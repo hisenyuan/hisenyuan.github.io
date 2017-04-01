@@ -1,1 +1,1 @@
-http://hisen.me/20170401-mysql数据库安装官方自带employees测试表/
+http://hisen.me/20170402-DBeaver-连接全部数据库工具-DBeaver快捷键/
