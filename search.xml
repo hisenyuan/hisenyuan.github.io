@@ -5,7 +5,7 @@
     <entry>
       <title><![CDATA[Hexo next主题添加本地搜索 - 不使用第三方服务]]></title>
       <url>%2F20170407-Hexo%20next%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%20-%20%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%2F</url>
-      <content type="text"><![CDATA[之前安装过第三方的搜索服务，贼蛋疼。都不免费了。也有自己安装插件，然后写js的，麻烦后来找到两个插件，安装之后就搞定了感谢开发的作者！！！安装插件记得要在站点根目录执行下面的安装操作1.安装 hexo-generator-search1npm install hexo-generator-searchdb --save2.安装 hexo-generator-searchdb1npm install hexo-generator-searchdb --save启用搜索编辑站点文件_config.yml，添加以下内容开启搜索12345search: path: search.xml field: post format: html limit: 10000效果预览小缺点第一次点击搜索的时候反应会比较慢因为是要加载一个xml文件]]></content>
+      <content type="text"><![CDATA[之前安装过第三方的搜索服务，贼蛋疼。都不免费了。也有自己安装插件，然后写js的，麻烦后来找到两个插件，安装之后就搞定了感谢开发的作者！！！安装插件记得要在站点根目录执行下面的安装操作1.安装 hexo-generator-search1npm install hexo-generator-searchdb --save2.安装 hexo-generator-searchdb1npm install hexo-generator-searchdb --save启用搜索编辑站点文件_config.yml，添加以下内容开启搜索12345search: path: search.xml field: post format: html limit: 10000编辑主题文件_config.yml，启用本地搜索功能：# Local search local_search: enable: true 效果预览小缺点第一次点击搜索的时候反应会比较慢因为是要加载一个xml文件]]></content>
     </entry>
 
     
