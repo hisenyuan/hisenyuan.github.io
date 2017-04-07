@@ -1,1 +1,1 @@
-http://hisen.me/20170407-Hexo next主题添加本地搜索 - 不使用第三方服务/
+http://hisen.me/20170407-linux查看日志文件常用命令/
