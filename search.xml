@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[Hexo next主题添加本地搜索 - 不使用第三方服务]]></title>
+      <url>%2F20170407-Hexo%20next%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%20-%20%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%2F</url>
+      <content type="text"><![CDATA[之前安装过第三方的搜索服务，贼蛋疼。都不免费了。也有自己安装插件，然后写js的，麻烦后来找到两个插件，安装之后就搞定了感谢开发的作者！！！安装插件记得要在站点根目录执行下面的安装操作1.安装 hexo-generator-search1npm install hexo-generator-searchdb --save2.安装 hexo-generator-searchdb1npm install hexo-generator-searchdb --save启用搜索编辑站点文件_config.yml，添加以下内容开启搜索12345search: path: search.xml field: post format: html limit: 10000效果预览小缺点第一次点击搜索的时候反应会比较慢因为是要加载一个xml文件]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[DBeaver-连接全部数据库工具-DBeaver快捷键]]></title>
       <url>%2F20170402-DBeaver-%E8%BF%9E%E6%8E%A5%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B7%A5%E5%85%B7-DBeaver%E5%BF%AB%E6%8D%B7%E9%94%AE%2F</url>
       <content type="text"><![CDATA[Windows、Linux、Mac OS X多个平台都可以用据我观察这个数据库可视化工具很不错，基于java以各种驱动来连接数据库，也就是说java支持的数据库都可以用他连接挺好用的，免费！！！安装之后新建连接，选择你要链接的数据库，配置一下就好了。下载地址官网下载地址快捷键123456#Shift + Home选中当前光标到行首#Shift + End选中当前光标到行尾#Shift + ↑/↓/←/→ 移动光标并且选中#Alt + X 执行选中的sql#Ctrl + Enter 执行当前光标所在行的sql#Ctrl + Alt + F 格式化SQL（file -&gt; properties -&gt; +SQL Editor -&gt; SQL formatting）]]></content>
