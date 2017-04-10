@@ -63,15 +63,15 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/categories/sql/</loc>
-        <lastmod>2017-04-10T11:17:47.933Z</lastmod>
+        <loc>http://hisen.me/categories/mysql/</loc>
+        <lastmod>2017-04-10T11:21:28.921Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hisen.me/categories/mysql/</loc>
-        <lastmod>2017-04-10T11:19:39.112Z</lastmod>
+        <loc>http://hisen.me/categories/sql/</loc>
+        <lastmod>2017-04-10T11:23:25.723Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
