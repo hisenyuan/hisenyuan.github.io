@@ -282,13 +282,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/redis/</loc>
-        <lastmod>2017-02-24T02:15:47.273Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/tags/nio/</loc>
         <lastmod>2017-02-27T14:50:04.844Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -375,6 +368,20 @@
     <url>
         <loc>http://hisen.me/tags/mysql/</loc>
         <lastmod>2017-04-10T11:23:25.723Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/redis/</loc>
+        <lastmod>2017-04-11T05:28:30.778Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/jedis/</loc>
+        <lastmod>2017-04-11T05:28:30.778Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
