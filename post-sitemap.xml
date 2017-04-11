@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://hisen.me/20170411-oracle%E5%88%86%E9%A1%B5%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/</loc>
+        <lastmod>2017-04-11T10:50:56.655Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://hisen.me/20170411-Jedis%20-%20Software%20caused%20connection%20abort%20recv%20failed/</loc>
         <lastmod>2017-04-11T05:31:53.240Z</lastmod>
         <changefreq>weekly</changefreq>
