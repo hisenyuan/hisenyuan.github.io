@@ -5,7 +5,7 @@
     <entry>
       <title><![CDATA[Jedis - Software caused connection abort:recv failed]]></title>
       <url>%2F20170411-Jedis%20-%20Software%20caused%20connection%20abort%20recv%20failed%2F</url>
-      <content type="text"><![CDATA[在使用jedis的时候出现这个问题：123redis.clients.jedis.exceptions.JedisConnectionException: java.net.SocketException: Software caused connection abort: recv failed我是windows上java运行，然后redis是在虚拟机的，通过映射访问解决办法：编辑redis配置文件：1sudo vi /etc/redis/redis.conf找到1bind 127.0.0.1改成1bind 0.0.0.0即可。这跟mysql一样，允许任何ip连接！]]></content>
+      <content type="text"><![CDATA[在使用jedis的时候出现这个问题：123redis.clients.jedis.exceptions.JedisConnectionException: java.net.SocketException: Software caused connection abort: recv failed我是windows上java运行，然后redis是在虚拟机的，通过映射访问解决办法：编辑redis配置文件：1sudo vi /etc/redis/redis.conf找到1bind 127.0.0.1改成1bind 0.0.0.0改完之后重启redis1service redis restart即可。这跟mysql一样，允许任何ip连接！]]></content>
     </entry>
 
     
