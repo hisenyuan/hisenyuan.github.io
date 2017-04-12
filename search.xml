@@ -5,7 +5,7 @@
     <entry>
       <title><![CDATA[Maven镜像库设置 - maven mirrors - maven 镜像 阿里]]></title>
       <url>%2F20170412-Maven%E9%95%9C%E5%83%8F%E5%BA%93%E8%AE%BE%E7%BD%AE%20-%20maven%20mirrors%20-%20maven%20%E9%95%9C%E5%83%8F%20%E9%98%BF%E9%87%8C%2F</url>
-      <content type="text"><![CDATA[配置文件：1yourPath\maven-3.3.9\conf\settings.xml找到里面的，添加镜像即可12&lt;mirrors&gt;&lt;/mirrors&gt;这里写的是被镜像的ID如果写成*所有的请求都会到这个镜像上，包括各种本地库注意：千万不要配成*否则内网的仓库或者你配的镜像里面没有一下jar包的时候不会去别的地方搜索123456789101112131415&lt;!--阿里云：速度挺快--&gt;&lt;mirror&gt; &lt;id&gt;nexus-aliyun&lt;/id&gt; &lt;mirrorOf&gt;central&lt;/mirrorOf&gt; &lt;name&gt;Nexus aliyun&lt;/name&gt; &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;&lt;/mirror&gt;&lt;!--谷歌：北京速度不错--&gt;&lt;mirror&gt; &lt;id&gt;google-maven-central&lt;/id&gt; &lt;name&gt;Google Maven Central&lt;/name&gt; &lt;url&gt;https://maven-central.storage.googleapis.com&lt;/url&gt; &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;&lt;/mirror&gt;]]></content>
+      <content type="text"><![CDATA[配置文件：1yourPath\maven-3.3.9\conf\settings.xml找到里面的，添加镜像即可12&lt;mirrors&gt;&lt;/mirrors&gt;这里写的是被镜像的ID如果写成：* (星号)所有的请求都会到这个镜像上，包括各种本地库注意：千万不要配成*否则内网的仓库或者你配的镜像里面没有一下jar包的时候不会去别的地方搜索123456789101112131415&lt;!--阿里云：速度挺快--&gt;&lt;mirror&gt; &lt;id&gt;nexus-aliyun&lt;/id&gt; &lt;mirrorOf&gt;central&lt;/mirrorOf&gt; &lt;name&gt;Nexus aliyun&lt;/name&gt; &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;&lt;/mirror&gt;&lt;!--谷歌：北京速度不错--&gt;&lt;mirror&gt; &lt;id&gt;google-maven-central&lt;/id&gt; &lt;name&gt;Google Maven Central&lt;/name&gt; &lt;url&gt;https://maven-central.storage.googleapis.com&lt;/url&gt; &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;&lt;/mirror&gt;]]></content>
     </entry>
 
     
