@@ -261,13 +261,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/maven/</loc>
-        <lastmod>2017-02-21T02:31:01.799Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/tags/tomcat/</loc>
         <lastmod>2017-02-22T03:43:25.017Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -382,6 +375,13 @@
     <url>
         <loc>http://hisen.me/tags/oracle/</loc>
         <lastmod>2017-04-11T10:50:56.655Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/maven/</loc>
+        <lastmod>2017-04-12T09:32:47.550Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
