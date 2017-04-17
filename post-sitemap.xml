@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://hisen.me/20170410-Mysql%20Employees%20%20Database%E7%BB%83%E4%B9%A0%E9%A2%98&%E7%AD%94%E6%A1%88/</loc>
+        <lastmod>2017-04-17T03:44:35.285Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://hisen.me/20170412-html%20-%20%E5%8E%9F%E7%94%9Fjavascript%E5%8A%A8%E6%80%81%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F/</loc>
         <lastmod>2017-04-12T10:26:47.115Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -33,14 +41,6 @@
     <url>
         <loc>http://hisen.me/20170411-Jedis%20-%20Software%20caused%20connection%20abort%20recv%20failed/</loc>
         <lastmod>2017-04-11T05:31:53.240Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://hisen.me/20170410-Mysql%20Employees%20%20Database%E7%BB%83%E4%B9%A0%E9%A2%98&%E7%AD%94%E6%A1%88/</loc>
-        <lastmod>2017-04-10T11:23:25.723Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
