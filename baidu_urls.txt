@@ -1,1 +1,1 @@
-http://hisen.me/20170417-用docker搭建IntelliJ IDEA License Server - idea本地激活服务器/
+http://hisen.me/20170417-Docker一件安装脚本Ubuntu-Debian-CentOS-Fedora-racleLinux/
