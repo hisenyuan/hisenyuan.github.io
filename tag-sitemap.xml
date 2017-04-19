@@ -352,27 +352,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/idea/</loc>
-        <lastmod>2017-04-17T07:53:21.073Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://hisen.me/tags/ubuntu/</loc>
-        <lastmod>2017-04-17T08:40:28.764Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://hisen.me/tags/docker/</loc>
-        <lastmod>2017-04-17T09:27:03.123Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/tags/mysql/</loc>
         <lastmod>2017-04-18T07:49:28.510Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -396,6 +375,27 @@
     <url>
         <loc>http://hisen.me/tags/dubbo/</loc>
         <lastmod>2017-04-19T02:25:47.004Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/idea/</loc>
+        <lastmod>2017-04-19T11:06:35.058Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/ubuntu/</loc>
+        <lastmod>2017-04-19T11:06:35.058Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/docker/</loc>
+        <lastmod>2017-04-19T11:06:35.058Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
