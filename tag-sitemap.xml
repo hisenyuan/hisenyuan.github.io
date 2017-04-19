@@ -261,13 +261,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/zookeeper/</loc>
-        <lastmod>2017-02-24T02:13:29.726Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/tags/nio/</loc>
         <lastmod>2017-02-27T14:50:04.844Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -298,13 +291,6 @@
     <url>
         <loc>http://hisen.me/tags/Maven/</loc>
         <lastmod>2017-03-24T02:14:06.411Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://hisen.me/tags/java/</loc>
-        <lastmod>2017-04-01T03:06:40.485Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -389,6 +375,27 @@
     <url>
         <loc>http://hisen.me/tags/mysql/</loc>
         <lastmod>2017-04-18T07:49:28.510Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/java/</loc>
+        <lastmod>2017-04-19T02:25:47.004Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/zookeeper/</loc>
+        <lastmod>2017-04-19T02:25:47.004Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/dubbo/</loc>
+        <lastmod>2017-04-19T02:25:47.004Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
