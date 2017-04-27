@@ -70,15 +70,15 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/categories/java/</loc>
-        <lastmod>2017-04-26T06:54:15.175Z</lastmod>
+        <loc>http://hisen.me/categories/mysql/</loc>
+        <lastmod>2017-04-27T01:10:27.018Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hisen.me/categories/mysql/</loc>
-        <lastmod>2017-04-27T01:10:27.018Z</lastmod>
+        <loc>http://hisen.me/categories/java/</loc>
+        <lastmod>2017-04-27T11:44:01.394Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
