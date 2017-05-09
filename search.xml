@@ -5,7 +5,7 @@
     <entry>
       <title><![CDATA[笔记本在BIOS Setup里面设置双显卡模式]]></title>
       <url>%2F20170509-%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%9C%A8BIOS%20Setup%E9%87%8C%E9%9D%A2%E8%AE%BE%E7%BD%AE%E5%8F%8C%E6%98%BE%E5%8D%A1%E6%A8%A1%E5%BC%8F%2F</url>
-      <content type="text"><![CDATA[我的本子是双显卡的，英特尔的核芯显卡和英伟达的独显但是之前完全没有把独显用上，在英伟达的设置里选择使用显卡感觉也没有用后来找到在BIOS里面设置，貌似管用，联想的机子可以看看其他的机子应该也差不多连接：http://iknow.lenovo.com/detail/dc_091648.html1236. IdeaPad Z380/Z480/Z580/U310/U410，Lenovo G480A/V370A/V470A/V570A依次选择“Configuration”、“Graphic Device”，其中有两个选项：Optimus表示可切换显卡模式；UMA Only表示集显模式。选择好后，按F10并根据提示保存退出即可。我的默认居然是：UMA Only]]></content>
+      <content type="text"><![CDATA[我的本子是双显卡的，英特尔的核芯显卡和英伟达的独显但是之前完全没有把独显用上，在英伟达的设置里选择使用显卡感觉也没有用后来找到在BIOS里面设置，貌似管用，联想的机子可以看看其他的机子应该也差不多连接：http://iknow.lenovo.com/detail/dc_102471.html1236. IdeaPad Z380/Z480/Z580/U310/U410，Lenovo G480A/V370A/V470A/V570A依次选择“Configuration”、“Graphic Device”，其中有两个选项：Optimus表示可切换显卡模式；UMA Only表示集显模式。选择好后，按F10并根据提示保存退出即可。我的默认居然是：UMA Only]]></content>
     </entry>
 
     
