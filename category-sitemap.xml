@@ -21,13 +21,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/categories/%E8%BD%AF%E4%BB%B6/</loc>
-        <lastmod>2017-03-21T11:40:26.386Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/categories/oracle/</loc>
         <lastmod>2017-03-29T02:02:53.621Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -79,6 +72,13 @@
     <url>
         <loc>http://hisen.me/categories/linux/</loc>
         <lastmod>2017-05-03T01:37:03.023Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/categories/%E8%BD%AF%E4%BB%B6/</loc>
+        <lastmod>2017-05-09T01:23:33.587Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

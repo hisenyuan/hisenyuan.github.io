@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[笔记本在BIOS Setup里面设置双显卡模式]]></title>
+      <url>%2F20170509-%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%9C%A8BIOS%20Setup%E9%87%8C%E9%9D%A2%E8%AE%BE%E7%BD%AE%E5%8F%8C%E6%98%BE%E5%8D%A1%E6%A8%A1%E5%BC%8F%2F</url>
+      <content type="text"><![CDATA[我的本子是双显卡的，英特尔的核芯显卡和英伟达的独显但是之前完全没有把独显用上，在英伟达的设置里选择使用显卡感觉也没有用后来找到在BIOS里面设置，貌似管用，联想的机子可以看看其他的机子应该也差不多连接：http://iknow.lenovo.com/detail/dc_091648.html1236. IdeaPad Z380/Z480/Z580/U310/U410，Lenovo G480A/V370A/V470A/V570A依次选择“Configuration”、“Graphic Device”，其中有两个选项：Optimus表示可切换显卡模式；UMA Only表示集显模式。选择好后，按F10并根据提示保存退出即可。我的默认居然是：UMA Only]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[linux安装tree命令 - apt-get install tree]]></title>
       <url>%2F20170503-linux%E5%AE%89%E8%A3%85tree%E5%91%BD%E4%BB%A4%20-%20apt-get%20install%20tree%2F</url>
       <content type="text"><![CDATA[目前debian系列的系统都无法使用apt-get install tree来安装tree命令以下是安装步骤123456789#下载（官网为：http://mama.indstate.edu/users/ice/tree/）wget http://mama.indstate.edu/users/ice/tree/src/tree-1.7.0.tgz#解压tar -zxvf tree-1.7.0.tgz#进入目录cd tree-1.7.0#安装sudo make install#完毕最简单的使用方法，在目录下输入：tree使用效果123456789101112131415161718192021222324252627282930313233hisen@ubuntu:~/dl$ tree.├── hisen.log├── master└── test_db-master ├── Changelog ├── employees_partitioned_5.1.sql ├── employees_partitioned.sql ├── employees.sql ├── images │ ├── employees.gif │ ├── employees.jpg │ └── employees.png ├── load_departments.dump ├── load_dept_emp.dump ├── load_dept_manager.dump ├── load_employees.dump ├── load_salaries1.dump ├── load_salaries2.dump ├── load_salaries3.dump ├── load_titles.dump ├── objects.sql ├── README.md ├── sakila │ ├── README.md │ ├── sakila-mv-data.sql │ └── sakila-mv-schema.sql ├── show_elapsed.sql ├── sql_test.sh ├── test_employees_md5.sql └── test_employees_sha.sql3 directories, 26 files使用参数12345678910111213141516171819202122tree命令行参数：-a 显示所有文件和目录。-A 使用ASNI绘图字符显示树状图而非以ASCII字符组合。-C 在文件和目录清单加上色彩，便于区分各种类型。-d 显示目录名称而非内容。-D 列出文件或目录的更改时间。-f 在每个文件或目录之前，显示完整的相对路径名称。-F 在执行文件，目录，Socket，符号连接，管道名称名称，各自加上&quot;*&quot;,&quot;/&quot;,&quot;=&quot;,&quot;@&quot;,&quot;|&quot;号。-g 列出文件或目录的所属群组名称，没有对应的名称时，则显示群组识别码。-i 不以阶梯状列出文件或目录名称。-I 不显示符合范本样式的文件或目录名称。-l 如遇到性质为符号连接的目录，直接列出该连接所指向的原始目录。-n 不在文件和目录清单加上色彩。-N 直接列出文件和目录名称，包括控制字符。-p 列出权限标示。-P 只显示符合范本样式的文件或目录名称。-q 用&quot;?&quot;号取代控制字符，列出文件和目录名称。-s 列出文件或目录大小。-t 用文件和目录的更改时间排序。-u 列出文件或目录的拥有者名称，没有对应的名称时，则显示用户识别码。-x 将范围局限在现行的文件系统中，若指定目录下的某些子目录，其存放于另一个文件系统上，则将该子目录予以排除在寻找范围外。]]></content>

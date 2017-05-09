@@ -1,1 +1,1 @@
-http://hisen.me/20170503-linux安装tree命令 - apt-get install tree/
+http://hisen.me/20170509-笔记本在BIOS Setup里面设置双显卡模式/
