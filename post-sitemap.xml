@@ -63,6 +63,14 @@
     </url>
 
     <url>
+        <loc>http://hisen.me/20170417-%E7%94%A8docker%E6%90%AD%E5%BB%BAIntelliJ%20IDEA%20License%20Server%20-%20idea%E6%9C%AC%E5%9C%B0%E6%BF%80%E6%B4%BB%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+        <lastmod>2017-04-19T11:06:35.058Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://hisen.me/20170419-zookeeper%20&%20dubbo%E6%90%AD%E5%BB%BA%20-%20%E5%9C%A8IDEA%E4%B8%8A%E8%BF%90%E8%A1%8C%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Dubbo-demo/</loc>
         <lastmod>2017-04-19T02:25:47.004Z</lastmod>
         <changefreq>weekly</changefreq>
