@@ -1,1 +1,1 @@
-http://hisen.me/20170509-笔记本在BIOS Setup里面设置双显卡模式/
+http://hisen.me/20170512-Data URI scheme 利用base64字符串通过image标签显示图片/
