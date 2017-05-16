@@ -373,13 +373,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/mysql/</loc>
-        <lastmod>2017-04-27T01:10:27.018Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/tags/sql/</loc>
         <lastmod>2017-04-27T01:10:27.018Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -410,6 +403,13 @@
     <url>
         <loc>http://hisen.me/tags/jsp/</loc>
         <lastmod>2017-05-12T01:25:33.462Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/mysql/</loc>
+        <lastmod>2017-05-16T05:46:11.078Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
