@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://hisen.me/20170601-%E5%B0%9D%E8%AF%95%E4%BD%BF%E7%94%A8NIO%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6/</loc>
+        <lastmod>2017-06-01T06:50:13.142Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://hisen.me/20170519-try%20redis%20-%20redis%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%E7%BB%83%E4%B9%A0/</loc>
         <lastmod>2017-05-19T07:02:26.598Z</lastmod>
         <changefreq>weekly</changefreq>
