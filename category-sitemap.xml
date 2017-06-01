@@ -49,13 +49,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/categories/sql/</loc>
-        <lastmod>2017-04-17T03:44:35.285Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/categories/linux/</loc>
         <lastmod>2017-05-03T01:37:03.023Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -78,7 +71,14 @@
 
     <url>
         <loc>http://hisen.me/categories/mysql/</loc>
-        <lastmod>2017-05-16T05:53:40.125Z</lastmod>
+        <lastmod>2017-05-18T03:38:02.354Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/categories/sql/</loc>
+        <lastmod>2017-05-19T07:02:26.598Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

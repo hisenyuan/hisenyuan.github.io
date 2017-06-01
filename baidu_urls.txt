@@ -1,1 +1,1 @@
-http://hisen.me/20170516-MySQL下A库的a表导入到B库的b表/
+http://hisen.me/20170519-try redis - redis官方教程练习/
