@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[oracle全局查找某字段所在的表]]></title>
+      <url>%2F20170612-oracle%E5%85%A8%E5%B1%80%E6%9F%A5%E6%89%BE%E6%9F%90%E5%AD%97%E6%AE%B5%E6%89%80%E5%9C%A8%E7%9A%84%E8%A1%A8%2F</url>
+      <content type="text"><![CDATA[下面这个存储过程是查找数据库中某个字段值为：hisen 的表12345678910111213141516171819declarel_cnt varchar2(20);v_sql varchar2(4000);v_tablename varchar(200); cursor cursor_jsdx is select &apos;select count(*) from &apos; || table_name || &apos; where NAME=&apos;&apos;hisen&apos;&apos;&apos;,table_name from user_tab_columns where column_name=&apos;NAME&apos;; --注：这里的字段名要大写 begin open cursor_jsdx; Loop fetch cursor_jsdx into v_sql,v_tablename; exit when cursor_jsdx%notfound; execute immediate v_sql into l_cnt; if l_cnt &gt;0 then ---如果该表有那内容的就打印那个表的名字。 dbms_output.put_line(v_tablename); end if; end loop; Close cursor_jsdx;end;]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[java.sql.SQLException Connections could not be acquired from the underlying database]]></title>
       <url>%2F20170602-java.sql.SQLException%20Connections%20could%20not%20be%20acquired%20from%20the%20underlying%20database%2F</url>
       <content type="text"><![CDATA[java.sql.SQLException: Connections could not be acquired from the underlying database这个错误出现的原因有的说是因为jdbc配置文件写错了正确的写法是：1234c3p0.driverClass=com.mysql.jdbc.Driverc3p0.jdbcUrl=jdbc:mysql://localhost:3306/testc3p0.user=rootc3p0.password=root而不是1234driver=com.mysql.jdbc.Driverurl=jdbc:mysql://localhost:3306/testuser=rootpassword=root但是我遇到的不是如此后来发现是因为maven出问题了，jar包没有加载进项目这是在starkoverflow上看到的回答1In my case it was problem that c3p0-0.9.2.1.jar file was not copied by maven into src/main/webapp/web-inf/libs最后maven重新install之后就解决了]]></content>
