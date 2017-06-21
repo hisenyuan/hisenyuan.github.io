@@ -1,1 +1,1 @@
-http://hisen.me/20170613-sql行转列，列转行/
+http://hisen.me/20170622-powerdesigner Oracle mysql comment 缺少右括号/
