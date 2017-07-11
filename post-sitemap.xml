@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://hisen.me/20170712-mongodb%20-%20failed%20with%20errno%2013%20Permission%20denied/</loc>
+        <lastmod>2017-07-11T16:24:25.549Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://hisen.me/20170711-MongoDB%20-%20%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9C%20-%20CRUD%20-%20JAVA/</loc>
         <lastmod>2017-07-11T16:10:26.868Z</lastmod>
         <changefreq>weekly</changefreq>
