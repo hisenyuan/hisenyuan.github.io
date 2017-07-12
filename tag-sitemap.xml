@@ -408,13 +408,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/linux/</loc>
-        <lastmod>2017-07-04T13:11:20.179Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/tags/%E6%AF%92%E7%98%A4/</loc>
         <lastmod>2017-07-05T13:49:06.810Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -431,6 +424,13 @@
     <url>
         <loc>http://hisen.me/tags/java/</loc>
         <lastmod>2017-07-12T16:47:29.114Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/linux/</loc>
+        <lastmod>2017-07-12T17:30:25.684Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
