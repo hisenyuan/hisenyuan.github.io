@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[MySQL update语句]]></title>
+      <url>%2F20170801-MySQL%20update%E8%AF%AD%E5%8F%A5%2F</url>
+      <content type="text"><![CDATA[刚在一个群里，有人有这么一个需求。表A：id,name表B：id,其他,name(新增字段)A，B表通过id关联，要把A的name给对应的B的name以前也没有写过这种update语句123456update 表名 set 字段名=字段值 where 条件如 update A set name=&apos;xiaoming&apos; where id=&apos;&apos;;如果是多表查询update 表1 a inner join 表2 b on ab表的关联 set a.字段=b.字段如 update A a inner join B b on a.id=b.id set a.name=b.name就是在table1表和table2表id相同时 把table2的name值赋给table1的name]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[Git Bash tree（windows）让windows支持tree]]></title>
       <url>%2F20170713-Git%20Bash%20tree%EF%BC%88windows%EF%BC%89%2F</url>
       <content type="text"><![CDATA[在安装了git客户端之后，发现Git Bash挺好用之前在linux shell用过tree命令感觉不错发现Git Bash也可以实现，于是就记录一下下载地址：点击前往下载文件： Binaries Zip解压文件：bin目录下找到tree.exe把这个放到git安装目录下后的路径：C:\Program Files\Git\usr\bin\tree.exe测试：虽然有点丑。。。1234567891011121314151617181920212223242526hisen@HiSEN MINGW64 /c/code/SpringBootCLI/myapp$ tree.|-- mvnw|-- mvnw.cmd|-- pom.xml`-- src |-- main | |-- java | | `-- com | | `-- example | | `-- myapp | | |-- DemoApplication.java | | `-- ServletInitializer.java | `-- resources | |-- application.properties | |-- static | `-- templates `-- test `-- java `-- com `-- example `-- myapp `-- DemoApplicationTests.java14 directories, 7 files]]></content>
