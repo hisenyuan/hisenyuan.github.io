@@ -450,15 +450,22 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/java/</loc>
+        <loc>http://hisen.me/tags/xml/</loc>
         <lastmod>2017-08-01T07:47:24.409Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/xml/</loc>
-        <lastmod>2017-08-01T07:47:24.409Z</lastmod>
+        <loc>http://hisen.me/tags/java/</loc>
+        <lastmod>2017-08-01T08:24:54.230Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/%E9%98%9F%E5%88%97/</loc>
+        <lastmod>2017-08-01T08:24:54.230Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
