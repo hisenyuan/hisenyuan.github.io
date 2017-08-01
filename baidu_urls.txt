@@ -1,1 +1,1 @@
-http://hisen.me/20170801-MySQL update语句/
+http://hisen.me/20170801-Google java工具类 - Guava - 常见用法/
