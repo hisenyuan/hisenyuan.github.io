@@ -1,1 +1,1 @@
-http://hisen.me/20170801-SpringMVC把jsp改为Thymeleaf模版引擎/
+http://hisen.me/20170801-No MyBatis mapper was found in '[com.xxx.dao]' package /

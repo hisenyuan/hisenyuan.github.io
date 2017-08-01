@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://hisen.me/20170801-No%20MyBatis%20mapper%20was%20found%20in%20'%5Bcom.xxx.dao%5D'%20package%20/</loc>
+        <lastmod>2017-08-01T07:47:24.409Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://hisen.me/20170801-SpringMVC%E6%8A%8Ajsp%E6%94%B9%E4%B8%BAThymeleaf%E6%A8%A1%E7%89%88%E5%BC%95%E6%93%8E/</loc>
         <lastmod>2017-08-01T06:31:11.890Z</lastmod>
         <changefreq>weekly</changefreq>
