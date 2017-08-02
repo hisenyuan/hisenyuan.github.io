@@ -443,13 +443,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/java/</loc>
-        <lastmod>2017-08-01T08:29:26.891Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/tags/%E9%98%9F%E5%88%97/</loc>
         <lastmod>2017-08-01T08:29:26.891Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -466,6 +459,27 @@
     <url>
         <loc>http://hisen.me/tags/mybatis/</loc>
         <lastmod>2017-08-02T07:42:56.979Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/java/</loc>
+        <lastmod>2017-08-02T09:16:48.809Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/spark/</loc>
+        <lastmod>2017-08-02T09:16:48.809Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/BigData/</loc>
+        <lastmod>2017-08-02T09:16:48.809Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
