@@ -77,15 +77,15 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/categories/java/</loc>
-        <lastmod>2017-08-02T07:42:56.979Z</lastmod>
+        <loc>http://hisen.me/categories/spark/</loc>
+        <lastmod>2017-08-04T02:00:10.132Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hisen.me/categories/spark/</loc>
-        <lastmod>2017-08-04T02:00:10.132Z</lastmod>
+        <loc>http://hisen.me/categories/java/</loc>
+        <lastmod>2017-08-08T08:06:47.974Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
