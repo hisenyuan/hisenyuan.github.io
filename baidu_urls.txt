@@ -1,1 +1,1 @@
-http://hisen.me/20170825-IntelliJ IDEA 调试窗口、帮助窗口、搜索框、底部消息等中文乱码问题解决/
+http://hisen.me/20170904-Debian丨Ubuntu丨shadowsocks-libev一键安装脚本/
