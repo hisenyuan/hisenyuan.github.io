@@ -359,13 +359,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/oracle/</loc>
-        <lastmod>2017-06-21T16:15:07.429Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/tags/rocketmq/</loc>
         <lastmod>2017-07-01T17:36:51.048Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -417,13 +410,6 @@
     <url>
         <loc>http://hisen.me/tags/%E9%98%9F%E5%88%97/</loc>
         <lastmod>2017-08-01T08:29:26.891Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://hisen.me/tags/sql/</loc>
-        <lastmod>2017-08-02T07:42:56.979Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -508,6 +494,20 @@
     <url>
         <loc>http://hisen.me/tags/%E7%AE%97%E6%B3%95/</loc>
         <lastmod>2017-09-07T03:09:43.595Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/sql/</loc>
+        <lastmod>2017-09-23T02:41:21.357Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/oracle/</loc>
+        <lastmod>2017-09-23T02:41:21.357Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
