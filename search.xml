@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[idea列编辑：IntelliJ IDEA：toggle block selection mode]]></title>
+      <url>%2F20171024-IntelliJ%20IDEA%EF%BC%9Atoggle%20block%20selection%20mode%2F</url>
+      <content type="text"><![CDATA[在eclipse中有列编辑模式：toggle block selection mode在idea中也可以，而且还比较高级，哈哈idea -&gt; 右上角 -&gt; Edit -&gt; Column Selection Mode -&gt; 移动光标到你想要弄的行完事在重复一次，就可以退出列编辑模式]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[常见算法：Java求最小公倍数和最大公约数三种算法]]></title>
       <url>%2F20171021-%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%EF%BC%9AJava%E6%B1%82%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E5%92%8C%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0%E4%B8%89%E7%A7%8D%E7%AE%97%E6%B3%95%2F</url>
       <content type="text"><![CDATA[最小公倍数：数论中的一种概念，两个整数公有的倍数成为他们的公倍数其中一个最小的公倍数是他们的最小公倍数同样地，若干个整数公有的倍数中最小的正整数称为它们的最小公倍数求最小公倍数算法：最小公倍数=两整数的乘积÷最大公约数求最大公约数算法：(1) 辗转相除法有两整数a和b：a%b得余数c若c=0，则b即为两数的最大公约数若c≠0，则a=b，b=c，再回去执行1例如:求27和15的最大公约数过程为27÷15余125÷12余312÷3余0因此，3即为最大公约数代码实现：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455/** * 最大公约数 */public int getGCD(int m, int n) &#123; if (n == 0) &#123; return m; &#125; return getGCD(n, m % n);&#125;/** * 最小公倍数 * @param m * @param n * @return */public int getLCM(int m, int n) &#123; int mn = m * n; return mn / getGCD(m, n);&#125;/** * 辗转相除求最大公约数 * 有两整数a和b： * ① a%b得余数c * ② 若c=0，则b即为两数的最大公约数 * ③ 若c≠0，则a=b，b=c，再回去执行① */ public int divisionGCD(int m, int n) &#123; int a; while (n != 0) &#123; a = m % n; m = n; n = a; &#125; return m; &#125; /** * 相减法求最大公约数 * 有两整数a和b： * ① 若a&gt;b，则a=a-b * ② 若a&lt;b，则b=b-a * ③ 若a=b，则a（或b）即为两数的最大公约数 * ④ 若a≠b，则再回去执行① */ public int subtractionGCD(int m,int n)&#123; while(m != n)&#123; if (m&gt;n)&#123; m = m-n; &#125;else &#123; n = n - m; &#125; &#125; return m; &#125;]]></content>

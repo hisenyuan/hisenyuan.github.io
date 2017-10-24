@@ -1,1 +1,1 @@
-http://hisen.me/20171021-常见算法：Java求最小公倍数和最大公约数三种算法/
+http://hisen.me/20171024-IntelliJ IDEA：toggle block selection mode/
