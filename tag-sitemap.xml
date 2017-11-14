@@ -163,13 +163,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/HashMap/</loc>
-        <lastmod>2017-02-17T08:41:56.206Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/tags/Hashtable/</loc>
         <lastmod>2017-02-17T08:41:56.206Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -522,6 +515,13 @@
     <url>
         <loc>http://hisen.me/tags/sql/</loc>
         <lastmod>2017-11-14T15:08:59.917Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/HashMap/</loc>
+        <lastmod>2017-11-14T15:57:44.656Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
