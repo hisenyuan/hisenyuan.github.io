@@ -366,13 +366,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/spring/</loc>
-        <lastmod>2017-08-01T06:31:11.890Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/tags/xml/</loc>
         <lastmod>2017-08-01T07:47:24.409Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -521,7 +514,14 @@
 
     <url>
         <loc>http://hisen.me/tags/java/</loc>
-        <lastmod>2017-11-15T12:54:07.175Z</lastmod>
+        <lastmod>2017-11-15T12:54:39.806Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/spring/</loc>
+        <lastmod>2017-11-20T15:48:19.309Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
