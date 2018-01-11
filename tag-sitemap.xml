@@ -275,13 +275,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/redis/</loc>
-        <lastmod>2017-04-11T05:31:53.240Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/tags/maven/</loc>
         <lastmod>2017-04-12T09:44:17.720Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -529,6 +522,20 @@
     <url>
         <loc>http://hisen.me/tags/docker/</loc>
         <lastmod>2018-01-11T14:44:38.631Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/rabbitMQ/</loc>
+        <lastmod>2018-01-11T14:51:17.711Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/redis/</loc>
+        <lastmod>2018-01-11T14:52:12.486Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
