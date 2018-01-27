@@ -1,1 +1,1 @@
-http://hisen.me/20180127-笔记 - 读后感：《第一本Docker书》/
+http://hisen.me/20180127-实现Singleton最佳方法 - Enum/
