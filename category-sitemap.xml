@@ -63,13 +63,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/categories/docker/</loc>
-        <lastmod>2017-10-21T06:38:14.636Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/categories/%E7%AE%97%E6%B3%95/</loc>
         <lastmod>2017-10-22T08:45:40.336Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -107,6 +100,13 @@
     <url>
         <loc>http://hisen.me/categories/java/</loc>
         <lastmod>2018-01-12T16:43:44.615Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/categories/docker/</loc>
+        <lastmod>2018-01-27T13:05:59.895Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

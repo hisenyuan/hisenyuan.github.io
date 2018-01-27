@@ -520,13 +520,6 @@
     </url>
 
     <url>
-        <loc>http://hisen.me/tags/docker/</loc>
-        <lastmod>2018-01-11T14:44:38.631Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hisen.me/tags/redis/</loc>
         <lastmod>2018-01-11T14:52:12.486Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -543,6 +536,13 @@
     <url>
         <loc>http://hisen.me/tags/poi/</loc>
         <lastmod>2018-01-12T16:43:44.615Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hisen.me/tags/docker/</loc>
+        <lastmod>2018-01-27T13:05:59.895Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
