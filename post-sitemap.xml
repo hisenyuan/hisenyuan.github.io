@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://hisen.me/20180128-%E5%AE%89%E5%85%A8%E7%9A%84%E9%87%8D%E5%8F%A0%E6%9E%84%E9%80%A0%E5%99%A8%20-%20%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%EF%BC%9ABuild%20Pattern/</loc>
+        <lastmod>2018-01-27T16:28:28.309Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://hisen.me/20180127-%E5%AE%9E%E7%8E%B0Singleton%E6%9C%80%E4%BD%B3%E6%96%B9%E6%B3%95%20-%20Enum/</loc>
         <lastmod>2018-01-27T15:50:25.094Z</lastmod>
         <changefreq>weekly</changefreq>
