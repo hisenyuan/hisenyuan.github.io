@@ -1,0 +1,23 @@
+---
+title: windows10 专业版激活密钥
+tags: [windows10专业版激活密钥]
+date: 2017-02-10 16:02:44
+categories: 软件
+---
+2017年2月10日 16:03:48
+亲测可用，这比激活工具方便多了
+
+<!--more-->
+```
+VK7JG-NPHTM-C97JM-9MPGT-3V66T
+
+NPPR9-FWDCX-D2C8J-H872K-2YT43
+
+W269N-WFGWX-YVC9B-4J6C9-T83GX
+
+NYW94-47Q7H-7X9TT-W7TXD-JTYPM
+
+NJ4MX-VQQ7Q-FP3DB-VDGHX-7XM87
+
+MH37W-N47XK-V7XM9-C7227-GCQG9
+```
