@@ -117,6 +117,6 @@ baidu_url_submit:
 
 deploy: 
 - type: git
-  repository: http://github.com/hisenyuan/hisen-yuan.github.io.git
+  repository: https://github.com/hisenyuan/hisen-yuan.github.io.git
   branch: master
 - type: baidu_url_submitter

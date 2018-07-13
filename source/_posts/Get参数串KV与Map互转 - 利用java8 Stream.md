@@ -1,8 +1,12 @@
-```
+---
 title: Get参数串KV与Map互转 - 利用java8 Stream
+keywords: map,get,stream
+categories: java
 date: 2018-07-13 00:25:02
 tags: java
-```
+---
+
+
 
 ## 一、背景
 在各种系统需要加签的时
