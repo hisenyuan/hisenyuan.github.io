@@ -37,7 +37,7 @@ Map<String, String> concurrentHashMap = new ConcurrentHashMap<>();
 
 代码如下
 <!--more-->
-```
+```java
 package com.hisen.collection.map;
 
 import java.util.Collections;

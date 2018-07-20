@@ -16,7 +16,7 @@ Thymeleaf也提供了spring的支持，我们可以非常方便的在Spring配�
 改造 - 由jsp到Thymeleaf
 ---
 1. 引入依赖
-```
+```xml
     <!--thymeleaf模版 spring4.x-->
     <dependency>
       <groupId>org.thymeleaf</groupId>
@@ -26,7 +26,7 @@ Thymeleaf也提供了spring的支持，我们可以非常方便的在Spring配�
 ```
 2. 配置ViewResolver(在spring的xml文件里)
 <!--more-->
-```
+```xml
 <!-- 配置ViewResolver 使用：thymeleaf 模版引擎-->
   <bean id="templateResolver"
     class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
@@ -47,7 +47,7 @@ Thymeleaf也提供了spring的支持，我们可以非常方便的在Spring配�
   </bean>
 ```
 3. 接下来就可以直接使用了，跟之前的jsp没有什么不同
-```
+```java
   @RequestMapping(value = "/listpageplug/{start}", method = RequestMethod.GET)
   private String listPagePlug(@PathVariable("start") String start, Model model) {
     PageHelper.startPage(Integer.valueOf(start), 20);
@@ -60,7 +60,7 @@ Thymeleaf也提供了spring的支持，我们可以非常方便的在Spring配�
 到这里就改造完了，接下来就是Thymeleaf的各种用法了
 
 这里举一个循环遍历的例子,后台返回了books对象集合
-```
+```html
         <!--判断是否为空-->
         <tbody th:unless="${#lists.isEmpty(books)}">
           <!--循环-->

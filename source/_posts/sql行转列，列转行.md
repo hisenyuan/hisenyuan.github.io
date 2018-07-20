@@ -10,7 +10,7 @@ categories: sql
 在Oracle 11g中，Oracle 又增加了2个查询：pivot（行转列） 和unpivot（列转行）
 
 下面是在mysql中的操作：
-```
+```SQL
 mysql> select * from test;
 +------+------+--------+
 | id   | age  | weigth |

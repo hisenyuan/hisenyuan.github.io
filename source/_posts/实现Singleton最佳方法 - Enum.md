@@ -14,8 +14,10 @@ effective java：
 2. 避免反射和并发困扰
 
 单例模式模式：<a href="https://github.com/hisenyuan/IDEAPractice/tree/master/src/main/java/com/hisen/interview/effective/no3enumsingleton" target="_blank">完整代码+测试</a>
+
 主要代码：
-```
+
+```java
 public class EnumSingleton {
 
   private EnumSingleton() {

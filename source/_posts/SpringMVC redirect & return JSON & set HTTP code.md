@@ -13,7 +13,7 @@ springmvc正常情况下redirect并且设置指定响应码，异常情况下返
 正常情况和异常情况都需要设置HTTP Code
 
 ## 代码实现
-```
+```java
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     public String webCharge(HttpServletRequest request, HttpServletResponse response) {
         if (1==1) {

@@ -29,7 +29,7 @@ categories: java
 ## Java代码实现
 算法使用了md5值来生成n个不同的hash值
 <!--more-->
-```
+```java
 package com.hisen.interview;
 
 import java.math.BigInteger;

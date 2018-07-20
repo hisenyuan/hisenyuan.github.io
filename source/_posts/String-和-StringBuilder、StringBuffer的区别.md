@@ -3,7 +3,7 @@ title: String 和 StringBuilder、StringBuffer的区别
 date: 2017-02-08 21:07:59
 tags: [java,StringBuilder,StringBuffer的区别]
 ---
-String和StringBuilder、StringBuffer的区别？ 
+String和StringBuilder、StringBuffer的区别？
 ---
 答：Java平台提供了两种类型的字符串：String和StringBuffer/StringBuilder，
 
@@ -31,9 +31,9 @@ StringBuilder：可以随意修改，无synchronized修饰，不是线程安全�
 
 **面试题1：说出程序的输出结果**
 ---
-```
+```java
 classStringEqualTest {
- 
+
 	publicstaticvoidmain(String[] args) {
 		String s1 = "Programming";
 		String s2 = new String("Programming");
@@ -52,7 +52,7 @@ String的intern()方法就是扩充常量池的一个方法；
 
 Java查找常量池中是否有相同Unicode的字符串常量，
 
-如果有，则返回其的引用， 
+如果有，则返回其的引用，
 
 如果没有，则在常量池中增加一个Unicode等于str的字符串并返回它的引用
 
@@ -62,10 +62,10 @@ Java查找常量池中是否有相同Unicode的字符串常量，
 
 答：
 
-如果使用少量的字符串操作，使用 (+运算符)连接字符串； 
+如果使用少量的字符串操作，使用 (+运算符)连接字符串；
 
-如果频繁的对大量字符串进行操作，则使用 
+如果频繁的对大量字符串进行操作，则使用
 
-1：全局变量或者需要多线程支持则使用StringBuffer； 
+1：全局变量或者需要多线程支持则使用StringBuffer；
 
 2：局部变量或者单线程不涉及线程安全则使有StringBuilder。

@@ -37,7 +37,7 @@ categories: 算法
 ---
 
 代码实现：
-```
+```java
   /**
    * 最大公约数
    */
@@ -58,7 +58,7 @@ categories: 算法
     int mn = m * n;
     return mn / getGCD(m, n);
   }
-  
+
   /**
      * 辗转相除求最大公约数
      * 有两整数a和b：
@@ -94,5 +94,3 @@ categories: 算法
       return m;
     }
 ```
-
-

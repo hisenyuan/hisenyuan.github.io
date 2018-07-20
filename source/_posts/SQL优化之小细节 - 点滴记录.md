@@ -10,7 +10,7 @@ categories: sql
 这里有一个简单的对比，情况相同的时候，两个sql的时间相差八倍
 
 优：0.077s
-```
+```sql
 SELECT ew.all_amt ,
        ew.customer_id,
        cf.id,
@@ -22,7 +22,7 @@ WHERE cf.acct_type in(2,3)
   AND ew.customer_id = cf.id
 ```
 劣：0.630s
-```
+```sql
 SELECT ew.all_amt ,
        ew.customer_id,
        cf.id,

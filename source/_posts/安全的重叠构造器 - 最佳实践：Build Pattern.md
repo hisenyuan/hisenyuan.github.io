@@ -15,7 +15,7 @@ Builder模式，不直接生成想要的对象，而是让客户端利用所有�
 来设置每个相关可选的参数，最后调用无参的build来生成不可变的对象。
 
 完整代码+测试：<a href="https://github.com/hisenyuan/IDEAPractice/tree/master/src/main/java/com/hisen/interview/effective/no2buildpatter" target="_blank">github:完整代码+测试</a>
-```
+```java
 public class NutritionFacts {
 
   private final int servingSize;

@@ -29,7 +29,7 @@ categories: java
 
 二叉链表的实现
 ---
-```
+```java
 package com.hisen.interview.tiger20171110.btree;
 
 /**
@@ -189,7 +189,7 @@ public class LinkBTree implements BTree {
 ---
 遍历方式：前序、中序、后序、层次
 <!--more-->
-```
+```java
 package com.hisen.interview.tiger20171110.btree;
 
 import java.util.LinkedList;

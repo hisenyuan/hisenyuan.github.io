@@ -6,12 +6,12 @@ tags: java
 
 这里我只是贴一段代码测试一下
 
-```+java
+```java
 package com.hisen.interview;
 
 /**
  * 变量不能被重写
- * 
+ *
  * @author hisenyuan 2017年1月18日 下午10:33:33
  */
 public class AboutExtends {
@@ -59,7 +59,7 @@ public class AboutExtends {
 		// I'm B class
 		// 1
 		// B
-		
+
 		// 多态记忆口诀
 		// 变量多态看左边
 		// 方法多态看右边
