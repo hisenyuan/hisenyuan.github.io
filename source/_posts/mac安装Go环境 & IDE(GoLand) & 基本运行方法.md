@@ -1,5 +1,5 @@
 ---
-title: mac安装Go环境 & IDE(GoLand) & 基本运行方法
+title: mac安装Go环境 & IDE(GoLand) & 基本运行方法(标准输入)
 keywords: [mac安装go,goland,go输入流运行]
 date: 2018/9/8 11:05
 tags: [go]
@@ -48,7 +48,7 @@ go env # 这时你会发现环境变量已经有改变
 ## 三、运行需要输入的程序
 买了一本《Go语言程序设计》
 <!--more-->
-有些程序需要从键盘输入，然后进行处理，例如dup2
+有些程序需要从标准输入获取信息，然后进行处理，例如dup2
 
 运行之后不知道该肿么办，百度一番之后发现了方法
 
@@ -57,7 +57,7 @@ go env # 这时你会发现环境变量已经有改变
 GoLand：command + D
 
 贴一段程序和运行的结果
-```
+```go
 package main
 
 import (
