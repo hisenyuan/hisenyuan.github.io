@@ -1,5 +1,5 @@
 ---
-title: gop1.io/ch1/dup2/dup2.go - go程序设计语言练习 - 同统计重复
+title: go程序设计语言练习 - 同统计重复 - gop1.io/ch1/dup2/dup2.go
 keywords: [go,dup2,统计,去重]
 date: 2018/10/27 13:32
 tags: [go]
@@ -33,7 +33,7 @@ $ go run dup2.go 'hisen.txt'
 
 代码如下：
 <!--more-->
-```
+```go
 package main
 
 import (

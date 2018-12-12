@@ -6,7 +6,7 @@
     <i class="fa fa-{{ theme.authoricon }}"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">{{ config.author }}</span>
-  
+
   </div>
 
 {% if theme.copyright %}
@@ -19,7 +19,7 @@
 		</span>
 		&nbsp;&nbsp; | &nbsp;&nbsp;
 	  <!--统计代码-->
-	  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <div class="theme-info">
   {{ __('footer.theme') }} -

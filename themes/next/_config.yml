@@ -154,7 +154,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-avatar: http://ol7rcyd1j.bkt.clouddn.com/avatar_hex.png
+avatar:
 
 
 # Table Of Contents in the Sidebar
@@ -460,15 +460,15 @@ vendors:
 
   # Internal version: 1.2.1
   # See: http://VelocityJS.org
-  velocity: http://ol7rcyd1j.bkt.clouddn.com/velocity.min.js
+  velocity: https://cdn.bootcss.com/velocity/1.2.1/velocity.min.js
 
   # Internal version: 1.2.1
   # See: http://VelocityJS.org
-  velocity_ui:
+  velocity_ui: https://cdn.bootcss.com/velocity/1.2.1/velocity.ui.js
 
   # Internal version: 0.7.9
   # See: https://faisalman.github.io/ua-parser-js/
-  ua_parser: http://ol7rcyd1j.bkt.clouddn.com/ua-parser.min.js
+  ua_parser:
 
   # Internal version: 4.6.2
   # See: http://fontawesome.io/
@@ -481,7 +481,7 @@ vendors:
 
   # Internal version: 1.0.0
   # https://github.com/hustcc/canvas-nest.js
-  canvas_nest: http://ol7rcyd1j.bkt.clouddn.com/canvas-nest.min.js
+  canvas_nest:
 
 
 
