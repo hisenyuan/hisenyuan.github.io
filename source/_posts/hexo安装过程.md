@@ -1,7 +1,7 @@
 ---
 title: hexo安装过程
 date: 2017-01-20 00:23:06
-tags: [hexo,安装,github]
+tags: [hexo,github]
 ---
 
 ## 准备工作 ##
@@ -54,7 +54,7 @@ npm install cnpm -g --registry=https://registry.npm.taobao.org
 8. 编辑blog文件夹里面的`_config.yml`配置文件
 9. 最后面添加
 ```
-deploy: 
+deploy:
   type: git
   repository: http://github.com/yourname/yourname.github.io.git
   branch: master

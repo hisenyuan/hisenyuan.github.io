@@ -3,7 +3,7 @@ title: Hexo新玩法 - Atom + platformio-ide-terminal
 keywords: hexo,Atom,platformio-ide-terminal
 categories: hexo
 date: 2018-07-16 23:15:02
-tags: hexo
+tags: [hexo]
 ---
 
 最近在慢慢适应mbp

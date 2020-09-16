@@ -31,9 +31,8 @@
       <div class="main-inner">
         <div class="content-wrap">
           <div id="content" class="content">
-            {% block content %}{% endblock %}          
+            {% block content %}{% endblock %}
           </div>
-          {% include '_partials/duoshuo-hot-articles.swig' %}
           {% include '_partials/comments.swig' %}
         </div>
         {% if theme.sidebar.display !== 'remove' %}
@@ -69,9 +68,8 @@
   {% include '_scripts/third-party/tinysou.swig' %}
   {% include '_scripts/third-party/localsearch.swig' %}
   {% include '_scripts/third-party/mathjax.swig' %}
-  {% include '_scripts/third-party/lean-analytics.swig' %}
+  {% include '_scripts/third-party/analytics/lean-analytics.swig' %}
   {% include '_scripts/baidu-push.swig' %}
   {% include '_components/algolia-search/assets.swig' %}
-
 </body>
 </html>

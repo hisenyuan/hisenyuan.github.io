@@ -4,7 +4,7 @@
     {% set gentie_productKey = theme.gentie_productKey %}
     <script>
       var cloudTieConfig = {
-        url: document.location.href, 
+        url: document.location.href,
         sourceId: "",
         productKey: "{{gentie_productKey}}",
         target: "cloud-tie-wrapper"

@@ -1,9 +1,9 @@
 ---
 title: MarkdownPad2注册码 20170213
 keywords: [hisen,MarkdownPad2注册码,MarkdownPad]
-tags: [MarkdownPad2注册码,软件,MarkdownPad]
+tags: [soft]
 date: 2017-02-13 18:05:09
-categories: 软件
+categories: soft
 ---
 
 MarkdownPad2注册码

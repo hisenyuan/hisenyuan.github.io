@@ -1,7 +1,8 @@
 ---
 title: Hexo 绑定个人域名简单方法
+keywords: [hexo优化,hexo绑定域名]
 date: 2017-02-09 17:26:49
-tags: [hexo优化]
+tags: [hexo]
 ---
 
 **1.**直接注册个域名(随便在哪里)

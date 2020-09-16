@@ -12,8 +12,8 @@ categories: linux
 但是又要用root密码怎么办呢？
 ```
 hisen@ubuntu-1:~$ sudo passwd
-Enter new UNIX password: 
-Retype new UNIX password: 
+Enter new UNIX password:
+Retype new UNIX password:
 passwd: password updated successfully
 ```
 上面输入的密码就是你的root密码
@@ -21,7 +21,7 @@ passwd: password updated successfully
 检测一下
 ```
 hisen@ubuntu-1:~$ su
-Password: 
-root@ubuntu-1:/home/hisen# 
+Password:
+root@ubuntu-1:/home/hisen#
 ```
 通过，至此结束

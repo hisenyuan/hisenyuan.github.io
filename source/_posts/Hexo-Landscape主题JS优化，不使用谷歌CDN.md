@@ -1,7 +1,8 @@
 ---
 title: Hexo Landscape主题JS优化，不使用谷歌CDN
+keywords: [Hexo优化,Hexo Landscape,cdn]
 date: 2017-02-08 22:21:52
-tags: [hexo优化]
+tags: [hexo]
 ---
 jQuery库的优化
 ---

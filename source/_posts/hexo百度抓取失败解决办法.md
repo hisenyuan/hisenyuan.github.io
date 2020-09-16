@@ -1,7 +1,7 @@
 ---
 title: hexo百度抓取失败解决办法
-keywords: [hexo]
-tags: [hexo,hexo优化]
+keywords: [hexo,hexo百度,hexo seo]
+tags: [hexo]
 date: 2017-02-16 10:12:05
 categories: 软件
 ---
@@ -35,7 +35,7 @@ baidu_url_submit:
 
 但是不这样处理执行hexo g 会报错
 ```
-deploy: 
+deploy:
 - type: git
   repository: yoururl
   branch: master

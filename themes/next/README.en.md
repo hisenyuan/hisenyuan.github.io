@@ -71,7 +71,7 @@ Add the following snippets to your `_config.yml`:
 
 ```yml
 duoshuo:
-  enable: true
+  enable: false
   shortname: your-duoshuo-shortname
 ```
 

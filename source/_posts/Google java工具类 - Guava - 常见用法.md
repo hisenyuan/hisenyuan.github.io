@@ -29,7 +29,7 @@ categories: java
 
 部分用法如下：
 <!--more-->
-```
+```java
 public class CommonUsage {
 
   /**

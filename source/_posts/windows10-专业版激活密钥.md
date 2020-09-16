@@ -1,8 +1,8 @@
 ---
 title: windows10 专业版激活密钥
-tags: [windows10专业版激活密钥]
+tags: [soft]
 date: 2017-02-10 16:02:44
-categories: 软件
+categories: soft
 ---
 2017年2月10日 16:03:48
 亲测可用，这比激活工具方便多了

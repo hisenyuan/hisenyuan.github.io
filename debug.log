@@ -1,0 +1,28 @@
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Hexo version: \u001b[35m3.7.1\u001b[39m","time":"2019-10-23T06:18:42.539Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Working directory: \u001b[35m~/hisen/blog/\u001b[39m","time":"2019-10-23T06:18:42.542Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Config loaded: \u001b[35m~/hisen/blog/_config.yml\u001b[39m","time":"2019-10-23T06:18:42.673Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-index\u001b[39m","time":"2019-10-23T06:18:42.699Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-category\u001b[39m","time":"2019-10-23T06:18:42.700Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-deployer-git\u001b[39m","time":"2019-10-23T06:18:42.727Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-search\u001b[39m","time":"2019-10-23T06:18:42.729Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-baidu-url-submit\u001b[39m","time":"2019-10-23T06:18:42.732Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-archive\u001b[39m","time":"2019-10-23T06:18:42.734Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-seo-friendly-sitemap\u001b[39m","time":"2019-10-23T06:18:42.748Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-searchdb\u001b[39m","time":"2019-10-23T06:18:42.754Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-server\u001b[39m","time":"2019-10-23T06:18:42.839Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-tag\u001b[39m","time":"2019-10-23T06:18:42.841Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-marked\u001b[39m","time":"2019-10-23T06:18:42.846Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-stylus\u001b[39m","time":"2019-10-23T06:18:42.848Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-ejs\u001b[39m","time":"2019-10-23T06:18:42.849Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-neat\u001b[39m","time":"2019-10-23T06:18:43.058Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-fs\u001b[39m","time":"2019-10-23T06:18:43.061Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/center-quote.js\u001b[39m","time":"2019-10-23T06:18:43.064Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/full-image.js\u001b[39m","time":"2019-10-23T06:18:43.064Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/button.js\u001b[39m","time":"2019-10-23T06:18:43.064Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/merge-configs.js\u001b[39m","time":"2019-10-23T06:18:43.065Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/note.js\u001b[39m","time":"2019-10-23T06:18:43.065Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/group-pictures.js\u001b[39m","time":"2019-10-23T06:18:43.066Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":30,"msg":"Deploying: \u001b[35mgit\u001b[39m","time":"2019-10-23T06:18:43.067Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":30,"msg":"Clearing .deploy_git folder...","time":"2019-10-23T06:18:43.074Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":30,"msg":"Copying files from public folder...","time":"2019-10-23T06:18:43.202Z","v":0}
+{"name":"hexo","hostname":"HiSEN-2.local","pid":65767,"level":30,"msg":"Farewell","time":"2019-10-23T06:19:20.527Z","v":0}

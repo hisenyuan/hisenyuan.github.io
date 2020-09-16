@@ -1,6 +1,6 @@
 ---
 title: Hexo提速优化 - 压缩html、css、js by hexo-neat插件
-tags: [hexo优化]
+tags: [hexo]
 date: 2017-02-11 22:41:10
 keywords: [hexo优化,hexo提速,hexo压缩]
 categories: 软件
@@ -35,7 +35,7 @@ neat_enable: true
 neat_html:
   enable: true
   exclude:
-  
+
 neat_css:
   enable: true
   exclude:
