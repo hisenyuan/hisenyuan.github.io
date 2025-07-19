@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hisen.me","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Java R &amp; D">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HiSEN">
+<meta property="og:url" content="http://hisen.me/page/27/index.html">
+<meta property="og:site_name" content="HiSEN">
+<meta property="og:description" content="Java R &amp; D">
+<meta property="og:locale">
+<meta property="article:author" content="hisenyuan">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hisen.me/page/27/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>HiSEN</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiSEN</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Personal Technology Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-booklist">
+
+    <a href="/booklist" rel="section"><i class="fa fa-list-ol fa-fw"></i>booklist</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hisen.me/20170120-Oracle-SQL%E8%AF%AD%E5%8F%A5%E4%BC%98%E5%8C%96-%E5%86%99%E5%87%BA%E9%AB%98%E6%95%88SQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hisenyuan">
+      <meta itemprop="description" content="Java R & D">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiSEN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20170120-Oracle-SQL%E8%AF%AD%E5%8F%A5%E4%BC%98%E5%8C%96-%E5%86%99%E5%87%BA%E9%AB%98%E6%95%88SQL/" class="post-title-link" itemprop="url">Oracle SQL语句优化 - 写出高效SQL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-20 14:35:55" itemprop="dateCreated datePublished" datetime="2017-01-20T14:35:55+08:00">2017-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-19 13:54:03" itemprop="dateModified" datetime="2025-07-19T13:54:03+08:00">2025-07-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-选择最有效率的表名顺序"><a href="#1-选择最有效率的表名顺序" class="headerlink" title="[1]选择最有效率的表名顺序"></a>[1]选择最有效率的表名顺序</h2><p>只在基于规则的优化器中有效,ORACLE的解析器按照从右到左的顺序处理FROM子句中的表名，FROM子句中写在最后的表(基础表 driving table)将被最先处理，在FROM子句中包含多个表的情况下,你必须<strong>选择记录条数最少的表作为基础表</strong>。如果有3个以上的表连接查询, 那就需要选择交叉表(intersection table)作为基础表, 交叉表是指那个被其他表所引用的表.</p>
+<h2 id="2-WHERE子句中的连接顺序"><a href="#2-WHERE子句中的连接顺序" class="headerlink" title="[2]WHERE子句中的连接顺序"></a>[2]WHERE子句中的连接顺序</h2><p><strong>ORACLE采用自下而上(从后往前)的顺序解析WHERE子句</strong>,根据这个原理,表之间的连接必须写在其他WHERE条件之前, 那些<strong>可以过滤掉最大数量记录的条件必须写在WHERE子句的末尾</strong></p>
+<h2 id="3-SELECT子句中避免使用’-’"><a href="#3-SELECT子句中避免使用’-’" class="headerlink" title="[3]SELECT子句中避免使用’*’"></a>[3]SELECT子句中避免使用’*’</h2><p>ORACLE在解析的过程中, 会将’*’ 依次转换成所有的列名, 这个工作是通过查询数据字典完成的, 这意味着将耗费更多的时间.需要什么字段就查询什么字段，永远不要查询出不需要的字段来</p>
+<h2 id="4-减少访问数据库的次数"><a href="#4-减少访问数据库的次数" class="headerlink" title="[4]减少访问数据库的次数"></a>[4]减少访问数据库的次数</h2><p>ORACLE在内部执行了许多工作: 解析SQL语句, 估算索引的利用率, 绑定变量 , 读数据块等；尽量使用缓存技术；</p>
+<h2 id="5-设置单次访问合适的检索数据量"><a href="#5-设置单次访问合适的检索数据量" class="headerlink" title="[5]设置单次访问合适的检索数据量"></a>[5]设置单次访问合适的检索数据量</h2><p>在SQL<em>Plus , SQL</em>Forms和Pro*C中重新设置ARRAYSIZE参数, 可以增加每次数据库访问的检索数据量 ,建议值为200</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/20170120-Oracle-SQL%E8%AF%AD%E5%8F%A5%E4%BC%98%E5%8C%96-%E5%86%99%E5%87%BA%E9%AB%98%E6%95%88SQL/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hisen.me/20170120-%E8%AF%A5Java%E8%AF%AD%E5%8F%A5%E5%88%9B%E5%BB%BA%E4%BA%86%E5%A4%9A%E5%B0%91%E4%B8%AA%E5%AF%B9%E8%B1%A1%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hisenyuan">
+      <meta itemprop="description" content="Java R & D">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiSEN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20170120-%E8%AF%A5Java%E8%AF%AD%E5%8F%A5%E5%88%9B%E5%BB%BA%E4%BA%86%E5%A4%9A%E5%B0%91%E4%B8%AA%E5%AF%B9%E8%B1%A1%EF%BC%9F/" class="post-title-link" itemprop="url">该Java语句创建了多少个对象？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-20 14:22:34" itemprop="dateCreated datePublished" datetime="2017-01-20T14:22:34+08:00">2017-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-19 13:54:03" itemprop="dateModified" datetime="2025-07-19T13:54:03+08:00">2025-07-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str = new String(&quot;java&quot;);</span><br></pre></td></tr></table></figure>
+<p>答案：最少一个，最多两个</p>
+<ol>
+<li>java中有常量池的概念，常量池和类文件相关，其数据存放的区域是在方法区中（方法区是jvm中内存模型的概念）</li>
+<li>因为当你使用关键字new的时候是一定会生成一个String类的实例，当你使用直接量的方式定义了一个字符串时，假如这个字符串在常量池中，则不会去实例化String，反之则会生成一个String类的实例，并置入常量池</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hisen.me/20170120-MySQL%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E7%9A%84%E8%AF%AD%E5%8F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hisenyuan">
+      <meta itemprop="description" content="Java R & D">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiSEN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20170120-MySQL%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E7%9A%84%E8%AF%AD%E5%8F%A5/" class="post-title-link" itemprop="url">MySQL一些简单的语句</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-20 01:23:17" itemprop="dateCreated datePublished" datetime="2017-01-20T01:23:17+08:00">2017-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-19 13:54:03" itemprop="dateModified" datetime="2025-07-19T13:54:03+08:00">2025-07-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>emlog_ad字段<br>id<br>status<br>position<br>title<br>weight<br>content</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">--找出重复</span><br><span class="line">SELECT a.*</span><br><span class="line">FROM emlog_ad a</span><br><span class="line">WHERE a.id IN</span><br><span class="line">    (SELECT b.id id</span><br><span class="line">     FROM emlog_ad b</span><br><span class="line">     GROUP BY b.title</span><br><span class="line">     HAVING count(b.id)&gt;1);</span><br><span class="line"></span><br><span class="line">--删除重复留下id最小的</span><br><span class="line">SELECT a.*</span><br><span class="line">FROM emlog_ad a</span><br><span class="line">WHERE a.id IN</span><br><span class="line">    (SELECT b.id</span><br><span class="line">     FROM emlog_ad b</span><br><span class="line">     GROUP BY b.title</span><br><span class="line">     HAVING count(b.id)&gt;1)</span><br><span class="line">  AND a.id NOT IN</span><br><span class="line">    (SELECT min(c.id)</span><br><span class="line">     FROM emlog_ad c</span><br><span class="line">     GROUP BY c.title</span><br><span class="line">     HAVING count(c.id)&gt;1);</span><br><span class="line"></span><br><span class="line">--一句sql把所有AA改为BB，CC改为DD</span><br><span class="line">UPDATE emlog_ad a</span><br><span class="line">SET a.`status`=(</span><br><span class="line">CASE</span><br><span class="line">	WHEN a.`status` = &#x27;1&#x27; THEN &#x27;11&#x27;</span><br><span class="line">	WHEN a.`status`=&#x27;2&#x27; THEN &#x27;22&#x27;</span><br><span class="line">	END</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hisen.me/20170120-hexo%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hisenyuan">
+      <meta itemprop="description" content="Java R & D">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiSEN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20170120-hexo%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">hexo安装过程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-20 00:23:06" itemprop="dateCreated datePublished" datetime="2017-01-20T00:23:06+08:00">2017-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-19 13:54:03" itemprop="dateModified" datetime="2025-07-19T13:54:03+08:00">2025-07-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>Node.js：<a href="https://nodejs.org/en/" target="_blank">点击下载</a></li>
+<li>git：<a href="https://git-for-windows.github.io/" target="_blank">点击下载</a></li>
+<li>MarkdownPad：<a href="http://markdownpad.com/" target="_blank">点击下载</a></li>
+</ol>
+<p>安装好上面三个工具<br>可能会遇到的问题：</p>
+<p>**1、**Git Bash执行<code>node -v</code>提示无效 或者 <code>npm install</code> 报 command not found</p>
+<p>解决办法：在环境变量 - 用户变量中 - 新建用户变量 - 添加nodejs安装路径</p>
+<p>如：C:\tool\nodejs</p>
+<p>**2、**ERROR Deployer not found : github</p>
+<p>解决办法：</p>
+<ol>
+<li>配置文件有问题，冒号后面都有一个空格的</li>
+<li>执行：npm install hexo-deployer-git –save （这命令是为了解决hexo新版本的部署问题）</li>
+</ol>
+<p><strong>3</strong>使用淘宝镜像加快安装速度<br>安装cnpm，使用命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install cnpm -g --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><ol>
+<li>打开Git Bash</li>
+<li>进入nodejs安装目录</li>
+<li>开始安装hexo，输入下面代码</li>
+<li><code>npm install -g hexo</code>#等待安装完成，这个过程可能会快也可能很慢，耐心等待</li>
+<li><code>mkdir blog &amp;&amp; cd blog</code> #上面这个代码是创建一个博客存放的目录</li>
+<li><code>hexo init</code>#初始化</li>
+<li><code>cnpm install</code> #安装依赖包</li>
+<li>完成之后，本地博客就搭建完成</li>
+<li><code>hexo g</code> #生成静态页面</li>
+<li><code>hexo s</code> #启动服务器，打开<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> 就是本地博客</li>
+</ol>
+<p>本地博客安装完成，下面介绍发布到github上</p>
+<ol>
+<li>登陆github，没有就注册</li>
+<li>点击右上角加号+</li>
+<li>Create a new repository</li>
+<li>名字写：<code>yourgithubname.github.io</code></li>
+<li>创建完成</li>
+<li>点击<code>Setting</code></li>
+<li>选择一个主题，然后就好了</li>
+<li>编辑blog文件夹里面的<code>_config.yml</code>配置文件</li>
+<li>最后面添加</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: http://github.com/yourname/yourname.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>最后执行</p>
+<ol>
+<li><code>hexo g</code>#重新生成静态博客</li>
+<li><code>hexo d</code>#将本地静态博客部署到github</li>
+</ol>
+<p>现在你在浏览器打开：<a target="_blank" rel="noopener" href="http://yourname.github.io就可以访问你的博客了/">http://yourname.github.io就可以访问你的博客了</a><br>到此为止就搭建完了一个博客</p>
+<p>开始写第一篇文章：<br>执行：hexo new “你的文章标题”<br>然后你在<code>blog/source/_posts</code>文件夹下面有文件，用markdownpad打开编辑<br>执行：</p>
+<ol>
+<li><code>hexo g</code>#重新生成</li>
+<li><code>hexo s</code>#本地查看效果</li>
+<li><code>hexo d</code>#上传到github</li>
+<li>或者不预览，直接一步上传到github：<code>hexo d -g</code></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hisen.me/20170120-Test-Java-Code/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hisenyuan">
+      <meta itemprop="description" content="Java R & D">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiSEN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20170120-Test-Java-Code/" class="post-title-link" itemprop="url">Test Java Code</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-20 00:00:15" itemprop="dateCreated datePublished" datetime="2017-01-20T00:00:15+08:00">2017-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-19 13:54:03" itemprop="dateModified" datetime="2025-07-19T13:54:03+08:00">2025-07-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这里我只是贴一段代码测试一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.hisen.interview;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 变量不能被重写</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> hisenyuan 2017年1月18日 下午10:33:33</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AboutExtends</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">		<span class="keyword">public</span> <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">fun</span><span class="params">()</span> &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">static</span> &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;Astatic&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;I&#x27;m A class&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">B</span> <span class="keyword">extends</span> <span class="title class_">A</span> &#123;</span><br><span class="line">		<span class="keyword">public</span> <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">fun</span><span class="params">()</span> &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">static</span> &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;Bstatic&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;I&#x27;m B class&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="comment">// 里面的static块方法，new了就会执行</span></span><br><span class="line">		<span class="comment">// new new B()两个都执行，new new A()执行A的</span></span><br><span class="line">		<span class="comment">//static代码块在&#123;&#125;代码块后面执行</span></span><br><span class="line">		<span class="type">A</span> <span class="variable">classA</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">B</span>();</span><br><span class="line">		System.out.println(classA.a);</span><br><span class="line">		classA.fun();</span><br><span class="line">		<span class="comment">// 输出信息</span></span><br><span class="line">		<span class="comment">// Astatic</span></span><br><span class="line">		<span class="comment">// Bstatic</span></span><br><span class="line">		<span class="comment">// I&#x27;m A class</span></span><br><span class="line">		<span class="comment">// I&#x27;m B class</span></span><br><span class="line">		<span class="comment">// 1</span></span><br><span class="line">		<span class="comment">// B</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">// 多态记忆口诀</span></span><br><span class="line">		<span class="comment">// 变量多态看左边</span></span><br><span class="line">		<span class="comment">// 方法多态看右边</span></span><br><span class="line">		<span class="comment">// 静态多态看左边</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hisen.me/20170119-%E8%A7%A3%E5%86%B3%EF%BC%9Ahtml-rendering-error-MarkdownPad-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hisenyuan">
+      <meta itemprop="description" content="Java R & D">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiSEN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20170119-%E8%A7%A3%E5%86%B3%EF%BC%9Ahtml-rendering-error-MarkdownPad-2/" class="post-title-link" itemprop="url">解决：html rendering error - MarkdownPad 2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-19 23:10:54" itemprop="dateCreated datePublished" datetime="2017-01-19T23:10:54+08:00">2017-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-19 13:54:03" itemprop="dateModified" datetime="2025-07-19T13:54:03+08:00">2025-07-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>MarkdownPad 2在windows 10上会遇到这个错误</p>
+<p>官方发布了这个问题的解决办法</p>
+<p>详见：<a href="http://markdownpad.com/faq.html" target="_blank">点击前往</a> 页面中搜索：This view has crashed</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>windows 10系统 需要下载 一个  awesomium_v1.6.6_sdk_win</p>
+<p>这是一个 HTML UI ENGINE</p>
+<p>下载地址：<a href="http://markdownpad.com/download/awesomium_v1.6.6_sdk_win.exe" target="_blank">http://markdownpad.com/download/awesomium_v1.6.6_sdk_win.exe</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/26/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hisenyuan</p>
+  <div class="site-description" itemprop="description">Java R & D</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">266</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">112</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hisenyuan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hisenyuan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/hisenyuan" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;hisenyuan" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hisenyuan" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hisenyuan" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hisenyuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

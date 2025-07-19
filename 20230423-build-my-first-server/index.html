@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hisen.me","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1. 简单介绍当时看朋友买的 E5 CPU 到了白菜价而且之前使用 dell 9020 sff 装的软路由也转给了朋友就想着整一个性能更强一些的服务器在家跑着，方便自己折腾。 当前跑的服务  DDNS 服务 网心云( 500M下行&#x2F;100M上行，收益应该可以覆盖网费+电费 ) homeassistant 青龙系统( JD 签到 )  2. 配置清单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建我的第一台服务器">
+<meta property="og:url" content="http://hisen.me/20230423-build-my-first-server/index.html">
+<meta property="og:site_name" content="HiSEN">
+<meta property="og:description" content="1. 简单介绍当时看朋友买的 E5 CPU 到了白菜价而且之前使用 dell 9020 sff 装的软路由也转给了朋友就想着整一个性能更强一些的服务器在家跑着，方便自己折腾。 当前跑的服务  DDNS 服务 网心云( 500M下行&#x2F;100M上行，收益应该可以覆盖网费+电费 ) homeassistant 青龙系统( JD 签到 )  2. 配置清单">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-04-23T10:00:00.000Z">
+<meta property="article:modified_time" content="2025-07-19T05:54:03.756Z">
+<meta property="article:author" content="hisenyuan">
+<meta property="article:tag" content="homelab">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hisen.me/20230423-build-my-first-server/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>搭建我的第一台服务器 | HiSEN</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiSEN</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Personal Technology Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-booklist">
+
+    <a href="/booklist" rel="section"><i class="fa fa-list-ol fa-fw"></i>booklist</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hisen.me/20230423-build-my-first-server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hisenyuan">
+      <meta itemprop="description" content="Java R & D">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiSEN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          搭建我的第一台服务器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-04-23 18:00:00" itemprop="dateCreated datePublished" datetime="2023-04-23T18:00:00+08:00">2023-04-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-19 13:54:03" itemprop="dateModified" datetime="2025-07-19T13:54:03+08:00">2025-07-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/homelab/" itemprop="url" rel="index"><span itemprop="name">homelab</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-简单介绍"><a href="#1-简单介绍" class="headerlink" title="1. 简单介绍"></a>1. 简单介绍</h1><p>当时看朋友买的 E5 CPU 到了白菜价<br>而且之前使用 dell 9020 sff 装的软路由也转给了朋友<br>就想着整一个性能更强一些的服务器在家跑着，方便自己折腾。</p>
+<p>当前跑的服务</p>
+<ul>
+<li>DDNS 服务</li>
+<li>网心云( 500M下行&#x2F;100M上行，收益应该可以覆盖网费+电费 )</li>
+<li>homeassistant</li>
+<li>青龙系统( JD 签到 )</li>
+</ul>
+<h1 id="2-配置清单"><a href="#2-配置清单" class="headerlink" title="2. 配置清单"></a>2. 配置清单</h1><span id="more"></span>
+
+<table>
+<thead>
+<tr>
+<th align="center">零件</th>
+<th align="center">类型</th>
+<th align="center">数量</th>
+<th align="center">总价</th>
+<th align="center">当前状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">电源 先马 金牌1000w</td>
+<td align="center">全新</td>
+<td align="center">1</td>
+<td align="center">634.05</td>
+<td align="center">在用</td>
+</tr>
+<tr>
+<td align="center">机箱 先马 黑洞7</td>
+<td align="center">全新</td>
+<td align="center">1</td>
+<td align="center">279</td>
+<td align="center">在用</td>
+</tr>
+<tr>
+<td align="center">散热 冰曼 6管双扇</td>
+<td align="center">全新</td>
+<td align="center">2</td>
+<td align="center">113.52</td>
+<td align="center">在用</td>
+</tr>
+<tr>
+<td align="center">致钛 2T SSD(nvme)</td>
+<td align="center">全新</td>
+<td align="center">1</td>
+<td align="center">819</td>
+<td align="center">在用</td>
+</tr>
+<tr>
+<td align="center">金胜维 480G SSD(m.2 SATA)</td>
+<td align="center">全新</td>
+<td align="center">1</td>
+<td align="center">148.98</td>
+<td align="center">在用(系统盘)</td>
+</tr>
+<tr>
+<td align="center">转接 ssu nvme 转 PCIE</td>
+<td align="center">全新</td>
+<td align="center">1</td>
+<td align="center">14.90</td>
+<td align="center">在用</td>
+</tr>
+<tr>
+<td align="center">主板 华硕 Z10PA-D8</td>
+<td align="center">拆机</td>
+<td align="center">1</td>
+<td align="center">1150</td>
+<td align="center">在用</td>
+</tr>
+<tr>
+<td align="center">内存 三星 32G</td>
+<td align="center">拆机</td>
+<td align="center">2</td>
+<td align="center">418</td>
+<td align="center">在用</td>
+</tr>
+<tr>
+<td align="center">硬盘 随机 480G</td>
+<td align="center">拆机</td>
+<td align="center">2</td>
+<td align="center">218</td>
+<td align="center">报废</td>
+</tr>
+<tr>
+<td align="center">CPU E5 2650V4</td>
+<td align="center">拆机</td>
+<td align="center">2</td>
+<td align="center">79</td>
+<td align="center">在用</td>
+</tr>
+<tr>
+<td align="center">整机</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">3874.75</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.notion.so/hisenyuan/3c5cf0d34fb94293be0e675df936ec12?pvs=4#fc70c311c354418bae6b7300753fd028">CPU参数对比</a></li>
+</ul>
+<h1 id="3-踩坑感言"><a href="#3-踩坑感言" class="headerlink" title="3. 踩坑感言"></a>3. 踩坑感言</h1><p>不建议购买二手 SSD，特别是不知名品牌的。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/homelab/" rel="tag"># homelab</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20230226-Bytecode_enhancement_part_1/" rel="prev" title="字节码增强 - 初识链路追踪 - ByteBuddy">
+      <i class="fa fa-chevron-left"></i> 字节码增强 - 初识链路追踪 - ByteBuddy
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20231231-crocodile-turtle-weight-record/" rel="next" title="鳄龟记录 - 持续更新">
+      鳄龟记录 - 持续更新 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">1. 简单介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AE%E6%B8%85%E5%8D%95"><span class="nav-number">2.</span> <span class="nav-text">2. 配置清单</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%B8%A9%E5%9D%91%E6%84%9F%E8%A8%80"><span class="nav-number">3.</span> <span class="nav-text">3. 踩坑感言</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hisenyuan</p>
+  <div class="site-description" itemprop="description">Java R & D</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">266</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">112</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hisenyuan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hisenyuan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/hisenyuan" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;hisenyuan" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hisenyuan" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hisenyuan" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hisenyuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
