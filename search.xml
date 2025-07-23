@@ -5355,7 +5355,7 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
 <p>主题配置：.&#x2F;themes&#x2F;_config.yml 调整对应的值</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Local Search</span><br><span class="line"># Dependencies: https://github.com/theme-next/hexo-generator-searchdb</span><br><span class="line">local_search:</span><br><span class="line">  enable: true</span><br><span class="line">  # If auto, trigger search by changing input.</span><br><span class="line">  # If manual, trigger search by pressing enter key or search button.</span><br><span class="line">  trigger: auto</span><br><span class="line">  # Show top n results per article, show all results by setting to -1</span><br><span class="line">  top_n_per_article: 1</span><br><span class="line">  # Unescape html strings to the readable one.</span><br><span class="line">  unescape: true</span><br><span class="line">  # Preload the search data when the page loads.</span><br><span class="line">  preload: true</span><br></pre></td></tr></table></figure>
 
-<p>这里有个小插曲<br>如果只修改 <em>主题配置</em> 右上角会有排版问题，但是 unescape 会生效。<br>如果同时改 <em>站点配置</em> 右上角排班恢复正常，但是 unescape 失效，体积增大。</p>
+<p>这里有个小插曲<br><img src="/../images/20250723_search_style_error.png" alt="检索样式错误"><br>如果只修改 <em>主题配置</em> 右上角会有排版问题，但是 unescape 会生效。<br>如果同时改 <em>站点配置</em> 右上角排班恢复正常，但是 unescape 失效，体积增大。</p>
 <h2 id="2-5-迁移到-Cloudflare"><a href="#2-5-迁移到-Cloudflare" class="headerlink" title="2.5 迁移到 Cloudflare"></a>2.5 迁移到 Cloudflare</h2><p>Cloudflare 也有 pages 的功能。原理是授权 github 给 Cloudflare 自动拉取部署。<br>迁移之前: hisen.me -&gt; Cloudflare -&gt; github.io<br>迁移之后: hisen.me -&gt; Cloudflare</p>
 <p>具体的操作过程：</p>
 <ol>
