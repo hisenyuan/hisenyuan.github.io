@@ -9395,14 +9395,15 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
 <ul>
 <li>随说：<span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS81MTk0MDQ2OTYxMDkyNzc4">软件指南 VS 旅游指南<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
-<p>一句话概况：架构代表了重大决策，衡量重要性的则是改变的成本。</p>
+<p>一句话概况：架构代表了重大决策，衡量重要性的则是改变的成本。<br>文章最后有更多架构相关书籍的读后感链接。</p>
 <h2 id="1-1-什么是架构？"><a href="#1-1-什么是架构？" class="headerlink" title="1.1 什么是架构？"></a>1.1 什么是架构？</h2><p>名词解释：将产品分解为一系列组件、模块和交互。<br>动词解释：理解你需要构建什么、设定愿景以便进行构建和做出恰当的设计决策。</p>
 <ul>
 <li>本质：结构 + 愿景</li>
 <li>现象：需求驱动架构</li>
 </ul>
 <h2 id="1-2-架构的好处"><a href="#1-2-架构的好处" class="headerlink" title="1.2 架构的好处"></a>1.2 架构的好处</h2><h3 id="1-2-1-没有架构会怎么样？"><a href="#1-2-1-没有架构会怎么样？" class="headerlink" title="1.2.1 没有架构会怎么样？"></a>1.2.1 没有架构会怎么样？</h3><p>如果没有人思考软件架构，最终结果往往看起来像一团乱码。<br>副作用包括软件系统难以维护、难以改变、难以扩展、难以部署、太慢、不安全、脆弱、不稳定等等。</p>
-<h3 id="1-2-2-架构的好处"><a href="#1-2-2-架构的好处" class="headerlink" title="1.2.2 架构的好处"></a>1.2.2 架构的好处</h3><ul>
+<h3 id="1-2-2-架构的好处"><a href="#1-2-2-架构的好处" class="headerlink" title="1.2.2 架构的好处"></a>1.2.2 架构的好处</h3><span id="more"></span>
+<ul>
 <li>让团队有清晰的愿景和路线图；</li>
 <li>技术领导力和更好地协调；</li>
 <li>更好地回答重要决策、非功能需求、限制和其他问题；</li>
@@ -9410,8 +9411,7 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
 <li>方法和标准的一致性(结果之一：结构良好的代码库)；</li>
 <li>对不同的听众，用不同的抽象来交流解决方案；</li>
 </ul>
-<h1 id="2-摘抄"><a href="#2-摘抄" class="headerlink" title="2. 摘抄"></a>2. 摘抄</h1><span id="more"></span>
-<p>这本书主要覆盖的内容：</p>
+<h1 id="2-摘抄"><a href="#2-摘抄" class="headerlink" title="2. 摘抄"></a>2. 摘抄</h1><p>这本书主要覆盖的内容：</p>
 <ul>
 <li>软件架构的本质；</li>
 <li>为什么软件架构角色应当包含编码、指导、合作；</li>
@@ -9483,6 +9483,21 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
 <p>项目级文档 vs 产品级文档</p>
 <p>思考软件架构的过程其实是确定范围，<br>在范围之内可以用任何一种 xDD 来实现。</p>
 <p>架构代表了重大决策，衡量重要性的则是改变的成本。</p>
+<h1 id="3-架构微博"><a href="#3-架构微博" class="headerlink" title="3. 架构微博"></a>3. 架构微博</h1><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS80OTIxMzk3Nzg3MjMwNDU4">《架构之道》<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS80ODkxODIzMDgyNTcyODMy">《架构师的12项修炼》<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS80ODM4MDMzNjY3MzkzMjA4">《软件架构：架构模式、特征及实践指南》<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS80NzkyMDIwNzIyNTE3OTQz">《微服务架构设计模式》<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS80NjQ3NDExODk4NjQ3OTY2">《凤凰架构》<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS80NTQ4MjY3MDk2NjcwOTY5">《架构之美》<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS80NTQzNTQyMjY4MDA3Mjgw">《架构修炼之道》<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS80NTIyMzI5OTIyOTg3MjU2">《高可用可伸缩微服务架构》<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS80NDExNzU1MTYzNTU5Mzc5">《高可用架构》<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS80MzY4Mzg1Mzg0NzIwMzUx">《可伸缩服务架构：框架与中间件》<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS80MzQ0ODMzODc3OTE4MzE1">《可伸缩架构》<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS80MzI5NjIxNjI3MTEzOTA3">《大型网站技术架构》<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNjIwOTA3OTIzMS80MzE1NDcxMjc4MzU1NDUz">《架构真经》<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
 ]]></content>
       <categories>
         <category>Reading</category>
