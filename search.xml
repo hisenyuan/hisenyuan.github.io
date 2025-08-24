@@ -9383,7 +9383,6 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
         <category>Tech</category>
       </categories>
       <tags>
-        <tag>业余无线电</tag>
         <tag>HAM</tag>
       </tags>
   </entry>
@@ -9504,6 +9503,112 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
       </categories>
       <tags>
         <tag>架构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>怎么获得业余无线电执照？</title>
+    <url>/20250825-how_to_get_an_amateur_radio_license_in_beijing/</url>
+    <content><![CDATA[<h1 id="1-合法合规"><a href="#1-合法合规" class="headerlink" title="1. 合法合规"></a>1. 合法合规</h1><p>发射业余无线电需要两个证件</p>
+<ol>
+<li>操作证(驾驶证)</li>
+<li>执照(行驶证)</li>
+</ol>
+<h1 id="2-具体步骤"><a href="#2-具体步骤" class="headerlink" title="2. 具体步骤"></a>2. 具体步骤</h1><ol>
+<li>关注”北京业余无线电服务中心”微信公众号</li>
+<li>及时关注报名信息，基本上每个月都会组织 A 类考试</li>
+<li>开始之前使用『HAM模拟考试』微信小程序</li>
+</ol>
+<ul>
+<li>建议直接开发做题，因为做错了又解析，也有错题记录，后续专门加强；</li>
+</ul>
+<ol start="4">
+<li>报名,可以不参加培训</li>
+</ol>
+<ul>
+<li>一般名额充足，都能报上名；</li>
+</ul>
+  <span id="more"></span>
+<ul>
+<li>可以微信公众上的入口进入</li>
+<li>也可以 PC 登录平台操作 <span class="exturl" data-url="aHR0cHM6Ly94dC5iand4ZHhoLm9yZy5jbi9zdGF0aWMvbWVtYmVyLyMvc3RhdGljL21lbWJlci91c2VyL2xvZ2lu">协会PC登录地址<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<ol start="5">
+<li>考试，30道题基本上十多分钟做完</li>
+<li>等待考试成绩出来</li>
+<li>等到操作证出来( 可以进平台选择邮寄 )</li>
+<li>查询操作证号( 尽快查，知道操作证号就可以设备登记，也就是申请执照+分配呼号 )</li>
+</ol>
+<ul>
+<li>参考<a href="/20250726-Amateur_Radio_Newbie_Guide/">3.2 查询操作证号</a></li>
+</ul>
+<ol start="9">
+<li>设备登记( 网上方便不用人到现场 )</li>
+</ol>
+<ul>
+<li>像素：800*1240 ( 美图像素修改 )</li>
+<li>尺寸&amp;格式：苹果的拍照格式非 jpg，需要通过电脑预览图片后导出，顺便选择图片质量即可</li>
+<li>建议选择全国设台</li>
+</ul>
+<ol start="10">
+<li>等协会执照通知</li>
+</ol>
+<ul>
+<li>登记完成后，基本上 20 天就可以拿到执照</li>
+</ul>
+<ol start="11">
+<li>可以愉快地通联</li>
+</ol>
+<h1 id="3-后话"><a href="#3-后话" class="headerlink" title="3. 后话"></a>3. 后话</h1><p>业余无线电涉及的知识很多，慢慢实践吧~<br>我按这个步骤给家里领导跑了一遍流程，挺顺畅。<br>我六月份考试的时候到早些天拿到呼号，流程还是有点不顺畅。</p>
+<p>我的节奏<br>2025.6.21 考试<br>2025.7.23 操作证(驾驶证)<br>2025.8.19 执照(行驶证)</p>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>HAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>怎么使用森海克斯 8800PRO 对讲机</title>
+    <url>/20250825-how_to_use_senhaix_8800pro/</url>
+    <content><![CDATA[<ol>
+<li>长按 menu 切换频率模式&#x2F;信道模式</li>
+</ol>
+<ul>
+<li>频率模式：自由输入( eg:438.500 北京直频 )</li>
+<li>信道模式：类似于书签，是之前保存好的频率</li>
+</ul>
+<ol start="2">
+<li>森海克斯8800PRO蓝牙写频</li>
+</ol>
+<ul>
+<li>软件<ul>
+<li>iOS：app store “SHX8800” (我没成功写频，暂时用安卓解决)</li>
+</ul>
+  <span id="more"></span>
+<ul>
+<li>安卓：<a href="/images/shx-v1.5.0.apk">本站1.5版本</a> 、 <span class="exturl" data-url="aHR0cHM6Ly93d3cuc2VuaGFpeC5jb20vY2F0ZWdvcnkvZG93bmxvYWRzLzM=">官网下载<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>步骤<ul>
+<li>对讲机打开蓝牙”数据模式”</li>
+<li>手机连接对讲机</li>
+<li>读频</li>
+<li>基于读频修改记录<ul>
+<li>如果不先读频，大概率写入 88% 写入的时候程序会崩溃</li>
+</ul>
+</li>
+<li>修改完成后写入</li>
+</ul>
+</li>
+</ul>
+<p>写频里面的一些细节后续有空再补充，<br>写频的目的也就是为了方便录入很多频率。<br>毕竟对讲机操作还是没有 app 操作方便。</p>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>HAM</tag>
       </tags>
   </entry>
 </search>
