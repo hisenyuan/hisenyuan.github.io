@@ -9582,15 +9582,15 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
 <li>森海克斯8800PRO蓝牙写频</li>
 </ol>
 <ul>
-<li>软件<ul>
+<li>写频软件<ul>
 <li>iOS：app store “SHX8800” (我没成功写频，暂时用安卓解决)</li>
 </ul>
   <span id="more"></span>
 <ul>
-<li>安卓：<a href="/images/shx-v1.5.0.apk">本站1.5版本</a> 、 <span class="exturl" data-url="aHR0cHM6Ly93d3cuc2VuaGFpeC5jb20vY2F0ZWdvcnkvZG93bmxvYWRzLzM=">官网下载<i class="fa fa-external-link-alt"></i></span></li>
+<li>安卓：<span class="exturl" data-url="aHR0cHM6Ly93d3cuc2VuaGFpeC5jb20vY2F0ZWdvcnkvZG93bmxvYWRzLzM=">官网下载<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 </li>
-<li>步骤<ul>
+<li>操作步骤<ul>
 <li>对讲机打开蓝牙”数据模式”</li>
 <li>手机连接对讲机</li>
 <li>读频</li>
