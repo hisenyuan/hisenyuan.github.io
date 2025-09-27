@@ -9611,4 +9611,54 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
         <tag>HAM</tag>
       </tags>
   </entry>
+  <entry>
+    <title>手搓群晖DS918+电源</title>
+    <url>/20250927-assembly_a_power_supply_for_the_Synology_DS918/</url>
+    <content><![CDATA[<h1 id="1-缘起"><a href="#1-缘起" class="headerlink" title="1. 缘起"></a>1. 缘起</h1><p>某个周末，收拾机柜时发现整个机柜都断电了。<br>后来一查，是半个小时左右之前断的，跳闸了。<br>重新开闸之后，发现 NAS 的灯不亮了…<br>开始还以为是电源线坏了，找了个电饭煲的线来还是不行。<br>最后只能怀疑是电源适配器坏了。<br>总结：电源适配器坏了。</p>
+<p>目标：性价比高、可靠性好的电源。</p>
+<h1 id="2-探索"><a href="#2-探索" class="headerlink" title="2. 探索"></a>2. 探索</h1><p>电源坏了正常是买一个电源对吧？<br>但是我一搜，成品的 68~138 等的价位比较多，关键还是杂牌。</p>
+<p>由于之前折腾机柜，DC 电源都换成了明纬的，自己接输入&#x2F;输出线，用的比较舒服。<br>当时 50+ 块买的电源是 S-200-12V 17A，拖了 10+ 个 DC 设备(节省 N 个充电器位置)。<br>重点：<strong>只要电压是一样就可以用</strong>,电源会自动适配设备电流。</p>
+<span id="more"></span>
+<h1 id="3-手搓"><a href="#3-手搓" class="headerlink" title="3. 手搓"></a>3. 手搓</h1><p>由于杂牌电源的加个较高，而且品质还没法保障。<br>于是我就选择自己买零件组装一个，明细如下：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>细节</th>
+<th>价格</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>电源</td>
+<td>明纬 S-150-12V 12.5A</td>
+<td>48.25</td>
+<td>比原装 8.33A 高点，适当冗余</td>
+</tr>
+<tr>
+<td>输入</td>
+<td>1.5 平方 1.5 米</td>
+<td>15</td>
+<td>接 220V 市电，适合 3500W 以内的，买粗了</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>4 针 2 芯公头线 1.2 米</td>
+<td>9.5</td>
+<td>接群晖</td>
+</tr>
+</tbody></table>
+<p>总计≈85元(含运费)</p>
+<h1 id="4-效果"><a href="#4-效果" class="headerlink" title="4. 效果"></a>4. 效果</h1><p>组装挺快，电源的输入是不区分零火线的自动匹配(好评)。<br>唯一的遗憾是输出的4针线，接头没有铁片那种，直接卡线有点不友好。<br>总结：性价比高，除了大一点，其它没毛病，毕竟大厂电源，金属外壳，散热杠杠的。</p>
+<h2 id="4-1-组装后"><a href="#4-1-组装后" class="headerlink" title="4.1 组装后"></a>4.1 组装后</h2><p><img src="/images/ds/assembly.jpg" alt="组装后"></p>
+<h2 id="4-2-入机柜"><a href="#4-2-入机柜" class="headerlink" title="4.2 入机柜"></a>4.2 入机柜</h2><p><img src="/images/ds/detail.jpg" alt="摆放细节"></p>
+<h2 id="4-3-融入整体"><a href="#4-3-融入整体" class="headerlink" title="4.3 融入整体"></a>4.3 融入整体</h2><p><img src="/images/ds/all.jpg" alt="机柜概览"></p>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
 </search>
