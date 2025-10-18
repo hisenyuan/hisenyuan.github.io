@@ -9756,4 +9756,71 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
         <tag>蜥蜴</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Mac iTerm2 无法 ping 网关</title>
+    <url>/20251018-mac_iterm2_can_not_ping_gateway/</url>
+    <content><![CDATA[<h1 id="0-概览"><a href="#0-概览" class="headerlink" title="0. 概览"></a>0. 概览</h1><p>如果 Mac 可以正常上网，但是无法访问本地网络。<br>解决：“系统设置”→“隐私与安全性”→“本地网络”，打开对应软件的权限。</p>
+<h1 id="1-表象"><a href="#1-表象" class="headerlink" title="1. 表象"></a>1. 表象</h1><p>无法 ping 网关，但是可以上网。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ping 192.168.1.1</span><br><span class="line">PING 192.168.1.1 (192.168.1.1): 56 data bytes</span><br><span class="line">ping: sendto: No route to host</span><br><span class="line">ping: sendto: No route to host</span><br><span class="line">Request timeout for icmp_seq 0</span><br><span class="line">...</span><br><span class="line">--- 192.168.1.1 ping statistics ---</span><br><span class="line">17 packets transmitted, 0 packets received, 100.0% packet loss</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-排查"><a href="#2-排查" class="headerlink" title="2. 排查"></a>2. 排查</h1><h2 id="2-1-使用自带终端"><a href="#2-1-使用自带终端" class="headerlink" title="2.1 使用自带终端"></a>2.1 使用自带终端</h2><p>可以正常 ping。</p>
+<h2 id="2-2-抓包"><a href="#2-2-抓包" class="headerlink" title="2.2 抓包"></a>2.2 抓包</h2><span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo tcpdump -i en0 icmp</span><br><span class="line"></span><br><span class="line">listening on en0, link-type EN10MB (Ethernet), snapshot length 524288 bytes</span><br><span class="line">16:50:17.646968 IP 180.165.12.183 &gt; 192.168.1.55: ICMP 180.165.12.183 udp port 49914 unreachable, length 56</span><br><span class="line">16:50:18.135497 IP 117.148.114.147 &gt; 192.168.1.55: ICMP 117.148.114.147 udp port 42944 unreachable, length 56</span><br><span class="line">16:50:18.361302 IP 210.74.154.110 &gt; 192.168.1.55: ICMP 210.74.154.110 udp port 40764 unreachable, length 56</span><br><span class="line">16:50:18.361989 IP 210.74.154.110 &gt; 192.168.1.55: ICMP 210.74.154.110 udp port 61340 unreachable, length 56</span><br><span class="line">16:50:18.434133 IP 117.155.164.106 &gt; 192.168.1.55: ICMP 117.155.164.106 udp port 10218 unreachable, length 56</span><br><span class="line">16:50:18.475222 IP 119.191.82.252 &gt; 192.168.1.55: ICMP 119.191.82.252 udp port hydap unreachable, length 56</span><br><span class="line">16:50:19.077798 IP 140.75.168.17 &gt; 192.168.1.55: ICMP 140.75.168.17 udp port 15464 unreachable, length 56</span><br></pre></td></tr></table></figure>
+<p>发现 180 这些 IP，很像 switchhost 上 GitHub 的IP。</p>
+<h2 id="2-3-问模型"><a href="#2-3-问模型" class="headerlink" title="2.3 问模型"></a>2.3 问模型</h2><p>SwitchHost 会导致 iTerm2 出现无法 ping 网关的问题吗？Mac 自带的终端是可以 ping 的。<br>答：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">本地网络权限问题：</span><br><span class="line">macOS 系统更新（如 Sequoia 15.0.1）后，可能会弹出权限请求窗口，询问是否允许应用访问本地网络。若用户误选“否”，iTerm2 将被禁止访问本地网络，导致无法 ping 通网关。</span><br><span class="line">解决方法：在 macOS 的“系统设置”→“隐私与安全性”→“本地网络”中，确保 iTerm2 的开关处于开启状态。</span><br></pre></td></tr></table></figure>
+<p>发现来问题，开启本地网络之后就可以正常使用。</p>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>homelab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>廉价交换机导致家庭网络瘫痪半年</title>
+    <url>/20251018-cheap_switches_cause_home_network_paralysis/</url>
+    <content><![CDATA[<h1 id="0-总结"><a href="#0-总结" class="headerlink" title="0. 总结"></a>0. 总结</h1><p>故障开始：2025年4月13日<br>故障结束：2025年10月12日<br>故障原因：交换机光模块发热导致断流</p>
+<ul>
+<li>发现问题后使用猫扇对着吹，2天没都正常</li>
+</ul>
+<p>交换机：keepLINK2.5G交换机(5口2.5G+1口万兆光口)。( 劝退，温度稍微高点就不行 )</p>
+<h1 id="1-网络情况"><a href="#1-网络情况" class="headerlink" title="1. 网络情况"></a>1. 网络情况</h1><p>进：入户光纤—弱电箱—顶柜(预计放网络设备)—吊顶(为了不走明线)—机柜(家政柜改的)—路由器<br>出：路由器—交换机(SFP+)—弱电箱—交换机(SFP+)—内网设备(AC+AP)</p>
+<p>规划不到位或者新需求变更导致的畸形解决方案.</p>
+<h1 id="2-排查过程"><a href="#2-排查过程" class="headerlink" title="2. 排查过程"></a>2. 排查过程</h1><p>刚开始连接上网络(本地+WIFI)，DHCP IP 分配正常，有时候可以上网，有时候不行。<br>没有排查到问题，由于家里有闲置的流量卡，就优先用热点了。</p>
+<p>期间由于工作上事情比较多，周末又有安排或者不想动，反正就是没动力去查…</p>
+<span id="more"></span>
+<p>于是就导致家里的 IOT 设备失效…因为都可以手动操作也就没什么影响。</p>
+<p>然后由于联通基站问题，这边流量也不太快，联通上门查了反馈的。<br>投诉也没用，就说等安排扩容基站，赔了一个月套餐费。</p>
+<p>期间家里领导也断断续续提过快点解决，<br>由于之前尝试的办法都不行，我一度怀疑是家里网络搞太复杂导致的。</p>
+<p>国庆节后，不那么忙，就想着回到最原始的办法，挨个设备排查。</p>
+<ol>
+<li>用 10m 的网线，把路由器和电脑直接连接：正常</li>
+<li>用 10m 的网线，把路由器和弱电箱交换机连接：正常</li>
+<li>发现光纤口灯不亮：找到问题</li>
+<li>怀疑弱电箱交换机坏了，京东买个同型号：判断错误</li>
+<li>怀疑机柜里交换机坏了，替换新交换机：可以</li>
+<li>换机柜中交换机过程中，发现光模块太热，会不会是发热导致？</li>
+<li>安排风扇降温：多天正常</li>
+</ol>
+<p>总结：交换机光模块太热导致罢工</p>
+<h1 id="3-解决问题"><a href="#3-解决问题" class="headerlink" title="3. 解决问题"></a>3. 解决问题</h1><p>应急：安排风扇<br>常规：购买 TP-Link 2.5G+万兆 交换机替换</p>
+<ul>
+<li>目前移除散热风扇，情况正常</li>
+</ul>
+<h1 id="4-感悟"><a href="#4-感悟" class="headerlink" title="4. 感悟"></a>4. 感悟</h1><p>遇到问题，排除法还是好用。</p>
+<p>不要懒，不然吃亏的还是自己。<br>网络瘫痪期间</p>
+<ul>
+<li>用联通的热点上网苦不堪言，还好可以看书或者别的…</li>
+<li>IOT 设备罢工，感应开关灯之类的没法用，稍微有点影响体验</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>homelab</tag>
+      </tags>
+  </entry>
 </search>
