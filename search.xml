@@ -9787,7 +9787,7 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
 </ul>
 <p>交换机：keepLINK2.5G交换机(5口2.5G+1口万兆光口)。( 劝退，温度稍微高点就不行 )</p>
 <h1 id="1-网络情况"><a href="#1-网络情况" class="headerlink" title="1. 网络情况"></a>1. 网络情况</h1><p>进：入户光纤—弱电箱—顶柜(预计放网络设备)—吊顶(为了不走明线)—机柜(家政柜改的)—路由器<br>出：路由器—交换机(SFP+)—弱电箱—交换机(SFP+)—内网设备(AC+AP)</p>
-<p>规划不到位或者新需求变更导致的畸形解决方案.</p>
+<p>规划不到位+新需求变更导致的畸形解决方案.</p>
 <h1 id="2-排查过程"><a href="#2-排查过程" class="headerlink" title="2. 排查过程"></a>2. 排查过程</h1><p>刚开始连接上网络(本地+WIFI)，DHCP IP 分配正常，有时候可以上网，有时候不行。<br>没有排查到问题，由于家里有闲置的流量卡，就优先用热点了。</p>
 <p>期间由于工作上事情比较多，周末又有安排或者不想动，反正就是没动力去查…</p>
 <span id="more"></span>
@@ -9815,6 +9815,65 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
 <li>用联通的热点上网苦不堪言，还好可以看书或者别的…</li>
 <li>IOT 设备罢工，感应开关灯之类的没法用，稍微有点影响体验</li>
 </ul>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>homelab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>家庭网络 1.0</title>
+    <url>/20251019-homelab_network_v1.0/</url>
+    <content><![CDATA[<h1 id="0-缘起"><a href="#0-缘起" class="headerlink" title="0. 缘起"></a>0. 缘起</h1><p>这些年在网络上看到不少文章，看到那些整理的很好看的桌面布局、网络机柜，莫名的羡慕。</p>
+<p>早两年 2.5G 刚开始，10G 比较贵，所以就预埋了万兆的网线，当时看到的观点是家庭万兆有点远。<br>现在看来还是有点保守了，当前 2.5G 的设备基本上白菜价，10G 还会远嘛？</p>
+<p>更关键的是，如果当时规划 10G 网络，必然会埋光纤，就不会有后续重新走吊顶布线的烦扰。</p>
+<p>不管是做什么，尽量多去深入了解相关领域的知识，根据自己的情况做出决定。<br>这样才能避免盲目，也能少踩坑，今天就简单分享一下家庭网络 1.0。</p>
+<h1 id="1-概览"><a href="#1-概览" class="headerlink" title="1. 概览"></a>1. 概览</h1><p><img src="/images/homelab/homelab_network.png" alt="概览"><br>房子装修时规划：</p>
+<span id="more"></span>
+<ul>
+<li>每个房间都留网线</li>
+<li>入户 2 根光纤</li>
+<li>大尺寸的弱电箱</li>
+<li>顶柜：两个网络口(进出)，放网络设备</li>
+<li>电视柜：放一个 4U 的服务器</li>
+</ul>
+<p>如果让我重新规划，我会：</p>
+<ul>
+<li>入户使用 12芯光纤：方便扩展入户网络；</li>
+<li>室内全部  4芯光纤：扩展性好，现在光纤设备不贵；</li>
+<li>机柜做好管线+通风：散热和线路一并解决；</li>
+<li>预留好传感器等位置；</li>
+</ul>
+<h1 id="2-无线网络"><a href="#2-无线网络" class="headerlink" title="2. 无线网络"></a>2. 无线网络</h1><p><img src="/images/homelab/network_ac_ap.jpg" alt="无线网络"></p>
+<h2 id="2-1-简单介绍"><a href="#2-1-简单介绍" class="headerlink" title="2.1 简单介绍"></a>2.1 简单介绍</h2><p>目前是 TP-Link 的 AC+AP 方案。</p>
+<ul>
+<li>AC：TL-AC100 V4.0，支持 WIFI7，二手</li>
+<li>AP1：7AP5100，WIFI7 的吸顶设备，全新</li>
+<li>AP2：XAP5407，带机量挺大的 AP略厚，二手</li>
+<li>AP3：XDR3010，一个支持易展的路由器，二手</li>
+</ul>
+<h2 id="2-1-AP-漫游日志"><a href="#2-1-AP-漫游日志" class="headerlink" title="2.1 AP 漫游日志"></a>2.1 AP 漫游日志</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">2025-10-19 08:03:52 无线客户端 STA(MAC AA-44-22-11-D3-24)从AP TL-7AP5100HC 的无线服务 HiSEN-5G(5G) 成功漫游到AP TL-XDR3010 的无线服务 HiSEN-5G(5G).</span><br><span class="line">2025-10-19 08:03:50 无线客户端 STA(MAC AA-44-22-11-D3-24)从AP TL-XAP5407GC 的无线服务 HiSEN-5G(5G) 成功漫游到AP TL-7AP5100HC 的无线服务 HiSEN-5G(5G).</span><br></pre></td></tr></table></figure>
+<h1 id="3-机柜实拍"><a href="#3-机柜实拍" class="headerlink" title="3. 机柜实拍"></a>3. 机柜实拍</h1><p><img src="/images/homelab/server_cabinet.jpg" alt="机柜实拍"><br>这个机柜是自己买立柱拼装的，宽度标准，深度只有 30cm 左右。<br>机箱选择的空间就很小，小主板可以找到1U的，大主板就只能多占点。</p>
+<p>散热方案<br>顶部：一个风扇对内吹，一个对外吹。<br>其它：没有额外的风扇。</p>
+<p>其实最好的办法是装一路新风进出口在那&#x3D;&#x3D;</p>
+<h2 id="3-1-提一下开关电源"><a href="#3-1-提一下开关电源" class="headerlink" title="3.1 提一下开关电源"></a>3.1 提一下开关电源</h2><p>开关电源用着蛮好的，我用的是明纬。<br>有大量 DC 电源需求的情况下，百来块就可以搞定所有供电,节省大量插座。</p>
+<ul>
+<li>大功率输入线</li>
+<li>1分N输出 DC 线</li>
+<li>电压一样的情况下，选自己负载需要的电流就行。</li>
+</ul>
+<h2 id="3-2-顺便说一下-NAS-个人私有化存储"><a href="#3-2-顺便说一下-NAS-个人私有化存储" class="headerlink" title="3.2 顺便说一下 NAS(个人私有化存储)"></a>3.2 顺便说一下 NAS(个人私有化存储)</h2><p>群晖 DS918+</p>
+<ul>
+<li>千兆的口，后加了 USB2.5G 网口(<a href="/20221119-synology-DS918-add-2500M-RTL8156B-usb-network-cart/">详情</a>)。</li>
+<li>新增了 2块 SSD 作为缓存，读写速度快不少。</li>
+<li>DIY 了一个电源质量和性价比拉满(<a href="/20250927-assembly_a_power_supply_for_the_Synology_DS918/">详情</a>).</li>
+</ul>
+<p>NAS 目前 10T 的容量，做的 Raid5 阵列。<br>存储了从 2011 年开始的个人未丢失的数据。</p>
+<p>个人建议那些没有特殊需求，为了照片存储容量的朋友购置一个 NAS。<br>一个是长期看性价比搞，数据安全性有保障，还能全家使用。</p>
+<h1 id="4-后话"><a href="#4-后话" class="headerlink" title="4. 后话"></a>4. 后话</h1><p>虽然有时候和朋友提起，讲我弄了一套 AC+AP，可以漫游什么的。<br>对方可能会呵呵一笑，我家也有，联通自带的~，<br>这种方式也挺好，但可能失去各种灵活性，也会错过各种实践机会。<br>身为 IT 从业者，我在负责高并发系统的时候，经常和底层打交道，那会还不知道光模块故障为何物。<br>现在自己在家实践下来，收获的不仅仅是成就感，还有随之带来的网络以及运维知识。</p>
+<p>保持好奇心，深入了解相关领域，了解原理。<br>那么不管在工作和生活中，会轻松很多，<br>而不用在谈笑间还得靠做自媒体的复读机。</p>
 ]]></content>
       <categories>
         <category>Tech</category>
