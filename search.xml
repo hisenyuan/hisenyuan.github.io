@@ -9612,7 +9612,7 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
       </tags>
   </entry>
   <entry>
-    <title>手搓群晖DS918+电源</title>
+    <title>手搓群晖 DS918+ 电源</title>
     <url>/20250927-assembly_a_power_supply_for_the_Synology_DS918/</url>
     <content><![CDATA[<h1 id="1-缘起"><a href="#1-缘起" class="headerlink" title="1. 缘起"></a>1. 缘起</h1><p>某个周末，收拾机柜时发现整个机柜都断电了。<br>后来一查，是半个小时左右之前断的，跳闸了。<br>重新开闸之后，发现 NAS 的灯不亮了…<br>开始还以为是电源线坏了，找了个电饭煲的线来还是不行。<br>最后只能怀疑是电源适配器坏了。<br>总结：电源适配器坏了。</p>
 <p>目标：性价比高、可靠性好的电源。</p>
@@ -9781,11 +9781,15 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
   <entry>
     <title>廉价交换机导致家庭网络瘫痪半年</title>
     <url>/20251018-cheap_switches_cause_home_network_paralysis/</url>
-    <content><![CDATA[<h1 id="0-总结"><a href="#0-总结" class="headerlink" title="0. 总结"></a>0. 总结</h1><p>故障开始：2025年4月13日<br>故障结束：2025年10月12日<br>故障原因：交换机光模块发热导致断流</p>
+    <content><![CDATA[<h1 id="0-总结"><a href="#0-总结" class="headerlink" title="0. 总结"></a>0. 总结</h1><p>故障开始：2025年4月13日<br>故障结束：2025年10月12日<br>故障原因：交换机光模块发热导致断流(用猫扇对着吹 2 天都正常)</p>
+<p>问题交换机：keepLINK 2.5G 交换机(5 口 2.5G + 1 口万兆光)。</p>
 <ul>
-<li>发现问题后使用猫扇对着吹，2天没都正常</li>
+<li>劝退，温度稍微高点就不行</li>
 </ul>
-<p>交换机：keepLINK2.5G交换机(5口2.5G+1口万兆光口)。( 劝退，温度稍微高点就不行 )</p>
+<p>更换交换机：TP-Link 2.5G 交换机(4 口 2.5G + 2 口万兆光)。</p>
+<ul>
+<li>目前(20251108)没有什么问题，可能是环境温度低了，明年再看看</li>
+</ul>
 <h1 id="1-网络情况"><a href="#1-网络情况" class="headerlink" title="1. 网络情况"></a>1. 网络情况</h1><p>进：入户光纤—弱电箱—顶柜(预计放网络设备)—吊顶(为了不走明线)—机柜(家政柜改的)—路由器<br>出：路由器—交换机(SFP+)—弱电箱—交换机(SFP+)—内网设备(AC+AP)</p>
 <p>规划不到位+新需求变更导致的畸形解决方案.</p>
 <h1 id="2-排查过程"><a href="#2-排查过程" class="headerlink" title="2. 排查过程"></a>2. 排查过程</h1><p>刚开始连接上网络(本地+WIFI)，DHCP IP 分配正常，有时候可以上网，有时候不行。<br>没有排查到问题，由于家里有闲置的流量卡，就优先用热点了。</p>
@@ -9805,7 +9809,7 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
 <li>安排风扇降温：多天正常</li>
 </ol>
 <p>总结：交换机光模块太热导致罢工</p>
-<h1 id="3-解决问题"><a href="#3-解决问题" class="headerlink" title="3. 解决问题"></a>3. 解决问题</h1><p>应急：安排风扇<br>常规：购买 TP-Link 2.5G+万兆 交换机替换</p>
+<h1 id="3-解决问题"><a href="#3-解决问题" class="headerlink" title="3. 解决问题"></a>3. 解决问题</h1><p>应急：安排风扇<br>常规：购买 TP-Link 2.5G + 万兆交换机替换</p>
 <ul>
 <li>目前移除散热风扇，情况正常</li>
 </ul>
@@ -9871,7 +9875,8 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
 </ul>
 <p>NAS 目前 10T 的容量，做的 Raid5 阵列。<br>存储了从 2011 年开始的个人未丢失的数据。</p>
 <p>个人建议那些没有特殊需求，为了照片存储容量的朋友购置一个 NAS。<br>一个是长期看性价比搞，数据安全性有保障，还能全家使用。</p>
-<h1 id="4-后话"><a href="#4-后话" class="headerlink" title="4. 后话"></a>4. 后话</h1><p>虽然有时候和朋友提起，讲我弄了一套 AC+AP，可以漫游什么的。<br>对方可能会呵呵一笑，我家也有，联通自带的~，<br>这种方式也挺好，但可能失去各种灵活性，也会错过各种实践机会。<br>身为 IT 从业者，我在负责高并发系统的时候，经常和底层打交道，那会还不知道光模块故障为何物。<br>现在自己在家实践下来，收获的不仅仅是成就感，还有随之带来的网络以及运维知识。</p>
+<h1 id="4-后话"><a href="#4-后话" class="headerlink" title="4. 后话"></a>4. 后话</h1><p>虽然有时候和朋友提起，讲我弄了一套 AC+AP，可无缝漫游~<br>对方可能会呵呵一笑，我家也有，联通自带的~，这种方式也挺好。<br>但可能失去各种灵活性，也会错过各种实践机会。</p>
+<p>过去工作中负责高并发系统时，经常和底层打交道，那会还不知道光模块故障为何物。<br>现在自己在家实践下来，收获的不仅仅是成就感，还有随之带来的网络以及运维知识。</p>
 <p>保持好奇心，深入了解相关领域，了解原理。<br>那么不管在工作和生活中，会轻松很多，<br>而不用在谈笑间还得靠做自媒体的复读机。</p>
 ]]></content>
       <categories>
@@ -9879,6 +9884,67 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
       </categories>
       <tags>
         <tag>homelab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>知识管理与消费：怎么用好书签和笔记？答：时常回顾</title>
+    <url>/20251108-how_to_use_bookmarks_and_notes_effectively/</url>
+    <content><![CDATA[<h1 id="1-知识管理：书签、笔记"><a href="#1-知识管理：书签、笔记" class="headerlink" title="1. 知识管理：书签、笔记"></a>1. 知识管理：书签、笔记</h1><p>书签工具：Chrome、Notion<br>笔记工具：Apple 备忘录、Notion、微博、Microsoft TODO、滴答清单、有道云笔记</p>
+<h1 id="2-知识消费：时常回顾"><a href="#2-知识消费：时常回顾" class="headerlink" title="2. 知识消费：时常回顾"></a>2. 知识消费：时常回顾</h1><h2 id="2-1-随机输入"><a href="#2-1-随机输入" class="headerlink" title="2.1 随机输入"></a>2.1 随机输入</h2><p>最近工作上项目比较忙，<br>没法做到每天都会在电脑上进行浏览，<br>周五项目空档期，稍微有点时间放松一下。</p>
+<p>于是就想打开『科技爱好者周刊』，其中的『AI 驱动的开源知识库 PandaWiki』吸引了我，<br>因为我最近也在想，自己散落各处的笔记、随想这些内容，有没有一个地方可以方便管理起来？</p>
+<span id="more"></span>
+<p>其实公司的文档库就蛮好用，支持代码、流程图、office 全家桶、富媒体等一系列功能，而且带检索系统。</p>
+<p>在看到可以通过『confluence』导入，就想到之前收藏了几篇文章，<br>也是 confluence 的(很少个人博客用)，但是不记得内容标题。<br>最后在书签里边翻看，终于找到了，是架构图相关的内容<span class="exturl" data-url="aHR0cHM6Ly9qb2huZy5jbi9hcmNoaXRlY3R1cmUvYXJjaGl0ZWN0dXJlLWRpYWdyYW1taW5n">架构制图：工具与方法论<i class="fa fa-external-link-alt"></i></span><br>于是顺着目录看了下其他文章，想不到有意外的收获，有种书读百遍其义自现的感觉：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9qb2huZy5jbi9tYW5hZ2VtZW50L3Vwd2FyZC1tYW5hZ2VtZW50">向上管理<i class="fa fa-external-link-alt"></i></span><ul>
+<li>领导力是怎么做别人的上司</li>
+<li>在这之前你得先领导自己和老板</li>
+</ul>
+</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9qb2huZy5jbi9tYW5hZ2VtZW50L3FicS10aGlua2luZw==">QBQ 问题背后的问题：改变思维模式，提升个人责任感<i class="fa fa-external-link-alt"></i></span><ul>
+<li>避免：将焦点放在了无法控制的人和事上</li>
+<li>提倡：不要问错误的问题，而要学会问正确的问题( 向内求，eg：为什么客户这么难缠？-&gt; 我如何更好地理解客户的需求？)</li>
+</ul>
+</li>
+</ul>
+<p>讲真，这次的放松，超出了我的预期。<br>有时间停下来，随机输入，有意外的收获，长期坚持会有奇迹 &#x3D;。&#x3D;</p>
+<p>当时还做了个简单的纪要，甚至分享给了家里领导：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">看周刊 → pandaWiki → confluence 导入 → 想起之前有个人的网站是 confluence → 我也想搞一个记录各种内容 → 找到网站 → 架构图相关 → 技术管理 → 向上管理 → 记录笔记 → 领导力是怎么做别人上司 → 在这之前你得先领导自己+老板 https://johng.cn/management/upward-management → qbq 深挖问题背后的问题转换思维方式 https://johng.cn/management/qbq-thinking</span><br><span class="line"></span><br><span class="line">有时间停下来输入真好，意外之喜[呲牙]</span><br><span class="line">这些年留下的文字不少，看看怎么整理出来</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-微博回顾"><a href="#2-2-微博回顾" class="headerlink" title="2.2 微博回顾"></a>2.2 微博回顾</h2><p>我是 2018 年 8 月 7 日开始用微博的，截止目前发布 473 条微博，大部分都是阅读相关。<br>过去几年，几乎每看完一本书，就会在微博去发笔记，仿佛是发完笔记这本书才算看完~<br>其实发布笔记时一本书的结束，也是一直沉淀，后续说不定会产生什么反应。</p>
+<p>就目前来看，好处有：</p>
+<ul>
+<li>看到什么话题、或者聊天的时候牵扯到相关书籍，可以迅速搜索看总结回顾。</li>
+<li>书看多了，类似的主题有不同的观点，可以相互引用，形成体系化观点&#x2F;笔记。</li>
+</ul>
+<p>两个例子</p>
+<table>
+<thead>
+<tr>
+<th>《程序员必读之软件架构》</th>
+<th>《国家为什么失败》</th>
+<th>《软件架构师的12项修炼》</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="/images/read/weibo_chengxuyuanbiduzhiruanjianjiagou.png" alt="《程序员必读之软件架构》"></td>
+<td><img src="/images/read/weibo_guojiawsmshibai.png" alt="《国家为什么失败》"></td>
+<td><img src="/images/read/weibo_ruanjianjiagoushide12xiangxiulian.png" alt="《软件架构师的12项修炼》"></td>
+</tr>
+</tbody></table>
+<h1 id="3-随想"><a href="#3-随想" class="headerlink" title="3. 随想"></a>3. 随想</h1><ol>
+<li>利用 Homelab 搭建个人的知识库，需要开公网，方便随时随地记录和查看。</li>
+<li>记录的时候先随便找个地方记，每周进行整理，甚至发布公开的周报，记录本周的见闻和感想。</li>
+<li>好记性不如烂笔头，多记录，多回顾，方便后续进行系统化地整理。</li>
+<li>怎么更好地和家里领导有共同话题？多分享看到的东西，交流各自的想法。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Growth</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+        <tag>学习</tag>
+        <tag>知识管理</tag>
       </tags>
   </entry>
 </search>
