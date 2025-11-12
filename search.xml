@@ -7279,10 +7279,11 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
 <td><img src="/images/homelab/2500M_speed.jpeg" alt="网卡信息"></td>
 </tr>
 </tbody></table>
-<p>2025年11月12日</p>
+<p>说明：<br>更新版本后(DSM 7.2.2)，需要再次调整相关配置；<br>如果遇到网卡未启动，可以在套件中心停止后再启动。</p>
+<p>相关内容</p>
 <ul>
-<li>版本：DSM 7.2.2</li>
-<li>说明：更新版本后，需要再次调整相关配置；如果遇到网卡未启动，可以在套件中心停止后再启动。</li>
+<li><a href="/20250927-assembly_a_power_supply_for_the_Synology_DS918/">手搓群晖 DS918+ 电源</a></li>
+<li><a href="20251019-homelab_network_v1.0/">家庭网络 1.0</a></li>
 </ul>
 <h1 id="1-获取-root-权限"><a href="#1-获取-root-权限" class="headerlink" title="1. 获取 root 权限"></a>1. 获取 root 权限</h1><p>搜索引擎很多</p>
 <h1 id="2-安装驱动"><a href="#2-安装驱动" class="headerlink" title="2. 安装驱动"></a>2. 安装驱动</h1><h2 id="2-1-查询群晖架构"><a href="#2-1-查询群晖架构" class="headerlink" title="2.1 查询群晖架构"></a>2.1 查询群晖架构</h2><p><span class="exturl" data-url="aHR0cHM6Ly9rYi5zeW5vbG9neS5jb20vZW4tZ2xvYmFsL0RTTS90dXRvcmlhbC9XaGF0X2tpbmRfb2ZfQ1BVX2RvZXNfbXlfTkFTX2hhdmU=">群晖官网查询NASCPU架构<i class="fa fa-external-link-alt"></i></span></p>
