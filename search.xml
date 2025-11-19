@@ -7263,9 +7263,9 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
       </tags>
   </entry>
   <entry>
-    <title>给群晖 NAS DS918+ 添加 RTL-8156B 2.5G 无线网卡</title>
+    <title>给群晖 DS918+ 添加 2.5G 无线网卡</title>
     <url>/20221119-synology-DS918-add-2500M-RTL8156B-usb-network-cart/</url>
-    <content><![CDATA[<h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>就这个群晖的网卡，困扰了我两天。<br>因为按照之后没法在系统控制面板里面找到对应的网卡。<br>就连 GitHub 上驱动的作者都说不支持 RTL-8156B(详见：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JiLXFxL3I4MTUyL2lzc3Vlcy8yMDU=">GitHub-issue<i class="fa fa-external-link-alt"></i></span>) 的外置网卡。<br>但是我想那么多人都买了这种网卡，并且成功了，于是周末到处搜，最终找到了办法。</p>
+    <content><![CDATA[<h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>给群晖 918+ 添加 RTL-8156B 2.5G 网卡，困扰了我两天。<br>因为按照之后没法在系统控制面板里面找到对应的网卡。<br>就连 GitHub 上驱动的作者都说不支持 RTL-8156B(详见：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JiLXFxL3I4MTUyL2lzc3Vlcy8yMDU=">GitHub-issue<i class="fa fa-external-link-alt"></i></span>) 的外置网卡。<br>但是我想那么多人都买了这种网卡，并且成功了，于是周末到处搜，最终找到了办法。</p>
 <p>可能这是 DS918+ 之类才会遇到的问题，最终效果：</p>
 <table>
 <thead>
