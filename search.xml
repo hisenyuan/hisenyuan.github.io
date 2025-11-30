@@ -10166,7 +10166,7 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
       </tags>
   </entry>
   <entry>
-    <title>多设备优雅地享单显示器</title>
+    <title>多设备优雅地共享单显示器</title>
     <url>/20251130-how_to_share_a_monitor_among_multiple_devices/</url>
     <content><![CDATA[<h1 id="1-缘起"><a href="#1-缘起" class="headerlink" title="1. 缘起"></a>1. 缘起</h1><p>由于家里地方有限，没办法把这三个设备分别安排不同的显示器，只能共享一个。<br>连接方案：</p>
 <ul>
@@ -10183,7 +10183,7 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
 <ul>
 <li>三进一出，带遥控器</li>
 <li>HDMI2.1</li>
-<li>视频：8K&#x2F;60Hz ( VRR可变刷新率可达 240Hz )</li>
+<li>视频：8K&#x2F;60Hz，4K&#x2F;120Hz ( VRR可变刷新率可达 240Hz )</li>
 <li>音频：24bit&#x2F;192KHz采样率(杜比环绕音效)</li>
 </ul>
 <p>原有的 HMDI 线太硬了，顺便买了几根超软的线，方便理线。</p>
