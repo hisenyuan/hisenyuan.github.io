@@ -10165,4 +10165,70 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
         <tag>成长</tag>
       </tags>
   </entry>
+  <entry>
+    <title>多设备优雅地享单显示器</title>
+    <url>/20251130-how_to_share_a_monitor_among_multiple_devices/</url>
+    <content><![CDATA[<h1 id="1-缘起"><a href="#1-缘起" class="headerlink" title="1. 缘起"></a>1. 缘起</h1><p>由于家里地方有限，没办法把这三个设备分别安排不同的显示器，只能共享一个。<br>连接方案：</p>
+<ul>
+<li>Type-C：Mac Studio</li>
+<li>HDMI 1：Apple TV</li>
+<li>HDMI 2：Switch 游戏机</li>
+</ul>
+<p>这种方案没什么大问题，就是略费劲(显示器：长按按钮 -&gt; 信号 -&gt; 选择 -&gt; 切换)<br>有没有更好的解决方案？</p>
+<ul>
+<li>共享显示器：多个设备连接到 hub，切换由该设备负责。</li>
+</ul>
+<h1 id="2-选择"><a href="#2-选择" class="headerlink" title="2. 选择"></a>2. 选择</h1><p>选择的尽量照顾后续设备升级的可能，参数尽可能面向未来。<br>看了不少，最后选了一款 8K 切换器：</p>
+<span id="more"></span>
+<ul>
+<li>三进一出，带遥控器</li>
+<li>HDMI2.1</li>
+<li>视频：8K&#x2F;60Hz ( VRR可变刷新率可达 240Hz )</li>
+<li>音频：24bit&#x2F;192KHz采样率(杜比环绕音效)</li>
+</ul>
+<p>原有的 HMDI 线太硬了，顺便买了几根超软的线，方便理线。</p>
+<p>购买清单</p>
+<ul>
+<li>视频 8K 切换器：<span class="exturl" data-url="aHR0cHM6Ly91LmpkLmNvbS9XNlhwQ2l2">https://u.jd.com/W6XpCiv<i class="fa fa-external-link-alt"></i></span> 价格：100+</li>
+<li>超软 8K 高清线：<span class="exturl" data-url="aHR0cHM6Ly91LmpkLmNvbS9XZ1hadzdh">https://u.jd.com/WgXZw7a<i class="fa fa-external-link-alt"></i></span> 价格：30+</li>
+</ul>
+<h1 id="3-安装效果"><a href="#3-安装效果" class="headerlink" title="3. 安装效果"></a>3. 安装效果</h1><p>安装完成之后，只需要一根长的线连着显示器。<br>其它用短线连接，放在开放式设备柜子里面。</p>
+<h2 id="3-1-切换器和线材"><a href="#3-1-切换器和线材" class="headerlink" title="3.1 切换器和线材"></a>3.1 切换器和线材</h2><table>
+<thead>
+<tr>
+<th>切换器正面</th>
+<th>切换器反面</th>
+<th>线材对比(上软下硬)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="/images/homelab/monitor/hdmi_swtich_3in1out_front.jpg" alt="HDMI 三合一切换器-正面"></td>
+<td><img src="/images/homelab/monitor/hdmi_swtich_3in1out_back.jpg" alt="HDMI 三合一切换器-反面"></td>
+<td><img src="/images/homelab/monitor/hdmi_normal_vs_soft.jpg" alt="HDMI软硬对比"></td>
+</tr>
+</tbody></table>
+<h2 id="3-2-信号切换"><a href="#3-2-信号切换" class="headerlink" title="3.2 信号切换"></a>3.2 信号切换</h2><p>信号切换延迟大概 8 秒，体验还是差了点。<br>但是相比通过显示器按键来切换，还是好很多。</p>
+<table>
+<thead>
+<tr>
+<th>信号1：Mac Studio</th>
+<th>信号2：Apple TV</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="/images/homelab/monitor/mac_studio_input1.jpg" alt="视频切换器输入1-Mac"></td>
+<td><img src="/images/homelab/monitor/apple_tv_input2.jpg" alt="视频切换器输入1-Apple TV"></td>
+</tr>
+</tbody></table>
+<h1 id="4-后记"><a href="#4-后记" class="headerlink" title="4. 后记"></a>4. 后记</h1><p>现在体验是 OK 了，方便不少。<br>安装过程也比较简单，麻烦的就是理线~</p>
+<p>唯一的缺憾是没法分理出音频，然后共享一个音响。<br>后续看下怎么折腾，目前的想法是在视频切换器后边，<br>加个单读的音频分离器，然后把音频信号转到音响上。<br>可能的问题就是信号会有折损。</p>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
+        <tag>homelab</tag>
+      </tags>
+  </entry>
 </search>
