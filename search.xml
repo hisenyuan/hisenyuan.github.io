@@ -5419,12 +5419,24 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
   <entry>
     <title>通过 OpenWrt 利用 Cloudflare tunnel 回家 - 连上家庭内网</title>
     <url>/20221114-go_home_by_cloudflare_via_openwrt/</url>
-    <content><![CDATA[<h1 id="1-写在前面"><a href="#1-写在前面" class="headerlink" title="1. 写在前面"></a>1. 写在前面</h1><p>需要注册 Cloudflare 账号<br>这个服务目前是可以免费使用</p>
-<p>速度的话一般，勉强可以接受。<br>后续再折腾看看是什么问题。</p>
+    <content><![CDATA[<h1 id="1-写在前面"><a href="#1-写在前面" class="headerlink" title="1. 写在前面"></a>1. 写在前面</h1><p>需要注册 Cloudflare 账号，这个服务目前是可以免费使用。<br>使用 cloudflared 的好处：</p>
+<ol>
+<li>让家庭局域网的服务安全地暴露在公网( Cloudflare 提供了基础的安全服务 )<br>  a. 主要解决没有公网 IP 的问题<br>  b. 有公网 IP，解决安全问题</li>
+<li>不会暴露真实的 IP 地址，因为只有 cloudflared 和服务端知道</li>
+</ol>
 <h1 id="2-主要操作步骤"><a href="#2-主要操作步骤" class="headerlink" title="2. 主要操作步骤"></a>2. 主要操作步骤</h1><span id="more"></span>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安装客户端</span><br><span class="line">opkg install cloudflared</span><br><span class="line"># 登录, 返回一个 cloudflare 官方连接，点击会生成密钥</span><br><span class="line">cloudflared tunnel login</span><br><span class="line"># 创建一条隧道，&lt;NAME&gt; 替换成你喜欢的名字</span><br><span class="line">cloudflared tunnel create &lt;NAME&gt;</span><br><span class="line"># 创建一个域名解析</span><br><span class="line">cloudflared tunnel route dns hisen home.hisenyuan.xyz</span><br><span class="line"># 配置 xxx.yml</span><br><span class="line">url: http://192.168.0.10 # 内网的网关，注意做好鉴权</span><br><span class="line">tunnel: d42a48c9-26da-4734-b249-1b9eee69ba8c</span><br><span class="line">credentials-file: /root/.cloudflared/d42a48c9-26da-4734-b249-1b9eee69ba8c.json</span><br><span class="line"># 启动一个内网穿透服务</span><br><span class="line">cloudflared tunnel --config xxx.yml run</span><br></pre></td></tr></table></figure>
-<h1 id="3-参考文档"><a href="#3-参考文档" class="headerlink" title="3. 参考文档"></a>3. 参考文档</h1><ul>
-<li><a href="https://dmesg.app/argo-tunnel.html">Cloudflare Argo Tunnel 小试：我终于可以用树莓派做网站啦</a></li>
+<h1 id="3-cloudflared-原理"><a href="#3-cloudflared-原理" class="headerlink" title="3. cloudflared  原理"></a>3. cloudflared  原理</h1><p><img src="https://cf-assets.www.cloudflare.com/zkvhlag99gkb/4JiK6i2ZWO5iktBimbbSw3/9308d07667006ac4d8aa6d0b0b53d401/image1.png" alt="cloudflared请求生命周期"><br>名词解释：<br>user：访问网站的用户<br>Cloudflare edge：Cloudflare 边缘服务器( 离用户比较近 )<br>cloudflared：Cloudflare tunnel 客户端( 安装在家庭服务器上 )<br>Origin Server：我们在局域网想暴露到公网的服务器( 上面可以运行很多服务 )</p>
+<p>连接流程：</p>
+<ol>
+<li>用户连接到 Cloudflare 就近的德国法兰克福( FRA )服务器</li>
+<li>识别到是 Cloudflare 隧道请求，转发给你的服务器所在的美国旧金山( SFO )</li>
+<li>旧金山的服务器把请求转发给你的服务器上的 cloudflared 服务</li>
+<li>cloudflared 服务再把请求转发给你的 web 服务( eg：NAS、路由器后台等 )</li>
+</ol>
+<h1 id="4-参考文档"><a href="#4-参考文档" class="headerlink" title="4. 参考文档"></a>4. 参考文档</h1><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNsb3VkZmxhcmUuY29tL3poLWNuL3Bvc3QtcXVhbnR1bS10dW5uZWwv">Cloudflare 博客:介绍后量子 Cloudflare Tunnel<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kbWVzZy5hcHAvYXJnby10dW5uZWwuaHRtbA==">Cloudflare Argo Tunnel 小试：我终于可以用树莓派做网站啦<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
@@ -5432,6 +5444,7 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
       </categories>
       <tags>
         <tag>OpenWrt</tag>
+        <tag>homelab</tag>
       </tags>
   </entry>
   <entry>
