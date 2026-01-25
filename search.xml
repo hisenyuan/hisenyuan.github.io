@@ -11014,15 +11014,19 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
   <entry>
     <title>我追踪的信息源</title>
     <url>/20260125-the-information-source-i-follow/</url>
-    <content><![CDATA[<p>我不太喜欢推荐类的信息源，避免信息茧房。<br>浏览器收藏夹会有一个 trace 目录，<br>里面有很多觉得不错的博客、网站等，进行被动输入。</p>
+    <content><![CDATA[<p>我不太喜欢推荐类的信息源，避免信息茧房。<br>浏览器收藏夹会有一个 trace 目录，<br>里面有很多觉得不错的博客、网站等，<br>空了的时候随机翻一番，进行被动输入。</p>
+<p>值得推荐的：</p>
 <ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucnVhbnlpZmVuZy5jb20vYmxvZy93ZWVrbHkv">科技爱好者周刊<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubGF0ZXBvc3QuY29tLw==">晚点<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RyZW5kaW5nP3NpbmNlPW1vbnRobHk=">Github月度流行项目<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8xNDAxNTI3NTUz">tombkeeper<i class="fa fa-external-link-alt"></i></span> ( 微博 )<ul>
+<li><ul>
 <li>腾讯的安全大拿，热爱分享。信息检索能力、思考能力、输出能力超强。</li>
 </ul>
 </li>
+</ul>
+</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucnVhbnlpZmVuZy5jb20vYmxvZy93ZWVrbHkv">科技爱好者周刊<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RyZW5kaW5nP3NpbmNlPW1vbnRobHk=">Github月度流行项目<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubGF0ZXBvc3QuY29tLw==">晚点<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9iYW95dS5pby8=">宝玉的分享<i class="fa fa-external-link-alt"></i></span><ul>
 <li>近期高频更新&#x2F;翻译 AI 相关内容。早期在微博活跃，现在有一个网站，更新比较及时。</li>
 </ul>
