@@ -11222,7 +11222,7 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
 <p>LLM 本质是一个下一个词预测器（next-token predictor）,也是一个黑盒。</p>
 <ul>
 <li>它在你给定的上下文（context）下，去算下一个词出现的概率。</li>
-<li>它没有真正物理意义上的逻辑或者内存，核心运作方式就是概率推断（probabilistic inference）。</li>
+<li>它没有真正物理意义上的逻辑，核心运作方式就是概率推断（probabilistic inference）。</li>
 </ul>
 <hr>
 <p>一个 Agent 并不是只是 LLM 本身，而是一个以 LLM 作为推理引擎，外面包裹着一套工具链的系统。</p>
