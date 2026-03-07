@@ -11217,7 +11217,7 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
     <title>【笔记】拥抱 LLM 黑盒</title>
     <url>/20260307-embracing-the-black-box-of-LLM/</url>
     <content><![CDATA[<h1 id="1-笔记"><a href="#1-笔记" class="headerlink" title="1. 笔记"></a>1. 笔记</h1><blockquote>
-<p>原文标题：拥抱黑盒：一个研究者 All in AI 的实录与反思<br>原文出处：<span class="exturl" data-url="aHR0cHM6Ly93d3cudXNjYXJkZm9ydW0uY29tL3QvdG9waWMvNDg4NjU0">https://www.uscardforum.com/t/topic/488654<i class="fa fa-external-link-alt"></i></span><br>这篇文章信息量蛮大，我读了个把小时，又花一个小时整理笔记。但不代表我认同里面全部观点。</p>
+<p>原文标题：拥抱黑盒：一个研究者 All in AI 的实录与反思<br>原文出处：<span class="exturl" data-url="aHR0cHM6Ly93d3cudXNjYXJkZm9ydW0uY29tL3QvdG9waWMvNDg4NjU0">https://www.uscardforum.com/t/topic/488654<i class="fa fa-external-link-alt"></i></span><br>这篇文章信息量蛮大，我读了个把小时，又花一个小时整理笔记。<br>拥抱黑盒，利用黑盒提升工作效率。用 AI Native 的方式思考、学习、工作甚至生活。</p>
 </blockquote>
 <p>LLM 本质是一个下一个词预测器（next-token predictor）,也是一个黑盒。</p>
 <ul>
