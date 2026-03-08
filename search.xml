@@ -11217,7 +11217,7 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
     <title>【笔记】拥抱 LLM 黑盒</title>
     <url>/20260307-embracing-the-black-box-of-LLM/</url>
     <content><![CDATA[<h1 id="1-笔记"><a href="#1-笔记" class="headerlink" title="1. 笔记"></a>1. 笔记</h1><blockquote>
-<p>原文标题：拥抱黑盒：一个研究者 All in AI 的实录与反思<br>原文出处：<span class="exturl" data-url="aHR0cHM6Ly93d3cudXNjYXJkZm9ydW0uY29tL3QvdG9waWMvNDg4NjU0">https://www.uscardforum.com/t/topic/488654<i class="fa fa-external-link-alt"></i></span><br>这篇文章真实、系统、信息量大。阅读 1 H 整理 1H ( PS：原文部分观点我不认同 )<br>拥抱黑盒，利用黑盒提升工作效率。用 AI Native 的方式思考、学习、工作甚至生活。</p>
+<p>原文标题：拥抱黑盒：一个研究者 All in AI 的实录与反思<br>原文出处：<span class="exturl" data-url="aHR0cHM6Ly93d3cudXNjYXJkZm9ydW0uY29tL3QvdG9waWMvNDg4NjU0">https://www.uscardforum.com/t/topic/488654<i class="fa fa-external-link-alt"></i></span><br>这篇文章真实、系统、信息量大。阅读 1H 整理 1H ( PS：原文部分观点我不认同 )<br>拥抱黑盒，利用黑盒提升工作效率。用 AI Native 的方式思考、学习、工作甚至生活。</p>
 </blockquote>
 <p>LLM 本质是一个下一个词预测器（next-token predictor）,也是一个黑盒。</p>
 <ul>
@@ -11456,6 +11456,97 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
       <tags>
         <tag>LLM</tag>
         <tag>AI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【了解世界】中东冲突杂记</title>
+    <url>/20260308-notes-on-the-Middle-East-Conflict/</url>
+    <content><![CDATA[<h1 id="1-缘起"><a href="#1-缘起" class="headerlink" title="1. 缘起"></a>1. 缘起</h1><p>2026年2月27日，18点左右多国外交部提醒国民暂时不要前往伊朗。</p>
+<p>28 日，以色列 14 点左右就宣布袭击了伊朗(袭击发生后同步的)。</p>
+<p>在这过程中，好奇心驱使，在看到一些信息后，做了一些信息补全以及思考。</p>
+<p>虽然可能会漏洞百出，但还是趁着周末记录一下，记录 <strong>了解世界运行</strong> 的过程，有机会慢慢迭代。</p>
+<span id="more"></span>
+<h1 id="2-地理位置"><a href="#2-地理位置" class="headerlink" title="2. 地理位置"></a>2. 地理位置</h1><p>伊朗距离以色列最近大约 900 km，最远 2000 km。</p>
+<p>伊朗位于北纬25 ~ 40°，东经44 ~ 63.5°，在亚洲的西南部，</p>
+<p>北接土库曼斯坦、阿塞拜疆和亚美尼亚，濒临里海，与俄罗斯和哈萨克斯坦隔海相望；</p>
+<p>南隔波斯湾、阿曼湾与科威特、巴林、卡塔尔、阿拉伯联合酋长国、阿曼和沙特阿拉伯等国相望。</p>
+<p>西与土耳其和伊拉克接壤；</p>
+<p>东邻巴基斯坦和阿富汗；</p>
+<p>总面积 1645000 平方千米，海岸线长 2700 千米。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9iYWlrZS5iYWlkdS5jb20vaXRlbS8lRTQlQkMlOEElRTYlOUMlOTcvMTU2NjA3">百度百科详情<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="3-军事相关"><a href="#3-军事相关" class="headerlink" title="3. 军事相关"></a>3. 军事相关</h1><h2 id="3-1-基本情况"><a href="#3-1-基本情况" class="headerlink" title="3.1 基本情况"></a>3.1 基本情况</h2><p>伊朗的财富被双轨制切分。一轨是看得见的“政府预算”，另一轨是最高领袖和革命卫队掌控的“平行财政”。</p>
+<p>革命卫队凭借其政治地位和商业渗透，拿走了国家最核心的资源，而国军在财政上长期处于“吃剩饭”的状态。</p>
+<p>伊朗伊斯兰革命卫队，是整个伊朗军事的核心力量。</p>
+<p>伊朗的空军、海军都比较薄弱，装备也比较寒酸。</p>
+<p>伊朗军队的杀手锏是导弹和无人机，因为实现了蠢国产，所以种类全，数量多，成本低廉。</p>
+<h2 id="3-2-核心战斗力"><a href="#3-2-核心战斗力" class="headerlink" title="3.2 核心战斗力"></a>3.2 核心战斗力</h2><p>所以当前的局势，伊朗更多的是通过无人机 + 导弹进行回击。</p>
+<p>之前有个疑问是，无人机那么慢( 200+km&#x2F;h )，距离那么远，不是很容易拦截吗？实际上：</p>
+<ul>
+<li>低空飞行：雷达的盲区</li>
+<li>特征偏弱：体积小、材料基本都是塑料&#x2F;碳纤维，加上活塞式的发动机，很难被自动系统识别</li>
+<li>攻防成本：2 ~ 5 万美元的无人机，如果用防空系统拦截需要耗费数十万。极易造成类似 DDOS 攻击</li>
+</ul>
+<h2 id="3-3-邻国情况"><a href="#3-3-邻国情况" class="headerlink" title="3.3 邻国情况"></a>3.3 邻国情况</h2><p>阿联酋：</p>
+<ul>
+<li>印象：通过石油起家，通过极度的开放政策打造高度西化的营商环境，背靠亚欧非交界的位置搭建了全球最繁忙的航空枢纽。</li>
+<li>近期：出台法律禁止在社媒发布各种事故的照片&#x2F;视频，违者罚款 20w+ 人民币。( 主要是还想维护形象？保持吸引力 )</li>
+</ul>
+<p>沙特：</p>
+<ul>
+<li>金轮部队：80年代土豪想买武器，没人卖，最后中国卖了 35亿 美元『东风-3』导弹。( 金额可能超过当时的外汇储备 )<ul>
+<li>社媒观点：可能中国会报恩，据称巴基斯坦近期有给沙特部署中式武器。( 可能会成为安保总代理？ )</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-金融市场"><a href="#4-金融市场" class="headerlink" title="4. 金融市场"></a>4. 金融市场</h1><h2 id="4-1-黄金"><a href="#4-1-黄金" class="headerlink" title="4.1 黄金"></a>4.1 黄金</h2><p>黄金不是安全资产，但它是避险资产。</p>
+<ul>
+<li>安全资产：波动低、有利息、定价简单。</li>
+<li>避险资产：面对极端系统性风险（如战争、金融危机、恶性通胀、地缘政治坍塌），保护财富不清零。</li>
+</ul>
+<p>从近期的行情来看，黄金价格在走低。<br>可能的原因是获利了结，卖出黄金拿去交其它资产都保证金( 比如韩国股市 )。</p>
+<p>最近两年支撑黄金上涨的逻辑可能还是世界各大央行的增持，主要是考虑去美元化，25Q4 中国央行黄金占总储备 ≈ 8.64% ( 23Q4 4.33% )</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jaGluYS5nb2xkLm9yZy9nb2xkaHViL2RhdGEvZ29sZC1yZXNlcnZlcy1ieS1jb3VudHJ5I3JlZ2lzdHJhdGlvbi10eXBlPXdlY2hhdCZqdXN0LXZlcmlmaWVkPTA=">世界黄金协会-各央行黄金储备情况<i class="fa fa-external-link-alt"></i></span> ( 每季度更新一次 )</li>
+</ul>
+<p>在这次中东冲突中如果黄金涨的很厉害，说明影响很大。<br>如果影响大，那么 2.27 各国外交部提醒发出的时候，应该就会涨起来( 实际没有 )。</p>
+<h2 id="4-2-石油-天然气"><a href="#4-2-石油-天然气" class="headerlink" title="4.2 石油&#x2F;天然气"></a>4.2 石油&#x2F;天然气</h2><p>霍尔木兹海峡承担着全球约 20% 的石油与液化天然气运输，</p>
+<p>在资源供需长期处于“紧平衡”的状态下，这 20% 构成了全球能源安全的边际生命线。</p>
+<p>能源作为底层战略物资，其需求弹性极低，一旦供应出现缺口，引发的将不是线性减产，而是级数倍增的恐慌性暴涨与供应链停摆。</p>
+<p>届时，市场的生存本能将彻底压倒政治制裁的约束力，能源将超越货币机制，成为决定国际博弈底牌的终极筹码。</p>
+<p>所以这也是伊朗的一张牌，海峡关闭对世界能源格局的影响，以及对美国盟友的影响还是蛮大的。</p>
+<p>要不然美国也不会在近期允许印度购买俄罗斯的石油。</p>
+<p>石油波动也是奇怪，涨到 85 再跌回 79 再大涨 12% 到 90+。</p>
+<h2 id="4-3-股市"><a href="#4-3-股市" class="headerlink" title="4.3 股市"></a>4.3 股市</h2><p>这一波影响最大的应该是韩国，韩国综合股价指数单周跌了 10% 以下。</p>
+<p>这还是在投入 100 万亿韩元救世的情况下发生的。</p>
+<p>有一种解释是半导体产业占比很高，然后对能源的消耗比较大，石油储备不多，</p>
+<p>以及韩国进入市场开放、外加 AI 投入等方面可能导致了本次大跌。</p>
+<h1 id="5-中国"><a href="#5-中国" class="headerlink" title="5. 中国"></a>5. 中国</h1><p>中国的石油对外依赖度 70%，煤炭是 10%。</p>
+<p>所以中国大力推动电动车产业发展，来解决对石油的过度依赖。</p>
+<p>因为电不是那么缺，有水电、火电、核电、清洁能源(风+光，今年要超过火电了)。</p>
+<p>极端情况下，也能从蒙古、俄罗斯等铁路渠道买入煤炭。再通过煤炭产出各煤气等各种战略资源。</p>
+<p>其它外交、政治方面的事情不太懂，目前看是想展示东方大国的形象。维护世界和平发展。</p>
+]]></content>
+      <categories>
+        <category>Growth</category>
+        <category>RandomThoughts</category>
+      </categories>
+      <tags>
+        <tag>随说</tag>
+        <tag>了解世界</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【AI 随笔】尝试与洞察</title>
+    <url>/20260308-the-AI-logbook-Trials-and-Insights/</url>
+    <content><![CDATA[<p>2023 使用 AI 做药品说明书，Bot 式交互，数字人形象、真人 TTS<br>2024 使用 AI 进行图文制作：文生图、相关性检索、OCR 文字识别<br>2025 风控策略、AI 机审、代码提示、页面 prompt 生成脚本代码<br>2026 Coding Agent 出来，写单侧、梳理历史项目、完成小功能</p>
+<p>未完待续</p>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>随说</tag>
+        <tag>了解世界</tag>
       </tags>
   </entry>
 </search>
