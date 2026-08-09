@@ -13209,4 +13209,27 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
         <tag>AI Native</tag>
       </tags>
   </entry>
+  <entry>
+    <title>解决 Cloudflare Pages URL 不支持大写的问题</title>
+    <url>/20260809-Cloudflare-pages-url-case/</url>
+    <content><![CDATA[<p>去年升级了博客：<a href="/20250719-hexo-upgrade-and-optimize/">Hexo 升级 &amp; 优化</a>，近期才发现有些 Tag 404。<br>但是 hexo s 本地运行的正常打开的，我看了下 Cloudflare pages 的发布日志。<br>判断应该是平台机制问题，生成的文件都是 java 而非预期的 Java。</p>
+<p>于是问了下模型：</p>
+<ul>
+<li>问题：这是 Cloudflare Pages 的一个已知机制&#x2F;行为。</li>
+<li>解决：通过 hexo 的配置，把 URL 都调整为小写( 可能会影响 SEO )</li>
+</ul>
+<p>原因解析<br>Cloudflare Pages 在部署静态资源时，其底层路由系统（以及预設的 Assets 引擎）在处理 URL 和文件路径时，默认是不区分大小写（Case-Insensitive）或者会执行规范化（Normalization）的。</p>
+<span id="more"></span>
+<p>在 Hexo 中，如果你创建了 Tag 为 Java，Hexo 默认生成的目录结构是 &#x2F;tags&#x2F;Java&#x2F;index.html。但 Cloudflare Pages 在处理路由匹配或文件同步时，往往会强制将路径重写为小写（java），或者对大小写敏感的路径做了规范化路由重定向，这就导致访问原始带大写字母的 URL（例如 &#x2F;tags&#x2F;Java&#x2F;）时触发 404 或重定向循环。</p>
+<p>社区中许多使用 Hexo、Hugo 等静态博客引擎并部署在 Cloudflare Pages 上的开发者都遇到过此类分类&#x2F;标签（Tag&#x2F;Category）包含大写字母导致路径失效的问题。</p>
+<p>解决方案<br>处理这个问题的根本原则是：在 Hexo 侧统一将 URL 生成策略调整为全小写（Case-insensitive Slugs）。<br>修改配置文件的 filename_case 开关：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 1 表示将生成的 filename / slug 强制转为小写 (Lower case)</span><br><span class="line"># 0 表示保持原样 (Default)</span><br><span class="line">filename_case: 1</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
 </search>
