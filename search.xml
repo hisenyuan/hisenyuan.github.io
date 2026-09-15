@@ -11972,15 +11972,20 @@ JAVA自带的远程方法调用工具，不过有一定的局限性，
 <p>平台自己的说法是风控、分成、审核这些机制仍在调整中。所以现在是个政策未定型的窗口期。</p>
 <p>配套的投放工具也在铺。TikTok 已经推出 Growth Max for Mini Games，支持用广告收入作为目标来优化买量。</p>
 <h1 id="3-平台需要做什么"><a href="#3-平台需要做什么" class="headerlink" title="3. 平台需要做什么"></a>3. 平台需要做什么</h1><p>这一节是我的判断，不是调研结论。会拿抖音做参照，因为 TikTok 不公布分成和规则细节，抖音是同源体系里唯一能查证的。</p>
-<h2 id="3-1-开发者侧"><a href="#3-1-开发者侧" class="headerlink" title="3.1 开发者侧"></a>3.1 开发者侧</h2><p>分成得写死。开发者立项第一步是算账，而 Minis 给不出这个数。抖音侧则是明码标价，小游戏 IAP 分九一开和六四开两档，IAA 分非投广 70%、投广 90% 外加 10% 激励金（<span class="exturl" data-url="aHR0cHM6Ly93d3cudGhlcGFwZXIuY24vbmV3c0RldGFpbF9mb3J3YXJkXzI3MTE3NzY1">澎湃<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ2FtZXJlcy5jb20vOTA2NjAzLmh0bWw=">GameRes<i class="fa fa-external-link-alt"></i></span>）。条件苛刻，但能算。</p>
-<p>「暂不抽佣」短期是让利，长期是不确定性。现在不收，但没写进政策，什么时候收、收多少都说不准。这是全文最大的变量。</p>
-<p>主体门槛也需要合规出口。现在要么自建海外公司自运营，成本高；要么找代理上架，但查不到公开的资质标准。另外规则得稳，频繁且不预告的调整，会让做长周期内容的人没法规划。</p>
-<h2 id="3-2-C-端侧"><a href="#3-2-C-端侧" class="headerlink" title="3.2 C 端侧"></a>3.2 C 端侧</h2><p>难题是心智，不是功能。</p>
-<p>微信花了几年时间教育中国用户「在 App 里用小程序」，海外没有这个肌肉记忆。Meta 的 Web Games 平台已宣布 2026 年 9 月 30 日彻底关停，Instant Games 也要迁移到新的权限模型才能存活，Unity 在 6.4 版本移除了对它的支持（<span class="exturl" data-url="aHR0cHM6Ly9wcGMubGFuZC9tZXRhLWFubm91bmNlcy13ZWItZ2FtZXMtc3Vuc2V0LWJ5LXNlcHRlbWJlci0yMDI2Lw==">PPC Land<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnVuaXR5M2QuY29tLzYwMDAuMy9Eb2N1bWVudGF0aW9uL01hbnVhbC9pbnN0YW50LWdhbWVzLmh0bWw=">Unity 文档<i class="fa fa-external-link-alt"></i></span>）。大厂试过这个方向，没做成主流。</p>
-<p>所以平台真正该抢的是入口位。抖音验证过的杠杆是把分成和入口位挂钩。分成档位看着是在谈钱，实际是平台开给开发者的一张行为清单：多分你钱，换你配合把用户导进它的入口。</p>
-<p>平台现在的重点是养成习惯，不是收税。降付费摩擦，Beans 合并支付和站内折扣都是在买这个习惯；保证内容供给，入驻方还不够多；多投入小游戏，短剧留存差，小游戏有社交和复访机制才撑得住。</p>
+<h2 id="3-1-开发者侧"><a href="#3-1-开发者侧" class="headerlink" title="3.1 开发者侧"></a>3.1 开发者侧</h2><p>分成政策得明确透明：开发者立项依赖精细算账。对比抖音的明码标价（即便条件严苛但具备可预期性），Minis 无法给出明确测算依据。</p>
+<p>“暂不抽佣”潜藏长期风险：未落地的口头免佣实为最大不确定性，开发者担心平台随时改规或加收，削弱入局意愿。</p>
+<p>出海门槛与合规路径模糊：目前自建海外主体成本过高，而通过代理上架又缺乏公开明确的资质规范。</p>
+<p>规则缺乏稳定性打击长期投入：频繁且突兀的政策变动，直接瓦解了长周期内容开发者的规划信心与安全感。</p>
+<h2 id="3-2-C-端侧"><a href="#3-2-C-端侧" class="headerlink" title="3.2 C 端侧"></a>3.2 C 端侧</h2><p>核心痛点在心智认知：海外缺乏在 App 内使用轻应用的习惯，Meta 2026 年 9 月 30 日关停 Web Games、Unity 移除支持等先例证明该模式在海外尚未跑通。</p>
+<p>以商业利益置换入口：效仿抖音模式，将分成让利作为杠杆，驱动开发者配合将用户向平台核心入口导流。</p>
+<p>现阶段战略是促活：</p>
+<ul>
+<li>培养消费习惯：通过降低支付门槛、合并支付与补贴折扣换取用户心智。</li>
+<li>扩充生态供给：加速吸引开发者入驻以解决内容不足。</li>
+<li>发力长留存品类：相比留存较差的短剧，重点扶持具备社交属性和高复访率的小游戏来稳固生态。</li>
+</ul>
 <hr>
-<p>总的来说，技术这条路的接入成本比预期低，微信小游戏的代码基本能直接搬。卡点在商业侧：分成不透明、主体门槛高、C 端还没形成在小程序里消费的习惯。适合当一次低成本的迁移试验。</p>
+<p>总的来说，技术这条路的接入成本比预期低，微信小游戏的代码基本能直接搬。<br>卡点在商业侧：分成不透明、主体门槛高、C 端还没形成在小程序里消费的习惯。适合当一次低成本的迁移试验。</p>
 ]]></content>
       <categories>
         <category>Tech</category>
