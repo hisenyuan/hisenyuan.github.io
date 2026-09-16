@@ -246,120 +246,6 @@ public static void main(String[] args) &#123;    System.out.println(&quot;===CGl
       </tags>
   </entry>
   <entry>
-    <title>Agent Orchestration - 智能体编排</title>
-    <url>/20260823-Agent-Orchestration/</url>
-    <content><![CDATA[1. Eino 如何实现多智能体                           ┌────────────────────────────────────────────────────────┐                           │            Eino 多智能体协同体系 (Multi-Agent)            │                           └──────────────────────────┬─────────────────────────────┘                                                      │         ┌────────────────────────────────────────────┼────────────────────────────────────────────┐         ▼                                            ▼                                            ▼【范式 1: Host Multi-Agent】              【范式 2: Agent as a Tool】                 【范式 3: State Graph 协同】• 机制: 意图识别分发 + Summarizer 聚合       • 机制: 主控 Agent 将 Sub-Agent 包装为 Tool    • 机制: 强类型全局状态机 + 条件边流转• 适用: 专家分流 (客服/风控/导购)             • 适用: 深度自主规划、跨领域能力委派              • 适用: 复杂闭环业务、自反思、Saga 事务
-1.1 Host-Specialist 模式（基于 Flow 集成）Host Multi-Agent 是 Eino 官方封装的高内聚开箱模式。Host 负责理解用户 Query 并做意图路由，分发给一个或多个 Specialist Agent，最后由可选的 Summarizer 模块聚合成最终流式输出。
-
-架构核心机制：
-
-单&#x2F;多 Specialist 动态激活：Host 可判定单路由转发，也可同时 Fan-Out 派发给多个 Specialist。
-流式平滑拼接：底层自动处理多个 Specialist 的 StreamChunk 合并，未配置 Summarizer 时默认拼接文本，配置后由 Summarizer 模型总结后下发。
-
-                    ┌─────────────────────────┐                    │       User Query        │                    └────────────┬────────────┘                                 ▼                    ┌─────────────────────────┐                    │    Host Agent (Router)  │ ──&gt; (识别意图并路由)                    └──────┬───────────┬──────┘                           │           │           ┌───────────────┘           └───────────────┐           ▼                                           ▼┌───────────────────────┐                   ┌───────────────────────┐│ Specialist A (售后退款)│                   │ Specialist B (商品推荐)│└──────────┬────────────┘                   └──────────┬────────────┘           │                                           │           └───────────────────┬───────────────────────┘                               ▼                    ┌─────────────────────────┐                    │  Summarizer (聚合响应)   │ ──&gt; (合并多 Agent 产出)                    └─────────────────────────┘
-1.2 Agent-as-a-Tool &#x2F; 层级委派（基于 ADK）在深度自主任务（如 DeepAgent &#x2F; 复杂分析）中，主控 Agent 拥有全局目标，遇到具体执行动作时，通过调用封装为 tool.BaseTool 的子 Agent。
-架构核心机理：
-
-上下文截断与降噪：主 Agent 的上下文不应被子 Agent 的长推理链（ReAct Loop）污染。子 Agent 在独立的 Context 空间内运行，执行完成后仅将最终摘要&#x2F;结构化结果作为 Tool Output 返回给主 Agent。
-控制权转移（Hand-off）：在 Eino ADK 中，通过设置 Agent 的转移链（Transfer&#x2F;SubAgents），支持主 Agent 在识别到特定专业阶段后，彻底将交互控制权移交给子 Agent 接管，待子任务结束后再回弹。
-
-基于 State Graph 的强类型多 Agent 协同在复杂度最高、一致性要求最严的电商&#x2F;金融场景中，应直接采用 Eino-Compose Graph 构建基于全局黑板（Blackboard State）的状态机协同。
-(Start) ──&gt; [Node: Intent_Router]                                  │                  ┌───────────────┴───────────────┐                  ▼                               ▼      [Node: Sales_Agent]                 [Node: Support_Agent]                  │                               │                  └───────────────┬───────────────┘                                  ▼                        [Node: Medical_Critic]                                  │                                  ├── (Score &lt; 0.8 &amp;&amp; HopCount &lt; 3) ──&gt; (回到 Agent 反思重写)                                  └── (Score &gt;= 0.8) ──&gt; [Node: Stream_Responder] ──&gt; (End)
-状态流转示意图
-// 添加评价节点的条件路由边graph.AddBranch(&quot;Medical_Critic&quot;, func(ctx context.Context, state *SessionState) (string, error) &#123;    state.HopCount++    // 死循环熔断    if state.HopCount &gt; 3 &#123;        return &quot;Stream_Responder&quot;, nil    &#125;    // 质检不合格，反思重试    if state.CriticScore &lt; 0.8 &#123;        return &quot;Sales_Agent&quot;, nil    &#125;    return &quot;Stream_Responder&quot;, nil&#125;)
-2. 多 Agent 协同四大工程防线2.1 跨 Agent 上下文隔离和 token 剪枝痛点：若每个 Agent 都能看到全部交互与所有工具原始报文，多轮多 Agent 交互后 Token 迅速暴涨。
-Eino 架构解法：在 Graph 节点间引入 State Reducer &#x2F; Masking 机制。
-
-Sales_Agent 仅消费 UserQuery + UserProfile；
-Critic_Agent 仅消费 DraftAnswer + Medical_Rules；
-状态持久化存储在 Redis，但注入大模型推理上下文的切片进行按需动态投影。
-
-2.2 全链路 Composable Streaming（流式透传与背压）痛点：多 Agent 串行或嵌套调用时，中间节点的阻塞会导致前端长时间白屏，TTFT 严重劣化。
-Eino 架构解法：
-
-利用 schema.StreamReader[T] 抽象，下游节点无需等待上游完全生成，而是以 Chunk 为单位进行流式订阅；
-在路由节点使用 Tee 分流，一路流式输出给前端做打字机渲染，一路流式喂给后置安全审计拦截器并行校验。
-
-2.3 中断与人工接管（Human-in-the-loop &#x2F; Checkpointing）Eino ADK 中断恢复机制：
-
-涉及敏感交易或高危操作（如发放高额优惠券、退款审批）时，Agent 执行节点调用 adk.Interrupt() 暂停当前执行图，将完整的 State 序列化持久化至存储；
-外部运营&#x2F;用户在审批系统确认后，通过 adk.Resume(taskID, payload) 从中断点精准恢复执行，避免从头重新推理。
-
-adk.Interrupt() 会触发下游的 checkPointStore 进行数据存储
-2.4 切面观测与 Parent-Child Span 治理（Aspect Tracing）Eino Aspect 机制：利用无侵入拦截器，在多 Agent 协同流转中自动维护 W3C TraceContext：
-
-Root Span (Graph Run)
-Child Span (Host Router)
-Child Span (Specialist Sub-Agent)
-Grandchild Span (Tool Calling &amp; LLM Inference)
-
-精准归因每个 Agent 的延迟占比、Token 消耗及错误堆栈，直接对接内部 OpenTelemetry 大盘。
-3. 数据中断与恢复流程
-状态模式演进与版本漂移
-历史数据结构不兼容，用兼容的数据结构或序列化组件
-在 checkpoint 上打标版本号
-
-
-任务超时与清理
-配置超时时间
-定时任务扫描标记过期
-
-
-防止唤醒脑裂
-通过 Redis 分布式锁
-更新的时候带上状态校验 CAS
-
-
-敏感数据处理
-敏感数据加密处理
-
-
-
-[1. Agent 节点执行] ──&gt; 触发 adk.Interrupt(payload)                             │                             ▼[2. Checkpointer 拦截] ──&gt; 抽取当前 Blackboard State                             │                             ├── (State &gt; 64KB) ──&gt; 上传 S3 并获取 Object_URI                             │                             ├── 写入 MySQL (Status = SUSPENDED, 记录挂起节点与审批摘要)                             └── 缓存至 Redis (Key: task_id, TTL: 24h)                             │                             ▼[3. 释放 Worker 资源] ──&gt; Worker 协程销毁退出，向审批工作台 / Webhook 发送待办事件                             │                      [ 人工审批/修改参数 ]                             │                             ▼[4. 触发 Resume API]  ──&gt; POST /api/v1/tasks/&#123;task_id&#125;/resume                             │                             ▼[5. 图引擎状态重建]   ──&gt; 加载分布式锁 ──&gt; 读取最新 Checkpoint ──&gt; 反序列化 State                             │                             ├── 注入 Human Feedback (覆盖/合并修改字段)                             ├── 更新 Checkpoint 状态为 RESUMED                             └── 从 suspended node 的下游条件边继续触发图流转
-
-4. 多智能体架构示意+-----------------------------------------------------------------------------------+|                            1. 接入层 (API Gateway)                                 ||   电商 App / 商家后台 / 客服工作台 (多端接入)   |  SSE/WebSocket 流式传输 |  鉴权 &amp; 限流  |+-----------------------------------------------------------------------------------+                                         │+----------------------------------------▼------------------------------------------+|                 2. 编排与调度中枢 (Agent Orchestration &amp; Engine)                    ||  ┌──────────────────┐  ┌─────────────────────────┐  ┌──────────────────────────┐  ||  │  意图识别/Router  │  │  状态机 (LangGraph/DAG)  │  │ Planning &amp; Reflection    │  ||  └─────────┬────────┘  └───────────┬─────────────┘  └────────────┬─────────────┘  ||            │                       │                             │                ||  ┌─────────▼───────────────────────▼─────────────────────────────▼─────────────┐  ||  │ Multi-Agent 协作层: 客服 Agent / 售后 Agent / 商家 Copilot / 推荐 Agent         │  ||  └─────────────────────────────────────────────────────────────────────────────┘  |+-----------------------------------------------------------------------------------+                    │                                             │+-------------------▼------------------+      +-------------------▼-----------------+|   3. 记忆与上下文引擎 (Memory Engine)  |      |   4. 能力与连接层 (Skills &amp; MCP)      || • 短时窗口管理 (Sliding Window/Pruning)|     | • MCP Client / Server 标准接入协议    || • 长期记忆 (Vector DB / User Profile) |      | • 业务 API: 订单/物流/退款/商品接口     || • 会话状态持久化 (Redis / MySQL)       |      | • RAG Pipeline: 向量检索 + 重排/分块   |+--------------------------------------+      +-------------------------------------+                    │                                             │+-------------------▼---------------------------------------------▼-----------------+|                     5. 模型与推理网关 (Model &amp; Infra Gateway)                       ||   模型路由 (Claude / GPT / 自研开源模型)  |  Prompt 管理  |  语义缓存 &amp; Prompt Cache   |+-----------------------------------------------------------------------------------+                                         │+----------------------------------------▼------------------------------------------+|                    6. 评测、安全与可观测 (Eval &amp; Observability)                      ||   安全护栏 (Guardrails/注入防御) | Trace 链路追踪 (LangSmith/OTel) | 自动化评测 (Eval)  |+-----------------------------------------------------------------------------------+
-5. 智能体记忆共享多 Agent 共享记忆治理思路
-
-架构解耦：采用 CQRS 模式，写走 Append-Only 日志流保吞吐，读走‘Redis 热缓存 + 向量&#x2F;图谱物化视图’的双轨读，兼顾写吞吐与写后读强一致；
-认知一致性：建立‘Slot 碰撞 → NLI 小模型 → LLM 仲裁’三级漏斗，以毫秒级确定性计算化解语义冲突；
-零信任治理：基于 ABAC 策略做向量检索算子下推，避免先搜后滤带来的召回截断与数据越界，并通过 Taint Analysis 阻断记忆投毒；
-成本与演进：参考 LSM 思想做双时态生命周期管理与分级 Compaction，将海量碎片 Trace 蒸馏为高阶全局认知，实现 Agent 系统的经验复利。
-
-[ Multi-Agents: Perception &amp; Action ]   │                                  ▲   │ 1. Append (毫秒级 ACK)            │ 4. Hybrid Read (双轨读)   ▼                                  │┌──────────────────────────────┐     ┌────────────────────────────────────────────────────────┐│ Ingestion Gateway (WAL Log)  │     │ Query Engine                                           ││ (Kafka / Raft Append-Only)   │     │ ├─ Hot Path: Redis (Session/Working Memory) [强一致]    │└──────────────┬───────────────┘     │ └─ Cold Path: Hybrid Vector + Graph [最终一致]          │               │                     └───────────────────────────▲────────────────────────────┘               ▼ 2. Async Dispatch                               │┌─────────────────────────────────────────────────────────┐      │ 3. Materialized View Update│ Background Async Reconciliation &amp; Compaction Pipeline   │──────┘│ ├─ Fast Path: Key-Slot Hash &amp; Vector Clock (确定性覆盖)   ││ ├─ Mid Path: NLI 轻量模型 (逻辑冲突/蕴含检测)               ││ ├─ Slow Path: LLM Semantic Merge (复杂因果仲裁)           ││ ├─ ABAC Pushdown Indexer (构建带权限掩码的物理索引)         ││ └─ Knowledge Compaction Engine (LSM-style 碎片聚合)      │└─────────────────────────────────────────────────────────┘
-
-6. 参考文档
-https://arthurchiao.art/blog/built-multi-agent-research-system-zh/
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>Agent</tag>
-        <tag>架构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Autowire、Resource的区别 | Java注解</title>
-    <url>/20190722-Autowire%E3%80%81Resource%E7%9A%84%E5%8C%BA%E5%88%AB%20%7C%20Java%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[零、本文背景项目中看到有一个缓存接口存在多个实现类,但是在代码中使用@Resource注解注入,之前有了解过@Autowire @Resource的区别,于是就尝试着搜索@@Resource，于是就有本文的总结了。
-一、两个注解1.1 @Autowire1.1.1 Spring开发;1.1.2 按照type来注入;
-1.2 @Resource1.2.1 JDK开发；1.2.2 按照名称注入，若无，则按type来注入(未指定name的情况下);
-二、后记
-做事情要有计划，得主动;
-需要想清楚自己想要什么样的生活，然后朝着目标奋斗;
-使用现成的代码尽量搞清楚来龙去脉，可以学习知识，更能避免被坑;
-每天的学习时间需要保证，坚持很重要;
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>业余无线电新手指南</title>
     <url>/20250726-Amateur_Radio_Newbie_Guide/</url>
     <content><![CDATA[0. 概览
@@ -456,6 +342,88 @@ CRAC
       </tags>
   </entry>
   <entry>
+    <title>Agent Orchestration - 智能体编排</title>
+    <url>/20260823-Agent-Orchestration/</url>
+    <content><![CDATA[1. 为什么要用多智能体多智能体不是把单个 Agent 做得更好，是用 token 换容量。
+Anthropic 自建研究 Agent 时做过一组对比：以 Claude Opus 4 为主 Agent、Claude Sonnet 4 为子 Agent 的多 Agent 系统，在内部 research eval 上比单 Agent 的 Opus 4 高 90.2%。他们给的归因不是「多个 Agent 更聪明」。在 BrowseComp 评测上，token 用量单独解释了 80% 的性能方差，加上工具调用次数和模型选择，三个因素合计解释 95%。多 Agent 架构的作用在于把 token 用量扩展到单个 Agent 够不到的规模。
+代价写在同一篇里：Agent 比普通对话多用约 4 倍 token，多 Agent 系统约 15 倍。原文的措辞是，多 Agent 只适用于任务本身价值足够高、付得起这个溢价的场景。
+
+
+适合拆的任务有三个特征：
+
+能切成多块并行推进，各块不需要看别人的中间过程。Anthropic 的例子是找出标普 500 信息技术板块所有公司的董事会成员：拆开之后每个子 Agent 分头查一批，单 Agent 顺序搜则找不到答案。
+信息量超出单个上下文窗口。
+要对接的工具又多又杂。
+
+反过来，需要所有 Agent 共享同一份上下文、或者 Agent 之间依赖密集的任务不适合拆。Anthropic 点名的反例是编码，多数编码任务真正可并行的部分比研究少，模型目前也不擅长实时协调和委派。
+三条都不占，或者任务的价值撑不起 15 倍 token，就该用单 Agent。决定要拆之后，用哪种实现取决于要隔离什么：
+┌─ 要隔离的东西，决定用哪种实现││  子 Agent 的推理链会污染主上下文 ──→ Agent 当 Tool│     主 Agent 保留控制权，子 Agent 跑完只回一个结果││  按角色分流，各角色领域不相交 ─────→ Host + Specialist│     可并行，各角色不需要互相等待││  全局状态要一致，还要能中断 ───────→ State Graph│     依赖密集、必须共享状态，代价最高└─
+
+2. Eino 里三种拆法2.1 按角色拆：Host + Specialistflow/agent/multiagent/host 包内置了这个模式。Host 理解用户输入并决定交给哪个 Specialist，Specialist 完成各自的子任务，最后由 Summarizer 合并结果。配置入口是 MultiAgentConfig 的三个字段：Host、Specialists []*Specialist、Summarizer。
+                    ┌─────────────────────────┐                    │       User Query        │                    └────────────┬────────────┘                                 ▼                    ┌─────────────────────────┐                    │    Host Agent (Router)  │ ──&gt; (识别意图并路由)                    └──────┬───────────┬──────┘                           │           │           ┌───────────────┘           └───────────────┐           ▼                                           ▼┌───────────────────────┐                   ┌───────────────────────┐│ Specialist A (售后退款)│                   │ Specialist B (商品推荐)│└──────────┬────────────┘                   └──────────┬────────────┘           │                                           │           └───────────────────┬───────────────────────┘                               ▼                    ┌─────────────────────────┐                    │  Summarizer (聚合响应)   │ ──&gt; (合并多 Agent 产出)                    └─────────────────────────┘
+
+隔离的是角色边界。每个 Specialist 有自己的 system prompt 和工具集，客服 Agent 的上下文里不会出现退款工具的定义。
+两处代价写在源码注释里。
+Summarizer 只在 Host 选中多个 Specialist 时才被调用。不配置的话用默认实现，而默认实现是把所有 Specialist 的输出直接拼成一条消息，注释明确写了它不支持流式。要做打字机效果就得自己实现一个。
+StreamToolCallChecker 的默认实现判断首个 chunk 里有没有 tool call。注释点名这跟 Claude 配合不好，因为 Claude 通常先输出文本再输出 tool call，需要额外用 prompt 约束模型在工具调用时别产生多余文本。
+2.2 按能力拆：Agent 当 Tool主 Agent 把子 Agent 包装成 tool.BaseTool，需要时当一个普通工具调用。
+隔离的是上下文。DeepAgent 的 prompt 用 ephemeral 形容子 Agent：只在任务期间存在，返回一个结果。子 Agent 在自己的上下文里跑完 ReAct 循环，中间过程不进主 Agent 的上下文，主 Agent 只收到一份结论。DeepAgent 的 prompt 里也写了这个模式适用的条件：任务要复杂、多步，并且能在隔离状态下完整委派。
+代价随之而来。主 Agent 看不到子 Agent 的中间过程，如果子 Agent 一开始就理解错了任务，主 Agent 没有中间信号可以纠正，只能重新派一次，前面那次的 token 就白花了。
+ADK 里这个模式有两种形态。SubAgents []Agent 是调用返回，主 Agent 始终握着控制权；TransferToAgent 是控制权转移，主 Agent 判断进入某个专业阶段后把整个交互交出去，子任务结束再回弹。
+2.3 按流程拆：State Graph前两种靠模型自己决定路由，第三种把路由写进代码。compose.Graph 用强类型状态加条件边，每一步的输入输出都是显式的。
+(Start) ──&gt; [Node: Intent_Router]                                  │                  ┌───────────────┴───────────────┐                  ▼                               ▼      [Node: Sales_Agent]                 [Node: Support_Agent]                  │                               │                  └───────────────┬───────────────┘                                  ▼                        [Node: Medical_Critic]                                  │                                  ├── (Score &lt; 0.8 &amp;&amp; HopCount &lt; 3) ──&gt; (回到 Agent 反思重写)                                  └── (Score &gt;= 0.8) ──&gt; [Node: Stream_Responder] ──&gt; (End)
+
+条件边要先用 compose.NewGraphBranch 包一层，再挂到节点上：
+branch := compose.NewGraphBranch(    func(ctx context.Context, in *SessionState) (string, error) &#123;        if in.HopCount &gt;= 3 || in.CriticScore &gt;= 0.8 &#123;            return &quot;Stream_Responder&quot;, nil        &#125;        return &quot;Sales_Agent&quot;, nil    &#125;,    map[string]bool&#123;&quot;Stream_Responder&quot;: true, &quot;Sales_Agent&quot;: true&#125;,)graph.AddBranch(&quot;Medical_Critic&quot;, branch)
+
+隔离的是流程控制权。走到哪一步、下一步去哪，由条件函数决定，不靠模型记住。质检分数不达标就回重写节点，循环次数超上限就强制出边，这类熔断逻辑必须是确定性的，交给模型判断不可靠。
+代价是三种里最高的。状态结构要自己定义，条件边要自己写，循环要自己兜底。换来的是可控。
+3. 拆开之后的工程问题拆法决定「谁来干」。跨 Agent 的上下文、流、中断和链路，是拆完才需要单独处理的。
+3.1 跨 Agent 的上下文隔离如果每个 Agent 都能看到全部交互和所有工具的原始报文，多轮之后 token 会迅速膨胀。
+节点之间传递的应该是结论，不是过程。子 Agent 包成 Tool 时天然如此，tool.BaseTool 的返回值就是主 Agent 能看到的全部内容。Graph 里更直接，状态是强类型的，每个节点声明自己消费哪些字段，没声明的字段不进模型上下文。
+大块产物不该走对话历史。Anthropic 建议让子 Agent 把结构化产物写到外部存储，只回传一个轻量引用给主 Agent，避免多级传递时信息被一层层改写，也省掉重复拷贝的 token。
+3.2 流式透传多 Agent 串行或嵌套调用时，中间节点阻塞会让前端长时间白屏，TTFT 恶化。
+Eino 用 schema.StreamReader[T] 处理这件事：下游节点不必等上游生成完，按 chunk 订阅即可。多个 Specialist 的输出怎么合并、背压阈值定在哪里，在《Eino 运行时分析》里展开过，这里不重复。
+3.3 中断与人工接管涉及高危操作时，Agent 执行到对应节点要停下来等人，比如发放高额优惠券、退款审批。Eino 的实现在 compose/interrupt.go、compose/checkpoint.go、compose/resume.go 三个文件里，机制细节同样见运行时那篇。
+从编排的角度，这里要定的是中断点的位置和粒度：哪些节点必须有人确认，确认的是动作本身还是动作的参数。粒度定粗了审批变成走过场，定细了每个节点都要人点一下，等于没自动化。
+3.4 链路观测拆成多 Agent 之后，一次请求的调用树从「一次模型调用」变成「主 Agent → 子 Agent → 工具 → 模型」这样一棵树。
+Eino 的 Callback 是无侵入的，编译期接进 Graph，运行时自动维护父子关系，挂上 OpenTelemetry 就能看到每个 Agent 的延迟占比和 token 消耗。定位是哪个子 Agent 慢，靠的是 span 的父子结构，不是日志时间戳。
+4. 中断恢复要处理的边界中断本身不难，难在恢复的时候状态还是不是当初那个。
+状态结构变了。发版改了 State 的字段，线上还有挂起的任务带着旧结构。做法是给 checkpoint 打版本号，恢复时按版本做兼容转换，或者干脆用不依赖 schema 的序列化格式。
+挂太久了。配超时时间，再用定时任务扫描标记过期任务，避免 checkpoint 无限堆积。
+重复唤醒。多个实例同时拿到同一个挂起任务，只能有一个抢到。用 Redis 分布式锁，更新状态时带上 CAS 校验。
+敏感数据落盘。checkpoint 里可能有用户信息、订单号，落盘前要加密或者脱敏。
+恢复的完整流程：
+┌─ 触发与挂起│  Agent 节点调用 adk.Interrupt(ctx, info)│         ││         ▼│  Checkpointer 抽取当前状态│  ├── 超过大小阈值 ──→ 传对象存储，只留引用│  ├── 写关系库 ──────→ 状态置为 SUSPENDED，记录挂起节点│  └── 写缓存 ────────→ 供恢复时快速读取│         ││         ▼│  释放 Worker 协程，发待办事件给审批方││  ▸ 人工审批 / 修改参数││  恢复时把 resume 信息注入 context，重新进图│  已完成的节点从 checkpoint 复用，从中断点的下游继续└─
+
+入口是 compose.Resume(ctx, interruptIDs...)，需要带数据时用 compose.ResumeWithData(ctx, interruptID, data)。两者都是往 context 里注入 resume 信息，然后重新进图；定位恢复目标用的是 interrupt ID。ADK 层另有 adk.Interrupt(ctx, info)，返回的是 *AgentEvent。
+5. 系统分层把上面这些放进一个完整的系统里，大致是六层：
++-----------------------------------------------------------------------------------+|                            1. 接入层 (API Gateway)                                 ||   电商 App / 商家后台 / 客服工作台 (多端接入)   |  SSE/WebSocket 流式传输 |  鉴权 &amp; 限流  |+-----------------------------------------------------------------------------------+                                         │+----------------------------------------▼------------------------------------------+|                 2. 编排与调度中枢 (Agent Orchestration &amp; Engine)                    ||  ┌──────────────────┐  ┌─────────────────────────┐  ┌──────────────────────────┐  ||  │  意图识别/Router  │  │  状态机 (compose.Graph)  │  │ Planning &amp; Reflection    │  ||  └─────────┬────────┘  └───────────┬─────────────┘  └────────────┬─────────────┘  ||            │                       │                             │                ||  ┌─────────▼───────────────────────▼─────────────────────────────▼─────────────┐  ||  │ Multi-Agent 协作层: 客服 Agent / 售后 Agent / 商家 Copilot / 推荐 Agent         │  ||  └─────────────────────────────────────────────────────────────────────────────┘  |+-----------------------------------------------------------------------------------+                    │                                             │+-------------------▼------------------+      +-------------------▼-----------------+|   3. 记忆与上下文引擎 (Memory Engine)  |      |   4. 能力与连接层 (Skills &amp; MCP)      || • 短时窗口管理 (Sliding Window/Pruning)|     | • MCP Client / Server 标准接入协议    || • 长期记忆 (Vector DB / User Profile) |      | • 业务 API: 订单/物流/退款/商品接口     || • 会话状态持久化 (Redis / MySQL)       |      | • RAG Pipeline: 向量检索 + 重排/分块   |+--------------------------------------+      +-------------------------------------+                    │                                             │+-------------------▼---------------------------------------------▼-----------------+|                     5. 模型与推理网关 (Model &amp; Infra Gateway)                       ||   模型路由 (Claude / GPT / 自研开源模型)  |  Prompt 管理  |  语义缓存 &amp; Prompt Cache   |+-----------------------------------------------------------------------------------+                                         │+----------------------------------------▼------------------------------------------+|                    6. 评测、安全与可观测 (Eval &amp; Observability)                      ||   安全护栏 (Guardrails/注入防御) | Trace 链路追踪 (Callbacks/OTel) | 自动化评测 (Eval)  |+-----------------------------------------------------------------------------------+
+
+第 2 层是前面几节讲的编排，第 3、4 层解决记忆和工具接入，第 5 层是模型，第 6 层是兜底。
+6. Agent 之间怎么共享记忆前面几节的前提都是「各块不需要看别人的中间过程」。真到了必须共享的时候，工程上要多付几笔成本。
+写和读分开。多个 Agent 同时写同一份记忆会冲突，所以写入走追加日志保吞吐，读取走双轨：热数据从 Redis 读，冷数据从向量库或图库读。代价是读到的未必是最新的，需要写后立刻读的场景得走热路径。
+冲突要仲裁。两个 Agent 对同一件事得出矛盾结论时，先比 slot 和向量时钟，能确定因果顺序的直接覆盖；分不出来的用小模型判断是不是逻辑冲突；还分不出来的才交给大模型裁决。三级漏斗的意义在于把大多数冲突挡在便宜的那两级。
+权限要下推。向量检索不能先搜完再按权限过滤，那样会搜出一批再被砍掉，召回率虚低，而且数据已经越界拿到了。做法是把权限条件编进索引，检索时直接带掩码。
+记忆要衰减。全量保存碎片化轨迹既贵又没用。按时间分层，旧轨迹定期压缩成结论，越久远的存得越粗。
+[ Multi-Agents: Perception &amp; Action ]   │                                  ▲   │ 1. Append (毫秒级 ACK)            │ 4. Hybrid Read (双轨读)   ▼                                  │┌──────────────────────────────┐     ┌────────────────────────────────────────────────────────┐│ Ingestion Gateway (WAL Log)  │     │ Query Engine                                           ││ (Kafka / Raft Append-Only)   │     │ ├─ Hot Path: Redis (Session/Working Memory) [强一致]    │└──────────────┬───────────────┘     │ └─ Cold Path: Hybrid Vector + Graph [最终一致]          │               │                     └───────────────────────────▲────────────────────────────┘               ▼ 2. Async Dispatch                               │┌─────────────────────────────────────────────────────────┐      │ 3. Materialized View Update│ Background Async Reconciliation &amp; Compaction Pipeline   │──────┘│ ├─ Fast Path: Key-Slot Hash &amp; Vector Clock (确定性覆盖)   ││ ├─ Mid Path: NLI 轻量模型 (逻辑冲突/蕴含检测)               ││ ├─ Slow Path: LLM Semantic Merge (复杂因果仲裁)           ││ ├─ ABAC Pushdown Indexer (构建带权限掩码的物理索引)         ││ └─ Knowledge Compaction Engine (LSM-style 碎片聚合)      │└─────────────────────────────────────────────────────────┘
+
+这四件事都是共享带来的成本，不共享就不用付。
+7. 参考
+Anthropic Engineering、中译 · 90.2% 提升、token 用量解释 80% 性能方差、4 倍与 15 倍 token 开销、多 Agent 不适用的场景
+cloudwego&#x2F;eino · Host Multi-Agent 与 Summarizer 配置、ADK 的 SubAgents 与 TransferToAgent、compose.Graph 条件边、中断与恢复实现
+
+本文的包名、函数名与源码注释均以 eino main 分支 2026-09-01 的 9d983b3 为准。
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>Agent</tag>
+        <tag>架构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>BeanCreationException: Error creating bean with name &#39;xxxService&#39;</title>
     <url>/20170223-BeanCreationException-Error-creating-bean-with-name-xxxService/</url>
     <content><![CDATA[出现的问题：
@@ -473,6 +441,26 @@ org.springframework.beans.factory.BeanCreationException:Error creating bean with
 没想到常见问题里面就有说这个事情
 13. 出现org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#x27;xxxService&#x27;: Initialization of bean failed; nested exception is Java.lang.IllegalArgumentException: Method must not be null怎么办？通常是classpath下存在spring多个版本的jar包，排除掉不需要的spring包即可。
 更多dubbo问题：点击查看
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Autowire、Resource的区别 | Java注解</title>
+    <url>/20190722-Autowire%E3%80%81Resource%E7%9A%84%E5%8C%BA%E5%88%AB%20%7C%20Java%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[零、本文背景项目中看到有一个缓存接口存在多个实现类,但是在代码中使用@Resource注解注入,之前有了解过@Autowire @Resource的区别,于是就尝试着搜索@@Resource，于是就有本文的总结了。
+一、两个注解1.1 @Autowire1.1.1 Spring开发;1.1.2 按照type来注入;
+1.2 @Resource1.2.1 JDK开发；1.2.2 按照名称注入，若无，则按type来注入(未指定name的情况下);
+二、后记
+做事情要有计划，得主动;
+需要想清楚自己想要什么样的生活，然后朝着目标奋斗;
+使用现成的代码尽量搞清楚来龙去脉，可以学习知识，更能避免被坑;
+每天的学习时间需要保证，坚持很重要;
+
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -1461,6 +1449,29 @@ maven project -&gt; Execute Maven Goal -&gt; mvn -U clean install
       </categories>
   </entry>
   <entry>
+    <title>IDEA 貌似注解失效 - 报错：cannot resolve method xxx</title>
+    <url>/20170301-IDEA-%E8%B2%8C%E4%BC%BC%E6%B3%A8%E8%A7%A3%E5%A4%B1%E6%95%88-%E6%8A%A5%E9%94%99%EF%BC%9Acannot-resolve-method-xxx/</url>
+    <content><![CDATA[在Java平台上lombok提供了简单的注解的形式
+来帮助我们消除一些必须有但看起来很臃肿的代码
+比如属性的get&#x2F;set，及对象的toString等方法，特别是相对于 POJO;
+
+出现问题
+各种log方法，set方法中红色波浪线
+提示：cannot resolve method xxx
+虽然出现错误但是编译是可以通过的
+
+问题原因原来的代码用了lombok简单注解比如maven的pom.xml文件有如下配置
+&lt;dependency&gt;	&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;	&lt;artifactId&gt;lombok&lt;/artifactId&gt;	&lt;version&gt;1.16.8&lt;/version&gt;&lt;/dependency&gt;
+
+解决办法安装lombok plugin
+
+装完插件之后就舒服了，也不报错
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>IDEA maven项目通过mongo-Java-driver折腾一下MongoDB</title>
     <url>/20170220-IDEA-maven%E9%A1%B9%E7%9B%AE%E9%80%9A%E8%BF%87mongo-Java-driver%E6%8A%98%E8%85%BE%E4%B8%80%E4%B8%8BMongoDB/</url>
     <content><![CDATA[这几天折腾ubuntu然后安装了下mongodb
@@ -2026,29 +2037,6 @@ package com.hisen.jdbc;import com.mongodb.Block;import com.mongodb.MongoClient;i
       </tags>
   </entry>
   <entry>
-    <title>IDEA 貌似注解失效 - 报错：cannot resolve method xxx</title>
-    <url>/20170301-IDEA-%E8%B2%8C%E4%BC%BC%E6%B3%A8%E8%A7%A3%E5%A4%B1%E6%95%88-%E6%8A%A5%E9%94%99%EF%BC%9Acannot-resolve-method-xxx/</url>
-    <content><![CDATA[在Java平台上lombok提供了简单的注解的形式
-来帮助我们消除一些必须有但看起来很臃肿的代码
-比如属性的get&#x2F;set，及对象的toString等方法，特别是相对于 POJO;
-
-出现问题
-各种log方法，set方法中红色波浪线
-提示：cannot resolve method xxx
-虽然出现错误但是编译是可以通过的
-
-问题原因原来的代码用了lombok简单注解比如maven的pom.xml文件有如下配置
-&lt;dependency&gt;	&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;	&lt;artifactId&gt;lombok&lt;/artifactId&gt;	&lt;version&gt;1.16.8&lt;/version&gt;&lt;/dependency&gt;
-
-解决办法安装lombok plugin
-
-装完插件之后就舒服了，也不报错
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>IDEA修改全局设置，如maven等</title>
     <url>/20170215-IDEA%E4%BF%AE%E6%94%B9%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%EF%BC%8C%E5%A6%82maven%E7%AD%89/</url>
     <content><![CDATA[这几天在折腾maven项目
@@ -2074,20 +2062,6 @@ File---&gt;Other Setting---&gt;Default Setting
       </categories>
   </entry>
   <entry>
-    <title>IDEA设置intellij-Java-google-style</title>
-    <url>/20170401-IDEA%E8%AE%BE%E7%BD%AEintellij-Java-google-style/</url>
-    <content><![CDATA[一直想弄个格式化代码，后来发现很多人用谷歌的，于是也来整一份
-保存一份google code的xml，链接有最新的intellij-Java-google-style.xml设置方法如下：Setting -&gt; Editor -&gt; Code Stytle -&gt; Java最后一步就选择你存放之前保存的xml
-然后就大功告成，来个对比前
-package com.hisen.json;import com.alibaba.fastjson.JSON;import com.alibaba.fastjson.JSONObject;/** * Created by hisenyuan on 2017/3/23 at 18:02. */public class test &#123;    public static void main(String[] args) &#123;String s = &quot;&#123;&#x27;A&#x27;:&#x27;a&#x27;&#125;&quot;;        JSONObject obj= JSON.parseObject(s);        System.out.println(obj.get(&quot;A&quot;));    &#125;&#125;
-后
-package com.hisen.json;import com.alibaba.fastjson.JSON;import com.alibaba.fastjson.JSONObject;/** * Created by hisenyuan on 2017/3/23 at 18:02. */public class test &#123;  public static void main(String[] args) &#123;    String s = &quot;&#123;&#x27;A&#x27;:&#x27;a&#x27;&#125;&quot;;    JSONObject obj = JSON.parseObject(s);    System.out.println(obj.get(&quot;A&quot;));  &#125;&#125;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>IDEA自定义注释模板(Javadoc) - Jindent插件 - 安装&amp;设置</title>
     <url>/20170214-IDEA%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E9%87%8A%E6%A8%A1%E6%9D%BF-Javadoc-Jindent%E6%8F%92%E4%BB%B6-%E5%AE%89%E8%A3%85-%E8%AE%BE%E7%BD%AE/</url>
     <content><![CDATA[在线安装
@@ -2099,6 +2073,20 @@ Jindent - Source Code Formatter 选中
 等待安装完成
 apply之后会让你重启idea
 
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>IDEA设置intellij-Java-google-style</title>
+    <url>/20170401-IDEA%E8%AE%BE%E7%BD%AEintellij-Java-google-style/</url>
+    <content><![CDATA[一直想弄个格式化代码，后来发现很多人用谷歌的，于是也来整一份
+保存一份google code的xml，链接有最新的intellij-Java-google-style.xml设置方法如下：Setting -&gt; Editor -&gt; Code Stytle -&gt; Java最后一步就选择你存放之前保存的xml
+然后就大功告成，来个对比前
+package com.hisen.json;import com.alibaba.fastjson.JSON;import com.alibaba.fastjson.JSONObject;/** * Created by hisenyuan on 2017/3/23 at 18:02. */public class test &#123;    public static void main(String[] args) &#123;String s = &quot;&#123;&#x27;A&#x27;:&#x27;a&#x27;&#125;&quot;;        JSONObject obj= JSON.parseObject(s);        System.out.println(obj.get(&quot;A&quot;));    &#125;&#125;
+后
+package com.hisen.json;import com.alibaba.fastjson.JSON;import com.alibaba.fastjson.JSONObject;/** * Created by hisenyuan on 2017/3/23 at 18:02. */public class test &#123;  public static void main(String[] args) &#123;    String s = &quot;&#123;&#x27;A&#x27;:&#x27;a&#x27;&#125;&quot;;    JSONObject obj = JSON.parseObject(s);    System.out.println(obj.get(&quot;A&quot;));  &#125;&#125;
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -2586,23 +2574,6 @@ IDEA解决办法Project Structure -&gt; Artifacts
       </categories>
   </entry>
   <entry>
-    <title>Java.lang.NoClassDefFoundError错误解决</title>
-    <url>/20190223-Java.lang.NoClassDefFoundError%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[maven项目昨天遇到的一个错误：Java.lang.NoClassDefFoundError
-理论原因：JVM在编译的时候能找到调用方法或静态变量所在的类，但在运行的时候找不到此类而引发的错误。
-真实原因：(仅针对当前问题)项目A依赖公共服务C-1.0.1版本项目B依赖项目A，B中dependencyManagement强制指定C-1.0.0
-此时编译可以通过，运行时如果有用的C的新版本功能就会会出现上述问题
-解决办法：对项目B中C的版本升级，使用1.0.1
-扩展阅读：https://blog.csdn.net/qq_27576335/article/details/77102385https://blog.csdn.net/jamesjxin/article/details/46606307
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java.sql.SQLException Connections could not be acquired from the underlying database</title>
     <url>/20170602-Java.sql.SQLException%20Connections%20could%20not%20be%20acquired%20from%20the%20underlying%20database/</url>
     <content><![CDATA[Java.sql.SQLException: Connections could not be acquired from the underlying database
@@ -2617,6 +2588,23 @@ driver=com.mysql.jdbc.Driverurl=jdbc:mysql://localhost:3306/testuser=rootpasswor
 这是在starkoverflow上看到的回答
 In my case it was problem that c3p0-0.9.2.1.jar file was not copied by maven into src/main/webapp/web-inf/libs
 最后maven重新install之后就解决了
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java.lang.NoClassDefFoundError错误解决</title>
+    <url>/20190223-Java.lang.NoClassDefFoundError%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[maven项目昨天遇到的一个错误：Java.lang.NoClassDefFoundError
+理论原因：JVM在编译的时候能找到调用方法或静态变量所在的类，但在运行的时候找不到此类而引发的错误。
+真实原因：(仅针对当前问题)项目A依赖公共服务C-1.0.1版本项目B依赖项目A，B中dependencyManagement强制指定C-1.0.0
+此时编译可以通过，运行时如果有用的C的新版本功能就会会出现上述问题
+解决办法：对项目B中C的版本升级，使用1.0.1
+扩展阅读：https://blog.csdn.net/qq_27576335/article/details/77102385https://blog.csdn.net/jamesjxin/article/details/46606307
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -3267,6 +3255,22 @@ service redis restart
       </tags>
   </entry>
   <entry>
+    <title>Linux 日志分析出现次数前10的数据 | awk sort uniq</title>
+    <url>/20190410-Linux-log-analyze-top-10/</url>
+    <content><![CDATA[一、命令组合$ more sort.log | awk &#x27;&#123;print $1&#125;&#x27; | sort | uniq -c | sort -k1nr | head -3   4 5   3 1   2 2
+
+二、命令详解more：一次读取少量的数据，避免一次性载入大文件，比cat好些awk ‘{print $1}’：以awk默认的分隔符，并且打印第一列sort：把上一步的结果按ASCII排序uniq -c：如果重复那么计数，uniq命令可以组合很多其它参数sort -k1nr：根据第一列的数据进行排序，n是按数值大小排序，r是倒序排序head -3：显示前面三行数据
+三、原始数据
+$ cat sort.log123456112345556
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>读后感：《王慧文的清华产品课》</title>
     <url>/20260201-Lao-Wang-Product-Manager-Course/</url>
     <content><![CDATA[1. 读后感大佬们往往看问题比较系统。
@@ -3432,22 +3436,6 @@ Price、Product、Place、Promotion（价格、产品、渠道、推广）。这
       <tags>
         <tag>成长</tag>
         <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux 日志分析出现次数前10的数据 | awk sort uniq</title>
-    <url>/20190410-Linux-log-analyze-top-10/</url>
-    <content><![CDATA[一、命令组合$ more sort.log | awk &#x27;&#123;print $1&#125;&#x27; | sort | uniq -c | sort -k1nr | head -3   4 5   3 1   2 2
-
-二、命令详解more：一次读取少量的数据，避免一次性载入大文件，比cat好些awk ‘{print $1}’：以awk默认的分隔符，并且打印第一列sort：把上一步的结果按ASCII排序uniq -c：如果重复那么计数，uniq命令可以组合很多其它参数sort -k1nr：根据第一列的数据进行排序，n是按数值大小排序，r是倒序排序head -3：显示前面三行数据
-三、原始数据
-$ cat sort.log123456112345556
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
       </tags>
   </entry>
   <entry>
@@ -3800,22 +3788,6 @@ tomkeeper （ 安全大佬，爱分享 ）
       </tags>
   </entry>
   <entry>
-    <title>Maven目录下*.lastupdated命令行批量删除</title>
-    <url>/20170220-Maven%E7%9B%AE%E5%BD%95%E4%B8%8B-lastupdated%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/</url>
-    <content><![CDATA[windows系统
-cd %userprofile%\.m2\repositoryfor /r %i in (*.lastUpdated) do del %i
-或者新建一个bat文件，批处理。就不用每次都在cmd敲命令了
-@echo offecho 确认删除maven仓库下*.lastUpdated文件？pause::create by hisenyuan(hisenyuan@gmail.com)::这里写你的仓库路径set REPOSITORY_PATH=C:\hisenwork\soft\mavenecho 正在搜索...for /f &quot;delims=&quot; %%i in (&#x27;dir /b /s &quot;%REPOSITORY_PATH%\*lastUpdated*&quot;&#x27;) do (    del /s /q %%i)echo 完毕pause
-linux系统
-find /app/maven/localRepository -name &quot;*.lastUpdated&quot; -exec grep -q &quot;Could not transfer&quot; &#123;&#125; \; -print -exec rm &#123;&#125; \;]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>工程效能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MarkdownPad2注册码 20170213</title>
     <url>/20170213-MarkdownPad2%E6%B3%A8%E5%86%8C%E7%A0%81-20170213/</url>
     <content><![CDATA[MarkdownPad2注册码
@@ -3830,6 +3802,22 @@ GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE
       <categories>
         <category>Tech</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Maven目录下*.lastupdated命令行批量删除</title>
+    <url>/20170220-Maven%E7%9B%AE%E5%BD%95%E4%B8%8B-lastupdated%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/</url>
+    <content><![CDATA[windows系统
+cd %userprofile%\.m2\repositoryfor /r %i in (*.lastUpdated) do del %i
+或者新建一个bat文件，批处理。就不用每次都在cmd敲命令了
+@echo offecho 确认删除maven仓库下*.lastUpdated文件？pause::create by hisenyuan(hisenyuan@gmail.com)::这里写你的仓库路径set REPOSITORY_PATH=C:\hisenwork\soft\mavenecho 正在搜索...for /f &quot;delims=&quot; %%i in (&#x27;dir /b /s &quot;%REPOSITORY_PATH%\*lastUpdated*&quot;&#x27;) do (    del /s /q %%i)echo 完毕pause
+linux系统
+find /app/maven/localRepository -name &quot;*.lastUpdated&quot; -exec grep -q &quot;Could not transfer&quot; &#123;&#125; \; -print -exec rm &#123;&#125; \;]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>工程效能</tag>
+      </tags>
   </entry>
   <entry>
     <title>Maven镜像库设置 - maven mirrors - maven 镜像 阿里</title>
@@ -3853,22 +3841,6 @@ yourPath\maven-3.3.9\conf\settings.xml
       </tags>
   </entry>
   <entry>
-    <title>MySQL - Data truncation:Incorrect datetime value</title>
-    <url>/20190201-MySQL%20-%20Data%20truncation%20Incorrect%20datetime%20value/</url>
-    <content><![CDATA[一、问题com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect datetime value: &#x27;2039-01-07 12:58:20.625&#x27; for column
-二、原因由于程序没有控制好，计算下一次更新时间失误，造成数值过大。
-update table_aSET UPDATE_TIME = &#x27;2039-01-07 12:58:20.625&#x27;WHERE ID = 6241
-以下是MySQL官方的说法，就是时间超过了范围。
-The TIMESTAMP data type is used for values that contain both date and time parts.TIMESTAMP has a range of &#x27;1970-01-01 00:00:01&#x27; UTC to &#x27;2038-01-19 03:14:07&#x27; UTC.
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>存储</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MongoDB - 简单操作 - CRUD - JAVA</title>
     <url>/20170711-MongoDB%20-%20%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9C%20-%20CRUD%20-%20JAVA/</url>
     <content><![CDATA[之前我记得写过简单的测试类，但是忘了，现在重新写一个
@@ -3884,6 +3856,22 @@ private Mongo mg = null;private DB db;private DBCollection dbCollection;@Beforep
 4、CRUD操作
 
 /**   * 插入数据   */  @Test  public void testCreate()&#123;    DBObject obj = null;    for (int i = 1; i &lt;= 10; i++) &#123;      obj = new BasicDBObject(&quot;_id&quot;,i).append(&quot;name&quot;,&quot;hisen&quot;+i).append(&quot;age&quot;,i*5);      dbCollection.save(obj);    &#125;  &#125;  /**   * 查询所有   */  @Test  public void testReadAll()&#123;    DBCursor dbCursor = dbCollection.find();    while (dbCursor.hasNext())&#123;      System.out.println(dbCursor.next());    &#125;  &#125;  /**   * 修改记录   */  @Test  public void testUpdate()&#123;    BasicDBObject condition = new BasicDBObject(&quot;_id&quot;,10);    BasicDBObject res = new BasicDBObject(&quot;name&quot;, &quot;hisen10_new&quot;);    //若没有此语句，直接调用下面的语句，返回结果&#123; &quot;_id&quot; : 10 , &quot;name&quot; : &quot;hisen10_new&quot;&#125;    BasicDBObject res2 = new BasicDBObject(&quot;$set&quot;, res);    dbCollection.update(condition,res2);    System.out.println(dbCollection.findOne(new BasicDBObject(&quot;_id&quot;,10)));  &#125;  /**   * 删除记录   */  @Test  public void testDelete()&#123;    dbCollection.remove(new BasicDBObject(&quot;_id&quot;,10));    testReadAll();  &#125;  /**   * 根据主键查询   */  @Test  public void testReadOneWithId()&#123;    DBObject object = dbCollection.findOne(new BasicDBObject(&quot;_id&quot;,1));    System.out.println(object);  &#125;  /**   * 模糊查询 - 使用正则   */  @Test  public void testReadPuzzy()&#123;    Pattern pattern = Pattern.compile(&quot;^hisen1&quot;);    BasicDBObject basicDBObject = new BasicDBObject(&quot;name&quot;,pattern);    DBCursor dbCursor = dbCollection.find(basicDBObject);    while (dbCursor.hasNext())&#123;      System.out.println(dbCursor.next());    &#125;  &#125;  /**   * 清空集合   */  @Test  public void testDrop()&#123;    dbCollection.drop();    testReadAll();  &#125;]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>存储</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL - Data truncation:Incorrect datetime value</title>
+    <url>/20190201-MySQL%20-%20Data%20truncation%20Incorrect%20datetime%20value/</url>
+    <content><![CDATA[一、问题com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect datetime value: &#x27;2039-01-07 12:58:20.625&#x27; for column
+二、原因由于程序没有控制好，计算下一次更新时间失误，造成数值过大。
+update table_aSET UPDATE_TIME = &#x27;2039-01-07 12:58:20.625&#x27;WHERE ID = 6241
+以下是MySQL官方的说法，就是时间超过了范围。
+The TIMESTAMP data type is used for values that contain both date and time parts.TIMESTAMP has a range of &#x27;1970-01-01 00:00:01&#x27; UTC to &#x27;2038-01-19 03:14:07&#x27; UTC.
+]]></content>
       <categories>
         <category>Tech</category>
       </categories>
@@ -3953,18 +3941,6 @@ mysql&gt; describe stu;+-------+---------+------+-----+---------+---------------
       </tags>
   </entry>
   <entry>
-    <title>MySQL一些简单的语句</title>
-    <url>/20170120-MySQL%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E7%9A%84%E8%AF%AD%E5%8F%A5/</url>
-    <content><![CDATA[emlog_ad字段idstatuspositiontitleweightcontent
---找出重复SELECT a.*FROM emlog_ad aWHERE a.id IN    (SELECT b.id id     FROM emlog_ad b     GROUP BY b.title     HAVING count(b.id)&gt;1);--删除重复留下id最小的SELECT a.*FROM emlog_ad aWHERE a.id IN    (SELECT b.id     FROM emlog_ad b     GROUP BY b.title     HAVING count(b.id)&gt;1)  AND a.id NOT IN    (SELECT min(c.id)     FROM emlog_ad c     GROUP BY c.title     HAVING count(c.id)&gt;1);--一句sql把所有AA改为BB，CC改为DDUPDATE emlog_ad aSET a.`status`=(CASE	WHEN a.`status` = &#x27;1&#x27; THEN &#x27;11&#x27;	WHEN a.`status`=&#x27;2&#x27; THEN &#x27;22&#x27;	END);]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>存储</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MySQL下A库的a表导入到B库的b表</title>
     <url>/20170516-MySQL%E4%B8%8BA%E5%BA%93%E7%9A%84a%E8%A1%A8%E5%AF%BC%E5%85%A5%E5%88%B0B%E5%BA%93%E7%9A%84b%E8%A1%A8/</url>
     <content><![CDATA[
@@ -3994,6 +3970,18 @@ mysql&gt; create table hisen.employee as(    -&gt; select * from employees.emplo
 如果导出部分字段或者有其他限制条件写sql即可
 这应该是最简单的方法~
 ]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>存储</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL一些简单的语句</title>
+    <url>/20170120-MySQL%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E7%9A%84%E8%AF%AD%E5%8F%A5/</url>
+    <content><![CDATA[emlog_ad字段idstatuspositiontitleweightcontent
+--找出重复SELECT a.*FROM emlog_ad aWHERE a.id IN    (SELECT b.id id     FROM emlog_ad b     GROUP BY b.title     HAVING count(b.id)&gt;1);--删除重复留下id最小的SELECT a.*FROM emlog_ad aWHERE a.id IN    (SELECT b.id     FROM emlog_ad b     GROUP BY b.title     HAVING count(b.id)&gt;1)  AND a.id NOT IN    (SELECT min(c.id)     FROM emlog_ad c     GROUP BY c.title     HAVING count(c.id)&gt;1);--一句sql把所有AA改为BB，CC改为DDUPDATE emlog_ad aSET a.`status`=(CASE	WHEN a.`status` = &#x27;1&#x27; THEN &#x27;11&#x27;	WHEN a.`status`=&#x27;2&#x27; THEN &#x27;22&#x27;	END);]]></content>
       <categories>
         <category>Tech</category>
       </categories>
@@ -4113,6 +4101,48 @@ title
       </tags>
   </entry>
   <entry>
+    <title>MySQL索引相关知识和应用</title>
+    <url>/20170518-MySQL%E7%B4%A2%E5%BC%95%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%92%8C%E5%BA%94%E7%94%A8/</url>
+    <content><![CDATA[hisen库中有一个post表，数据20w，非重复数据20条；
+结构如下mysql&gt; describe post;+---------+---------------+------+-----+---------+----------------+| Field   | Type          | Null | Key | Default | Extra          |+---------+---------------+------+-----+---------+----------------+| id      | int(11)       | NO   | PRI | NULL    | auto_increment || title   | varchar(255)  | YES  | MUL | NULL    |                || content | varchar(2550) | YES  |     | NULL    |                |+---------+---------------+------+-----+---------+----------------+3 rows in set (0.00 sec)
+添加普通索引mysql&gt; alter table post add index index_post_title (title);Query OK, 0 rows affected (1.22 sec)Records: 0  Duplicates: 0  Warnings: 0
+删除索引mysql&gt; drop index index_post_title on post;Query OK, 0 rows affected (0.02 sec)Records: 0  Duplicates: 0  Warnings: 0
+添加索引之后查询速度明显加快mysql&gt; select count(title) from post group by title;20 rows in set (0.25 sec)#加了索引之后20 rows in set (0.08 sec)
+使用索引的情况
+表的主关键字:自动建立唯一索引
+表的字段唯一约束:ORACLE利用索引来保证数据的完整性
+直接条件查询的字段
+在SQL中用于条件约束的字段
+查询中与其它表关联的字段
+查询中排序的字段
+查询中统计或分组统计的字段
+
+不使用索引的情况
+表记录太少
+经常插入、删除、修改的表
+数据重复且分布平均的表字段：假如10万数据只有A、B状态，且A、B各50%，这样建立索引就不会提速
+经常和主字段一块查询但主字段索引值比较多的表字段
+
+MySql在建立索引优化时需要注意的问题
+
+创建索引：对于查询占主要的应用来说，索引显得尤为重要。很多时候性能问题很简单的就是因为我们忘了添加索引而造成的，或者说没有添加更为有效的索引导致。如果不加索引的话，那么查找任何哪怕只是一条特定的数据都会进行一次全表扫描，如果一张表的数据量很大而符合条件的结果又很少，那么不加索引会引起致命的性能下降。但是也不是什么情况都非得建索引不可，比如性别可能就只有两个值，建索引不仅没什么优势，还会影响到更新速度，这被称为过度索引。
+复合索引：比如有一条语句是这样的：select * from users where area&#x3D;’beijing’ and age&#x3D;22;如果我们是在area和age上分别创建单个索引的话，由于mysql查询每次只能使用一个索引，所以虽然这样已经相对不做索引时全表扫描提高了很多效率，但是如果在area、age两列上创建复合索引的话将带来更高的效率。如果我们创建了(area, age,salary)的复合索引，那么其实相当于创建了(area,age,salary)、(area,age)、(area)三个索引，这被称为最佳左前缀特性。因此我们在创建复合索引时应该将最常用作限制条件的列放在最左边，依次递减。
+索引不会包含有NULL值的列：只要列中包含有NULL值都将不会被包含在索引中，复合索引中只要有一列含有NULL值，那么这一列对于此复合索引就是无效的。所以我们在数据库设计时不要让字段的默认值为NULL。
+使用短索引：对串列进行索引，如果可能应该指定一个前缀长度。例如，如果有一个CHAR(255)的 列，如果在前10 个或20 个字符内，多数值是惟一的，那么就不要对整个列进行索引。短索引不仅可以提高查询速度而且可以节省磁盘空间和I&#x2F;O操作。
+排序的索引问题：mysql查询只使用一个索引，因此如果where子句中已经使用了索引的话，那么order by中的列是不会使用索引的。因此数据库默认排序可以符合要求的情况下不要使用排序操作；尽量不要包含多个列的排序，如果需要最好给这些列创建复合索引。
+like语句操作：一般情况下不鼓励使用like操作，如果非使用不可，如何使用也是一个问题。like “%aaa%” 不会使用索引而like “aaa%”可以使用索引。
+不要在列上进行运算：select * from users where YEAR(adddate);
+不使用NOT IN和操作：NOT IN和操作都不会使用索引将进行全表扫描。NOT IN可以NOT EXISTS代替，id3则可使用id&gt;3 or id
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MySQL统计成功率等 - 利用case when</title>
     <url>/20190218-MySQL%E7%BB%9F%E8%AE%A1%E6%88%90%E5%8A%9F%E7%8E%87%E7%AD%89%20-%20%E5%88%A9%E7%94%A8case%20when/</url>
     <content><![CDATA[CONCAT:连接字符串,CONCAT(55.00,’%’)-&gt;55.00%truncate:处理小数点位数,truncate(10.1111,2)-&gt;10.11
@@ -4154,48 +4184,6 @@ success rate
       </categories>
       <tags>
         <tag>存储</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MySQL索引相关知识和应用</title>
-    <url>/20170518-MySQL%E7%B4%A2%E5%BC%95%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%92%8C%E5%BA%94%E7%94%A8/</url>
-    <content><![CDATA[hisen库中有一个post表，数据20w，非重复数据20条；
-结构如下mysql&gt; describe post;+---------+---------------+------+-----+---------+----------------+| Field   | Type          | Null | Key | Default | Extra          |+---------+---------------+------+-----+---------+----------------+| id      | int(11)       | NO   | PRI | NULL    | auto_increment || title   | varchar(255)  | YES  | MUL | NULL    |                || content | varchar(2550) | YES  |     | NULL    |                |+---------+---------------+------+-----+---------+----------------+3 rows in set (0.00 sec)
-添加普通索引mysql&gt; alter table post add index index_post_title (title);Query OK, 0 rows affected (1.22 sec)Records: 0  Duplicates: 0  Warnings: 0
-删除索引mysql&gt; drop index index_post_title on post;Query OK, 0 rows affected (0.02 sec)Records: 0  Duplicates: 0  Warnings: 0
-添加索引之后查询速度明显加快mysql&gt; select count(title) from post group by title;20 rows in set (0.25 sec)#加了索引之后20 rows in set (0.08 sec)
-使用索引的情况
-表的主关键字:自动建立唯一索引
-表的字段唯一约束:ORACLE利用索引来保证数据的完整性
-直接条件查询的字段
-在SQL中用于条件约束的字段
-查询中与其它表关联的字段
-查询中排序的字段
-查询中统计或分组统计的字段
-
-不使用索引的情况
-表记录太少
-经常插入、删除、修改的表
-数据重复且分布平均的表字段：假如10万数据只有A、B状态，且A、B各50%，这样建立索引就不会提速
-经常和主字段一块查询但主字段索引值比较多的表字段
-
-MySql在建立索引优化时需要注意的问题
-
-创建索引：对于查询占主要的应用来说，索引显得尤为重要。很多时候性能问题很简单的就是因为我们忘了添加索引而造成的，或者说没有添加更为有效的索引导致。如果不加索引的话，那么查找任何哪怕只是一条特定的数据都会进行一次全表扫描，如果一张表的数据量很大而符合条件的结果又很少，那么不加索引会引起致命的性能下降。但是也不是什么情况都非得建索引不可，比如性别可能就只有两个值，建索引不仅没什么优势，还会影响到更新速度，这被称为过度索引。
-复合索引：比如有一条语句是这样的：select * from users where area&#x3D;’beijing’ and age&#x3D;22;如果我们是在area和age上分别创建单个索引的话，由于mysql查询每次只能使用一个索引，所以虽然这样已经相对不做索引时全表扫描提高了很多效率，但是如果在area、age两列上创建复合索引的话将带来更高的效率。如果我们创建了(area, age,salary)的复合索引，那么其实相当于创建了(area,age,salary)、(area,age)、(area)三个索引，这被称为最佳左前缀特性。因此我们在创建复合索引时应该将最常用作限制条件的列放在最左边，依次递减。
-索引不会包含有NULL值的列：只要列中包含有NULL值都将不会被包含在索引中，复合索引中只要有一列含有NULL值，那么这一列对于此复合索引就是无效的。所以我们在数据库设计时不要让字段的默认值为NULL。
-使用短索引：对串列进行索引，如果可能应该指定一个前缀长度。例如，如果有一个CHAR(255)的 列，如果在前10 个或20 个字符内，多数值是惟一的，那么就不要对整个列进行索引。短索引不仅可以提高查询速度而且可以节省磁盘空间和I&#x2F;O操作。
-排序的索引问题：mysql查询只使用一个索引，因此如果where子句中已经使用了索引的话，那么order by中的列是不会使用索引的。因此数据库默认排序可以符合要求的情况下不要使用排序操作；尽量不要包含多个列的排序，如果需要最好给这些列创建复合索引。
-like语句操作：一般情况下不鼓励使用like操作，如果非使用不可，如何使用也是一个问题。like “%aaa%” 不会使用索引而like “aaa%”可以使用索引。
-不要在列上进行运算：select * from users where YEAR(adddate);
-不使用NOT IN和操作：NOT IN和操作都不会使用索引将进行全表扫描。NOT IN可以NOT EXISTS代替，id3则可使用id&gt;3 or id
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
       </tags>
   </entry>
   <entry>
@@ -4642,10 +4630,14 @@ update ew_quota_info ewset ew.all_amt = 100000where exists(SELECT ew.customer_id
       </categories>
   </entry>
   <entry>
-    <title>oracle全局查找某字段所在的表</title>
-    <url>/20170612-Oracle%E5%85%A8%E5%B1%80%E6%9F%A5%E6%89%BE%E6%9F%90%E5%AD%97%E6%AE%B5%E6%89%80%E5%9C%A8%E7%9A%84%E8%A1%A8/</url>
-    <content><![CDATA[下面这个存储过程是查找数据库中某个字段值为：hisen 的表
-declarel_cnt    varchar2(20);v_sql  varchar2(4000);v_tablename varchar(200);  cursor cursor_jsdx is select &#x27;select count(*) from &#x27; || table_name || &#x27; where NAME=&#x27;&#x27;hisen&#x27;&#x27;&#x27;,table_name from user_tab_columns where column_name=&#x27;NAME&#x27;;  --注：这里的字段名要大写begin     open cursor_jsdx;     Loop            fetch cursor_jsdx into v_sql,v_tablename;            exit when cursor_jsdx%notfound;            execute immediate v_sql       into l_cnt;                    if l_cnt &gt;0 then            ---如果该表有那内容的就打印那个表的名字。            dbms_output.put_line(v_tablename);         end if;     end loop;    Close cursor_jsdx;end;
+    <title>Oracle 分页的三种方式</title>
+    <url>/20170411-Oracle%E5%88%86%E9%A1%B5%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[第一种：
+select *  from (select t.*, rownum rn          from (select * from EW_AUTH_FLOW) t         where rownum &lt;= 5) where rn &gt; 2;
+第二种：
+select *  from (select t.*, rownum rn from ew_auth_flow t where rownum &lt;= 5) where rn &gt; 2;
+第三种：
+select *  from (select t.*, rownum rn from ew_auth_flow t) where rn between 2 and 5;
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -4655,30 +4647,10 @@ declarel_cnt    varchar2(20);v_sql  varchar2(4000);v_tablename varchar(200);  cu
       </tags>
   </entry>
   <entry>
-    <title>PLSQL注册码 - 9999/12/31</title>
-    <url>/20170214-PLSQL%E6%B3%A8%E5%86%8C%E7%A0%81-9999-12-31/</url>
-    <content><![CDATA[PLSQL注册码过期时间为：9999&#x2F;12&#x2F;31
-Registration successful01.601769 - unlimited user licenceservice contract：9999/12/31
-
-Product Code：
-4t46t6vydkvsxekkvf3fjnpzy5wbuhphqz
-serial Number：
-601769
-password：
-xs374ca]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Oracle 分页的三种方式</title>
-    <url>/20170411-Oracle%E5%88%86%E9%A1%B5%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[第一种：
-select *  from (select t.*, rownum rn          from (select * from EW_AUTH_FLOW) t         where rownum &lt;= 5) where rn &gt; 2;
-第二种：
-select *  from (select t.*, rownum rn from ew_auth_flow t where rownum &lt;= 5) where rn &gt; 2;
-第三种：
-select *  from (select t.*, rownum rn from ew_auth_flow t) where rn between 2 and 5;
+    <title>oracle全局查找某字段所在的表</title>
+    <url>/20170612-Oracle%E5%85%A8%E5%B1%80%E6%9F%A5%E6%89%BE%E6%9F%90%E5%AD%97%E6%AE%B5%E6%89%80%E5%9C%A8%E7%9A%84%E8%A1%A8/</url>
+    <content><![CDATA[下面这个存储过程是查找数据库中某个字段值为：hisen 的表
+declarel_cnt    varchar2(20);v_sql  varchar2(4000);v_tablename varchar(200);  cursor cursor_jsdx is select &#x27;select count(*) from &#x27; || table_name || &#x27; where NAME=&#x27;&#x27;hisen&#x27;&#x27;&#x27;,table_name from user_tab_columns where column_name=&#x27;NAME&#x27;;  --注：这里的字段名要大写begin     open cursor_jsdx;     Loop            fetch cursor_jsdx into v_sql,v_tablename;            exit when cursor_jsdx%notfound;            execute immediate v_sql       into l_cnt;                    if l_cnt &gt;0 then            ---如果该表有那内容的就打印那个表的名字。            dbms_output.put_line(v_tablename);         end if;     end loop;    Close cursor_jsdx;end;
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -4701,6 +4673,22 @@ select *  from (select t.*, rownum rn from ew_auth_flow t) where rn between 2 an
       <tags>
         <tag>性能</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>PLSQL注册码 - 9999/12/31</title>
+    <url>/20170214-PLSQL%E6%B3%A8%E5%86%8C%E7%A0%81-9999-12-31/</url>
+    <content><![CDATA[PLSQL注册码过期时间为：9999&#x2F;12&#x2F;31
+Registration successful01.601769 - unlimited user licenceservice contract：9999/12/31
+
+Product Code：
+4t46t6vydkvsxekkvf3fjnpzy5wbuhphqz
+serial Number：
+601769
+password：
+xs374ca]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
   </entry>
   <entry>
     <title>介绍 | RASP</title>
@@ -5050,25 +5038,6 @@ package com.hisen.thread.count_click_by_redis;import Java.util.concurrent.ArrayB
       </tags>
   </entry>
   <entry>
-    <title>SQL优化之小细节 - 点滴记录</title>
-    <url>/20170309-SQL%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B0%8F%E7%BB%86%E8%8A%82%20-%20%E7%82%B9%E6%BB%B4%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[不知道现在是不是还很多人首先就把关联的id放在where的第一位
-这里有一个简单的对比，情况相同的时候，两个sql的时间相差八倍
-优：0.077s
-SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE cf.acct_type in(2,3)  AND ew.customer_id = cf.id
-劣：0.630s
-SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE ew.customer_id = cf.id  AND cf.acct_type in(2,3)
-上述原因：where子句从后往前执行，应该把大的过滤条件放在后面记录时间：2017年3月9日 10:44:59
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>计算机科学与技术反思录【转】</title>
     <url>/20240509-Reflection-on-Computer-Science-and-Technology/</url>
     <content><![CDATA[0. 背景本文来自一朋友给转发的 txt 文件。
@@ -5144,6 +5113,25 @@ SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       c
       </categories>
       <tags>
         <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL优化之小细节 - 点滴记录</title>
+    <url>/20170309-SQL%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B0%8F%E7%BB%86%E8%8A%82%20-%20%E7%82%B9%E6%BB%B4%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[不知道现在是不是还很多人首先就把关联的id放在where的第一位
+这里有一个简单的对比，情况相同的时候，两个sql的时间相差八倍
+优：0.077s
+SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE cf.acct_type in(2,3)  AND ew.customer_id = cf.id
+劣：0.630s
+SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE ew.customer_id = cf.id  AND cf.acct_type in(2,3)
+上述原因：where子句从后往前执行，应该把大的过滤条件放在后面记录时间：2017年3月9日 10:44:59
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
       </tags>
   </entry>
   <entry>
@@ -5705,104 +5693,6 @@ package com.hisen.interview;/** * 变量不能被重写 * * @author hisenyuan 20
       </categories>
   </entry>
   <entry>
-    <title>《人民的名义》与技术管理</title>
-    <url>/20260628-The-name-of-the-people-and-technology-management/</url>
-    <content><![CDATA[0. 缘起五一假期没有什么安排，就在家看了一部比较经典的剧《人民的名义》。当时我比较惊讶的就是：
-
-高育良居然和高晓凤是结婚的，和原配是离婚状态。
-侯亮平的领导给他派活时，居然还提醒让问问他老婆钟小艾的建议。
-信托相关：后面还探索了一些信托、慈善基金等知识。
-
-涉及到利益的事情，在上地视角下还是能看懂，如果现实生活呢？从技术一线走过来，剧里面也有不少值得学习的管理和沟通技巧。
-1. 组织协同与管理当你面对一个庞大的遗留系统、复杂的跨部门协作，甚至准备空降到一个新的业务增效团队时，你面对的局面，本质上就是一个微缩版的“汉东省”。《人民的名义》表面上是政治剧，但其内核是一部 教科书级的复杂系统治理指南。对于资深技术管理者，有四个最核心的组织协同与人员管理洞察。
-1.1 沙瑞金的“重构”哲学：先理清依赖，再动手重构工程师最容易犯的错，是“新官上任三把火”，看到历史遗留系统或低效流程，第一反应就是“推翻重写”。沙瑞金初到汉东，面对彻底板结的政治生态，他没有立刻下令抓人，而是花了大量时间去基层调研（林城、大风厂），理清了汉东复杂的“接口依赖”和“历史技术债”。
-
-管理映射： 当你接手一个核心业务系统，组织诊断先于架构演进。
-不要急于推动重构，先摸清各团队的利益诉求、核心痛点以及业务的真实运转逻辑。
-所有的技术债，本质上都是过去的组织架构和业务妥协留下的历史快照。
-
-
-落地动作： 谋定而后动。用专业的管理思维去评估资源盘点与风险敞口，把技术愿景转化为各部门都能听懂的业务增效指标，做到“师出有名”。
-
-
-1.2 驾驭“李达康式”高绩效人才：结果导向与边界控制李达康是典型的“业务攻坚型Tech Lead”，只要能完成KPI（GDP），他甚至可以无视一些规范，性格强势，容易误伤跨部门协作的同事。沙瑞金对李达康的使用方式，是现代企业管理的典范：既要用他的极致执行力去攻克难题，又要用易学习（纪委）去死死盯住他的合规边界。
-
-管理映射： 团队里有技术狂人，他们能力极强，但忽视代码可读性、系统可维护性和研发规范。
-落地动作： 对待这类高绩效员工，充分授权的同时必须锁定边界。
-给他们最难的硬骨头去啃，但要在架构评审和代码合并环节卡住底线：
-强制文档沉淀；
-使用费曼技巧把复杂逻辑讲给其他成员听；
-
-
-确保他们的个人能力转化为团队的系统资产，而不是让他们成为“不可替代的单点风险”。
-
-
-
-1.3 拆解“高育良式”山头：打破技术黑盒与知识垄断高育良和他的“汉大帮”，本质上就是企业内部的“信息孤岛”和“部门墙”。他们通过建立复杂的人际网络和黑盒操作，垄断了汉东的政法系统。
-
-管理映射： 在研发团队中，最可怕的不是技术菜，而是“技术垄断”。有些老员工把控着核心模块，代码写得极其晦涩，拒绝输出清晰的文档，试图通过制造“信息壁垒”来巩固自己的地位。这就是技术团队里的“山头主义”。
-落地动作： 作为管理者，必须毫不留情地打破这种知识垄断。
-推行强制的轮岗机制、交叉Code Review，以及透明的架构分享。
-把“代码可读性”和“系统可维护性”提升到绩效考核的高度，倡导大道至简的工程文化。
-谁把系统搞得越复杂、越离不开他，就越要削弱他的核心控制权。
-
-
-
-1.4 陈岩石的“底层穿透”：拒绝中层信息过滤陈岩石是沙瑞金在汉东的“物理探针”。如果没有陈岩石，沙瑞金听到的将全是省委大院里粉饰太平的汇报。
-
-管理映射： 随着管理半径变大，你的时间会被各种会议和汇报填满。中层管理者或项目经理为了粉饰进度，往往会上报过滤后的“好消息”。
-落地动作： 保持对一线业务的“穿透式体感”。
-不要只看管理看板上的流转率，偶尔要亲自去看看核心链路的监控大盘，去听听一线运营人员或者客服对系统卡顿的真实吐槽。
-你的管理决策必须建立在真实的“物理依据”之上，而不是经过层层包装的PPT汇报。
-
-
-
-
-核心洞察：优秀的工程师关注逻辑的完美，而优秀的管理者关注资源的配置与目标的达成。把写代码时的模块化思维、解耦思维，运用到组织架构的协同设计中，用最平实、准确的职业语言去统一团队目标，这才是技术人向高阶管理进化的必经之路。
-
-2. 沟通协作在沟通与协作上，《人民的名义》展示的段位更高，甚至可以说是全剧的灵魂。日常研发中，我们常觉得“技术是黑白分明的，沟通却是灰色的”。但实际上，高级的沟通协作，本质上是另一场高并发的“协议对齐”与“流量控制”。对于资深的技术人，无论面对的是业务方、上级还是跨团队同僚，剧中的四种沟通名场面，直接对应了四种极具价值的职场协作解法：
-2.1 向上沟通：不要输出“技术黑盒”，要对齐“核心币种”很多技术人向上汇报时，喜欢抛出一堆非技术领导听不懂的专业术语（如高并发下的锁竞争、垃圾回收停顿等）。这在管理沟通中属于“低效协议”。看看剧中的高育良，哪怕面对不熟悉政法业务的沙瑞金，他每一次汇报都极度丝滑。为什么？因为他永远在用沙瑞金听得懂、且最关心的语言——**“大局观、班子团结、干部稳定”**来包装他的诉求。
-
-技术人的通病： 向上要资源重构时说：“这段旧代码太烂了，我要用 Go 重写，提高并发性能。”
-
-高阶的对齐方式（费曼技巧）： 转化成业务和管理听得懂的**“语言货币”**——资金、时间、稳定性。
-
-“目前核心链路的技术债已经到了临界点，当前的系统架构支撑下半年 11.11 促销的风险敞口极高。如果现在投入 2 个人、花 2 周时间把这部分逻辑解耦，不仅能把大促期间的服务器成本降低 30%，还能保证核心交易的可用性达到 4 个 9 以上，彻底消除资损风险。”
-
-
-
-2.2 横向协作：寻找“最大公约数”，破除“汉大帮”与“秘书帮”的对立剧中“汉大帮”（政法系）和“秘书帮”（经济系）天然对立，但在大风厂危机爆发的那个晚上，这两派人竟然坐在协调会上把问题给解决了。因为他们找到了一个共同的目标：不能发生群体性事件。在研发日常中，类似大风厂这样的“边界扯皮”天天在发生（比如：R&amp;D 觉得业务方的需求变化太快，产品觉得研发排期太长）。
-
-协作解法： 当跨部门协作推不动时，不要在技术细节上跟对方死磕。尝试跳出技术视角，站到更高的业务视角去寻找**“利益最大公约数”**。
-具体动作： 主动帮业务方算账。如果业务要上一个很赶的需求，与其生硬地拒绝，不如给出折中方案：“如果按你原定的完美版本做，研发要 3 周，肯定赶不上营销节点。我们能不能第一期先做个最小可行性产品（MVP），只支持核心主流程，3 天内就能上线跑数据，后面的功能我们按周迭代？”
-
-2.3 向下沟通：警惕“李达康式”的压迫，建立“非责备”的安全感李达康为了出政绩，对下属的沟通极其粗暴和强势，甚至不容许解释。结果导致了什么？孙连城直接躺平开始“仰望星空”，下属们为了不犯错，选择不做事。在技术团队里，如果你也是一个过于强势的 Tech Lead（技术主管），总在出线上事故时当众训斥：“这么简单的 Bug 怎么写出来的？”、“你这代码逻辑是怎么过的 Code Review？”。团队很快就会“李达康化”。
-
-带来的系统风险： 下属会因为害怕犯错而隐瞒技术风险。有了线上隐患不敢说，遇到架构难题自己硬扛，最后演变成无法收拾的灾难性大故障。
-高阶的沟通动作： 引入大厂提倡的 “非责备复盘”（Blameless Post-mortem）。在出故障后，沟通的焦点应该从“这是谁写的 Bug”转向“我们的系统设计和 Review 流程存在什么漏洞，才让这个 Bug 溜到了线上”。用流程和制度的防护网，换取团队成员的心理安全感，才能激发底层的实干创造力。
-
-2.4 危机沟通：学习“季昌明式”的合规与升级机制很多人觉得检察长季昌明“胆小怕事、极度教条”，在抓捕丁义珍的关键时刻，他非要拦着陈海，去向省委汇报，结果导致丁义珍跑了。但如果你在大厂待过，你会发现季昌明才是真正懂**“重大事故升级与容灾机制”**的人。抓捕副厅级干部，稍有不慎就是政治地震，这不是一个检察院能私自兜底的。
-
-技术人的通病： 线上突发大故障，或者核心数据库疑似被锁，为了个人英雄主义，自己悄悄在生产环境改代码、重启服务，结果导致故障范围进一步扩大，错过了最佳的止损时机。
-高阶的流程意识： 越是资深的工程师，越要明白**“风险升级机制”**（Escalation Policy）的重要性。
-明确什么级别的故障必须在 5 分钟内拉通整个核心团队；
-什么时候必须立刻向总监、VP 级别报警争取支持；
-什么时候该直接执行主备切换或熔断降级。  按流程规范办事，这不是教条，而是对系统、对团队最专业的保护。
-
-
-
-
-一句话总结：工程师写代码是为了让机器执行，而沟通是为了让组织协同。像机器一样去精准对齐信息流，像架构师一样去设计协作的边界与容灾机制，这就是从写代码（Coding）走向带团队（Leading）的沟通质变。
-
-]]></content>
-      <categories>
-        <category>Growth</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《远见：如何规划职业生涯3大阶段》读后感</title>
     <url>/20260628-The-Long-View/</url>
     <content><![CDATA[1. 缘起在看完一系列的电视剧之后，特别是《夜色正浓》里面李东明以及同事对竞选总监的张玫进行的各种辅导。我在想为什么会没相关的书籍呢？然后想到某博主说的一段话：
@@ -6227,6 +6117,104 @@ package com.hisen.interview;/** * 变量不能被重写 * * @author hisenyuan 20
       </tags>
   </entry>
   <entry>
+    <title>《人民的名义》与技术管理</title>
+    <url>/20260628-The-name-of-the-people-and-technology-management/</url>
+    <content><![CDATA[0. 缘起五一假期没有什么安排，就在家看了一部比较经典的剧《人民的名义》。当时我比较惊讶的就是：
+
+高育良居然和高晓凤是结婚的，和原配是离婚状态。
+侯亮平的领导给他派活时，居然还提醒让问问他老婆钟小艾的建议。
+信托相关：后面还探索了一些信托、慈善基金等知识。
+
+涉及到利益的事情，在上地视角下还是能看懂，如果现实生活呢？从技术一线走过来，剧里面也有不少值得学习的管理和沟通技巧。
+1. 组织协同与管理当你面对一个庞大的遗留系统、复杂的跨部门协作，甚至准备空降到一个新的业务增效团队时，你面对的局面，本质上就是一个微缩版的“汉东省”。《人民的名义》表面上是政治剧，但其内核是一部 教科书级的复杂系统治理指南。对于资深技术管理者，有四个最核心的组织协同与人员管理洞察。
+1.1 沙瑞金的“重构”哲学：先理清依赖，再动手重构工程师最容易犯的错，是“新官上任三把火”，看到历史遗留系统或低效流程，第一反应就是“推翻重写”。沙瑞金初到汉东，面对彻底板结的政治生态，他没有立刻下令抓人，而是花了大量时间去基层调研（林城、大风厂），理清了汉东复杂的“接口依赖”和“历史技术债”。
+
+管理映射： 当你接手一个核心业务系统，组织诊断先于架构演进。
+不要急于推动重构，先摸清各团队的利益诉求、核心痛点以及业务的真实运转逻辑。
+所有的技术债，本质上都是过去的组织架构和业务妥协留下的历史快照。
+
+
+落地动作： 谋定而后动。用专业的管理思维去评估资源盘点与风险敞口，把技术愿景转化为各部门都能听懂的业务增效指标，做到“师出有名”。
+
+
+1.2 驾驭“李达康式”高绩效人才：结果导向与边界控制李达康是典型的“业务攻坚型Tech Lead”，只要能完成KPI（GDP），他甚至可以无视一些规范，性格强势，容易误伤跨部门协作的同事。沙瑞金对李达康的使用方式，是现代企业管理的典范：既要用他的极致执行力去攻克难题，又要用易学习（纪委）去死死盯住他的合规边界。
+
+管理映射： 团队里有技术狂人，他们能力极强，但忽视代码可读性、系统可维护性和研发规范。
+落地动作： 对待这类高绩效员工，充分授权的同时必须锁定边界。
+给他们最难的硬骨头去啃，但要在架构评审和代码合并环节卡住底线：
+强制文档沉淀；
+使用费曼技巧把复杂逻辑讲给其他成员听；
+
+
+确保他们的个人能力转化为团队的系统资产，而不是让他们成为“不可替代的单点风险”。
+
+
+
+1.3 拆解“高育良式”山头：打破技术黑盒与知识垄断高育良和他的“汉大帮”，本质上就是企业内部的“信息孤岛”和“部门墙”。他们通过建立复杂的人际网络和黑盒操作，垄断了汉东的政法系统。
+
+管理映射： 在研发团队中，最可怕的不是技术菜，而是“技术垄断”。有些老员工把控着核心模块，代码写得极其晦涩，拒绝输出清晰的文档，试图通过制造“信息壁垒”来巩固自己的地位。这就是技术团队里的“山头主义”。
+落地动作： 作为管理者，必须毫不留情地打破这种知识垄断。
+推行强制的轮岗机制、交叉Code Review，以及透明的架构分享。
+把“代码可读性”和“系统可维护性”提升到绩效考核的高度，倡导大道至简的工程文化。
+谁把系统搞得越复杂、越离不开他，就越要削弱他的核心控制权。
+
+
+
+1.4 陈岩石的“底层穿透”：拒绝中层信息过滤陈岩石是沙瑞金在汉东的“物理探针”。如果没有陈岩石，沙瑞金听到的将全是省委大院里粉饰太平的汇报。
+
+管理映射： 随着管理半径变大，你的时间会被各种会议和汇报填满。中层管理者或项目经理为了粉饰进度，往往会上报过滤后的“好消息”。
+落地动作： 保持对一线业务的“穿透式体感”。
+不要只看管理看板上的流转率，偶尔要亲自去看看核心链路的监控大盘，去听听一线运营人员或者客服对系统卡顿的真实吐槽。
+你的管理决策必须建立在真实的“物理依据”之上，而不是经过层层包装的PPT汇报。
+
+
+
+
+核心洞察：优秀的工程师关注逻辑的完美，而优秀的管理者关注资源的配置与目标的达成。把写代码时的模块化思维、解耦思维，运用到组织架构的协同设计中，用最平实、准确的职业语言去统一团队目标，这才是技术人向高阶管理进化的必经之路。
+
+2. 沟通协作在沟通与协作上，《人民的名义》展示的段位更高，甚至可以说是全剧的灵魂。日常研发中，我们常觉得“技术是黑白分明的，沟通却是灰色的”。但实际上，高级的沟通协作，本质上是另一场高并发的“协议对齐”与“流量控制”。对于资深的技术人，无论面对的是业务方、上级还是跨团队同僚，剧中的四种沟通名场面，直接对应了四种极具价值的职场协作解法：
+2.1 向上沟通：不要输出“技术黑盒”，要对齐“核心币种”很多技术人向上汇报时，喜欢抛出一堆非技术领导听不懂的专业术语（如高并发下的锁竞争、垃圾回收停顿等）。这在管理沟通中属于“低效协议”。看看剧中的高育良，哪怕面对不熟悉政法业务的沙瑞金，他每一次汇报都极度丝滑。为什么？因为他永远在用沙瑞金听得懂、且最关心的语言——**“大局观、班子团结、干部稳定”**来包装他的诉求。
+
+技术人的通病： 向上要资源重构时说：“这段旧代码太烂了，我要用 Go 重写，提高并发性能。”
+
+高阶的对齐方式（费曼技巧）： 转化成业务和管理听得懂的**“语言货币”**——资金、时间、稳定性。
+
+“目前核心链路的技术债已经到了临界点，当前的系统架构支撑下半年 11.11 促销的风险敞口极高。如果现在投入 2 个人、花 2 周时间把这部分逻辑解耦，不仅能把大促期间的服务器成本降低 30%，还能保证核心交易的可用性达到 4 个 9 以上，彻底消除资损风险。”
+
+
+
+2.2 横向协作：寻找“最大公约数”，破除“汉大帮”与“秘书帮”的对立剧中“汉大帮”（政法系）和“秘书帮”（经济系）天然对立，但在大风厂危机爆发的那个晚上，这两派人竟然坐在协调会上把问题给解决了。因为他们找到了一个共同的目标：不能发生群体性事件。在研发日常中，类似大风厂这样的“边界扯皮”天天在发生（比如：R&amp;D 觉得业务方的需求变化太快，产品觉得研发排期太长）。
+
+协作解法： 当跨部门协作推不动时，不要在技术细节上跟对方死磕。尝试跳出技术视角，站到更高的业务视角去寻找**“利益最大公约数”**。
+具体动作： 主动帮业务方算账。如果业务要上一个很赶的需求，与其生硬地拒绝，不如给出折中方案：“如果按你原定的完美版本做，研发要 3 周，肯定赶不上营销节点。我们能不能第一期先做个最小可行性产品（MVP），只支持核心主流程，3 天内就能上线跑数据，后面的功能我们按周迭代？”
+
+2.3 向下沟通：警惕“李达康式”的压迫，建立“非责备”的安全感李达康为了出政绩，对下属的沟通极其粗暴和强势，甚至不容许解释。结果导致了什么？孙连城直接躺平开始“仰望星空”，下属们为了不犯错，选择不做事。在技术团队里，如果你也是一个过于强势的 Tech Lead（技术主管），总在出线上事故时当众训斥：“这么简单的 Bug 怎么写出来的？”、“你这代码逻辑是怎么过的 Code Review？”。团队很快就会“李达康化”。
+
+带来的系统风险： 下属会因为害怕犯错而隐瞒技术风险。有了线上隐患不敢说，遇到架构难题自己硬扛，最后演变成无法收拾的灾难性大故障。
+高阶的沟通动作： 引入大厂提倡的 “非责备复盘”（Blameless Post-mortem）。在出故障后，沟通的焦点应该从“这是谁写的 Bug”转向“我们的系统设计和 Review 流程存在什么漏洞，才让这个 Bug 溜到了线上”。用流程和制度的防护网，换取团队成员的心理安全感，才能激发底层的实干创造力。
+
+2.4 危机沟通：学习“季昌明式”的合规与升级机制很多人觉得检察长季昌明“胆小怕事、极度教条”，在抓捕丁义珍的关键时刻，他非要拦着陈海，去向省委汇报，结果导致丁义珍跑了。但如果你在大厂待过，你会发现季昌明才是真正懂**“重大事故升级与容灾机制”**的人。抓捕副厅级干部，稍有不慎就是政治地震，这不是一个检察院能私自兜底的。
+
+技术人的通病： 线上突发大故障，或者核心数据库疑似被锁，为了个人英雄主义，自己悄悄在生产环境改代码、重启服务，结果导致故障范围进一步扩大，错过了最佳的止损时机。
+高阶的流程意识： 越是资深的工程师，越要明白**“风险升级机制”**（Escalation Policy）的重要性。
+明确什么级别的故障必须在 5 分钟内拉通整个核心团队；
+什么时候必须立刻向总监、VP 级别报警争取支持；
+什么时候该直接执行主备切换或熔断降级。  按流程规范办事，这不是教条，而是对系统、对团队最专业的保护。
+
+
+
+
+一句话总结：工程师写代码是为了让机器执行，而沟通是为了让组织协同。像机器一样去精准对齐信息流，像架构师一样去设计协作的边界与容灾机制，这就是从写代码（Coding）走向带团队（Leading）的沟通质变。
+
+]]></content>
+      <categories>
+        <category>Growth</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Thread Pool Monitor - 线程池监控</title>
     <url>/20190905-Thread-Pool-Monitor/</url>
     <content><![CDATA[一、背景业务当中多处用到线程池进行异步处理;为了得知线程池设置是否合理，故需要增加线程池监控;常见的实现方式：
@@ -6324,6 +6312,25 @@ redis服务路径: &#x2F;etc&#x2F;init.d&#x2F;redis-server
       </tags>
   </entry>
   <entry>
+    <title>Ubuntu 16 换阿里云源</title>
+    <url>/20170218-Ubuntu-16-%E6%8D%A2%E9%98%BF%E9%87%8C%E4%BA%91%E6%BA%90/</url>
+    <content><![CDATA[
+sudo vi &#x2F;etc&#x2F;apt&#x2F;sources.list
+删除里面所有的内容，添加下面的内容
+sudo apt-get update
+
+三步完成之后即可！
+
+
+deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiversedeb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiversedeb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiversedeb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiversedeb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Ubuntu 16 LTS 安装zookeeper并开机启动</title>
     <url>/20170224-Ubuntu-16-LTS-%E5%AE%89%E8%A3%85zookeeper%E5%B9%B6%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/</url>
     <content><![CDATA[一、安装sudo apt-get install zookeeper
@@ -6348,25 +6355,6 @@ sudo rcconf
 ↑ ↓ 移动光标，空格键选中zookeeper
 Tab 使光标移动到OK 回车即可
 ]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ubuntu 16 换阿里云源</title>
-    <url>/20170218-Ubuntu-16-%E6%8D%A2%E9%98%BF%E9%87%8C%E4%BA%91%E6%BA%90/</url>
-    <content><![CDATA[
-sudo vi &#x2F;etc&#x2F;apt&#x2F;sources.list
-删除里面所有的内容，添加下面的内容
-sudo apt-get update
-
-三步完成之后即可！
-
-
-deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiversedeb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiversedeb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiversedeb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiversedeb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse]]></content>
       <categories>
         <category>Tech</category>
       </categories>
@@ -6582,6 +6570,52 @@ Error: Could not create the Java Virtual Machine.Error: A fatal exception has oc
       </categories>
   </entry>
   <entry>
+    <title>理解 Linux Load Averages</title>
+    <url>/20201026-Understanding-Linux-Load-Averages/</url>
+    <content><![CDATA[零、背景最近做压力测试，不同的系统的机器监控数据差异明显A 系统：CPU 高 load 低B 系统：CPU 低 load 高
+那么是什么导致 A B 系统出现这种情况？CPU 高了系统肯定跑不动了，那么 load 多高代表系统跑不动呢？
+一、解释
+A 系统的原因  CPU 很忙，没有等待其它资源，瓶颈在 CPU。
+B 系统的原因  等待磁盘 I&#x2F;O 完成的进程过多，导致进程队列长度过大，  但是 CPU 运行的进程却很少，这样就导致负载过大，但 CPU 使用率低，瓶颈不在 CPU，可能在 I&#x2F;O。
+
+二、load averages 知识
+Linux 系统下代表的是 system load averages。
+
+Linux load averages track not just runnable tasks, but also tasks in the uninterruptible sleep state.  Linux 平均负载不仅跟踪可运行的任务，还跟踪处于不可中断睡眠状态的任务。
+
+On Linux, load averages are (or try to be) “system load averages”, for the system as a whole, measuring the number of threads that are working and waiting to work (CPU, disk, uninterruptible locks). Put differently, it measures the number of threads that aren’t completely idle. Advantage: includes demand for different resources.  在 Linux 上，负载平均值是(或试图是)“系统负载平均值” ，对于整个系统来说，测量正在工作和等待工作的线程数(CPU、磁盘、不可中断锁)。换句话说，它测量的是没有完全空闲的线程数量。优势: 包括对不同资源的需求。
+
+In 1993, a Linux engineer found a nonintuitive case with load averages, and with a three-line patch changed them forever from “CPU load averages” to what one might call “system load averages.” His change included tasks in the uninterruptible state, so that load averages reflected demand for disk resources and not just CPUs.  1993年，一位 Linux 工程师发现了一个与平均负载不直观的案例，一个三行补丁永远地将它们从“ CPU 负载平均值”改变为人们可能称之为“系统负载平均值”他的更改包括处于不可中断状态的任务，因此平均负载反映了对磁盘资源的需求，而不仅仅是 cpu。
+
+
+三、总结
+linux load averages 数字大，代表系统压力大;
+
+
+
+load 高可能的原因有(CPU、I&#x2F;O、不可中断锁);
+load 1min load 5min load 15min，从左到右递增说明负载在增加，递减说明负载在降低;
+负载多大才算高，没有定论，得看是否影响业务，如果业务正常那多半是没有问题的;
+
+四、load 优化
+优化算法，减少 CPU 计算;
+减少 I&#x2F;O 交互的次数，以及大小;
+分布式系统水平扩展更多的机器;
+
+五、参考
+Linux Load Averages: Solving the Mystery (发表于 2017 年)
+理解Linux系统负荷 （发表于 2011 年）
+Linux中CPU使用率低负载高
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《地下帝国：金融、网络、半导体---美国如何将世界经济武器化》读后感</title>
     <url>/20260801-Underground-Empire-How-America-Weaponized-the-World-Economy/</url>
     <content><![CDATA[1. 读后感全球化时代，你中有我，我中有你。短时间内很难撇清关系，虽然很别扭，但是还得拉着脸合作。新时代的竞争，和冷战差不多，甚至更严重，双方都制造假想敌，不断竞争。提出假想敌的那些人也可能是为了让自己多争取点资源，扩大自己的一亩三分地。
@@ -6668,52 +6702,6 @@ SWIFT 已从一个政治独立的组织，蜕变为美国政府无所不知的�
       </tags>
   </entry>
   <entry>
-    <title>理解 Linux Load Averages</title>
-    <url>/20201026-Understanding-Linux-Load-Averages/</url>
-    <content><![CDATA[零、背景最近做压力测试，不同的系统的机器监控数据差异明显A 系统：CPU 高 load 低B 系统：CPU 低 load 高
-那么是什么导致 A B 系统出现这种情况？CPU 高了系统肯定跑不动了，那么 load 多高代表系统跑不动呢？
-一、解释
-A 系统的原因  CPU 很忙，没有等待其它资源，瓶颈在 CPU。
-B 系统的原因  等待磁盘 I&#x2F;O 完成的进程过多，导致进程队列长度过大，  但是 CPU 运行的进程却很少，这样就导致负载过大，但 CPU 使用率低，瓶颈不在 CPU，可能在 I&#x2F;O。
-
-二、load averages 知识
-Linux 系统下代表的是 system load averages。
-
-Linux load averages track not just runnable tasks, but also tasks in the uninterruptible sleep state.  Linux 平均负载不仅跟踪可运行的任务，还跟踪处于不可中断睡眠状态的任务。
-
-On Linux, load averages are (or try to be) “system load averages”, for the system as a whole, measuring the number of threads that are working and waiting to work (CPU, disk, uninterruptible locks). Put differently, it measures the number of threads that aren’t completely idle. Advantage: includes demand for different resources.  在 Linux 上，负载平均值是(或试图是)“系统负载平均值” ，对于整个系统来说，测量正在工作和等待工作的线程数(CPU、磁盘、不可中断锁)。换句话说，它测量的是没有完全空闲的线程数量。优势: 包括对不同资源的需求。
-
-In 1993, a Linux engineer found a nonintuitive case with load averages, and with a three-line patch changed them forever from “CPU load averages” to what one might call “system load averages.” His change included tasks in the uninterruptible state, so that load averages reflected demand for disk resources and not just CPUs.  1993年，一位 Linux 工程师发现了一个与平均负载不直观的案例，一个三行补丁永远地将它们从“ CPU 负载平均值”改变为人们可能称之为“系统负载平均值”他的更改包括处于不可中断状态的任务，因此平均负载反映了对磁盘资源的需求，而不仅仅是 cpu。
-
-
-三、总结
-linux load averages 数字大，代表系统压力大;
-
-
-
-load 高可能的原因有(CPU、I&#x2F;O、不可中断锁);
-load 1min load 5min load 15min，从左到右递增说明负载在增加，递减说明负载在降低;
-负载多大才算高，没有定论，得看是否影响业务，如果业务正常那多半是没有问题的;
-
-四、load 优化
-优化算法，减少 CPU 计算;
-减少 I&#x2F;O 交互的次数，以及大小;
-分布式系统水平扩展更多的机器;
-
-五、参考
-Linux Load Averages: Solving the Mystery (发表于 2017 年)
-理解Linux系统负荷 （发表于 2011 年）
-Linux中CPU使用率低负载高
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Unix文件超过大小限制移动到某目录</title>
     <url>/20190408-Unix%E6%96%87%E4%BB%B6%E8%B6%85%E8%BF%87%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6%E7%A7%BB%E5%8A%A8%E5%88%B0%E6%9F%90%E7%9B%AE%E5%BD%95/</url>
     <content><![CDATA[某个文件夹下面有n个文件，需要移动大于10M的文件到&#x2F;tmp&#x2F;目录下
@@ -6726,25 +6714,6 @@ find 查找. 当前目录-type 文件类型：f 文件，d 目录-size 文件大
       </categories>
       <tags>
         <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>WeightAlgorithm - 权重算法 - Random、HashCode对比</title>
-    <url>/20190322-WeightAlgorithm%20-%20%E6%9D%83%E9%87%8D%E7%AE%97%E6%B3%95%20-%20Random%E3%80%81HashCode%E5%AF%B9%E6%AF%94/</url>
-    <content><![CDATA[一、权重算法权重算法一般在路由里面用的比较多，分布式环境下对等的服务有多个，加权随机选出一个服务来调用；
-可能还有其他方面的用途，下面的代码简单的实现了这个权重，本质上就用到了数组，随机下标；
-二、代码概览public static void main(String[] args) &#123;    String[] weight = &#123;&quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;&#125;;    final int times = 500000;    final long hashStart = System.currentTimeMillis();    List&lt;String&gt; hashRes = getList4Hash(weight, times);    printRes(&quot;Hash&quot;, hashStart, hashRes);    final long randomStart = System.currentTimeMillis();    List&lt;String&gt; randomRes = getList4Random(weight, times);    printRes(&quot;Random&quot;, randomStart, randomRes);//        Hash          use millis: 931//        A:49.92%//        B:29.99%//        C:20.09%//        Random        use millis: 50//        A:50.08%//        B:29.93%//        C:19.99%&#125;
-
-三、完整代码
-github:show all code
-package com.hisen.algorithms;import com.google.common.collect.Lists;import Java.text.NumberFormat;import Java.util.List;import Java.util.Map;import Java.util.Random;import Java.util.UUID;import Java.util.function.Function;import Java.util.stream.Collectors;/** * @Author hisenyuan * @Description $end$ * @Date 2019/3/21 21:04 */public class WeightAlgorithm &#123;    public static void main(String[] args) &#123;        String[] weight = &#123;&quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;&#125;;        final int times = 500000;        final long hashStart = System.currentTimeMillis();        List&lt;String&gt; hashRes = getList4Hash(weight, times);        printRes(&quot;Hash&quot;, hashStart, hashRes);        final long randomStart = System.currentTimeMillis();        List&lt;String&gt; randomRes = getList4Random(weight, times);        printRes(&quot;Random&quot;, randomStart, randomRes);//        Hash          use millis: 931//        A:49.92%//        B:29.99%//        C:20.09%//        Random        use millis: 50//        A:50.08%//        B:29.93%//        C:19.99%    &#125;    private static void printRes(String method, long start, List&lt;String&gt; resList) &#123;        final Map&lt;String, Long&gt; collect = resList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));        final double a = collect.get(&quot;A&quot;);        final double b = collect.get(&quot;B&quot;);        final double c = collect.get(&quot;C&quot;);        final double sum = a + b + c;        NumberFormat nt = NumberFormat.getPercentInstance();        nt.setMinimumFractionDigits(2);        System.out.println(method + &quot;\t use millis: &quot; + (System.currentTimeMillis() - start));        System.out.println(&quot;A&quot; + &quot;:&quot; + nt.format(a / sum));        System.out.println(&quot;B&quot; + &quot;:&quot; + nt.format(b / sum));        System.out.println(&quot;C&quot; + &quot;:&quot; + nt.format(c / sum));    &#125;    private static List&lt;String&gt; getList4Hash(String[] weight, int times) &#123;        List&lt;String&gt; result = Lists.newArrayList();        for (int i = 0; i &lt; times; i++) &#123;            final String a = UUID.randomUUID().toString() + System.currentTimeMillis();            final int hash = a.hashCode();            final int index = hash &gt; 0 ? hash : -hash;            final String res = weight[index % weight.length];            result.add(res);        &#125;        return result;    &#125;    private static List&lt;String&gt; getList4Random(String[] weight, int times) &#123;        List&lt;String&gt; result = Lists.newArrayList();        Random random = new Random();        for (int i = 0; i &lt; times; i++) &#123;            final int index = random.nextInt(weight.length);            final String res = weight[index];            result.add(res);        &#125;        return result;    &#125;&#125;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -6784,15 +6753,52 @@ github地址：ValidSudoku.Java
       </tags>
   </entry>
   <entry>
-    <title>windows10 专业版激活密钥</title>
-    <url>/20170210-Windows10-%E4%B8%93%E4%B8%9A%E7%89%88%E6%BF%80%E6%B4%BB%E5%AF%86%E9%92%A5/</url>
-    <content><![CDATA[2017年2月10日 16:03:48亲测可用，这比激活工具方便多了
+    <title>WebSocket - Java &amp; html &amp; JavaScript - 单发 &amp; 群发</title>
+    <url>/20180728-WebSocket%20-%20Java%20&amp;%20html%20&amp;%20JavaScript%20-%20%E5%8D%95%E5%8F%91%20&amp;%20%E7%BE%A4%E5%8F%91/</url>
+    <content><![CDATA[一、背景说明最近在做app后台相关接口
+自建通知中心目前不能很好的支持给APP推送消息
+长连接可以保持推送速度，目前app中内嵌了H5，所以考虑使用websocket
+之前没有接触过websocket，百度了一堆之后，页面上可以正常使用
+但是没有发现可用使用Java后台进行消息的发送，于是乎就琢磨了一上午，解决了这个问题
+现在把这个小工程分享给大家，少走点弯路&#x3D;&#x3D;
+ps：很多不能在后台发送消息，是因为缺少Java的客户端
+二、准备工作建立一个maven web 工程
+添加依赖
+&lt;dependency&gt;    &lt;groupId&gt;Javax.websocket&lt;/groupId&gt;    &lt;artifactId&gt;Javax.websocket-api&lt;/artifactId&gt;    &lt;version&gt;1.1&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;com.neovisionaries&lt;/groupId&gt;    &lt;artifactId&gt;nv-websocket-client&lt;/artifactId&gt;    &lt;version&gt;1.13&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;    &lt;artifactId&gt;junit-jupiter-api&lt;/artifactId&gt;    &lt;version&gt;RELEASE&lt;/version&gt;    &lt;scope&gt;compile&lt;/scope&gt;&lt;/dependency&gt;
 
-VK7JG-NPHTM-C97JM-9MPGT-3V66TNPPR9-FWDCX-D2C8J-H872K-2YT43W269N-WFGWX-YVC9B-4J6C9-T83GXNYW94-47Q7H-7X9TT-W7TXD-JTYPMNJ4MX-VQQ7Q-FP3DB-VDGHX-7XM87MH37W-N47XK-V7XM9-C7227-GCQG9
+三、主要代码websocket服务端主逻辑
+为了实现简单的非群发操作，在连接websocket的时候，加上了一些get参数
+例如：ws:&#x2F;&#x2F;localhost:8080&#x2F;websocket?sendTo&#x3D;hisen&amp;method&#x3D;methodSingle&amp;user&#x3D;hisenyuan
+然后在后端判断，根据参数做出不同的动作
+demo完整工程：https://github.com/hisenyuan/IDEAPractice/tree/master/websocket-demo
+配置完Tomcat，即可使用，在Java后台运行测试类(com.hisen.ws.client.ClientApp4Java)可发送消息到页面
+package com.hisen.ws.server;import com.hisen.ws.util.Constants;import Javax.websocket.*;import Javax.websocket.server.ServerEndpoint;import Java.io.IOException;import Java.util.ArrayList;import Java.util.List;import Java.util.Map;import Java.util.Optional;import Java.util.concurrent.ConcurrentHashMap;/** * @ServerEndpoint 注解是一个类层次的注解，它的功能主要是将目前的类定义成一个websocket服务器端, * 注解的值将被用于监听用户连接的终端访问URL地址,客户端可以通过这个URL来连接到WebSocket服务器端 */@ServerEndpoint(&quot;/websocket&quot;)public class WebSocketServer &#123;    // 静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。    private static int onlineCount = 0;    // 实现服务端与单一客户端通信的话，可以使用Map来存放，其中Key可以为用户标识    private static ConcurrentHashMap&lt;String, WebSocketServer&gt; webSocketMap = new ConcurrentHashMap&lt;&gt;();    // 与某个客户端的连接会话，需要通过它来给客户端发送数据    private Session session;    // 当前用户    private String user;    /**     * 客户端可以是web页面，也可以是Java后台     * &lt;p&gt;     * 通过连接或者message可以控制发送给谁     *     * @param message 客户端发送过来的消息     * @param session 可选的参数     */    @OnMessage    public void onMessage(String message, Session session) &#123;        System.out.println(&quot;来自客户端的消息:&quot; + message);        // 获取url传过来的参数        Map&lt;String, List&lt;String&gt;&gt; parameterMap = session.getRequestParameterMap();        // 发送方式        String method = null;        // 发送给哪些人        List&lt;String&gt; receivers = new ArrayList&lt;&gt;();        // 发送者        String sernder = null;        if (parameterMap.containsKey(Constants.METHOD)) &#123;            method = parameterMap.get(Constants.METHOD).get(0);        &#125;        if (parameterMap.containsKey(Constants.SEND_TO)) &#123;            receivers = parameterMap.get(Constants.SEND_TO);        &#125;        if (parameterMap.containsKey(Constants.USER)) &#123;            sernder = parameterMap.get(Constants.USER).get(0);        &#125;        System.out.println(&quot;sender:&quot; + sernder + &quot;,receivers:&quot; + receivers.toString() + &quot;,method:&quot; + method);        if (method == null || method.equals(Constants.METHOD_ALL)) &#123;            //发送所有            send2All(message);        &#125; else &#123;            //单发            send2Users(receivers, message);        &#125;    &#125;    /**     * 连接建立成功调用的方法     *     * @param session 可选的参数。session为与某个客户端的连接会话，需要通过它来给客户端发送数据     */    @OnOpen    public void onOpen(Session session) &#123;        this.session = session;        this.user = session.getRequestParameterMap().get(Constants.USER).get(0);        // 放入map        webSocketMap.put(user, this);        //在线数加1        addOnlineCount();        System.out.println(&quot;有新连接加入！当前在线人数为&quot; + getOnlineCount() + &quot;,session:&quot; + session.getId() + &quot;,user:&quot; + this.user);    &#125;    /**     * 连接关闭调用的方法     */    @OnClose    public void onClose() &#123;        // 移除        webSocketMap.remove(this.user);        //在线数减1        subOnlineCount();        System.out.println(&quot;有一连接关闭！当前在线人数为&quot; + getOnlineCount() + &quot;,user:&quot; + this.user);    &#125;    private void send2Users(List&lt;String&gt; receivers, String message) &#123;        receivers.forEach(e -&gt; &#123;            System.out.println(&quot;single receiver:&quot; + e);            Optional.ofNullable(webSocketMap.get(e))                    .filter(webSocketServer -&gt; webSocketServer.session.isOpen())                    .ifPresent(webSocketServer -&gt; sendOnce(message, e, webSocketServer));        &#125;);    &#125;    private void send2All(String message) &#123;        webSocketMap.forEach((key, value) -&gt; &#123;            sendOnce(message, key, value);        &#125;);    &#125;    private void sendOnce(String message, String e, WebSocketServer webSocketServer) &#123;        try &#123;            webSocketServer.sendMessage(message);        &#125; catch (IOException exp) &#123;            System.out.println(&quot;发送出错，receiver:&quot; + e);        &#125;    &#125;    /**     * 发生错误时调用     *     * @param session     * @param error     */    @OnError    public void onError(Session session, Throwable error) &#123;        System.out.println(&quot;发生错误，user:&quot; + this.user);        error.printStackTrace();    &#125;    /**     * 自定义的方法     *     * @param message     * @throws IOException     */    public void sendMessage(String message) throws IOException &#123;        this.session.getBasicRemote().sendText(message);        //this.session.getAsyncRemote().sendText(message);    &#125;    public static synchronized int getOnlineCount() &#123;        return onlineCount;    &#125;    public static synchronized void addOnlineCount() &#123;        WebSocketServer.onlineCount++;    &#125;    public static synchronized void subOnlineCount() &#123;        WebSocketServer.onlineCount--;    &#125;&#125;
 ]]></content>
       <categories>
         <category>Tech</category>
       </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WeightAlgorithm - 权重算法 - Random、HashCode对比</title>
+    <url>/20190322-WeightAlgorithm%20-%20%E6%9D%83%E9%87%8D%E7%AE%97%E6%B3%95%20-%20Random%E3%80%81HashCode%E5%AF%B9%E6%AF%94/</url>
+    <content><![CDATA[一、权重算法权重算法一般在路由里面用的比较多，分布式环境下对等的服务有多个，加权随机选出一个服务来调用；
+可能还有其他方面的用途，下面的代码简单的实现了这个权重，本质上就用到了数组，随机下标；
+二、代码概览public static void main(String[] args) &#123;    String[] weight = &#123;&quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;&#125;;    final int times = 500000;    final long hashStart = System.currentTimeMillis();    List&lt;String&gt; hashRes = getList4Hash(weight, times);    printRes(&quot;Hash&quot;, hashStart, hashRes);    final long randomStart = System.currentTimeMillis();    List&lt;String&gt; randomRes = getList4Random(weight, times);    printRes(&quot;Random&quot;, randomStart, randomRes);//        Hash          use millis: 931//        A:49.92%//        B:29.99%//        C:20.09%//        Random        use millis: 50//        A:50.08%//        B:29.93%//        C:19.99%&#125;
+
+三、完整代码
+github:show all code
+package com.hisen.algorithms;import com.google.common.collect.Lists;import Java.text.NumberFormat;import Java.util.List;import Java.util.Map;import Java.util.Random;import Java.util.UUID;import Java.util.function.Function;import Java.util.stream.Collectors;/** * @Author hisenyuan * @Description $end$ * @Date 2019/3/21 21:04 */public class WeightAlgorithm &#123;    public static void main(String[] args) &#123;        String[] weight = &#123;&quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;&#125;;        final int times = 500000;        final long hashStart = System.currentTimeMillis();        List&lt;String&gt; hashRes = getList4Hash(weight, times);        printRes(&quot;Hash&quot;, hashStart, hashRes);        final long randomStart = System.currentTimeMillis();        List&lt;String&gt; randomRes = getList4Random(weight, times);        printRes(&quot;Random&quot;, randomStart, randomRes);//        Hash          use millis: 931//        A:49.92%//        B:29.99%//        C:20.09%//        Random        use millis: 50//        A:50.08%//        B:29.93%//        C:19.99%    &#125;    private static void printRes(String method, long start, List&lt;String&gt; resList) &#123;        final Map&lt;String, Long&gt; collect = resList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));        final double a = collect.get(&quot;A&quot;);        final double b = collect.get(&quot;B&quot;);        final double c = collect.get(&quot;C&quot;);        final double sum = a + b + c;        NumberFormat nt = NumberFormat.getPercentInstance();        nt.setMinimumFractionDigits(2);        System.out.println(method + &quot;\t use millis: &quot; + (System.currentTimeMillis() - start));        System.out.println(&quot;A&quot; + &quot;:&quot; + nt.format(a / sum));        System.out.println(&quot;B&quot; + &quot;:&quot; + nt.format(b / sum));        System.out.println(&quot;C&quot; + &quot;:&quot; + nt.format(c / sum));    &#125;    private static List&lt;String&gt; getList4Hash(String[] weight, int times) &#123;        List&lt;String&gt; result = Lists.newArrayList();        for (int i = 0; i &lt; times; i++) &#123;            final String a = UUID.randomUUID().toString() + System.currentTimeMillis();            final int hash = a.hashCode();            final int index = hash &gt; 0 ? hash : -hash;            final String res = weight[index % weight.length];            result.add(res);        &#125;        return result;    &#125;    private static List&lt;String&gt; getList4Random(String[] weight, int times) &#123;        List&lt;String&gt; result = Lists.newArrayList();        Random random = new Random();        for (int i = 0; i &lt; times; i++) &#123;            final int index = random.nextInt(weight.length);            final String res = weight[index];            result.add(res);        &#125;        return result;    &#125;&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>算法</tag>
+      </tags>
   </entry>
   <entry>
     <title>Windows ssh连接 VirtualBox Ubuntu 16虚拟机</title>
@@ -6845,44 +6851,11 @@ ip写上麦的主机ip：127.0.0.1
       </tags>
   </entry>
   <entry>
-    <title>WebSocket - Java &amp; html &amp; JavaScript - 单发 &amp; 群发</title>
-    <url>/20180728-WebSocket%20-%20Java%20&amp;%20html%20&amp;%20JavaScript%20-%20%E5%8D%95%E5%8F%91%20&amp;%20%E7%BE%A4%E5%8F%91/</url>
-    <content><![CDATA[一、背景说明最近在做app后台相关接口
-自建通知中心目前不能很好的支持给APP推送消息
-长连接可以保持推送速度，目前app中内嵌了H5，所以考虑使用websocket
-之前没有接触过websocket，百度了一堆之后，页面上可以正常使用
-但是没有发现可用使用Java后台进行消息的发送，于是乎就琢磨了一上午，解决了这个问题
-现在把这个小工程分享给大家，少走点弯路&#x3D;&#x3D;
-ps：很多不能在后台发送消息，是因为缺少Java的客户端
-二、准备工作建立一个maven web 工程
-添加依赖
-&lt;dependency&gt;    &lt;groupId&gt;Javax.websocket&lt;/groupId&gt;    &lt;artifactId&gt;Javax.websocket-api&lt;/artifactId&gt;    &lt;version&gt;1.1&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;com.neovisionaries&lt;/groupId&gt;    &lt;artifactId&gt;nv-websocket-client&lt;/artifactId&gt;    &lt;version&gt;1.13&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;    &lt;artifactId&gt;junit-jupiter-api&lt;/artifactId&gt;    &lt;version&gt;RELEASE&lt;/version&gt;    &lt;scope&gt;compile&lt;/scope&gt;&lt;/dependency&gt;
+    <title>windows10 专业版激活密钥</title>
+    <url>/20170210-Windows10-%E4%B8%93%E4%B8%9A%E7%89%88%E6%BF%80%E6%B4%BB%E5%AF%86%E9%92%A5/</url>
+    <content><![CDATA[2017年2月10日 16:03:48亲测可用，这比激活工具方便多了
 
-三、主要代码websocket服务端主逻辑
-为了实现简单的非群发操作，在连接websocket的时候，加上了一些get参数
-例如：ws:&#x2F;&#x2F;localhost:8080&#x2F;websocket?sendTo&#x3D;hisen&amp;method&#x3D;methodSingle&amp;user&#x3D;hisenyuan
-然后在后端判断，根据参数做出不同的动作
-demo完整工程：https://github.com/hisenyuan/IDEAPractice/tree/master/websocket-demo
-配置完Tomcat，即可使用，在Java后台运行测试类(com.hisen.ws.client.ClientApp4Java)可发送消息到页面
-package com.hisen.ws.server;import com.hisen.ws.util.Constants;import Javax.websocket.*;import Javax.websocket.server.ServerEndpoint;import Java.io.IOException;import Java.util.ArrayList;import Java.util.List;import Java.util.Map;import Java.util.Optional;import Java.util.concurrent.ConcurrentHashMap;/** * @ServerEndpoint 注解是一个类层次的注解，它的功能主要是将目前的类定义成一个websocket服务器端, * 注解的值将被用于监听用户连接的终端访问URL地址,客户端可以通过这个URL来连接到WebSocket服务器端 */@ServerEndpoint(&quot;/websocket&quot;)public class WebSocketServer &#123;    // 静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。    private static int onlineCount = 0;    // 实现服务端与单一客户端通信的话，可以使用Map来存放，其中Key可以为用户标识    private static ConcurrentHashMap&lt;String, WebSocketServer&gt; webSocketMap = new ConcurrentHashMap&lt;&gt;();    // 与某个客户端的连接会话，需要通过它来给客户端发送数据    private Session session;    // 当前用户    private String user;    /**     * 客户端可以是web页面，也可以是Java后台     * &lt;p&gt;     * 通过连接或者message可以控制发送给谁     *     * @param message 客户端发送过来的消息     * @param session 可选的参数     */    @OnMessage    public void onMessage(String message, Session session) &#123;        System.out.println(&quot;来自客户端的消息:&quot; + message);        // 获取url传过来的参数        Map&lt;String, List&lt;String&gt;&gt; parameterMap = session.getRequestParameterMap();        // 发送方式        String method = null;        // 发送给哪些人        List&lt;String&gt; receivers = new ArrayList&lt;&gt;();        // 发送者        String sernder = null;        if (parameterMap.containsKey(Constants.METHOD)) &#123;            method = parameterMap.get(Constants.METHOD).get(0);        &#125;        if (parameterMap.containsKey(Constants.SEND_TO)) &#123;            receivers = parameterMap.get(Constants.SEND_TO);        &#125;        if (parameterMap.containsKey(Constants.USER)) &#123;            sernder = parameterMap.get(Constants.USER).get(0);        &#125;        System.out.println(&quot;sender:&quot; + sernder + &quot;,receivers:&quot; + receivers.toString() + &quot;,method:&quot; + method);        if (method == null || method.equals(Constants.METHOD_ALL)) &#123;            //发送所有            send2All(message);        &#125; else &#123;            //单发            send2Users(receivers, message);        &#125;    &#125;    /**     * 连接建立成功调用的方法     *     * @param session 可选的参数。session为与某个客户端的连接会话，需要通过它来给客户端发送数据     */    @OnOpen    public void onOpen(Session session) &#123;        this.session = session;        this.user = session.getRequestParameterMap().get(Constants.USER).get(0);        // 放入map        webSocketMap.put(user, this);        //在线数加1        addOnlineCount();        System.out.println(&quot;有新连接加入！当前在线人数为&quot; + getOnlineCount() + &quot;,session:&quot; + session.getId() + &quot;,user:&quot; + this.user);    &#125;    /**     * 连接关闭调用的方法     */    @OnClose    public void onClose() &#123;        // 移除        webSocketMap.remove(this.user);        //在线数减1        subOnlineCount();        System.out.println(&quot;有一连接关闭！当前在线人数为&quot; + getOnlineCount() + &quot;,user:&quot; + this.user);    &#125;    private void send2Users(List&lt;String&gt; receivers, String message) &#123;        receivers.forEach(e -&gt; &#123;            System.out.println(&quot;single receiver:&quot; + e);            Optional.ofNullable(webSocketMap.get(e))                    .filter(webSocketServer -&gt; webSocketServer.session.isOpen())                    .ifPresent(webSocketServer -&gt; sendOnce(message, e, webSocketServer));        &#125;);    &#125;    private void send2All(String message) &#123;        webSocketMap.forEach((key, value) -&gt; &#123;            sendOnce(message, key, value);        &#125;);    &#125;    private void sendOnce(String message, String e, WebSocketServer webSocketServer) &#123;        try &#123;            webSocketServer.sendMessage(message);        &#125; catch (IOException exp) &#123;            System.out.println(&quot;发送出错，receiver:&quot; + e);        &#125;    &#125;    /**     * 发生错误时调用     *     * @param session     * @param error     */    @OnError    public void onError(Session session, Throwable error) &#123;        System.out.println(&quot;发生错误，user:&quot; + this.user);        error.printStackTrace();    &#125;    /**     * 自定义的方法     *     * @param message     * @throws IOException     */    public void sendMessage(String message) throws IOException &#123;        this.session.getBasicRemote().sendText(message);        //this.session.getAsyncRemote().sendText(message);    &#125;    public static synchronized int getOnlineCount() &#123;        return onlineCount;    &#125;    public static synchronized void addOnlineCount() &#123;        WebSocketServer.onlineCount++;    &#125;    public static synchronized void subOnlineCount() &#123;        WebSocketServer.onlineCount--;    &#125;&#125;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>windows任务栏由底部改到左边，并自动隐藏</title>
-    <url>/20170215-Windows%E4%BB%BB%E5%8A%A1%E6%A0%8F%E7%94%B1%E5%BA%95%E9%83%A8%E6%94%B9%E5%88%B0%E5%B7%A6%E8%BE%B9%EF%BC%8C%E5%B9%B6%E8%87%AA%E5%8A%A8%E9%9A%90%E8%97%8F/</url>
-    <content><![CDATA[windows默认是在底部的
-在底部任务栏空白处：
-右键—设置—任务栏—在桌面模式下自动隐藏任务栏(开)—任务栏在屏幕上的位置(上 | 下 | 左 | 右)
-这样就设置完毕了，毕竟笔记本太小用idea的时候居然有些界面很难点击OK什么的！！！
-
-知乎有专门讨论任务栏放置位置分析，有兴趣的可以看看:
-Windows 任务栏放在窗口左边和下面哪一种更合理？各有什么利弊？
+VK7JG-NPHTM-C97JM-9MPGT-3V66TNPPR9-FWDCX-D2C8J-H872K-2YT43W269N-WFGWX-YVC9B-4J6C9-T83GXNYW94-47Q7H-7X9TT-W7TXD-JTYPMNJ4MX-VQQ7Q-FP3DB-VDGHX-7XM87MH37W-N47XK-V7XM9-C7227-GCQG9
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -6909,6 +6882,21 @@ Windows &gt; [开始]菜单 &gt; 程序 &gt; 启动
       <tags>
         <tag>运维</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>windows任务栏由底部改到左边，并自动隐藏</title>
+    <url>/20170215-Windows%E4%BB%BB%E5%8A%A1%E6%A0%8F%E7%94%B1%E5%BA%95%E9%83%A8%E6%94%B9%E5%88%B0%E5%B7%A6%E8%BE%B9%EF%BC%8C%E5%B9%B6%E8%87%AA%E5%8A%A8%E9%9A%90%E8%97%8F/</url>
+    <content><![CDATA[windows默认是在底部的
+在底部任务栏空白处：
+右键—设置—任务栏—在桌面模式下自动隐藏任务栏(开)—任务栏在屏幕上的位置(上 | 下 | 左 | 右)
+这样就设置完毕了，毕竟笔记本太小用idea的时候居然有些界面很难点击OK什么的！！！
+
+知乎有专门讨论任务栏放置位置分析，有兴趣的可以看看:
+Windows 任务栏放在窗口左边和下面哪一种更合理？各有什么利弊？
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
   </entry>
   <entry>
     <title>关于数据一致性</title>
@@ -7607,6 +7595,70 @@ Brooks 说软件工程的困难是可命名的、结构性的、可以被面对�
       </tags>
   </entry>
   <entry>
+    <title>apt-get 常用命令</title>
+    <url>/20170815-apt-get%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[apt-get应该debian内核系列的系统都能用：
+比如：debian、ubuntu、deepin等
+apt-cache search package    #搜索包（相当于yum list | grep pkg）apt-cache show package      #显示包的相关信息，如说明、大小、版本等apt-cache showpg package    #显示包的相关信息，如Reverse Depends（反向依赖）、依赖等apt-get install package       #安装包apt-get reinstall package     #重新安装包apt-get -f install package    #强制安装apt-get remove package        #删除包（只是删掉数据和可执行文件，不删除配置文件）apt-get remove --purge package       #删除包，包括删除配置文件等apt-get autoremove --purge package   #删除包及其依赖的软件包+配置文件等apt-get update          #更新源apt-get upgrade         #更新已安装的包apt-get dist-upgrade    #升级系统apt-get dselect-upgrade        #使用 dselect 升级apt-cache depends package      #了解使用依赖apt-cache rdepends package     #查看该包被哪些包依赖apt-get build-dep package   #安装相关的编译环境apt-get source package      #下载该包的源代码apt-get clean &amp;&amp; apt-get autoclean  #清理下载文件的存档 &amp;&amp; 只清理过时的包apt-get check             #检查是否有损坏的依赖dpkg -S filename          #查找filename属于哪个软件包apt-file search filename  #查找filename属于哪个软件包apt-file list packagename #列出软件包的内容apt-file update           #更新apt-file的数据库dpkg -l      #列出当前系统中所有的包.可以和参数less一起使用在分屏查看（类似于rpm -qa）dpkg -l |grep -i &quot;pkg&quot;   #查看系统中与&quot;pkg&quot;相关联的包（类似于rpm -qa | grep pkg）dpkg -s pkg  #查询一个已安装的包的详细信息（类似于rpm -qi）dpkg -L pkg  #查询一个已安装的软件包释放了哪些文件（类似于rpm -ql）dpkg -S file     #查询系统中某个文件属于哪个软件包（类似于rpm -qf）dpkg -c pkg.deb  #查询一个未安装的deb包将会释放哪些文件（类似于rpm -qpl）dpkg -I pkg.deb  #查看一个未安装的deb包的详细信息（类似于rpm -qpi）dpkg -i pkg.deb  #手动安装软件包（不能解决软依赖性问题，可以用apt-get -f install解决）dpkg -r pkg      #卸载软件包（不是完全的卸载，它的配置文件还存在）dpkg -P pkg      #全部卸载（不能解决依赖性的问题）dpkg-reconfigure pkg     #重新配置dpkg -x pkg.deb dir      #将一个deb包解开至dir目录dpkg --pending --remove  #移除多余的软件# 强制安装一个包(忽略依赖及其它问题)dpkg --force-all -i pkg.deb    #可以参考dpkg --force-help# 强制卸载一个包dpkg --force-all -P pkg.debaptitude update   #更新可用的包列表aptitude upgrade  #升级可用的包aptitude dist-upgrade     #将系统升级到新的发行版aptitude install pkgname  #安装包aptitude remove pkgname   #删除包aptitude purge pkgname    #删除包及其配置文件aptitude search string    #搜索包（相当于yum list | grep pkg，重要）aptitude show pkgname     #显示包的详细信息 （相当于yum info pkg，重要）aptitude clean            #删除下载的包文件aptitude autoclean        #仅删除过期的包文件apt-get install xrdp      #安装图形化
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>手搓群晖 DS918+ 电源</title>
+    <url>/20250927-assembly_a_power_supply_for_the_Synology_DS918/</url>
+    <content><![CDATA[1. 缘起某个周末，收拾机柜时发现整个机柜都断电了。后来一查，是半个小时左右之前断的，跳闸了。重新开闸之后，发现 NAS 的灯不亮了…开始还以为是电源线坏了，找了个电饭煲的线来还是不行。最后只能怀疑是电源适配器坏了。总结：电源适配器坏了。
+目标：性价比高、可靠性好的电源。
+2. 探索电源坏了正常是买一个电源对吧？但是我一搜，成品的 68~138 等的价位比较多，关键还是杂牌。
+由于之前折腾机柜，DC 电源都换成了明纬的，自己接输入&#x2F;输出线，用的比较舒服。当时 50+ 块买的电源是 S-200-12V 17A，拖了 10+ 个 DC 设备(节省 N 个充电器位置)。重点：只要电压是一样就可以用,电源会自动适配设备电流。
+
+3. 手搓由于杂牌电源的加个较高，而且品质还没法保障。于是我就选择自己买零件组装一个，明细如下：
+
+
+
+项目
+细节
+价格
+备注
+
+
+
+电源
+明纬 S-150-12V 12.5A
+48.25
+比原装 8.33A 高点，适当冗余
+
+
+输入
+1.5 平方 1.5 米
+15
+接 220V 市电，适合 3500W 以内的，买粗了
+
+
+输出
+4 针 2 芯公头线 1.2 米
+9.5
+接群晖
+
+
+总计≈85元(含运费)
+4. 效果组装挺快，电源的输入是不区分零火线的自动匹配(好评)。唯一的遗憾是输出的4针线，接头没有铁片那种，直接卡线有点不友好。总结：性价比高，除了大一点，其它没毛病，毕竟大厂电源，金属外壳，散热杠杠的。
+4.1 组装后
+4.2 入机柜
+4.3 融入整体
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>自建服务</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LLM API 中转站数据泄密，剖析它背后的生意与技术</title>
     <url>/20260915-ai-api-relay-station/</url>
     <content><![CDATA[
@@ -7946,70 +7998,6 @@ CVE 编号与影响版本来自公开漏洞库检索，上生产前建议去 NVD
       </tags>
   </entry>
   <entry>
-    <title>apt-get 常用命令</title>
-    <url>/20170815-apt-get%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[apt-get应该debian内核系列的系统都能用：
-比如：debian、ubuntu、deepin等
-apt-cache search package    #搜索包（相当于yum list | grep pkg）apt-cache show package      #显示包的相关信息，如说明、大小、版本等apt-cache showpg package    #显示包的相关信息，如Reverse Depends（反向依赖）、依赖等apt-get install package       #安装包apt-get reinstall package     #重新安装包apt-get -f install package    #强制安装apt-get remove package        #删除包（只是删掉数据和可执行文件，不删除配置文件）apt-get remove --purge package       #删除包，包括删除配置文件等apt-get autoremove --purge package   #删除包及其依赖的软件包+配置文件等apt-get update          #更新源apt-get upgrade         #更新已安装的包apt-get dist-upgrade    #升级系统apt-get dselect-upgrade        #使用 dselect 升级apt-cache depends package      #了解使用依赖apt-cache rdepends package     #查看该包被哪些包依赖apt-get build-dep package   #安装相关的编译环境apt-get source package      #下载该包的源代码apt-get clean &amp;&amp; apt-get autoclean  #清理下载文件的存档 &amp;&amp; 只清理过时的包apt-get check             #检查是否有损坏的依赖dpkg -S filename          #查找filename属于哪个软件包apt-file search filename  #查找filename属于哪个软件包apt-file list packagename #列出软件包的内容apt-file update           #更新apt-file的数据库dpkg -l      #列出当前系统中所有的包.可以和参数less一起使用在分屏查看（类似于rpm -qa）dpkg -l |grep -i &quot;pkg&quot;   #查看系统中与&quot;pkg&quot;相关联的包（类似于rpm -qa | grep pkg）dpkg -s pkg  #查询一个已安装的包的详细信息（类似于rpm -qi）dpkg -L pkg  #查询一个已安装的软件包释放了哪些文件（类似于rpm -ql）dpkg -S file     #查询系统中某个文件属于哪个软件包（类似于rpm -qf）dpkg -c pkg.deb  #查询一个未安装的deb包将会释放哪些文件（类似于rpm -qpl）dpkg -I pkg.deb  #查看一个未安装的deb包的详细信息（类似于rpm -qpi）dpkg -i pkg.deb  #手动安装软件包（不能解决软依赖性问题，可以用apt-get -f install解决）dpkg -r pkg      #卸载软件包（不是完全的卸载，它的配置文件还存在）dpkg -P pkg      #全部卸载（不能解决依赖性的问题）dpkg-reconfigure pkg     #重新配置dpkg -x pkg.deb dir      #将一个deb包解开至dir目录dpkg --pending --remove  #移除多余的软件# 强制安装一个包(忽略依赖及其它问题)dpkg --force-all -i pkg.deb    #可以参考dpkg --force-help# 强制卸载一个包dpkg --force-all -P pkg.debaptitude update   #更新可用的包列表aptitude upgrade  #升级可用的包aptitude dist-upgrade     #将系统升级到新的发行版aptitude install pkgname  #安装包aptitude remove pkgname   #删除包aptitude purge pkgname    #删除包及其配置文件aptitude search string    #搜索包（相当于yum list | grep pkg，重要）aptitude show pkgname     #显示包的详细信息 （相当于yum info pkg，重要）aptitude clean            #删除下载的包文件aptitude autoclean        #仅删除过期的包文件apt-get install xrdp      #安装图形化
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>手搓群晖 DS918+ 电源</title>
-    <url>/20250927-assembly_a_power_supply_for_the_Synology_DS918/</url>
-    <content><![CDATA[1. 缘起某个周末，收拾机柜时发现整个机柜都断电了。后来一查，是半个小时左右之前断的，跳闸了。重新开闸之后，发现 NAS 的灯不亮了…开始还以为是电源线坏了，找了个电饭煲的线来还是不行。最后只能怀疑是电源适配器坏了。总结：电源适配器坏了。
-目标：性价比高、可靠性好的电源。
-2. 探索电源坏了正常是买一个电源对吧？但是我一搜，成品的 68~138 等的价位比较多，关键还是杂牌。
-由于之前折腾机柜，DC 电源都换成了明纬的，自己接输入&#x2F;输出线，用的比较舒服。当时 50+ 块买的电源是 S-200-12V 17A，拖了 10+ 个 DC 设备(节省 N 个充电器位置)。重点：只要电压是一样就可以用,电源会自动适配设备电流。
-
-3. 手搓由于杂牌电源的加个较高，而且品质还没法保障。于是我就选择自己买零件组装一个，明细如下：
-
-
-
-项目
-细节
-价格
-备注
-
-
-
-电源
-明纬 S-150-12V 12.5A
-48.25
-比原装 8.33A 高点，适当冗余
-
-
-输入
-1.5 平方 1.5 米
-15
-接 220V 市电，适合 3500W 以内的，买粗了
-
-
-输出
-4 针 2 芯公头线 1.2 米
-9.5
-接群晖
-
-
-总计≈85元(含运费)
-4. 效果组装挺快，电源的输入是不区分零火线的自动匹配(好评)。唯一的遗憾是输出的4针线，接头没有铁片那种，直接卡线有点不友好。总结：性价比高，除了大一点，其它没毛病，毕竟大厂电源，金属外壳，散热杠杠的。
-4.1 组装后
-4.2 入机柜
-4.3 融入整体
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>自建服务</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>百度地图 API - 地址 转 经纬度</title>
     <url>/20220528-baidu-map-api-address-to-longitude-and-latitude/</url>
     <content><![CDATA[0. 背景某做科研的朋友需要对一些地点的坐标然后在 WGS-84 坐标系的底图上呈现相关内容
@@ -8229,55 +8217,6 @@ CPU参数对比
       </tags>
   </entry>
   <entry>
-    <title>廉价交换机导致家庭网络瘫痪半年</title>
-    <url>/20251018-cheap_switches_cause_home_network_paralysis/</url>
-    <content><![CDATA[0. 总结故障开始：2025年4月13日故障结束：2025年10月12日故障原因：交换机光模块发热导致断流(用猫扇对着吹 2 天都正常)
-问题交换机：keepLINK 2.5G 交换机(5 口 2.5G + 1 口万兆光)。
-
-劝退，温度稍微高点就不行
-
-更换交换机：TP-Link 2.5G 交换机(4 口 2.5G + 2 口万兆光)。
-
-目前(20251108)没有什么问题，可能是环境温度低了，明年再看看
-
-1. 网络情况进：入户光纤—弱电箱—顶柜(预计放网络设备)—吊顶(为了不走明线)—机柜(家政柜改的)—路由器出：路由器—交换机(SFP+)—弱电箱—交换机(SFP+)—内网设备(AC+AP)
-规划不到位+新需求变更导致的畸形解决方案.
-2. 排查过程刚开始连接上网络(本地+WIFI)，DHCP IP 分配正常，有时候可以上网，有时候不行。没有排查到问题，由于家里有闲置的流量卡，就优先用热点了。
-期间由于工作上事情比较多，周末又有安排或者不想动，反正就是没动力去查…
-
-于是就导致家里的 IOT 设备失效…因为都可以手动操作也就没什么影响。
-然后由于联通基站问题，这边流量也不太快，联通上门查了反馈的。投诉也没用，就说等安排扩容基站，赔了一个月套餐费。
-期间家里领导也断断续续提过快点解决，由于之前尝试的办法都不行，我一度怀疑是家里网络搞太复杂导致的。
-国庆节后，不那么忙，就想着回到最原始的办法，挨个设备排查。
-
-用 10m 的网线，把路由器和电脑直接连接：正常
-用 10m 的网线，把路由器和弱电箱交换机连接：正常
-发现光纤口灯不亮：找到问题
-怀疑弱电箱交换机坏了，京东买个同型号：判断错误
-怀疑机柜里交换机坏了，替换新交换机：可以
-换机柜中交换机过程中，发现光模块太热，会不会是发热导致？
-安排风扇降温：多天正常
-
-总结：交换机光模块太热导致罢工
-3. 解决问题应急：安排风扇常规：购买 TP-Link 2.5G + 万兆交换机替换
-
-目前移除散热风扇，情况正常
-
-4. 感悟遇到问题，排除法还是好用。
-不要懒，不然吃亏的还是自己。网络瘫痪期间
-
-用联通的热点上网苦不堪言，还好可以看书或者别的…
-IOT 设备罢工，感应开关灯之类的没法用，稍微有点影响体验
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>自建服务</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>centos更换yum源为阿里云 - 三步搞定</title>
     <url>/20170217-centos%E6%9B%B4%E6%8D%A2yum%E6%BA%90%E4%B8%BA%E9%98%BF%E9%87%8C%E4%BA%91-%E4%B8%89%E9%83%A8%E6%90%9E%E5%AE%9A/</url>
     <content><![CDATA[阿里云是最近新出的一个镜像源。得益于阿里云的高速发展，这么大的需求，肯定会推出自己的镜像源。阿里云Linux安装镜像源地址：http://mirrors.aliyun.com/
@@ -8342,6 +8281,55 @@ proxies:    - &#123; name: &#x27;self&#x27;, dialer-proxy: &#x27;dialer&#x27; &#
       <tags>
         <tag>自建服务</tag>
         <tag>网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>廉价交换机导致家庭网络瘫痪半年</title>
+    <url>/20251018-cheap_switches_cause_home_network_paralysis/</url>
+    <content><![CDATA[0. 总结故障开始：2025年4月13日故障结束：2025年10月12日故障原因：交换机光模块发热导致断流(用猫扇对着吹 2 天都正常)
+问题交换机：keepLINK 2.5G 交换机(5 口 2.5G + 1 口万兆光)。
+
+劝退，温度稍微高点就不行
+
+更换交换机：TP-Link 2.5G 交换机(4 口 2.5G + 2 口万兆光)。
+
+目前(20251108)没有什么问题，可能是环境温度低了，明年再看看
+
+1. 网络情况进：入户光纤—弱电箱—顶柜(预计放网络设备)—吊顶(为了不走明线)—机柜(家政柜改的)—路由器出：路由器—交换机(SFP+)—弱电箱—交换机(SFP+)—内网设备(AC+AP)
+规划不到位+新需求变更导致的畸形解决方案.
+2. 排查过程刚开始连接上网络(本地+WIFI)，DHCP IP 分配正常，有时候可以上网，有时候不行。没有排查到问题，由于家里有闲置的流量卡，就优先用热点了。
+期间由于工作上事情比较多，周末又有安排或者不想动，反正就是没动力去查…
+
+于是就导致家里的 IOT 设备失效…因为都可以手动操作也就没什么影响。
+然后由于联通基站问题，这边流量也不太快，联通上门查了反馈的。投诉也没用，就说等安排扩容基站，赔了一个月套餐费。
+期间家里领导也断断续续提过快点解决，由于之前尝试的办法都不行，我一度怀疑是家里网络搞太复杂导致的。
+国庆节后，不那么忙，就想着回到最原始的办法，挨个设备排查。
+
+用 10m 的网线，把路由器和电脑直接连接：正常
+用 10m 的网线，把路由器和弱电箱交换机连接：正常
+发现光纤口灯不亮：找到问题
+怀疑弱电箱交换机坏了，京东买个同型号：判断错误
+怀疑机柜里交换机坏了，替换新交换机：可以
+换机柜中交换机过程中，发现光模块太热，会不会是发热导致？
+安排风扇降温：多天正常
+
+总结：交换机光模块太热导致罢工
+3. 解决问题应急：安排风扇常规：购买 TP-Link 2.5G + 万兆交换机替换
+
+目前移除散热风扇，情况正常
+
+4. 感悟遇到问题，排除法还是好用。
+不要懒，不然吃亏的还是自己。网络瘫痪期间
+
+用联通的热点上网苦不堪言，还好可以看书或者别的…
+IOT 设备罢工，感应开关灯之类的没法用，稍微有点影响体验
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>自建服务</tag>
       </tags>
   </entry>
   <entry>
@@ -8572,6 +8560,33 @@ dubbo.protocol.dubbo.payload=11557050
       </tags>
   </entry>
   <entry>
+    <title>dubbo与zookeeper的关系</title>
+    <url>/20171115-dubbo%E4%B8%8Ezookeeper%E7%9A%84%E5%85%B3%E7%B3%BB/</url>
+    <content><![CDATA[Zookeeper的作用zookeeper用来注册服务和进行负载均衡，哪一个服务由哪一个机器来提供必需让调用者知道，简单来说就是ip地址和服务名称的对应关系。
+当然也可以 通过硬编码的方式把这种对应关系在调用方业务代码中实现，但是如果提供服务的机器挂掉调用者无法知晓，如果不更改代码会继续请求挂掉的机器提供服务。 
+zookeeper通过心跳机制可以检测挂掉的机器并将挂掉机器的ip和服务对应关系从列表中删除。至于支持高并发，简单来说就是横向扩展，在不更改代码 的情况通过添加机器来提高运算能力。
+通过添加新的机器向zookeeper注册服务，服务的提供者多了能服务的客户就多了。
+dubbo是管理中间层的工具，在业务层到数据仓库间有非常多服务的接入和服务提供者需要调度，dubbo提供一个框架解决这个问题。
+注意这里的dubbo只是一个框架，至于你架子上放什么是完全取决于你的，就像一个汽车骨架，你需要配你的轮子引擎。
+这个框架中要完成调度必须要有一个分布式的注册中心，储存所有服务的元数据，你可以用zk，也可以用别的，只是大家都用zk。
+zookeeper和dubbo的关系Dubbo的将注册中心进行抽象，是得它可以外接不同的存储媒介给注册中心提供服务，有ZooKeeper，Memcached，Redis等。
+ 引入了ZooKeeper作为存储媒介，也就把ZooKeeper的特性引进来。
+
+负载均衡:单注册中心的承载能力是有限的，在流量达到一定程度的时 候就需要分流，负载均衡就是为了分流而存在的，一个ZooKeeper群配合相应的Web应用就可以很容易达到负载均衡；
+资源同步:单单有负载均衡还不 够，节点之间的数据和资源需要同步，ZooKeeper集群就天然具备有这样的功能；
+命名服务:将树状结构用于维护全局的服务地址列表，服务提供者在启动 的时候，向ZK上的指定节点&#x2F;dubbo&#x2F;${serviceName}&#x2F;providers目录下写入自己的URL地址，这个操作就完成了服务的发布
+Mast选举，分布式锁等。
+
+参考https://www.cnblogs.com/xiaofei1208/p/7077733.html
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>中间件</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>杜比亚活体饲料饲养</title>
     <url>/20250927-dubia_live_feed_breeding/</url>
     <content><![CDATA[1. 缘起北京 7.26 有个爬宠展，那天没事去逛了下。在里面见了不少陆龟、双头的乌龟、大鳄龟、蛇、蜥蜴等。媳妇觉得鬃狮蜥蜴不错，想养，现场 3k+ 略贵就没入手。转头在海鲜市场看到两条成体不错，1k+，纠结了一会隔天决定面交。结果面交地点比预期的还要偏远，在东南角的村子里的群租公寓。见到实体后感觉不错，交流一番付款拿下(蜥蜴+PVC饲养箱)，打车装回家。交流的过程中卖家好心说，偶尔喂杜比亚，成体主要喂油麦菜+钙粉+维生素。
@@ -8667,33 +8682,6 @@ dubbo.protocol.dubbo.payload=11557050
       </tags>
   </entry>
   <entry>
-    <title>dubbo与zookeeper的关系</title>
-    <url>/20171115-dubbo%E4%B8%8Ezookeeper%E7%9A%84%E5%85%B3%E7%B3%BB/</url>
-    <content><![CDATA[Zookeeper的作用zookeeper用来注册服务和进行负载均衡，哪一个服务由哪一个机器来提供必需让调用者知道，简单来说就是ip地址和服务名称的对应关系。
-当然也可以 通过硬编码的方式把这种对应关系在调用方业务代码中实现，但是如果提供服务的机器挂掉调用者无法知晓，如果不更改代码会继续请求挂掉的机器提供服务。 
-zookeeper通过心跳机制可以检测挂掉的机器并将挂掉机器的ip和服务对应关系从列表中删除。至于支持高并发，简单来说就是横向扩展，在不更改代码 的情况通过添加机器来提高运算能力。
-通过添加新的机器向zookeeper注册服务，服务的提供者多了能服务的客户就多了。
-dubbo是管理中间层的工具，在业务层到数据仓库间有非常多服务的接入和服务提供者需要调度，dubbo提供一个框架解决这个问题。
-注意这里的dubbo只是一个框架，至于你架子上放什么是完全取决于你的，就像一个汽车骨架，你需要配你的轮子引擎。
-这个框架中要完成调度必须要有一个分布式的注册中心，储存所有服务的元数据，你可以用zk，也可以用别的，只是大家都用zk。
-zookeeper和dubbo的关系Dubbo的将注册中心进行抽象，是得它可以外接不同的存储媒介给注册中心提供服务，有ZooKeeper，Memcached，Redis等。
- 引入了ZooKeeper作为存储媒介，也就把ZooKeeper的特性引进来。
-
-负载均衡:单注册中心的承载能力是有限的，在流量达到一定程度的时 候就需要分流，负载均衡就是为了分流而存在的，一个ZooKeeper群配合相应的Web应用就可以很容易达到负载均衡；
-资源同步:单单有负载均衡还不 够，节点之间的数据和资源需要同步，ZooKeeper集群就天然具备有这样的功能；
-命名服务:将树状结构用于维护全局的服务地址列表，服务提供者在启动 的时候，向ZK上的指定节点&#x2F;dubbo&#x2F;${serviceName}&#x2F;providers目录下写入自己的URL地址，这个操作就完成了服务的发布
-Mast选举，分布式锁等。
-
-参考https://www.cnblogs.com/xiaofei1208/p/7077733.html
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>中间件</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>eclipse无法链接github</title>
     <url>/20170208-eclipse%E6%97%A0%E6%B3%95%E9%93%BE%E6%8E%A5github/</url>
     <content><![CDATA[浏览器什么的都能打开github.com就是eclipse无法提交到github，每次都是连接超时然后就直接修改host了，目前有效2017年1月14日 18:01:34
@@ -8706,57 +8694,217 @@ host文件最后一行加上下面内容即可
       </categories>
   </entry>
   <entry>
-    <title>找到好的学习方法</title>
-    <url>/20200226-find-a-good-way-to-learn/</url>
-    <content><![CDATA[1. 时间与学习1.1 时间是公平的时间是公平的，对每个人都一样，不同之处在于每个人单位时间的产出值会有差异。一直在寻找适合于自己的学习方法以提高时间的利用效率，以便不影响诗和远方&#x3D;&#x3D;奈何目前也没有太多满意的答案，或许生命的意义就是在于探索未知而又刺激的世界。
-1.2 相关书籍与思想分享一些文字，提到了一些好的学习方法，抛砖引玉，共勉：
-
-《贫穷的本质》贫穷的本质是认知。其实很多时候真的是认知，方法论决定了一个人可以走多远；
-《刻意练习》原地踏步的练习是没意义的，大众眼里一万小时定律基本上是错误的，需要的是有进步练习；
-《如何阅读一本书》风靡美国的阅读入门书籍，通过主题阅读，交流不同的人不同的的看法，对比吸收;
-《程序员的职业素养》有提到卡塔练习，提高我们的肌肉反应，让写代码像聊天打字一遍的顺畅;
-《学习之道》十个不错的方法：
-运用回想
-知识组块
-简化类比
-方法交替
-间隔重复
-注意休息
-心理对照
-自我测试
-保持专注
-困难先行
+    <title>Eino 运行时分析：从编译期单例到协程级调度</title>
+    <url>/20260917-eino-runtime-internals/</url>
+    <content><![CDATA[1. 缘起上一篇《Agent Orchestration - 智能体编排》写的是 Eino 怎么实现多智能体，讲的是用法。
+Eino 是 CloudWeGo 出的 Go 语言 LLM 应用编排框架。它把 ChatModel、Tool、Retriever 这些组件连成图，编译成一个 Runnable 来跑。README 里写明参考了 LangChain 和 Google ADK，所以熟悉那两个框架的人会觉得眼熟。
+通过分析运行时，来了解 Eino 内部调度、状态管理、中间件、可观测等方面。
 
 
+2. 全景：一次请求的完整坐标编译期的产物被所有请求共享，运行期的状态每请求一份。这条边界是后面每一节都要落回去的地方。
+┌─ 编译期：进程内一份，只读，被所有请求共享│  Graph / Workflow / Chain 声明│         ││         ▼  compose.Compile(ctx)││  Compiled Runnable│  ├── Nodes             map[string]*nodeRunner，各节点的无状态执行闭包│  ├── Dependency Table   DAG 入度表 / Pregel 邻接表│  ├── Converters         类型适配管道，Stream ↔ Value、FieldMapping│  ├── Middleware Chain   编译期串好的装饰器链│  └── Callback Chain     编译期固化的监听链││  ▸ Compile() 做掉四件事：类型检查、拓扑分析、转换层注入、中间件接线└─        │  拓扑与接线在编译期固化，运行时不再改        ▼┌─ 运行期：每请求一份，互不可见│  HTTP / RPC 请求进入，携带独立的 req.Context│  Ephemeral Execution Instance│  ├── 独立 Context      TraceID / Deadline / 取消信号│  ├── 独立 State Table  请求级私有状态，无跨请求污染│  └── Goroutine Tree    调度协程树，取消时整棵退出（§9）└─
 
-2. 高效学习的秘籍早些天看到一篇不错的帖子对我感触最深的就是，不要看不起薄的教材。标题：如果高效学习有什么秘诀的话，那就都在这里了：）
+3. 编译期：Compile 做的四件事Eino 的图是声明式的。
+┌─ 声明期：只是在描述一张图，不能跑│  graph := compose.NewGraph[In, Out]()│  graph.AddChatModelNode(&quot;model&quot;, m)│  graph.AddToolsNode(&quot;tools&quot;, t)│  graph.AddBranch(&quot;model&quot;, router)│  graph.AddEdge(START, &quot;model&quot;)│  graph.AddEdge(&quot;tools&quot;, &quot;model&quot;)          ← 回边，形成环└─                │                ▼  compose.Compile(ctx)┌─ 编译期：做掉四件事│  1. 类型检查     相邻节点的输出类型能不能接上│  2. 拓扑分析     有没有环，决定走 Pregel 还是 DAG│  3. 转换层注入   流式节点接到非流式节点时，插入 drain 适配器│  4. 中间件接线   Middleware 按接口变体串成装饰器链││  产物是 Compiled Runnable，此后只读└─
+
+编译期做掉的事情，运行时就不做了。这是它跟「每个请求反射建图」类框架最大的差别。
+compose/graph_compile_options.go 里有个选项跟运行时形态直接相关：
+WithMaxRunSteps(maxSteps int)       // 循环图的最大步数，超过返回 ErrExceedMaxStepsWithEagerExecution(...)             // 是否启用 Eager 执行，见 §5
+
+还有一个运行期的 WithRuntimeMaxSteps，可以在单次调用时覆盖编译期的设置。
+4. 请求级状态：ProcessState 与节点 Hook编译产物共享，请求级状态不能共享。Eino 的边界划在 context.Context 上。
+读写都走 ProcessState：
+compose.ProcessState[S](ctx, func(ctx context.Context, s S) error &#123;    s.Counter++                    // 同一时刻只有一个 handler 在跑    return nil&#125;)
+
+v0.4.0 之前是 GetState[S](ctx)，返回状态对象本身，并发保护要调用方自己保证；改成回调之后，这个责任收到框架里。
+配套还有四个节点级 Hook，用来在节点执行前后读写状态：
+StatePreHandler[I, S]              // 普通节点，执行前StatePostHandler[O, S]             // 普通节点，执行后StreamStatePreHandler[I, S]        // 流式节点，执行前StreamStatePostHandler[O, S]       // 流式节点，执行后
+
+以及 GenLocalState[S]，给每个请求生成独立的初始状态。
+5. 调度：Pregel 与 DAG 两条路径Eino 有两种触发模式，由 NodeTriggerMode 区分。源码里 compose/pregel.go 和 compose/dag.go 是两个独立文件。
 
 
-不要完美主义！
-不要过度“学习路径依赖”，学习要冲着自己的目标去。
-不要迷信权威的“好”教材。
-不要看不起“薄薄”的“傻”教材，这些你看不起的学习材料，可能是你入门某个领域的关键。
-不要迷信单一教材。
-实践！
-debug非常非常重要。
-量变到质变。
-最后，一定要相信时间的力量。
 
-3. 参考
-《贫穷的本质》
-《刻意练习》
-《学习之道》
-《如果阅读一本书》
-如果高效学习有什么秘诀的话，那就都在这里了：）
-我的书单
+模式
+常量
+适用
+触发条件
+
+
+
+Pregel
+AnyPredecessor
+循环图（ReAct）
+任一前置节点在上一步完成
+
+
+DAG
+AllPredecessor
+无环图
+所有前置节点都完成
+
+
+Pregel：超步屏障带环的图，比如思考 → 调工具 → 再思考，需要严格的步数同步，否则会出现节点读到上一轮半成品的情况。
+┌─ Step N：本轮活跃节点并发跑│  ├── Model 协程        产出 ToolCall 决策│  ├── 日志协程          记录本轮输入输出│  └── 校验协程          检查参数合法性│         ││         ▼  所有产出写入 Mailbox，不直接投递给下游├─ ══ 同步屏障 ══│  等 Step N 内所有活跃协程全部退出，Mailbox 里的数据才算本轮定稿└─                │                ▼┌─ 路由评估│  是否调 Tool ？        ── 是 ──→ 进入 Step N+1│  是否结束 ？           ── 是 ──→ 走向 END│  步数 &gt; MaxRunSteps ？ ── 是 ──→ ErrExceedMaxSteps└─
+
+屏障的意义是把并发的网状依赖压成一轮一轮的批次，杜绝同一轮内节点互相看到中间态。
+DAG：Eager 触发无环图走 AllPredecessor，哪个节点的入边到齐了就立刻触发，不等整步。v0.4.0 起改成 Eager，早期 DAG 复用 Pregel 的超步屏障，A、B 跑完后 C 明明可以跑，却要等整步同步。
+┌─ DAG 的触发│  A ──┐│  B ──┼──→ D      谁的入边到齐就立刻跑，不等整步│  C ──┘││  注意：Eager 与 AnyPredecessor 不兼容，循环图仍走 Pregel└─
+
+所以「超步屏障消除竞态」这句话，只对 Pregel 模式成立。DAG 模式是 Eager 的，同步开销被拿掉了。
+6. 数据流转：值、流、转换、背压节点之间流转的形态有三种：普通值、流，以及流被拼装回的值。转换层在编译期接好，背压交给 Go channel 的容量。
+流降级为值：隐式屏障当一个流式节点连到一个只接受普通值的节点时，编译器会在中间插一个转换层。
+┌─ 分支汇聚，接线在编译期完成│├─ 分支 A：Model 节点，流式输出│       │  StreamReader[*Message]│       ▼│  drain 适配器│  ├─ 起一个协程循环 Recv()│  ├─ 调 schema.ConcatMessages() 拼装│  └─ 等另一个分支的普通值也到达│       ▲│       │  DocList├─ 分支 B：检索节点，普通值│├─ 两个字段都就绪 → FieldMapping 组装│└─ 传给总结节点，非流式
+
+运行时表现为：流被 drain 完，拼装成完整对象，再连同另一个分支的普通值一起传给下游。
+字段映射的代码在 compose/field_mapping.go。好处是编译期就能发现字段名写错，比用 map[string]any 传数据、跑到运行时才崩要好。
+Pipe 的容量就是背压阈值sr, sw := schema.Pipe[string](3)
+
+容量 3 表示通道里最多缓存 3 个元素，写第 4 个时 Send 阻塞，直到有人读走。Eino 没有另造一套背压机制，就是把 Go channel 的语义封成了 StreamReader &#x2F; StreamWriter。
+StreamReader[T] 本身是联合类型，内部按 typ 分五种：
+
+
+
+类型
+来源
+
+
+
+stream[T]
+Pipe[T]() 创建的通道流
+
+
+arrayReader[T]
+StreamReaderFromArray[T]()，纯索引，零开销
+
+
+multiStreamReader[T]
+MergeStreamReaders()，多流合并
+
+
+streamReaderWithConvert[T]
+转换或过滤
+
+
+childStreamReader[T]
+Copy() 扇出的子流
+
+
+背压的传导与流的关闭背压不是一条传到底的链条。
+┌─ 第一段：本地传导，机制保证│  [ 下游消费慢 ]│        ││        ▼│  [ Pipe 通道被塞满，Send 阻塞 ]│        ││        ▼│  [ 发送协程被 Go 调度器挂起，gopark ]│        ││        ▼│  [ 本地停止从上游读取 ]││  到这里为止是确定的└─                │                ▼  再往上传不动，取决于上游是什么┌─ 第二段：分两种情况│├─ 情况 A：上游是网络流，比如直连模型服务的 SSE│    本地不读│      → socket 接收缓冲区填满│      → TCP 通告零窗口，Window Size = 0│      → 服务端冻结发包│      → 模型引擎 write() 阻塞，暂停生成│├─ 情况 B：上游是已经读完的内存响应│    本地不读，压力传不回去，止步于本地，内存该占还是占│└─
+
+所以「Eino 的背压能让大模型服务端停止生成」这句话，在直连流式的场景下成立，但不能当成普适结论。中间隔一层LLM API 中转站的话，背压能传到哪一层，取决于它边收边转还是收完再转。
+两端都要 Close：写端 Close() 通知消费者 EOF，读端 Close() 通知写端「我不要了」，否则写端 Send 永远阻塞，goroutine 泄漏。
+还有个 SetAutomaticClose()，内部用 runtime.SetFinalizer 在对象被 GC 时自动关闭。但它需要主动调用才生效，源码注释也写明 NOT concurrency safe。适合兜底，不适合放进关键路径。
+Copy 是共享链表，不是复制Copy(n) 把一个流扇出给 n 个消费者，但每个消费者读的不是独立副本。
+// Each value comes from a hidden linked list of cpStreamElement.elem.once.Do(func() &#123;    t, err = p.sr.Recv()              // 上游只读一次    elem.item = streamItem[T]&#123;chunk: t, err: err&#125;    elem.next = &amp;cpStreamElement[T]&#123;&#125;    p.subStreamList[idx] = elem.next&#125;)
+
+┌─ Copy(3) 之后的读序│  上游 stream│      ││      ▼│  parentStreamReader│      ││      ├─ subStreamList[0] ──→ ● ──→ ● ──→ ●     子 reader 0 游标│      ├─ subStreamList[1] ──→ ● ──→ ●           子 reader 1 游标│      └─ subStreamList[2] ──→ ●                 子 reader 2 游标│                               ▲│                        同一批链表节点，值不复制││  每个节点由 sync.Once 保护，上游 Recv() 只调一次└─
+
+代价是链表节点会保留到所有子 reader 都消费过为止。某个子 reader 慢，后面的节点就堆着不放。省的是复制开销，换的是内存占用随最慢消费者增长。
+调用 Copy 之后原来的 sr 失效，只能用返回的副本。
+7. 横切：Callback 读，Middleware 写运行时有两套横切机制，分工不同。
+
+Callback 的签名是 OnStart &#x2F; OnEnd &#x2F; OnError，只能观察，用来做 trace、指标、审计
+Middleware 的签名是 func(Endpoint) Endpoint，能改输入、改输出、或者短路不调用，用来做重试、熔断、脱敏、缓存
+
+重试、熔断这类失败处理，在《稳定性：从传统工程到大模型时代》里属于设计阶段就该定下来的事；落到 Eino 里，承载它们的就是 Middleware。
+┌─ 一次节点调用的剖面│  节点入参│      ││      ├── ◄── Middleware 在这一层：能改参数、能直接返回│      ││      ▼│  ┌─ 节点执行体│  │   OnStart   ← Callback 只能看│  ││  │   真正执行节点逻辑│  ││  │   OnEnd / OnError  ← 只能看│  └─│      ││      ▼│  节点出参│      ││      └── ◄── Middleware 也在这一层：能改结果└─
+
+一个容易踩的细节，源码注释写得很明确：
+
+This middleware only applies to tools that implement the InvokableTool interface.
+
+InvokableToolMiddleware 只作用于实现了 InvokableTool 的工具。工具如果只实现了 StreamableTool，这个中间件对它无效。挂中间件前得先确认工具实现了哪个接口。
+ADK 层还有 AgentMiddleware &#x2F; ChatModelAgentMiddleware，通过 WrapModel 和 WrapTool 包住模型与工具。
+观测与改造的分工要观测就用 Callback。用 Middleware 做 trace 有个隐患：如果中间件会短路，比如缓存命中或熔断打开，trace 会记成一次成功调用，但底层根本没执行，指标上分不出来。
+要改行为就用 Middleware。这时候 trace 作为副产品自然就有了。
+8. 工具：五种接口变体与中断工具不是一个接口，是五个。
+BaseTool                    // 只要 Info()，能描述自己InvokableTool               // InvokableRun(ctx, argsJSON) (string, error)StreamableTool              // StreamableRun(ctx, argsJSON) (*StreamReader[string], error)EnhancedInvokableTool       // 带结构化的 ToolArgument / ToolResultEnhancedStreamableTool
+
+运行时按工具实际实现了哪些接口决定调用路径：调用方声明要流式，工具没实现 StreamableTool 就降级或报错；声明要结构化参数，没实现 EnhancedInvokableTool 就回落到 JSON 字符串。
+工具可以主动中断components/tool/interrupt.go 提供了一组中断原语：
+tool.Interrupt(ctx, info)                            // 中断，带上下文信息tool.StatefulInterrupt(ctx, info, state)             // 中断并保存现场tool.CompositeInterrupt(ctx, info, state, errs...)   // 多个中断合并tool.GetInterruptState[T](ctx)                       // 恢复时取回现场tool.GetResumeContext[T](ctx)                        // 判断自己是不是恢复目标
+
+┌─ 工具内中断的时间线│  ToolsNode 执行到一半，需要人确认│      ││      ▼│  tool.StatefulInterrupt(ctx, info, state)│      ││      ▼│  整图就地挂起，现场被 checkpoint 序列化│      ││      ⋯ 等人，几分钟到几天│      ││      ▼│  带 checkpoint 重新进入图│      ││      ▼│  跳过已完成节点，工具内 GetInterruptState 取回现场，继续跑└─
+
+这是 human-in-the-loop 的基础，跟 §9 的 checkpoint 是一条线。
+MCP 在运行时里没有特殊地位MCP 工具在 eino-ext/components/tool/mcp，不在核心仓库。从运行时视角看，它跟本地工具没有区别，就是一个 Tool 实现。
+真正需要注意的是 schema 的时机：MCP 工具的 Info() 通常要连服务端拿 schema，比本地工具多一次网络往返，这次往返发生在初始化阶段而不是每次调用。
+9. 请求终结：取消、错误、中断恢复取消是 context 级联┌─ 请求 ctx：Deadline 5s，TraceID abc123│        ││        ├── 派生 span ctx ──→ 协程 1：Model 节点│        ││        └── 派生 span ctx ──→ 协程 2：检索节点│                                      ││                                      │  ← 客户端断开 / 超时│                                      ▼│                               ctx.Done() 触发│                                      ││                                      ▼│                               级联响应│                               ├─ 中断 DB 连接│                               ├─ 关闭 PipeWriter│                               └─ 触发 OnError│                                      ││                                      ▼│                               整棵协程树退出，状态随实例释放└─
+
+关键在于所有可能阻塞的操作都吃同一个 ctx。一处取消，整棵树跟着退。这也是为什么每个节点拿到的是派生 ctx 而不是原始 ctx。
+错误有类型标签internalErrorTypeNodeRun  = &quot;NodeRunError&quot;internalErrorTypeGraphRun = &quot;GraphRunError&quot;
+
+节点错误包一层打 NodeRunError，图调度层再包一层打 GraphRunError。调用方配合 ErrExceedMaxSteps 这类哨兵错误，可以用 errors.Is 分类，不用匹配错误字符串。
+中断与恢复实现分散在 compose/ 的三个文件里：interrupt.go 挂起，checkpoint.go 序列化现场（已完成节点、状态表、中断点），resume.go 带着 checkpoint 重新进图。定位是长流程和人工介入，一个需要人审批的流程可以停下来等几小时甚至几天，然后接着跑。
+10. ADK 层：ReAct 循环与模型容错compose 给的是通用编排能力。ADK 面向 Agent 场景，加了这些东西：
+
+
+
+能力
+文件
+
+
+
+ReAct 循环
+react.go
+
+
+模型重试
+retry_chatmodel.go
+
+
+模型故障转移
+failover_chatmodel.go
+
+
+中断与取消
+interrupt.go、cancel.go
+
+
+轮次管理
+turn_loop.go、turn_buffer.go
+
+
+指令与配置
+instruction.go、config.go
+
+
+其中重试和故障转移是 §7 讲的 Middleware 模式的具体应用：
+┌─ buildModelWrappers 的装饰顺序│  原始 BaseModel│      ││      ├── 包一层：callback 注入    typedCallbackInjectionModelWrapper│      ├── 包一层：事件发送         NewEventSenderModelWrapper│      ├── 包一层：重试             retry│      └── 包一层：故障转移         failover││  最外层拿到的还是 model.BaseModel[M] 接口│  调用方看不出里面套了几层└─
+
+这是「不改节点代码插入横切逻辑」的现成例子，也解释了为什么 §7 要区分 Callback 和 Middleware：ADK 自身就是靠 Middleware 实现重试和故障转移的。
+turn_loop.go 管 Agent 的轮次。ReAct 的「思考 → 调工具 → 再思考」就是个循环，ADK 把它抽成了可配置的循环，比手写图更贴合 Agent 的语义。
+11. 五条设计取舍抛开 Eino，这几条对我做 Go 服务有参考价值。
+
+编译期校验，运行时只读。类型、字段名、拓扑有没有环，全在 Compile() 时发现，运行时不需要加锁。代价是灵活性。
+
+并发安全的责任收进框架。GetState 到 ProcessState 的改动值得学：能靠结构避免的错误，不要靠文档提醒。
+
+背压复用 Go channel 语义，不自造机制。不发明新概念，学习成本和出错概率都低。
+
+读和写分开两套机制。混在一起的框架最后往往变成一个万能 Hook，什么都往里塞。
+
+广播用共享链表而不是复制。代价是最慢的消费者会拖住内存，是个明确的权衡。
+
+
+
+Eino 运行时的大部分复杂度，来自它要在共享的只读拓扑上跑隔离的并发请求。
+12. 参考
+cloudwego&#x2F;eino · 源码仓库，本文的 API 名称与实现细节均以 main 分支为准
+Eino README · 三层模块划分，以及 ADK 的设计来源
+Stream Processing Internals · StreamReader 五种内部类型与背压
+eino v0.4.0 更新解析 · Eager 执行默认开启、GetState 移除的背景
+Eino 发布记录 · 各版本 API 变更
 
 ]]></content>
       <categories>
-        <category>RandomThoughts</category>
+        <category>Tech</category>
       </categories>
       <tags>
-        <tag>成长</tag>
-        <tag>效率</tag>
+        <tag>Agent</tag>
+        <tag>架构</tag>
       </tags>
   </entry>
   <entry>
@@ -9002,6 +9150,60 @@ Citrini Research 曾写过一篇关于”2028 年全球智力危机”的深度�
         <tag>AI 工程</tag>
         <tag>Agent</tag>
         <tag>LLM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>找到好的学习方法</title>
+    <url>/20200226-find-a-good-way-to-learn/</url>
+    <content><![CDATA[1. 时间与学习1.1 时间是公平的时间是公平的，对每个人都一样，不同之处在于每个人单位时间的产出值会有差异。一直在寻找适合于自己的学习方法以提高时间的利用效率，以便不影响诗和远方&#x3D;&#x3D;奈何目前也没有太多满意的答案，或许生命的意义就是在于探索未知而又刺激的世界。
+1.2 相关书籍与思想分享一些文字，提到了一些好的学习方法，抛砖引玉，共勉：
+
+《贫穷的本质》贫穷的本质是认知。其实很多时候真的是认知，方法论决定了一个人可以走多远；
+《刻意练习》原地踏步的练习是没意义的，大众眼里一万小时定律基本上是错误的，需要的是有进步练习；
+《如何阅读一本书》风靡美国的阅读入门书籍，通过主题阅读，交流不同的人不同的的看法，对比吸收;
+《程序员的职业素养》有提到卡塔练习，提高我们的肌肉反应，让写代码像聊天打字一遍的顺畅;
+《学习之道》十个不错的方法：
+运用回想
+知识组块
+简化类比
+方法交替
+间隔重复
+注意休息
+心理对照
+自我测试
+保持专注
+困难先行
+
+
+
+2. 高效学习的秘籍早些天看到一篇不错的帖子对我感触最深的就是，不要看不起薄的教材。标题：如果高效学习有什么秘诀的话，那就都在这里了：）
+
+
+不要完美主义！
+不要过度“学习路径依赖”，学习要冲着自己的目标去。
+不要迷信权威的“好”教材。
+不要看不起“薄薄”的“傻”教材，这些你看不起的学习材料，可能是你入门某个领域的关键。
+不要迷信单一教材。
+实践！
+debug非常非常重要。
+量变到质变。
+最后，一定要相信时间的力量。
+
+3. 参考
+《贫穷的本质》
+《刻意练习》
+《学习之道》
+《如果阅读一本书》
+如果高效学习有什么秘诀的话，那就都在这里了：）
+我的书单
+
+]]></content>
+      <categories>
+        <category>RandomThoughts</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+        <tag>效率</tag>
       </tags>
   </entry>
   <entry>
@@ -9542,21 +9744,6 @@ GitHub 上各种学习类型的仓库之推荐书籍
       </tags>
   </entry>
   <entry>
-    <title>英语文档：how-to-manage-a-redis-database.pdf</title>
-    <url>/20201010-how-to-manage-a-redis-database/</url>
-    <content><![CDATA[当初这个文档应该是在『科技爱好者周刊』上还是哪里发现的看这个文档本来的目的是每天坚持阅读英文文档技术文档一般都比较简洁易懂，英语是一个长期的过程，还得继续坚持阅读~
-看的过程中发现，结合一定的场景，和示例和官方文档相比，没有那么枯燥，也更好理解甚至有一些之前未曾关注的用法让我感到惊艳
-所以推荐一下
-下载地址：how-to-manage-a-redis-database.pdf
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>效率</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何做一个让人讨厌的产品经理 - 《人人都是产品经理 2.0》读后感</title>
     <url>/20210130-how-to-be-a-disgusting-product-manager/</url>
     <content><![CDATA[零、背景本文灵感来自《人人都是产品经理 2.0》位置：7.4.2 如何做一个让 Ta 们讨厌的人
@@ -9581,6 +9768,21 @@ GitHub 上各种学习类型的仓库之推荐书籍
       <tags>
         <tag>成长</tag>
         <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语文档：how-to-manage-a-redis-database.pdf</title>
+    <url>/20201010-how-to-manage-a-redis-database/</url>
+    <content><![CDATA[当初这个文档应该是在『科技爱好者周刊』上还是哪里发现的看这个文档本来的目的是每天坚持阅读英文文档技术文档一般都比较简洁易懂，英语是一个长期的过程，还得继续坚持阅读~
+看的过程中发现，结合一定的场景，和示例和官方文档相比，没有那么枯燥，也更好理解甚至有一些之前未曾关注的用法让我感到惊艳
+所以推荐一下
+下载地址：how-to-manage-a-redis-database.pdf
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>效率</tag>
       </tags>
   </entry>
   <entry>
@@ -10813,24 +11015,6 @@ select *  from hisenwhere id &gt; $&#123;lastId&#125;  order by idlimit $&#123;p
       </tags>
   </entry>
   <entry>
-    <title>new ImageIcon()无法加载同目录图片</title>
-    <url>/20170208-new-ImageIcon-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E5%90%8C%E7%9B%AE%E5%BD%95%E5%9B%BE%E7%89%87/</url>
-    <content><![CDATA[错误：
-new ImageIcon(&quot;1.jpg&quot;)
-正确：
-new ImageIcon(&quot;src/com/hisen/thread/progressbar/1.jpg&quot;)
-图片路径：
-test\src\com\hisen\thread\progressbar\1.jpg
-所谓的相对路径，是相对于这个工程而言的，而不是当前文件夹而言。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【了解世界】中东冲突杂记</title>
     <url>/20260308-notes-on-the-Middle-East-Conflict/</url>
     <content><![CDATA[1. 缘起2026年2月27日，18点左右多国外交部提醒国民暂时不要前往伊朗。
@@ -10900,6 +11084,23 @@ test\src\com\hisen\thread\progressbar\1.jpg
 ]]></content>
       <categories>
         <category>RandomThoughts</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>powerdesigner Oracle mysql comment 缺少右括号</title>
+    <url>/20170622-powerdesigner%20Oracle%20mysql%20comment%20%E7%BC%BA%E5%B0%91%E5%8F%B3%E6%8B%AC%E5%8F%B7/</url>
+    <content><![CDATA[powerdesigner Oracle mysql comment 缺少右括号
+今天人家给我个powerdesigner设计好的表
+要我去间数据库，直接复制出来去oracle执行，结果报错。
+在comment附近，如果把comment去掉则可以正确执行
+最后找到罪魁祸首：powerdesigner没有设置对数据库
+解决办法，在powerdesigner页面
+database--&gt;change curren DBMS 
+上面是设置你需要的数据库
+下面是为更改前的数据库
+]]></content>
+      <categories>
+        <category>Tech</category>
       </categories>
   </entry>
   <entry>
@@ -11032,21 +11233,22 @@ prompt 注入与记忆毒化
       </tags>
   </entry>
   <entry>
-    <title>powerdesigner Oracle mysql comment 缺少右括号</title>
-    <url>/20170622-powerdesigner%20Oracle%20mysql%20comment%20%E7%BC%BA%E5%B0%91%E5%8F%B3%E6%8B%AC%E5%8F%B7/</url>
-    <content><![CDATA[powerdesigner Oracle mysql comment 缺少右括号
-今天人家给我个powerdesigner设计好的表
-要我去间数据库，直接复制出来去oracle执行，结果报错。
-在comment附近，如果把comment去掉则可以正确执行
-最后找到罪魁祸首：powerdesigner没有设置对数据库
-解决办法，在powerdesigner页面
-database--&gt;change curren DBMS 
-上面是设置你需要的数据库
-下面是为更改前的数据库
+    <title>new ImageIcon()无法加载同目录图片</title>
+    <url>/20170208-new-ImageIcon-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E5%90%8C%E7%9B%AE%E5%BD%95%E5%9B%BE%E7%89%87/</url>
+    <content><![CDATA[错误：
+new ImageIcon(&quot;1.jpg&quot;)
+正确：
+new ImageIcon(&quot;src/com/hisen/thread/progressbar/1.jpg&quot;)
+图片路径：
+test\src\com\hisen\thread\progressbar\1.jpg
+所谓的相对路径，是相对于这个工程而言的，而不是当前文件夹而言。
 ]]></content>
       <categories>
         <category>Tech</category>
       </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
   </entry>
   <entry>
     <title>rabbitMQ的安装和Demo</title>
@@ -11460,21 +11662,6 @@ awk 入门指南
       </tags>
   </entry>
   <entry>
-    <title>sql行转列，列转行</title>
-    <url>/20170613-sql%E8%A1%8C%E8%BD%AC%E5%88%97%EF%BC%8C%E5%88%97%E8%BD%AC%E8%A1%8C/</url>
-    <content><![CDATA[有时候需要行转列或者列转行
-在Oracle 11g中，Oracle 又增加了2个查询：pivot（行转列） 和unpivot（列转行）
-下面是在mysql中的操作：
-mysql&gt; select * from test;+------+------+--------+| id   | age  | weigth |+------+------+--------+|    1 |    1 |      3 ||    1 |    2 |      2 ||    1 |    3 |      1 ||    2 |    5 |      6 |+------+------+--------+4 rows in set (0.00 sec)#根据ID分组mysql&gt; select group_concat(age) from test group by id;+-------------------+| group_concat(age) |+-------------------+| 1,2,3             || 5                 |+-------------------+2 rows in set (0.01 sec)#不分组mysql&gt; select group_concat(age) from test;+-------------------+| group_concat(age) |+-------------------+| 1,2,3,5           |+-------------------+1 row in set (0.00 sec)
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>存储</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>赢得财富：用独到的知识/责任感/杠杆</title>
     <url>/20200517-specific-knowledge-accountability-leverage/</url>
     <content><![CDATA[零、读后感美国风险投资家 Naval Ravikant 通过一个很长的推特阐明了他的商业观，感觉挺精辟。积累独到的知识(无法批量复制的)，为社会提供他们需要的。财富不是靠出卖时间获得，应该通过杠杆(资本、人力、一本万利的工具&lt;写书等&gt;)去积累。选择一个可以长期从事的行业，寻找一批可以长期共事的人。
@@ -11713,6 +11900,42 @@ accountability 我本想翻译为“靠谱程度”，想想还是算了。
       </tags>
   </entry>
   <entry>
+    <title>STAR面试/简历</title>
+    <url>/20240818-star-interview/</url>
+    <content><![CDATA[0. 背景有天早上，许久没联系的同事说要找我看看简历。于是约着周六在公主坟附近的星巴克聊了 2 小时。然后今天在《技术领导力:程序员如何才能带好团队》看到 STAR 面试，就是就想着挖个坑讲讲。
+1. STAR 介绍STAR 是 SITUATION(背景), TASK(任务)、ACTION(行动)和RESULT(结果)四个英文单词的首字母组合。在招聘面试中, 仅通过应聘者的简历无法全面了解应聘者的知识、经验、技能、工作风格、性格特点等，而使用STAR技巧则可以对应聘者做出全面而客观的评价。
+1.1 背景(SITUATION)
+通过不断提出与工作业绩有关的背景问题，可以全面了解该应聘者获得优秀业绩的前提因素，从而获知所取得的业绩有多少是与应聘者个人有直接关联的，有多少是与市场的状况、行业的特点有关的。
+1.2 任务(TASK)每项任务的具体内容是什么。通过这些可以了解应聘者的工作经历和经验，以确定他所从事的工作与获得的经验是否适合现在的职位。
+1.3 行动(ACTION)了解他是如何完成工作的，都采取了哪些行动，所采取的行动是如何帮助他完成工作的。通过这些，可以进一步了解他的工作方式、思维方式和行为方式。
+1.4 结果(RESULT)每项任务在采取了行动之后的结果是什么，是好还是不好，好是因为什么，不好又是因为什么。
+2. 简历一般来讲，看简历第一页前面一部分，就决定是要要留下。所以我们该怎么去呈现呢？
+我觉得 STAR 法则也是很值得参考的。要讲清楚背景：业务+技术，然后讲自己是负哪一块(单纯实现?还是设计&#x2F;实现&#x2F;推动&#x2F;带头)再讲讲技术方案是怎么来的？为什么会这么选？都有哪些备选方案？当前有哪些不足？以及怎么改进？最后讲一讲业务技术上的收益(用户体验&#x2F;提效&#x2F;GMV&#x2F;收入等等)
+还有就是得站在招聘者的角度去思考。假如是自己招人，你希望招什么样的人？优秀的工程师有什么特质？思考这些之后，那么怎么结合实际，把自己的优点呈现出来
+]]></content>
+      <categories>
+        <category>Growth</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sql行转列，列转行</title>
+    <url>/20170613-sql%E8%A1%8C%E8%BD%AC%E5%88%97%EF%BC%8C%E5%88%97%E8%BD%AC%E8%A1%8C/</url>
+    <content><![CDATA[有时候需要行转列或者列转行
+在Oracle 11g中，Oracle 又增加了2个查询：pivot（行转列） 和unpivot（列转行）
+下面是在mysql中的操作：
+mysql&gt; select * from test;+------+------+--------+| id   | age  | weigth |+------+------+--------+|    1 |    1 |      3 ||    1 |    2 |      2 ||    1 |    3 |      1 ||    2 |    5 |      6 |+------+------+--------+4 rows in set (0.00 sec)#根据ID分组mysql&gt; select group_concat(age) from test group by id;+-------------------+| group_concat(age) |+-------------------+| 1,2,3             || 5                 |+-------------------+2 rows in set (0.01 sec)#不分组mysql&gt; select group_concat(age) from test;+-------------------+| group_concat(age) |+-------------------+| 1,2,3,5           |+-------------------+1 row in set (0.00 sec)
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>存储</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>su  Authentication failure</title>
     <url>/20170401-su%20%20Authentication%20failure/</url>
     <content><![CDATA[想要获取root权限，提示如下
@@ -11777,60 +12000,6 @@ root@DS:~# ifconfigeth2      Link encap:Ethernet  HWaddr 00:xx:xx:xx:xx:03      
       <tags>
         <tag>自建服务</tag>
         <tag>网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>STAR面试/简历</title>
-    <url>/20240818-star-interview/</url>
-    <content><![CDATA[0. 背景有天早上，许久没联系的同事说要找我看看简历。于是约着周六在公主坟附近的星巴克聊了 2 小时。然后今天在《技术领导力:程序员如何才能带好团队》看到 STAR 面试，就是就想着挖个坑讲讲。
-1. STAR 介绍STAR 是 SITUATION(背景), TASK(任务)、ACTION(行动)和RESULT(结果)四个英文单词的首字母组合。在招聘面试中, 仅通过应聘者的简历无法全面了解应聘者的知识、经验、技能、工作风格、性格特点等，而使用STAR技巧则可以对应聘者做出全面而客观的评价。
-1.1 背景(SITUATION)
-通过不断提出与工作业绩有关的背景问题，可以全面了解该应聘者获得优秀业绩的前提因素，从而获知所取得的业绩有多少是与应聘者个人有直接关联的，有多少是与市场的状况、行业的特点有关的。
-1.2 任务(TASK)每项任务的具体内容是什么。通过这些可以了解应聘者的工作经历和经验，以确定他所从事的工作与获得的经验是否适合现在的职位。
-1.3 行动(ACTION)了解他是如何完成工作的，都采取了哪些行动，所采取的行动是如何帮助他完成工作的。通过这些，可以进一步了解他的工作方式、思维方式和行为方式。
-1.4 结果(RESULT)每项任务在采取了行动之后的结果是什么，是好还是不好，好是因为什么，不好又是因为什么。
-2. 简历一般来讲，看简历第一页前面一部分，就决定是要要留下。所以我们该怎么去呈现呢？
-我觉得 STAR 法则也是很值得参考的。要讲清楚背景：业务+技术，然后讲自己是负哪一块(单纯实现?还是设计&#x2F;实现&#x2F;推动&#x2F;带头)再讲讲技术方案是怎么来的？为什么会这么选？都有哪些备选方案？当前有哪些不足？以及怎么改进？最后讲一讲业务技术上的收益(用户体验&#x2F;提效&#x2F;GMV&#x2F;收入等等)
-还有就是得站在招聘者的角度去思考。假如是自己招人，你希望招什么样的人？优秀的工程师有什么特质？思考这些之后，那么怎么结合实际，把自己的优点呈现出来
-]]></content>
-      <categories>
-        <category>Growth</category>
-      </categories>
-      <tags>
-        <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【AI 随笔】尝试与洞察</title>
-    <url>/20260308-the-AI-logbook-Trials-and-Insights/</url>
-    <content><![CDATA[个人经历与想法2023 使用 AI 做药品说明书，Bot 式交互，数字人形象、真人 TTS；2024 使用 AI 进行图文制作：文生图、相关性检索、OCR 文字识别；2025 风控策略、AI 机审、代码提示、页面 prompt 生成脚本代码；2026 Coding Agent 流行，写单侧、梳理历史项目、完成中小功能；
-虽然现阶段 AI Coding 等工具不够完美，但是我们必须相信他能做好，持续使用，持续学习。不会用 AI 是麻烦的，只会用 AI 是危险的。不要有惰性，觉得 AI 什么都可以解决就不学习，全依赖 AI。
-鲁肃谈 AI 时代的工程师早些天看蚂蚁集团三代 CTO 齐聚一堂的视频，其中鲁肃的观点让我印象深刻。工程师的核心
-
-记忆：主动学习各种技术，精通并了解；
-创新：面对业务，基于已有的技术，权衡最好的方案；
-匠心：根据自己的品味，极力追求极致，不断反思、实践、提升；
-
-
-当前 AI 能够替代的更多的记忆都部分，让我们有更多的时间去做创新，去落地并打磨好的创意。
-就业市场的随想后续的初级岗位可能需求量会很小，但是使用 AI 又要求有一定的经验，岂不是悖论。只要有足够的利润，总会有人愿意投入人力物力去培养新人，不然饮壑止血？
-最近看到有关 35 的言论，还挺友好，主要还是要心态年轻，有足够的好奇心。
-从软件工程角度看软件工程诞生于 1968 年，其根本初衷是为了解决所谓的“软件危机”（Software Crisis）：
-
-不可控的成本与进度：软件开发经常陷入“完成了 90%，但剩下的 10% 需要无限期”的怪圈;
-不可观测的复杂性：软件是无形的，随着逻辑堆叠，没有人能理清全局，导致牵一发而动全身;
-沟通损耗：当团队人数翻倍时，沟通链路呈指数级增长，生产力反而可能下降（布鲁克定律）;
-软件质量与可靠性：如何保证银行、航空或医疗系统的代码在极端情况下不出错;
-
-软件工程思想，在 AI Native 更重要。超级个体再牛，也没法独自去做一个工业级的产品。还是需要协作，这就要求：清晰的文档、良好的可读性、顺畅的沟通等。eg：封闭会议室面对面沟通完就开始干活，大概率会南辕北辙… 每个人按自己的理解干活~
-AI 只是加快了写代码的部分，或者做设计的部分。这里有一个问题，就是所有这种加速之后，Review 的负担会很重；由于速度快，同时进行多个事情，导致上下文切换的巨大开销；
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-        <tag>AI 工程</tag>
       </tags>
   </entry>
   <entry>
@@ -11921,6 +12090,39 @@ MIT 6.824
       </categories>
       <tags>
         <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【AI 随笔】尝试与洞察</title>
+    <url>/20260308-the-AI-logbook-Trials-and-Insights/</url>
+    <content><![CDATA[个人经历与想法2023 使用 AI 做药品说明书，Bot 式交互，数字人形象、真人 TTS；2024 使用 AI 进行图文制作：文生图、相关性检索、OCR 文字识别；2025 风控策略、AI 机审、代码提示、页面 prompt 生成脚本代码；2026 Coding Agent 流行，写单侧、梳理历史项目、完成中小功能；
+虽然现阶段 AI Coding 等工具不够完美，但是我们必须相信他能做好，持续使用，持续学习。不会用 AI 是麻烦的，只会用 AI 是危险的。不要有惰性，觉得 AI 什么都可以解决就不学习，全依赖 AI。
+鲁肃谈 AI 时代的工程师早些天看蚂蚁集团三代 CTO 齐聚一堂的视频，其中鲁肃的观点让我印象深刻。工程师的核心
+
+记忆：主动学习各种技术，精通并了解；
+创新：面对业务，基于已有的技术，权衡最好的方案；
+匠心：根据自己的品味，极力追求极致，不断反思、实践、提升；
+
+
+当前 AI 能够替代的更多的记忆都部分，让我们有更多的时间去做创新，去落地并打磨好的创意。
+就业市场的随想后续的初级岗位可能需求量会很小，但是使用 AI 又要求有一定的经验，岂不是悖论。只要有足够的利润，总会有人愿意投入人力物力去培养新人，不然饮壑止血？
+最近看到有关 35 的言论，还挺友好，主要还是要心态年轻，有足够的好奇心。
+从软件工程角度看软件工程诞生于 1968 年，其根本初衷是为了解决所谓的“软件危机”（Software Crisis）：
+
+不可控的成本与进度：软件开发经常陷入“完成了 90%，但剩下的 10% 需要无限期”的怪圈;
+不可观测的复杂性：软件是无形的，随着逻辑堆叠，没有人能理清全局，导致牵一发而动全身;
+沟通损耗：当团队人数翻倍时，沟通链路呈指数级增长，生产力反而可能下降（布鲁克定律）;
+软件质量与可靠性：如何保证银行、航空或医疗系统的代码在极端情况下不出错;
+
+软件工程思想，在 AI Native 更重要。超级个体再牛，也没法独自去做一个工业级的产品。还是需要协作，这就要求：清晰的文档、良好的可读性、顺畅的沟通等。eg：封闭会议室面对面沟通完就开始干活，大概率会南辕北辙… 每个人按自己的理解干活~
+AI 只是加快了写代码的部分，或者做设计的部分。这里有一个问题，就是所有这种加速之后，Review 的负担会很重；由于速度快，同时进行多个事情，导致上下文切换的巨大开销；
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+        <tag>AI 工程</tag>
       </tags>
   </entry>
   <entry>
@@ -12624,89 +12826,6 @@ A 套餐所有会有均可购买B 套餐 VIP3 不能购买C 套餐仅 VIP1 可�
       </tags>
   </entry>
   <entry>
-    <title>《五十度灰》系列观后感</title>
-    <url>/20260628-wushiduhuixilie/</url>
-    <content><![CDATA[在通俗大众的眼中，《五十度灰》（Fifty Shades of Grey）三部曲是一套充斥着豪车、直升机、百亿霸总与限制级画面的都市罗曼史。然而，若撇开这些博人眼球的商业包装，将其放在现代心理学、两性博弈与人格模型的显微镜下，这其实是一个极其硬核的“双人心理沙盘演练”。
-整个三部曲的底层故事逻辑，讲述的并不是一个单纯的“总裁爱上灰姑娘”的童话，而是一个关于“两个不同人格模型在权力、私欲与控制的博弈中，最终完成反向重塑与精神救赎”的现代寓言。
-1. 第一部《五十度灰》：权力的初次交锋与底线的试探1.1 莫名的开局与失控的序幕故事的开篇看似荒诞且充满巧合：文学系女大学生安娜（Anastasia Steele）顶替生病的闺蜜，去采访年轻英俊的百亿创投巨头克里斯蒂安·格雷（Christian Grey）。安娜自幼沉浸在英国文学的世界里，精神世界丰富且对周围平庸的追求者不屑一顾。这种超然的纯洁与固执，瞬间激发了格雷恐怖的占有欲。
-
-然而，当格雷将安娜带入他的“红房子”，并拿出一份事无巨细、规定了饮食起居及绝对服从规矩的 BDSM 合同（Dom&#x2F;Sub 契约）时，两性的博弈正式从“浪漫追求”演变为“权力争夺”。
-1.2 私欲的工具化与 Sub 的终极权力在这一阶段，格雷将内心的“控制欲”伪装在精英外表和商业合同之下。由于童年遭受生母抛弃和虐待的创伤，格雷极度缺乏安全感，他需要通过事事在握的“确定性”来维持心理防线。他把安娜当作一个满足自身心理缺陷的“完美客体（工具）”，试图用冷酷的规矩拒绝发生真正平等、有温度的情感连接。
-但第一部的结尾给出了极高级的反转：当格雷在红房子里用皮带跨越情感边界地抽打了安娜 6 下、单方面宣泄控制欲时，安娜看清了这场游戏背后并非爱意，而是冷酷与扭曲。她动用了身为 Sub 的终极权力——拒绝、呼唤其真名（拒绝物化）并果断离场。这一走，直接打破了格雷“掌控一切”的幻觉，将这位不可一世的支配者推向了精神崩溃的边缘。
-#2. 第二部《五十度飞》：规则的彻底重组与反客为主
-2.1 攻守易势的心理依附无法承受失去安娜之痛的格雷，被迫放下所有高高在上的姿态，卑微求和。此时，安娜展现出了极强的人格底线，她重组了游戏规则，提出了复合的绝对前提：“不签合同、没有规矩、不要红房子，要一场正常的、平等的恋爱。”
-格雷的全盘妥协，标志着两人的权力关系彻底发生了“反客为主”的倒置。格雷原本高度依赖“制定规则”来获得安全感，但为了留住安娜，他必须被迫学着去“适应不确定性”。
-2.2 创伤重现与情绪的“反向驯服”第二部中，格雷扭曲童年的始作俑者埃琳娜（罗宾逊太太）、以及因嫉妒企图枪杀安娜的前任 Sub 先后出现，甚至格雷本人也经历了直升机坠机的生死考验。
-在这一系列危机的倒逼下，格雷在梦魇中向安娜下跪。这一幕揭示了控制狂背后的真相：他不是太强大，而是太弱小。安娜用她那健全的人格、稳定的情绪和无条件的爱，扮演了超越情人的“心理疗愈者”角色。她剥离了格雷身上那些防御性的私欲，反向重塑了格雷的心理系统，让他明白：不需要靠支配别人，也能获得安全的爱。
-3. 第三部《五十度自由》：人格的最终独立与高质量共生3.1 职场、生育与控制欲的临界点两人步入婚姻后，矛盾并未绝迹，而是推向了更深层的现实维度。安娜在职场上凭借专业能力快速晋升为出版社主编，她死守自己的专业阵地，甚至在改回夫姓的问题上与格雷爆发激烈冲突。她用绝对的人格独立，拒绝被“格雷太太”这个符号吞噬。
-冲突在安娜意外怀孕时达到顶峰。格雷因为童年阴影以及对安娜“独占私欲”作祟，对胎儿产生了强烈的抗拒与自私的愤怒。他愤而离家，在酒吧喝得烂醉并遇到了企图挑拨的埃琳娜。虽然格雷保持了身体的忠诚并拒绝了埃琳娜，但宿醉归家后，极度无能为力的他再次退行回老一套的控制手段——在红房子里粗暴地捆绑并占有了安娜，试图重新确立掌控感。
-3.2 致命的觉醒与红房子的终局面对格雷近乎自残式的粗暴惩罚，安娜流着泪说出了全片最具分量的一句话：
-
-“Christian, this is not love. You are punishing me for something I have no control over.”（这不是爱，你是在为你无法控制的事情惩罚我。）
-
-这句话如同一把尖刀，彻底刺破了格雷最后的心理防御，让他直面自己即将变成当年虐待他的恶魔这一事实。最终，在经历前上司杰克的疯狂绑架与复仇危机时，安娜展现出惊人的孤勇，持枪反击保护了家庭。
-在大结局的几年后，红房子依然存在，但它已经不再是格雷宣泄痛苦与惩罚的“精神牢笼”，而是退去了冰冷的权力剥削，变成了双方在完全平等、快乐的前提下调剂生活的情趣空间。草坪上，他们与两岁的儿子和即将出生的女儿共享阳光，格雷最终被驯化成了一个满眼都是家庭的温柔父亲。
-4. Dom&#x2F;Sub 文化底层的现代解构《五十度灰》的文本之所以能立住，是因为它无意中暗合了现代心理学与社会学对 Dom&#x2F;Sub 文化的底层逻辑解构：
-
-“逃避自我”与压力卸载： 现实中社会地位越高、掌控欲越强的人（如格雷），前额叶皮层长期超载，往往越容易在私密关系中渴望让渡控制权，以此获得极致的心理减压。
-创伤重现与自我疗愈： 弗洛伊德式的“创伤重现”表明，小时候经历过绝对无助的人，长大后会通过扮演 Dom 或安全的 Sub，在可控的环境里战胜当年的恐惧。
-高浓度的化学鸡尾酒： BDSM 互动带来的痛觉与紧张，会刺激大脑分泌海量的内啡肽（带来极乐感）与催产素（建立深刻的精神纽带），其本质是一场披着不平等外衣的、最高级别的平等信任契约。
-
-真正读懂这部作品的人会明白：格雷在财富与社会地位上是绝对的支配者（Dom），但在精神与情感上，他是一个随时可能碎掉的依附者（Sub）；安娜表面上一无所有，但她凭借健全的人格与死守的底线，成为了这场权力博弈中真正的统治者。
-安娜用了三部曲的篇幅，把一份冷酷的商业奴役合同，变成了一首有温度的家庭共生诗。敢于掀翻桌子的人，才配拥有规则的制定权——这才是隐藏在豪车与欲望之下，最硬核的两性博弈逻辑。
-]]></content>
-      <categories>
-        <category>Growth</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>小四：你尽力了吗？【转】</title>
-    <url>/20240718-xiao-si_did-you-do-your-best/</url>
-    <content><![CDATA[
-安全大佬小四2000年写过一篇《你尽力了吗》的学习方法，网上不好找，我把文字版搜到放在下面了(20多年后再来看这篇其实挺一般的 :) )
-
-
-发信人: cloudsky (小四), 信区: Security标 题: 你尽力了吗发信站: 武汉白云黄鹤站 (Mon Apr 17 19:52:54 2000), 站内信件
-
-很多人问如何入门如何入门，我却不知道要问的是入什么门。很少把某些好文章耐心从头看完，我这次就深有体会。比如袁哥的 sniffer 原理，一直以为自己对 sniffer 原理很清楚的，所以也就不曾仔细看过袁哥的这篇。后来有天晚上和袁哥讨论，如何通过端口读写直接获取 mac 地址，为什么 antisniff 可以获得真正的 mac 地址，而不受更改mac地址技术的影响，如何在 linux 下获得真正的 mac 地址。我一直对 linux 下的端口读写心存疑虑，总觉得在保护模式下的端口都做了内存映象等等。结果袁哥问了我一句，你仔细看我写的文章没有。我楞，最近因为要印刷月刊，我整理以前的很多文档，被迫认真过滤它们，才发现袁哥的文章让我又有新认识。
-再后来整理到 tt 的几篇缓冲区溢出的，尤其是上面的关于 Solaris 可装载内核模块，那就更觉得惭愧了。
-
-以前说书非借不能读，现在是文章留在硬盘上却不读。其实本版已经很多经典文章了，也推荐了不少经典书籍了，有几个好好看过呢。W.Richard.Stevens 的 UNP 我算是认真看过加了不少旁注，APUE就没有那么认真了，而卷II的一半认真看过，写过读书笔记，卷III就没有看一页。道格拉斯的卷I、卷III是认真看过几遍，卷II就只断续看过。而很多技术文章，如果搞到手了就懒得再看，却不知道这浪费了多少资源，忽略了多少资源。BBS 是真正能学到东西的地方吗？rain 说不是的，我说也不是的。不过这里能开阔人的视野，能得到对大方向的指引，足够了。
-我一直都希望大家从这里学到的不是技术本身，而是学习方法和一种不再狂热的淡然。很多技术，明天就会过时，如果你掌握的是学习方法，那你还有下一个机会，如果你掌握的仅仅是这个技术本身，你就没有机会了。其实我对系统安全是真不懂，因为我一直都喜欢看程序写程序却不喜欢也没有能力攻击谁谁的主机&#x2F;站点。我所能在这里做的是，为大家提供一个方向，一种让你的狂热归于淡然的说教。如果你连《WindowsNT设备驱动程序编写》、《win9x系统编程》都没有看过，却要写个什么隐藏自己的木马，搞笑。如果你看都不看汇编语言，偏要问 exploit code 的原理，那我无法回答也不想回答你。总有人责问，要讨个说法纭纭，说什么提问却没有回答。不回答已经是正确的处理方式了，至少没有回你一句，看书去，对不对，至少没有扰乱版面让你生闷气。Unix 的 man 手册你要都看完了，想不会Unix都不行了。微软的 MSDN、Platform SDK DOC你要看完了，你想把 Win 编程想象得稍微困难点都找不到理由。还是那句话，一个程序员做到 W.Richard.Stevens 那个份上，做到逝世后还能叫全世界的顶级 hacker 们专门著文怀念，但生前却不曾著文攻击，想想看，那是一种什么样的境界，那是一份什么样的淡然。我们可以大肆讨论技术问题，可以就技术问题进行激烈的卓有成效的讨论，却无意进行基础知识、资源信息的版面重复。我刚在前面贴了一堆 isbase 的文章，开头就是主页标识，却在后面立刻问什么主页在哪里？前面刚刚讨论过如何修改 mac 地址，后面马上又来一个，前后相差不过3篇文章。
-选择沉默已经是很多朋友忍耐力的优异表现了。很多东西都是可以举一反三的。vertex 的 lids，被 packetstorm 天天追踪更新，你要是看了 THC 的那三篇，觉得理解一个就理解了一堆，都是内核模块上的手脚。你不看你怎么知道。我不想在这里陷入具体技术问题的讨论中去，你要是觉得该做点什么了，就自己去看自己去找。没有什么人摆什么架子，也没有什么人生来就是干这个的。你自己问自己，尽力了吗？
-]]></content>
-      <categories>
-        <category>Growth</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《夜色正浓》观后感</title>
-    <url>/20260628-yesezhengnong/</url>
-    <content><![CDATA[1. 概览1.1 简介一场盛宴之下的狂欢，让隐藏已久的暗涌浮现，唤醒了所有装睡的人，也触发了 GST 酒业各层人士的生存危机。一切事关生存，每一步都需格外谨慎。赵玫、李东明、董越、梁丹宁等深陷其中的主要人物，在事件中扮演了不同的角色，勾勒出人性的复杂和现实的残酷，从而呈现出一个共同的主题——如何在惶惶不安中乐观地活下去。
-1.2 看点
-行业切面：这一次，是极度暴利也极度残酷的“酒业江湖”女主角赵玫（江疏影 饰）是一个在跨国酒业巨头里拼杀的高级金领。在这个行业里，绝对的金钱伴随着绝对的应酬、人情交割与灰色利益。怎么做省级代理？怎么在夜场、高端会所里用酒开路？怎么平衡外资总部、国内分销商、以及各地监管层之间的复杂关系？
-
-
-这部剧把高端名利场表面上的“觥筹交错、红酒雪茄”，和背后的“抢渠道、压库存、互相设局、资本绞杀”撕开。它不是那种坐在办公室里喝咖啡的悬浮职场剧，它是带着宿醉和血腥味的现代商战。
-
-双雄角色解说赵玫（江疏影 饰）：典型的阿耐式现代独立女性。高学历、高智商，在华尔街和跨国企业的外资系统里浸泡过。她讲的是KPI、是现代企业的合规与资本效率，身段极为精准，手段极其锋利。李东明（佟大为 饰）： 一个深谙中国本土“人情世故操作系统”的老练玩家。他太懂怎么和各路人马打交道、怎么在微观的利益博弈里打太极、怎么利用本土的潜规则去解构外资的硬性指标。
-
-2. 观后感这些人算计了一辈子，没几个有好下场~《夜色正浓》的结局挺奇怪的，赵玫和董越在一起，整个故事下来似乎是赵玫和她闺密梁丹宁的结局比较好。赵玫：虽然隐忍了丈夫出轨一段时间，最后站队齐又蓝，如愿以偿当上了总监；因狗子受惠那段真是，对手手段真是高；梁丹宁：没有什么职业理想，看破了“依附男权”的职场伪命题，通过拒绝豪门求婚并逆袭掌控核心资源，反向拿捏金主的女强人；李冬明：精于算计，直接打明牌威胁等。虽然最后当上 CEO，但乔海伦死后也被快递小哥撞残废无法工作；乔海伦：身材出众，但是没有什么真本事，又想过更好的生活，只能自愿沦为其他人的工具人；
-]]></content>
-      <categories>
-        <category>Growth</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【阅读笔记】《国家为什么失败》</title>
     <url>/20251123-why_nations_fail/</url>
     <content><![CDATA[1. 基本信息中文书名：《国家为什么会失败》原版书名：Why Nations Fail: The Origins of Power, Prosperity, and Poverty阅读时间：2025.09.05 ～ 2025.09.19阅读理由：应该是在 X 上看到有人推荐，书名比较吸引人就加入了『阅读清单』。讲的比较多的是贫穷相关，和之前《贫穷的本质》、《枪炮、钢铁与病菌》、《历史的教训》、《大众经济学》有较大的相关性，是个不错的主题阅读材料。
@@ -12920,24 +13039,86 @@ A 套餐所有会有均可购买B 套餐 VIP3 不能购买C 套餐仅 VIP1 可�
       </tags>
   </entry>
   <entry>
-    <title>《Go语言程序设计》 - ch1/lissajous - GIF动画</title>
-    <url>/20180908-%E3%80%8AGo%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%20-%20ch1:lissajous%20-%20GIF%E5%8A%A8%E7%94%BB/</url>
-    <content><![CDATA[一、程序说明
-可以以web的方式查看，也可以生成一个图片
-直接go run输出的是一丢乱码(图片)
-需要go build 然后运行程序(具体看代码里面注释)
+    <title>《五十度灰》系列观后感</title>
+    <url>/20260628-wushiduhuixilie/</url>
+    <content><![CDATA[在通俗大众的眼中，《五十度灰》（Fifty Shades of Grey）三部曲是一套充斥着豪车、直升机、百亿霸总与限制级画面的都市罗曼史。然而，若撇开这些博人眼球的商业包装，将其放在现代心理学、两性博弈与人格模型的显微镜下，这其实是一个极其硬核的“双人心理沙盘演练”。
+整个三部曲的底层故事逻辑，讲述的并不是一个单纯的“总裁爱上灰姑娘”的童话，而是一个关于“两个不同人格模型在权力、私欲与控制的博弈中，最终完成反向重塑与精神救赎”的现代寓言。
+1. 第一部《五十度灰》：权力的初次交锋与底线的试探1.1 莫名的开局与失控的序幕故事的开篇看似荒诞且充满巧合：文学系女大学生安娜（Anastasia Steele）顶替生病的闺蜜，去采访年轻英俊的百亿创投巨头克里斯蒂安·格雷（Christian Grey）。安娜自幼沉浸在英国文学的世界里，精神世界丰富且对周围平庸的追求者不屑一顾。这种超然的纯洁与固执，瞬间激发了格雷恐怖的占有欲。
 
-具体的内容可以看下面的程序代码(虽然是抄书)
-二、程序代码
-2.1 基本程序package mainimport (	&quot;image&quot;	&quot;image/color&quot;	&quot;image/gif&quot;	&quot;io&quot;	&quot;log&quot;	&quot;math&quot;	&quot;math/rand&quot;	&quot;net/http&quot;	&quot;os&quot;	&quot;time&quot;)var palette = []color.Color&#123;color.White, color.Black&#125;const (	whiteIndex = 0 // 画板中的第一种颜色	blackIndex = 1 // 画板中的下一种颜色)func main() &#123;	rand.Seed(time.Now().UTC().UnixNano())	if len(os.Args) &gt; 1 &amp;&amp; os.Args[1] == &quot;web&quot; &#123;		handler := func(w http.ResponseWriter, r *http.Request) &#123;			lissajous(w)		&#125;		http.HandleFunc(&quot;/&quot;, handler)		log.Fatal(http.ListenAndServe(&quot;localhost:8000&quot;, nil))		return	&#125;	lissajous(os.Stdout)&#125;func lissajous(out io.Writer) &#123;	const (		cycles  = 5     // 完整的x振荡器变化的个数		res     = 0.001 // 角度分辨率		size    = 100   // 图像画布包含		nframes = 64    // 动画中的帧数		delay   = 8     // 以10ms为单位的帧间延迟	)	freq := rand.Float64() * 3.0 // y振荡器的相对频率	anim := gif.GIF&#123;LoopCount: nframes&#125;	phase := 0.0 // phase difference	for i := 1; i &lt; nframes; i++ &#123;		rect := image.Rect(0, 0, 2*size+1, 2*size+1)		img := image.NewPaletted(rect, palette)		for t := 0.0; t &lt; cycles*2*math.Pi; t += res &#123;			x := math.Sin(t)			y := math.Sin(t*freq + phase)			img.SetColorIndex(size+int(x*size+0.5),size+int(y*size+0.5),blackIndex)		&#125;		phase +=0.1		anim.Delay = append(anim.Delay,delay)		anim.Image = append(anim.Image,img)	&#125;	gif.EncodeAll(out,&amp;anim) // 注意：忽略编码错误（直接运行输出的是一堆乱码）	// go build lissajous.go	// ./lissajous &gt;out.gif # 生成一个图片	// ./lissajous web # 开启一个web服务，可以浏览器访问 localhost:8000&#125;
+然而，当格雷将安娜带入他的“红房子”，并拿出一份事无巨细、规定了饮食起居及绝对服从规矩的 BDSM 合同（Dom&#x2F;Sub 契约）时，两性的博弈正式从“浪漫追求”演变为“权力争夺”。
+1.2 私欲的工具化与 Sub 的终极权力在这一阶段，格雷将内心的“控制欲”伪装在精英外表和商业合同之下。由于童年遭受生母抛弃和虐待的创伤，格雷极度缺乏安全感，他需要通过事事在握的“确定性”来维持心理防线。他把安娜当作一个满足自身心理缺陷的“完美客体（工具）”，试图用冷酷的规矩拒绝发生真正平等、有温度的情感连接。
+但第一部的结尾给出了极高级的反转：当格雷在红房子里用皮带跨越情感边界地抽打了安娜 6 下、单方面宣泄控制欲时，安娜看清了这场游戏背后并非爱意，而是冷酷与扭曲。她动用了身为 Sub 的终极权力——拒绝、呼唤其真名（拒绝物化）并果断离场。这一走，直接打破了格雷“掌控一切”的幻觉，将这位不可一世的支配者推向了精神崩溃的边缘。
+#2. 第二部《五十度飞》：规则的彻底重组与反客为主
+2.1 攻守易势的心理依附无法承受失去安娜之痛的格雷，被迫放下所有高高在上的姿态，卑微求和。此时，安娜展现出了极强的人格底线，她重组了游戏规则，提出了复合的绝对前提：“不签合同、没有规矩、不要红房子，要一场正常的、平等的恋爱。”
+格雷的全盘妥协，标志着两人的权力关系彻底发生了“反客为主”的倒置。格雷原本高度依赖“制定规则”来获得安全感，但为了留住安娜，他必须被迫学着去“适应不确定性”。
+2.2 创伤重现与情绪的“反向驯服”第二部中，格雷扭曲童年的始作俑者埃琳娜（罗宾逊太太）、以及因嫉妒企图枪杀安娜的前任 Sub 先后出现，甚至格雷本人也经历了直升机坠机的生死考验。
+在这一系列危机的倒逼下，格雷在梦魇中向安娜下跪。这一幕揭示了控制狂背后的真相：他不是太强大，而是太弱小。安娜用她那健全的人格、稳定的情绪和无条件的爱，扮演了超越情人的“心理疗愈者”角色。她剥离了格雷身上那些防御性的私欲，反向重塑了格雷的心理系统，让他明白：不需要靠支配别人，也能获得安全的爱。
+3. 第三部《五十度自由》：人格的最终独立与高质量共生3.1 职场、生育与控制欲的临界点两人步入婚姻后，矛盾并未绝迹，而是推向了更深层的现实维度。安娜在职场上凭借专业能力快速晋升为出版社主编，她死守自己的专业阵地，甚至在改回夫姓的问题上与格雷爆发激烈冲突。她用绝对的人格独立，拒绝被“格雷太太”这个符号吞噬。
+冲突在安娜意外怀孕时达到顶峰。格雷因为童年阴影以及对安娜“独占私欲”作祟，对胎儿产生了强烈的抗拒与自私的愤怒。他愤而离家，在酒吧喝得烂醉并遇到了企图挑拨的埃琳娜。虽然格雷保持了身体的忠诚并拒绝了埃琳娜，但宿醉归家后，极度无能为力的他再次退行回老一套的控制手段——在红房子里粗暴地捆绑并占有了安娜，试图重新确立掌控感。
+3.2 致命的觉醒与红房子的终局面对格雷近乎自残式的粗暴惩罚，安娜流着泪说出了全片最具分量的一句话：
 
-2.2 改进型程序，也是课后练习package mainimport (	&quot;image&quot;	&quot;image/color&quot;	&quot;image/gif&quot;	&quot;io&quot;	&quot;log&quot;	&quot;math&quot;	&quot;math/rand&quot;	&quot;net/http&quot;	&quot;os&quot;	&quot;time&quot;)// 颜色代码数组var palette = []color.Color&#123;color.Black, color.RGBA&#123;199, 237, 204, 0xff&#125;, color.RGBA&#123;102, 53, 204, 0xff&#125;&#125;func main() &#123;	rand.Seed(time.Now().UTC().UnixNano())	// 判断传入参数 如果有web,就启动一个web服务器	if len(os.Args) &gt; 1 &amp;&amp; os.Args[1] == &quot;web&quot; &#123;		handler := func(w http.ResponseWriter, r *http.Request) &#123;			lissajous(w)		&#125;		http.HandleFunc(&quot;/&quot;, handler)		log.Fatal(http.ListenAndServe(&quot;localhost:8000&quot;, nil))		return	&#125;	lissajous(os.Stdout)&#125;func lissajous(out io.Writer) &#123;	const (		cycles  = 5     // 完整的x振荡器变化的个数		res     = 0.001 // 角度分辨率		size    = 100   // 图像画布包含		nframes = 64    // 动画中的帧数		delay   = 8     // 以10ms为单位的帧间延迟	)	freq := rand.Float64() * 3.0 // y振荡器的相对频率	anim := gif.GIF&#123;LoopCount: nframes&#125;	phase := 0.0 // phase difference	for index,i :=0, 1; i &lt; nframes; i++ &#123;		rect := image.Rect(0, 0, 2*size+1, 2*size+1)		img := image.NewPaletted(rect, palette)		for t := 0.0; t &lt; cycles*2*math.Pi; t += res &#123;			x := math.Sin(t)			y := math.Sin(t*freq + phase)			img.SetColorIndex(size+int(x*size+0.5), size+int(y*size+0.5), uint8(index))		&#125;		// 控制变色频率，生成颜色数组下标		index = i % 3		phase += 0.1		anim.Delay = append(anim.Delay, delay)		anim.Image = append(anim.Image, img)	&#125;	gif.EncodeAll(out, &amp;anim) // 注意：忽略编码错误（直接运行输出的是一堆乱码）	// go build lissajous.go	// ./lissajous &gt;out.gif # 生成一个图片	// ./lissajous web # 开启一个web服务，可以浏览器访问 localhost:8000&#125;
+“Christian, this is not love. You are punishing me for something I have no control over.”（这不是爱，你是在为你无法控制的事情惩罚我。）
+
+这句话如同一把尖刀，彻底刺破了格雷最后的心理防御，让他直面自己即将变成当年虐待他的恶魔这一事实。最终，在经历前上司杰克的疯狂绑架与复仇危机时，安娜展现出惊人的孤勇，持枪反击保护了家庭。
+在大结局的几年后，红房子依然存在，但它已经不再是格雷宣泄痛苦与惩罚的“精神牢笼”，而是退去了冰冷的权力剥削，变成了双方在完全平等、快乐的前提下调剂生活的情趣空间。草坪上，他们与两岁的儿子和即将出生的女儿共享阳光，格雷最终被驯化成了一个满眼都是家庭的温柔父亲。
+4. Dom&#x2F;Sub 文化底层的现代解构《五十度灰》的文本之所以能立住，是因为它无意中暗合了现代心理学与社会学对 Dom&#x2F;Sub 文化的底层逻辑解构：
+
+“逃避自我”与压力卸载： 现实中社会地位越高、掌控欲越强的人（如格雷），前额叶皮层长期超载，往往越容易在私密关系中渴望让渡控制权，以此获得极致的心理减压。
+创伤重现与自我疗愈： 弗洛伊德式的“创伤重现”表明，小时候经历过绝对无助的人，长大后会通过扮演 Dom 或安全的 Sub，在可控的环境里战胜当年的恐惧。
+高浓度的化学鸡尾酒： BDSM 互动带来的痛觉与紧张，会刺激大脑分泌海量的内啡肽（带来极乐感）与催产素（建立深刻的精神纽带），其本质是一场披着不平等外衣的、最高级别的平等信任契约。
+
+真正读懂这部作品的人会明白：格雷在财富与社会地位上是绝对的支配者（Dom），但在精神与情感上，他是一个随时可能碎掉的依附者（Sub）；安娜表面上一无所有，但她凭借健全的人格与死守的底线，成为了这场权力博弈中真正的统治者。
+安娜用了三部曲的篇幅，把一份冷酷的商业奴役合同，变成了一首有温度的家庭共生诗。敢于掀翻桌子的人，才配拥有规则的制定权——这才是隐藏在豪车与欲望之下，最硬核的两性博弈逻辑。
 ]]></content>
       <categories>
-        <category>Tech</category>
+        <category>Growth</category>
       </categories>
       <tags>
-        <tag>go</tag>
+        <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小四：你尽力了吗？【转】</title>
+    <url>/20240718-xiao-si_did-you-do-your-best/</url>
+    <content><![CDATA[
+安全大佬小四2000年写过一篇《你尽力了吗》的学习方法，网上不好找，我把文字版搜到放在下面了(20多年后再来看这篇其实挺一般的 :) )
+
+
+发信人: cloudsky (小四), 信区: Security标 题: 你尽力了吗发信站: 武汉白云黄鹤站 (Mon Apr 17 19:52:54 2000), 站内信件
+
+很多人问如何入门如何入门，我却不知道要问的是入什么门。很少把某些好文章耐心从头看完，我这次就深有体会。比如袁哥的 sniffer 原理，一直以为自己对 sniffer 原理很清楚的，所以也就不曾仔细看过袁哥的这篇。后来有天晚上和袁哥讨论，如何通过端口读写直接获取 mac 地址，为什么 antisniff 可以获得真正的 mac 地址，而不受更改mac地址技术的影响，如何在 linux 下获得真正的 mac 地址。我一直对 linux 下的端口读写心存疑虑，总觉得在保护模式下的端口都做了内存映象等等。结果袁哥问了我一句，你仔细看我写的文章没有。我楞，最近因为要印刷月刊，我整理以前的很多文档，被迫认真过滤它们，才发现袁哥的文章让我又有新认识。
+再后来整理到 tt 的几篇缓冲区溢出的，尤其是上面的关于 Solaris 可装载内核模块，那就更觉得惭愧了。
+
+以前说书非借不能读，现在是文章留在硬盘上却不读。其实本版已经很多经典文章了，也推荐了不少经典书籍了，有几个好好看过呢。W.Richard.Stevens 的 UNP 我算是认真看过加了不少旁注，APUE就没有那么认真了，而卷II的一半认真看过，写过读书笔记，卷III就没有看一页。道格拉斯的卷I、卷III是认真看过几遍，卷II就只断续看过。而很多技术文章，如果搞到手了就懒得再看，却不知道这浪费了多少资源，忽略了多少资源。BBS 是真正能学到东西的地方吗？rain 说不是的，我说也不是的。不过这里能开阔人的视野，能得到对大方向的指引，足够了。
+我一直都希望大家从这里学到的不是技术本身，而是学习方法和一种不再狂热的淡然。很多技术，明天就会过时，如果你掌握的是学习方法，那你还有下一个机会，如果你掌握的仅仅是这个技术本身，你就没有机会了。其实我对系统安全是真不懂，因为我一直都喜欢看程序写程序却不喜欢也没有能力攻击谁谁的主机&#x2F;站点。我所能在这里做的是，为大家提供一个方向，一种让你的狂热归于淡然的说教。如果你连《WindowsNT设备驱动程序编写》、《win9x系统编程》都没有看过，却要写个什么隐藏自己的木马，搞笑。如果你看都不看汇编语言，偏要问 exploit code 的原理，那我无法回答也不想回答你。总有人责问，要讨个说法纭纭，说什么提问却没有回答。不回答已经是正确的处理方式了，至少没有回你一句，看书去，对不对，至少没有扰乱版面让你生闷气。Unix 的 man 手册你要都看完了，想不会Unix都不行了。微软的 MSDN、Platform SDK DOC你要看完了，你想把 Win 编程想象得稍微困难点都找不到理由。还是那句话，一个程序员做到 W.Richard.Stevens 那个份上，做到逝世后还能叫全世界的顶级 hacker 们专门著文怀念，但生前却不曾著文攻击，想想看，那是一种什么样的境界，那是一份什么样的淡然。我们可以大肆讨论技术问题，可以就技术问题进行激烈的卓有成效的讨论，却无意进行基础知识、资源信息的版面重复。我刚在前面贴了一堆 isbase 的文章，开头就是主页标识，却在后面立刻问什么主页在哪里？前面刚刚讨论过如何修改 mac 地址，后面马上又来一个，前后相差不过3篇文章。
+选择沉默已经是很多朋友忍耐力的优异表现了。很多东西都是可以举一反三的。vertex 的 lids，被 packetstorm 天天追踪更新，你要是看了 THC 的那三篇，觉得理解一个就理解了一堆，都是内核模块上的手脚。你不看你怎么知道。我不想在这里陷入具体技术问题的讨论中去，你要是觉得该做点什么了，就自己去看自己去找。没有什么人摆什么架子，也没有什么人生来就是干这个的。你自己问自己，尽力了吗？
+]]></content>
+      <categories>
+        <category>Growth</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《夜色正浓》观后感</title>
+    <url>/20260628-yesezhengnong/</url>
+    <content><![CDATA[1. 概览1.1 简介一场盛宴之下的狂欢，让隐藏已久的暗涌浮现，唤醒了所有装睡的人，也触发了 GST 酒业各层人士的生存危机。一切事关生存，每一步都需格外谨慎。赵玫、李东明、董越、梁丹宁等深陷其中的主要人物，在事件中扮演了不同的角色，勾勒出人性的复杂和现实的残酷，从而呈现出一个共同的主题——如何在惶惶不安中乐观地活下去。
+1.2 看点
+行业切面：这一次，是极度暴利也极度残酷的“酒业江湖”女主角赵玫（江疏影 饰）是一个在跨国酒业巨头里拼杀的高级金领。在这个行业里，绝对的金钱伴随着绝对的应酬、人情交割与灰色利益。怎么做省级代理？怎么在夜场、高端会所里用酒开路？怎么平衡外资总部、国内分销商、以及各地监管层之间的复杂关系？
+
+
+这部剧把高端名利场表面上的“觥筹交错、红酒雪茄”，和背后的“抢渠道、压库存、互相设局、资本绞杀”撕开。它不是那种坐在办公室里喝咖啡的悬浮职场剧，它是带着宿醉和血腥味的现代商战。
+
+双雄角色解说赵玫（江疏影 饰）：典型的阿耐式现代独立女性。高学历、高智商，在华尔街和跨国企业的外资系统里浸泡过。她讲的是KPI、是现代企业的合规与资本效率，身段极为精准，手段极其锋利。李东明（佟大为 饰）： 一个深谙中国本土“人情世故操作系统”的老练玩家。他太懂怎么和各路人马打交道、怎么在微观的利益博弈里打太极、怎么利用本土的潜规则去解构外资的硬性指标。
+
+2. 观后感这些人算计了一辈子，没几个有好下场~《夜色正浓》的结局挺奇怪的，赵玫和董越在一起，整个故事下来似乎是赵玫和她闺密梁丹宁的结局比较好。赵玫：虽然隐忍了丈夫出轨一段时间，最后站队齐又蓝，如愿以偿当上了总监；因狗子受惠那段真是，对手手段真是高；梁丹宁：没有什么职业理想，看破了“依附男权”的职场伪命题，通过拒绝豪门求婚并逆袭掌控核心资源，反向拿捏金主的女强人；李冬明：精于算计，直接打明牌威胁等。虽然最后当上 CEO，但乔海伦死后也被快递小哥撞残废无法工作；乔海伦：身材出众，但是没有什么真本事，又想过更好的生活，只能自愿沦为其他人的工具人；
+]]></content>
+      <categories>
+        <category>Growth</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
       </tags>
   </entry>
   <entry>
@@ -12978,6 +13159,27 @@ IDEA上搭建dubbo服务的简单过程只是简单的让例子在IntelliJ IDEA�
       <tags>
         <tag>java</tag>
         <tag>中间件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《Go语言程序设计》 - ch1/lissajous - GIF动画</title>
+    <url>/20180908-%E3%80%8AGo%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%20-%20ch1:lissajous%20-%20GIF%E5%8A%A8%E7%94%BB/</url>
+    <content><![CDATA[一、程序说明
+可以以web的方式查看，也可以生成一个图片
+直接go run输出的是一丢乱码(图片)
+需要go build 然后运行程序(具体看代码里面注释)
+
+具体的内容可以看下面的程序代码(虽然是抄书)
+二、程序代码
+2.1 基本程序package mainimport (	&quot;image&quot;	&quot;image/color&quot;	&quot;image/gif&quot;	&quot;io&quot;	&quot;log&quot;	&quot;math&quot;	&quot;math/rand&quot;	&quot;net/http&quot;	&quot;os&quot;	&quot;time&quot;)var palette = []color.Color&#123;color.White, color.Black&#125;const (	whiteIndex = 0 // 画板中的第一种颜色	blackIndex = 1 // 画板中的下一种颜色)func main() &#123;	rand.Seed(time.Now().UTC().UnixNano())	if len(os.Args) &gt; 1 &amp;&amp; os.Args[1] == &quot;web&quot; &#123;		handler := func(w http.ResponseWriter, r *http.Request) &#123;			lissajous(w)		&#125;		http.HandleFunc(&quot;/&quot;, handler)		log.Fatal(http.ListenAndServe(&quot;localhost:8000&quot;, nil))		return	&#125;	lissajous(os.Stdout)&#125;func lissajous(out io.Writer) &#123;	const (		cycles  = 5     // 完整的x振荡器变化的个数		res     = 0.001 // 角度分辨率		size    = 100   // 图像画布包含		nframes = 64    // 动画中的帧数		delay   = 8     // 以10ms为单位的帧间延迟	)	freq := rand.Float64() * 3.0 // y振荡器的相对频率	anim := gif.GIF&#123;LoopCount: nframes&#125;	phase := 0.0 // phase difference	for i := 1; i &lt; nframes; i++ &#123;		rect := image.Rect(0, 0, 2*size+1, 2*size+1)		img := image.NewPaletted(rect, palette)		for t := 0.0; t &lt; cycles*2*math.Pi; t += res &#123;			x := math.Sin(t)			y := math.Sin(t*freq + phase)			img.SetColorIndex(size+int(x*size+0.5),size+int(y*size+0.5),blackIndex)		&#125;		phase +=0.1		anim.Delay = append(anim.Delay,delay)		anim.Image = append(anim.Image,img)	&#125;	gif.EncodeAll(out,&amp;anim) // 注意：忽略编码错误（直接运行输出的是一堆乱码）	// go build lissajous.go	// ./lissajous &gt;out.gif # 生成一个图片	// ./lissajous web # 开启一个web服务，可以浏览器访问 localhost:8000&#125;
+
+2.2 改进型程序，也是课后练习package mainimport (	&quot;image&quot;	&quot;image/color&quot;	&quot;image/gif&quot;	&quot;io&quot;	&quot;log&quot;	&quot;math&quot;	&quot;math/rand&quot;	&quot;net/http&quot;	&quot;os&quot;	&quot;time&quot;)// 颜色代码数组var palette = []color.Color&#123;color.Black, color.RGBA&#123;199, 237, 204, 0xff&#125;, color.RGBA&#123;102, 53, 204, 0xff&#125;&#125;func main() &#123;	rand.Seed(time.Now().UTC().UnixNano())	// 判断传入参数 如果有web,就启动一个web服务器	if len(os.Args) &gt; 1 &amp;&amp; os.Args[1] == &quot;web&quot; &#123;		handler := func(w http.ResponseWriter, r *http.Request) &#123;			lissajous(w)		&#125;		http.HandleFunc(&quot;/&quot;, handler)		log.Fatal(http.ListenAndServe(&quot;localhost:8000&quot;, nil))		return	&#125;	lissajous(os.Stdout)&#125;func lissajous(out io.Writer) &#123;	const (		cycles  = 5     // 完整的x振荡器变化的个数		res     = 0.001 // 角度分辨率		size    = 100   // 图像画布包含		nframes = 64    // 动画中的帧数		delay   = 8     // 以10ms为单位的帧间延迟	)	freq := rand.Float64() * 3.0 // y振荡器的相对频率	anim := gif.GIF&#123;LoopCount: nframes&#125;	phase := 0.0 // phase difference	for index,i :=0, 1; i &lt; nframes; i++ &#123;		rect := image.Rect(0, 0, 2*size+1, 2*size+1)		img := image.NewPaletted(rect, palette)		for t := 0.0; t &lt; cycles*2*math.Pi; t += res &#123;			x := math.Sin(t)			y := math.Sin(t*freq + phase)			img.SetColorIndex(size+int(x*size+0.5), size+int(y*size+0.5), uint8(index))		&#125;		// 控制变色频率，生成颜色数组下标		index = i % 3		phase += 0.1		anim.Delay = append(anim.Delay, delay)		anim.Image = append(anim.Image, img)	&#125;	gif.EncodeAll(out, &amp;anim) // 注意：忽略编码错误（直接运行输出的是一堆乱码）	// go build lissajous.go	// ./lissajous &gt;out.gif # 生成一个图片	// ./lissajous web # 开启一个web服务，可以浏览器访问 localhost:8000&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>go</tag>
       </tags>
   </entry>
   <entry>
@@ -13628,6 +13830,25 @@ package com.hisen.interview;import Java.math.BigInteger;import Java.security.Mes
       </tags>
   </entry>
   <entry>
+    <title>性能指标的含义与计算方式:TP50、TP90、TP99、TP999</title>
+    <url>/20190801-%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%E7%9A%84%E5%90%AB%E4%B9%89%E4%B8%8E%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F:TP50%E3%80%81TP90%E3%80%81TP99%E3%80%81TP999/</url>
+    <content><![CDATA[零、本文背景一个接口的关键指标应该就是响应速度，要想提高响应速度，结果在缓存中最好;那么怎么确定一个合理的缓存时间，以平衡性能与成本呢？我们可以通过记录业务请求，看读取缓存的时间分布，比如 99% 的请求都是 1天内;
+近期在做日志分析，找到比较理想的一个缓存过期时间，使 90% 的查询都能被缓存覆盖;发现有些同学不太懂 TP 指标，故写文记录一下。
+一、性能指标含义常见指标：TP50、TP80、TP90、TP99、TP999正式解释：TP&#x3D;Top Percentile，Top百分数，是一个统计学术语，与平均数、中位数都是一类;通俗理解：TP99 100ms，99%的查询都能在100ms内返回;本质理解：它是一个分位值，看数据的一个分布;
+二、性能指标计算计算方式：拿到所有请求耗时，升序排序，取 99% 位置的数据，就是 TP99;比如说：拿 100 次请求的耗时，升序排序，取第 99 个的数据，就是TP99的值;
+具体的代码方式就是，先算出耗时，放入 List ，然后排序，按指定的下标取值即可;
+代码如下：
+
+private void calTime(List&lt;Long&gt; timeDurations) &#123;    timeDurations.sort(Long::compareTo);    double tp50 = timeDurations.size() * 0.5;    double tp90 = timeDurations.size() * 0.9;    double tp99 = timeDurations.size() * 0.99;    double tp999 = timeDurations.size() * 0.999;    // 基础统计，包含max、min、count、avg信息;    DoubleSummaryStatistics doubleSummaryStatistics = timeDurations.stream().mapToDouble(Long::longValue).summaryStatistics();    System.out.println(JSON.toJSONString(doubleSummaryStatistics));    // Math.ceil() 向上取整    System.out.println(&quot;tp50:&quot; + timeDurations.get((int) Math.ceil(tp50)));    System.out.println(&quot;tp90:&quot; + timeDurations.get((int) Math.ceil(tp90)));    System.out.println(&quot;tp99:&quot; + timeDurations.get((int) Math.ceil(tp99)));    System.out.println(&quot;tp999:&quot; + timeDurations.get((int) Math.ceil(tp999)));&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>常见算法：Java求最小公倍数和最大公约数三种算法</title>
     <url>/20171021-%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%EF%BC%9AJava%E6%B1%82%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E5%92%8C%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0%E4%B8%89%E7%A7%8D%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[最小公倍数：数论中的一种概念，两个整数公有的倍数成为他们的公倍数
@@ -13660,25 +13881,6 @@ a%b得余数c
       </categories>
       <tags>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>性能指标的含义与计算方式:TP50、TP90、TP99、TP999</title>
-    <url>/20190801-%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%E7%9A%84%E5%90%AB%E4%B9%89%E4%B8%8E%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F:TP50%E3%80%81TP90%E3%80%81TP99%E3%80%81TP999/</url>
-    <content><![CDATA[零、本文背景一个接口的关键指标应该就是响应速度，要想提高响应速度，结果在缓存中最好;那么怎么确定一个合理的缓存时间，以平衡性能与成本呢？我们可以通过记录业务请求，看读取缓存的时间分布，比如 99% 的请求都是 1天内;
-近期在做日志分析，找到比较理想的一个缓存过期时间，使 90% 的查询都能被缓存覆盖;发现有些同学不太懂 TP 指标，故写文记录一下。
-一、性能指标含义常见指标：TP50、TP80、TP90、TP99、TP999正式解释：TP&#x3D;Top Percentile，Top百分数，是一个统计学术语，与平均数、中位数都是一类;通俗理解：TP99 100ms，99%的查询都能在100ms内返回;本质理解：它是一个分位值，看数据的一个分布;
-二、性能指标计算计算方式：拿到所有请求耗时，升序排序，取 99% 位置的数据，就是 TP99;比如说：拿 100 次请求的耗时，升序排序，取第 99 个的数据，就是TP99的值;
-具体的代码方式就是，先算出耗时，放入 List ，然后排序，按指定的下标取值即可;
-代码如下：
-
-private void calTime(List&lt;Long&gt; timeDurations) &#123;    timeDurations.sort(Long::compareTo);    double tp50 = timeDurations.size() * 0.5;    double tp90 = timeDurations.size() * 0.9;    double tp99 = timeDurations.size() * 0.99;    double tp999 = timeDurations.size() * 0.999;    // 基础统计，包含max、min、count、avg信息;    DoubleSummaryStatistics doubleSummaryStatistics = timeDurations.stream().mapToDouble(Long::longValue).summaryStatistics();    System.out.println(JSON.toJSONString(doubleSummaryStatistics));    // Math.ceil() 向上取整    System.out.println(&quot;tp50:&quot; + timeDurations.get((int) Math.ceil(tp50)));    System.out.println(&quot;tp90:&quot; + timeDurations.get((int) Math.ceil(tp90)));    System.out.println(&quot;tp99:&quot; + timeDurations.get((int) Math.ceil(tp99)));    System.out.println(&quot;tp999:&quot; + timeDurations.get((int) Math.ceil(tp999)));&#125;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
       </tags>
   </entry>
   <entry>
@@ -13995,6 +14197,30 @@ Window -&gt; preferences -&gt; general -&gt; Contents Types -&gt; Text(展开) -
       </categories>
   </entry>
   <entry>
+    <title>计算长度最大的子串长度(按空格分割) - 多种方式</title>
+    <url>/20190326-%E8%AE%A1%E7%AE%97%E9%95%BF%E5%BA%A6%E6%9C%80%E5%A4%A7%E7%9A%84%E5%AD%90%E4%B8%B2%E9%95%BF%E5%BA%A6(%E6%8C%89%E7%A9%BA%E6%A0%BC%E5%88%86%E5%89%B2)/</url>
+    <content><![CDATA[一、背景今天中午一个朋友问我一个问题没来得及回，现在折腾一下;问题：有一个包含以N个空格分割的字符串，求最大子串的长度，要求时间空间复杂度最优;
+二、方案：
+朋友给人方案：直接split分割遍历数组，找出最大值;
+面试官的方案：使用StringTokenizer，找出最大值;
+我想到的方案：indexOf计算index差值，找出最大值;
+
+三、结果：封装的代码比较复杂，目前来看不在么好分析时间复杂度和空间复杂度；于是就直观得对比了一下时间；
+//        output//        use(nano): 15486049, by 方案3//        use(nano): 66060102, by 方案2//        use(nano): 80844275, by 方案1
+有时间再深入了解下StringTokenizer的源码
+四、代码对比String oriStr = &quot;aa aa aaaa aaa a a a aa aa a&quot;;int times = 100000;// 自定义实现final long start1 = System.nanoTime();for (int i = 0; i &lt; times; i++) &#123;    String splitStr = &quot; &quot;;    findMaxLength(oriStr, splitStr);&#125;final long end1 = System.nanoTime();// 利用 StringTokenizerfinal long start2 = System.nanoTime();for (int i = 0; i &lt; times; i++) &#123;    findMaxLength4StringTokenizer(oriStr);&#125;final long end2 = System.nanoTime();// 利用 Splitfinal long start3 = System.nanoTime();for (int i = 0; i &lt; times; i++) &#123;    String splitStr = &quot; &quot;;    findMaxLength4Split(oriStr, splitStr);&#125;final long end3 = System.nanoTime();System.out.println(&quot;use(nano): &quot; + (end1 - start1) + &quot;, by findMaxLength&quot;);System.out.println(&quot;use(nano): &quot; + (end2 - start2) + &quot;, by findMaxLength4StringTokenizer&quot;);System.out.println(&quot;use(nano): &quot; + (end3 - start3) + &quot;, by findMaxLength4Split&quot;);//        output//        use(nano): 15486049, by findMaxLength//        use(nano): 66060102, by findMaxLength4StringTokenizer//        use(nano): 80844275, by findMaxLength4Split
+五、完整代码
+github也有：https://github.com/hisenyuan/IDEAPractice/blob/master/src/main/Java/com/hisen/interview/TestStringTokenizer.Java
+/** * @Author hisenyuan * @Description 计算长度最大的子串长度(按空格分割), 自定义实现比较优 * @Date 2019/3/26 20:53 */public class TestStringTokenizer &#123;    public static void main(String[] args) &#123;        String oriStr = &quot;aa aa aaaa aaa a a a aa aa a&quot;;        int times = 100000;        // 自定义实现        final long start1 = System.nanoTime();        for (int i = 0; i &lt; times; i++) &#123;            String splitStr = &quot; &quot;;            findMaxLength(oriStr, splitStr);        &#125;        final long end1 = System.nanoTime();        // 利用 StringTokenizer        final long start2 = System.nanoTime();        for (int i = 0; i &lt; times; i++) &#123;            findMaxLength4StringTokenizer(oriStr);        &#125;        final long end2 = System.nanoTime();        // 利用 Split        final long start3 = System.nanoTime();        for (int i = 0; i &lt; times; i++) &#123;            String splitStr = &quot; &quot;;            findMaxLength4Split(oriStr, splitStr);        &#125;        final long end3 = System.nanoTime();        System.out.println(&quot;use(nano): &quot; + (end1 - start1) + &quot;, by findMaxLength&quot;);        System.out.println(&quot;use(nano): &quot; + (end2 - start2) + &quot;, by findMaxLength4StringTokenizer&quot;);        System.out.println(&quot;use(nano): &quot; + (end3 - start3) + &quot;, by findMaxLength4Split&quot;);//        output//        use(nano): 15486049, by findMaxLength//        use(nano): 66060102, by findMaxLength4StringTokenizer//        use(nano): 80844275, by findMaxLength4Split    &#125;    private static void findMaxLength4StringTokenizer(String oriStr) &#123;        int maxLength = 0;        final StringTokenizer stringTokenizer = new StringTokenizer(oriStr);        while (stringTokenizer.hasMoreElements()) &#123;            final int length = stringTokenizer.nextToken().length();            maxLength = length &gt; maxLength ? length : maxLength;        &#125;//        System.out.println(&quot;max: &quot; + maxLength);    &#125;    private static void findMaxLength(String oriStr, String splitStr) &#123;        int index = 0;        final int maxIndex = oriStr.lastIndexOf(splitStr);        int maxLength = oriStr.length() - maxIndex;        while (index &lt; maxIndex) &#123;            final int currentIndex = oriStr.indexOf(splitStr, index);            int currLength = currentIndex - index;            maxLength = currLength &gt; maxLength ? currLength : maxLength;            index = currentIndex + splitStr.length();        &#125;//        System.out.println(&quot;max: &quot; + maxLength);    &#125;    private static void findMaxLength4Split(String oriStr, String splitStr) &#123;        int maxLength = 0;        final String[] strings = oriStr.split(splitStr);        for (String str : strings) &#123;            final int length = str.length();            maxLength = length &gt; maxLength ? length : maxLength;        &#125;//        System.out.println(&quot;max: &quot; + maxLength);    &#125;&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>认识Java I/O | BIO NIO AIO | 同步与异步 | 阻塞与非阻塞 | I/O多路复用</title>
     <url>/20190413-%E8%AE%A4%E8%AF%86Java%20IO%20%7C%20BIO-NIO-AIO/</url>
     <content><![CDATA[一、名词解释1.1 同步与异步同步与异步主要是针对CPU来说的
@@ -14022,30 +14248,6 @@ Window -&gt; preferences -&gt; general -&gt; Contents Types -&gt; Text(展开) -
       <tags>
         <tag>java</tag>
         <tag>高并发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>计算长度最大的子串长度(按空格分割) - 多种方式</title>
-    <url>/20190326-%E8%AE%A1%E7%AE%97%E9%95%BF%E5%BA%A6%E6%9C%80%E5%A4%A7%E7%9A%84%E5%AD%90%E4%B8%B2%E9%95%BF%E5%BA%A6(%E6%8C%89%E7%A9%BA%E6%A0%BC%E5%88%86%E5%89%B2)/</url>
-    <content><![CDATA[一、背景今天中午一个朋友问我一个问题没来得及回，现在折腾一下;问题：有一个包含以N个空格分割的字符串，求最大子串的长度，要求时间空间复杂度最优;
-二、方案：
-朋友给人方案：直接split分割遍历数组，找出最大值;
-面试官的方案：使用StringTokenizer，找出最大值;
-我想到的方案：indexOf计算index差值，找出最大值;
-
-三、结果：封装的代码比较复杂，目前来看不在么好分析时间复杂度和空间复杂度；于是就直观得对比了一下时间；
-//        output//        use(nano): 15486049, by 方案3//        use(nano): 66060102, by 方案2//        use(nano): 80844275, by 方案1
-有时间再深入了解下StringTokenizer的源码
-四、代码对比String oriStr = &quot;aa aa aaaa aaa a a a aa aa a&quot;;int times = 100000;// 自定义实现final long start1 = System.nanoTime();for (int i = 0; i &lt; times; i++) &#123;    String splitStr = &quot; &quot;;    findMaxLength(oriStr, splitStr);&#125;final long end1 = System.nanoTime();// 利用 StringTokenizerfinal long start2 = System.nanoTime();for (int i = 0; i &lt; times; i++) &#123;    findMaxLength4StringTokenizer(oriStr);&#125;final long end2 = System.nanoTime();// 利用 Splitfinal long start3 = System.nanoTime();for (int i = 0; i &lt; times; i++) &#123;    String splitStr = &quot; &quot;;    findMaxLength4Split(oriStr, splitStr);&#125;final long end3 = System.nanoTime();System.out.println(&quot;use(nano): &quot; + (end1 - start1) + &quot;, by findMaxLength&quot;);System.out.println(&quot;use(nano): &quot; + (end2 - start2) + &quot;, by findMaxLength4StringTokenizer&quot;);System.out.println(&quot;use(nano): &quot; + (end3 - start3) + &quot;, by findMaxLength4Split&quot;);//        output//        use(nano): 15486049, by findMaxLength//        use(nano): 66060102, by findMaxLength4StringTokenizer//        use(nano): 80844275, by findMaxLength4Split
-五、完整代码
-github也有：https://github.com/hisenyuan/IDEAPractice/blob/master/src/main/Java/com/hisen/interview/TestStringTokenizer.Java
-/** * @Author hisenyuan * @Description 计算长度最大的子串长度(按空格分割), 自定义实现比较优 * @Date 2019/3/26 20:53 */public class TestStringTokenizer &#123;    public static void main(String[] args) &#123;        String oriStr = &quot;aa aa aaaa aaa a a a aa aa a&quot;;        int times = 100000;        // 自定义实现        final long start1 = System.nanoTime();        for (int i = 0; i &lt; times; i++) &#123;            String splitStr = &quot; &quot;;            findMaxLength(oriStr, splitStr);        &#125;        final long end1 = System.nanoTime();        // 利用 StringTokenizer        final long start2 = System.nanoTime();        for (int i = 0; i &lt; times; i++) &#123;            findMaxLength4StringTokenizer(oriStr);        &#125;        final long end2 = System.nanoTime();        // 利用 Split        final long start3 = System.nanoTime();        for (int i = 0; i &lt; times; i++) &#123;            String splitStr = &quot; &quot;;            findMaxLength4Split(oriStr, splitStr);        &#125;        final long end3 = System.nanoTime();        System.out.println(&quot;use(nano): &quot; + (end1 - start1) + &quot;, by findMaxLength&quot;);        System.out.println(&quot;use(nano): &quot; + (end2 - start2) + &quot;, by findMaxLength4StringTokenizer&quot;);        System.out.println(&quot;use(nano): &quot; + (end3 - start3) + &quot;, by findMaxLength4Split&quot;);//        output//        use(nano): 15486049, by findMaxLength//        use(nano): 66060102, by findMaxLength4StringTokenizer//        use(nano): 80844275, by findMaxLength4Split    &#125;    private static void findMaxLength4StringTokenizer(String oriStr) &#123;        int maxLength = 0;        final StringTokenizer stringTokenizer = new StringTokenizer(oriStr);        while (stringTokenizer.hasMoreElements()) &#123;            final int length = stringTokenizer.nextToken().length();            maxLength = length &gt; maxLength ? length : maxLength;        &#125;//        System.out.println(&quot;max: &quot; + maxLength);    &#125;    private static void findMaxLength(String oriStr, String splitStr) &#123;        int index = 0;        final int maxIndex = oriStr.lastIndexOf(splitStr);        int maxLength = oriStr.length() - maxIndex;        while (index &lt; maxIndex) &#123;            final int currentIndex = oriStr.indexOf(splitStr, index);            int currLength = currentIndex - index;            maxLength = currLength &gt; maxLength ? currLength : maxLength;            index = currentIndex + splitStr.length();        &#125;//        System.out.println(&quot;max: &quot; + maxLength);    &#125;    private static void findMaxLength4Split(String oriStr, String splitStr) &#123;        int maxLength = 0;        final String[] strings = oriStr.split(splitStr);        for (String str : strings) &#123;            final int length = str.length();            maxLength = length &gt; maxLength ? length : maxLength;        &#125;//        System.out.println(&quot;max: &quot; + maxLength);    &#125;&#125;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
