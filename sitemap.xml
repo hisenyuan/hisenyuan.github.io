@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://hisen.me/about/index.html</loc>
+    <loc>https://hisen.me/about/</loc>
     
     <lastmod>2026-09-24</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/booklist/index.html</loc>
+    <loc>https://hisen.me/booklist/</loc>
     
     <lastmod>2026-09-19</lastmod>
     
@@ -101,6 +101,15 @@
   </url>
   
   <url>
+    <loc>https://hisen.me/20190322-WeightAlgorithm%20-%20%E6%9D%83%E9%87%8D%E7%AE%97%E6%B3%95%20-%20Random%E3%80%81HashCode%E5%AF%B9%E6%AF%94/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hisen.me/20180728-WebSocket%20-%20Java%20&%20html%20&%20JavaScript%20-%20%E5%8D%95%E5%8F%91%20&%20%E7%BE%A4%E5%8F%91/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -110,7 +119,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190322-WeightAlgorithm%20-%20%E6%9D%83%E9%87%8D%E7%AE%97%E6%B3%95%20-%20Random%E3%80%81HashCode%E5%AF%B9%E6%AF%94/</loc>
+    <loc>https://hisen.me/20170215-Windows%E4%BB%BB%E5%8A%A1%E6%A0%8F%E7%94%B1%E5%BA%95%E9%83%A8%E6%94%B9%E5%88%B0%E5%B7%A6%E8%BE%B9%EF%BC%8C%E5%B9%B6%E8%87%AA%E5%8A%A8%E9%9A%90%E8%97%8F/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -137,15 +146,6 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170215-Windows%E4%BB%BB%E5%8A%A1%E6%A0%8F%E7%94%B1%E5%BA%95%E9%83%A8%E6%94%B9%E5%88%B0%E5%B7%A6%E8%BE%B9%EF%BC%8C%E5%B9%B6%E8%87%AA%E5%8A%A8%E9%9A%90%E8%97%8F/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20170304-Ubuntu%2016%20%E5%AE%89%E8%A3%85IDEA%20%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E5%BF%AB%E6%8D%B7%E5%90%AF%E5%8A%A8/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -155,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170704-Ubuntu%20root%20%E5%AF%86%E7%A0%81/</loc>
+    <loc>https://hisen.me/20170218-Ubuntu-16-LTS-%E5%85%B3%E9%97%AD%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -164,7 +164,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170218-Ubuntu-16-LTS-%E5%85%B3%E9%97%AD%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2/</loc>
+    <loc>https://hisen.me/20170704-Ubuntu%20root%20%E5%AF%86%E7%A0%81/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -191,15 +191,6 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170218-Ubuntu-16-%E6%8D%A2%E9%98%BF%E9%87%8C%E4%BA%91%E6%BA%90/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20170219-Ubuntu16-04%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E9%95%9C%E5%83%8F%E5%AE%89%E8%A3%85Mongodb-%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -218,34 +209,16 @@
   </url>
   
   <url>
+    <loc>https://hisen.me/20170218-Ubuntu-16-%E6%8D%A2%E9%98%BF%E9%87%8C%E4%BA%91%E6%BA%90/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hisen.me/20170311-Ubuntu%E5%AE%89%E8%A3%85MySQL%E5%B9%B6%E4%B8%94%E5%BC%80%E5%90%AFroot%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170702-Ubuntu%E5%AE%89%E8%A3%85RocketMQ%20-%20Quick%20Start/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170321-Ubuntu%E5%AE%89%E8%A3%85nginx/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170305-Ubuntu%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%20-%20%E5%9C%A8ubuntu%E7%B3%BB%E7%BB%9F%E4%B8%8B%E9%87%8D%E6%96%B0%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -263,7 +236,34 @@
   </url>
   
   <url>
+    <loc>https://hisen.me/20170702-Ubuntu%E5%AE%89%E8%A3%85RocketMQ%20-%20Quick%20Start/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hisen.me/20260801-Underground-Empire-How-America-Weaponized-the-World-Economy/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170305-Ubuntu%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%20-%20%E5%9C%A8ubuntu%E7%B3%BB%E7%BB%9F%E4%B8%8B%E9%87%8D%E6%96%B0%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170321-Ubuntu%E5%AE%89%E8%A3%85nginx/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -281,15 +281,6 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170309-SQL%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B0%8F%E7%BB%86%E8%8A%82%20-%20%E7%82%B9%E6%BB%B4%E8%AE%B0%E5%BD%95/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20171114-SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -299,7 +290,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20201107-Shell-batch-decompression-and-rename/</loc>
+    <loc>https://hisen.me/20170309-SQL%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B0%8F%E7%BB%86%E8%8A%82%20-%20%E7%82%B9%E6%BB%B4%E8%AE%B0%E5%BD%95/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -308,7 +299,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20250803-Software-Architecture-for-Developers/</loc>
+    <loc>https://hisen.me/20201107-Shell-batch-decompression-and-rename/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -353,6 +344,15 @@
   </url>
   
   <url>
+    <loc>https://hisen.me/20250803-Software-Architecture-for-Developers/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hisen.me/20260628-The-Long-View/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -380,15 +380,6 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20221030-OpenWrt_22.03_install_passwall/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20170801-No%20MyBatis%20mapper%20was%20found%20in%20'[com.xxx.dao]'%20package%20/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -398,7 +389,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20221030-OpenWrt_NETGEAR_R8000_use_USB_flash_disk_to_expand_overlay/</loc>
+    <loc>https://hisen.me/20221030-OpenWrt_22.03_install_passwall/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -425,25 +416,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170219-Oracle-VM-VirtualBox%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%93%E5%BC%80%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B9%B6%E4%B8%94%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170923-Oracle-%E5%8F%96%E5%BE%AE%E7%A7%92-%E8%AE%B0%E5%BD%95%E7%82%B9%E6%BB%B4/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170323-Oracle%E4%B8%ADexists%E5%9C%A8update%E4%B8%AD%E6%97%A0%E6%B3%95%E9%99%90%E5%88%B6%E4%BD%8F%E6%9D%A1%E4%BB%B6%EF%BC%8C%E5%9C%A8select%E4%B8%AD%E5%8F%AF%E4%BB%A5/</loc>
+    <loc>https://hisen.me/20221030-OpenWrt_NETGEAR_R8000_use_USB_flash_disk_to_expand_overlay/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -461,16 +434,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170612-Oracle%E5%85%A8%E5%B1%80%E6%9F%A5%E6%89%BE%E6%9F%90%E5%AD%97%E6%AE%B5%E6%89%80%E5%9C%A8%E7%9A%84%E8%A1%A8/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170329-Oracle%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%B8%B8%E7%94%A8%E7%9A%84SQL/</loc>
+    <loc>https://hisen.me/20170323-Oracle%E4%B8%ADexists%E5%9C%A8update%E4%B8%AD%E6%97%A0%E6%B3%95%E9%99%90%E5%88%B6%E4%BD%8F%E6%9D%A1%E4%BB%B6%EF%BC%8C%E5%9C%A8select%E4%B8%AD%E5%8F%AF%E4%BB%A5/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -480,6 +444,24 @@
   
   <url>
     <loc>https://hisen.me/20170214-PLSQL%E6%B3%A8%E5%86%8C%E7%A0%81-9999-12-31/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170923-Oracle-%E5%8F%96%E5%BE%AE%E7%A7%92-%E8%AE%B0%E5%BD%95%E7%82%B9%E6%BB%B4/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170329-Oracle%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%B8%B8%E7%94%A8%E7%9A%84SQL/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -498,6 +480,24 @@
   
   <url>
     <loc>https://hisen.me/20260726-Reason-in-the-Balance/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170219-Oracle-VM-VirtualBox%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%93%E5%BC%80%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B9%B6%E4%B8%94%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170612-Oracle%E5%85%A8%E5%B1%80%E6%9F%A5%E6%89%BE%E6%9F%90%E5%AD%97%E6%AE%B5%E6%89%80%E5%9C%A8%E7%9A%84%E8%A1%A8/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -578,25 +578,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170518-MySQL%E7%B4%A2%E5%BC%95%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%92%8C%E5%BA%94%E7%94%A8/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20190218-MySQL%E7%BB%9F%E8%AE%A1%E6%88%90%E5%8A%9F%E7%8E%87%E7%AD%89%20-%20%E5%88%A9%E7%94%A8case%20when/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20171123-MySql%E7%9A%84%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -614,7 +596,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190410-Linux-log-analyze-top-10/</loc>
+    <loc>https://hisen.me/20171123-MySql%E7%9A%84%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -623,7 +605,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20180712-Linux-mac%E6%9F%A5%E6%89%BE%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%AD%E5%8C%85%E5%90%AB%E6%9F%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%91%BD%E4%BB%A4/</loc>
+    <loc>https://hisen.me/20170518-MySQL%E7%B4%A2%E5%BC%95%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%92%8C%E5%BA%94%E7%94%A8/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -641,7 +623,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170503-Linux%E5%AE%89%E8%A3%85tree%E5%91%BD%E4%BB%A4%20-%20apt-get%20install%20tree/</loc>
+    <loc>https://hisen.me/20190410-Linux-log-analyze-top-10/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -651,6 +633,24 @@
   
   <url>
     <loc>https://hisen.me/20170122-Linux%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E4%B8%AA%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170503-Linux%E5%AE%89%E8%A3%85tree%E5%91%BD%E4%BB%A4%20-%20apt-get%20install%20tree/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20180712-Linux-mac%E6%9F%A5%E6%89%BE%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%AD%E5%8C%85%E5%90%AB%E6%9F%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%91%BD%E4%BB%A4/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -686,7 +686,16 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170412-Maven%E9%95%9C%E5%83%8F%E5%BA%93%E8%AE%BE%E7%BD%AE%20-%20maven%20mirrors%20-%20maven%20%E9%95%9C%E5%83%8F%20%E9%98%BF%E9%87%8C/</loc>
+    <loc>https://hisen.me/20190201-MySQL%20-%20Data%20truncation%20Incorrect%20datetime%20value/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170427-MySQL%20decode%20-%20MySQL%E4%B8%AD%E7%B1%BB%E4%BC%BCoracle%E7%9A%84decode%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -704,16 +713,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190201-MySQL%20-%20Data%20truncation%20Incorrect%20datetime%20value/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170427-MySQL%20decode%20-%20MySQL%E4%B8%AD%E7%B1%BB%E4%BC%BCoracle%E7%9A%84decode%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95/</loc>
+    <loc>https://hisen.me/20170412-Maven%E9%95%9C%E5%83%8F%E5%BA%93%E8%AE%BE%E7%BD%AE%20-%20maven%20mirrors%20-%20maven%20%E9%95%9C%E5%83%8F%20%E9%98%BF%E9%87%8C/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -749,25 +749,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170213-Intellij-Idea-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB-%E4%BB%8B%E7%BB%8D/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20170317-JAVA%E4%B8%AD%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%9A%84RPC%E6%A1%86%E6%9E%B6/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170817-JWT%20%E4%B8%A8%20JSON%20Web%20Tokens%20%E4%B8%A8%20Java-jwt/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -785,7 +767,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190429-Java%20GC%20-%20%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%20-%20%E9%99%84%E4%BC%98%E5%8C%96%E6%A1%88%E4%BE%8B/</loc>
+    <loc>https://hisen.me/20170817-JWT%20%E4%B8%A8%20JSON%20Web%20Tokens%20%E4%B8%A8%20Java-jwt/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -794,7 +776,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170222-Java-Lang-OutOfMemoryError-PermGen-Space/</loc>
+    <loc>https://hisen.me/20170213-Intellij-Idea-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB-%E4%BB%8B%E7%BB%8D/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -821,7 +803,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170227-Java-lang-IllegalArgumentException-addChild-Child-name-hisen-is-not-unique/</loc>
+    <loc>https://hisen.me/20190429-Java%20GC%20-%20%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%20-%20%E9%99%84%E4%BC%98%E5%8C%96%E6%A1%88%E4%BE%8B/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -830,7 +812,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170226-Java%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/</loc>
+    <loc>https://hisen.me/20170222-Java-Lang-OutOfMemoryError-PermGen-Space/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -848,7 +830,25 @@
   </url>
   
   <url>
+    <loc>https://hisen.me/20170226-Java%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hisen.me/20170411-Jedis%20-%20Software%20caused%20connection%20abort%20recv%20failed/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170227-Java-lang-IllegalArgumentException-addChild-Child-name-hisen-is-not-unique/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -893,25 +893,16 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170216-Hxeot%E7%99%BE%E5%BA%A6%E7%AB%99%E9%95%BF%E5%B7%A5%E5%85%B7%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%8E%9F%E5%9B%A0/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170228-IDEA-Denpendencies%E7%BA%A2%E8%89%B2%E6%B3%A2%E6%B5%AA%E7%BA%BF%E6%8A%A5%E9%94%99-%E6%89%80%E6%9C%89%E7%9A%84%E5%8C%85%E6%97%A0%E6%B3%95%E5%AF%BC%E5%85%A5-%E4%B8%80%E7%A7%8D%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20170220-IDEA-maven%E9%A1%B9%E7%9B%AE%E9%80%9A%E8%BF%87mongo-Java-driver%E6%8A%98%E8%85%BE%E4%B8%80%E4%B8%8BMongoDB/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170216-Hxeot%E7%99%BE%E5%BA%A6%E7%AB%99%E9%95%BF%E5%B7%A5%E5%85%B7%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%8E%9F%E5%9B%A0/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -929,16 +920,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170215-IDEA%E4%BF%AE%E6%94%B9%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%EF%BC%8C%E5%A6%82maven%E7%AD%89/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170328-IDEA%E6%99%BA%E8%83%BD%E8%A1%A5%E5%85%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%9B%B4%E6%94%B9%E4%B8%BACtrl%20+%20%E9%80%97%E5%8F%B7/</loc>
+    <loc>https://hisen.me/20170401-IDEA%E8%AE%BE%E7%BD%AEintellij-Java-google-style/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -956,7 +938,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170401-IDEA%E8%AE%BE%E7%BD%AEintellij-Java-google-style/</loc>
+    <loc>https://hisen.me/20170330-IDEA%E9%83%A8%E7%BD%B2tomcat%E9%A1%B9%E7%9B%AE%E5%89%8D%E5%8F%B0%E4%BC%A0%E8%BE%93%E7%9A%84json%E5%88%B0%E5%90%8E%E5%8F%B0%E4%B9%B1%E7%A0%81/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -965,7 +947,25 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170330-IDEA%E9%83%A8%E7%BD%B2tomcat%E9%A1%B9%E7%9B%AE%E5%89%8D%E5%8F%B0%E4%BC%A0%E8%BE%93%E7%9A%84json%E5%88%B0%E5%90%8E%E5%8F%B0%E4%B9%B1%E7%A0%81/</loc>
+    <loc>https://hisen.me/20170228-IDEA-Denpendencies%E7%BA%A2%E8%89%B2%E6%B3%A2%E6%B5%AA%E7%BA%BF%E6%8A%A5%E9%94%99-%E6%89%80%E6%9C%89%E7%9A%84%E5%8C%85%E6%97%A0%E6%B3%95%E5%AF%BC%E5%85%A5-%E4%B8%80%E7%A7%8D%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170328-IDEA%E6%99%BA%E8%83%BD%E8%A1%A5%E5%85%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%9B%B4%E6%94%B9%E4%B8%BACtrl%20+%20%E9%80%97%E5%8F%B7/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170215-IDEA%E4%BF%AE%E6%94%B9%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%EF%BC%8C%E5%A6%82maven%E7%AD%89/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1010,7 +1010,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20180127-%E7%AC%94%E8%AE%B0%20-%20%E8%AF%BB%E5%90%8E%E6%84%9F%EF%BC%9A%E3%80%8A%E7%AC%AC%E4%B8%80%E6%9C%ACDocker%E4%B9%A6%E3%80%8B/</loc>
+    <loc>https://hisen.me/20180809-%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85%E8%AE%B0%E5%BD%95%20-%20%E6%AD%BB%E9%94%81/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1028,7 +1028,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20180809-%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85%E8%AE%B0%E5%BD%95%20-%20%E6%AD%BB%E9%94%81/</loc>
+    <loc>https://hisen.me/20180127-%E7%AC%94%E8%AE%B0%20-%20%E8%AF%BB%E5%90%8E%E6%84%9F%EF%BC%9A%E3%80%8A%E7%AC%AC%E4%B8%80%E6%9C%ACDocker%E4%B9%A6%E3%80%8B/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1064,7 +1064,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190326-%E8%AE%A1%E7%AE%97%E9%95%BF%E5%BA%A6%E6%9C%80%E5%A4%A7%E7%9A%84%E5%AD%90%E4%B8%B2%E9%95%BF%E5%BA%A6(%E6%8C%89%E7%A9%BA%E6%A0%BC%E5%88%86%E5%89%B2)/</loc>
+    <loc>https://hisen.me/20190413-%E8%AE%A4%E8%AF%86Java%20IO%20|%20BIO-NIO-AIO/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1073,7 +1073,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190413-%E8%AE%A4%E8%AF%86Java%20IO%20|%20BIO-NIO-AIO/</loc>
+    <loc>https://hisen.me/20190326-%E8%AE%A1%E7%AE%97%E9%95%BF%E5%BA%A6%E6%9C%80%E5%A4%A7%E7%9A%84%E5%AD%90%E4%B8%B2%E9%95%BF%E5%BA%A6(%E6%8C%89%E7%A9%BA%E6%A0%BC%E5%88%86%E5%89%B2)/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1118,7 +1118,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20191025-%E5%90%84%E7%B3%BB%E7%BB%9F%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E6%97%B6%E9%97%B4%E5%88%86%E5%B8%83%E6%83%85%E5%86%B5%E7%BB%9F%E8%AE%A1-%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86/</loc>
+    <loc>https://hisen.me/20170818-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80%20&%20%E8%BF%9B%E9%98%B6%20-%20CSDN%E5%8D%9A%E4%B8%BB%EF%BC%9A%E8%AF%B4%E5%A5%BD%E4%B8%8D%E8%83%BD%E6%89%93%E8%84%B8/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1127,7 +1127,16 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170818-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80%20&%20%E8%BF%9B%E9%98%B6%20-%20CSDN%E5%8D%9A%E4%B8%BB%EF%BC%9A%E8%AF%B4%E5%A5%BD%E4%B8%8D%E8%83%BD%E6%89%93%E8%84%B8/</loc>
+    <loc>https://hisen.me/20170120-%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4-%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%A1%A8/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20191025-%E5%90%84%E7%B3%BB%E7%BB%9F%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E6%97%B6%E9%97%B4%E5%88%86%E5%B8%83%E6%83%85%E5%86%B5%E7%BB%9F%E8%AE%A1-%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1154,25 +1163,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170120-%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4-%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%A1%A8/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20191008-%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E4%B8%93%E4%B8%9A%E7%9A%84%E6%8A%80%E6%9C%AF%E4%BB%8E%E4%B8%9A%E8%80%85%20-%20%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%81%8C%E4%B8%9A%E7%B4%A0%E5%85%BB%E3%80%8B/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170208-%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8BLinux-VPS%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E6%98%AFXen%E3%80%81KVM%E8%BF%98%E6%98%AFOpenVZ/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1199,7 +1190,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20171021-%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%EF%BC%9AJava%E6%B1%82%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E5%92%8C%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0%E4%B8%89%E7%A7%8D%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://hisen.me/20170208-%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8BLinux-VPS%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E6%98%AFXen%E3%80%81KVM%E8%BF%98%E6%98%AFOpenVZ/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1226,7 +1217,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170814-%E6%9C%80%E8%BF%91%E5%9C%A8%E7%9C%8B%E7%9A%84Java%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0%20-%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%80%9D%E7%BB%B4%E9%80%BB%E8%BE%91/</loc>
+    <loc>https://hisen.me/20171021-%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%EF%BC%9AJava%E6%B1%82%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E5%92%8C%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0%E4%B8%89%E7%A7%8D%E7%AE%97%E6%B3%95/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1236,6 +1227,15 @@
   
   <url>
     <loc>https://hisen.me/20170807-%E6%9C%89%E9%81%93%E4%BA%91%E7%AC%94%E8%AE%B0%E6%94%AF%E6%8C%81%E7%9A%84markdown%E8%AF%AD%E6%B3%95%20-%20hexo%E8%AF%95%E4%B8%80%E8%AF%95/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170814-%E6%9C%80%E8%BF%91%E5%9C%A8%E7%9C%8B%E7%9A%84Java%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0%20-%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%80%9D%E7%BB%B4%E9%80%BB%E8%BE%91/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1262,7 +1262,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20210518-troubleshooting-unbalanced-of-redis-cluster-slots/</loc>
+    <loc>https://hisen.me/20170519-try%20redis%20-%20redis%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%E7%BB%83%E4%B9%A0/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1271,7 +1271,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170519-try%20redis%20-%20redis%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%E7%BB%83%E4%B9%A0/</loc>
+    <loc>https://hisen.me/20210518-troubleshooting-unbalanced-of-redis-cluster-slots/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1316,7 +1316,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190903-%E3%80%8A%E9%87%8D%E5%A1%91%E5%A4%A7%E8%84%91%EF%BC%8C%E9%87%8D%E5%A1%91%E4%BA%BA%E7%94%9F%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F%20+%20%E6%91%98%E6%8A%84/</loc>
+    <loc>https://hisen.me/20191023-%E4%B8%9A%E5%8A%A1%E5%AE%89%E5%85%A8%E7%9A%84%E8%B5%84%E6%BA%90%E5%B1%82%E6%94%BB%E9%98%B2%E4%BB%8B%E7%BB%8D/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1325,7 +1325,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20191023-%E4%B8%9A%E5%8A%A1%E5%AE%89%E5%85%A8%E7%9A%84%E8%B5%84%E6%BA%90%E5%B1%82%E6%94%BB%E9%98%B2%E4%BB%8B%E7%BB%8D/</loc>
+    <loc>https://hisen.me/20190903-%E3%80%8A%E9%87%8D%E5%A1%91%E5%A4%A7%E8%84%91%EF%BC%8C%E9%87%8D%E5%A1%91%E4%BA%BA%E7%94%9F%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F%20+%20%E6%91%98%E6%8A%84/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1370,15 +1370,6 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20260822-openviking/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20170622-powerdesigner%20Oracle%20mysql%20comment%20%E7%BC%BA%E5%B0%91%E5%8F%B3%E6%8B%AC%E5%8F%B7/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -1388,7 +1379,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20180111-rabbitMQ%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8CDemo/</loc>
+    <loc>https://hisen.me/20210613-reaction-of-the-fenix-project/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1397,7 +1388,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20210613-reaction-of-the-fenix-project/</loc>
+    <loc>https://hisen.me/20180111-rabbitMQ%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8CDemo/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1416,6 +1407,15 @@
   
   <url>
     <loc>https://hisen.me/20220603-shell-and-expect-for-mysql-auto-login/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20260822-openviking/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1469,7 +1469,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20221119-synology-DS918-add-2500M-RTL8156B-usb-network-cart/</loc>
+    <loc>https://hisen.me/20260308-the-AI-logbook-Trials-and-Insights/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1478,7 +1478,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20260308-the-AI-logbook-Trials-and-Insights/</loc>
+    <loc>https://hisen.me/20221119-synology-DS918-add-2500M-RTL8156B-usb-network-cart/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1496,7 +1496,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170407-linux-log-command/</loc>
+    <loc>https://hisen.me/20170314-linux%20cal%20date%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1505,7 +1505,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170314-linux%20cal%20date%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</loc>
+    <loc>https://hisen.me/20170407-linux-log-command/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1550,15 +1550,6 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170712-mongodb%20-%20failed%20with%20errno%2013%20Permission%20denied/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20170802-mybatis%20-%20Invalid%20bound%20statement%20(not%20found)/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -1568,7 +1559,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170310-mybatis%E5%B8%B8%E7%94%A8jdbctype/</loc>
+    <loc>https://hisen.me/20170712-mongodb%20-%20failed%20with%20errno%2013%20Permission%20denied/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1578,6 +1569,15 @@
   
   <url>
     <loc>https://hisen.me/20200712-mysql-page-query/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170310-mybatis%E5%B8%B8%E7%94%A8jdbctype/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1604,25 +1604,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20210130-how-to-be-a-disgusting-product-manager/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20201010-how-to-manage-a-redis-database/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20250825-how_to_get_an_amateur_radio_license_in_beijing/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1640,7 +1622,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20251130-how_to_share_a_monitor_among_multiple_devices/</loc>
+    <loc>https://hisen.me/20210130-how-to-be-a-disgusting-product-manager/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1667,16 +1649,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170412-html%20-%20%E5%8E%9F%E7%94%9FJavascript%E5%8A%A8%E6%80%81%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170303-idea%20failed%20to%20create%20jvm%20error%20code%20-1/</loc>
+    <loc>https://hisen.me/20250825-how_to_get_an_amateur_radio_license_in_beijing/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1686,6 +1659,15 @@
   
   <url>
     <loc>https://hisen.me/20170303-idea%20jrebel%207.0%20%E7%A0%B4%E8%A7%A3%20-%20%E8%8E%B7%E5%8F%96JRebel%E6%BF%80%E6%B4%BB%E7%A0%81/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170303-idea%20failed%20to%20create%20jvm%20error%20code%20-1/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1712,7 +1694,25 @@
   </url>
   
   <url>
+    <loc>https://hisen.me/20251130-how_to_share_a_monitor_among_multiple_devices/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hisen.me/20211009-jvm-tool-and-knowledge/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170412-html%20-%20%E5%8E%9F%E7%94%9FJavascript%E5%8A%A8%E6%80%81%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1784,7 +1784,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20250719-hexo-upgrade-and-optimize/</loc>
+    <loc>https://hisen.me/20170216-hexo%E7%99%BE%E5%BA%A6%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1802,16 +1802,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170216-hexo%E7%99%BE%E5%BA%A6%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170120-hexo%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/</loc>
+    <loc>https://hisen.me/20250719-hexo-upgrade-and-optimize/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1829,6 +1820,15 @@
   </url>
   
   <url>
+    <loc>https://hisen.me/20170120-hexo%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hisen.me/20220604-bj-unicom-optical-modem-change-to-bridge-and-set-ipv6/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -1838,7 +1838,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20230423-build-my-first-server/</loc>
+    <loc>https://hisen.me/20170217-centos%E6%9B%B4%E6%8D%A2yum%E6%BA%90%E4%B8%BA%E9%98%BF%E9%87%8C%E4%BA%91-%E4%B8%89%E9%83%A8%E6%90%9E%E5%AE%9A/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1847,7 +1847,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170217-centos%E6%9B%B4%E6%8D%A2yum%E6%BA%90%E4%B8%BA%E9%98%BF%E9%87%8C%E4%BA%91-%E4%B8%89%E9%83%A8%E6%90%9E%E5%AE%9A/</loc>
+    <loc>https://hisen.me/20230423-build-my-first-server/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1982,6 +1982,15 @@
   </url>
   
   <url>
+    <loc>https://hisen.me/20170417-Docker%E4%B8%80%E4%BB%B6%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%ACUbuntu-Debian-CentOS-Fedora-racleLinux/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hisen.me/20170929-Docker%20%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -2000,7 +2009,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170417-Docker%E4%B8%80%E4%BB%B6%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%ACUbuntu-Debian-CentOS-Fedora-racleLinux/</loc>
+    <loc>https://hisen.me/20260829-FDE-2026/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2010,15 +2019,6 @@
   
   <url>
     <loc>https://hisen.me/20190325-Dubbo%E5%AE%98%E6%96%B9%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3|%E7%94%A8%E6%88%B7%E6%96%87%E6%A1%A3|%E5%BC%80%E5%8F%91%E8%80%85%E6%8C%87%E5%8D%97|%E6%BA%90%E7%A0%81%E5%AF%BC%E8%AF%BB|%E8%BF%90%E7%BB%B4%E7%AE%A1%E7%90%86/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20260829-FDE-2026/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2063,24 +2063,6 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20200926-BeanUtils-copyLimitedProperties-for-better-performance-of-response/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20230226-Bytecode_enhancement_part_1/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20260809-Cloudflare-pages-url-case/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -2099,15 +2081,6 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170402-DBeaver-%E8%BF%9E%E6%8E%A5%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B7%A5%E5%85%B7-DBeaver%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20170904-Debian%E4%B8%A8Ubuntu%E4%B8%A8shadowsocks-libev%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -2117,7 +2090,25 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170311-1103%20host%20%E2%80%98xxx%E2%80%99%20is%20not%20allowed%20to%20connect%20to%20this%20mysql/</loc>
+    <loc>https://hisen.me/20170402-DBeaver-%E8%BF%9E%E6%8E%A5%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B7%A5%E5%85%B7-DBeaver%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20200926-BeanUtils-copyLimitedProperties-for-better-performance-of-response/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20230226-Bytecode_enhancement_part_1/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2127,6 +2118,15 @@
   
   <url>
     <loc>https://hisen.me/20260822-AI-Engineering-skills-map/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170311-1103%20host%20%E2%80%98xxx%E2%80%99%20is%20not%20allowed%20to%20connect%20to%20this%20mysql/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2153,7 +2153,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20180128-%E5%AE%89%E5%85%A8%E7%9A%84%E9%87%8D%E5%8F%A0%E6%9E%84%E9%80%A0%E5%99%A8%20-%20%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%EF%BC%9ABuild%20Pattern/</loc>
+    <loc>https://hisen.me/20180127-%E5%AE%9E%E7%8E%B0Singleton%E6%9C%80%E4%BD%B3%E6%96%B9%E6%B3%95%20-%20Enum/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2162,7 +2162,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20180127-%E5%AE%9E%E7%8E%B0Singleton%E6%9C%80%E4%BD%B3%E6%96%B9%E6%B3%95%20-%20Enum/</loc>
+    <loc>https://hisen.me/20180128-%E5%AE%89%E5%85%A8%E7%9A%84%E9%87%8D%E5%8F%A0%E6%9E%84%E9%80%A0%E5%99%A8%20-%20%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%EF%BC%9ABuild%20Pattern/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2225,7 +2225,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20251123-why_nations_fail/</loc>
+    <loc>https://hisen.me/20240718-xiao-si_did-you-do-your-best/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2234,7 +2234,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20240718-xiao-si_did-you-do-your-best/</loc>
+    <loc>https://hisen.me/20251123-why_nations_fail/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2324,7 +2324,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20210718-about-internet-medicine/</loc>
+    <loc>https://hisen.me/20220206-about-learning-rust/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2333,7 +2333,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20220206-about-learning-rust/</loc>
+    <loc>https://hisen.me/20210718-about-internet-medicine/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2414,7 +2414,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170120-Test-Java-Code/</loc>
+    <loc>https://hisen.me/20260628-The-golden-shield-of-capital/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2423,7 +2423,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20260628-The-golden-shield-of-capital/</loc>
+    <loc>https://hisen.me/20170120-Test-Java-Code/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2450,7 +2450,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170210-Java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
+    <loc>https://hisen.me/20190408-Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%80%E7%94%9F/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2468,16 +2468,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190408-Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%80%E7%94%9F/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20170427-Java%E8%8E%B7%E5%8F%96%E8%82%A1%E7%A5%A8%E4%BF%A1%E6%81%AF%20-%20Java%E8%8E%B7%E5%8F%96%E8%82%A1%E7%A5%A8%E4%BF%A1%E6%81%AF%E6%8E%A5%E5%8F%A3/</loc>
+    <loc>https://hisen.me/20170210-Java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2487,6 +2478,15 @@
   
   <url>
     <loc>https://hisen.me/20180712-Java%E8%B0%83%E7%94%A8%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E6%8E%A5%E5%8F%A3-%E5%85%8D%E8%B4%B9%E7%BF%BB%E8%AF%91API/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20170427-Java%E8%8E%B7%E5%8F%96%E8%82%A1%E7%A5%A8%E4%BF%A1%E6%81%AF%20-%20Java%E8%8E%B7%E5%8F%96%E8%82%A1%E7%A5%A8%E4%BF%A1%E6%81%AF%E6%8E%A5%E5%8F%A3/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2513,7 +2513,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20220102-Looking-back-to-2021-looking-forward-to-2022/</loc>
+    <loc>https://hisen.me/20231231-Looking-back-to-2023-looking-forward-to-2024/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2522,7 +2522,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20231231-Looking-back-to-2023-looking-forward-to-2024/</loc>
+    <loc>https://hisen.me/20220102-Looking-back-to-2021-looking-forward-to-2022/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2576,7 +2576,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170401-Java%E5%88%A4%E6%96%AD%E5%85%A8%E8%A7%92%E5%8D%8A%E8%A7%92%E5%AD%97%E7%AC%A6%E4%BB%A5%E5%8F%8A%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2/</loc>
+    <loc>https://hisen.me/20170426-Java%E5%8E%9F%E7%94%9F%E7%B1%BB%E5%BA%93Java.util.zip%20-%20%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8E%8B%E7%BC%A9%E4%B8%8E%E8%A7%A3%E5%8E%8B/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2585,7 +2585,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170426-Java%E5%8E%9F%E7%94%9F%E7%B1%BB%E5%BA%93Java.util.zip%20-%20%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8E%8B%E7%BC%A9%E4%B8%8E%E8%A7%A3%E5%8E%8B/</loc>
+    <loc>https://hisen.me/20170401-Java%E5%88%A4%E6%96%AD%E5%85%A8%E8%A7%92%E5%8D%8A%E8%A7%92%E5%AD%97%E7%AC%A6%E4%BB%A5%E5%8F%8A%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2639,15 +2639,6 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170801-Google%20Java%E5%B7%A5%E5%85%B7%E7%B1%BB%20-%20Guava%20-%20%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20190424-Guice%20Demo%20|%20solve%20NoSuchMethodError/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -2657,7 +2648,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190722-Autowire%E3%80%81Resource%E7%9A%84%E5%8C%BA%E5%88%AB%20|%20Java%E6%B3%A8%E8%A7%A3/</loc>
+    <loc>https://hisen.me/20170801-Google%20Java%E5%B7%A5%E5%85%B7%E7%B1%BB%20-%20Guava%20-%20%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2667,6 +2658,15 @@
   
   <url>
     <loc>https://hisen.me/20181015-Could%20not%20initialize%20class%20io.jsonwebtoken.impl.DefaultJwtBuilder/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20190722-Autowire%E3%80%81Resource%E7%9A%84%E5%8C%BA%E5%88%AB%20|%20Java%E6%B3%A8%E8%A7%A3/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2837,7 +2837,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/tags/index.html</loc>
+    <loc>https://hisen.me/tags/</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -2846,7 +2846,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/categories/index.html</loc>
+    <loc>https://hisen.me/categories/</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -2862,13 +2862,6 @@
     <priority>1.0</priority>
   </url>
 
-  
-  <url>
-    <loc>https://hisen.me/tags/%E5%AD%98%E5%82%A8/</loc>
-    <lastmod>2026-09-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
   
   <url>
     <loc>https://hisen.me/tags/%E6%88%90%E9%95%BF/</loc>
@@ -2899,14 +2892,14 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/tags/java/</loc>
+    <loc>https://hisen.me/tags/%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hisen.me/tags/%E6%9E%B6%E6%9E%84/</loc>
+    <loc>https://hisen.me/tags/%E5%AD%98%E5%82%A8/</loc>
     <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2920,14 +2913,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/tags/%E6%80%A7%E8%83%BD/</loc>
-    <lastmod>2026-09-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B/</loc>
+    <loc>https://hisen.me/tags/java/</loc>
     <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2976,7 +2962,21 @@
   </url>
   
   <url>
+    <loc>https://hisen.me/tags/%E6%80%A7%E8%83%BD/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://hisen.me/tags/%E9%98%85%E8%AF%BB/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B/</loc>
     <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -3055,14 +3055,14 @@
 
   
   <url>
-    <loc>https://hisen.me/categories/tech/</loc>
+    <loc>https://hisen.me/categories/growth/</loc>
     <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hisen.me/categories/growth/</loc>
+    <loc>https://hisen.me/categories/tech/</loc>
     <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
