@@ -10434,7 +10434,7 @@ Jev 独有
 表里的数来自两个第三方项目：速度和准确率是 SemIf 测的（一张 3090、一个 4B 模型），校准是 SemIf 和 mini-Jev 的结论。自建那边是第三方在自己机器上跑，Jev 那边出自官方公布，两边不是同一条件。
 校准这行的差距，mini-Jev 给了对照：让模型生成概率数值，准确率只有 0.346；改成直接读选项打分，升到 0.896。
 官方还公布过 193.6 倍、444.6 倍的加速数字。这两个数字是自家设计的四类工作流上与特定模型比较的最大差距，换个任务不成立；官方基准里 Jev 得 67.8%，对照的前沿模型在 68%～74%，准确率处于中间。
-Jev 发布三天后，GitHub 上出现了照这套接口做的开源模型 laya：权重 Apache-2.0 开放，HTTP 服务兼容 Jev 的 /v1/systemone 协议，模型是自己训练的另一套，但同样声称经 RLCD 校准。校准这一项因此有了能自己动手的对照。部署与实测见《Laya 部署与实测：能判断什么，判断不了什么》。
+Jev 发布三天后，GitHub 上出现了照这套接口做的开源模型 Laya：权重 Apache-2.0 开放，HTTP 服务兼容 Jev 的 /v1/systemone 协议，模型是自己训练的另一套，但同样声称经 RLCD 校准。校准这一项因此有了能自己动手的对照。部署与实测另见《Jev 的开源替代 Laya：部署与实测》。
 4. 和现有 Agent 架构的结合点凡是「看一眼材料、做一个答案受限的判断」的步骤，都可能换成 Jev。按 Agent 循环里的位置排：
 
 
@@ -14830,26 +14830,28 @@ var data=[&#123;name:&quot;a&quot;,age:12&#125;,&#123;name:&quot;b&quot;,age:11&
       </tags>
   </entry>
   <entry>
-    <title>Laya 部署与实测：能判断什么，判断不了什么</title>
-    <url>/20260926-laya-deploy-and-benchmark/</url>
-    <content><![CDATA[1. laya 是什么laya 是一个跑在自己机器上的判断模型。给它一段材料（工单、邮件、命令、JSON）和几个预设问题，它返回选项和概率，不生成任何文字。
-能用的部分很明确。单次前向传播出全部答案，本机 Apple GPU 上 70 毫秒一次，一台笔记本就能跑，不用排队等 API。权重 Apache-2.0 开放，单卡甚至纯 CPU 都能起服务。同一个请求里问多个问题，材料只读一遍。
-判断依据能从文本直接读出来的任务，laya 靠得住。按 ID 查库、识别明确的动作请求这一类，概率给得干脆，可以直接接阈值。
-局限同样清楚，而且大部分是官方自己写在文档里的。
+    <title>Jev 的开源替代 Laya：部署与实测</title>
+    <url>/20260926-laya-hands-on/</url>
+    <content><![CDATA[1. laya 是什么laya 是一个跑在自己机器上的判断模型：给它一段材料（工单、邮件、命令、JSON）和几个预设问题，它返回选项和概率，不生成任何文字。
+它是照着 Jev 的接口做的开源替代：比 Jev 快得多、免费、能自己部署，但开箱能力弱一档，选项一多就崩，要用得先拿自己的数据微调。下面说的快和弱，参照物都是 Jev。
+1.1 和 Jev 的关系2026 年 9 月 15 日 TypeSafe AI 发布 Jev，闭源托管、邀请制。三天后 laya 出现在 GitHub 上，由 Convai Innovations 开发。
+laya 复现的是 Jev 的接口和那套概念，模型本身是另一套。它是三个 encoder 加一个决策头，英文基于 ModernBERT-large 421M 参数，多语言基于 mmBERT-base 322M，权重都是自己训练的。Jev 只提供托管 API，laya 的基准测试里也从没调用过 TypeSafe 的接口，取的都是官方公布的数字。
 
-零样本能力弱。官方 README 的总结是 It is a fast base to specialise, not a zero-shot decision engine，要拿自己的数据微调才有准确率。
+接口这一层对得上。laya 的 HTTP 服务源码开篇注释写着自己的定位：对外提供 TypeSafe Jev 那套 /v1/systemone 接口。照着 Jev 写的客户端，把 baseUrl 指到 laya 的地址就能继续用，返回结构一致，choice &#x2F; score &#x2F; noul 三种答案加一个 usage 块。仓库里那张官方对比图直接叫 laya_vs_jev_full.png。
+规模上，仓库 9 月 18 日建仓，到 9 月 26 日已经 2.4 万 star、2100 多个 fork、154 个未关 issue。PyPI 上从 0.1.0 到 0.3.20 一共 28 个发行版，集中在头七天。
+1.2 比 Jev 强在哪延迟差一个数量级。官方在 T4 上测出单问题 32.8 毫秒，本机实测 70 毫秒。Jev 的 p50 延迟由 AbdelStark 和 nibzard 两个第三方项目测到 236 到 276 毫秒。两边样本和提示词不同，但差着七八倍。
+权重开放，能自己部署。Apache-2.0，单卡甚至纯 CPU 都能起服务，数据不出本机，成本为零。Jev 要申请、按 token 付费。
+同一个请求里问多个问题，材料只读一遍。判断依据能从文本直接读出来的任务，概率给得干脆，实测里按 ID 查库和识别明确动作请求稳定正确，可以直接接阈值。
+1.3 比 Jev 差在哪开箱准确率低一档。官方在 typed-decisions 基准上测，微调前只有 0.362，低于 0.461 的多数类基线；Jev 公布的是 0.727。laya 那个常被引用的 0.766 是拿这个基准的训练集微调之后的结果，同一张表里就列着微调前的 0.362。
+选项一多就崩。所有选项共享一个固定的 token 池，超过 20 个选项准确率掉得很快，Banking77 上 laya 0.425、Jev 0.870。Jev 支持到 255 个选项。这是架构约束，微调也解决不了。
+校准要自己动手。开箱状态的原始 ECE 是 0.213，比 Jev 的 0.144 还差；官方宣传的 0.081 是温度缩放拟合之后的结果。加载 checkpoint 时发的温度越界警告，说的就是这件事。
+另外三条不是相对 Jev 的，是 laya 自身的问题：
+
 需要背景知识的判断做不了。「这是我们的文档还是通用知识」「这是问政策还是要执行」两类稳定出错，因为 laya 无从知道某个知识库里有什么。
-选项数受 token 预算限制。所有选项共享一个固定的 token 池，选项一多，每个分到的 token 就不够用。
+高置信度不等于判对。模型自信但判错的情况实测里出现过。
 多语言路由有个默认分支。拉丁字母、没有变音符的语种会被送进英文 checkpoint。
-置信度出厂未校准。加载时就发温度越界的警告，要拿它做门控得先在自己的数据上拟合。
 HTTP 服务的推理是串行的，约 14 QPS 封顶。
 
-
-
-laya 的接口来自 Jev，模型本身是另一套。
-2026 年 9 月 15 日 TypeSafe AI 发布 Jev，三天后 laya 出现在 GitHub 上，由 Convai Innovations 开发。laya 是三个 encoder 加一个决策头，英文基于 ModernBERT-large 421M 参数，多语言基于 mmBERT-base 322M，权重都是自己训练的。Jev 只提供托管 API，laya 的基准测试里也从没调用过 TypeSafe 的接口，取的都是官方公布的数字。
-两者的接口对得上。laya 的 HTTP 服务源码开篇注释写着自己的定位：对外提供 TypeSafe Jev 那套 /v1/systemone 接口。官方 README 说得更直白，照着 Jev 写的客户端把 baseUrl 指到 laya 的地址就能继续用，返回结构一致，choice &#x2F; score &#x2F; noul 三种答案加一个 usage 块。仓库里那张官方对比图直接叫 laya_vs_jev_full.png。
-规模上，仓库 9 月 18 日建仓，到 9 月 26 日已经 2.4 万 star、2100 多个 fork、154 个未关 issue。PyPI 上从 0.1.0 到 0.3.20 一共 28 个发行版，首发在 9 月 18 日，0.3.20 在 9 月 24 日。
 2. 装到本机2.1 不走 Docker官方平台页写明 Apple Silicon 上 Docker 只能跑 CPU。Docker Desktop for macOS 跑的是 Linux 虚拟机，Metal 透不进去，官方的 compose.cuda.yaml 和 compose.spark.yaml 也都跟 Mac 无关。本机是 M2 Max，有 Apple GPU，走 Docker 等于主动放弃它。一条 pip 命令就能解决的事，不值得为此再装一个 Docker Desktop。
 官方把 Docker 定位在 Linux 服务器上：要在目标机上 build，不能用 buildx 交叉编译。
 2.2 安装python3 -m venv .venv.venv/bin/pip install --upgrade pip.venv/bin/pip install &quot;laya[serve]&quot;      # 主体 + HTTP 服务.venv/bin/pip install &quot;httpx[socks]&quot;     # 挂 socks 代理时必需，见下
@@ -14972,15 +14974,11 @@ noul 那种更好用，尽管准确率一样。每个工具一个校准过的概
 解法是显式指定 checkpoint。CLI 加 --model multilingual，Python 传 model=&quot;multilingual&quot;，HTTP 在请求体里加 &quot;model&quot;: &quot;multilingual&quot;。
 但别无脑全局强制。英文文本下两个 checkpoint 各有胜负，五条用例里各错一条。只在流量确定是这几类拉丁语种时才强制。
 有个可用的信号：英文 checkpoint 处理外语文本时，answer_confidence 明显偏低，在 0.53 到 0.80 之间；正确路由后是 0.96 到 0.99。所以置信度低于 0.85 时值得怀疑是不是路由错了。这只是信号不是保证，英文原文也可能给出低置信度，实测里有一条 0.49。
-6. 官方那张对比表怎么读官方 README 里有一张 laya 对 Jev 的表，里面的数字成色不一样，照着标题读会高估 laya。
-准确率 0.766 是 laya-typed-decisions 微调后的成绩。同一张表里，微调前的英文 checkpoint 只有 0.362，低于 0.461 的多数类基线。这 0.766 全部来自拿自己的数据微调，不是开箱能力。
-校准 0.081 同理，那是温度缩放拟合之后的 ECE。拟合前，也就是开箱状态，原始 ECE 是 0.213，比 Jev 的 0.144 还差。加载 checkpoint 时发的那个温度越界 RuntimeWarning，说的就是这件事。
-延迟那栏两边来源不同。Jev 的 p50 236 到 276 毫秒来自 AbdelStark 和 nibzard 两个第三方项目，laya 的 32.8 毫秒是官方自己在 T4 上测的，样本和提示词都不一样，只能看数量级。
-Jev 领先的地方官方也列了：选项超过 20 个之后准确率掉得很快，Banking77 上 Jev 是 0.870，laya 只有 0.425。原因是所有选项共享一个固定的 token 预算，选项一多每个分到的就太少。这是架构约束，微调也解决不了。
-7. 放在链路的哪个位置laya 适合当前置闸门，不适合当唯一的分类器。一次典型的接法：请求进来先过 laya，概率过阈值的直接路由到对应工具或队列，低置信度的转给 LLM 或走检索兜底。
+6. 放在链路的哪个位置laya 适合当前置闸门，不适合当唯一的分类器。一次典型的接法：请求进来先过 laya，概率过阈值的直接路由到对应工具或队列，低置信度的转给 LLM 或走检索兜底。
+这个闸门挡得住什么、挡不住什么要分清。低概率说明模型自己拿不准，转走是对的。但高概率不等于判对了。上面那条中文用例「你们的退款政策是什么？」，被判成 refund_issue 的概率是 0.96，照样是错的。阈值只能滤掉「拿不准」这一类，「很自信但判错」那一类滤不掉，只能靠选任务避开。
 阈值按自己的数据定。官方 README 的说法是：A threshold is a policy you choose from measured accuracy at that coverage on your data, not a property of the model。
 三档 checkpoint 按语种和领域分，第三个留给自己微调。微调是这个项目预设的用法，官方给了在 Kaggle 免费 2x T4 上跑完整流程的 notebook。
-8. 参考
+7. 参考
 laya 仓库 · 官方 README，含 Jev 对比表、Benchmarks 与 Honest limits 两节；serve.py 声明实现 Jev 的接口
 laya 文档站 · 部署、hooks、Docker 平台说明，Apple Silicon 只能跑 CPU 的出处
 PyPI 上的 laya · 0.1.0 发布于 2026-09-18，到 0.3.20 共 28 个发行版
