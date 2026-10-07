@@ -1207,6 +1207,36 @@ https://country-code.cl/
       </tags>
   </entry>
   <entry>
+    <title>Guice Demo | solve NoSuchMethodError</title>
+    <url>/20190424-Guice%20Demo%20%7C%20solve%20NoSuchMethodError/</url>
+    <content><![CDATA[一、Guice简介Google公司的Bob lee开发的轻量级IoC容器，其特点是：
+
+速度快，号称是spring的100倍速度
+无配置文件，实用JDK5.0的annotation描述组件依赖，简单，而且有编译器检查和重构支持
+简单，代码量很少
+
+二、简单样例
+详细代码：https://github.com/hisenyuan/IDEAPractice/tree/master/src/main/Java/com/hisen/jars/guice
+依赖
+
+&lt;dependency&gt;    &lt;groupId&gt;com.google.inject&lt;/groupId&gt;    &lt;artifactId&gt;guice&lt;/artifactId&gt;    &lt;version&gt;4.2.2&lt;/version&gt;&lt;/dependency&gt;
+
+测试类
+
+public class HelloApp extends BaseServer &#123;    @Inject    private HelloServiceImpl hello;    @Test    public void testSayHello() &#123;        // 方式一        Injector injector = Guice.createInjector();        HelloService helloService = injector.getInstance(HelloService.class);        helloService.sayHello(&quot;hisen&quot;);        // 方式二 其实是在BaseServer中做了方式1的事情 【类似Spring的方式】        hello.sayHello(&quot;1&quot;);    &#125;&#125;
+
+三、解决问题Java.lang.NoSuchMethodError: com.google.common.base.Preconditions.checkArgument(ZLJava/lang/String;LJava/lang/Object;LJava/lang/Object;)V
+github有人遇到同样的问题：https://github.com/SeleniumHQ/selenium/issues/3880
+把本地的guava版本由19.0改为21.0成功解决问题
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Google Java工具类 - Guava - 常见用法</title>
     <url>/20170801-Google%20Java%E5%B7%A5%E5%85%B7%E7%B1%BB%20-%20Guava%20-%20%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/</url>
     <content><![CDATA[概述
@@ -1230,36 +1260,6 @@ I&#x2F;O 等等。
 public class CommonUsage &#123;  /**   * 2.集合转换为特定格式的字符串   */  @Test  public void collection2Srt() &#123;    //List转    List&lt;String&gt; list = new ArrayList&lt;String&gt;();    list.add(&quot;a&quot;);    list.add(&quot;b&quot;);    list.add(&quot;c&quot;);    list.add(&quot;d&quot;);    list.add(&quot;e&quot;);    list.add(&quot;f&quot;);    String result = Joiner.on(&quot;-&quot;).join(list);    System.out.println(result);//a-b-c-d-e-f    //Map 转    HashMap&lt;String, Integer&gt; map = Maps.newHashMap();    map.put(&quot;a&quot;, 1);    map.put(&quot;b&quot;, 2);    map.put(&quot;c&quot;, 3);    //on 分隔符，withKeyValueSeparator key value之间的分隔符    String s = Joiner.on(&quot;,&quot;).withKeyValueSeparator(&quot;=&quot;).join(map);    System.out.println(s);//a=1,b=2,c=3  &#125;  /**   * 3.将String 转为特定的集合   */  @Test  public void str2Collection() &#123;    String s = &quot;1,2,3,4,5,6,7,8,9&quot;;    List&lt;String&gt; list = Splitter.on(&quot;,&quot;).splitToList(s);    System.out.println(list);    s = &quot;1-2-3-4- 5-  6  &quot;;    //去除空串与空格    List&lt;String&gt; list1 = Splitter.on(&quot;-&quot;).omitEmptyStrings().trimResults().splitToList(s);    System.out.println(list1);    //将String转换为map    String str = &quot;a=1,b=2&quot;;    Map&lt;String, String&gt; map = Splitter.on(&quot;,&quot;).withKeyValueSeparator(&quot;=&quot;).split(str);  &#125;  /**   * 4.多个字符切割，或者特定的正则分隔   */  @Test  public void strSplit() &#123;    String input = &quot;aa.dd,,ff,,.&quot;;    List&lt;String&gt; list = Splitter.onPattern(&quot;[.|,]&quot;).omitEmptyStrings().trimResults()        .splitToList(input);    System.out.println(list);    // 判断匹配结果    boolean result = CharMatcher.inRange(&#x27;a&#x27;, &#x27;z&#x27;).or(CharMatcher.inRange(&#x27;A&#x27;, &#x27;Z&#x27;))        .matches(&#x27;K&#x27;);//true    // 保留数字文本    String s1 = CharMatcher.digit().retainFrom(&quot;abc 123 efg&quot;);//123    // 删除数字文本    String s2 = CharMatcher.digit().removeFrom(&quot;abc 123 efg&quot;);//abc  efg  &#125;  /**   * 9.计算程序开始结束用了多少时间   */  @Test  public void countTime() &#123;    Stopwatch stopwatch = Stopwatch.createStarted();    for (int i = 0; i &lt; 100000; i++) &#123;    &#125;    //TimeUnit可以指定时间精度    long nanos = stopwatch.elapsed(TimeUnit.MILLISECONDS);    System.out.println(nanos);  &#125;  /**   * 10.Files 文件操作   * 方便，   */  @Test  public void filesOperation() &#123;    String fileName = &quot;./src/main/Java/com/hisen/jars/guava/test.txt&quot;;    for (int i = 0; i &lt; 1000; i++) &#123;      //写      filesWrite(fileName, String.valueOf(i) + &quot;\n&quot;);    &#125;    //读    List&lt;String&gt; list = filesRead(fileName);    System.out.println(&quot;读取到的内容：&quot; + list.toString());//    Files.copy(sourceFile, targetFile); //复制文件//    Files.equal(File,File);//比较文件内容是否完全一致//    touch方法创建或者更新文件的时间戳。//    createTempDir()方法创建临时目录//    Files.createParentDirs(File) 创建父级目录//    getChecksum(File)获得文件的checksum//    hash(File)获得文件的hashmap系列方法获得文件的内存映射//    getFileExtension(String)获得文件的扩展名//    getNameWithoutExtension(String file)获得不带扩展名的文件名  &#125;  /**   * Files写文件   *   * @param fileName 文件名（包括路径）   * @param contents 写入的单行内容   */  public void filesWrite(final String fileName, final String contents) &#123;    checkNotNull(fileName, &quot;文件名称不能为空&quot;);    checkNotNull(contents, &quot;写入内容不能为空&quot;);    final File file = new File(fileName);    try &#123;      //Files.write(contents.getBytes(), file);//覆盖      Files.append(contents, file, Charsets.UTF_8);//追加    &#125; catch (IOException e) &#123;      System.out.println(&quot;ERROR trying to write to file &#x27;&quot; + fileName + &quot;&#x27; - &quot;          + e.toString());    &#125;  &#125;  /**   * Files 文件单行读取   *   * @param filePath 文件名(包括路径)   */  public List&lt;String&gt; filesRead(String filePath) &#123;    checkNotNull(filePath, &quot;文件名称不能为空&quot;);    File file = new File(filePath);    List&lt;String&gt; list = null;    try &#123;      list = Files.readLines(file, Charsets.UTF_8);    &#125; catch (IOException e) &#123;      e.printStackTrace();    &#125;    return list;  &#125;&#125;
 
 部分摘自：点击查看
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Guice Demo | solve NoSuchMethodError</title>
-    <url>/20190424-Guice%20Demo%20%7C%20solve%20NoSuchMethodError/</url>
-    <content><![CDATA[一、Guice简介Google公司的Bob lee开发的轻量级IoC容器，其特点是：
-
-速度快，号称是spring的100倍速度
-无配置文件，实用JDK5.0的annotation描述组件依赖，简单，而且有编译器检查和重构支持
-简单，代码量很少
-
-二、简单样例
-详细代码：https://github.com/hisenyuan/IDEAPractice/tree/master/src/main/Java/com/hisen/jars/guice
-依赖
-
-&lt;dependency&gt;    &lt;groupId&gt;com.google.inject&lt;/groupId&gt;    &lt;artifactId&gt;guice&lt;/artifactId&gt;    &lt;version&gt;4.2.2&lt;/version&gt;&lt;/dependency&gt;
-
-测试类
-
-public class HelloApp extends BaseServer &#123;    @Inject    private HelloServiceImpl hello;    @Test    public void testSayHello() &#123;        // 方式一        Injector injector = Guice.createInjector();        HelloService helloService = injector.getInstance(HelloService.class);        helloService.sayHello(&quot;hisen&quot;);        // 方式二 其实是在BaseServer中做了方式1的事情 【类似Spring的方式】        hello.sayHello(&quot;1&quot;);    &#125;&#125;
-
-三、解决问题Java.lang.NoSuchMethodError: com.google.common.base.Preconditions.checkArgument(ZLJava/lang/String;LJava/lang/Object;LJava/lang/Object;)V
-github有人遇到同样的问题：https://github.com/SeleniumHQ/selenium/issues/3880
-把本地的guava版本由19.0改为21.0成功解决问题
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -1432,23 +1432,6 @@ HTTP/1.1 403 ForbiddenCache-Control: no-cacheContent-Type: text/htmlTransfer-Enc
       </tags>
   </entry>
   <entry>
-    <title>IDEA Denpendencies红色波浪线报错,所有的包无法导入 - 一种解决办法</title>
-    <url>/20170228-IDEA-Denpendencies%E7%BA%A2%E8%89%B2%E6%B3%A2%E6%B5%AA%E7%BA%BF%E6%8A%A5%E9%94%99-%E6%89%80%E6%9C%89%E7%9A%84%E5%8C%85%E6%97%A0%E6%B3%95%E5%AF%BC%E5%85%A5-%E4%B8%80%E7%A7%8D%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
-    <content><![CDATA[failed to read artifact descriptor for xxx：jar
-一下午那代码里面是各种报错
-凡是引入的大部分都报错
-原因就是maven管理的jar没有添加上依赖
-最后在stackoverflow找到了良药
-上面有图片，错误会详细一点，如果你的也相同，可以试一试
-maven project -&gt; Execute Maven Goal -&gt; mvn -U clean install
-执行以上命令之后等待完成，应该就好了
-参考自stackoverflow：点击查看
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>IDEA maven项目通过mongo-Java-driver折腾一下MongoDB</title>
     <url>/20170220-IDEA-maven%E9%A1%B9%E7%9B%AE%E9%80%9A%E8%BF%87mongo-Java-driver%E6%8A%98%E8%85%BE%E4%B8%80%E4%B8%8BMongoDB/</url>
     <content><![CDATA[这几天折腾ubuntu然后安装了下mongodb
@@ -1470,48 +1453,17 @@ package com.hisen.jdbc;import com.mongodb.Block;import com.mongodb.MongoClient;i
       </tags>
   </entry>
   <entry>
-    <title>IDEA 貌似注解失效 - 报错：cannot resolve method xxx</title>
-    <url>/20170301-IDEA-%E8%B2%8C%E4%BC%BC%E6%B3%A8%E8%A7%A3%E5%A4%B1%E6%95%88-%E6%8A%A5%E9%94%99%EF%BC%9Acannot-resolve-method-xxx/</url>
-    <content><![CDATA[在Java平台上lombok提供了简单的注解的形式
-来帮助我们消除一些必须有但看起来很臃肿的代码
-比如属性的get&#x2F;set，及对象的toString等方法，特别是相对于 POJO;
-
-出现问题
-各种log方法，set方法中红色波浪线
-提示：cannot resolve method xxx
-虽然出现错误但是编译是可以通过的
-
-问题原因原来的代码用了lombok简单注解比如maven的pom.xml文件有如下配置
-&lt;dependency&gt;	&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;	&lt;artifactId&gt;lombok&lt;/artifactId&gt;	&lt;version&gt;1.16.8&lt;/version&gt;&lt;/dependency&gt;
-
-解决办法安装lombok plugin
-
-装完插件之后就舒服了，也不报错
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>IDEA修改全局设置，如maven等</title>
-    <url>/20170215-IDEA%E4%BF%AE%E6%94%B9%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%EF%BC%8C%E5%A6%82maven%E7%AD%89/</url>
-    <content><![CDATA[这几天在折腾maven项目
-我发现居然每次新open一个项目就得配置下maven
-因为默认的maven配置文件不行，我自定义的文件用的是阿里云的镜像
-那样快一点，于是很郁闷，决定要搞定他！！！
-结果这样设置就可以了，全局设置。
-File---&gt;Other Setting---&gt;Default Setting
-接下来的设置就是一样的了，各种设置都可以，只要你想全局生效
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>IDEA智能补全快捷键更改为Ctrl + 逗号</title>
-    <url>/20170328-IDEA%E6%99%BA%E8%83%BD%E8%A1%A5%E5%85%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%9B%B4%E6%94%B9%E4%B8%BACtrl%20+%20%E9%80%97%E5%8F%B7/</url>
-    <content><![CDATA[一直就听说idea的智能补全很厉害，但是Ctrl + 空格 被万恶的输入法给占用了网上搜也不是很清晰，这里就写个博客记录一下
-快捷键设置：file－&gt;setting-&gt;Keymap-&gt;Main menu-&gt;Code-&gt;Completion-&gt;Basic找到之后右键Add keyboard Shortcut，然后按下：Ctrl + 逗号
+    <title>IDEA Denpendencies红色波浪线报错,所有的包无法导入 - 一种解决办法</title>
+    <url>/20170228-IDEA-Denpendencies%E7%BA%A2%E8%89%B2%E6%B3%A2%E6%B5%AA%E7%BA%BF%E6%8A%A5%E9%94%99-%E6%89%80%E6%9C%89%E7%9A%84%E5%8C%85%E6%97%A0%E6%B3%95%E5%AF%BC%E5%85%A5-%E4%B8%80%E7%A7%8D%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+    <content><![CDATA[failed to read artifact descriptor for xxx：jar
+一下午那代码里面是各种报错
+凡是引入的大部分都报错
+原因就是maven管理的jar没有添加上依赖
+最后在stackoverflow找到了良药
+上面有图片，错误会详细一点，如果你的也相同，可以试一试
+maven project -&gt; Execute Maven Goal -&gt; mvn -U clean install
+执行以上命令之后等待完成，应该就好了
+参考自stackoverflow：点击查看
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -2062,6 +2014,54 @@ File---&gt;Other Setting---&gt;Default Setting
       </tags>
   </entry>
   <entry>
+    <title>IDEA 貌似注解失效 - 报错：cannot resolve method xxx</title>
+    <url>/20170301-IDEA-%E8%B2%8C%E4%BC%BC%E6%B3%A8%E8%A7%A3%E5%A4%B1%E6%95%88-%E6%8A%A5%E9%94%99%EF%BC%9Acannot-resolve-method-xxx/</url>
+    <content><![CDATA[在Java平台上lombok提供了简单的注解的形式
+来帮助我们消除一些必须有但看起来很臃肿的代码
+比如属性的get&#x2F;set，及对象的toString等方法，特别是相对于 POJO;
+
+出现问题
+各种log方法，set方法中红色波浪线
+提示：cannot resolve method xxx
+虽然出现错误但是编译是可以通过的
+
+问题原因原来的代码用了lombok简单注解比如maven的pom.xml文件有如下配置
+&lt;dependency&gt;	&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;	&lt;artifactId&gt;lombok&lt;/artifactId&gt;	&lt;version&gt;1.16.8&lt;/version&gt;&lt;/dependency&gt;
+
+解决办法安装lombok plugin
+
+装完插件之后就舒服了，也不报错
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>IDEA修改全局设置，如maven等</title>
+    <url>/20170215-IDEA%E4%BF%AE%E6%94%B9%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%EF%BC%8C%E5%A6%82maven%E7%AD%89/</url>
+    <content><![CDATA[这几天在折腾maven项目
+我发现居然每次新open一个项目就得配置下maven
+因为默认的maven配置文件不行，我自定义的文件用的是阿里云的镜像
+那样快一点，于是很郁闷，决定要搞定他！！！
+结果这样设置就可以了，全局设置。
+File---&gt;Other Setting---&gt;Default Setting
+接下来的设置就是一样的了，各种设置都可以，只要你想全局生效
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>IDEA智能补全快捷键更改为Ctrl + 逗号</title>
+    <url>/20170328-IDEA%E6%99%BA%E8%83%BD%E8%A1%A5%E5%85%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%9B%B4%E6%94%B9%E4%B8%BACtrl%20+%20%E9%80%97%E5%8F%B7/</url>
+    <content><![CDATA[一直就听说idea的智能补全很厉害，但是Ctrl + 空格 被万恶的输入法给占用了网上搜也不是很清晰，这里就写个博客记录一下
+快捷键设置：file－&gt;setting-&gt;Keymap-&gt;Main menu-&gt;Code-&gt;Completion-&gt;Basic找到之后右键Add keyboard Shortcut，然后按下：Ctrl + 逗号
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>IDEA自定义注释模板(Javadoc) - Jindent插件 - 安装&amp;设置</title>
     <url>/20170214-IDEA%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E9%87%8A%E6%A8%A1%E6%9D%BF-Javadoc-Jindent%E6%8F%92%E4%BB%B6-%E5%AE%89%E8%A3%85-%E8%AE%BE%E7%BD%AE/</url>
     <content><![CDATA[在线安装
@@ -2112,6 +2112,18 @@ VM options：-Dfile.encoding&#x3D;UTF-8
       </categories>
   </entry>
   <entry>
+    <title>idea列编辑：IntelliJ IDEA：toggle block selection mode</title>
+    <url>/20171024-IntelliJ%20IDEA%EF%BC%9Atoggle%20block%20selection%20mode/</url>
+    <content><![CDATA[在eclipse中有列编辑模式：toggle block selection mode
+在idea中也可以，而且还比较高级，哈哈
+idea -&gt; 右上角 -&gt; Edit -&gt; Column Selection Mode -&gt; 移动光标到你想要弄的行
+完事在重复一次，就可以退出列编辑模式
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>IntelliJ IDEA 调试窗口、帮助窗口、搜索框、底部消息等中文乱码问题解决</title>
     <url>/20170825-IntelliJ%20IDEA%20%E8%B0%83%E8%AF%95%E7%AA%97%E5%8F%A3%E3%80%81%E5%B8%AE%E5%8A%A9%E7%AA%97%E5%8F%A3%E3%80%81%E6%90%9C%E7%B4%A2%E6%A1%86%E3%80%81%E5%BA%95%E9%83%A8%E6%B6%88%E6%81%AF%E7%AD%89%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[IntelliJ IDEA 调试窗口、帮助窗口、搜索框、底部消息等中文乱码
@@ -2120,18 +2132,6 @@ VM options：-Dfile.encoding&#x3D;UTF-8
 解决办法：更改为支持中文的字体（比如：微软雅黑 Microsoft YaHei）
 设置路径：Settings -&gt; Appearance &amp; Behavior -&gt; UI Options -&gt; override default fonts by
 选择何时的字体即可，也可以把勾勾去掉，使用默认的。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>idea列编辑：IntelliJ IDEA：toggle block selection mode</title>
-    <url>/20171024-IntelliJ%20IDEA%EF%BC%9Atoggle%20block%20selection%20mode/</url>
-    <content><![CDATA[在eclipse中有列编辑模式：toggle block selection mode
-在idea中也可以，而且还比较高级，哈哈
-idea -&gt; 右上角 -&gt; Edit -&gt; Column Selection Mode -&gt; 移动光标到你想要弄的行
-完事在重复一次，就可以退出列编辑模式
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -2403,6 +2403,21 @@ JWT官方网站：https://jwt.io/
       </tags>
   </entry>
   <entry>
+    <title>Java - 利用apache POI读取Excel（xls,xlsx,2003,2007)</title>
+    <url>/20180113-Java%20-%20%E5%88%A9%E7%94%A8apache%20POI%E8%AF%BB%E5%8F%96Excel%EF%BC%88xls,xlsx,2003,2007)/</url>
+    <content><![CDATA[一个简单的工具类，更多Java小练习：https://github.com/hisenyuan/IDEAPractice
+一、添加依赖&lt;!-- POI start --&gt;&lt;dependency&gt;  &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;  &lt;artifactId&gt;poi&lt;/artifactId&gt;  &lt;version&gt;3.9&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;  &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;  &lt;artifactId&gt;poi-ooxml&lt;/artifactId&gt;  &lt;version&gt;3.9&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;  &lt;groupId&gt;commons-collections&lt;/groupId&gt;  &lt;artifactId&gt;commons-collections&lt;/artifactId&gt;  &lt;version&gt;3.2.2&lt;/version&gt;&lt;/dependency&gt;&lt;!-- POI end --&gt;
+二、测试类package com.hisen.jars.poi;import Java.io.File;import Java.io.IOException;import Java.util.Arrays;import Java.util.List;/** * @author hisenyuan * @time 2018/1/12 17:43 * @description 测试读取 */public class TestPoiExcelUtil &#123;  public static void main(String[] args) &#123;    File file = new File(&quot;C:\\work\\document\\银行信息.xlsx&quot;);    try &#123;      // 每一个excelData为一行数据（存放在数组）      List&lt;String[]&gt; excelData = POIExcelUtil.readExcel(file);      for (String[] data:excelData) &#123;        System.out.println(Arrays.toString(data));      &#125;    &#125; catch (IOException e) &#123;      e.printStackTrace();    &#125;  &#125;&#125;
+三、工具类代码完整类：POIExcelUtil.Java
+package com.hisen.jars.poi;import Java.io.File;import Java.io.FileInputStream;import Java.io.FileNotFoundException;import Java.io.IOException;import Java.io.InputStream;import Java.util.ArrayList;import Java.util.List;import org.apache.log4j.Logger;import org.apache.poi.hssf.usermodel.HSSFWorkbook;import org.apache.poi.ss.usermodel.Cell;import org.apache.poi.ss.usermodel.Row;import org.apache.poi.ss.usermodel.Sheet;import org.apache.poi.ss.usermodel.Workbook;import org.apache.poi.xssf.usermodel.XSSFWorkbook;/** * @author hisenyuan * @time 2018/1/12 16:35 * @description 利用POI读取excel表格 */public class POIExcelUtil &#123;  private static Logger logger = Logger.getLogger(POIExcelUtil.class);  private final static String XLS = &quot;xls&quot;;  private final static String XLSX = &quot;xlsx&quot;;  public static List&lt;String[]&gt; readExcel(File file) throws IOException &#123;    // 检查文件    checkFile(file);    Workbook workBook = getWorkBook(file);    // 返回对象,每行作为一个数组，放在集合返回    ArrayList&lt;String[]&gt; rowList = new ArrayList&lt;&gt;();    if (null != workBook) &#123;      for (int sheetNum = 0; sheetNum &lt; workBook.getNumberOfSheets(); sheetNum++) &#123;        // 获得当前sheet工作表        Sheet sheet = workBook.getSheetAt(sheetNum);        if (sheet == null) &#123;          continue;        &#125;        // 获得当前sheet的开始行        int firstRowNum = sheet.getFirstRowNum();        // 获得当前sheet的结束行        int lastRowNum = sheet.getLastRowNum();        // 循环所有行(第一行为标题)        for (int rowNum = firstRowNum; rowNum &lt; lastRowNum; rowNum++) &#123;          // 获得当前行          Row row = sheet.getRow(rowNum);          if (row == null) &#123;            continue;          &#125;          // 获得当前行开始的列          short firstCellNum = row.getFirstCellNum();          // 获得当前行的列数          int lastCellNum = row.getPhysicalNumberOfCells();          String[] cells = new String[row.getPhysicalNumberOfCells()];          // 循环当前行          for (int cellNum = firstCellNum; cellNum &lt; lastCellNum; cellNum++) &#123;            Cell cell = row.getCell(cellNum);            cells[cellNum] = getCellValue(cell);          &#125;          rowList.add(cells);        &#125;      &#125;    &#125;    return rowList;  &#125;&#125;]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java受检异常和非受检异常 - uncheckedException checkedException</title>
     <url>/20190429-Java%20-%20%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%E5%92%8C%E9%9D%9E%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%20-%20uncheckedException%20checkedException/</url>
     <content><![CDATA[一、简单介绍除了runtimeException以外的异常，都属于checkedException。
@@ -2458,21 +2473,6 @@ JVM调优是最后的稻草，进行JVM调优之前应该先优化架构和代�
       </tags>
   </entry>
   <entry>
-    <title>Java - 利用apache POI读取Excel（xls,xlsx,2003,2007)</title>
-    <url>/20180113-Java%20-%20%E5%88%A9%E7%94%A8apache%20POI%E8%AF%BB%E5%8F%96Excel%EF%BC%88xls,xlsx,2003,2007)/</url>
-    <content><![CDATA[一个简单的工具类，更多Java小练习：https://github.com/hisenyuan/IDEAPractice
-一、添加依赖&lt;!-- POI start --&gt;&lt;dependency&gt;  &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;  &lt;artifactId&gt;poi&lt;/artifactId&gt;  &lt;version&gt;3.9&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;  &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;  &lt;artifactId&gt;poi-ooxml&lt;/artifactId&gt;  &lt;version&gt;3.9&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;  &lt;groupId&gt;commons-collections&lt;/groupId&gt;  &lt;artifactId&gt;commons-collections&lt;/artifactId&gt;  &lt;version&gt;3.2.2&lt;/version&gt;&lt;/dependency&gt;&lt;!-- POI end --&gt;
-二、测试类package com.hisen.jars.poi;import Java.io.File;import Java.io.IOException;import Java.util.Arrays;import Java.util.List;/** * @author hisenyuan * @time 2018/1/12 17:43 * @description 测试读取 */public class TestPoiExcelUtil &#123;  public static void main(String[] args) &#123;    File file = new File(&quot;C:\\work\\document\\银行信息.xlsx&quot;);    try &#123;      // 每一个excelData为一行数据（存放在数组）      List&lt;String[]&gt; excelData = POIExcelUtil.readExcel(file);      for (String[] data:excelData) &#123;        System.out.println(Arrays.toString(data));      &#125;    &#125; catch (IOException e) &#123;      e.printStackTrace();    &#125;  &#125;&#125;
-三、工具类代码完整类：POIExcelUtil.Java
-package com.hisen.jars.poi;import Java.io.File;import Java.io.FileInputStream;import Java.io.FileNotFoundException;import Java.io.IOException;import Java.io.InputStream;import Java.util.ArrayList;import Java.util.List;import org.apache.log4j.Logger;import org.apache.poi.hssf.usermodel.HSSFWorkbook;import org.apache.poi.ss.usermodel.Cell;import org.apache.poi.ss.usermodel.Row;import org.apache.poi.ss.usermodel.Sheet;import org.apache.poi.ss.usermodel.Workbook;import org.apache.poi.xssf.usermodel.XSSFWorkbook;/** * @author hisenyuan * @time 2018/1/12 16:35 * @description 利用POI读取excel表格 */public class POIExcelUtil &#123;  private static Logger logger = Logger.getLogger(POIExcelUtil.class);  private final static String XLS = &quot;xls&quot;;  private final static String XLSX = &quot;xlsx&quot;;  public static List&lt;String[]&gt; readExcel(File file) throws IOException &#123;    // 检查文件    checkFile(file);    Workbook workBook = getWorkBook(file);    // 返回对象,每行作为一个数组，放在集合返回    ArrayList&lt;String[]&gt; rowList = new ArrayList&lt;&gt;();    if (null != workBook) &#123;      for (int sheetNum = 0; sheetNum &lt; workBook.getNumberOfSheets(); sheetNum++) &#123;        // 获得当前sheet工作表        Sheet sheet = workBook.getSheetAt(sheetNum);        if (sheet == null) &#123;          continue;        &#125;        // 获得当前sheet的开始行        int firstRowNum = sheet.getFirstRowNum();        // 获得当前sheet的结束行        int lastRowNum = sheet.getLastRowNum();        // 循环所有行(第一行为标题)        for (int rowNum = firstRowNum; rowNum &lt; lastRowNum; rowNum++) &#123;          // 获得当前行          Row row = sheet.getRow(rowNum);          if (row == null) &#123;            continue;          &#125;          // 获得当前行开始的列          short firstCellNum = row.getFirstCellNum();          // 获得当前行的列数          int lastCellNum = row.getPhysicalNumberOfCells();          String[] cells = new String[row.getPhysicalNumberOfCells()];          // 循环当前行          for (int cellNum = firstCellNum; cellNum &lt; lastCellNum; cellNum++) &#123;            Cell cell = row.getCell(cellNum);            cells[cellNum] = getCellValue(cell);          &#125;          rowList.add(cells);        &#125;      &#125;    &#125;    return rowList;  &#125;&#125;]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>IDEA - Java.Lang.OutOfMemoryError: PermGen Space</title>
     <url>/20170222-Java-Lang-OutOfMemoryError-PermGen-Space/</url>
     <content><![CDATA[Java.Lang.OutOfMemoryError: PermGen Space
@@ -2484,6 +2484,30 @@ Tomcat只分配了非常小的PermGen内存，这里重新设置一下
       </categories>
       <tags>
         <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 反序列化漏洞</title>
+    <url>/20200510-Java-deserialize-security-hole/</url>
+    <content><![CDATA[微博目前关注了好几个做安全的大佬不要问我为什么关注问就是想观摩下有钱人的微博！
+其中有一个经常发 Java 相关的内容今天看到一个稍微熟悉一点关于 FastJson 漏洞
+
+窃以为Fastjson入门的最佳篇章非Mi1k7ea这个系列莫属，郑重推荐: Mi1k7ea。共有5篇，从第3篇开始，成体系地由旧到新展示了1.2.25之后各版本的补丁绕过，直至思路惊艳的1.2.47绕过方案及1.2.48的修补方案，相当完备。可以看出此君是动手实践派、整理归纳派，要我说，新学东西时就得这套路，无它。
+
+今天看了这两篇文章，不得不说对 Java 是异常的熟悉。想做好安全，想必要对用的东西了如指掌，知道坑在哪里，怎么填坑。
+
+Java反序列化漏洞
+Fastjson系列一 反序列化漏洞基本原理
+
+
+后记：很多时候大部分人都只关注自己工作职责内的那一亩三分地其实很多时候横向观察一下会发现很多靓丽的风景至今没有如此深入的去看过底层甚是愧疚用最多的时间去做最正确的事情！
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+        <tag>安全</tag>
       </tags>
   </entry>
   <entry>
@@ -2532,30 +2556,6 @@ JVM 新生代大小与老年代大小默认为 1:2，大部分应用按这个设
       <tags>
         <tag>java</tag>
         <tag>性能</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java 反序列化漏洞</title>
-    <url>/20200510-Java-deserialize-security-hole/</url>
-    <content><![CDATA[微博目前关注了好几个做安全的大佬不要问我为什么关注问就是想观摩下有钱人的微博！
-其中有一个经常发 Java 相关的内容今天看到一个稍微熟悉一点关于 FastJson 漏洞
-
-窃以为Fastjson入门的最佳篇章非Mi1k7ea这个系列莫属，郑重推荐: Mi1k7ea。共有5篇，从第3篇开始，成体系地由旧到新展示了1.2.25之后各版本的补丁绕过，直至思路惊艳的1.2.47绕过方案及1.2.48的修补方案，相当完备。可以看出此君是动手实践派、整理归纳派，要我说，新学东西时就得这套路，无它。
-
-今天看了这两篇文章，不得不说对 Java 是异常的熟悉。想做好安全，想必要对用的东西了如指掌，知道坑在哪里，怎么填坑。
-
-Java反序列化漏洞
-Fastjson系列一 反序列化漏洞基本原理
-
-
-后记：很多时候大部分人都只关注自己工作职责内的那一亩三分地其实很多时候横向观察一下会发现很多靓丽的风景至今没有如此深入的去看过底层甚是愧疚用最多的时间去做最正确的事情！
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-        <tag>安全</tag>
       </tags>
   </entry>
   <entry>
@@ -2808,6 +2808,23 @@ windows为了兼容dos，所以turbo c生成的文件也可以在windows中运�
       </tags>
   </entry>
   <entry>
+    <title>Java多姿势读写文件</title>
+    <url>/20180718-Java%E5%A4%9A%E5%A7%BF%E5%8A%BF%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[重温经典，特意看了下为什么读文件非得不让等于 -1
+fileChannelIn.read(byteBuffer) !&#x3D; -1
+EOF &#x3D; End Of File，其默认值就是-1
+这是一个约定好的结束符，不是认为改变的
+代码建议使用大文件进行测试，看效果比较明显
+@Testpublic void testCopy() &#123;    String oldFileName = &quot;/Users/hisenyuan/hisen/blog/source/_posts/Test-Java-Code.md&quot;;    String newFileName = &quot;/Users/hisenyuan/hisen/test/Test-Java-Code.md&quot;;    nioCopy(oldFileName, newFileName);    ioCopy(oldFileName, newFileName.replace(&quot;.md&quot;, &quot;.md.bak&quot;));    ioCopyByLine(oldFileName,newFileName.replace(&quot;.md&quot;,&quot;.bak.&quot; + System.currentTimeMillis()));&#125;/** * 利用NIO进行读写文件 * * @param oldFileName 原文件的路径 * @param newFileName 新文件的路径 */public static void nioCopy(String oldFileName, String newFileName) &#123;    try &#123;        FileChannel fileChannelIn = new FileInputStream(new File(oldFileName)).getChannel();        FileChannel fileChannelOut = new FileOutputStream(new File(newFileName)).getChannel();        //获取文件大小        long size = fileChannelIn.size();        System.out.printf(&quot;文件大小为：%s byte \n&quot;, size);        //缓冲        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);        long start = System.currentTimeMillis();        while (fileChannelIn.read(byteBuffer) != -1) &#123;            //准备写            byteBuffer.flip();            fileChannelOut.write(byteBuffer);            //准备读            byteBuffer.clear();        &#125;        long end = System.currentTimeMillis();        System.out.printf(&quot;NIO方式复制完成，耗时 %s 秒\n&quot;, (end - start) / 1000);        //关闭        fileChannelIn.close();        fileChannelOut.close();    &#125; catch (FileNotFoundException e) &#123;        e.printStackTrace();    &#125; catch (IOException e) &#123;        e.printStackTrace();    &#125;&#125;/** * IO方式复制文件 * * @param oldFileName * @param newFileName */public static void ioCopy(String oldFileName, String newFileName) &#123;    try &#123;        FileInputStream fileInputStream = new FileInputStream(new File(oldFileName));        FileOutputStream fileOutputStream = new FileOutputStream(new File(newFileName));        long length = new File(oldFileName).length();        System.out.printf(&quot;文件大小为：%s byte \n&quot;, length);        byte[] buffer = new byte[1024];        long start = System.currentTimeMillis();        int len = 0;        //EOF = End Of File，其默认值就是-1        while ((len = fileInputStream.read(buffer)) != -1) &#123;            fileOutputStream.write(buffer, 0, len);        &#125;        long end = System.currentTimeMillis();        System.out.printf(&quot;IO方式复制完成，耗时 %s 秒\n&quot;, (end - start) / 1000);    &#125; catch (FileNotFoundException e) &#123;        e.printStackTrace();    &#125; catch (IOException e) &#123;        e.printStackTrace();    &#125;&#125;public static void ioCopyByLine(String oldFileName, String newFileName) &#123;    try &#123;        BufferedReader reader = new BufferedReader(new FileReader(oldFileName));        BufferedWriter writer = new BufferedWriter(new FileWriter(newFileName));        String line;        while ((line = reader.readLine()) != null) &#123;            writer.write(line);            writer.newLine();            writer.flush();        &#125;    &#125; catch (IOException e) &#123;        System.out.println(&quot;error:&quot; + e);    &#125;&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java对象的一生 | 从new到被回收</title>
     <url>/20190408-Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%80%E7%94%9F/</url>
     <content><![CDATA[一、出生过程这里讲述的是第一次出生的过程，即之前class没有被加载。
@@ -2844,44 +2861,6 @@ Java new一个对象的过程中发生了什么
       <tags>
         <tag>java</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Java多姿势读写文件</title>
-    <url>/20180718-Java%E5%A4%9A%E5%A7%BF%E5%8A%BF%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[重温经典，特意看了下为什么读文件非得不让等于 -1
-fileChannelIn.read(byteBuffer) !&#x3D; -1
-EOF &#x3D; End Of File，其默认值就是-1
-这是一个约定好的结束符，不是认为改变的
-代码建议使用大文件进行测试，看效果比较明显
-@Testpublic void testCopy() &#123;    String oldFileName = &quot;/Users/hisenyuan/hisen/blog/source/_posts/Test-Java-Code.md&quot;;    String newFileName = &quot;/Users/hisenyuan/hisen/test/Test-Java-Code.md&quot;;    nioCopy(oldFileName, newFileName);    ioCopy(oldFileName, newFileName.replace(&quot;.md&quot;, &quot;.md.bak&quot;));    ioCopyByLine(oldFileName,newFileName.replace(&quot;.md&quot;,&quot;.bak.&quot; + System.currentTimeMillis()));&#125;/** * 利用NIO进行读写文件 * * @param oldFileName 原文件的路径 * @param newFileName 新文件的路径 */public static void nioCopy(String oldFileName, String newFileName) &#123;    try &#123;        FileChannel fileChannelIn = new FileInputStream(new File(oldFileName)).getChannel();        FileChannel fileChannelOut = new FileOutputStream(new File(newFileName)).getChannel();        //获取文件大小        long size = fileChannelIn.size();        System.out.printf(&quot;文件大小为：%s byte \n&quot;, size);        //缓冲        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);        long start = System.currentTimeMillis();        while (fileChannelIn.read(byteBuffer) != -1) &#123;            //准备写            byteBuffer.flip();            fileChannelOut.write(byteBuffer);            //准备读            byteBuffer.clear();        &#125;        long end = System.currentTimeMillis();        System.out.printf(&quot;NIO方式复制完成，耗时 %s 秒\n&quot;, (end - start) / 1000);        //关闭        fileChannelIn.close();        fileChannelOut.close();    &#125; catch (FileNotFoundException e) &#123;        e.printStackTrace();    &#125; catch (IOException e) &#123;        e.printStackTrace();    &#125;&#125;/** * IO方式复制文件 * * @param oldFileName * @param newFileName */public static void ioCopy(String oldFileName, String newFileName) &#123;    try &#123;        FileInputStream fileInputStream = new FileInputStream(new File(oldFileName));        FileOutputStream fileOutputStream = new FileOutputStream(new File(newFileName));        long length = new File(oldFileName).length();        System.out.printf(&quot;文件大小为：%s byte \n&quot;, length);        byte[] buffer = new byte[1024];        long start = System.currentTimeMillis();        int len = 0;        //EOF = End Of File，其默认值就是-1        while ((len = fileInputStream.read(buffer)) != -1) &#123;            fileOutputStream.write(buffer, 0, len);        &#125;        long end = System.currentTimeMillis();        System.out.printf(&quot;IO方式复制完成，耗时 %s 秒\n&quot;, (end - start) / 1000);    &#125; catch (FileNotFoundException e) &#123;        e.printStackTrace();    &#125; catch (IOException e) &#123;        e.printStackTrace();    &#125;&#125;public static void ioCopyByLine(String oldFileName, String newFileName) &#123;    try &#123;        BufferedReader reader = new BufferedReader(new FileReader(oldFileName));        BufferedWriter writer = new BufferedWriter(new FileWriter(newFileName));        String line;        while ((line = reader.readLine()) != null) &#123;            writer.write(line);            writer.newLine();            writer.flush();        &#125;    &#125; catch (IOException e) &#123;        System.out.println(&quot;error:&quot; + e);    &#125;&#125;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java编译错误：程序包Javax.servlet不存在Javax.servlet.*</title>
-    <url>/20170217-Java%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%8C%85Javax-servlet%E4%B8%8D%E5%AD%98%E5%9C%A8Javax-servlet/</url>
-    <content><![CDATA[之前用myeclipse开发的项目
-今天导入到IDEA中去，发现编译出问题
-ava编译错误：程序包Javax.servlet不存在Javax.servlet.*
-
-原因大概是myeclipse中可以选择Java EE项目
-而idea没有，缺少 servlet-api.jar 这个jar包
-
-解决办法：
-
-复制tomcat文件夹下lib—&gt;servlet-api.jar 这个jar包
-添加到IDEA项目中去：粘贴到External Library目录下
-
-即可
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
   </entry>
   <entry>
     <title>Java开发的一点思考</title>
@@ -2984,6 +2963,27 @@ Hibernate为什么一定要定义一个数据库标识？
         <tag>成长</tag>
         <tag>面试</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Java编译错误：程序包Javax.servlet不存在Javax.servlet.*</title>
+    <url>/20170217-Java%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%8C%85Javax-servlet%E4%B8%8D%E5%AD%98%E5%9C%A8Javax-servlet/</url>
+    <content><![CDATA[之前用myeclipse开发的项目
+今天导入到IDEA中去，发现编译出问题
+ava编译错误：程序包Javax.servlet不存在Javax.servlet.*
+
+原因大概是myeclipse中可以选择Java EE项目
+而idea没有，缺少 servlet-api.jar 这个jar包
+
+解决办法：
+
+复制tomcat文件夹下lib—&gt;servlet-api.jar 这个jar包
+添加到IDEA项目中去：粘贴到External Library目录下
+
+即可
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
   </entry>
   <entry>
     <title>Java获取股票信息 - Java获取股票信息接口</title>
@@ -4617,19 +4617,6 @@ select to_char(systimestamp, &#x27;yyyy-mm-dd hh24:mi:ss ff&#x27;) from dual;
       </tags>
   </entry>
   <entry>
-    <title>Oracle中exists在update中无法限制住条件，在select中可以</title>
-    <url>/20170323-Oracle%E4%B8%ADexists%E5%9C%A8update%E4%B8%AD%E6%97%A0%E6%B3%95%E9%99%90%E5%88%B6%E4%BD%8F%E6%9D%A1%E4%BB%B6%EF%BC%8C%E5%9C%A8select%E4%B8%AD%E5%8F%AF%E4%BB%A5/</url>
-    <content><![CDATA[这个问题是自己写的一个bug，标示不知道原因是什么
-现在暂时使用 in 代替解决了
-下面的查询是能限制住acct_type
-SELECT ew.customer_id,cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE cf.acct_type in(2,3)  AND ew.customer_id = cf.id
-但是在update的时候,会把acct_type&#x3D;1的也更新了
-update ew_quota_info ewset ew.all_amt = 100000where exists(SELECT ew.customer_idFROM ew_quota_info ew,     cf_customer cfWHERE cf.acct_type in(2,3)  AND ew.customer_id = cf.id)]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>oracle全局查找某字段所在的表</title>
     <url>/20170612-Oracle%E5%85%A8%E5%B1%80%E6%9F%A5%E6%89%BE%E6%9F%90%E5%AD%97%E6%AE%B5%E6%89%80%E5%9C%A8%E7%9A%84%E8%A1%A8/</url>
     <content><![CDATA[下面这个存储过程是查找数据库中某个字段值为：hisen 的表
@@ -4641,6 +4628,19 @@ declarel_cnt    varchar2(20);v_sql  varchar2(4000);v_tablename varchar(200);  cu
       <tags>
         <tag>存储</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Oracle中exists在update中无法限制住条件，在select中可以</title>
+    <url>/20170323-Oracle%E4%B8%ADexists%E5%9C%A8update%E4%B8%AD%E6%97%A0%E6%B3%95%E9%99%90%E5%88%B6%E4%BD%8F%E6%9D%A1%E4%BB%B6%EF%BC%8C%E5%9C%A8select%E4%B8%AD%E5%8F%AF%E4%BB%A5/</url>
+    <content><![CDATA[这个问题是自己写的一个bug，标示不知道原因是什么
+现在暂时使用 in 代替解决了
+下面的查询是能限制住acct_type
+SELECT ew.customer_id,cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE cf.acct_type in(2,3)  AND ew.customer_id = cf.id
+但是在update的时候,会把acct_type&#x3D;1的也更新了
+update ew_quota_info ewset ew.all_amt = 100000where exists(SELECT ew.customer_idFROM ew_quota_info ew,     cf_customer cfWHERE cf.acct_type in(2,3)  AND ew.customer_id = cf.id)]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
   </entry>
   <entry>
     <title>Oracle 分页的三种方式</title>
@@ -4734,6 +4734,27 @@ Tencent - Java安全指南
       </categories>
       <tags>
         <tag>安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis counter demo -  redis并发计数器</title>
+    <url>/20180111-Redis%20counter%20demo%20-%20%20redis%E5%B9%B6%E5%8F%91%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
+    <content><![CDATA[一、说明利用redis操作的原子性，实现Java 多线程并发的情况下实现计数器。
+我本机测试多个线程操作之后，结果会出现一定的延迟，但是最终数字是ok的
+应该是redis内部做了一个类似于队列的功能。
+需要注意的是，得使用redis连接的线程池，不然会出现异常
+这里有一个：JedisUtil 下面用到了
+二、 代码实现2.1 redis操作类package com.hisen.thread.count_click_by_redis;import com.hisen.utils.JedisUtil;import redis.clients.jedis.JedisPool;/** * @author hisenyuan * @description 操作redis的线程类 */public class ClickRedis &#123;  /**   * 必须使用线程池，而且线程池要大于并发数，否则会出现redis超时   */  private static JedisPool jedis = JedisUtil.getPool();  public static void click() &#123;    jedis.getResource().incrBy(&quot;hisen&quot;, 1);  &#125;  public static int getCount() &#123;    return Integer.parseInt(jedis.getResource().get(&quot;hisen&quot;));  &#125;  public static void declare() &#123;    jedis.getResource().del(&quot;hisen&quot;);    jedis.close();  &#125;&#125;
+2.2 线程类,模拟点击package com.hisen.thread.count_click_by_redis;/** * @author hisenyuan * @description 执行点击的线程类 */public class CountClickByRedisThread extends Thread&#123;  private int id;  public CountClickByRedisThread(int id) &#123;    this.id = id;  &#125;  @Override  public void run() &#123;    super.run();    ClickRedis.click();    int count = ClickRedis.getCount();    System.out.println(&quot;task:&quot; + id + &quot;\t 执行完毕\t线程编号：&quot; + this.getId() + &quot;\t当前值：&quot; + count);  &#125;&#125;
+2.3 主线程 - 启动类
+package com.hisen.thread.count_click_by_redis;import Java.util.concurrent.ArrayBlockingQueue;import Java.util.concurrent.ThreadPoolExecutor;import Java.util.concurrent.TimeUnit;public class Main &#123;  public static void main(String[] args) throws InterruptedException &#123;    /**     * 5 - corePoolSize：核心池的大小     * 10 - maximumPoolSize：线程池最大线程数，它表示在线程池中最多能创建多少个线程     * 200 - keepAliveTime：表示线程没有任务执行时最多保持多久时间会终止。     * unit - unit：参数keepAliveTime的时间单位，有7种取值     * workQueue：一个阻塞队列，用来存储等待执行的任务     */    ThreadPoolExecutor executor = new ThreadPoolExecutor(        50,        100,        200,        TimeUnit.MICROSECONDS,        new ArrayBlockingQueue&lt;Runnable&gt;(50));    // 开启50个线程    for (int i = 0; i &lt; 50; i++) &#123;      executor.execute(new CountClickByRedisThread(i));    &#125;    System.out.println(&quot;已经开启所有的子线程&quot;);    // 启动一次顺序关闭，执行以前提交的任务，但不接受新任务。    executor.shutdown();    // 判断所有线程是否已经执行完毕    while (true) &#123;      if (executor.isTerminated()) &#123;        System.out.println(&quot;所有的子线程都结束了！&quot;);        // 清除redis数据        ClickRedis.declare();        break;      &#125;      Thread.sleep(100);    &#125;  &#125;&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>高并发</tag>
       </tags>
   </entry>
   <entry>
@@ -5014,27 +5035,6 @@ Tencent - Java安全指南
       <tags>
         <tag>成长</tag>
         <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis counter demo -  redis并发计数器</title>
-    <url>/20180111-Redis%20counter%20demo%20-%20%20redis%E5%B9%B6%E5%8F%91%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
-    <content><![CDATA[一、说明利用redis操作的原子性，实现Java 多线程并发的情况下实现计数器。
-我本机测试多个线程操作之后，结果会出现一定的延迟，但是最终数字是ok的
-应该是redis内部做了一个类似于队列的功能。
-需要注意的是，得使用redis连接的线程池，不然会出现异常
-这里有一个：JedisUtil 下面用到了
-二、 代码实现2.1 redis操作类package com.hisen.thread.count_click_by_redis;import com.hisen.utils.JedisUtil;import redis.clients.jedis.JedisPool;/** * @author hisenyuan * @description 操作redis的线程类 */public class ClickRedis &#123;  /**   * 必须使用线程池，而且线程池要大于并发数，否则会出现redis超时   */  private static JedisPool jedis = JedisUtil.getPool();  public static void click() &#123;    jedis.getResource().incrBy(&quot;hisen&quot;, 1);  &#125;  public static int getCount() &#123;    return Integer.parseInt(jedis.getResource().get(&quot;hisen&quot;));  &#125;  public static void declare() &#123;    jedis.getResource().del(&quot;hisen&quot;);    jedis.close();  &#125;&#125;
-2.2 线程类,模拟点击package com.hisen.thread.count_click_by_redis;/** * @author hisenyuan * @description 执行点击的线程类 */public class CountClickByRedisThread extends Thread&#123;  private int id;  public CountClickByRedisThread(int id) &#123;    this.id = id;  &#125;  @Override  public void run() &#123;    super.run();    ClickRedis.click();    int count = ClickRedis.getCount();    System.out.println(&quot;task:&quot; + id + &quot;\t 执行完毕\t线程编号：&quot; + this.getId() + &quot;\t当前值：&quot; + count);  &#125;&#125;
-2.3 主线程 - 启动类
-package com.hisen.thread.count_click_by_redis;import Java.util.concurrent.ArrayBlockingQueue;import Java.util.concurrent.ThreadPoolExecutor;import Java.util.concurrent.TimeUnit;public class Main &#123;  public static void main(String[] args) throws InterruptedException &#123;    /**     * 5 - corePoolSize：核心池的大小     * 10 - maximumPoolSize：线程池最大线程数，它表示在线程池中最多能创建多少个线程     * 200 - keepAliveTime：表示线程没有任务执行时最多保持多久时间会终止。     * unit - unit：参数keepAliveTime的时间单位，有7种取值     * workQueue：一个阻塞队列，用来存储等待执行的任务     */    ThreadPoolExecutor executor = new ThreadPoolExecutor(        50,        100,        200,        TimeUnit.MICROSECONDS,        new ArrayBlockingQueue&lt;Runnable&gt;(50));    // 开启50个线程    for (int i = 0; i &lt; 50; i++) &#123;      executor.execute(new CountClickByRedisThread(i));    &#125;    System.out.println(&quot;已经开启所有的子线程&quot;);    // 启动一次顺序关闭，执行以前提交的任务，但不接受新任务。    executor.shutdown();    // 判断所有线程是否已经执行完毕    while (true) &#123;      if (executor.isTerminated()) &#123;        System.out.println(&quot;所有的子线程都结束了！&quot;);        // 清除redis数据        ClickRedis.declare();        break;      &#125;      Thread.sleep(100);    &#125;  &#125;&#125;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>高并发</tag>
       </tags>
   </entry>
   <entry>
@@ -5693,104 +5693,6 @@ package com.hisen.interview;/** * 变量不能被重写 * * @author hisenyuan 20
       </categories>
   </entry>
   <entry>
-    <title>《人民的名义》与技术管理</title>
-    <url>/20260628-The-name-of-the-people-and-technology-management/</url>
-    <content><![CDATA[0. 缘起五一假期没有什么安排，就在家看了一部比较经典的剧《人民的名义》。当时我比较惊讶的就是：
-
-高育良居然和高晓凤是结婚的，和原配是离婚状态。
-侯亮平的领导给他派活时，居然还提醒让问问他老婆钟小艾的建议。
-信托相关：后面还探索了一些信托、慈善基金等知识。
-
-涉及到利益的事情，在上地视角下还是能看懂，如果现实生活呢？从技术一线走过来，剧里面也有不少值得学习的管理和沟通技巧。
-1. 组织协同与管理当你面对一个庞大的遗留系统、复杂的跨部门协作，甚至准备空降到一个新的业务增效团队时，你面对的局面，本质上就是一个微缩版的“汉东省”。《人民的名义》表面上是政治剧，但其内核是一部 教科书级的复杂系统治理指南。对于资深技术管理者，有四个最核心的组织协同与人员管理洞察。
-1.1 沙瑞金的“重构”哲学：先理清依赖，再动手重构工程师最容易犯的错，是“新官上任三把火”，看到历史遗留系统或低效流程，第一反应就是“推翻重写”。沙瑞金初到汉东，面对彻底板结的政治生态，他没有立刻下令抓人，而是花了大量时间去基层调研（林城、大风厂），理清了汉东复杂的“接口依赖”和“历史技术债”。
-
-管理映射： 当你接手一个核心业务系统，组织诊断先于架构演进。
-不要急于推动重构，先摸清各团队的利益诉求、核心痛点以及业务的真实运转逻辑。
-所有的技术债，本质上都是过去的组织架构和业务妥协留下的历史快照。
-
-
-落地动作： 谋定而后动。用专业的管理思维去评估资源盘点与风险敞口，把技术愿景转化为各部门都能听懂的业务增效指标，做到“师出有名”。
-
-
-1.2 驾驭“李达康式”高绩效人才：结果导向与边界控制李达康是典型的“业务攻坚型Tech Lead”，只要能完成KPI（GDP），他甚至可以无视一些规范，性格强势，容易误伤跨部门协作的同事。沙瑞金对李达康的使用方式，是现代企业管理的典范：既要用他的极致执行力去攻克难题，又要用易学习（纪委）去死死盯住他的合规边界。
-
-管理映射： 团队里有技术狂人，他们能力极强，但忽视代码可读性、系统可维护性和研发规范。
-落地动作： 对待这类高绩效员工，充分授权的同时必须锁定边界。
-给他们最难的硬骨头去啃，但要在架构评审和代码合并环节卡住底线：
-强制文档沉淀；
-使用费曼技巧把复杂逻辑讲给其他成员听；
-
-
-确保他们的个人能力转化为团队的系统资产，而不是让他们成为“不可替代的单点风险”。
-
-
-
-1.3 拆解“高育良式”山头：打破技术黑盒与知识垄断高育良和他的“汉大帮”，本质上就是企业内部的“信息孤岛”和“部门墙”。他们通过建立复杂的人际网络和黑盒操作，垄断了汉东的政法系统。
-
-管理映射： 在研发团队中，最可怕的不是技术菜，而是“技术垄断”。有些老员工把控着核心模块，代码写得极其晦涩，拒绝输出清晰的文档，试图通过制造“信息壁垒”来巩固自己的地位。这就是技术团队里的“山头主义”。
-落地动作： 作为管理者，必须毫不留情地打破这种知识垄断。
-推行强制的轮岗机制、交叉Code Review，以及透明的架构分享。
-把“代码可读性”和“系统可维护性”提升到绩效考核的高度，倡导大道至简的工程文化。
-谁把系统搞得越复杂、越离不开他，就越要削弱他的核心控制权。
-
-
-
-1.4 陈岩石的“底层穿透”：拒绝中层信息过滤陈岩石是沙瑞金在汉东的“物理探针”。如果没有陈岩石，沙瑞金听到的将全是省委大院里粉饰太平的汇报。
-
-管理映射： 随着管理半径变大，你的时间会被各种会议和汇报填满。中层管理者或项目经理为了粉饰进度，往往会上报过滤后的“好消息”。
-落地动作： 保持对一线业务的“穿透式体感”。
-不要只看管理看板上的流转率，偶尔要亲自去看看核心链路的监控大盘，去听听一线运营人员或者客服对系统卡顿的真实吐槽。
-你的管理决策必须建立在真实的“物理依据”之上，而不是经过层层包装的PPT汇报。
-
-
-
-
-核心洞察：优秀的工程师关注逻辑的完美，而优秀的管理者关注资源的配置与目标的达成。把写代码时的模块化思维、解耦思维，运用到组织架构的协同设计中，用最平实、准确的职业语言去统一团队目标，这才是技术人向高阶管理进化的必经之路。
-
-2. 沟通协作在沟通与协作上，《人民的名义》展示的段位更高，甚至可以说是全剧的灵魂。日常研发中，我们常觉得“技术是黑白分明的，沟通却是灰色的”。但实际上，高级的沟通协作，本质上是另一场高并发的“协议对齐”与“流量控制”。对于资深的技术人，无论面对的是业务方、上级还是跨团队同僚，剧中的四种沟通名场面，直接对应了四种极具价值的职场协作解法：
-2.1 向上沟通：不要输出“技术黑盒”，要对齐“核心币种”很多技术人向上汇报时，喜欢抛出一堆非技术领导听不懂的专业术语（如高并发下的锁竞争、垃圾回收停顿等）。这在管理沟通中属于“低效协议”。看看剧中的高育良，哪怕面对不熟悉政法业务的沙瑞金，他每一次汇报都极度丝滑。为什么？因为他永远在用沙瑞金听得懂、且最关心的语言——**“大局观、班子团结、干部稳定”**来包装他的诉求。
-
-技术人的通病： 向上要资源重构时说：“这段旧代码太烂了，我要用 Go 重写，提高并发性能。”
-
-高阶的对齐方式（费曼技巧）： 转化成业务和管理听得懂的**“语言货币”**——资金、时间、稳定性。
-
-“目前核心链路的技术债已经到了临界点，当前的系统架构支撑下半年 11.11 促销的风险敞口极高。如果现在投入 2 个人、花 2 周时间把这部分逻辑解耦，不仅能把大促期间的服务器成本降低 30%，还能保证核心交易的可用性达到 4 个 9 以上，彻底消除资损风险。”
-
-
-
-2.2 横向协作：寻找“最大公约数”，破除“汉大帮”与“秘书帮”的对立剧中“汉大帮”（政法系）和“秘书帮”（经济系）天然对立，但在大风厂危机爆发的那个晚上，这两派人竟然坐在协调会上把问题给解决了。因为他们找到了一个共同的目标：不能发生群体性事件。在研发日常中，类似大风厂这样的“边界扯皮”天天在发生（比如：R&amp;D 觉得业务方的需求变化太快，产品觉得研发排期太长）。
-
-协作解法： 当跨部门协作推不动时，不要在技术细节上跟对方死磕。尝试跳出技术视角，站到更高的业务视角去寻找**“利益最大公约数”**。
-具体动作： 主动帮业务方算账。如果业务要上一个很赶的需求，与其生硬地拒绝，不如给出折中方案：“如果按你原定的完美版本做，研发要 3 周，肯定赶不上营销节点。我们能不能第一期先做个最小可行性产品（MVP），只支持核心主流程，3 天内就能上线跑数据，后面的功能我们按周迭代？”
-
-2.3 向下沟通：警惕“李达康式”的压迫，建立“非责备”的安全感李达康为了出政绩，对下属的沟通极其粗暴和强势，甚至不容许解释。结果导致了什么？孙连城直接躺平开始“仰望星空”，下属们为了不犯错，选择不做事。在技术团队里，如果你也是一个过于强势的 Tech Lead（技术主管），总在出线上事故时当众训斥：“这么简单的 Bug 怎么写出来的？”、“你这代码逻辑是怎么过的 Code Review？”。团队很快就会“李达康化”。
-
-带来的系统风险： 下属会因为害怕犯错而隐瞒技术风险。有了线上隐患不敢说，遇到架构难题自己硬扛，最后演变成无法收拾的灾难性大故障。
-高阶的沟通动作： 引入大厂提倡的 “非责备复盘”（Blameless Post-mortem）。在出故障后，沟通的焦点应该从“这是谁写的 Bug”转向“我们的系统设计和 Review 流程存在什么漏洞，才让这个 Bug 溜到了线上”。用流程和制度的防护网，换取团队成员的心理安全感，才能激发底层的实干创造力。
-
-2.4 危机沟通：学习“季昌明式”的合规与升级机制很多人觉得检察长季昌明“胆小怕事、极度教条”，在抓捕丁义珍的关键时刻，他非要拦着陈海，去向省委汇报，结果导致丁义珍跑了。但如果你在大厂待过，你会发现季昌明才是真正懂**“重大事故升级与容灾机制”**的人。抓捕副厅级干部，稍有不慎就是政治地震，这不是一个检察院能私自兜底的。
-
-技术人的通病： 线上突发大故障，或者核心数据库疑似被锁，为了个人英雄主义，自己悄悄在生产环境改代码、重启服务，结果导致故障范围进一步扩大，错过了最佳的止损时机。
-高阶的流程意识： 越是资深的工程师，越要明白**“风险升级机制”**（Escalation Policy）的重要性。
-明确什么级别的故障必须在 5 分钟内拉通整个核心团队；
-什么时候必须立刻向总监、VP 级别报警争取支持；
-什么时候该直接执行主备切换或熔断降级。  按流程规范办事，这不是教条，而是对系统、对团队最专业的保护。
-
-
-
-
-一句话总结：工程师写代码是为了让机器执行，而沟通是为了让组织协同。像机器一样去精准对齐信息流，像架构师一样去设计协作的边界与容灾机制，这就是从写代码（Coding）走向带团队（Leading）的沟通质变。
-
-]]></content>
-      <categories>
-        <category>Growth</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《远见：如何规划职业生涯3大阶段》读后感</title>
     <url>/20260628-The-Long-View/</url>
     <content><![CDATA[1. 缘起在看完一系列的电视剧之后，特别是《夜色正浓》里面李东明以及同事对竞选总监的张玫进行的各种辅导。我在想为什么会没相关的书籍呢？然后想到某博主说的一段话：
@@ -6212,6 +6114,104 @@ package com.hisen.interview;/** * 变量不能被重写 * * @author hisenyuan 20
       <tags>
         <tag>成长</tag>
         <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《人民的名义》与技术管理</title>
+    <url>/20260628-The-name-of-the-people-and-technology-management/</url>
+    <content><![CDATA[0. 缘起五一假期没有什么安排，就在家看了一部比较经典的剧《人民的名义》。当时我比较惊讶的就是：
+
+高育良居然和高晓凤是结婚的，和原配是离婚状态。
+侯亮平的领导给他派活时，居然还提醒让问问他老婆钟小艾的建议。
+信托相关：后面还探索了一些信托、慈善基金等知识。
+
+涉及到利益的事情，在上地视角下还是能看懂，如果现实生活呢？从技术一线走过来，剧里面也有不少值得学习的管理和沟通技巧。
+1. 组织协同与管理当你面对一个庞大的遗留系统、复杂的跨部门协作，甚至准备空降到一个新的业务增效团队时，你面对的局面，本质上就是一个微缩版的“汉东省”。《人民的名义》表面上是政治剧，但其内核是一部 教科书级的复杂系统治理指南。对于资深技术管理者，有四个最核心的组织协同与人员管理洞察。
+1.1 沙瑞金的“重构”哲学：先理清依赖，再动手重构工程师最容易犯的错，是“新官上任三把火”，看到历史遗留系统或低效流程，第一反应就是“推翻重写”。沙瑞金初到汉东，面对彻底板结的政治生态，他没有立刻下令抓人，而是花了大量时间去基层调研（林城、大风厂），理清了汉东复杂的“接口依赖”和“历史技术债”。
+
+管理映射： 当你接手一个核心业务系统，组织诊断先于架构演进。
+不要急于推动重构，先摸清各团队的利益诉求、核心痛点以及业务的真实运转逻辑。
+所有的技术债，本质上都是过去的组织架构和业务妥协留下的历史快照。
+
+
+落地动作： 谋定而后动。用专业的管理思维去评估资源盘点与风险敞口，把技术愿景转化为各部门都能听懂的业务增效指标，做到“师出有名”。
+
+
+1.2 驾驭“李达康式”高绩效人才：结果导向与边界控制李达康是典型的“业务攻坚型Tech Lead”，只要能完成KPI（GDP），他甚至可以无视一些规范，性格强势，容易误伤跨部门协作的同事。沙瑞金对李达康的使用方式，是现代企业管理的典范：既要用他的极致执行力去攻克难题，又要用易学习（纪委）去死死盯住他的合规边界。
+
+管理映射： 团队里有技术狂人，他们能力极强，但忽视代码可读性、系统可维护性和研发规范。
+落地动作： 对待这类高绩效员工，充分授权的同时必须锁定边界。
+给他们最难的硬骨头去啃，但要在架构评审和代码合并环节卡住底线：
+强制文档沉淀；
+使用费曼技巧把复杂逻辑讲给其他成员听；
+
+
+确保他们的个人能力转化为团队的系统资产，而不是让他们成为“不可替代的单点风险”。
+
+
+
+1.3 拆解“高育良式”山头：打破技术黑盒与知识垄断高育良和他的“汉大帮”，本质上就是企业内部的“信息孤岛”和“部门墙”。他们通过建立复杂的人际网络和黑盒操作，垄断了汉东的政法系统。
+
+管理映射： 在研发团队中，最可怕的不是技术菜，而是“技术垄断”。有些老员工把控着核心模块，代码写得极其晦涩，拒绝输出清晰的文档，试图通过制造“信息壁垒”来巩固自己的地位。这就是技术团队里的“山头主义”。
+落地动作： 作为管理者，必须毫不留情地打破这种知识垄断。
+推行强制的轮岗机制、交叉Code Review，以及透明的架构分享。
+把“代码可读性”和“系统可维护性”提升到绩效考核的高度，倡导大道至简的工程文化。
+谁把系统搞得越复杂、越离不开他，就越要削弱他的核心控制权。
+
+
+
+1.4 陈岩石的“底层穿透”：拒绝中层信息过滤陈岩石是沙瑞金在汉东的“物理探针”。如果没有陈岩石，沙瑞金听到的将全是省委大院里粉饰太平的汇报。
+
+管理映射： 随着管理半径变大，你的时间会被各种会议和汇报填满。中层管理者或项目经理为了粉饰进度，往往会上报过滤后的“好消息”。
+落地动作： 保持对一线业务的“穿透式体感”。
+不要只看管理看板上的流转率，偶尔要亲自去看看核心链路的监控大盘，去听听一线运营人员或者客服对系统卡顿的真实吐槽。
+你的管理决策必须建立在真实的“物理依据”之上，而不是经过层层包装的PPT汇报。
+
+
+
+
+核心洞察：优秀的工程师关注逻辑的完美，而优秀的管理者关注资源的配置与目标的达成。把写代码时的模块化思维、解耦思维，运用到组织架构的协同设计中，用最平实、准确的职业语言去统一团队目标，这才是技术人向高阶管理进化的必经之路。
+
+2. 沟通协作在沟通与协作上，《人民的名义》展示的段位更高，甚至可以说是全剧的灵魂。日常研发中，我们常觉得“技术是黑白分明的，沟通却是灰色的”。但实际上，高级的沟通协作，本质上是另一场高并发的“协议对齐”与“流量控制”。对于资深的技术人，无论面对的是业务方、上级还是跨团队同僚，剧中的四种沟通名场面，直接对应了四种极具价值的职场协作解法：
+2.1 向上沟通：不要输出“技术黑盒”，要对齐“核心币种”很多技术人向上汇报时，喜欢抛出一堆非技术领导听不懂的专业术语（如高并发下的锁竞争、垃圾回收停顿等）。这在管理沟通中属于“低效协议”。看看剧中的高育良，哪怕面对不熟悉政法业务的沙瑞金，他每一次汇报都极度丝滑。为什么？因为他永远在用沙瑞金听得懂、且最关心的语言——**“大局观、班子团结、干部稳定”**来包装他的诉求。
+
+技术人的通病： 向上要资源重构时说：“这段旧代码太烂了，我要用 Go 重写，提高并发性能。”
+
+高阶的对齐方式（费曼技巧）： 转化成业务和管理听得懂的**“语言货币”**——资金、时间、稳定性。
+
+“目前核心链路的技术债已经到了临界点，当前的系统架构支撑下半年 11.11 促销的风险敞口极高。如果现在投入 2 个人、花 2 周时间把这部分逻辑解耦，不仅能把大促期间的服务器成本降低 30%，还能保证核心交易的可用性达到 4 个 9 以上，彻底消除资损风险。”
+
+
+
+2.2 横向协作：寻找“最大公约数”，破除“汉大帮”与“秘书帮”的对立剧中“汉大帮”（政法系）和“秘书帮”（经济系）天然对立，但在大风厂危机爆发的那个晚上，这两派人竟然坐在协调会上把问题给解决了。因为他们找到了一个共同的目标：不能发生群体性事件。在研发日常中，类似大风厂这样的“边界扯皮”天天在发生（比如：R&amp;D 觉得业务方的需求变化太快，产品觉得研发排期太长）。
+
+协作解法： 当跨部门协作推不动时，不要在技术细节上跟对方死磕。尝试跳出技术视角，站到更高的业务视角去寻找**“利益最大公约数”**。
+具体动作： 主动帮业务方算账。如果业务要上一个很赶的需求，与其生硬地拒绝，不如给出折中方案：“如果按你原定的完美版本做，研发要 3 周，肯定赶不上营销节点。我们能不能第一期先做个最小可行性产品（MVP），只支持核心主流程，3 天内就能上线跑数据，后面的功能我们按周迭代？”
+
+2.3 向下沟通：警惕“李达康式”的压迫，建立“非责备”的安全感李达康为了出政绩，对下属的沟通极其粗暴和强势，甚至不容许解释。结果导致了什么？孙连城直接躺平开始“仰望星空”，下属们为了不犯错，选择不做事。在技术团队里，如果你也是一个过于强势的 Tech Lead（技术主管），总在出线上事故时当众训斥：“这么简单的 Bug 怎么写出来的？”、“你这代码逻辑是怎么过的 Code Review？”。团队很快就会“李达康化”。
+
+带来的系统风险： 下属会因为害怕犯错而隐瞒技术风险。有了线上隐患不敢说，遇到架构难题自己硬扛，最后演变成无法收拾的灾难性大故障。
+高阶的沟通动作： 引入大厂提倡的 “非责备复盘”（Blameless Post-mortem）。在出故障后，沟通的焦点应该从“这是谁写的 Bug”转向“我们的系统设计和 Review 流程存在什么漏洞，才让这个 Bug 溜到了线上”。用流程和制度的防护网，换取团队成员的心理安全感，才能激发底层的实干创造力。
+
+2.4 危机沟通：学习“季昌明式”的合规与升级机制很多人觉得检察长季昌明“胆小怕事、极度教条”，在抓捕丁义珍的关键时刻，他非要拦着陈海，去向省委汇报，结果导致丁义珍跑了。但如果你在大厂待过，你会发现季昌明才是真正懂**“重大事故升级与容灾机制”**的人。抓捕副厅级干部，稍有不慎就是政治地震，这不是一个检察院能私自兜底的。
+
+技术人的通病： 线上突发大故障，或者核心数据库疑似被锁，为了个人英雄主义，自己悄悄在生产环境改代码、重启服务，结果导致故障范围进一步扩大，错过了最佳的止损时机。
+高阶的流程意识： 越是资深的工程师，越要明白**“风险升级机制”**（Escalation Policy）的重要性。
+明确什么级别的故障必须在 5 分钟内拉通整个核心团队；
+什么时候必须立刻向总监、VP 级别报警争取支持；
+什么时候该直接执行主备切换或熔断降级。  按流程规范办事，这不是教条，而是对系统、对团队最专业的保护。
+
+
+
+
+一句话总结：工程师写代码是为了让机器执行，而沟通是为了让组织协同。像机器一样去精准对齐信息流，像架构师一样去设计协作的边界与容灾机制，这就是从写代码（Coding）走向带团队（Leading）的沟通质变。
+
+]]></content>
+      <categories>
+        <category>Growth</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
       </tags>
   </entry>
   <entry>
@@ -7817,6 +7817,81 @@ Mem0 · 提取、对比、决策三阶段的记忆框架
       </tags>
   </entry>
   <entry>
+    <title>AI 替代的是任务，不是程序员</title>
+    <url>/20261003-ai-replaces-tasks-not-programmers/</url>
+    <content><![CDATA[程序员会不会被 AI 取代，这个问题被反复问了好几年。真到了日常的工作里，被替掉的是一部分任务：样板代码、重复修复、机械实现。审查、验收和判断留了下来，它们的成本并没有下降。
+软件工程攒了几十年的实践，比如完整的回归测试、跟随代码演进的文档、清晰的模块边界和性能基准，一直没有真正普及。它们对人力的消耗太大，有交付压力时总是先被砍掉。AI 把执行成本降下来之后，这些实践第一次变得划算。
+
+
+1. AI 没有取代程序员，重排了他们的工作Anthropic 基础设施团队的体验是，AI 能快速生成 PR，但 RPC、内存、故障回滚这类关键路径仍然要人来看。模型犯小错也很常见：Spec 里写了十条，它可能漏掉一两条。人工审查不是旧习惯，而是安全底线。
+时间的去向也变了。过去要两周才能手写完的任务，现在一小时内就能生成十几个 PR，但工程师还要花几天分批阅读、跑测试、改掉不合适的地方。「一小时抵两周」只对生成环节成立，交付仍然卡在判断和验证上。原型的收益更明显：一个想法以前要申请一个月的验证时间，现在可以先做原型，一两周就能看出方向能不能走。
+真正扩大的还有工作范围。这位工程师说，原来三个人维护的领域，现在他用一半时间就能覆盖，零散知识交给 AI 补齐，自己抓住方向和边界。他开始同时理解产品、设计、策略和技术方案，成为一个更全面的工程师。价值点也跟着上移：知道该做什么、能提出 Roadmap 的人变得更稀缺，只会把手写代码当成全部能力的人，议价空间在变小。
+协作方式也在变。AI 能先替人解释别人的领域和问题，长会因此减少，很多对齐转到异步消息里。沟通的总量没有消失，只是重心从会议记录转向可检索的上下文。
+所以更准确的说法是任务替代。Stack Overflow 2025 年调查显示，84% 的受访者正在用或计划用 AI 工具，51% 的职业开发者每天使用。同时，46% 的人不信任 AI 输出的准确性，只有 33% 信任，高度信任只有 3%。66% 的开发者被「差不多但不对」的答案困扰，45% 觉得调试 AI 生成的代码更费时。这些数据指向同一个结论：AI 已经进入日常，验收权还在人手里。
+市场情绪也在回落。Anthropic 的年化收入从 2026 年 2 月的 140 亿美元涨到 4 月的 300 亿，7 月底到 650 亿，绝对值还在涨，但增速从年初的每月翻倍降到约 17%。Simon Willison 在复盘 2026 年时写道，模型接管了容易的事，剩下的全是难的。年初那种「程序员要被取代了」的推文少了，讨论转向怎么审查 Agent 代码、怎么控制 Token 开销、怎么划授权边界。议题从「会不会被替代」变成了「怎么用好」。
+2. 写代码变便宜，判断没有Tison 在《When Code Is Cheap》里的判断更直接：只有模型能力覆盖了日常工作的基线，生产力才会井喷。他自己已经进入这个状态，但前提说得很清楚，模型得先达到这条基线。到了这一步，核心竞争力是两件事：把愿望说清楚，以及构建出愿望的落地路径。
+他有选择地「不看代码」。有充分回归测试、范围清楚的代码，重构时只看测试快照就够了。需求还模糊的产品，靠端到端体验验证。但核心设计、并发原语、错误格式这类关键决策，他仍然读代码，必要时自己动手改。所以「不看代码」不是放弃审查，而是把审查的负担转移给测试和明确的验收边界。
+他自己的项目也支持这个判断。他重写过一个几千行的工具，用超过 100 次对话和 155 次提交推进。省下来的手写时间没有变成休息，而是用去确认范围、审查入口契约、重命名模块和补集成测试。规模变大以后，协作文档、清晰命名和可读性反而成了更贵的投入。
+他在 2026 年 9 月的《代码上道》里进一步说明了人的位置：AI 不能承担生产事故的责任，Code Owner 必须理解并重构 AI 生成的代码，才能对交付负责。他的做法是把设计固化成 IaC、项目结构、AGENTS.md、标准操作流程和运维日志，再授权 Agent 执行。连开源协作也要换假设：默认 PR 里有 AI 参与，维护者合并代码，就等于接下了责任。
+这些做法和「软件工程实践变得更容易落地」是同一件事。他在 4 月的《Agentic Coding 的边界》里就指出，领域语言、模块边界和活文档能提高上下文的密度，同时提醒 AI 会放大滥用，过度抽象和无意义的测试覆盖率都要警惕。到 9 月，他的说法从「提示词像软工实践」变成了「项目结构和 SOP 本身就是提示词」，立场更冷静，也更可执行。
+3. 初级人才需要新入口，不是更少的入口初级岗位确实在承压。SignalFire 2025 年的报告估计，大厂新毕业生占招聘的比例降到了 7%，比 2019 年低了一半以上。初创公司这个比例低于 6%，比 2019 年低了三分之一以上。原因不能全归给 AI，融资收紧、团队变小和正式培养项目减少是同时发生的。
+困境在于，传统初级工作正在被压缩。写样板代码、做重复修复、维护文档，这些以前是新人建立上下文的入口，现在 Agent 都能快速完成。我在三月的 AI 随笔里记过这个悖论：初级岗位可能变少，但用好 AI 又要求经验。SignalFire 的提醒更直接，公司如果完全跳过初级岗，长期的人才管道会被破坏。
+解法不是等一个天然岗位回来，而是把入口前移到真实问题上。新人得更早接触方向、测试和验收，否则身上只剩「用过 AI」这个没有区分度的标签。
+可行的培养路径有三层：
+
+学基础：算法、操作系统、数据库和系统设计，仍然决定一个人能不能判断 AI 给出的方案，具体语法的重要性在下降。
+用真实项目练验收：拿一个开源或个人项目当练习场，写行为测试和回归测试，读 AI 的 diff，再重构成自己能解释的结构。
+练方向感：用户为什么需要它、哪些方案不该做、怎么算做成了。Roadmap 不是产品经理的专属头衔，而是可以被验证的判断。
+
+这套路径也回应了访谈里的结论。软件工程仍然值得进入，因为编码成本下降会催生更多定制软件。但新人要按「基础 + 验收 + 产品判断」来准备，而不是追语法。
+4. 省下的时间投向验证、原型和组织协作这些投入有一个共同的目标：提高 oneshot 的命中率。我最近在自己的核心库里体会很深。oneshot 出得不好，第一次生成的代码就不能用，只能反复修，而反复修没有明确的终点。没有上线日期逼着交付，也没有测试告诉我架构方向对不对，动力就耗在调试循环里。反过来，Spec 写清楚了、测试边界划好了、架构约束落了盘，oneshot 命中率高，返工少，人就不会卡在中间。
+省下来的编码时间不该全部变成更快的交付，它至少有三个去处。
+第一个去处是验证，把测试、监控、文档和性能基准补齐。Tison 的体会是，AI 不怕枯燥，适合补齐以前懒得写的性能基准和基础测试。Anthropic 的工程师则把大批量生成改成小批量审查，避免上下文丢失和测试资源浪费。我在《稳定性：从传统工程到大模型时代》里的结论也一样：大模型场景不能靠断言判断对错，评测门禁就是新的回归测试。
+第二个去处是原型和定义问题。Anthropic 的工程师用快速原型换来了更多提案机会。我读《部署工程师》时记下的关键不是技术，而是「写第一行代码之前，怎么确保在解决正确的问题」。FDE 的时间分布里有两三成花在对齐方向、拆问题和做架构决策上，一到五天的部署原型要求真实数据、可部署的结果和高管拍板。原型变便宜以后，验证问题是否成立这件事反而更前置了。
+第三个去处是组织协作。我在《Agent 时代的人月神话》读后感里记录过一条分工线：能形式化的工作交给 Agent，目的、判据和处境的判断留给人。Agent 降低了个体的执行成本，但没有消除概念完整性、责任归属和协作摩擦。开会可以用 AI 减少，跨人的文档、命名和协作仍然决定系统能不能长大。软技能因此更像工程能力：把业务问题翻译成技术问题，把技术取舍翻译成业务结果，把现场经验沉淀成团队可复用的文档。
+这些做法已经有了组织级的验证。Anthropic 内部一个团队每季度交付的代码量是过去的 8 倍，其中 80% 由 Claude 生成。测试量涨了 10 倍，半年里 CI 任务量涨了 25 倍，原来的测试调度服务追不上，打了三次补丁之后只能重写。Shopify CEO 把另一面叫「烂泥手榴弹」：工程师用 AI 几秒钟生成一段代码，自己没核对就发给同事，省下的五分钟变成了 reviewer 两小时的排错成本。生成端越快，组织层面的验证和审查架构就越重要。Anthropic 用两周把核心体验提速约 3 倍，走的也是同一条路：先把「哪里慢」变成可测的指标，再让 Agent 去改，最后把指标接进 CI，防止性能掉回去。
+工程团队可以把这些动作制度化：
+
+关键路径必须人工审查：先明确哪些模块涉及资金、隐私、稳定性或不可逆操作，再决定授权范围。
+用回归测试换取有选择的信任：测试充分的服务可以少看实现，核心模型和错误处理仍然要读。
+把工程约束写进可执行文件：IaC、CI、AGENTS.md 和 SOP 让 Agent 有章可循，也让责任可追踪。
+把业务判断写进文档：成功标准、边界、风险和「为什么不这么做」要能被团队复核。
+给验证链路留出余量：Agent 生成的速度远快于人的审查速度，CI、测试和审查带宽要按新产能重新规划。
+
+上面这些做法都不是新发明。AI 改变的是执行成本，让团队能把软件工程的实践从「知道」推进到「每天做」。
+5. 所以，程序员怎么做得更好把 AI 当成放大器。基础越扎实、系统越健康，它放大的是判断和交付能力。基础薄弱、流程混乱，它放大的是返工和技术债。DORA 2025 年的报告也是这个定位：AI 放大组织已有的优点和弱点，收益主要取决于底层系统。
+程序员的具体优势会转移。写代码仍然重要，但它从终点变成了起点，更重要的是定义问题、选择架构、设计验收边界、读懂复杂系统，并对上线的结果负责。范围扩大之后，工程师还要补产品判断和跨职能协作。方向感会带来更多话语权，因为验证一个想法的成本降低之后，组织更愿意采纳可执行的提案。
+我负责把需求变成一条可验证的路径，让 AI 承担机械工作，自己保留技术决策和最终责任。这不是拒绝 AI，也不是把思考外包出去。
+我自己的做法更具体一些。AI Native 不是让每一步都用 AI，而是把工程约束写进文档和流程：需求澄清、接口契约、决策记录都落盘，上下文被污染时及时切换窗口，代码变更同步回文档。Agent 生成之后，Hook 和 CI 做确定性的校验，人只处理真正需要取舍的问题。一些新模型已经不再把软件工程师当作首要用户，代码是写给人和其他 Agent 读的，可读性和可维护性反而更要靠人来守。AI Native 不该只是一个口号，能落地的版本就是这些约束和验证闭环。
+6. 参考
+Stack Overflow 2025 开发者调查 · 一手调查，AI 使用率、信任度、Agent 采用与常见挫败感数据
+SignalFire 科技人才报告 2025 · 二手行业报告，大厂新毕业生招聘占比降至 7%，初创低于 6%
+DORA 2025 报告 · 一手研究摘要，AI 是组织已有能力的放大器
+Tison · When Code Is Cheap · 一手实践，模型能力覆盖基线后生产力才井喷，以及选择性审查的边界
+Tison · 代码上道、Agentic Coding 的边界 · 一手实践，Code Owner 责任、SOP 授权与上下文密度
+AI 工程师访谈 · 机器转写，Anthropic 基础设施工程师的审查、范围扩大与 Roadmap 判断。字幕有专有名词转写错误
+claude.dev · How we made claude.ai 3x faster in two weeks · 官方一手记录，两周把核心体验提速约 3 倍的做法
+CNBC · 二手报道，三个匿名信源，Anthropic 7 月底年化收入 650 亿美元
+Simon Willison · 二手摘录，Anthropic 官方公告中的 2 月 140 亿、4 月 300 亿、5 月 470 亿美元
+Simon Willison · 2026 in LLMs · 一手综述，容易的事被 Agent 接管、剩下的全是难的
+Anthropic 工程团队的 CI 案例 · 二手笔记转述，季度代码量 8 倍、CI 任务量 25 倍，原始出处未核实
+Shopify CEO Tobi Lütke 访谈 · 二手笔记转述，一半 PR 有 AI 参与与「烂泥手榴弹」的说法，原始出处未核实
+稳定性：从传统工程到大模型时代 · 我的博客，评测门禁是新的回归测试
+《部署工程师》(FDE)读后感 · 我的博客，写第一行代码前先确认问题
+《Agent 时代的人月神话》读后感 · 我的博客，人机分工线与协作成本
+【AI 随笔】尝试与洞察 · 我的博客，初级岗位悖论与 Review 负担
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+        <tag>AI 工程</tag>
+        <tag>工程效能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LLM API 中转站数据泄密，剖析它背后的生意与技术</title>
     <url>/20260915-ai-api-relay-station/</url>
     <content><![CDATA[
@@ -8156,81 +8231,6 @@ CVE 编号与影响版本来自公开漏洞库检索，上生产前建议去 NVD
       </tags>
   </entry>
   <entry>
-    <title>AI 替代的是任务，不是程序员</title>
-    <url>/20261003-ai-replaces-tasks-not-programmers/</url>
-    <content><![CDATA[程序员会不会被 AI 取代，这个问题被反复问了好几年。真到了日常的工作里，被替掉的是一部分任务：样板代码、重复修复、机械实现。审查、验收和判断留了下来，它们的成本并没有下降。
-软件工程攒了几十年的实践，比如完整的回归测试、跟随代码演进的文档、清晰的模块边界和性能基准，一直没有真正普及。它们对人力的消耗太大，有交付压力时总是先被砍掉。AI 把执行成本降下来之后，这些实践第一次变得划算。
-
-
-1. AI 没有取代程序员，重排了他们的工作Anthropic 基础设施团队的体验是，AI 能快速生成 PR，但 RPC、内存、故障回滚这类关键路径仍然要人来看。模型犯小错也很常见：Spec 里写了十条，它可能漏掉一两条。人工审查不是旧习惯，而是安全底线。
-时间的去向也变了。过去要两周才能手写完的任务，现在一小时内就能生成十几个 PR，但工程师还要花几天分批阅读、跑测试、改掉不合适的地方。「一小时抵两周」只对生成环节成立，交付仍然卡在判断和验证上。原型的收益更明显：一个想法以前要申请一个月的验证时间，现在可以先做原型，一两周就能看出方向能不能走。
-真正扩大的还有工作范围。这位工程师说，原来三个人维护的领域，现在他用一半时间就能覆盖，零散知识交给 AI 补齐，自己抓住方向和边界。他开始同时理解产品、设计、策略和技术方案，成为一个更全面的工程师。价值点也跟着上移：知道该做什么、能提出 Roadmap 的人变得更稀缺，只会把手写代码当成全部能力的人，议价空间在变小。
-协作方式也在变。AI 能先替人解释别人的领域和问题，长会因此减少，很多对齐转到异步消息里。沟通的总量没有消失，只是重心从会议记录转向可检索的上下文。
-所以更准确的说法是任务替代。Stack Overflow 2025 年调查显示，84% 的受访者正在用或计划用 AI 工具，51% 的职业开发者每天使用。同时，46% 的人不信任 AI 输出的准确性，只有 33% 信任，高度信任只有 3%。66% 的开发者被「差不多但不对」的答案困扰，45% 觉得调试 AI 生成的代码更费时。这些数据指向同一个结论：AI 已经进入日常，验收权还在人手里。
-市场情绪也在回落。Anthropic 的年化收入从 2026 年 2 月的 140 亿美元涨到 4 月的 300 亿，7 月底到 650 亿，绝对值还在涨，但增速从年初的每月翻倍降到约 17%。Simon Willison 在复盘 2026 年时写道，模型接管了容易的事，剩下的全是难的。年初那种「程序员要被取代了」的推文少了，讨论转向怎么审查 Agent 代码、怎么控制 Token 开销、怎么划授权边界。议题从「会不会被替代」变成了「怎么用好」。
-2. 写代码变便宜，判断没有Tison 在《When Code Is Cheap》里的判断更直接：只有模型能力覆盖了日常工作的基线，生产力才会井喷。他自己已经进入这个状态，但前提说得很清楚，模型得先达到这条基线。到了这一步，核心竞争力是两件事：把愿望说清楚，以及构建出愿望的落地路径。
-他有选择地「不看代码」。有充分回归测试、范围清楚的代码，重构时只看测试快照就够了。需求还模糊的产品，靠端到端体验验证。但核心设计、并发原语、错误格式这类关键决策，他仍然读代码，必要时自己动手改。所以「不看代码」不是放弃审查，而是把审查的负担转移给测试和明确的验收边界。
-他自己的项目也支持这个判断。他重写过一个几千行的工具，用超过 100 次对话和 155 次提交推进。省下来的手写时间没有变成休息，而是用去确认范围、审查入口契约、重命名模块和补集成测试。规模变大以后，协作文档、清晰命名和可读性反而成了更贵的投入。
-他在 2026 年 9 月的《代码上道》里进一步说明了人的位置：AI 不能承担生产事故的责任，Code Owner 必须理解并重构 AI 生成的代码，才能对交付负责。他的做法是把设计固化成 IaC、项目结构、AGENTS.md、标准操作流程和运维日志，再授权 Agent 执行。连开源协作也要换假设：默认 PR 里有 AI 参与，维护者合并代码，就等于接下了责任。
-这些做法和「软件工程实践变得更容易落地」是同一件事。他在 4 月的《Agentic Coding 的边界》里就指出，领域语言、模块边界和活文档能提高上下文的密度，同时提醒 AI 会放大滥用，过度抽象和无意义的测试覆盖率都要警惕。到 9 月，他的说法从「提示词像软工实践」变成了「项目结构和 SOP 本身就是提示词」，立场更冷静，也更可执行。
-3. 初级人才需要新入口，不是更少的入口初级岗位确实在承压。SignalFire 2025 年的报告估计，大厂新毕业生占招聘的比例降到了 7%，比 2019 年低了一半以上。初创公司这个比例低于 6%，比 2019 年低了三分之一以上。原因不能全归给 AI，融资收紧、团队变小和正式培养项目减少是同时发生的。
-困境在于，传统初级工作正在被压缩。写样板代码、做重复修复、维护文档，这些以前是新人建立上下文的入口，现在 Agent 都能快速完成。我在三月的 AI 随笔里记过这个悖论：初级岗位可能变少，但用好 AI 又要求经验。SignalFire 的提醒更直接，公司如果完全跳过初级岗，长期的人才管道会被破坏。
-解法不是等一个天然岗位回来，而是把入口前移到真实问题上。新人得更早接触方向、测试和验收，否则身上只剩「用过 AI」这个没有区分度的标签。
-可行的培养路径有三层：
-
-学基础：算法、操作系统、数据库和系统设计，仍然决定一个人能不能判断 AI 给出的方案，具体语法的重要性在下降。
-用真实项目练验收：拿一个开源或个人项目当练习场，写行为测试和回归测试，读 AI 的 diff，再重构成自己能解释的结构。
-练方向感：用户为什么需要它、哪些方案不该做、怎么算做成了。Roadmap 不是产品经理的专属头衔，而是可以被验证的判断。
-
-这套路径也回应了访谈里的结论。软件工程仍然值得进入，因为编码成本下降会催生更多定制软件。但新人要按「基础 + 验收 + 产品判断」来准备，而不是追语法。
-4. 省下的时间投向验证、原型和组织协作这些投入有一个共同的目标：提高 oneshot 的命中率。我最近在自己的核心库里体会很深。oneshot 出得不好，第一次生成的代码就不能用，只能反复修，而反复修没有明确的终点。没有上线日期逼着交付，也没有测试告诉我架构方向对不对，动力就耗在调试循环里。反过来，Spec 写清楚了、测试边界划好了、架构约束落了盘，oneshot 命中率高，返工少，人就不会卡在中间。
-省下来的编码时间不该全部变成更快的交付，它至少有三个去处。
-第一个去处是验证，把测试、监控、文档和性能基准补齐。Tison 的体会是，AI 不怕枯燥，适合补齐以前懒得写的性能基准和基础测试。Anthropic 的工程师则把大批量生成改成小批量审查，避免上下文丢失和测试资源浪费。我在《稳定性：从传统工程到大模型时代》里的结论也一样：大模型场景不能靠断言判断对错，评测门禁就是新的回归测试。
-第二个去处是原型和定义问题。Anthropic 的工程师用快速原型换来了更多提案机会。我读《部署工程师》时记下的关键不是技术，而是「写第一行代码之前，怎么确保在解决正确的问题」。FDE 的时间分布里有两三成花在对齐方向、拆问题和做架构决策上，一到五天的部署原型要求真实数据、可部署的结果和高管拍板。原型变便宜以后，验证问题是否成立这件事反而更前置了。
-第三个去处是组织协作。我在《Agent 时代的人月神话》读后感里记录过一条分工线：能形式化的工作交给 Agent，目的、判据和处境的判断留给人。Agent 降低了个体的执行成本，但没有消除概念完整性、责任归属和协作摩擦。开会可以用 AI 减少，跨人的文档、命名和协作仍然决定系统能不能长大。软技能因此更像工程能力：把业务问题翻译成技术问题，把技术取舍翻译成业务结果，把现场经验沉淀成团队可复用的文档。
-这些做法已经有了组织级的验证。Anthropic 内部一个团队每季度交付的代码量是过去的 8 倍，其中 80% 由 Claude 生成。测试量涨了 10 倍，半年里 CI 任务量涨了 25 倍，原来的测试调度服务追不上，打了三次补丁之后只能重写。Shopify CEO 把另一面叫「烂泥手榴弹」：工程师用 AI 几秒钟生成一段代码，自己没核对就发给同事，省下的五分钟变成了 reviewer 两小时的排错成本。生成端越快，组织层面的验证和审查架构就越重要。Anthropic 用两周把核心体验提速约 3 倍，走的也是同一条路：先把「哪里慢」变成可测的指标，再让 Agent 去改，最后把指标接进 CI，防止性能掉回去。
-工程团队可以把这些动作制度化：
-
-关键路径必须人工审查：先明确哪些模块涉及资金、隐私、稳定性或不可逆操作，再决定授权范围。
-用回归测试换取有选择的信任：测试充分的服务可以少看实现，核心模型和错误处理仍然要读。
-把工程约束写进可执行文件：IaC、CI、AGENTS.md 和 SOP 让 Agent 有章可循，也让责任可追踪。
-把业务判断写进文档：成功标准、边界、风险和「为什么不这么做」要能被团队复核。
-给验证链路留出余量：Agent 生成的速度远快于人的审查速度，CI、测试和审查带宽要按新产能重新规划。
-
-上面这些做法都不是新发明。AI 改变的是执行成本，让团队能把软件工程的实践从「知道」推进到「每天做」。
-5. 所以，程序员怎么做得更好把 AI 当成放大器。基础越扎实、系统越健康，它放大的是判断和交付能力。基础薄弱、流程混乱，它放大的是返工和技术债。DORA 2025 年的报告也是这个定位：AI 放大组织已有的优点和弱点，收益主要取决于底层系统。
-程序员的具体优势会转移。写代码仍然重要，但它从终点变成了起点，更重要的是定义问题、选择架构、设计验收边界、读懂复杂系统，并对上线的结果负责。范围扩大之后，工程师还要补产品判断和跨职能协作。方向感会带来更多话语权，因为验证一个想法的成本降低之后，组织更愿意采纳可执行的提案。
-我负责把需求变成一条可验证的路径，让 AI 承担机械工作，自己保留技术决策和最终责任。这不是拒绝 AI，也不是把思考外包出去。
-我自己的做法更具体一些。AI Native 不是让每一步都用 AI，而是把工程约束写进文档和流程：需求澄清、接口契约、决策记录都落盘，上下文被污染时及时切换窗口，代码变更同步回文档。Agent 生成之后，Hook 和 CI 做确定性的校验，人只处理真正需要取舍的问题。一些新模型已经不再把软件工程师当作首要用户，代码是写给人和其他 Agent 读的，可读性和可维护性反而更要靠人来守。AI Native 不该只是一个口号，能落地的版本就是这些约束和验证闭环。
-6. 参考
-Stack Overflow 2025 开发者调查 · 一手调查，AI 使用率、信任度、Agent 采用与常见挫败感数据
-SignalFire 科技人才报告 2025 · 二手行业报告，大厂新毕业生招聘占比降至 7%，初创低于 6%
-DORA 2025 报告 · 一手研究摘要，AI 是组织已有能力的放大器
-Tison · When Code Is Cheap · 一手实践，模型能力覆盖基线后生产力才井喷，以及选择性审查的边界
-Tison · 代码上道、Agentic Coding 的边界 · 一手实践，Code Owner 责任、SOP 授权与上下文密度
-AI 工程师访谈 · 机器转写，Anthropic 基础设施工程师的审查、范围扩大与 Roadmap 判断。字幕有专有名词转写错误
-claude.dev · How we made claude.ai 3x faster in two weeks · 官方一手记录，两周把核心体验提速约 3 倍的做法
-CNBC · 二手报道，三个匿名信源，Anthropic 7 月底年化收入 650 亿美元
-Simon Willison · 二手摘录，Anthropic 官方公告中的 2 月 140 亿、4 月 300 亿、5 月 470 亿美元
-Simon Willison · 2026 in LLMs · 一手综述，容易的事被 Agent 接管、剩下的全是难的
-Anthropic 工程团队的 CI 案例 · 二手笔记转述，季度代码量 8 倍、CI 任务量 25 倍，原始出处未核实
-Shopify CEO Tobi Lütke 访谈 · 二手笔记转述，一半 PR 有 AI 参与与「烂泥手榴弹」的说法，原始出处未核实
-稳定性：从传统工程到大模型时代 · 我的博客，评测门禁是新的回归测试
-《部署工程师》(FDE)读后感 · 我的博客，写第一行代码前先确认问题
-《Agent 时代的人月神话》读后感 · 我的博客，人机分工线与协作成本
-【AI 随笔】尝试与洞察 · 我的博客，初级岗位悖论与 Review 负担
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-        <tag>AI 工程</tag>
-        <tag>工程效能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>apt-get 常用命令</title>
     <url>/20170815-apt-get%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[apt-get应该debian内核系列的系统都能用：
@@ -8347,6 +8347,60 @@ CoordinateTransformUtil - wgs84, gcj02, bd09 三种坐标的互相转换
       </tags>
   </entry>
   <entry>
+    <title>给 300+ 篇博客重做标签体系</title>
+    <url>/20260913-blog-tag-taxonomy-refactor/</url>
+    <content><![CDATA[1. 缘起博客攒了 300+ 篇，标签一直没管过。前几天想找「我写过哪些关于稳定性的东西」，在标签页翻了半天没找着，才下决心重做。
+原来的样子不好看。
+
+124 个标签，其中 82 个只用过一次，占三分之二；
+Java 一个标签挂了 105 篇，占全站三分之一；
+另一头是「穿布鞋的马云」「StringBuffer的区别」这种，一辈子只用一次。
+
+标签列表点进去一半是单篇，这就不叫导航了。
+
+
+2. 前后对比
+标签种数：124 → 27
+只用过一次：82 → 1
+标签槽位：412 → 334
+无标签文章：11 → 49
+
+主要标签的去向：
+
+Java 105 篇 → java 63、性能 10、中间件 7
+mysql 23 篇 → 存储 13、性能 5、运维 3
+linux 21 篇 → 运维 18
+idea 15 篇 → 13 篇不再有标签
+
+比数字更重要的，是标准变了：标签回答「这篇在解决什么问题」，不再是「用了什么产品」。
+mysql 那 23 篇最能说明问题。13 篇讲数据怎么组织，归了存储；5 篇讲怎么让查询更快，归了性能。同一个产品标签拆进两个关注点，这个区分旧体系根本看不出来。
+无标签文章从 11 篇涨到 49 篇，大多是注册码、激活密钥、IDE 快捷键这类，靠 category 和 keywords 兜住就够。
+3. 怎么做的第一轮是纯机械的：统一大小写、合并同义词、长尾降级。
+
+Ubuntu &#x2F; centos &#x2F; shell &#x2F; ssh 合并成 linux；
+mongo 并入 mongodb，github &#x2F; gitLab 并入 git；
+HashMap &#x2F; jdk &#x2F; 多线程 &#x2F; jvm 并入 java。
+
+124 收成 30 个，但方向不对：剩下的还是产品名，java 反而涨到了 111 篇。
+第二轮换成按关注点划的词表，27 个：架构、稳定性、性能、高并发、存储、缓存、分布式、中间件、可观测、安全、工程效能、容器、网络、运维、自建服务、AI 工程、LLM、Agent、java、go、算法、成长、阅读、效率、面试、业余无线电、水族。
+这个没法查表。一篇 MySQL 文章该归性能还是存储，只能读正文。于是开了 20 个 agent 并行，每个认领 16 篇，读完正文再打 1 到 3 个标签。跑之前先拿 15 篇试了一轮，把边界歧义定成规则，再跑全量。
+被砍掉的长尾没丢，全部降级进 keywords，站内搜索照样能命中。
+4. token 消耗
+试点：3 个 agent，15 篇，10.8 万；
+全量：20 个 agent，292 篇，93 万；
+合计：23 个 agent，约 104 万，平均每篇 3400。
+
+这只是子 agent 的消耗，不含主对话本身的上下文。
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>AI 工程</tag>
+        <tag>效率</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搭建我的第一台服务器</title>
     <url>/20230423-build-my-first-server/</url>
     <content><![CDATA[1. 简单介绍当时看朋友买的 E5 CPU 到了白菜价而且之前使用 dell 9020 sff 装的软路由也转给了朋友就想着整一个性能更强一些的服务器在家跑着，方便自己折腾。
@@ -8457,60 +8511,6 @@ CPU参数对比
       </categories>
       <tags>
         <tag>自建服务</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>给 300+ 篇博客重做标签体系</title>
-    <url>/20260913-blog-tag-taxonomy-refactor/</url>
-    <content><![CDATA[1. 缘起博客攒了 300+ 篇，标签一直没管过。前几天想找「我写过哪些关于稳定性的东西」，在标签页翻了半天没找着，才下决心重做。
-原来的样子不好看。
-
-124 个标签，其中 82 个只用过一次，占三分之二；
-Java 一个标签挂了 105 篇，占全站三分之一；
-另一头是「穿布鞋的马云」「StringBuffer的区别」这种，一辈子只用一次。
-
-标签列表点进去一半是单篇，这就不叫导航了。
-
-
-2. 前后对比
-标签种数：124 → 27
-只用过一次：82 → 1
-标签槽位：412 → 334
-无标签文章：11 → 49
-
-主要标签的去向：
-
-Java 105 篇 → java 63、性能 10、中间件 7
-mysql 23 篇 → 存储 13、性能 5、运维 3
-linux 21 篇 → 运维 18
-idea 15 篇 → 13 篇不再有标签
-
-比数字更重要的，是标准变了：标签回答「这篇在解决什么问题」，不再是「用了什么产品」。
-mysql 那 23 篇最能说明问题。13 篇讲数据怎么组织，归了存储；5 篇讲怎么让查询更快，归了性能。同一个产品标签拆进两个关注点，这个区分旧体系根本看不出来。
-无标签文章从 11 篇涨到 49 篇，大多是注册码、激活密钥、IDE 快捷键这类，靠 category 和 keywords 兜住就够。
-3. 怎么做的第一轮是纯机械的：统一大小写、合并同义词、长尾降级。
-
-Ubuntu &#x2F; centos &#x2F; shell &#x2F; ssh 合并成 linux；
-mongo 并入 mongodb，github &#x2F; gitLab 并入 git；
-HashMap &#x2F; jdk &#x2F; 多线程 &#x2F; jvm 并入 java。
-
-124 收成 30 个，但方向不对：剩下的还是产品名，java 反而涨到了 111 篇。
-第二轮换成按关注点划的词表，27 个：架构、稳定性、性能、高并发、存储、缓存、分布式、中间件、可观测、安全、工程效能、容器、网络、运维、自建服务、AI 工程、LLM、Agent、java、go、算法、成长、阅读、效率、面试、业余无线电、水族。
-这个没法查表。一篇 MySQL 文章该归性能还是存储，只能读正文。于是开了 20 个 agent 并行，每个认领 16 篇，读完正文再打 1 到 3 个标签。跑之前先拿 15 篇试了一轮，把边界歧义定成规则，再跑全量。
-被砍掉的长尾没丢，全部降级进 keywords，站内搜索照样能命中。
-4. token 消耗
-试点：3 个 agent，15 篇，10.8 万；
-全量：20 个 agent，292 篇，93 万；
-合计：23 个 agent，约 104 万，平均每篇 3400。
-
-这只是子 agent 的消耗，不含主对话本身的上下文。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>AI 工程</tag>
-        <tag>效率</tag>
       </tags>
   </entry>
   <entry>
@@ -8630,6 +8630,25 @@ IOT 设备罢工，感应开关灯之类的没法用，稍微有点影响体验
       </tags>
   </entry>
   <entry>
+    <title>count函数效率问题 - 了解count函数</title>
+    <url>/20170303-count%E5%87%BD%E6%95%B0%E6%95%88%E7%8E%87%E9%97%AE%E9%A2%98%20-%20%E4%BA%86%E8%A7%A3count%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[count函数的作用想要真正的理解count函数，我们就必须明白count函数的作用。
+作用一：统计某一列非空(not null)值得数量，即统计某列有值得结果数,使用count(col)。
+作用二：统计结果集的行数，此时不用管某列是否为null值。即使用count(*).
+明白了这点，我们就应该知道MySQL的count(*)并不是想象中的那样，统计每一列的值，而是直接忽视掉所有列，直接统计行数，那么它的效率肯定是很高的。
+但是有一点，当col指定了该字段为NOT NULL时实际上，MySQL会自动将count(col)转为count(*),但是这样也同样耗费了些时间，如果col没有指定为NOT NULL的话，那么效率就更低了，MySQL就必须要判断每一行的值是否为空。
+所以综上所述，如果是要统计行数最好优先使用select count(*)
+当统计某一列等于多少的值得时候可以使用下面两种方法:
+SELECT SUM(IF(id = 23,1,0)) FROM table SELECT COUNT(id = 23 OR NULL) FROM table 
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>城市与抱负：环境在说什么</title>
     <url>/20260930-cities-and-ambition/</url>
     <content><![CDATA[
@@ -8689,25 +8708,6 @@ Cities and Ambition · Paul Graham，2008 年 5 月，城市信息的完整清�
       </categories>
       <tags>
         <tag>成长</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>count函数效率问题 - 了解count函数</title>
-    <url>/20170303-count%E5%87%BD%E6%95%B0%E6%95%88%E7%8E%87%E9%97%AE%E9%A2%98%20-%20%E4%BA%86%E8%A7%A3count%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[count函数的作用想要真正的理解count函数，我们就必须明白count函数的作用。
-作用一：统计某一列非空(not null)值得数量，即统计某列有值得结果数,使用count(col)。
-作用二：统计结果集的行数，此时不用管某列是否为null值。即使用count(*).
-明白了这点，我们就应该知道MySQL的count(*)并不是想象中的那样，统计每一列的值，而是直接忽视掉所有列，直接统计行数，那么它的效率肯定是很高的。
-但是有一点，当col指定了该字段为NOT NULL时实际上，MySQL会自动将count(col)转为count(*),但是这样也同样耗费了些时间，如果col没有指定为NOT NULL的话，那么效率就更低了，MySQL就必须要判断每一行的值是否为空。
-所以综上所述，如果是要统计行数最好优先使用select count(*)
-当统计某一列等于多少的值得时候可以使用下面两种方法:
-SELECT SUM(IF(id = 23,1,0)) FROM table SELECT COUNT(id = 23 OR NULL) FROM table 
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
       </tags>
   </entry>
   <entry>
@@ -8862,6 +8862,121 @@ SELECT SUM(IF(id = 23,1,0)) FROM table SELECT COUNT(id = 23 OR NULL) FROM table
       </tags>
   </entry>
   <entry>
+    <title>DHH 不写代码了：AI 能接手什么，不能接手什么</title>
+    <url>/20261007-dhh-no-more-handwritten-code/</url>
+    <content><![CDATA[DHH 在 Rails World 2026 上说，37signals 已经不再把手写代码当成正常业务。八个多月前，也就是 2026 年 1 月，他还在文章里写，自己做不到 90% 以上代码由 agent 写。
+他现在维护 Omarchy，一个把 agent 接到系统里的 Linux 发行版。
+我写过《AI 替代的是任务，不是程序员》，那篇讲被替代的是什么。这篇讲另一半：外包之后，资深工程师和架构师该留下什么。
+具体实现和重复的操作可以交给 AI。质量、安全、合规和长期系统不行。架构师的新职责是决定哪些地方永远不能交出去。
+
+
+1. DHH 为什么转向DHH 的转变有时间线。2026 年 1 月，他写《Promoting AI agents》，说 agent 已经能做出生产级贡献。但他也说，对他而言，专业工作里的纯 vibe coding 目前仍是愿景，自己做不到 90% 以上代码由 agent 写。当时他用的词是监督式协作。
+到 2026 年 9 月的 Rails World，他宣布 37signals 已把手写代码变成异常状态，自己也从专业程序员退休。
+这一节给的是解释，材料来自他的公开自述和项目文档，不是独立测量。模型、默认值、制度，三件事叠在一起，他才愿意把整条流程交出去。
+模型先过了他的门槛。2025 年 11 月 24 日，Anthropic 发布 Claude Opus 4.5。他把这天定成编程的 Brownie 时刻，比作一百多年前相机开始大众化的那个瞬间。他感受到的不是模型分数涨了，而是可以把任务整个交出去，等结果回来验收。
+默认值已经铺好。Rails 二十年攒下的目录、命名、迁移和测试结构，给了 agent 一张稳定的地图，Rails 官方 AI 页面也把约定优于配置写成 agent 的效率来源。
+他自己新做的 Omarchy 走同一条路，把 agent CLI 预置成 launcher，首次运行才下载，主题和崩溃诊断都接到 agent 上。约定优于配置从框架搬到了桌面。
+他有权改制度。他是 CTO 和共同所有人，能决定重写哪个产品，也承担得起后果。Basecamp 5 已经发布，演讲里说它是 agent 加速的，但仍包含大量手写代码。真正激进的是 HEY 的下一代，他现场还在纠结叫什么名字，要做 6 个原生端加 Rust 后端。
+2. 该学的是修流程，不是不看代码DHH 最有价值的说法是把手写代码当成异常状态，而不是「我不再写代码」。agent 失败时，人可以短暂接管。接管之后要回头修机器和工厂，让同类问题下次由系统处理。
+他自己举过一个例子。2026 年春天做 Basecamp 5 时，几个设计师各自用 agent 写功能。单个 PR 看起来都合理，20 至 30 个合起来，架构就变得像瑞士奶酪。
+团队当时的结论是模型不行。他后来说这是错的。Jared Norman 的说法更接近问题本身：没人协调的改动，不管来自 agent 还是人，都会把架构改坏。两种原因都存在，只是协调缺失比模型能力更容易被忽略。
+两条修法是我从「修工厂」这句话拆出来的，不是 DHH 的原话。
+一条按错误频率走。同类错误第二次出现，补一条测试。第三次出现，改设计。
+另一条顺着重复走。有效的 prompt 升成项目规则。手动步骤写成脚本。脚本接进 CI，再变成门禁。门禁误报太多，就修评测集，而不是放宽标准。
+做完之后，同类失败下次会被测试和门禁拦住。资深工程师的位置也跟着变，重点工作变成定义目标、验收条件、失败模式和恢复方式。
+不过把实现当黑盒是有前提的。他说如果永远不用看 Rust，Rust 就很好，也说会从外部验收这个黑盒。不过能这么说的前提是接口清楚、结果可测、失败可回滚。演讲没有给完整的治理证据，所以这是他的工作假设，不是通用结论。
+3. 资深工程师能交给 AI 什么具体实现通常可以先交出去。
+
+样板代码、CRUD 和适配器
+测试脚手架、文档初稿、迁移草案
+重构候选、性能实验和一次性工具
+低风险模块的第一版实现
+
+看代码也要分级，而不是全读或全不读。
+可以低强度看的，是局部实现、样式、重复逻辑、无副作用的纯函数，以及已经被契约测试覆盖的模块。
+必须高强度看的，是鉴权、支付、配额、密钥、审计、多租户隔离、迁移、删除、并发、外部副作用和不可回滚操作。
+人不必读每一行，但必须读每个风险边界。
+4. 哪些边界不能交给黑盒一个模块能不能交出去，先过四个问题：错了代价多大，能不能撤回，出问题时能不能发现，监管会不会找上门。四个都不紧张，可以先交，但要留着退路。有一个紧张，就得留人看着。
+这四个问题背后是一组工程前提：接口契约、行为测试、性能基线、日志告警、回滚方案、密钥和租户策略、明确的负责人。缺得越多，风险越往后移。
+
+责任：AI 可以生成代码，不能承担生产事故。上线、变更、数据访问和事故响应都要有明确的负责人，出事时能追到人。
+安全：需要一条能解释清楚的人类责任链。第 3 节那份高强度清单，就是安全审查的起点。
+合规：医疗、金融、政府、跨境数据这些场景，监管要的是流程、留痕和责任主体，不是一段演示。
+长期系统：一次性工具可以只看结果，五年系统还要看演进成本。半年后新人怎么理解，事故时谁能在半小时内定位，模型或供应商换了怎么办，依赖出现 CVE 怎么修。这些都写不进外部验收的演示。
+
+安全这一类不是假设。HN 上有人举过自己的例子：agent 生成的几个 controller 各自重写鉴权，漏掉了统一的 before_action，于是有接口没做鉴权就上了线。他说自己读代码时一眼就看出来了。
+边界也不必全靠人眼扫。权限矩阵、契约测试和静态检查能先把大部分标出来，剩下判断不了的交给人。
+想让某一块变成黑盒，就按最小范围试。选一个低风险服务，走影子流量或者小流量，记录成功率、人工干预率、缺陷逃逸率和回滚次数。这些数字直接取现有的 CI 记录和事故单，不用另造统计。数字稳定之后，再扩大边界。
+这四类划分是我从实践里归纳的，不是哪个研究给的结论。
+5. DHH 的数字能信多少DHH 提供了一个真实实验，不代表结论都能照抄。演讲第二天，Jared Norman 在《What About Rails?》里逐条拆过这些技术主张，结论和我一致。
+他在演讲里说，8 月一个人写了 15 万行代码，是长期平均年产 3 万行的 60 倍。这个数字不能当生产力结论：他当场也承认行数粗糙，还说自己容忍了平时不会容忍的啰嗦 Rust，而公开材料里没有 commit 记录、审查流程和质量评分。
+他还说 HEY 的新后端 CPU 减少 99%、内存减少 95%。没有 benchmark 和成本模型，这些收益可能同时来自换成 Rust、把渲染搬到客户端和业务简化，不能全记给 agent。
+Rails 官方 AI 评测页上的数字更保守。复杂 Feature tickets 最高成功率约 53.3%，多数模型低得多。简单 Atomic tasks 最高 92.1%。每个 ticket 只跑三次，模型之间差几个点在波动范围内，这组数字也不等于生产成功率。
+METR 的随机对照试验说明的是另一件事：开发者的自我感受不可靠。2025 年的实验里，资深开源开发者自估快了，实际用早期模型做同样的活反而更慢。METR 之后复述这组结果时给出的置信区间是慢 2% 至 39%，同时说旧结果已经过时，新数据因为选择偏差和并行 agent 的计时问题，只能弱支持提速。
+同一场演讲里，他还说到年底手写代码会终结于几乎所有领域、几乎所有公司和几乎所有程序员，并把程序员之间的差距从 10 倍一路说到 1000 倍。
+10 倍这个说法出自 1968 年的一项实验，之后被争论了几十年。Jared Norman 指出原文里并没有「平均 10 倍」这个结论。1000 倍没有任何测量，只是他在台上的估计。
+他的样本还有特殊条件：小团队、高信任、产品可以快速回滚、创始人有最终验收权。这些不是所有组织的默认配置。
+6. 先在一个项目试点这套判断不用一次铺满。有干净起点就挑一个低风险服务，没有就先从存量系统里选一条高风险路径补门禁，四步走完再看要不要扩大。
+
+列清单：把模块分成两类，能交给 AI 的，和必须人看的。
+补前面那类：按第 4 节的清单补齐契约、测试、告警和回滚。
+锁后面那类：给必须人看的路径写明负责人、审批方式、审计留痕和恢复方案。
+复盘：先走影子流量或者小流量，记录成功率、人工干预率、缺陷逃逸率和回滚次数，再把 AI 犯过的错转成测试和门禁。数字稳定，再扩大范围。
+
+第二步是前提。契约和测试不到位，后面量出来的成功率不作数。
+还有一个约束要提前排。agent 生成快 10 倍，人的审查不会跟着快 10 倍，多出来的活都堆在 review 队列上。审查工作量得按新的生成速度重新安排。
+这条我在《AI 替代的是任务，不是程序员》里写过，这里不重复。
+在 DHH 的条件下，也就是约定成熟、环境围绕 agent 组织、他自己能定制度并承担后果，执行可以大规模外包。这不能推广成所有团队的结论。但有一条判断对谁都成立：执行可以外包，边界不能外包。
+7. 参考
+Rails World 2026 Opening Keynote · 一手视频，pencils down、Rust 黑盒、15 万行和 Omarchy 的原始语境。文中引语取自该视频的机器转写字幕（YouTube ASR，轨道 URL 带 caps=asr），数字与专名已与 en-orig 轨比对，仍可能有转写误差
+Promoting AI agents · DHH 一手文章，2026 年 1 月仍称纯 vibe coding 对自己是愿景
+Basecamp Five · DHH 一手文章，Basecamp 5 的发布与克制表述
+Introducing Claude Opus 4.5 · Anthropic 官方公告，确认 2025 年 11 月 24 日发布
+Rails and AI · Rails 官方 AI 评测页，基准数据与任务定义。委托与执行方（Rails 基金会、Evil Martians）的说法出自上面那条 keynote
+Omarchy · 官方仓库，元数据快照见 research/dhh-ai-coding/sources/omarchy-repo-meta.json（抓取于 2026-10-07，44,166 stars，创建于 2025-06-01）
+METR：早期 AI 对资深开源开发者生产力的影响 · 一手随机对照试验，早期模型让资深开源开发者更慢
+METR：2026 年开发者生产力实验的方法更新 · 一手方法更新，置信区间、选择偏差与弱提速结论均出自此文
+What About Rails? · 二手评论，逐条质疑 15 万行这个数字、HEY 的性能归因和这场演讲的 Rails 路线
+Rails World 2026 Opening Keynote 讨论 · 二手社区讨论，447 分、508 条评论，对演讲褒贬都有
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>AI 工程</tag>
+        <tag>Agent</tag>
+        <tag>工程效能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>优雅地分桶 - 数据分片 - list 拆分</title>
+    <url>/20220218-divide-barrels-gracefully/</url>
+    <content><![CDATA[零、背景最近在做数据迁移为了加速迁移速度其中就需要把查询到的数据( max 100 条)拆分成 5 份，然后执行 5 个子任务，加速处理
+一、代码1.1 常规做法public static &lt;T&gt; List&lt;List&lt;T&gt;&gt; split2(List&lt;T&gt; lists, int subCount) &#123;    if (CollectionUtils.isEmpty(lists) || subCount &lt; 1) &#123;        return null;    &#125;    List&lt;List&lt;T&gt;&gt; result = new ArrayList&lt;&gt;();    int size = lists.size();    int count = (size + subCount - 1) / subCount;    for (int i = 0; i &lt; count; i++) &#123;        List&lt;T&gt; subList = lists.subList(i * subCount, (Math.min((i + 1) * subCount, size)));        result.add(subList);    &#125;    return result;&#125;
+
+1.2 新颖做法
+public static &lt;T&gt; List&lt;List&lt;T&gt;&gt; split(List&lt;T&gt; lists, int subCount) &#123;    if (CollectionUtils.isEmpty(lists) || subCount &lt; 1) &#123;        return null;    &#125;    // 简约的计算分桶次数，避免判断是否有余数，再+1    int splitTimes = (lists.size() + subCount - 1) / subCount;    return Stream            // 每次递增指定子列表个数            .iterate(0, n -&gt; n + subCount)            // 限制循环次数            .limit(splitTimes)            // 转换成想要的结果            .map(item -&gt; lists.stream()                    // 跳过之前的下标                    .skip(item)                    // 限制每次的个数为子表个数                    .limit(subCount)                    // 转换为子列表                    .collect(Collectors.toList()))            // 转换为主列表            .collect(Collectors.toList());&#125;
+三、性能3.1 结果从结果可以看出，一味地追求新颖也不是好事，需要知其然Java 8 的 stream 并不占优势，性能相差好几个数量级…
+Benchmark              Mode  Cnt       Score       Error  UnitsListSplit.split2Test  thrpt   10  306050.155 ± 24646.689  ops/sListSplit.splitTest   thrpt   10     353.048 ±   122.423  ops/s
+3.3 压测代码压测教程：JMH 使用参考
+import com.google.api.client.util.Lists;import org.openjdk.jmh.annotations.Benchmark;import org.openjdk.jmh.annotations.BenchmarkMode;import org.openjdk.jmh.annotations.Fork;import org.openjdk.jmh.annotations.Measurement;import org.openjdk.jmh.annotations.Mode;import org.openjdk.jmh.annotations.Scope;import org.openjdk.jmh.annotations.Setup;import org.openjdk.jmh.annotations.State;import org.openjdk.jmh.annotations.Warmup;import org.springframework.util.CollectionUtils;import Java.util.ArrayList;import Java.util.List;import Java.util.stream.Collectors;import Java.util.stream.Stream;/** * @author hisenyuan * @date 2022/2/18 20:05 */// 默认的 State，每个测试线程分配一个实例@State(Scope.Thread)// 如果 fork 数是 2 的话，则 JMH 会 fork 出两个进程来进行测试。@Fork(1)// 预热的次数 3 次基准测试(不是执行三次方法)@Warmup(iterations = 1)// 基准执行次数 10 次(参数含义同上)@Measurement(iterations = 10)@BenchmarkMode(Mode.Throughput)public class ListSplit &#123;    private static final List&lt;Integer&gt; INTEGERS = Lists.newArrayList();    @Setup    public void init() &#123;        List&lt;Integer&gt; list = Stream.iterate(0, n -&gt; n + 1)                .limit(1000)                .collect(Collectors.toList());        INTEGERS.addAll(list);    &#125;    @Benchmark    public void splitTest()&#123;        List&lt;List&lt;Integer&gt;&gt; listList = split(INTEGERS, 3);    &#125;    @Benchmark    public void split2Test()&#123;        List&lt;List&lt;Integer&gt;&gt; listList = split2(INTEGERS, 3);    &#125;    public static &lt;T&gt; List&lt;List&lt;T&gt;&gt; split(List&lt;T&gt; lists, int subCount) &#123;        // 简约的计算分桶次数，避免判断是否有余数，再+1        int splitTimes = (lists.size() + subCount - 1) / subCount;        return Stream                // 每次递增指定子列表个数                .iterate(0, n -&gt; n + subCount)                // 限制循环次数                .limit(splitTimes)                // 转换成想要的结果                .map(item -&gt; lists.stream()                        // 跳过之前的下标                        .skip(item)                        // 限制每次的个数为子表个数                        .limit(subCount)                        // 转换为子列表                        .collect(Collectors.toList()))                // 转换为主列表                .collect(Collectors.toList());    &#125;    public static &lt;T&gt; List&lt;List&lt;T&gt;&gt; split2(List&lt;T&gt; list, int len) &#123;        if (CollectionUtils.isEmpty(list) || len &lt; 1) &#123;            return null;        &#125;        List&lt;List&lt;T&gt;&gt; result = new ArrayList&lt;&gt;();        int size = list.size();        int count = (size + len - 1) / len;        for (int i = 0; i &lt; count; i++) &#123;            List&lt;T&gt; subList = list.subList(i * len, (Math.min((i + 1) * len, size)));            result.add(subList);        &#125;        return result;    &#125;
+
+四、后话
+其中不错的一点我觉得是
+int splitTimes = (lists.size() + subCount - 1) / subCount;
+这样巧妙的计算，避免了先取模，后判断是否有余数的繁杂。这个不是我想到的，也不知道怎么通过数学证明，但是这样就是对的 &#x3D;&#x3D;
+ps:是谁说数学没用的 ？？？？
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>开源画图工具(各种图)：draw.io 支持 Web、macOS、Windows、Linux</title>
     <url>/20200406-draw.io-open-source-drawing-tools-support-web-mac-windows-linux/</url>
     <content><![CDATA[draw.io 一个很棒的开源画图工具，可以导出 xml、pdf、html、png 等各种格式其实重点是开源，目前好几个地方看到有在用，之前用网页版，现在用桌面版多些
@@ -9011,33 +9126,6 @@ Mast选举，分布式锁等。
       </categories>
       <tags>
         <tag>水族</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>优雅地分桶 - 数据分片 - list 拆分</title>
-    <url>/20220218-divide-barrels-gracefully/</url>
-    <content><![CDATA[零、背景最近在做数据迁移为了加速迁移速度其中就需要把查询到的数据( max 100 条)拆分成 5 份，然后执行 5 个子任务，加速处理
-一、代码1.1 常规做法public static &lt;T&gt; List&lt;List&lt;T&gt;&gt; split2(List&lt;T&gt; lists, int subCount) &#123;    if (CollectionUtils.isEmpty(lists) || subCount &lt; 1) &#123;        return null;    &#125;    List&lt;List&lt;T&gt;&gt; result = new ArrayList&lt;&gt;();    int size = lists.size();    int count = (size + subCount - 1) / subCount;    for (int i = 0; i &lt; count; i++) &#123;        List&lt;T&gt; subList = lists.subList(i * subCount, (Math.min((i + 1) * subCount, size)));        result.add(subList);    &#125;    return result;&#125;
-
-1.2 新颖做法
-public static &lt;T&gt; List&lt;List&lt;T&gt;&gt; split(List&lt;T&gt; lists, int subCount) &#123;    if (CollectionUtils.isEmpty(lists) || subCount &lt; 1) &#123;        return null;    &#125;    // 简约的计算分桶次数，避免判断是否有余数，再+1    int splitTimes = (lists.size() + subCount - 1) / subCount;    return Stream            // 每次递增指定子列表个数            .iterate(0, n -&gt; n + subCount)            // 限制循环次数            .limit(splitTimes)            // 转换成想要的结果            .map(item -&gt; lists.stream()                    // 跳过之前的下标                    .skip(item)                    // 限制每次的个数为子表个数                    .limit(subCount)                    // 转换为子列表                    .collect(Collectors.toList()))            // 转换为主列表            .collect(Collectors.toList());&#125;
-三、性能3.1 结果从结果可以看出，一味地追求新颖也不是好事，需要知其然Java 8 的 stream 并不占优势，性能相差好几个数量级…
-Benchmark              Mode  Cnt       Score       Error  UnitsListSplit.split2Test  thrpt   10  306050.155 ± 24646.689  ops/sListSplit.splitTest   thrpt   10     353.048 ±   122.423  ops/s
-3.3 压测代码压测教程：JMH 使用参考
-import com.google.api.client.util.Lists;import org.openjdk.jmh.annotations.Benchmark;import org.openjdk.jmh.annotations.BenchmarkMode;import org.openjdk.jmh.annotations.Fork;import org.openjdk.jmh.annotations.Measurement;import org.openjdk.jmh.annotations.Mode;import org.openjdk.jmh.annotations.Scope;import org.openjdk.jmh.annotations.Setup;import org.openjdk.jmh.annotations.State;import org.openjdk.jmh.annotations.Warmup;import org.springframework.util.CollectionUtils;import Java.util.ArrayList;import Java.util.List;import Java.util.stream.Collectors;import Java.util.stream.Stream;/** * @author hisenyuan * @date 2022/2/18 20:05 */// 默认的 State，每个测试线程分配一个实例@State(Scope.Thread)// 如果 fork 数是 2 的话，则 JMH 会 fork 出两个进程来进行测试。@Fork(1)// 预热的次数 3 次基准测试(不是执行三次方法)@Warmup(iterations = 1)// 基准执行次数 10 次(参数含义同上)@Measurement(iterations = 10)@BenchmarkMode(Mode.Throughput)public class ListSplit &#123;    private static final List&lt;Integer&gt; INTEGERS = Lists.newArrayList();    @Setup    public void init() &#123;        List&lt;Integer&gt; list = Stream.iterate(0, n -&gt; n + 1)                .limit(1000)                .collect(Collectors.toList());        INTEGERS.addAll(list);    &#125;    @Benchmark    public void splitTest()&#123;        List&lt;List&lt;Integer&gt;&gt; listList = split(INTEGERS, 3);    &#125;    @Benchmark    public void split2Test()&#123;        List&lt;List&lt;Integer&gt;&gt; listList = split2(INTEGERS, 3);    &#125;    public static &lt;T&gt; List&lt;List&lt;T&gt;&gt; split(List&lt;T&gt; lists, int subCount) &#123;        // 简约的计算分桶次数，避免判断是否有余数，再+1        int splitTimes = (lists.size() + subCount - 1) / subCount;        return Stream                // 每次递增指定子列表个数                .iterate(0, n -&gt; n + subCount)                // 限制循环次数                .limit(splitTimes)                // 转换成想要的结果                .map(item -&gt; lists.stream()                        // 跳过之前的下标                        .skip(item)                        // 限制每次的个数为子表个数                        .limit(subCount)                        // 转换为子列表                        .collect(Collectors.toList()))                // 转换为主列表                .collect(Collectors.toList());    &#125;    public static &lt;T&gt; List&lt;List&lt;T&gt;&gt; split2(List&lt;T&gt; list, int len) &#123;        if (CollectionUtils.isEmpty(list) || len &lt; 1) &#123;            return null;        &#125;        List&lt;List&lt;T&gt;&gt; result = new ArrayList&lt;&gt;();        int size = list.size();        int count = (size + len - 1) / len;        for (int i = 0; i &lt; count; i++) &#123;            List&lt;T&gt; subList = list.subList(i * len, (Math.min((i + 1) * len, size)));            result.add(subList);        &#125;        return result;    &#125;
-
-四、后话
-其中不错的一点我觉得是
-int splitTimes = (lists.size() + subCount - 1) / subCount;
-这样巧妙的计算，避免了先取模，后判断是否有余数的繁杂。这个不是我想到的，也不知道怎么通过数学证明，但是这样就是对的 &#x3D;&#x3D;
-ps:是谁说数学没用的 ？？？？
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>性能</tag>
       </tags>
   </entry>
   <entry>
@@ -9606,22 +9694,6 @@ debug非常非常重要。
       </tags>
   </entry>
   <entry>
-    <title>git版本差异报告 - git difftool分支对比 - gitLab compare</title>
-    <url>/20190309-git%E7%89%88%E6%9C%AC%E5%B7%AE%E5%BC%82%E6%8A%A5%E5%91%8A%20-%20git%20difftool%E5%88%86%E6%94%AF%E5%AF%B9%E6%AF%94%20-%20gitLab%20compare/</url>
-    <content><![CDATA[一、初衷有时候上线会出现合错代码，比如功能，或者maven的pom文件；
-人都不是十全十美的人，只要是人就会犯错关键是要想办法去避免，只有工具才不犯错
-所以尽量想办法利用工具来防止我们犯错，git来说有很多办法；简单的命令，或者gitlab的compare报告；每次上线之前，开发自己看一遍当前版本与线上版本的区别，确认每一个点都是正确的改动；
-二、gitlab compare功能(推荐)2.1 入口：工程首页 -&gt; Repository -&gt; Compare2.2 选择：上一个版本，当前版本，点击Compare2.2 结果：一次能看到两个版本的所有commit、改动点
-三、git命令# 显示版本之间改动的文件名git difftool master 1.2.4 --stat# 在命令行挨个显示版本某个文件具体差异git difftool master 1.2.4
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>工程效能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>github api - github api中文说明</title>
     <url>/20170428-github%20api%20-%20github%20api%E4%B8%AD%E6%96%87%E8%AF%B4%E6%98%8E/</url>
     <content><![CDATA[github api的网址
@@ -9747,6 +9819,22 @@ current_user_url: &quot;https://api.github.com/user&quot;,current_user_authoriza
       </categories>
   </entry>
   <entry>
+    <title>git版本差异报告 - git difftool分支对比 - gitLab compare</title>
+    <url>/20190309-git%E7%89%88%E6%9C%AC%E5%B7%AE%E5%BC%82%E6%8A%A5%E5%91%8A%20-%20git%20difftool%E5%88%86%E6%94%AF%E5%AF%B9%E6%AF%94%20-%20gitLab%20compare/</url>
+    <content><![CDATA[一、初衷有时候上线会出现合错代码，比如功能，或者maven的pom文件；
+人都不是十全十美的人，只要是人就会犯错关键是要想办法去避免，只有工具才不犯错
+所以尽量想办法利用工具来防止我们犯错，git来说有很多办法；简单的命令，或者gitlab的compare报告；每次上线之前，开发自己看一遍当前版本与线上版本的区别，确认每一个点都是正确的改动；
+二、gitlab compare功能(推荐)2.1 入口：工程首页 -&gt; Repository -&gt; Compare2.2 选择：上一个版本，当前版本，点击Compare2.2 结果：一次能看到两个版本的所有commit、改动点
+三、git命令# 显示版本之间改动的文件名git difftool master 1.2.4 --stat# 在命令行挨个显示版本某个文件具体差异git difftool master 1.2.4
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>工程效能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>通过 OpenWrt 利用 Cloudflare tunnel 回家 - 连上家庭内网</title>
     <url>/20221114-go_home_by_cloudflare_via_openwrt/</url>
     <content><![CDATA[1. 写在前面需要注册 Cloudflare 账号，这个服务目前是可以免费使用。使用 cloudflared 的好处：
@@ -9843,71 +9931,6 @@ eg：
       </tags>
   </entry>
   <entry>
-    <title>hexo安装过程</title>
-    <url>/20170120-hexo%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[准备工作
-Node.js：点击下载
-git：点击下载
-MarkdownPad：点击下载
-
-安装好上面三个工具可能会遇到的问题：
-**1、**Git Bash执行node -v提示无效 或者 npm install 报 command not found
-解决办法：在环境变量 - 用户变量中 - 新建用户变量 - 添加nodejs安装路径
-如：C:\tool\nodejs
-**2、**ERROR Deployer not found : github
-解决办法：
-
-配置文件有问题，冒号后面都有一个空格的
-执行：npm install hexo-deployer-git –save （这命令是为了解决hexo新版本的部署问题）
-
-3使用淘宝镜像加快安装速度安装cnpm，使用命令：
-npm install cnpm -g --registry=https://registry.npm.taobao.org
-
-安装过程
-打开Git Bash
-进入nodejs安装目录
-开始安装hexo，输入下面代码
-npm install -g hexo#等待安装完成，这个过程可能会快也可能很慢，耐心等待
-mkdir blog &amp;&amp; cd blog #上面这个代码是创建一个博客存放的目录
-hexo init#初始化
-cnpm install #安装依赖包
-完成之后，本地博客就搭建完成
-hexo g #生成静态页面
-hexo s #启动服务器，打开http://localhost:4000 就是本地博客
-
-本地博客安装完成，下面介绍发布到github上
-
-登陆github，没有就注册
-点击右上角加号+
-Create a new repository
-名字写：yourgithubname.github.io
-创建完成
-点击Setting
-选择一个主题，然后就好了
-编辑blog文件夹里面的_config.yml配置文件
-最后面添加
-
-deploy:  type: git  repository: http://github.com/yourname/yourname.github.io.git  branch: master
-
-最后执行
-
-hexo g#重新生成静态博客
-hexo d#将本地静态博客部署到github
-
-现在你在浏览器打开：http://yourname.github.io就可以访问你的博客了到此为止就搭建完了一个博客
-开始写第一篇文章：执行：hexo new “你的文章标题”然后你在blog/source/_posts文件夹下面有文件，用markdownpad打开编辑执行：
-
-hexo g#重新生成
-hexo s#本地查看效果
-hexo d#上传到github
-或者不预览，直接一步上传到github：hexo d -g
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Hexo 升级 &amp; 优化</title>
     <url>/20250719-hexo-upgrade-and-optimize/</url>
     <content><![CDATA[1. 概览换了电脑，hexo 一直没迁移。乘着周末，折腾一下。幸好之前有一个记录可以参考一下：hexo安装过程最新版本的 node 和 老版本的 hexo 有兼容性问题(hexo 官方说明)，所以需要升级。
@@ -9977,6 +10000,71 @@ Pages
       </categories>
   </entry>
   <entry>
+    <title>hexo安装过程</title>
+    <url>/20170120-hexo%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[准备工作
+Node.js：点击下载
+git：点击下载
+MarkdownPad：点击下载
+
+安装好上面三个工具可能会遇到的问题：
+**1、**Git Bash执行node -v提示无效 或者 npm install 报 command not found
+解决办法：在环境变量 - 用户变量中 - 新建用户变量 - 添加nodejs安装路径
+如：C:\tool\nodejs
+**2、**ERROR Deployer not found : github
+解决办法：
+
+配置文件有问题，冒号后面都有一个空格的
+执行：npm install hexo-deployer-git –save （这命令是为了解决hexo新版本的部署问题）
+
+3使用淘宝镜像加快安装速度安装cnpm，使用命令：
+npm install cnpm -g --registry=https://registry.npm.taobao.org
+
+安装过程
+打开Git Bash
+进入nodejs安装目录
+开始安装hexo，输入下面代码
+npm install -g hexo#等待安装完成，这个过程可能会快也可能很慢，耐心等待
+mkdir blog &amp;&amp; cd blog #上面这个代码是创建一个博客存放的目录
+hexo init#初始化
+cnpm install #安装依赖包
+完成之后，本地博客就搭建完成
+hexo g #生成静态页面
+hexo s #启动服务器，打开http://localhost:4000 就是本地博客
+
+本地博客安装完成，下面介绍发布到github上
+
+登陆github，没有就注册
+点击右上角加号+
+Create a new repository
+名字写：yourgithubname.github.io
+创建完成
+点击Setting
+选择一个主题，然后就好了
+编辑blog文件夹里面的_config.yml配置文件
+最后面添加
+
+deploy:  type: git  repository: http://github.com/yourname/yourname.github.io.git  branch: master
+
+最后执行
+
+hexo g#重新生成静态博客
+hexo d#将本地静态博客部署到github
+
+现在你在浏览器打开：http://yourname.github.io就可以访问你的博客了到此为止就搭建完了一个博客
+开始写第一篇文章：执行：hexo new “你的文章标题”然后你在blog/source/_posts文件夹下面有文件，用markdownpad打开编辑执行：
+
+hexo g#重新生成
+hexo s#本地查看效果
+hexo d#上传到github
+或者不预览，直接一步上传到github：hexo d -g
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>hexo新建文章时候默认带上categories，tags</title>
     <url>/20170209-hexo%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0%E6%97%B6%E5%80%99%E9%BB%98%E8%AE%A4%E5%B8%A6%E4%B8%8Acategories%EF%BC%8Ctags/</url>
     <content><![CDATA[在博客的 scaffolds 文件夹里有个post.md 添加上需要的配置就行
@@ -9984,40 +10072,6 @@ Pages
 我的默认设置成这样：
 ---title: &#123;&#123; title &#125;&#125;date: &#123;&#123; date &#125;&#125;tags: []categories:---
 tags: [关键词1,关键词2]
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>hexo百度抓取失败解决办法</title>
-    <url>/20170216-hexo%E7%99%BE%E5%BA%A6%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
-    <content><![CDATA[上一篇帖子说明了一下百度抓取不到的原因是因为github把百度爬虫给屏蔽了
-这里给出的解决办法是用hexo自动提交插件
-需要获取一个自动提交的token
-
-注册百度站长工具：http://zhanzhang.baidu.com
-添加你的hexo域名
-找到网页抓取 - 链接提交 - 下拉选择你的hexo站点
-数据提交方式 - 自动提交 - 主动推送(实时)
-推送接口
-接口调用地址： http://data.zz.baidu.com/urls?site=hisen.me&amp;token=XmxXyESxyz1hANxE
-复制上面token&#x3D;后面的内容，那就是你的token
-
-安装自动提交插件：
-
-
-npm install hexo-baidu-url-submit –save
-编辑站点配置文件_config.yml，添加一下内容
-
-baidu_url_submit:  count: 1 ## 提交最新的一个链接  host: www.hui-wang.info ## 在百度站长平台中注册的域名  token: your_token ## 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!  path: baidu_urls.txt ## 文本文档的地址， 新链接会保存在此文本文档里
-加入新的deployer: 原来type前面是没有 - 的
-但是不这样处理执行hexo g 会报错
-deploy:- type: git  repository: yoururl  branch: master- type: baidu_url_submitter
-生成效果如下：
-$ hexo gINFO  Start processingINFO  Generating Baidu urls for last 1 postsINFO  Posts urls generated in baidu_urls.txthttp://hisen.me/20170216-hexo百度抓取失败解决办法/INFO  Files loaded in 1.31 s$ hexo dINFO  Deploy done: gitINFO  Deploying: baidu_url_submitterINFO  Submitting urlshttp://hisen.me/20170216-hexo百度抓取失败解决办法/&#123;&quot;remain&quot;:1,&quot;success&quot;:1&#125;INFO  Deploy done: baidu_url_submitter
-
-感谢插件作者：王辉的博客
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -10071,6 +10125,40 @@ right_option -&gt; right_arrow
       <tags>
         <tag>电子设备</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>hexo百度抓取失败解决办法</title>
+    <url>/20170216-hexo%E7%99%BE%E5%BA%A6%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+    <content><![CDATA[上一篇帖子说明了一下百度抓取不到的原因是因为github把百度爬虫给屏蔽了
+这里给出的解决办法是用hexo自动提交插件
+需要获取一个自动提交的token
+
+注册百度站长工具：http://zhanzhang.baidu.com
+添加你的hexo域名
+找到网页抓取 - 链接提交 - 下拉选择你的hexo站点
+数据提交方式 - 自动提交 - 主动推送(实时)
+推送接口
+接口调用地址： http://data.zz.baidu.com/urls?site=hisen.me&amp;token=XmxXyESxyz1hANxE
+复制上面token&#x3D;后面的内容，那就是你的token
+
+安装自动提交插件：
+
+
+npm install hexo-baidu-url-submit –save
+编辑站点配置文件_config.yml，添加一下内容
+
+baidu_url_submit:  count: 1 ## 提交最新的一个链接  host: www.hui-wang.info ## 在百度站长平台中注册的域名  token: your_token ## 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!  path: baidu_urls.txt ## 文本文档的地址， 新链接会保存在此文本文档里
+加入新的deployer: 原来type前面是没有 - 的
+但是不这样处理执行hexo g 会报错
+deploy:- type: git  repository: yoururl  branch: master- type: baidu_url_submitter
+生成效果如下：
+$ hexo gINFO  Start processingINFO  Generating Baidu urls for last 1 postsINFO  Posts urls generated in baidu_urls.txthttp://hisen.me/20170216-hexo百度抓取失败解决办法/INFO  Files loaded in 1.31 s$ hexo dINFO  Deploy done: gitINFO  Deploying: baidu_url_submitterINFO  Submitting urlshttp://hisen.me/20170216-hexo百度抓取失败解决办法/&#123;&quot;remain&quot;:1,&quot;success&quot;:1&#125;INFO  Deploy done: baidu_url_submitter
+
+感谢插件作者：王辉的博客
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
   </entry>
   <entry>
     <title>homelab - 参考博文</title>
@@ -11413,28 +11501,6 @@ log4j配置文件
       </tags>
   </entry>
   <entry>
-    <title>Mac iTerm2 无法 ping 网关</title>
-    <url>/20251018-mac_iterm2_can_not_ping_gateway/</url>
-    <content><![CDATA[0. 概览如果 Mac 可以正常上网，但是无法访问本地网络。解决：“系统设置”→“隐私与安全性”→“本地网络”，打开对应软件的权限。
-1. 表象无法 ping 网关，但是可以上网。
-ping 192.168.1.1PING 192.168.1.1 (192.168.1.1): 56 data bytesping: sendto: No route to hostping: sendto: No route to hostRequest timeout for icmp_seq 0...--- 192.168.1.1 ping statistics ---17 packets transmitted, 0 packets received, 100.0% packet loss
-
-2. 排查2.1 使用自带终端可以正常 ping。
-2.2 抓包
-sudo tcpdump -i en0 icmplistening on en0, link-type EN10MB (Ethernet), snapshot length 524288 bytes16:50:17.646968 IP 180.165.12.183 &gt; 192.168.1.55: ICMP 180.165.12.183 udp port 49914 unreachable, length 5616:50:18.135497 IP 117.148.114.147 &gt; 192.168.1.55: ICMP 117.148.114.147 udp port 42944 unreachable, length 5616:50:18.361302 IP 210.74.154.110 &gt; 192.168.1.55: ICMP 210.74.154.110 udp port 40764 unreachable, length 5616:50:18.361989 IP 210.74.154.110 &gt; 192.168.1.55: ICMP 210.74.154.110 udp port 61340 unreachable, length 5616:50:18.434133 IP 117.155.164.106 &gt; 192.168.1.55: ICMP 117.155.164.106 udp port 10218 unreachable, length 5616:50:18.475222 IP 119.191.82.252 &gt; 192.168.1.55: ICMP 119.191.82.252 udp port hydap unreachable, length 5616:50:19.077798 IP 140.75.168.17 &gt; 192.168.1.55: ICMP 140.75.168.17 udp port 15464 unreachable, length 56
-发现 180 这些 IP，很像 switchhost 上 GitHub 的IP。
-2.3 问模型SwitchHost 会导致 iTerm2 出现无法 ping 网关的问题吗？Mac 自带的终端是可以 ping 的。答：
-本地网络权限问题：macOS 系统更新（如 Sequoia 15.0.1）后，可能会弹出权限请求窗口，询问是否允许应用访问本地网络。若用户误选“否”，iTerm2 将被禁止访问本地网络，导致无法 ping 通网关。解决方法：在 macOS 的“系统设置”→“隐私与安全性”→“本地网络”中，确保 iTerm2 的开关处于开启状态。
-发现来问题，开启本地网络之后就可以正常使用。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>网络</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>mac docker compose timezone 问题解决</title>
     <url>/20181221-mac%20docker%20compose%20timezone%20%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[一、背景介绍想用docker搭建一个lnmp环境
@@ -11465,6 +11531,28 @@ apply &amp; restart
       </categories>
       <tags>
         <tag>容器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mac iTerm2 无法 ping 网关</title>
+    <url>/20251018-mac_iterm2_can_not_ping_gateway/</url>
+    <content><![CDATA[0. 概览如果 Mac 可以正常上网，但是无法访问本地网络。解决：“系统设置”→“隐私与安全性”→“本地网络”，打开对应软件的权限。
+1. 表象无法 ping 网关，但是可以上网。
+ping 192.168.1.1PING 192.168.1.1 (192.168.1.1): 56 data bytesping: sendto: No route to hostping: sendto: No route to hostRequest timeout for icmp_seq 0...--- 192.168.1.1 ping statistics ---17 packets transmitted, 0 packets received, 100.0% packet loss
+
+2. 排查2.1 使用自带终端可以正常 ping。
+2.2 抓包
+sudo tcpdump -i en0 icmplistening on en0, link-type EN10MB (Ethernet), snapshot length 524288 bytes16:50:17.646968 IP 180.165.12.183 &gt; 192.168.1.55: ICMP 180.165.12.183 udp port 49914 unreachable, length 5616:50:18.135497 IP 117.148.114.147 &gt; 192.168.1.55: ICMP 117.148.114.147 udp port 42944 unreachable, length 5616:50:18.361302 IP 210.74.154.110 &gt; 192.168.1.55: ICMP 210.74.154.110 udp port 40764 unreachable, length 5616:50:18.361989 IP 210.74.154.110 &gt; 192.168.1.55: ICMP 210.74.154.110 udp port 61340 unreachable, length 5616:50:18.434133 IP 117.155.164.106 &gt; 192.168.1.55: ICMP 117.155.164.106 udp port 10218 unreachable, length 5616:50:18.475222 IP 119.191.82.252 &gt; 192.168.1.55: ICMP 119.191.82.252 udp port hydap unreachable, length 5616:50:19.077798 IP 140.75.168.17 &gt; 192.168.1.55: ICMP 140.75.168.17 udp port 15464 unreachable, length 56
+发现 180 这些 IP，很像 switchhost 上 GitHub 的IP。
+2.3 问模型SwitchHost 会导致 iTerm2 出现无法 ping 网关的问题吗？Mac 自带的终端是可以 ping 的。答：
+本地网络权限问题：macOS 系统更新（如 Sequoia 15.0.1）后，可能会弹出权限请求窗口，询问是否允许应用访问本地网络。若用户误选“否”，iTerm2 将被禁止访问本地网络，导致无法 ping 通网关。解决方法：在 macOS 的“系统设置”→“隐私与安全性”→“本地网络”中，确保 iTerm2 的开关处于开启状态。
+发现来问题，开启本地网络之后就可以正常使用。
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>网络</tag>
       </tags>
   </entry>
   <entry>
@@ -11501,6 +11589,71 @@ package mainimport (	&quot;bufio&quot;	&quot;fmt&quot;	&quot;os&quot;)// dup2 �
       </categories>
       <tags>
         <tag>go</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>maven环境搭建</title>
+    <url>/20170214-maven%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[一、环境的配置
+下载maven：http://maven.apache.org/download.cgi
+解压到相关目录
+配置环境变量：计算机—系统属性—高级系统设置—环境变量
+系统变量新建：M2_HOME 变量值：C:\tool\JAVA\apache-maven-3.3.9
+path中添加：%M2_HOME%\bin; (注意看看前面有没有分号隔开，没有添上)
+启动cmd，输入mvm -v可以查看版本
+
+Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-11T00:41:47+08:00)Maven home: C:\tool\JAVA\apache-maven-3.3.9Java version: 1.7.0_51, vendor: Oracle CorporationJava home: C:\hisenwork\Java\jdk1.7.0_51\jreDefault locale: zh_CN, platform encoding: GBKOS name: &quot;windows 8&quot;, version: &quot;6.2&quot;, arch: &quot;amd64&quot;, family: &quot;windows&quot;
+
+二、自定义设置(优化)1.自定义下载目录，修改配置文件
+C:\hisenwork\soft\maven-3.3.9\conf\settings.xml
+C:\hisenwork\soft\maven-3.3.9为你解压的maven路径
+
+**ps：**如果不想自己设置，我有现成的settings.xml，直接复制粘贴，覆盖原来的即可现成的settings.xml内容我放在底部
+
+搜索：localRepository
+在注释外添加以下代码，以后下载maven相关文件就会在这
+&lt;!--自定义存放目录--&gt;  &lt;localRepository&gt;C:\hisenwork\soft\maven&lt;/localRepository&gt;
+2.自定义镜像(推荐阿里云，速度飞快)
+搜索：mirrors
+在里面添加：
+&lt;!--阿里云--&gt;&lt;mirror&gt;	&lt;id&gt;nexus-aliyun&lt;/id&gt;	&lt;mirrorOf&gt;*&lt;/mirrorOf&gt;	&lt;name&gt;Nexus aliyun&lt;/name&gt;	&lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;&lt;/mirror&gt; 
+
+3.运行命令初始化maven
+mvn  help:system
+然后你会看到命令行飞快的移动，在你刚刚设置的目录下会出现很多东西
+类似于这样
+$ mvn  help:system[INFO] Scanning for projects...Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom (4 KB at 1.8 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/22/maven-plugins-22.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/22/maven-plugins-22.pom (13 KB at 15.9 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/21/maven-parent-21.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/21/maven-parent-21.pom (26 KB at 15.5 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/apache/10/apache-10.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/apache/10/apache-10.pom (15 KB at 19.3 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.jarDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.jar (25 KB at 30.6 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/2.4/maven-install-plugin-2.4.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/2.4/maven-install-plugin-2.4.pom (7 KB at 5.5 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/23/maven-plugins-23.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/23/maven-plugins-23.pom (9 KB at 8.2 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/22/maven-parent-22.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/22/maven-parent-22.pom (30 KB at 7.9 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/apache/11/apache-11.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/apache/11/apache-11.pom (15 KB at 12.8 KB/sec)[INFO] ------------------------------------------------------------------------[INFO] BUILD SUCCESS[INFO] ------------------------------------------------------------------------[INFO] Total time: 49.223 s[INFO] Finished at: 2017-02-14T13:09:33+08:00[INFO] Final Memory: 11M/152M[INFO] ------------------------------------------------------------------------
+
+三、maven相关命令创建 Maven 项目
+mvn archetype:create
+编译源代码（编译到target文件夹中）
+mvn compile
+编译测试代码
+mvn test-compile
+运行应用程序中的单元测试
+mvn test
+生成项目相关信息的网站
+mvn site
+清除目标目录中的生成结果（把默认target文件夹中的数据清理）
+mvn clean
+项目打包
+mvn package
+将打包好的包安装到本地仓库中，以使其塔项目能够调用
+mvn install
+生成 Eclipse 项目文件
+mvn eclipse:eclipse
+忽略测试文档编译
+mvn -Dmaven.test.skip=true
+部署到私有服务器
+cargo:deploy
+
+四、settings.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!--author：HiSENwebsite：http://hisen.me--&gt;&lt;!--Licensed to the Apache Software Foundation (ASF) under oneor more contributor license agreements.  See the NOTICE filedistributed with this work for additional informationregarding copyright ownership.  The ASF licenses this fileto you under the Apache License, Version 2.0 (the&quot;License&quot;); you may not use this file except in compliancewith the License.  You may obtain a copy of the License at    http://www.apache.org/licenses/LICENSE-2.0Unless required by applicable law or agreed to in writing,software distributed under the License is distributed on an&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANYKIND, either express or implied.  See the License for thespecific language governing permissions and limitationsunder the License.--&gt;&lt;!-- | This is the configuration file for Maven. It can be specified at two levels: | |  1. User Level. This settings.xml file provides configuration for a single user, |                 and is normally provided in $&#123;user.home&#125;/.m2/settings.xml. | |                 NOTE: This location can be overridden with the CLI option: | |                 -s /path/to/user/settings.xml | |  2. Global Level. This settings.xml file provides configuration for all Maven |                 users on a machine (assuming they&#x27;re all using the same Maven |                 installation). It&#x27;s normally provided in |                 $&#123;maven.home&#125;/conf/settings.xml. | |                 NOTE: This location can be overridden with the CLI option: | |                 -gs /path/to/global/settings.xml | | The sections in this sample file are intended to give you a running start at | getting the most out of your Maven installation. Where appropriate, the default | values (values used when the setting is not specified) are provided. | |--&gt;&lt;settings xmlns=&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;          xsi:schemaLocation=&quot;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;&gt;  &lt;!-- localRepository   | The path to the local repository maven will use to store artifacts.   |   | Default: $&#123;user.home&#125;/.m2/repository  &lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;  --&gt;  &lt;!--自定义存放目录--&gt;  &lt;localRepository&gt;C:\hisenwork\soft\maven  &lt;/localRepository&gt;  &lt;!-- interactiveMode   | This will determine whether maven prompts you when it needs input. If set to false,   | maven will use a sensible default value, perhaps based on some other setting, for   | the parameter in question.   |   | Default: true  &lt;interactiveMode&gt;true&lt;/interactiveMode&gt;  --&gt;  &lt;!-- offline   | Determines whether maven should attempt to connect to the network when executing a build.   | This will have an effect on artifact downloads, artifact deployment, and others.   |   | Default: false  &lt;offline&gt;false&lt;/offline&gt;  --&gt;  &lt;!-- pluginGroups   | This is a list of additional group identifiers that will be searched when resolving plugins by their prefix, i.e.   | when invoking a command line like &quot;mvn prefix:goal&quot;. Maven will automatically add the group identifiers   | &quot;org.apache.maven.plugins&quot; and &quot;org.codehaus.mojo&quot; if these are not already contained in the list.   |--&gt;  &lt;pluginGroups&gt;    &lt;!-- pluginGroup     | Specifies a further group identifier to use for plugin lookup.    &lt;pluginGroup&gt;com.your.plugins&lt;/pluginGroup&gt;    --&gt;  &lt;/pluginGroups&gt;  &lt;!-- proxies   | This is a list of proxies which can be used on this machine to connect to the network.   | Unless otherwise specified (by system property or command-line switch), the first proxy   | specification in this list marked as active will be used.   |--&gt;  &lt;proxies&gt;    &lt;!-- proxy     | Specification for one proxy, to be used in connecting to the network.     |    &lt;proxy&gt;      &lt;id&gt;optional&lt;/id&gt;      &lt;active&gt;true&lt;/active&gt;      &lt;protocol&gt;http&lt;/protocol&gt;      &lt;username&gt;proxyuser&lt;/username&gt;      &lt;password&gt;proxypass&lt;/password&gt;      &lt;host&gt;proxy.host.net&lt;/host&gt;      &lt;port&gt;80&lt;/port&gt;      &lt;nonProxyHosts&gt;local.net|some.host.com&lt;/nonProxyHosts&gt;    &lt;/proxy&gt;    --&gt;  &lt;/proxies&gt;  &lt;!-- servers   | This is a list of authentication profiles, keyed by the server-id used within the system.   | Authentication profiles can be used whenever maven must make a connection to a remote server.   |--&gt;  &lt;servers&gt;    &lt;!-- server     | Specifies the authentication information to use when connecting to a particular server, identified by     | a unique name within the system (referred to by the &#x27;id&#x27; attribute below).     |     | NOTE: You should either specify username/password OR privateKey/passphrase, since these pairings are     |       used together.     |    &lt;server&gt;      &lt;id&gt;deploymentRepo&lt;/id&gt;      &lt;username&gt;repouser&lt;/username&gt;      &lt;password&gt;repopwd&lt;/password&gt;    &lt;/server&gt;    --&gt;    &lt;!-- Another sample, using keys to authenticate.    &lt;server&gt;      &lt;id&gt;siteServer&lt;/id&gt;      &lt;privateKey&gt;/path/to/private/key&lt;/privateKey&gt;      &lt;passphrase&gt;optional; leave empty if not used.&lt;/passphrase&gt;    &lt;/server&gt;    --&gt;  &lt;/servers&gt;  &lt;!-- mirrors   | This is a list of mirrors to be used in downloading artifacts from remote repositories.   |   | It works like this: a POM may declare a repository to use in resolving certain artifacts.   | However, this repository may have problems with heavy traffic at times, so people have mirrored   | it to several places.   |   | That repository definition will have a unique id, so we can create a mirror reference for that   | repository, to be used as an alternate download site. The mirror site will be the preferred   | server for that repository.   |--&gt;  &lt;mirrors&gt;    &lt;!-- mirror     | Specifies a repository mirror site to use instead of a given repository. The repository that     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.     |    &lt;mirror&gt;      &lt;id&gt;mirrorId&lt;/id&gt;      &lt;mirrorOf&gt;repositoryId&lt;/mirrorOf&gt;      &lt;name&gt;Human Readable Name for this Mirror.&lt;/name&gt;      &lt;url&gt;http://my.repository.com/repo/path&lt;/url&gt;    &lt;/mirror&gt;     --&gt;	&lt;!--阿里云--&gt;	&lt;mirror&gt;		&lt;id&gt;nexus-aliyun&lt;/id&gt;		&lt;mirrorOf&gt;*&lt;/mirrorOf&gt;		&lt;name&gt;Nexus aliyun&lt;/name&gt;		&lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;	&lt;/mirror&gt;   &lt;/mirrors&gt;  &lt;!-- profiles   | This is a list of profiles which can be activated in a variety of ways, and which can modify   | the build process. Profiles provided in the settings.xml are intended to provide local machine-   | specific paths and repository locations which allow the build to work in the local environment.   |   | For example, if you have an integration testing plugin - like cactus - that needs to know where   | your Tomcat instance is installed, you can provide a variable here such that the variable is   | dereferenced during the build process to configure the cactus plugin.   |   | As noted above, profiles can be activated in a variety of ways. One way - the activeProfiles   | section of this document (settings.xml) - will be discussed later. Another way essentially   | relies on the detection of a system property, either matching a particular value for the property,   | or merely testing its existence. Profiles can also be activated by JDK version prefix, where a   | value of &#x27;1.4&#x27; might activate a profile when the build is executed on a JDK version of &#x27;1.4.2_07&#x27;.   | Finally, the list of active profiles can be specified directly from the command line.   |   | NOTE: For profiles defined in the settings.xml, you are restricted to specifying only artifact   |       repositories, plugin repositories, and free-form properties to be used as configuration   |       variables for plugins in the POM.   |   |--&gt;  &lt;profiles&gt;    &lt;!-- profile     | Specifies a set of introductions to the build process, to be activated using one or more of the     | mechanisms described above. For inheritance purposes, and to activate profiles via &lt;activatedProfiles/&gt;     | or the command line, profiles have to have an ID that is unique.     |     | An encouraged best practice for profile identification is to use a consistent naming convention     | for profiles, such as &#x27;env-dev&#x27;, &#x27;env-test&#x27;, &#x27;env-production&#x27;, &#x27;user-jdcasey&#x27;, &#x27;user-brett&#x27;, etc.     | This will make it more intuitive to understand what the set of introduced profiles is attempting     | to accomplish, particularly when you only have a list of profile id&#x27;s for debug.     |     | This profile example uses the JDK version to trigger activation, and provides a JDK-specific repo.    &lt;profile&gt;      &lt;id&gt;jdk-1.4&lt;/id&gt;      &lt;activation&gt;        &lt;jdk&gt;1.4&lt;/jdk&gt;      &lt;/activation&gt;      &lt;repositories&gt;        &lt;repository&gt;          &lt;id&gt;jdk14&lt;/id&gt;          &lt;name&gt;Repository for JDK 1.4 builds&lt;/name&gt;          &lt;url&gt;http://www.myhost.com/maven/jdk14&lt;/url&gt;          &lt;layout&gt;default&lt;/layout&gt;          &lt;snapshotPolicy&gt;always&lt;/snapshotPolicy&gt;        &lt;/repository&gt;      &lt;/repositories&gt;    &lt;/profile&gt;    --&gt;    &lt;!--     | Here is another profile, activated by the system property &#x27;target-env&#x27; with a value of &#x27;dev&#x27;,     | which provides a specific path to the Tomcat instance. To use this, your plugin configuration     | might hypothetically look like:     |     | ...     | &lt;plugin&gt;     |   &lt;groupId&gt;org.myco.myplugins&lt;/groupId&gt;     |   &lt;artifactId&gt;myplugin&lt;/artifactId&gt;     |     |   &lt;configuration&gt;     |     &lt;tomcatLocation&gt;$&#123;tomcatPath&#125;&lt;/tomcatLocation&gt;     |   &lt;/configuration&gt;     | &lt;/plugin&gt;     | ...     |     | NOTE: If you just wanted to inject this configuration whenever someone set &#x27;target-env&#x27; to     |       anything, you could just leave off the &lt;value/&gt; inside the activation-property.     |    &lt;profile&gt;      &lt;id&gt;env-dev&lt;/id&gt;      &lt;activation&gt;        &lt;property&gt;          &lt;name&gt;target-env&lt;/name&gt;          &lt;value&gt;dev&lt;/value&gt;        &lt;/property&gt;      &lt;/activation&gt;      &lt;properties&gt;        &lt;tomcatPath&gt;/path/to/tomcat/instance&lt;/tomcatPath&gt;      &lt;/properties&gt;    &lt;/profile&gt;    --&gt;  &lt;/profiles&gt;  &lt;!-- activeProfiles   | List of profiles that are active for all builds.   |  &lt;activeProfiles&gt;    &lt;activeProfile&gt;alwaysActiveProfile&lt;/activeProfile&gt;    &lt;activeProfile&gt;anotherAlwaysActiveProfile&lt;/activeProfile&gt;  &lt;/activeProfiles&gt;  --&gt;&lt;/settings&gt;]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>工程效能</tag>
       </tags>
   </entry>
   <entry>
@@ -11715,71 +11868,6 @@ Scaling AI Agent Infrastructure with the MCP Stateless updates – Google Develo
       <tags>
         <tag>Agent</tag>
         <tag>架构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>maven环境搭建</title>
-    <url>/20170214-maven%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[一、环境的配置
-下载maven：http://maven.apache.org/download.cgi
-解压到相关目录
-配置环境变量：计算机—系统属性—高级系统设置—环境变量
-系统变量新建：M2_HOME 变量值：C:\tool\JAVA\apache-maven-3.3.9
-path中添加：%M2_HOME%\bin; (注意看看前面有没有分号隔开，没有添上)
-启动cmd，输入mvm -v可以查看版本
-
-Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-11T00:41:47+08:00)Maven home: C:\tool\JAVA\apache-maven-3.3.9Java version: 1.7.0_51, vendor: Oracle CorporationJava home: C:\hisenwork\Java\jdk1.7.0_51\jreDefault locale: zh_CN, platform encoding: GBKOS name: &quot;windows 8&quot;, version: &quot;6.2&quot;, arch: &quot;amd64&quot;, family: &quot;windows&quot;
-
-二、自定义设置(优化)1.自定义下载目录，修改配置文件
-C:\hisenwork\soft\maven-3.3.9\conf\settings.xml
-C:\hisenwork\soft\maven-3.3.9为你解压的maven路径
-
-**ps：**如果不想自己设置，我有现成的settings.xml，直接复制粘贴，覆盖原来的即可现成的settings.xml内容我放在底部
-
-搜索：localRepository
-在注释外添加以下代码，以后下载maven相关文件就会在这
-&lt;!--自定义存放目录--&gt;  &lt;localRepository&gt;C:\hisenwork\soft\maven&lt;/localRepository&gt;
-2.自定义镜像(推荐阿里云，速度飞快)
-搜索：mirrors
-在里面添加：
-&lt;!--阿里云--&gt;&lt;mirror&gt;	&lt;id&gt;nexus-aliyun&lt;/id&gt;	&lt;mirrorOf&gt;*&lt;/mirrorOf&gt;	&lt;name&gt;Nexus aliyun&lt;/name&gt;	&lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;&lt;/mirror&gt; 
-
-3.运行命令初始化maven
-mvn  help:system
-然后你会看到命令行飞快的移动，在你刚刚设置的目录下会出现很多东西
-类似于这样
-$ mvn  help:system[INFO] Scanning for projects...Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom (4 KB at 1.8 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/22/maven-plugins-22.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/22/maven-plugins-22.pom (13 KB at 15.9 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/21/maven-parent-21.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/21/maven-parent-21.pom (26 KB at 15.5 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/apache/10/apache-10.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/apache/10/apache-10.pom (15 KB at 19.3 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.jarDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.jar (25 KB at 30.6 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/2.4/maven-install-plugin-2.4.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/2.4/maven-install-plugin-2.4.pom (7 KB at 5.5 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/23/maven-plugins-23.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/23/maven-plugins-23.pom (9 KB at 8.2 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/22/maven-parent-22.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/22/maven-parent-22.pom (30 KB at 7.9 KB/sec)Downloading: https://repo.maven.apache.org/maven2/org/apache/apache/11/apache-11.pomDownloaded: https://repo.maven.apache.org/maven2/org/apache/apache/11/apache-11.pom (15 KB at 12.8 KB/sec)[INFO] ------------------------------------------------------------------------[INFO] BUILD SUCCESS[INFO] ------------------------------------------------------------------------[INFO] Total time: 49.223 s[INFO] Finished at: 2017-02-14T13:09:33+08:00[INFO] Final Memory: 11M/152M[INFO] ------------------------------------------------------------------------
-
-三、maven相关命令创建 Maven 项目
-mvn archetype:create
-编译源代码（编译到target文件夹中）
-mvn compile
-编译测试代码
-mvn test-compile
-运行应用程序中的单元测试
-mvn test
-生成项目相关信息的网站
-mvn site
-清除目标目录中的生成结果（把默认target文件夹中的数据清理）
-mvn clean
-项目打包
-mvn package
-将打包好的包安装到本地仓库中，以使其塔项目能够调用
-mvn install
-生成 Eclipse 项目文件
-mvn eclipse:eclipse
-忽略测试文档编译
-mvn -Dmaven.test.skip=true
-部署到私有服务器
-cargo:deploy
-
-四、settings.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!--author：HiSENwebsite：http://hisen.me--&gt;&lt;!--Licensed to the Apache Software Foundation (ASF) under oneor more contributor license agreements.  See the NOTICE filedistributed with this work for additional informationregarding copyright ownership.  The ASF licenses this fileto you under the Apache License, Version 2.0 (the&quot;License&quot;); you may not use this file except in compliancewith the License.  You may obtain a copy of the License at    http://www.apache.org/licenses/LICENSE-2.0Unless required by applicable law or agreed to in writing,software distributed under the License is distributed on an&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANYKIND, either express or implied.  See the License for thespecific language governing permissions and limitationsunder the License.--&gt;&lt;!-- | This is the configuration file for Maven. It can be specified at two levels: | |  1. User Level. This settings.xml file provides configuration for a single user, |                 and is normally provided in $&#123;user.home&#125;/.m2/settings.xml. | |                 NOTE: This location can be overridden with the CLI option: | |                 -s /path/to/user/settings.xml | |  2. Global Level. This settings.xml file provides configuration for all Maven |                 users on a machine (assuming they&#x27;re all using the same Maven |                 installation). It&#x27;s normally provided in |                 $&#123;maven.home&#125;/conf/settings.xml. | |                 NOTE: This location can be overridden with the CLI option: | |                 -gs /path/to/global/settings.xml | | The sections in this sample file are intended to give you a running start at | getting the most out of your Maven installation. Where appropriate, the default | values (values used when the setting is not specified) are provided. | |--&gt;&lt;settings xmlns=&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;          xsi:schemaLocation=&quot;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;&gt;  &lt;!-- localRepository   | The path to the local repository maven will use to store artifacts.   |   | Default: $&#123;user.home&#125;/.m2/repository  &lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;  --&gt;  &lt;!--自定义存放目录--&gt;  &lt;localRepository&gt;C:\hisenwork\soft\maven  &lt;/localRepository&gt;  &lt;!-- interactiveMode   | This will determine whether maven prompts you when it needs input. If set to false,   | maven will use a sensible default value, perhaps based on some other setting, for   | the parameter in question.   |   | Default: true  &lt;interactiveMode&gt;true&lt;/interactiveMode&gt;  --&gt;  &lt;!-- offline   | Determines whether maven should attempt to connect to the network when executing a build.   | This will have an effect on artifact downloads, artifact deployment, and others.   |   | Default: false  &lt;offline&gt;false&lt;/offline&gt;  --&gt;  &lt;!-- pluginGroups   | This is a list of additional group identifiers that will be searched when resolving plugins by their prefix, i.e.   | when invoking a command line like &quot;mvn prefix:goal&quot;. Maven will automatically add the group identifiers   | &quot;org.apache.maven.plugins&quot; and &quot;org.codehaus.mojo&quot; if these are not already contained in the list.   |--&gt;  &lt;pluginGroups&gt;    &lt;!-- pluginGroup     | Specifies a further group identifier to use for plugin lookup.    &lt;pluginGroup&gt;com.your.plugins&lt;/pluginGroup&gt;    --&gt;  &lt;/pluginGroups&gt;  &lt;!-- proxies   | This is a list of proxies which can be used on this machine to connect to the network.   | Unless otherwise specified (by system property or command-line switch), the first proxy   | specification in this list marked as active will be used.   |--&gt;  &lt;proxies&gt;    &lt;!-- proxy     | Specification for one proxy, to be used in connecting to the network.     |    &lt;proxy&gt;      &lt;id&gt;optional&lt;/id&gt;      &lt;active&gt;true&lt;/active&gt;      &lt;protocol&gt;http&lt;/protocol&gt;      &lt;username&gt;proxyuser&lt;/username&gt;      &lt;password&gt;proxypass&lt;/password&gt;      &lt;host&gt;proxy.host.net&lt;/host&gt;      &lt;port&gt;80&lt;/port&gt;      &lt;nonProxyHosts&gt;local.net|some.host.com&lt;/nonProxyHosts&gt;    &lt;/proxy&gt;    --&gt;  &lt;/proxies&gt;  &lt;!-- servers   | This is a list of authentication profiles, keyed by the server-id used within the system.   | Authentication profiles can be used whenever maven must make a connection to a remote server.   |--&gt;  &lt;servers&gt;    &lt;!-- server     | Specifies the authentication information to use when connecting to a particular server, identified by     | a unique name within the system (referred to by the &#x27;id&#x27; attribute below).     |     | NOTE: You should either specify username/password OR privateKey/passphrase, since these pairings are     |       used together.     |    &lt;server&gt;      &lt;id&gt;deploymentRepo&lt;/id&gt;      &lt;username&gt;repouser&lt;/username&gt;      &lt;password&gt;repopwd&lt;/password&gt;    &lt;/server&gt;    --&gt;    &lt;!-- Another sample, using keys to authenticate.    &lt;server&gt;      &lt;id&gt;siteServer&lt;/id&gt;      &lt;privateKey&gt;/path/to/private/key&lt;/privateKey&gt;      &lt;passphrase&gt;optional; leave empty if not used.&lt;/passphrase&gt;    &lt;/server&gt;    --&gt;  &lt;/servers&gt;  &lt;!-- mirrors   | This is a list of mirrors to be used in downloading artifacts from remote repositories.   |   | It works like this: a POM may declare a repository to use in resolving certain artifacts.   | However, this repository may have problems with heavy traffic at times, so people have mirrored   | it to several places.   |   | That repository definition will have a unique id, so we can create a mirror reference for that   | repository, to be used as an alternate download site. The mirror site will be the preferred   | server for that repository.   |--&gt;  &lt;mirrors&gt;    &lt;!-- mirror     | Specifies a repository mirror site to use instead of a given repository. The repository that     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.     |    &lt;mirror&gt;      &lt;id&gt;mirrorId&lt;/id&gt;      &lt;mirrorOf&gt;repositoryId&lt;/mirrorOf&gt;      &lt;name&gt;Human Readable Name for this Mirror.&lt;/name&gt;      &lt;url&gt;http://my.repository.com/repo/path&lt;/url&gt;    &lt;/mirror&gt;     --&gt;	&lt;!--阿里云--&gt;	&lt;mirror&gt;		&lt;id&gt;nexus-aliyun&lt;/id&gt;		&lt;mirrorOf&gt;*&lt;/mirrorOf&gt;		&lt;name&gt;Nexus aliyun&lt;/name&gt;		&lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;	&lt;/mirror&gt;   &lt;/mirrors&gt;  &lt;!-- profiles   | This is a list of profiles which can be activated in a variety of ways, and which can modify   | the build process. Profiles provided in the settings.xml are intended to provide local machine-   | specific paths and repository locations which allow the build to work in the local environment.   |   | For example, if you have an integration testing plugin - like cactus - that needs to know where   | your Tomcat instance is installed, you can provide a variable here such that the variable is   | dereferenced during the build process to configure the cactus plugin.   |   | As noted above, profiles can be activated in a variety of ways. One way - the activeProfiles   | section of this document (settings.xml) - will be discussed later. Another way essentially   | relies on the detection of a system property, either matching a particular value for the property,   | or merely testing its existence. Profiles can also be activated by JDK version prefix, where a   | value of &#x27;1.4&#x27; might activate a profile when the build is executed on a JDK version of &#x27;1.4.2_07&#x27;.   | Finally, the list of active profiles can be specified directly from the command line.   |   | NOTE: For profiles defined in the settings.xml, you are restricted to specifying only artifact   |       repositories, plugin repositories, and free-form properties to be used as configuration   |       variables for plugins in the POM.   |   |--&gt;  &lt;profiles&gt;    &lt;!-- profile     | Specifies a set of introductions to the build process, to be activated using one or more of the     | mechanisms described above. For inheritance purposes, and to activate profiles via &lt;activatedProfiles/&gt;     | or the command line, profiles have to have an ID that is unique.     |     | An encouraged best practice for profile identification is to use a consistent naming convention     | for profiles, such as &#x27;env-dev&#x27;, &#x27;env-test&#x27;, &#x27;env-production&#x27;, &#x27;user-jdcasey&#x27;, &#x27;user-brett&#x27;, etc.     | This will make it more intuitive to understand what the set of introduced profiles is attempting     | to accomplish, particularly when you only have a list of profile id&#x27;s for debug.     |     | This profile example uses the JDK version to trigger activation, and provides a JDK-specific repo.    &lt;profile&gt;      &lt;id&gt;jdk-1.4&lt;/id&gt;      &lt;activation&gt;        &lt;jdk&gt;1.4&lt;/jdk&gt;      &lt;/activation&gt;      &lt;repositories&gt;        &lt;repository&gt;          &lt;id&gt;jdk14&lt;/id&gt;          &lt;name&gt;Repository for JDK 1.4 builds&lt;/name&gt;          &lt;url&gt;http://www.myhost.com/maven/jdk14&lt;/url&gt;          &lt;layout&gt;default&lt;/layout&gt;          &lt;snapshotPolicy&gt;always&lt;/snapshotPolicy&gt;        &lt;/repository&gt;      &lt;/repositories&gt;    &lt;/profile&gt;    --&gt;    &lt;!--     | Here is another profile, activated by the system property &#x27;target-env&#x27; with a value of &#x27;dev&#x27;,     | which provides a specific path to the Tomcat instance. To use this, your plugin configuration     | might hypothetically look like:     |     | ...     | &lt;plugin&gt;     |   &lt;groupId&gt;org.myco.myplugins&lt;/groupId&gt;     |   &lt;artifactId&gt;myplugin&lt;/artifactId&gt;     |     |   &lt;configuration&gt;     |     &lt;tomcatLocation&gt;$&#123;tomcatPath&#125;&lt;/tomcatLocation&gt;     |   &lt;/configuration&gt;     | &lt;/plugin&gt;     | ...     |     | NOTE: If you just wanted to inject this configuration whenever someone set &#x27;target-env&#x27; to     |       anything, you could just leave off the &lt;value/&gt; inside the activation-property.     |    &lt;profile&gt;      &lt;id&gt;env-dev&lt;/id&gt;      &lt;activation&gt;        &lt;property&gt;          &lt;name&gt;target-env&lt;/name&gt;          &lt;value&gt;dev&lt;/value&gt;        &lt;/property&gt;      &lt;/activation&gt;      &lt;properties&gt;        &lt;tomcatPath&gt;/path/to/tomcat/instance&lt;/tomcatPath&gt;      &lt;/properties&gt;    &lt;/profile&gt;    --&gt;  &lt;/profiles&gt;  &lt;!-- activeProfiles   | List of profiles that are active for all builds.   |  &lt;activeProfiles&gt;    &lt;activeProfile&gt;alwaysActiveProfile&lt;/activeProfile&gt;    &lt;activeProfile&gt;anotherAlwaysActiveProfile&lt;/activeProfile&gt;  &lt;/activeProfiles&gt;  --&gt;&lt;/settings&gt;]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>工程效能</tag>
       </tags>
   </entry>
   <entry>
@@ -12536,6 +12624,25 @@ redis 查看 key 的大小：debug object key看其中的 serializedlength 即�
       </tags>
   </entry>
   <entry>
+    <title>Java 日志配置文件 - self4j 之 logback 和 log4j</title>
+    <url>/20200406-self4j-logback-log4j-log-properties/</url>
+    <content><![CDATA[写这种博客总感觉很低级但是不得不承认自己从来没有认真的了解过打日志这件事这里开个头，先从常见的日志配置文件开始，后续再深入了解
+“I wish i had” vs “I’m glad i did”人生会不会留下遗憾，在 20 年之后的这两句话中就能看出。希望 20 年后的自己，能够很自豪的说：I’m glad i did.
+一、self4j这是一个只定义了标准的日志组件
+二、logback常见配置：logback.xml
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;configuration&gt;    &lt;property name=&quot;APP&quot; value=&quot;hisenyuan-log-project&quot;/&gt;    &lt;!--文件输出--&gt;    &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;        &lt;!--存储路径--&gt;        &lt;file&gt;/export/log/$&#123;APP&#125;/$&#123;APP&#125;_detail.log&lt;/file&gt;        &lt;!--按天分割--&gt;        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;            &lt;FileNamePattern&gt;/www/log/$&#123;APP&#125;/$&#123;APP&#125;_detail.%d&#123;yyyy-MM-dd&#125;.log&lt;/FileNamePattern&gt;        &lt;/rollingPolicy&gt;        &lt;encoder class=&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;&gt;            &lt;pattern&gt;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;0&#125; %X&#123;trace-id&#125; - %m%n&lt;/pattern&gt;        &lt;/encoder&gt;    &lt;/appender&gt;    &lt;!--控制台--&gt;    &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;        &lt;encoder class=&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;&gt;            &lt;pattern&gt;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;0&#125; %X&#123;trace-id&#125; - %m%n&lt;/pattern&gt;        &lt;/encoder&gt;    &lt;/appender&gt;    &lt;!--你想排除xxx包下面的日志--&gt;    &lt;logger name=&quot;kafka.utils.Logging&quot; additivity=&quot;false&quot;&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;!--允许WARN以及以上的打印--&gt;    &lt;logger name=&quot;org.apache.http&quot; additivity=&quot;false&quot;&gt;        &lt;level value=&quot;WARN&quot; /&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;!--日志级别--&gt;    &lt;root level=&quot;INFO&quot;&gt;        &lt;!--启用日志文件打印日志--&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;        &lt;!----&gt;        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;    &lt;/root&gt;&lt;/configuration&gt;
+三、log4j常见配置：log4j.xml
+&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;UTF-8&#x27; ?&gt;&lt;!DOCTYPE log4j:configuration SYSTEM        &quot;http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd&quot;&gt;&lt;log4j:configuration&gt;    &lt;appender name=&quot;CONSOLE&quot; class=&quot;org.apache.log4j.ConsoleAppender&quot;&gt;        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;            &lt;param name=&quot;ConversionPattern&quot; value=&quot;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;1&#125; - %m%n&quot;/&gt;        &lt;/layout&gt;        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;            &lt;param name=&quot;LevelMin&quot; value=&quot;INFO&quot;/&gt;            &lt;param name=&quot;LevelMax&quot; value=&quot;ERROR&quot;/&gt;        &lt;/filter&gt;    &lt;/appender&gt;    &lt;appender name=&quot;FILE&quot; class=&quot;org.apache.log4j.DailyRollingFileAppender&quot;&gt;        &lt;param name=&quot;DatePattern&quot; value=&quot;&#x27;.&#x27;yyyy-MM-dd&quot;/&gt;        &lt;param name=&quot;Append&quot; value=&quot;true&quot;/&gt;        &lt;param name=&quot;file&quot; value=&quot;/www/log/hisenyuan-log-project.log&quot;/&gt;        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;            &lt;param name=&quot;ConversionPattern&quot; value=&quot;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;1&#125; - %m%n&quot;/&gt;        &lt;/layout&gt;        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;            &lt;param name=&quot;LevelMin&quot; value=&quot;INFO&quot;/&gt;            &lt;param name=&quot;LevelMax&quot; value=&quot;ERROR&quot;/&gt;        &lt;/filter&gt;    &lt;/appender&gt;    &lt;logger name=&quot;kafka.utils.Logging&quot; additivity=&quot;false&quot;&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;logger name=&quot;org.apache.http&quot; additivity=&quot;false&quot;&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;root&gt;        &lt;priority value=&quot;INFO&quot;/&gt;        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/root&gt;&lt;/log4j:configuration&gt;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>resteasy fastjson版本冲突问题</title>
     <url>/20190804-resteasy%20fastjson%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[零、相关介绍关键错误信息：Java.lang.RuntimeException: RESTeasy Provider Factory is null, do you have the ResteasyBootstrap listener configured?Java.lang.RuntimeException: Illegal to inject a message body into a singleton into public com.alibaba.fastjson.support.jaxrs.FastJsonProvider(Java.lang.String)
@@ -12551,25 +12658,6 @@ tomcat localhost long
 三、解决办法&lt;dependency&gt;    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;    &lt;artifactId&gt;fastjson&lt;/artifactId&gt;    &lt;version&gt;1.1.34.sec01&lt;/version&gt;&lt;!--改为：1.1.34.sec01相安无事--&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;org.jboss.resteasy&lt;/groupId&gt;    &lt;artifactId&gt;resteasy-jaxrs&lt;/artifactId&gt;    &lt;version&gt;2.2.1.GA&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;org.jboss.resteasy&lt;/groupId&gt;    &lt;artifactId&gt;jaxrs-api&lt;/artifactId&gt;    &lt;version&gt;2.2.1.GA&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;org.jboss.resteasy&lt;/groupId&gt;    &lt;artifactId&gt;resteasy-spring&lt;/artifactId&gt;    &lt;version&gt;2.2.1.GA&lt;/version&gt;&lt;/dependency&gt;
 
 四、细节说明暂时不知道引起的原因，后期补充
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java 日志配置文件 - self4j 之 logback 和 log4j</title>
-    <url>/20200406-self4j-logback-log4j-log-properties/</url>
-    <content><![CDATA[写这种博客总感觉很低级但是不得不承认自己从来没有认真的了解过打日志这件事这里开个头，先从常见的日志配置文件开始，后续再深入了解
-“I wish i had” vs “I’m glad i did”人生会不会留下遗憾，在 20 年之后的这两句话中就能看出。希望 20 年后的自己，能够很自豪的说：I’m glad i did.
-一、self4j这是一个只定义了标准的日志组件
-二、logback常见配置：logback.xml
-
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;configuration&gt;    &lt;property name=&quot;APP&quot; value=&quot;hisenyuan-log-project&quot;/&gt;    &lt;!--文件输出--&gt;    &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;        &lt;!--存储路径--&gt;        &lt;file&gt;/export/log/$&#123;APP&#125;/$&#123;APP&#125;_detail.log&lt;/file&gt;        &lt;!--按天分割--&gt;        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;            &lt;FileNamePattern&gt;/www/log/$&#123;APP&#125;/$&#123;APP&#125;_detail.%d&#123;yyyy-MM-dd&#125;.log&lt;/FileNamePattern&gt;        &lt;/rollingPolicy&gt;        &lt;encoder class=&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;&gt;            &lt;pattern&gt;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;0&#125; %X&#123;trace-id&#125; - %m%n&lt;/pattern&gt;        &lt;/encoder&gt;    &lt;/appender&gt;    &lt;!--控制台--&gt;    &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;        &lt;encoder class=&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;&gt;            &lt;pattern&gt;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;0&#125; %X&#123;trace-id&#125; - %m%n&lt;/pattern&gt;        &lt;/encoder&gt;    &lt;/appender&gt;    &lt;!--你想排除xxx包下面的日志--&gt;    &lt;logger name=&quot;kafka.utils.Logging&quot; additivity=&quot;false&quot;&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;!--允许WARN以及以上的打印--&gt;    &lt;logger name=&quot;org.apache.http&quot; additivity=&quot;false&quot;&gt;        &lt;level value=&quot;WARN&quot; /&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;!--日志级别--&gt;    &lt;root level=&quot;INFO&quot;&gt;        &lt;!--启用日志文件打印日志--&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;        &lt;!----&gt;        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;    &lt;/root&gt;&lt;/configuration&gt;
-三、log4j常见配置：log4j.xml
-&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;UTF-8&#x27; ?&gt;&lt;!DOCTYPE log4j:configuration SYSTEM        &quot;http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd&quot;&gt;&lt;log4j:configuration&gt;    &lt;appender name=&quot;CONSOLE&quot; class=&quot;org.apache.log4j.ConsoleAppender&quot;&gt;        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;            &lt;param name=&quot;ConversionPattern&quot; value=&quot;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;1&#125; - %m%n&quot;/&gt;        &lt;/layout&gt;        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;            &lt;param name=&quot;LevelMin&quot; value=&quot;INFO&quot;/&gt;            &lt;param name=&quot;LevelMax&quot; value=&quot;ERROR&quot;/&gt;        &lt;/filter&gt;    &lt;/appender&gt;    &lt;appender name=&quot;FILE&quot; class=&quot;org.apache.log4j.DailyRollingFileAppender&quot;&gt;        &lt;param name=&quot;DatePattern&quot; value=&quot;&#x27;.&#x27;yyyy-MM-dd&quot;/&gt;        &lt;param name=&quot;Append&quot; value=&quot;true&quot;/&gt;        &lt;param name=&quot;file&quot; value=&quot;/www/log/hisenyuan-log-project.log&quot;/&gt;        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;            &lt;param name=&quot;ConversionPattern&quot; value=&quot;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;1&#125; - %m%n&quot;/&gt;        &lt;/layout&gt;        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;            &lt;param name=&quot;LevelMin&quot; value=&quot;INFO&quot;/&gt;            &lt;param name=&quot;LevelMax&quot; value=&quot;ERROR&quot;/&gt;        &lt;/filter&gt;    &lt;/appender&gt;    &lt;logger name=&quot;kafka.utils.Logging&quot; additivity=&quot;false&quot;&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;logger name=&quot;org.apache.http&quot; additivity=&quot;false&quot;&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;root&gt;        &lt;priority value=&quot;INFO&quot;/&gt;        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/root&gt;&lt;/log4j:configuration&gt;
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -12628,21 +12716,6 @@ awk 入门指南
       </categories>
       <tags>
         <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>sql行转列，列转行</title>
-    <url>/20170613-sql%E8%A1%8C%E8%BD%AC%E5%88%97%EF%BC%8C%E5%88%97%E8%BD%AC%E8%A1%8C/</url>
-    <content><![CDATA[有时候需要行转列或者列转行
-在Oracle 11g中，Oracle 又增加了2个查询：pivot（行转列） 和unpivot（列转行）
-下面是在mysql中的操作：
-mysql&gt; select * from test;+------+------+--------+| id   | age  | weigth |+------+------+--------+|    1 |    1 |      3 ||    1 |    2 |      2 ||    1 |    3 |      1 ||    2 |    5 |      6 |+------+------+--------+4 rows in set (0.00 sec)#根据ID分组mysql&gt; select group_concat(age) from test group by id;+-------------------+| group_concat(age) |+-------------------+| 1,2,3             || 5                 |+-------------------+2 rows in set (0.01 sec)#不分组mysql&gt; select group_concat(age) from test;+-------------------+| group_concat(age) |+-------------------+| 1,2,3,5           |+-------------------+1 row in set (0.00 sec)
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>存储</tag>
       </tags>
   </entry>
   <entry>
@@ -12881,6 +12954,21 @@ accountability 我本想翻译为“靠谱程度”，想想还是算了。
       <tags>
         <tag>成长</tag>
         <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sql行转列，列转行</title>
+    <url>/20170613-sql%E8%A1%8C%E8%BD%AC%E5%88%97%EF%BC%8C%E5%88%97%E8%BD%AC%E8%A1%8C/</url>
+    <content><![CDATA[有时候需要行转列或者列转行
+在Oracle 11g中，Oracle 又增加了2个查询：pivot（行转列） 和unpivot（列转行）
+下面是在mysql中的操作：
+mysql&gt; select * from test;+------+------+--------+| id   | age  | weigth |+------+------+--------+|    1 |    1 |      3 ||    1 |    2 |      2 ||    1 |    3 |      1 ||    2 |    5 |      6 |+------+------+--------+4 rows in set (0.00 sec)#根据ID分组mysql&gt; select group_concat(age) from test group by id;+-------------------+| group_concat(age) |+-------------------+| 1,2,3             || 5                 |+-------------------+2 rows in set (0.01 sec)#不分组mysql&gt; select group_concat(age) from test;+-------------------+| group_concat(age) |+-------------------+| 1,2,3,5           |+-------------------+1 row in set (0.00 sec)
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>存储</tag>
       </tags>
   </entry>
   <entry>
@@ -13556,6 +13644,47 @@ awk getline 函数
       </tags>
   </entry>
   <entry>
+    <title>ubuntu安装docker-ce并配置国内源和加速器</title>
+    <url>/20170417-ubuntu%E5%AE%89%E8%A3%85docker-ce%E5%B9%B6%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E6%BA%90%E5%92%8C%E5%8A%A0%E9%80%9F%E5%99%A8/</url>
+    <content><![CDATA[一、配置ubuntu国内镜像，这里推荐阿里云，右上角搜索：换阿里云源二、安装dockersudo apt-get updatesudo apt-get install \     linux-image-extra-$(uname -r) \     linux-image-extra-virtual
+安装docker包
+sudo apt-get install \     apt-transport-https \     ca-certificates \     curl \     software-properties-common 
+添加docker官方GPG秘钥,留意最后那个符号也要复制
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+安装稳定版仓库
+
+sudo add-apt-repository \     &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \     $(lsb_release -cs) \     stable&quot;
+再次更新源
+sudo apt-get update
+安装docker-ce
+sudo apt-get install docker-ce
+
+三、给docker添加国内加速器在阿里云申请一个账号，打开连接https://cr.console.aliyun.com/#/accelerator 
+拷贝您的专属加速器地址（每个人专属的，登陆需要密码），然后
+vi /etc/systemd/system/multi-user.target.wants/docker.service
+可以看到如下内容
+[Service]Type=notify# the default is not to use systemd for cgroups because the delegate issues still# exists and systemd currently does not support the cgroup feature set required# for containers run by docker#下面这行是默认的，我注释了，添加了下面一行#ExecStart=/usr/bin/dockerd -H fd://ExecStart=/usr/bin/dockerd -H fd:// --registry-mirror=https://9s3ekxxx.mirror.aliyuncs.comExecReload=/bin/kill -s HUP $MAINPIDLimitNOFILE=1048576
+找到 ExecStart&#x3D; 这一行，在这行最后添加加速器地址 –registry-mirror&#x3D;&lt;加速器地址&gt;
+如：ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;dockerd -H fd:&#x2F;&#x2F;  –registry-mirror&#x3D;https://xxxxxx.mirror.aliyuncs.com
+四、重新加载配置并且重新启动$ sudo systemctl daemon-reload$ sudo systemctl restart docker
+至此docker安装及国内加速器都好了，开始你的docker之旅吧。
+sudo docker run hello-world
+看到如下信息
+hisen@ubuntu:/$ sudo docker run hello-worldUnable to find image &#x27;hello-world:latest&#x27; locallylatest: Pulling from library/hello-world78445dd45222: Pull complete Digest: sha256:c5515758d4c5e1e838e9cd307f6c6a0d620b5e07e6f927b07d05f6d12a1ac8d7Status: Downloaded newer image for hello-world:latestHello from Docker!This message shows that your installation appears to be working correctly.To generate this message, Docker took the following steps: 1. The Docker client contacted the Docker daemon. 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub. 3. The Docker daemon created a new container from that image which runs the    executable that produces the output you are currently reading. 4. The Docker daemon streamed that output to the Docker client, which sent it    to your terminal.To try something more ambitious, you can run an Ubuntu container with: $ docker run -it ubuntu bashShare images, automate workflows, and more with a free Docker ID: https://cloud.docker.com/For more examples and ideas, visit: https://docs.docker.com/engine/userguide/
+到此就圆满结束
+最后给个彩蛋，阿里云一键安装脚本，执行下面命令即可安装最新版docker
+curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
+详情：http://mirrors.aliyun.com/help/docker-engine
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+        <tag>容器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>不确定性入门：框架、路线和落地</title>
     <url>/20261001-uncertainty-primer/</url>
     <content><![CDATA[1. 起因：一条视频前阵子刷到一条视频，《大灭绝时代的生存指南：塔勒布思想述评》，讲纳西姆·塔勒布。这条视频把《随机漫步的傻瓜》《黑天鹅》《反脆弱》《非对称风险》串成一条线，中间还补了休谟的归纳问题、演化论里的间断平衡，以及塔勒布本人在黎巴嫩内战的经历。
@@ -13696,47 +13825,6 @@ Wikipedia · 二手索引，指向塔勒布《随机漫步的傻瓜》，幸存�
       <tags>
         <tag>成长</tag>
         <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ubuntu安装docker-ce并配置国内源和加速器</title>
-    <url>/20170417-ubuntu%E5%AE%89%E8%A3%85docker-ce%E5%B9%B6%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E6%BA%90%E5%92%8C%E5%8A%A0%E9%80%9F%E5%99%A8/</url>
-    <content><![CDATA[一、配置ubuntu国内镜像，这里推荐阿里云，右上角搜索：换阿里云源二、安装dockersudo apt-get updatesudo apt-get install \     linux-image-extra-$(uname -r) \     linux-image-extra-virtual
-安装docker包
-sudo apt-get install \     apt-transport-https \     ca-certificates \     curl \     software-properties-common 
-添加docker官方GPG秘钥,留意最后那个符号也要复制
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-安装稳定版仓库
-
-sudo add-apt-repository \     &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \     $(lsb_release -cs) \     stable&quot;
-再次更新源
-sudo apt-get update
-安装docker-ce
-sudo apt-get install docker-ce
-
-三、给docker添加国内加速器在阿里云申请一个账号，打开连接https://cr.console.aliyun.com/#/accelerator 
-拷贝您的专属加速器地址（每个人专属的，登陆需要密码），然后
-vi /etc/systemd/system/multi-user.target.wants/docker.service
-可以看到如下内容
-[Service]Type=notify# the default is not to use systemd for cgroups because the delegate issues still# exists and systemd currently does not support the cgroup feature set required# for containers run by docker#下面这行是默认的，我注释了，添加了下面一行#ExecStart=/usr/bin/dockerd -H fd://ExecStart=/usr/bin/dockerd -H fd:// --registry-mirror=https://9s3ekxxx.mirror.aliyuncs.comExecReload=/bin/kill -s HUP $MAINPIDLimitNOFILE=1048576
-找到 ExecStart&#x3D; 这一行，在这行最后添加加速器地址 –registry-mirror&#x3D;&lt;加速器地址&gt;
-如：ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;dockerd -H fd:&#x2F;&#x2F;  –registry-mirror&#x3D;https://xxxxxx.mirror.aliyuncs.com
-四、重新加载配置并且重新启动$ sudo systemctl daemon-reload$ sudo systemctl restart docker
-至此docker安装及国内加速器都好了，开始你的docker之旅吧。
-sudo docker run hello-world
-看到如下信息
-hisen@ubuntu:/$ sudo docker run hello-worldUnable to find image &#x27;hello-world:latest&#x27; locallylatest: Pulling from library/hello-world78445dd45222: Pull complete Digest: sha256:c5515758d4c5e1e838e9cd307f6c6a0d620b5e07e6f927b07d05f6d12a1ac8d7Status: Downloaded newer image for hello-world:latestHello from Docker!This message shows that your installation appears to be working correctly.To generate this message, Docker took the following steps: 1. The Docker client contacted the Docker daemon. 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub. 3. The Docker daemon created a new container from that image which runs the    executable that produces the output you are currently reading. 4. The Docker daemon streamed that output to the Docker client, which sent it    to your terminal.To try something more ambitious, you can run an Ubuntu container with: $ docker run -it ubuntu bashShare images, automate workflows, and more with a free Docker ID: https://cloud.docker.com/For more examples and ideas, visit: https://docs.docker.com/engine/userguide/
-到此就圆满结束
-最后给个彩蛋，阿里云一键安装脚本，执行下面命令即可安装最新版docker
-curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
-详情：http://mirrors.aliyun.com/help/docker-engine
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-        <tag>容器</tag>
       </tags>
   </entry>
   <entry>
@@ -15039,20 +15127,6 @@ public class EnumSingleton &#123;  private EnumSingleton() &#123;  &#125;  publi
       </tags>
   </entry>
   <entry>
-    <title>尝试使用NIO读取文件</title>
-    <url>/20170601-%E5%B0%9D%E8%AF%95%E4%BD%BF%E7%94%A8NIO%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[具体代码如下，这里获取出来的文件大小是准确的
-FileInputStream方式获取出来的大小会有差异
-NIO与IO的对比详见：NIOCopy.Java
-/**   * 利用NIO进行读写文件   *   * @param oldFileName 原文件的路径   * @param newFileName 新文件的路径   */  public static void nioCopy(String oldFileName, String newFileName) &#123;    try &#123;      FileChannel fileChannelIn = new FileInputStream(new File(oldFileName)).getChannel();      FileChannel fileChannelOut = new FileOutputStream(new File(newFileName)).getChannel();      //获取文件大小      long size = fileChannelIn.size();      System.out.printf(&quot;文件大小为：%s byte \n&quot;,size);      //缓冲      ByteBuffer byteBuffer = ByteBuffer.allocate(1024);      long start = System.currentTimeMillis();      while (fileChannelIn.read(byteBuffer) != -1) &#123;        //准备写        byteBuffer.flip();        fileChannelOut.write(byteBuffer);        //准备读        byteBuffer.clear();      &#125;      long end = System.currentTimeMillis();      System.out.printf(&quot;NIO方式复制完成，耗时 %s 秒\n&quot;,(end-start)/1000);      //关闭      fileChannelIn.close();      fileChannelOut.close();    &#125; catch (FileNotFoundException e) &#123;      e.printStackTrace();    &#125; catch (IOException e) &#123;      e.printStackTrace();    &#125;  &#125;]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>布隆过滤器 丨 简介 - Java demo</title>
     <url>/20170907-%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%20%E4%B8%A8%20%E7%AE%80%E4%BB%8B%20-%20Java%20demo/</url>
     <content><![CDATA[概述布隆过滤器的作用是加快判定一个元素是否在集合中出现的方法。
@@ -15112,6 +15186,20 @@ a%b得余数c
       </tags>
   </entry>
   <entry>
+    <title>尝试使用NIO读取文件</title>
+    <url>/20170601-%E5%B0%9D%E8%AF%95%E4%BD%BF%E7%94%A8NIO%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[具体代码如下，这里获取出来的文件大小是准确的
+FileInputStream方式获取出来的大小会有差异
+NIO与IO的对比详见：NIOCopy.Java
+/**   * 利用NIO进行读写文件   *   * @param oldFileName 原文件的路径   * @param newFileName 新文件的路径   */  public static void nioCopy(String oldFileName, String newFileName) &#123;    try &#123;      FileChannel fileChannelIn = new FileInputStream(new File(oldFileName)).getChannel();      FileChannel fileChannelOut = new FileOutputStream(new File(newFileName)).getChannel();      //获取文件大小      long size = fileChannelIn.size();      System.out.printf(&quot;文件大小为：%s byte \n&quot;,size);      //缓冲      ByteBuffer byteBuffer = ByteBuffer.allocate(1024);      long start = System.currentTimeMillis();      while (fileChannelIn.read(byteBuffer) != -1) &#123;        //准备写        byteBuffer.flip();        fileChannelOut.write(byteBuffer);        //准备读        byteBuffer.clear();      &#125;      long end = System.currentTimeMillis();      System.out.printf(&quot;NIO方式复制完成，耗时 %s 秒\n&quot;,(end-start)/1000);      //关闭      fileChannelIn.close();      fileChannelOut.close();    &#125; catch (FileNotFoundException e) &#123;      e.printStackTrace();    &#125; catch (IOException e) &#123;      e.printStackTrace();    &#125;  &#125;]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>性能指标的含义与计算方式:TP50、TP90、TP99、TP999</title>
     <url>/20190801-%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%E7%9A%84%E5%90%AB%E4%B9%89%E4%B8%8E%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F:TP50%E3%80%81TP90%E3%80%81TP99%E3%80%81TP999/</url>
     <content><![CDATA[零、本文背景一个接口的关键指标应该就是响应速度，要想提高响应速度，结果在缓存中最好;那么怎么确定一个合理的缓存时间，以平衡性能与成本呢？我们可以通过记录业务请求，看读取缓存的时间分布，比如 99% 的请求都是 1天内;
@@ -15141,6 +15229,24 @@ private void calTime(List&lt;Long&gt; timeDurations) &#123;    timeDurations.sor
       </categories>
   </entry>
   <entry>
+    <title>数组中只有一个数出现奇数次 | 利用异或最高效</title>
+    <url>/20190404-%E6%95%B0%E7%BB%84%E4%B8%AD%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B0%E5%87%BA%E7%8E%B0%E5%A5%87%E6%95%B0%E6%AC%A1%20%7C%20%E5%88%A9%E7%94%A8%E5%BC%82%E6%88%96%E6%9C%80%E9%AB%98%E6%95%88/</url>
+    <content><![CDATA[一、背景题意：一个数组有奇数个元素，其中只有一个元素出现一次，其它都出现了2次
+方案A：利用hashMap存储出现的次数，然后遍历，复杂度O(3&#x2F;2N)&#x3D;O(N);方案B：利用bitmap,根据数组元素的大小确定位置，做取反(0-&gt;1-&gt;0);方案C：利用异或的特性快速找出，最简单，高效;
+二、异或a^a&#x3D;00^a&#x3D;a异或支持：交换率、结合率因此：a^b^c^b^c&#x3D;a^(b^b)^(c^c)&#x3D;a
+三、代码
+public static void main(String[] args) &#123;    int[] mayDup = &#123;1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1&#125;;    int res = mayDup[0];    for (int i = 1; i &lt; mayDup.length; i++) &#123;        System.out.print(&quot;res^mayDup[i]: &quot; + res + &quot;^&quot; + mayDup[i]);        res ^= mayDup[i];        System.out.println(&quot;=&quot; + res);    &#125;    System.out.println(res);&#125;
+
+四、后记这只是一个场景的妙用，实际当中很难遇到这种情况。所以不管什么时候还是得多去刷题，没事刷几道，熟然生巧。
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>最近在看的Java系列文章 - 计算机程序的思维逻辑</title>
     <url>/20170814-%E6%9C%80%E8%BF%91%E5%9C%A8%E7%9C%8B%E7%9A%84Java%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0%20-%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%80%9D%E7%BB%B4%E9%80%BB%E8%BE%91/</url>
     <content><![CDATA[计算机程序的思维逻辑这个系列的文章还不错
@@ -15157,24 +15263,6 @@ private void calTime(List&lt;Long&gt; timeDurations) &#123;    timeDurations.sor
       </categories>
       <tags>
         <tag>效率</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数组中只有一个数出现奇数次 | 利用异或最高效</title>
-    <url>/20190404-%E6%95%B0%E7%BB%84%E4%B8%AD%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B0%E5%87%BA%E7%8E%B0%E5%A5%87%E6%95%B0%E6%AC%A1%20%7C%20%E5%88%A9%E7%94%A8%E5%BC%82%E6%88%96%E6%9C%80%E9%AB%98%E6%95%88/</url>
-    <content><![CDATA[一、背景题意：一个数组有奇数个元素，其中只有一个元素出现一次，其它都出现了2次
-方案A：利用hashMap存储出现的次数，然后遍历，复杂度O(3&#x2F;2N)&#x3D;O(N);方案B：利用bitmap,根据数组元素的大小确定位置，做取反(0-&gt;1-&gt;0);方案C：利用异或的特性快速找出，最简单，高效;
-二、异或a^a&#x3D;00^a&#x3D;a异或支持：交换率、结合率因此：a^b^c^b^c&#x3D;a^(b^b)^(c^c)&#x3D;a
-三、代码
-public static void main(String[] args) &#123;    int[] mayDup = &#123;1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1&#125;;    int res = mayDup[0];    for (int i = 1; i &lt; mayDup.length; i++) &#123;        System.out.print(&quot;res^mayDup[i]: &quot; + res + &quot;^&quot; + mayDup[i]);        res ^= mayDup[i];        System.out.println(&quot;=&quot; + res);    &#125;    System.out.println(res);&#125;
-
-四、后记这只是一个场景的妙用，实际当中很难遇到这种情况。所以不管什么时候还是得多去刷题，没事刷几道，熟然生巧。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -15278,29 +15366,6 @@ i&#x3D;2写入主存有可能在3写入之前，其它线程已经对i进行了�
       </tags>
   </entry>
   <entry>
-    <title>笔记 - 读后感：《第一本Docker书》</title>
-    <url>/20180127-%E7%AC%94%E8%AE%B0%20-%20%E8%AF%BB%E5%90%8E%E6%84%9F%EF%BC%9A%E3%80%8A%E7%AC%AC%E4%B8%80%E6%9C%ACDocker%E4%B9%A6%E3%80%8B/</url>
-    <content><![CDATA[忘记开始是在什么地方看到docker这个东西
-后面觉得挺好玩，也试了很多次，找过很多的教程。
-搭建了一个zookeeper的集群(docker-compose)
-然后当我需要搭建redis集群的时候，发现里面很多的概念还不是很懂
-比如：volume network
-然后加了docker的群，遇到了在以前idea群里面熟的一个人
-花了一天的时间看完他传的一本书，昨天买的几本书晚上也到了。（docker从入门到实践、Java并发编程的艺术、effective Java中文版 2）
-这本书总体来说还行，就是过时了，还在用link，毕竟三年前的东西
-有些例子也报错，主要是ruby相关的不行，提醒需要2.2以上的版本
-下面是随便做的一点笔记
-
-# 所有容器，不加-a只显示正在运行的；-1 列出最后一次运行的docker ps -a# 启动一个已经停止的容器(id，--name 都可以)docker start hisen_container# 进入容器(容器重启之后进入交换行)docker attach hisen_container# 创建一个守护式容器docker -d# 查看日志 可选 -f 类似tail -f Ctrl+c 退出docker logs hisen_container# 查看容器内的进程docker top hisen_container# 在容器内部运行进程docker exec -d hisen_container touch /etc/new_conf_file# 停止守护式容器docker stop hisen_container# 自动重启容器docker run --restart=always ....=on-failure:5 当容器退出代码为非0时，docker会自动重启，最多重试5次# 深入容器,会以json串显示更多容器信息docker inspect hisen_container # 删除容器，要先stop才行docker rm hisen_container# 删除所有容器 -a:所有容器 -q:只返回容器的IDdocker rm &#x27;docker ps -a -q&#x27;# 启动新的名字为other_hisen_container的容器，并且进入bash shelldocker run -i -t --name other_hisen_container ubuntu /bin/bash# docker文件系统层可写容器镜像(比如tomcat)基础镜像(比如ubuntu)引导文件系统(容器组、命名空间、设备映射)内核# docker简单构成顶层的读写层+底部不可变的可读层还有一些配置，就成了一个容器。# 列出所有镜像docker images# 仓库名:tag 如果没有指定，默认latest# 推荐使用Dockerfile构建镜像FROM ubuntu:14.04MAINTAINER hisenyuan &quot;hisenyuan@gmail.com&quot;RUN apt-get update \&amp;&amp; apt-getinstall -y nginx \&amp;&amp; echo &#x27;Hi,I am in your container&#x27; \   /usr/share/nginx/html/index.htmlEXPOSE 80# 构建镜像，在上面的dockerfile目录docker build -t=&quot;hisenyuan/static_web&quot; .# 查看构建过程，以及镜像的每一层docker history 791397495f7a# 运行构建的镜像 -p端口映射 nginx -g &quot;daemon off;&quot; 前台运行nginxdocker run -d -p 80:80 --name static_web hisenyuan/static_web nginx -g &quot;daemon off;&quot;# Dockerfile指令RUN 镜像构建的时候才会执行CMD 启动一个容器的时候要运行的命令，如有多个，只会生效最后一个，前面的多个会被忽略ENTRYPOINT 例子:ENTRYPOINT [&quot;/usr/sbin/nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;],这个命令不容易覆盖，CMD容易被RUN覆盖WORKDIR 设定工作目录，ENTRYPOINT CMD 会在这个目录执行ENV 设置构建时的环境变量，设置之后可以在后续的RUN命令使用USER 设置运行的用户VOLUME 向基于镜像创建的容器添加卷。1.卷可以在容器间共享和重用2.一个容器不是必须和其他容器共享卷3.对卷的修改是立即生效的4.对卷的修改不会对更新镜像产生影响5.卷会一直存在，直到没有任何容器再使用他VOLUME [&quot;/opt/project&quot;] 创建一个名为/opt/project的挂载点ADD 添加上下文目录的文件到构架容器中，如果是压缩包，会自动解压。会使构建缓存无效COPY 类似ADD、只会在上下文复制文件、也不会解压ONBUILD 为镜像添加触发器，当一个镜像被用作其他镜像的基础镜像时，该镜像中的触发器将会被执行。# 删除镜像，会删除这个镜像的每一层docker rmi hisenyuan/static_web# 运行一个registrydocker run -p 5000:5000 registry# 推送镜像到registrydocker tag 791397495f7a yourip:5000/hisenyuan/static_web #打标签docker push yourip:5000/hisenyuan/static_web #推送到本地注册容器docker run -t -i docker yourip:5000/hisenyuan/static_web /bin/bash #从registry运行一个容器==========第五章 在测试中使用docker==========5.1 使用docker测试静态网站5.1.1 sample网站的初始Dockerfilehisen@docker1:~/docker$ mkdir samplehisen@docker1:~/docker$ cd sample/hisen@docker1:~/docker/sample$ touch Dockerfilehisen@docker1:~/docker/sample$ mkdir nginx &amp;&amp; cd nginxhisen@docker1:~/docker/sample/nginx$ vi global.confserver &#123;        listen          0.0.0.0:80;        server_name     _;        root            /var/www/html/website;        index           index.html index.htm;        access_log      /var/log/nginx/default_access.log;        error_log       /var/log/nginx/default_error.log;&#125;hisen@docker1:~/docker/sample/nginx$ vi nginx.confuser www-data;worker_processes 4;pid /run/nginx.pid;daemon off;events &#123;  &#125;http &#123;  sendfile on;  tcp_nopush on;  tcp_nodelay on;  keepalive_timeout 65;  types_hash_max_size 2048;  include /etc/nginx/mime.types;  default_type application/octet-stream;  access_log /var/log/nginx/access.log;  error_log /var/log/nginx/error.log;  gzip on;  gzip_disable &quot;msie6&quot;;  include /etc/nginx/conf.d/*.conf;&#125;hisen@docker1:~/docker/sample/nginx$ vi DockerfileFROM ubuntu:14.04MAINTAINER hisenyuan &quot;hisenyuan@gmail.com&quot;ENV REFRESHED_AT 2018-01-27RUN apt-get update \ &amp;&amp; apt-get -y -q install nginx \ &amp;&amp; mkdir -p /var/www/htmlADD nginx/global.conf /etc/nginx/conf.d/ADD nginx/nginx.conf /etc/nginx/nginx.confEXPOSE 80hisen@docker1:~/docker/sample/nginx/website$ vi index.html&lt;head&gt;	&lt;title&gt;Test website&lt;/title&gt;&lt;/head&gt;&lt;body&gt;	&lt;h1&gt;This is a test website&lt;/h1&gt;&lt;/body&gt;hisen@docker1:~/docker/sample/nginx$ docker build -t hisenyuan/nginx .hisen@docker1:~/docker/sample/nginx$ docker run -d -p 8080:80 --name website \&gt; -v $PWD/website:/var/www/html/website \&gt; hisenyuan/nginx nginx # 因为已经在配置文件指定了daemon off，所以能直接启动# -v 指定了卷的源目录，挂载本地$PWD/website到容器/var/www/html/website目录，conf配置文件指定了工作目录# 修改之后，刷新浏览器，立马就生效hisen@docker1:~/docker/sample/nginx$ vi $PWD/website/index.html&lt;head&gt;&lt;title&gt;Test website - hisenyuan&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;This is a test website&lt;/h1&gt;&lt;h2&gt;2018年1月27日 13:20:13&lt;/h2&gt;&lt;/body&gt;5.2 使用docker构建并测试web应用程序5.2.1 构建sinatra应用程序# 创建Dockerfilehisen@docker1:~/docker/sinatra$ vi DockerfileFROM ubuntu:14.04MAINTINER hisenyuan &quot;hisenyuan@gmail.com&quot;ENV REFRESHED 2018-01-27RUN apt-get upate \ &amp;&amp; apt-get -y install ruby ruby-dev build-essential redis-tools \ &amp;&amp; gem install --no-rdoc --no-ri sinatra json redis \ &amp;&amp; mkdir -p /opt/webappEXPOSE 4567# 代码网站：https://dockerbook.com/code/5/sinatra/webapp/wget --cut-dir=3 -nH -r --no-parent https://dockerbook.com/code/5/sinatra/webapp/5.3 docker用于持续集成==========第六章 使用docker构建服务==========6.1 构建第一个应用==========第七章 Consul、服务发现与注册==========]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>容器</tag>
-        <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>笔记本在BIOS Setup里面设置双显卡模式</title>
     <url>/20170509-%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%9C%A8BIOS%20Setup%E9%87%8C%E9%9D%A2%E8%AE%BE%E7%BD%AE%E5%8F%8C%E6%98%BE%E5%8D%A1%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[我的本子是双显卡的，英特尔的核芯显卡和英伟达的独显
@@ -15343,6 +15408,29 @@ ID ACCOUNT10 A11 B
       <tags>
         <tag>存储</tag>
         <tag>稳定性</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>笔记 - 读后感：《第一本Docker书》</title>
+    <url>/20180127-%E7%AC%94%E8%AE%B0%20-%20%E8%AF%BB%E5%90%8E%E6%84%9F%EF%BC%9A%E3%80%8A%E7%AC%AC%E4%B8%80%E6%9C%ACDocker%E4%B9%A6%E3%80%8B/</url>
+    <content><![CDATA[忘记开始是在什么地方看到docker这个东西
+后面觉得挺好玩，也试了很多次，找过很多的教程。
+搭建了一个zookeeper的集群(docker-compose)
+然后当我需要搭建redis集群的时候，发现里面很多的概念还不是很懂
+比如：volume network
+然后加了docker的群，遇到了在以前idea群里面熟的一个人
+花了一天的时间看完他传的一本书，昨天买的几本书晚上也到了。（docker从入门到实践、Java并发编程的艺术、effective Java中文版 2）
+这本书总体来说还行，就是过时了，还在用link，毕竟三年前的东西
+有些例子也报错，主要是ruby相关的不行，提醒需要2.2以上的版本
+下面是随便做的一点笔记
+
+# 所有容器，不加-a只显示正在运行的；-1 列出最后一次运行的docker ps -a# 启动一个已经停止的容器(id，--name 都可以)docker start hisen_container# 进入容器(容器重启之后进入交换行)docker attach hisen_container# 创建一个守护式容器docker -d# 查看日志 可选 -f 类似tail -f Ctrl+c 退出docker logs hisen_container# 查看容器内的进程docker top hisen_container# 在容器内部运行进程docker exec -d hisen_container touch /etc/new_conf_file# 停止守护式容器docker stop hisen_container# 自动重启容器docker run --restart=always ....=on-failure:5 当容器退出代码为非0时，docker会自动重启，最多重试5次# 深入容器,会以json串显示更多容器信息docker inspect hisen_container # 删除容器，要先stop才行docker rm hisen_container# 删除所有容器 -a:所有容器 -q:只返回容器的IDdocker rm &#x27;docker ps -a -q&#x27;# 启动新的名字为other_hisen_container的容器，并且进入bash shelldocker run -i -t --name other_hisen_container ubuntu /bin/bash# docker文件系统层可写容器镜像(比如tomcat)基础镜像(比如ubuntu)引导文件系统(容器组、命名空间、设备映射)内核# docker简单构成顶层的读写层+底部不可变的可读层还有一些配置，就成了一个容器。# 列出所有镜像docker images# 仓库名:tag 如果没有指定，默认latest# 推荐使用Dockerfile构建镜像FROM ubuntu:14.04MAINTAINER hisenyuan &quot;hisenyuan@gmail.com&quot;RUN apt-get update \&amp;&amp; apt-getinstall -y nginx \&amp;&amp; echo &#x27;Hi,I am in your container&#x27; \   /usr/share/nginx/html/index.htmlEXPOSE 80# 构建镜像，在上面的dockerfile目录docker build -t=&quot;hisenyuan/static_web&quot; .# 查看构建过程，以及镜像的每一层docker history 791397495f7a# 运行构建的镜像 -p端口映射 nginx -g &quot;daemon off;&quot; 前台运行nginxdocker run -d -p 80:80 --name static_web hisenyuan/static_web nginx -g &quot;daemon off;&quot;# Dockerfile指令RUN 镜像构建的时候才会执行CMD 启动一个容器的时候要运行的命令，如有多个，只会生效最后一个，前面的多个会被忽略ENTRYPOINT 例子:ENTRYPOINT [&quot;/usr/sbin/nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;],这个命令不容易覆盖，CMD容易被RUN覆盖WORKDIR 设定工作目录，ENTRYPOINT CMD 会在这个目录执行ENV 设置构建时的环境变量，设置之后可以在后续的RUN命令使用USER 设置运行的用户VOLUME 向基于镜像创建的容器添加卷。1.卷可以在容器间共享和重用2.一个容器不是必须和其他容器共享卷3.对卷的修改是立即生效的4.对卷的修改不会对更新镜像产生影响5.卷会一直存在，直到没有任何容器再使用他VOLUME [&quot;/opt/project&quot;] 创建一个名为/opt/project的挂载点ADD 添加上下文目录的文件到构架容器中，如果是压缩包，会自动解压。会使构建缓存无效COPY 类似ADD、只会在上下文复制文件、也不会解压ONBUILD 为镜像添加触发器，当一个镜像被用作其他镜像的基础镜像时，该镜像中的触发器将会被执行。# 删除镜像，会删除这个镜像的每一层docker rmi hisenyuan/static_web# 运行一个registrydocker run -p 5000:5000 registry# 推送镜像到registrydocker tag 791397495f7a yourip:5000/hisenyuan/static_web #打标签docker push yourip:5000/hisenyuan/static_web #推送到本地注册容器docker run -t -i docker yourip:5000/hisenyuan/static_web /bin/bash #从registry运行一个容器==========第五章 在测试中使用docker==========5.1 使用docker测试静态网站5.1.1 sample网站的初始Dockerfilehisen@docker1:~/docker$ mkdir samplehisen@docker1:~/docker$ cd sample/hisen@docker1:~/docker/sample$ touch Dockerfilehisen@docker1:~/docker/sample$ mkdir nginx &amp;&amp; cd nginxhisen@docker1:~/docker/sample/nginx$ vi global.confserver &#123;        listen          0.0.0.0:80;        server_name     _;        root            /var/www/html/website;        index           index.html index.htm;        access_log      /var/log/nginx/default_access.log;        error_log       /var/log/nginx/default_error.log;&#125;hisen@docker1:~/docker/sample/nginx$ vi nginx.confuser www-data;worker_processes 4;pid /run/nginx.pid;daemon off;events &#123;  &#125;http &#123;  sendfile on;  tcp_nopush on;  tcp_nodelay on;  keepalive_timeout 65;  types_hash_max_size 2048;  include /etc/nginx/mime.types;  default_type application/octet-stream;  access_log /var/log/nginx/access.log;  error_log /var/log/nginx/error.log;  gzip on;  gzip_disable &quot;msie6&quot;;  include /etc/nginx/conf.d/*.conf;&#125;hisen@docker1:~/docker/sample/nginx$ vi DockerfileFROM ubuntu:14.04MAINTAINER hisenyuan &quot;hisenyuan@gmail.com&quot;ENV REFRESHED_AT 2018-01-27RUN apt-get update \ &amp;&amp; apt-get -y -q install nginx \ &amp;&amp; mkdir -p /var/www/htmlADD nginx/global.conf /etc/nginx/conf.d/ADD nginx/nginx.conf /etc/nginx/nginx.confEXPOSE 80hisen@docker1:~/docker/sample/nginx/website$ vi index.html&lt;head&gt;	&lt;title&gt;Test website&lt;/title&gt;&lt;/head&gt;&lt;body&gt;	&lt;h1&gt;This is a test website&lt;/h1&gt;&lt;/body&gt;hisen@docker1:~/docker/sample/nginx$ docker build -t hisenyuan/nginx .hisen@docker1:~/docker/sample/nginx$ docker run -d -p 8080:80 --name website \&gt; -v $PWD/website:/var/www/html/website \&gt; hisenyuan/nginx nginx # 因为已经在配置文件指定了daemon off，所以能直接启动# -v 指定了卷的源目录，挂载本地$PWD/website到容器/var/www/html/website目录，conf配置文件指定了工作目录# 修改之后，刷新浏览器，立马就生效hisen@docker1:~/docker/sample/nginx$ vi $PWD/website/index.html&lt;head&gt;&lt;title&gt;Test website - hisenyuan&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;This is a test website&lt;/h1&gt;&lt;h2&gt;2018年1月27日 13:20:13&lt;/h2&gt;&lt;/body&gt;5.2 使用docker构建并测试web应用程序5.2.1 构建sinatra应用程序# 创建Dockerfilehisen@docker1:~/docker/sinatra$ vi DockerfileFROM ubuntu:14.04MAINTINER hisenyuan &quot;hisenyuan@gmail.com&quot;ENV REFRESHED 2018-01-27RUN apt-get upate \ &amp;&amp; apt-get -y install ruby ruby-dev build-essential redis-tools \ &amp;&amp; gem install --no-rdoc --no-ri sinatra json redis \ &amp;&amp; mkdir -p /opt/webappEXPOSE 4567# 代码网站：https://dockerbook.com/code/5/sinatra/webapp/wget --cut-dir=3 -nH -r --no-parent https://dockerbook.com/code/5/sinatra/webapp/5.3 docker用于持续集成==========第六章 使用docker构建服务==========6.1 构建第一个应用==========第七章 Consul、服务发现与注册==========]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>容器</tag>
+        <tag>阅读</tag>
       </tags>
   </entry>
   <entry>
@@ -15618,6 +15706,22 @@ Java中有常量池的概念，常量池和类文件相关，其数据存放的�
       </tags>
   </entry>
   <entry>
+    <title>阿里巴巴Java开发手册，摘要&amp;下载链接</title>
+    <url>/20170213-%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%EF%BC%8C%E6%91%98%E8%A6%81-%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</url>
+    <content><![CDATA[阿里巴巴Java开发手册
+看了几个小时，感觉还是不错
+都按规范来写，可以避免很多错误
+下载链接
+点击下载
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>工程效能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>读取文件路径相关问题</title>
     <url>/20190716-%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[零、本文由来感觉从业这么久以来，读取文件路径相关问题一直是一个痛用的很少，之前也解决过相关的问题但是得用这种路径
@@ -15632,22 +15736,6 @@ ps：因maven打包配置不同，最终resources资源文件夹下的路径是�
       </categories>
       <tags>
         <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>阿里巴巴Java开发手册，摘要&amp;下载链接</title>
-    <url>/20170213-%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%EF%BC%8C%E6%91%98%E8%A6%81-%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</url>
-    <content><![CDATA[阿里巴巴Java开发手册
-看了几个小时，感觉还是不错
-都按规范来写，可以避免很多错误
-下载链接
-点击下载
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>工程效能</tag>
       </tags>
   </entry>
   <entry>

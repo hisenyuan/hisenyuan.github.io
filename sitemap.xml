@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hisen.me/20261007-dhh-no-more-handwritten-code/</loc>
+    
+    <lastmod>2026-10-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hisen.me/20260927-ying-sheng-sglang-ai-infra/</loc>
     
     <lastmod>2026-10-07</lastmod>
@@ -524,7 +533,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170323-Oracle%E4%B8%ADexists%E5%9C%A8update%E4%B8%AD%E6%97%A0%E6%B3%95%E9%99%90%E5%88%B6%E4%BD%8F%E6%9D%A1%E4%BB%B6%EF%BC%8C%E5%9C%A8select%E4%B8%AD%E5%8F%AF%E4%BB%A5/</loc>
+    <loc>https://hisen.me/20170612-Oracle%E5%85%A8%E5%B1%80%E6%9F%A5%E6%89%BE%E6%9F%90%E5%AD%97%E6%AE%B5%E6%89%80%E5%9C%A8%E7%9A%84%E8%A1%A8/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -533,7 +542,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170612-Oracle%E5%85%A8%E5%B1%80%E6%9F%A5%E6%89%BE%E6%9F%90%E5%AD%97%E6%AE%B5%E6%89%80%E5%9C%A8%E7%9A%84%E8%A1%A8/</loc>
+    <loc>https://hisen.me/20170323-Oracle%E4%B8%ADexists%E5%9C%A8update%E4%B8%AD%E6%97%A0%E6%B3%95%E9%99%90%E5%88%B6%E4%BD%8F%E6%9D%A1%E4%BB%B6%EF%BC%8C%E5%9C%A8select%E4%B8%AD%E5%8F%AF%E4%BB%A5/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -803,7 +812,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170825-IntelliJ%20IDEA%20%E8%B0%83%E8%AF%95%E7%AA%97%E5%8F%A3%E3%80%81%E5%B8%AE%E5%8A%A9%E7%AA%97%E5%8F%A3%E3%80%81%E6%90%9C%E7%B4%A2%E6%A1%86%E3%80%81%E5%BA%95%E9%83%A8%E6%B6%88%E6%81%AF%E7%AD%89%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
+    <loc>https://hisen.me/20171024-IntelliJ%20IDEA%EF%BC%9Atoggle%20block%20selection%20mode/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -812,7 +821,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20171024-IntelliJ%20IDEA%EF%BC%9Atoggle%20block%20selection%20mode/</loc>
+    <loc>https://hisen.me/20170825-IntelliJ%20IDEA%20%E8%B0%83%E8%AF%95%E7%AA%97%E5%8F%A3%E3%80%81%E5%B8%AE%E5%8A%A9%E7%AA%97%E5%8F%A3%E3%80%81%E6%90%9C%E7%B4%A2%E6%A1%86%E3%80%81%E5%BA%95%E9%83%A8%E6%B6%88%E6%81%AF%E7%AD%89%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -884,7 +893,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20201019-Java-hotspot-vm-cms-g1-setting-log/</loc>
+    <loc>https://hisen.me/20200510-Java-deserialize-security-hole/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -893,7 +902,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20200510-Java-deserialize-security-hole/</loc>
+    <loc>https://hisen.me/20201019-Java-hotspot-vm-cms-g1-setting-log/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -911,7 +920,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170217-Java%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%8C%85Javax-servlet%E4%B8%8D%E5%AD%98%E5%9C%A8Javax-servlet/</loc>
+    <loc>https://hisen.me/20170226-Java%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -920,7 +929,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170226-Java%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/</loc>
+    <loc>https://hisen.me/20170217-Java%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%8C%85Javax-servlet%E4%B8%8D%E5%AD%98%E5%9C%A8Javax-servlet/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -983,7 +992,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170228-IDEA-Denpendencies%E7%BA%A2%E8%89%B2%E6%B3%A2%E6%B5%AA%E7%BA%BF%E6%8A%A5%E9%94%99-%E6%89%80%E6%9C%89%E7%9A%84%E5%8C%85%E6%97%A0%E6%B3%95%E5%AF%BC%E5%85%A5-%E4%B8%80%E7%A7%8D%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
+    <loc>https://hisen.me/20170220-IDEA-maven%E9%A1%B9%E7%9B%AE%E9%80%9A%E8%BF%87mongo-Java-driver%E6%8A%98%E8%85%BE%E4%B8%80%E4%B8%8BMongoDB/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -992,7 +1001,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170220-IDEA-maven%E9%A1%B9%E7%9B%AE%E9%80%9A%E8%BF%87mongo-Java-driver%E6%8A%98%E8%85%BE%E4%B8%80%E4%B8%8BMongoDB/</loc>
+    <loc>https://hisen.me/20170228-IDEA-Denpendencies%E7%BA%A2%E8%89%B2%E6%B3%A2%E6%B5%AA%E7%BA%BF%E6%8A%A5%E9%94%99-%E6%89%80%E6%9C%89%E7%9A%84%E5%8C%85%E6%97%A0%E6%B3%95%E5%AF%BC%E5%85%A5-%E4%B8%80%E7%A7%8D%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1091,15 +1100,6 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20180127-%E7%AC%94%E8%AE%B0%20-%20%E8%AF%BB%E5%90%8E%E6%84%9F%EF%BC%9A%E3%80%8A%E7%AC%AC%E4%B8%80%E6%9C%ACDocker%E4%B9%A6%E3%80%8B/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20170509-%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%9C%A8BIOS%20Setup%E9%87%8C%E9%9D%A2%E8%AE%BE%E7%BD%AE%E5%8F%8C%E6%98%BE%E5%8D%A1%E6%A8%A1%E5%BC%8F/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -1110,6 +1110,15 @@
   
   <url>
     <loc>https://hisen.me/20180809-%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85%E8%AE%B0%E5%BD%95%20-%20%E6%AD%BB%E9%94%81/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20180127-%E7%AC%94%E8%AE%B0%20-%20%E8%AF%BB%E5%90%8E%E6%84%9F%EF%BC%9A%E3%80%8A%E7%AC%AC%E4%B8%80%E6%9C%ACDocker%E4%B9%A6%E3%80%8B/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1298,7 +1307,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170814-%E6%9C%80%E8%BF%91%E5%9C%A8%E7%9C%8B%E7%9A%84Java%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0%20-%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%80%9D%E7%BB%B4%E9%80%BB%E8%BE%91/</loc>
+    <loc>https://hisen.me/20190404-%E6%95%B0%E7%BB%84%E4%B8%AD%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B0%E5%87%BA%E7%8E%B0%E5%A5%87%E6%95%B0%E6%AC%A1%20|%20%E5%88%A9%E7%94%A8%E5%BC%82%E6%88%96%E6%9C%80%E9%AB%98%E6%95%88/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1307,7 +1316,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190404-%E6%95%B0%E7%BB%84%E4%B8%AD%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B0%E5%87%BA%E7%8E%B0%E5%A5%87%E6%95%B0%E6%AC%A1%20|%20%E5%88%A9%E7%94%A8%E5%BC%82%E6%88%96%E6%9C%80%E9%AB%98%E6%95%88/</loc>
+    <loc>https://hisen.me/20170814-%E6%9C%80%E8%BF%91%E5%9C%A8%E7%9C%8B%E7%9A%84Java%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0%20-%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%80%9D%E7%BB%B4%E9%80%BB%E8%BE%91/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1514,7 +1523,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170613-sql%E8%A1%8C%E8%BD%AC%E5%88%97%EF%BC%8C%E5%88%97%E8%BD%AC%E8%A1%8C/</loc>
+    <loc>https://hisen.me/20200517-specific-knowledge-accountability-leverage/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1523,7 +1532,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20200517-specific-knowledge-accountability-leverage/</loc>
+    <loc>https://hisen.me/20170613-sql%E8%A1%8C%E8%BD%AC%E5%88%97%EF%BC%8C%E5%88%97%E8%BD%AC%E8%A1%8C/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1595,15 +1604,6 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20251018-mac_iterm2_can_not_ping_gateway/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/20181221-mac%20docker%20compose%20timezone%20%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -1613,7 +1613,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20260809-mcp-big-version-in-2026/</loc>
+    <loc>https://hisen.me/20251018-mac_iterm2_can_not_ping_gateway/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1623,6 +1623,15 @@
   
   <url>
     <loc>https://hisen.me/20170214-maven%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hisen.me/20260809-mcp-big-version-in-2026/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1829,7 +1838,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190309-git%E7%89%88%E6%9C%AC%E5%B7%AE%E5%BC%82%E6%8A%A5%E5%91%8A%20-%20git%20difftool%E5%88%86%E6%94%AF%E5%AF%B9%E6%AF%94%20-%20gitLab%20compare/</loc>
+    <loc>https://hisen.me/20170428-github%20api%20-%20github%20api%E4%B8%AD%E6%96%87%E8%AF%B4%E6%98%8E/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1838,7 +1847,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170428-github%20api%20-%20github%20api%E4%B8%AD%E6%96%87%E8%AF%B4%E6%98%8E/</loc>
+    <loc>https://hisen.me/20190309-git%E7%89%88%E6%9C%AC%E5%B7%AE%E5%BC%82%E6%8A%A5%E5%91%8A%20-%20git%20difftool%E5%88%86%E6%94%AF%E5%AF%B9%E6%AF%94%20-%20gitLab%20compare/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1865,7 +1874,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170120-hexo%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/</loc>
+    <loc>https://hisen.me/20250719-hexo-upgrade-and-optimize/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1874,7 +1883,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20250719-hexo-upgrade-and-optimize/</loc>
+    <loc>https://hisen.me/20170120-hexo%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -1964,6 +1973,15 @@
   </url>
   
   <url>
+    <loc>https://hisen.me/20220218-divide-barrels-gracefully/</loc>
+    
+    <lastmod>2026-09-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hisen.me/20190307-dubbo%20transport%20Data%20length%20too%20large-14277263-max%20payload-8388608%20channel-NettyChannel/</loc>
     
     <lastmod>2026-09-13</lastmod>
@@ -1974,15 +1992,6 @@
   
   <url>
     <loc>https://hisen.me/20171115-dubbo%E4%B8%8Ezookeeper%E7%9A%84%E5%85%B3%E7%B3%BB/</loc>
-    
-    <lastmod>2026-09-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hisen.me/20220218-divide-barrels-gracefully/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2540,7 +2549,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190408-Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%80%E7%94%9F/</loc>
+    <loc>https://hisen.me/20180718-Java%E5%A4%9A%E5%A7%BF%E5%8A%BF%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2549,7 +2558,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20180718-Java%E5%A4%9A%E5%A7%BF%E5%8A%BF%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</loc>
+    <loc>https://hisen.me/20190408-Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%80%E7%94%9F/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2612,7 +2621,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190429-Java%20-%20%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%E5%92%8C%E9%9D%9E%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%20-%20uncheckedException%20checkedException/</loc>
+    <loc>https://hisen.me/20180113-Java%20-%20%E5%88%A9%E7%94%A8apache%20POI%E8%AF%BB%E5%8F%96Excel%EF%BC%88xls,xlsx,2003,2007)/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2621,7 +2630,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20180113-Java%20-%20%E5%88%A9%E7%94%A8apache%20POI%E8%AF%BB%E5%8F%96Excel%EF%BC%88xls,xlsx,2003,2007)/</loc>
+    <loc>https://hisen.me/20190429-Java%20-%20%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%E5%92%8C%E9%9D%9E%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%20-%20uncheckedException%20checkedException/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2720,7 +2729,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20170801-Google%20Java%E5%B7%A5%E5%85%B7%E7%B1%BB%20-%20Guava%20-%20%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/</loc>
+    <loc>https://hisen.me/20190424-Guice%20Demo%20|%20solve%20NoSuchMethodError/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
@@ -2729,7 +2738,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/20190424-Guice%20Demo%20|%20solve%20NoSuchMethodError/</loc>
+    <loc>https://hisen.me/20170801-Google%20Java%E5%B7%A5%E5%85%B7%E7%B1%BB%20-%20Guava%20-%20%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/</loc>
     
     <lastmod>2026-09-13</lastmod>
     
