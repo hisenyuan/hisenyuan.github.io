@@ -104,40 +104,6 @@ $ mysql -u root -p#进入mysql交互界面mysql&gt; use mysql;#使用mysql这个
       </tags>
   </entry>
   <entry>
-    <title>人工智能工程技能图谱 - 吴恩达</title>
-    <url>/20260822-AI-Engineering-skills-map/</url>
-    <content><![CDATA[吴恩达团队通过分析超过 10,000 个招聘信息；对人工智能专家、招聘经理和招聘人员进行数十次结构化访谈；通过调查收集数据；以及综合其他在线数据，总结出以下四项最重要的 AI 工程技能：
-
-构建和部署人工智能应用程序( Building and deploying AI applications )
-软件工程基础知识( Software engineering fundamentals )
-使用编程代理( Using coding agents )
-塑造结构( Shaping the build)
-
-1. 构建和部署人工智能应用与非人工智能应用的主要区别在于前者具有不可预测的输出。
-
-当你向逻辑学习模型（LLM）发出指令时，你无法预知会得到什么结果。当你训练深度学习算法时，你也无法预知它会对新的样本做出怎样的预测。相比之下，传统软件的行为则更具可预测性。
-擅长构建和部署人工智能应用的人员不仅了解人工智能的基本组成部分（例如逻辑逻辑模型、上下文工程、红绿灯系统、智能体工作流、机器学习和深度学习），更重要的是，他们还懂得如何运用统计技术来衡量、引导和管理人工智能系统，使其行为更具可预测性。其中一项核心技能是懂得如何开展严谨的评估和误差分析循环。
-2. 软件工程理解软件的工作原理时，能更高效地进行开发。软件工程需要在成本、可扩展性、可靠性、速度等诸多因素之间进行权衡。安全性和隐私性则进一步增加了复杂性。
-理解软件基础知识能让你认识到各种权衡取舍( trade off )的存在。
-
-做出更好的决策：选择软件栈、设计系统架构、设计数据存储、测试等方面；
-更好地使用 AI Coding：运用软件工程来引导 Coding Agent，做出合理的权衡取舍，而不是凭感觉；
-
-3. 使用 AI Coding有效运用智能体编码如今已成为每位开发者的一项关键技能。掌握这项技能，你就能对智能体的工作原理形成清晰的认知模型。你了解它们的局限性以及如何克服这些局限性，并能快速引导它们——懂得适度干预和放任自流——从而构建出健壮的软件，同时避免浪费过多的时间和 token。
-这要求您了解如何管理编码代理的上下文，如何在计划和执行之间进行权衡，以及如何通过提供验证器或评估来帮助代理自主地闭合循环。您还需要知道如何使用清晰的规范（以及何时不必这样做），如何协调多个协同工作的代理，以及如何避免诸如代理破坏生产数据库之类的陷阱。由于代理编码技术发展迅速，熟练地使用编码代理不仅意味着掌握前沿实践，还意味着要养成不断尝试新工具并随着最佳实践的变化而改进工作流程的习惯。
-4. 塑造结构有了清晰的规范，编码代理在交付符合规范的产品方面正在迅速进步。因此，我们工程师的工作重心正在转向决定规范中应该包含哪些内容。工程师不应再期望获得一个像素级完美的设计，然后只需照办即可。相反，高效的 AI 工程师需要具备产品意识，理解业务背景和客户目标，从而参与到构建过程的塑造和驱动中。
-人工智能也赋予你比以往更大的自主权和掌控权。你可以发现有趣的问题和机遇，并以负责任的方式加以利用。要抓住这个机遇，你需要知道如何推动项目进展。例如，何时应该快速构建最小可行产品（MVP）供用户测试，何时应该放慢速度，花更多时间进行更细致的开发。
-所有这些技能的基础是持续学习的心态。人工智能发展日新月异，因此我们必须不断学习和提升自身技能，以适应不断涌现的最佳实践。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>AI 工程</tag>
-        <tag>Agent</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>关于学习英语</title>
     <url>/20210605-About-learning-English/</url>
     <content><![CDATA[一、背景作为一个软件开发工程师，日常很多机会和英文打交道。特别是上一份工作，做全球支付项目，需要用到英文与国际友人沟通。奈何自己的英语水平捉襟见肘，于是经常会有意地去收集相关的文章。
@@ -224,25 +190,37 @@ GitHub 上的成功人士：
       </tags>
   </entry>
   <entry>
-    <title>Agent CGlib VS JDK | 动态代理比较</title>
-    <url>/20190330-Agent%20CGlib%20VS%20JDK%20%7C%20%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%AF%94%E8%BE%83/</url>
-    <content><![CDATA[一、代理简介1.1 代理是什么举个例子：快到吃饭的点了，你有两种选择：1)自己做,2)叫外卖1.1.1 自己做你嫌麻烦，那就叫外卖，只管收外卖其它不关注(解耦);1.1.2 自己做的不好吃，那厨师上门，厨师给你增强菜的味道(增强);
-官方定义：对其他对象提供一种代理以控制对这个对象的访问。
-1.2 使用场景是什么1.2.1 设计模式中有一个设计原则是开闭原则，是说对修改关闭对扩展开放，我们在工作中有时会接手很多前人的代码，里面代码逻辑让人摸不着头脑(sometimes the code is really like shit)，这时就很难去下手修改代码，那么这时我们就可以通过代理对类进行增强。
-1.2.2 我们在使用RPC框架的时候，框架本身并不能提前知道各个业务方要调用哪些接口的哪些方法 。那么这个时候，就可用通过动态代理的方式来建立一个中间人给客户端使用，也方便框架进行搭建逻辑，某种程度上也是客户端代码和框架松耦合的一种表现。
-1.2.3 Spring的AOP机制就是采用动态代理的机制来实现切面编程。
-二、CGlib VS JDK 两种方式实现代理2.1 差异2.1.1 JDK：只能代理接口2.1.2 CGlib：直接代理类
-2.2 简单demo
-完整代码：https://github.com/hisenyuan/IDEAPractice/tree/master/src/main/Java/com/hisen/jdk/agent
-public static void main(String[] args) &#123;    System.out.println(&quot;===CGlibAgentTest===&quot;);    cGlibAgentTest();    System.out.println(&quot;\n===JDKDynamicAgentTest===&quot;);    jdkDynamicAgentTest();&#125;private static void cGlibAgentTest() &#123;    CGlibAgent cGlibAgent = new CGlibAgent();    Apple apple = (Apple) cGlibAgent.getInstance(Apple.class);    apple.show();    System.out.println();    Orange orange = (Orange) cGlibAgent.getInstance(Orange.class);    orange.show();&#125;private static void jdkDynamicAgentTest() &#123;    // must be return interface    Fruit apple = (Fruit) DynamicAgent.agent(Fruit.class, new Apple());    apple.show();    System.out.println();    Fruit orange = (Fruit) DynamicAgent.agent(Fruit.class, new Orange());    orange.show();&#125;//===CGlibAgentTest===//-&gt; before invoking//Apple show method is invoked//-&gt; after invoking////-&gt; before invoking//    Orange show method is invoked//-&gt; after invoking////===JDKDynamicAgentTest===//-&gt; before invoking//    Apple show method is invoked//-&gt; after invoking////-&gt; before invoking//    Orange show method is invoked//-&gt; after invoking
+    <title>人工智能工程技能图谱 - 吴恩达</title>
+    <url>/20260822-AI-Engineering-skills-map/</url>
+    <content><![CDATA[吴恩达团队通过分析超过 10,000 个招聘信息；对人工智能专家、招聘经理和招聘人员进行数十次结构化访谈；通过调查收集数据；以及综合其他在线数据，总结出以下四项最重要的 AI 工程技能：
 
-三、参考连接http://www.cnblogs.com/puyangsky/p/6218925.htmlhttps://blog.csdn.net/u011784767/article/details/78281384
+构建和部署人工智能应用程序( Building and deploying AI applications )
+软件工程基础知识( Software engineering fundamentals )
+使用编程代理( Using coding agents )
+塑造结构( Shaping the build)
+
+1. 构建和部署人工智能应用与非人工智能应用的主要区别在于前者具有不可预测的输出。
+
+当你向逻辑学习模型（LLM）发出指令时，你无法预知会得到什么结果。当你训练深度学习算法时，你也无法预知它会对新的样本做出怎样的预测。相比之下，传统软件的行为则更具可预测性。
+擅长构建和部署人工智能应用的人员不仅了解人工智能的基本组成部分（例如逻辑逻辑模型、上下文工程、红绿灯系统、智能体工作流、机器学习和深度学习），更重要的是，他们还懂得如何运用统计技术来衡量、引导和管理人工智能系统，使其行为更具可预测性。其中一项核心技能是懂得如何开展严谨的评估和误差分析循环。
+2. 软件工程理解软件的工作原理时，能更高效地进行开发。软件工程需要在成本、可扩展性、可靠性、速度等诸多因素之间进行权衡。安全性和隐私性则进一步增加了复杂性。
+理解软件基础知识能让你认识到各种权衡取舍( trade off )的存在。
+
+做出更好的决策：选择软件栈、设计系统架构、设计数据存储、测试等方面；
+更好地使用 AI Coding：运用软件工程来引导 Coding Agent，做出合理的权衡取舍，而不是凭感觉；
+
+3. 使用 AI Coding有效运用智能体编码如今已成为每位开发者的一项关键技能。掌握这项技能，你就能对智能体的工作原理形成清晰的认知模型。你了解它们的局限性以及如何克服这些局限性，并能快速引导它们——懂得适度干预和放任自流——从而构建出健壮的软件，同时避免浪费过多的时间和 token。
+这要求您了解如何管理编码代理的上下文，如何在计划和执行之间进行权衡，以及如何通过提供验证器或评估来帮助代理自主地闭合循环。您还需要知道如何使用清晰的规范（以及何时不必这样做），如何协调多个协同工作的代理，以及如何避免诸如代理破坏生产数据库之类的陷阱。由于代理编码技术发展迅速，熟练地使用编码代理不仅意味着掌握前沿实践，还意味着要养成不断尝试新工具并随着最佳实践的变化而改进工作流程的习惯。
+4. 塑造结构有了清晰的规范，编码代理在交付符合规范的产品方面正在迅速进步。因此，我们工程师的工作重心正在转向决定规范中应该包含哪些内容。工程师不应再期望获得一个像素级完美的设计，然后只需照办即可。相反，高效的 AI 工程师需要具备产品意识，理解业务背景和客户目标，从而参与到构建过程的塑造和驱动中。
+人工智能也赋予你比以往更大的自主权和掌控权。你可以发现有趣的问题和机遇，并以负责任的方式加以利用。要抓住这个机遇，你需要知道如何推动项目进展。例如，何时应该快速构建最小可行产品（MVP）供用户测试，何时应该放慢速度，花更多时间进行更细致的开发。
+所有这些技能的基础是持续学习的心态。人工智能发展日新月异，因此我们必须不断学习和提升自身技能，以适应不断涌现的最佳实践。
 ]]></content>
       <categories>
         <category>Tech</category>
       </categories>
       <tags>
-        <tag>java</tag>
+        <tag>AI 工程</tag>
+        <tag>Agent</tag>
       </tags>
   </entry>
   <entry>
@@ -424,6 +402,28 @@ CRAC
       </tags>
   </entry>
   <entry>
+    <title>Agent CGlib VS JDK | 动态代理比较</title>
+    <url>/20190330-Agent%20CGlib%20VS%20JDK%20%7C%20%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%AF%94%E8%BE%83/</url>
+    <content><![CDATA[一、代理简介1.1 代理是什么举个例子：快到吃饭的点了，你有两种选择：1)自己做,2)叫外卖1.1.1 自己做你嫌麻烦，那就叫外卖，只管收外卖其它不关注(解耦);1.1.2 自己做的不好吃，那厨师上门，厨师给你增强菜的味道(增强);
+官方定义：对其他对象提供一种代理以控制对这个对象的访问。
+1.2 使用场景是什么1.2.1 设计模式中有一个设计原则是开闭原则，是说对修改关闭对扩展开放，我们在工作中有时会接手很多前人的代码，里面代码逻辑让人摸不着头脑(sometimes the code is really like shit)，这时就很难去下手修改代码，那么这时我们就可以通过代理对类进行增强。
+1.2.2 我们在使用RPC框架的时候，框架本身并不能提前知道各个业务方要调用哪些接口的哪些方法 。那么这个时候，就可用通过动态代理的方式来建立一个中间人给客户端使用，也方便框架进行搭建逻辑，某种程度上也是客户端代码和框架松耦合的一种表现。
+1.2.3 Spring的AOP机制就是采用动态代理的机制来实现切面编程。
+二、CGlib VS JDK 两种方式实现代理2.1 差异2.1.1 JDK：只能代理接口2.1.2 CGlib：直接代理类
+2.2 简单demo
+完整代码：https://github.com/hisenyuan/IDEAPractice/tree/master/src/main/Java/com/hisen/jdk/agent
+public static void main(String[] args) &#123;    System.out.println(&quot;===CGlibAgentTest===&quot;);    cGlibAgentTest();    System.out.println(&quot;\n===JDKDynamicAgentTest===&quot;);    jdkDynamicAgentTest();&#125;private static void cGlibAgentTest() &#123;    CGlibAgent cGlibAgent = new CGlibAgent();    Apple apple = (Apple) cGlibAgent.getInstance(Apple.class);    apple.show();    System.out.println();    Orange orange = (Orange) cGlibAgent.getInstance(Orange.class);    orange.show();&#125;private static void jdkDynamicAgentTest() &#123;    // must be return interface    Fruit apple = (Fruit) DynamicAgent.agent(Fruit.class, new Apple());    apple.show();    System.out.println();    Fruit orange = (Fruit) DynamicAgent.agent(Fruit.class, new Orange());    orange.show();&#125;//===CGlibAgentTest===//-&gt; before invoking//Apple show method is invoked//-&gt; after invoking////-&gt; before invoking//    Orange show method is invoked//-&gt; after invoking////===JDKDynamicAgentTest===//-&gt; before invoking//    Apple show method is invoked//-&gt; after invoking////-&gt; before invoking//    Orange show method is invoked//-&gt; after invoking
+
+三、参考连接http://www.cnblogs.com/puyangsky/p/6218925.htmlhttps://blog.csdn.net/u011784767/article/details/78281384
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Autowire、Resource的区别 | Java注解</title>
     <url>/20190722-Autowire%E3%80%81Resource%E7%9A%84%E5%8C%BA%E5%88%AB%20%7C%20Java%E6%B3%A8%E8%A7%A3/</url>
     <content><![CDATA[零、本文背景项目中看到有一个缓存接口存在多个实现类,但是在代码中使用@Resource注解注入,之前有了解过@Autowire @Resource的区别,于是就尝试着搜索@@Resource，于是就有本文的总结了。
@@ -435,32 +435,6 @@ CRAC
 使用现成的代码尽量搞清楚来龙去脉，可以学习知识，更能避免被坑;
 每天的学习时间需要保证，坚持很重要;
 
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>BeanCreationException: Error creating bean with name &#39;xxxService&#39;</title>
-    <url>/20170223-BeanCreationException-Error-creating-bean-with-name-xxxService/</url>
-    <content><![CDATA[出现的问题：
-[platform] ERROR 2017-02-22 17:46:05,756 [RMI TCP Connection(4)-127.0.0.1] org.springframework.web.context.ContextLoader.() | Context initialization failed org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#x27;pmTranLimitLiteServiceImpl&#x27;: Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.msds.zkutil.ZkLockFactory] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: &#123;@Javax.annotation.Resource(mappedName=, shareable=true, description=, name=, type=class Java.lang.Object, authenticationType=CONTAINER, lookup=)&#125;	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.Java:306) ~[spring-context-3.2.4.RELEASE.jar:3.2.4.RELEASE]	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.Java:1116) ~[spring-beans-3.2.4.RELEASE.jar:3.2.4.RELEASE]
-最重要的是这句
-org.springframework.beans.factory.BeanCreationException:Error creating bean with name&#x27;pmTranLimitLiteServiceImpl&#x27;
-出现的原因：缺少相关的jar包或者依赖
-建议不要自己配置idea的module和artificts
-直接在pom.xml文件添加
-&lt;artifactId&gt;hisen-project&lt;/artifactId&gt;&lt;!--加在这句话后面--&gt;  &lt;packaging&gt;war&lt;/packaging&gt;&lt;!--加上这句话就会自动给你打war包--&gt;
-
-其他原因
-开始不知道什么问题，后来搜索这个服务。
-发现这跟dubbo有关，于是百度搜索进了官网
-没想到常见问题里面就有说这个事情
-13. 出现org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#x27;xxxService&#x27;: Initialization of bean failed; nested exception is Java.lang.IllegalArgumentException: Method must not be null怎么办？通常是classpath下存在spring多个版本的jar包，排除掉不需要的spring包即可。
-更多dubbo问题：点击查看
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -501,6 +475,32 @@ else if (value instanceof List) &#123;     index = Integer.parseInt(key);     Li
       <tags>
         <tag>java</tag>
         <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BeanCreationException: Error creating bean with name &#39;xxxService&#39;</title>
+    <url>/20170223-BeanCreationException-Error-creating-bean-with-name-xxxService/</url>
+    <content><![CDATA[出现的问题：
+[platform] ERROR 2017-02-22 17:46:05,756 [RMI TCP Connection(4)-127.0.0.1] org.springframework.web.context.ContextLoader.() | Context initialization failed org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#x27;pmTranLimitLiteServiceImpl&#x27;: Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.msds.zkutil.ZkLockFactory] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: &#123;@Javax.annotation.Resource(mappedName=, shareable=true, description=, name=, type=class Java.lang.Object, authenticationType=CONTAINER, lookup=)&#125;	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.Java:306) ~[spring-context-3.2.4.RELEASE.jar:3.2.4.RELEASE]	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.Java:1116) ~[spring-beans-3.2.4.RELEASE.jar:3.2.4.RELEASE]
+最重要的是这句
+org.springframework.beans.factory.BeanCreationException:Error creating bean with name&#x27;pmTranLimitLiteServiceImpl&#x27;
+出现的原因：缺少相关的jar包或者依赖
+建议不要自己配置idea的module和artificts
+直接在pom.xml文件添加
+&lt;artifactId&gt;hisen-project&lt;/artifactId&gt;&lt;!--加在这句话后面--&gt;  &lt;packaging&gt;war&lt;/packaging&gt;&lt;!--加上这句话就会自动给你打war包--&gt;
+
+其他原因
+开始不知道什么问题，后来搜索这个服务。
+发现这跟dubbo有关，于是百度搜索进了官网
+没想到常见问题里面就有说这个事情
+13. 出现org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#x27;xxxService&#x27;: Initialization of bean failed; nested exception is Java.lang.IllegalArgumentException: Method must not be null怎么办？通常是classpath下存在spring多个版本的jar包，排除掉不需要的spring包即可。
+更多dubbo问题：点击查看
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -812,17 +812,57 @@ curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/in
       </tags>
   </entry>
   <entry>
-    <title>Dubbo官方中文文档|用户文档|开发者指南|源码导读|运维管理</title>
-    <url>/20190325-Dubbo%E5%AE%98%E6%96%B9%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3%7C%E7%94%A8%E6%88%B7%E6%96%87%E6%A1%A3%7C%E5%BC%80%E5%8F%91%E8%80%85%E6%8C%87%E5%8D%97%7C%E6%BA%90%E7%A0%81%E5%AF%BC%E8%AF%BB%7C%E8%BF%90%E7%BB%B4%E7%AE%A1%E7%90%86/</url>
-    <content><![CDATA[一、为什么要学Dubbo近几年一直在使用dubbo进行支付系统的开发;作为国内比较受欢迎的一个SOA框架，Dubbo使用简单设计优雅;里面用到的思想和技术，基本上涵盖大部分互联网公司用到的技术;记得直属领导说过一句话，看完Dubbo他觉得设计者简直就是天才;而且看完dubbo的源码，对他的影响很大，处处模仿dubbo的思想;
-二、文档地址中文文档：用户文档、开发者指南、源码导读、运维管理http://dubbo.apache.org/zh-cn/docs/user/quick-start.html用户手册(比较完整)：https://dubbo.gitbooks.io/dubbo-user-book/demos/routing-rule.html官方博客：http://dubbo.apache.org/zh-cn/blog/index.html
-三、Dubbo创始人博客最后更新于2014年https://Javatar.iteye.com/
+    <title>王慧文(美团)：很少人知道自己在愚昧之巅</title>
+    <url>/20200723-Few-people-know-that-they-are-ignorance/</url>
+    <content><![CDATA[零、写在前面早几天在领导 JG 的朋友圈看到这篇文章简单几个字的标题，让我产生了兴趣一来这个标题是挺吸引人，典型的自媒体文章二来JG 之前推过一些书很不错三来一般领导朋友圈都不会推垃圾信息
+全文看来其实感觉还是挺切合我的认知：
+
+人很难认清自己，很难找到方向，成长路上有他人指点会很棒
+除了遇到的人合读过的书，十年之后你还是你
+多与他人交流，多帮助他人，利人利己
+运动、学习、反馈、重塑大脑
+
+离开学校大部分时间都是围绕着工作有些人可能觉得当前的工作不满意然后想着学点什么高大上的东西为以后的工作做准备极端情况下这种选择是对的，大部分情况会让自己进退两难正确的选择应该是：过好当下，瞭望远方，持续学习，总结反思，慢慢进步架构师同事 SGLS 说过：做好当下的事情才是最重要的，不管现在是做什么项目，设计和实现是我们自己可以控制的。
+以下为原文
+审视是一个特别好的词。当一个人开始审视世界、审视经历、审视自己的时候，更容易做出有担当的选择。作为美团“二号首长”，王慧文选择在2020年底正式“退休”，这不可分说地成为了焦点——王慧文，是怎么成为“王慧文”的？
+一、“不自我设限”，造就无边界的王慧文什么是促使人成长的本质原因？王慧文一直在渴求突破，也一直在探究这个问题。
+1. 人要接受变化，有动荡才有进化王慧文修行的开端，就是校内网。2006年3月，王慧文、王兴和另外四名同伴绞尽脑汁、黑白颠倒，终于让校内网收获了一百多万用户。王兴开始四处找投资，但在多数投资人眼里看来，他们仍是群“生瓜蛋子”、“杂牌军”，校内网不过是几个大学生做的小打小闹的玩意儿。但在这时，千橡集团董事长陈一舟出现了，他愿意拿出一千多万人民币，收购校内网。《九败一胜：美团创始人王兴创业十年》中这样描述
+
+陈一舟说，如果你们不卖，我们可以拿这钱砸到市场上推广。当然，校内网的这群狂妄的小子被这句话激怒了，拒绝跟陈一舟谈。回绝了陈一舟后，王兴的融资依旧不顺利，陈一舟却与王兴他们保持接触，认准了校内网这条大鱼，准备放长线，持久诱惑。2006年9月，陈一舟再次抬高了收购校内网的价码，校内网召开了五人的股东会。王慧文觉得校内网的机会难得，做成的希望很大，而且是自己一手做起来的产品，感情已经很深，所以坚决反对卖掉。王兴态度中立，但倾向于不卖。赖斌强则考虑的方面更多，他支持卖掉，以免大家背着一身巨债创业。除了他们三个大股东，还有另两名小股东，杨俊和付栋平。他们加入较晚，股份也较少，觉得卖不卖都行，比起被收购，他们更担心王慧文和赖斌强由于意见不合而导致团队破裂。这次争论后不久，陈一舟就就又开出了更高的收购价格。几人意识到，如果继续争论不休，团队的裂痕势必更深。万般无奈之下，校内网不得不同意陈一舟的条件。那一晚，大家都不说话，一起去吃夜宵的时候，王兴、王慧文、赖斌强全喝醉了，所有人大哭了一场。
+不论校内网是成功的，还是失败的，在王慧文和王兴的心里，它永远都是遗憾的。回首往事，王慧文已经不再执着，反而觉得这段遗憾对自己的人生是件好事。他说：如果校内网做成了，我会变成让别人非常讨厌的人，刚愎、自负，因为挫折，所以我才懂得反省自己，能更理智客观冷静地看待自己。还有人问王慧文，如果当初不卖的话，校内网能不能做得成？王慧文答：这取决于我们遇到什么样的投资商，如果投资商能够在很多地方帮助我们，是可能做成的；如果投完钱就不怎么管，让我们自己随便搞，那就不行，因为我们还不够成熟。管理者的自我反思，会反馈在他的战略、领导力、管理、业务实操等能力上。人必须反思，是因为事物是时刻变化的，不断反思，才能不断跟上变化。王慧文在一次采访中说：美团的持续高速增长，不是我们在推动着业务发展，而是业务快速发展，我们努力地跟上，不是我们做了什么事情，只是我们跟上了，没掉队。在一个快速发展的行业里，在一个快速变化的时代里， 创业者、管理者如果没有自我反思，是很难生存下来的。在第一次创业修行中，王慧文就悟出一个道理：人，把事做成不易，不断成长、突破自己边界更难。
+2. 不设限的人生，成长机会无限“君子不器”是王慧文的人生原则之一。2019年，在极客公园创新大会上，极客公园创始人、总裁张鹏问王慧文：你觉得美团的基因是什么？王慧文当时就说出了“君子不器”四个字，他面对张鹏侃侃而谈：孔子说，君子不器，君子不是一个器皿，人不要搞自我定义，自我定义就是自我设限，我不倾向于用美团的基因来自我设限。他还用“基因突变”举例，基因变化变错的概率比变对的概率高几百万倍，所以大家都很恐惧基因变化，抵触变化。但王慧文认为变化不可怕，自我设限才最可怕，他还幽默地说：一旦变对了呢？一旦长出翅膀了呢？这种不自我设限，就是“美团无边界，专注而不专一”的根源。君子不器，有两个含义：一是人想要成长就不能有固化思维，事物是变化的，人也要具备动态发展的眼光，反思过去，展望未来；二是人不能像器皿那样自我设限，器皿只有某一方面的用途和才能，而人应该博学多识。孔子的这两点要求，王慧文都做到了，他的生活和工作就是如此。
+《财经天下》周刊记者朱晓培这样形容“百变的王慧文”
+在王慧文的朋友圈里，总能看见他忽然想到一个问题，比如：是不是20世纪在唯心主义和唯物主义领域都没有出现过大师？如果地球上没有美洲，哥伦布的船直接西行到了亚洲，今天的世界格局又会是什么样子？为什么射雕英雄传的五绝里只有反派欧阳锋没有广招门徒？
+正如王慧文在内部信中所说，他个人的兴趣“散乱不稳定”。当年创业时，王慧文和王兴都不会敲代码，但他们都觉得：没事，我们可以学。同样，后来在美团时，有一段时间王慧文要研究零售，他几乎每天都看一本关于零售的书，并且跟很多人谈论自己的心得。
+王慧文敬佩爱因斯坦，爱因斯坦曾说：科学和艺术一样，都让我们的世界更加绚丽多彩。爱因斯坦格外推崇西方古典音乐。这位“相对论”的创始人经常和“量子论”的创始人普朗克一起演奏贝多芬的作品，爱因斯坦拉小提琴，普朗克弹钢琴。相对论和量子论共同构成了21世纪物理学科的两大支柱，而它们的创始人不仅都对科学抱有偏执的热情，也都对艺术也怀有高涨的热爱，这真的很奇妙。
+
+王慧文从中体会到：爱因斯坦经常从艺术和审美的视角去探讨科学命题，人如果永远只站在一个视角来看待人生，人生就会变得特别狭隘，不够丰富，而站在不同视角来看待问题，不设限地长大，才非常重要。不自我定义、不自我设限、不抗拒变化、不沉溺过去的王慧文，与“无边界”的美团极为匹配。
+2012年底，美团实现盈亏平衡后，王慧文认为团购领域大局已定，又开始把目光聚焦在了外卖领域。2015年10月，早已在“千团大战”中站稳脚跟的美团，开始跟大众点评整合，从T型战略逐步转向餐饮、酒旅、综合三大业务架构。几次调整后，到店餐饮事业群、外卖配送事业群和餐饮生态平台被统一归进餐饮平台，总负责人仍然是王慧文。2017年12月，美团再次调整架构，王慧文担任大零售事业群总裁，统筹生鲜零售、外卖、配送、餐饮B2B等业务。同时，王慧文还负责出行事业部，正式和滴滴展开角逐。至此，美团点评已经构建了新到店事业群、大零售事业群、酒店旅游事业群和出行事业部四大业务体系，王慧文是其中两大事业群的统帅。
+如果管理者认为自己就是一个器皿，那么你就会认为自己的状态永远不会改变，也没有改变的必要。如果王慧文这样想，就不会为美团的基业立下赫赫战功。只有当你明白“君子不器”的道理时，才会意识到成长的必要性，也才会清醒地看到自己过去的弱点。不自我设限，多元思考人生，始终相信自己有更多机会，这样的管理者才能持续地自我突破，才能在激烈的竞争中拼杀出属于自己的战场。
+二、“练强兵，结硬寨，打呆仗”，造就能征善战的王慧文王慧文信奉曾国藩的九字箴言：练强兵，结硬寨，打呆仗。
+1. 有担当的管理者，麾下自有万千雄兵“练强兵”很容易理解，当时清朝腐败，太平天国武装起义，清朝的正规军竟无力抵抗，只好调动地方军事力量，多亏有曾国藩统率的湘军，才能击败太平军。此后，湘军成为了清朝军事上强有力的骨干。没有强兵，则无法作战。但强兵如何练成？曾国藩治理湘军，主要凭思想纪律，而不是战术技巧。王慧文“练强兵”，看重三点：人聪明，接地气，学习能力强（不是考试能力强）。其次，王慧文主张：管理者的一个重要责任，就是——担当。王慧文有一句话曾经火遍全网：有担当的管理者，要把下属从“愚昧之巅”推向“绝望之谷”，至于下属能否爬上“开悟之坡”，看个人造化。王慧文解释，这句话的核心词是“担当”。他向来不喜欢说“责任”，因为他认为：责任可以逃避，只有有担当的管理者才不会逃避责任。那么，什么是“愚昧之巅”、“绝望之谷”、“开悟之坡”？这些词语源于 达克效应 ，王慧文说：我思考我个人的成长和周围同事的成长，每个人都希望自己最后成为智者（大师），但是，我们要承认一个事实，大部分人没有走上去。
+愚昧之巅——人的智慧极低，但是自信度极高；绝望之谷——认识到自己的不足，智慧有所增长，自信度大幅降低；开悟之坡——智慧继续增长，自信度开始反弹增长；持续平稳高原——智慧达到顶级，自信心也持续平稳，走上大师之路。
+王慧文说：大部分人没能从愚昧之巅走到绝望之谷，大部分人都在这个部分遇到了困难。王慧文借用“达克效应”理论，不是为了拆穿别人的智慧不足，而是为了强调管理者的担当，他认为：
+大部分人都知道别人处在愚昧之巅，但是很少有人知道自己处在愚昧之巅，这就产生了非常大的信息不对称。为什么人不知道自己在愚昧之巅？就是因为每一个人在自己成长的过程中，没有得到有效反馈，没有人告诉他“你现在在愚昧之巅”。因此，有效反馈变得非常重要和稀缺。但是再进一步思考，为什么很多人没有得到这个反馈？因为别人没有这个责任反馈给你，而且戳破真相是有风险的。
+王慧文觉得他们在离开美团的环境后，很可能更没希望得到他人的有效反馈了，所以他有好几次，在同事或下属离职时，告诉了对方正处于愚昧之巅的真相，但是转眼就被拉黑了。尽管王慧文承认他们是一个好人、正直的人，也是一个想成长的、对美团有过贡献的人，将来也会成为对社会有贡献的人，王慧文希望对方成长得更好，才戳破真相，但是要戳破真相、给他人有效反馈，就必须承担得罪人的风险。
+也正因此，管理者才更需要担当。王慧文说：你给别人反馈的时候，也可能你自己是一个傻×，可能我自己是在愚昧之巅，其实人家是对的，这个可能性也是很大的，通过这个行为反而证明了你可能在愚昧之巅的事实。管理者能不能从善意出发，帮下属敲响警钟？又能不能在被误解时，甘愿承受来自下属的伤害？或者是在发现自己比下属更愚昧的时候，还能不能调整心态，通过努力学习来提升自己的智慧和自信？回答这些问题的最好方式，就是努力向一个有担当的管理者去逼近。担当，是管理者们最稀缺的能力，但却是“练强兵”必不可少的素质。
+2. 优秀管理者，都在暗下笨功夫“结硬寨，打呆仗”，是曾国藩的兵法内核。字面意思是，把军营扎得坚如磐石，打仗时不讲究技巧而是追求笨方法。曾国藩带兵打仗有个规矩，他到任何地方安营扎寨之后，不论当时是刮风还是下雨，首先命令士兵们挖掘战壕，壕深约两米，而且还要筑墙，墙高约八尺高，墙外再挖一道沟。这就确保整个营盘固若金汤。湘军总是要挖沟、筑墙，行军速度非常慢。由于这种打法显得特别笨，所以才叫“结硬寨，打呆仗”。王慧文的工作速度并不慢，但他也爱下笨功夫，一个细节一个细节得打磨，确保每个业务流程都能稳扎稳打。美团前员工这样评价王慧文：老王可能是我见过在互联网行业，大佬级别中所谓“比你聪明还更拼搏”，并且会关注很多业务细节的人。工作起来，王慧文就像变成了拼命三郎，让很多比他年轻的人都心生畏惧。据美团前员工回忆：每周六下午，是大团队的业务管理会，每个分支业务的负责人要详细地讲解业务进度，用数据说话，以结果为导向，绝对不让周报变成“流水账”；在这个过程中，王慧文会非常认真地听每个人的讲解，绝不走过场，绝不讲废话；某个员工在周报中提及“某个数据变化属于正常波动”，这是产品负责人没有特别认真思考或经验欠缺、全局感不强而惯用的一个理由，而此时王慧文则会一针见血地指出是因为什么问题、什么原因导致的数据变化，让人心服口服。王兴在内部信里这样评价王慧文：
+美团精神，老王身体力行、堪称典范。回顾老王过去九年多的工作，既有冲锋在前的勇猛，又有安营扎寨的稳健；既有舍我其谁的担当，又有功成不必在我的潇洒；既有“天下兴亡，匹夫有责”的责任感，又有“我们什么都没有，但是我们有兄弟和勇气”的真性情；既长期有耐心地保持战略定力，又坚持时不我待、只争朝夕地忘情投入。美团人经常加班到凌晨两三点，但转天早上九点又准时坐到办公室里开会，这让很多人对美团这家公司佩服不已。
+2013年6月，美团收购猛买网，猛买网创始人张智勇在加入美团之后，曾发微博说：牛x都是苦x堆出来的，你看美团网牛x，没看到的都是苦x。原来公司没有比它做得好，就是我不够苦x，是因为我管理不好。在这里，每月每周都能学到东西，蛮好的。辛苦没关系，能学到东西就行，最怕加班没结果。
+对王慧文来说，周六全天开会，周日半天高管会，每周留给自己的时间或许只有一个下午而已。但王慧文向外界和美团内部员工展现的，永远是一副精力充沛、充满激情的样子。这就像将军带兵打仗，“跟我上”和“给我上”，一字之差，但全军的战斗力却会有天壤之别。前者能把团队里每个人的心思都拧成一股绳，无往不胜；后者却永远苦于团队像一盘散沙。
+三、“不宜贪天之功，知止不殆”，造就未来不可限量的王慧文王慧文在今年年初的内部信里，把自己在美团拼搏的17年激情燃烧岁月，轻描淡写地说成了“我运气实在太好”。低调、收敛，不是王慧文今天才有的风格，而是他始终具备的性格底色。王慧文经常开玩笑地说，我是农民的孩子，只会拼命工作。玩笑的背后，是他专注做事的态度，以及不居功自傲的格局和胸襟。管理者要常常怀有“清零思维”，过去的错误要变成未来的前车之鉴，不能用来惩罚自己；过去的成就要变成未来的经验和警示，不能用来炫耀自己、骄傲自满。如果管理者觉得自己“满了”，也就意味着，你认为自己的成长之路到头了。清零思维也是一种包容心。《九败一胜：美团创始人王兴创业十年》写道：王慧文曾去过无锡，见到88米高的灵山大佛，从远处看大佛，跟山一样高，走近大佛，人还没有大佛的脚趾头高。王慧文心想，如果这尊大佛有脚臭的话，那么来观光的人就只能闻到大佛的脚臭味，而看不见整个大佛的巍巍如山。只有包容的人，心胸宽广，眼界开阔，才看得到大佛的宝相庄严。该书的作者李志刚说：也只有包容的CEO，才能听到下面的真实心声，兼听则明，才能有各种奇人异士来帮你做事。王慧文这17年来，已经为美团培养了大批人才，也为人才梯度建设付出了贡献，他离职后，自然也不需要人才来帮自己做事了，但是这种包容心会始终伴随他，让他的未来无法限量。王慧文也包容对手，他和王兴都不认为美团是在跟同行们“争”，美团是在“竞”，他说：我们不认为千团大战是我们打赢了别人，而是我们跟上了行业节奏，他们没有跟上，这个认知是跟打仗不一样的；同向为竞，相向为争。
+包容，就是不眷恋。
+王慧文不眷恋名利荣誉，他说“我运气实在太好，不宜继续贪天之功，知止不殆”；王慧文不眷恋自己的能力，他说“感谢我的家人，承受很多困难，无怨无尽地给我支持和包容”，还感谢了时代、王兴和所有同事；王慧文不眷恋他的江湖，他说“美团十年，豪兴不浅。他日江湖相逢，再当杯酒言欢”。
+金庸先生曾写：天上白云，散了又聚，聚了又散，人生离合，亦复如斯。
+今天，我们预测王慧文的人生“下半场”会有怎样的风景，已经是徒劳，因为他早已选择了一条“不确定”的人生旅程。王慧文说过，固定靶比移动靶更难打中。人生就像一个移动靶，我们谁也不知道自己的未来将穿梭至何处，也几乎不可能帮别人预测。我们只能希望，当自己修炼出清零思维、包容心、不眷恋的人生态度时，能够跟上时代变化莫测的脚步，不要掉队。不论人生的下半场将会如何，至少王慧文已经可以潇洒地说出一句——“这十年激烈精彩，不负年华”。
+四、参考美团王慧文：很少人知道自己在愚昧之巅
 ]]></content>
       <categories>
-        <category>Tech</category>
+        <category>RandomThoughts</category>
       </categories>
       <tags>
-        <tag>中间件</tag>
+        <tag>成长</tag>
+        <tag>阅读</tag>
       </tags>
   </entry>
   <entry>
@@ -1022,57 +1062,17 @@ SAP 中国区总裁还提醒了一句值得记住的话：AI 落地的最大挑�
       </tags>
   </entry>
   <entry>
-    <title>王慧文(美团)：很少人知道自己在愚昧之巅</title>
-    <url>/20200723-Few-people-know-that-they-are-ignorance/</url>
-    <content><![CDATA[零、写在前面早几天在领导 JG 的朋友圈看到这篇文章简单几个字的标题，让我产生了兴趣一来这个标题是挺吸引人，典型的自媒体文章二来JG 之前推过一些书很不错三来一般领导朋友圈都不会推垃圾信息
-全文看来其实感觉还是挺切合我的认知：
-
-人很难认清自己，很难找到方向，成长路上有他人指点会很棒
-除了遇到的人合读过的书，十年之后你还是你
-多与他人交流，多帮助他人，利人利己
-运动、学习、反馈、重塑大脑
-
-离开学校大部分时间都是围绕着工作有些人可能觉得当前的工作不满意然后想着学点什么高大上的东西为以后的工作做准备极端情况下这种选择是对的，大部分情况会让自己进退两难正确的选择应该是：过好当下，瞭望远方，持续学习，总结反思，慢慢进步架构师同事 SGLS 说过：做好当下的事情才是最重要的，不管现在是做什么项目，设计和实现是我们自己可以控制的。
-以下为原文
-审视是一个特别好的词。当一个人开始审视世界、审视经历、审视自己的时候，更容易做出有担当的选择。作为美团“二号首长”，王慧文选择在2020年底正式“退休”，这不可分说地成为了焦点——王慧文，是怎么成为“王慧文”的？
-一、“不自我设限”，造就无边界的王慧文什么是促使人成长的本质原因？王慧文一直在渴求突破，也一直在探究这个问题。
-1. 人要接受变化，有动荡才有进化王慧文修行的开端，就是校内网。2006年3月，王慧文、王兴和另外四名同伴绞尽脑汁、黑白颠倒，终于让校内网收获了一百多万用户。王兴开始四处找投资，但在多数投资人眼里看来，他们仍是群“生瓜蛋子”、“杂牌军”，校内网不过是几个大学生做的小打小闹的玩意儿。但在这时，千橡集团董事长陈一舟出现了，他愿意拿出一千多万人民币，收购校内网。《九败一胜：美团创始人王兴创业十年》中这样描述
-
-陈一舟说，如果你们不卖，我们可以拿这钱砸到市场上推广。当然，校内网的这群狂妄的小子被这句话激怒了，拒绝跟陈一舟谈。回绝了陈一舟后，王兴的融资依旧不顺利，陈一舟却与王兴他们保持接触，认准了校内网这条大鱼，准备放长线，持久诱惑。2006年9月，陈一舟再次抬高了收购校内网的价码，校内网召开了五人的股东会。王慧文觉得校内网的机会难得，做成的希望很大，而且是自己一手做起来的产品，感情已经很深，所以坚决反对卖掉。王兴态度中立，但倾向于不卖。赖斌强则考虑的方面更多，他支持卖掉，以免大家背着一身巨债创业。除了他们三个大股东，还有另两名小股东，杨俊和付栋平。他们加入较晚，股份也较少，觉得卖不卖都行，比起被收购，他们更担心王慧文和赖斌强由于意见不合而导致团队破裂。这次争论后不久，陈一舟就就又开出了更高的收购价格。几人意识到，如果继续争论不休，团队的裂痕势必更深。万般无奈之下，校内网不得不同意陈一舟的条件。那一晚，大家都不说话，一起去吃夜宵的时候，王兴、王慧文、赖斌强全喝醉了，所有人大哭了一场。
-不论校内网是成功的，还是失败的，在王慧文和王兴的心里，它永远都是遗憾的。回首往事，王慧文已经不再执着，反而觉得这段遗憾对自己的人生是件好事。他说：如果校内网做成了，我会变成让别人非常讨厌的人，刚愎、自负，因为挫折，所以我才懂得反省自己，能更理智客观冷静地看待自己。还有人问王慧文，如果当初不卖的话，校内网能不能做得成？王慧文答：这取决于我们遇到什么样的投资商，如果投资商能够在很多地方帮助我们，是可能做成的；如果投完钱就不怎么管，让我们自己随便搞，那就不行，因为我们还不够成熟。管理者的自我反思，会反馈在他的战略、领导力、管理、业务实操等能力上。人必须反思，是因为事物是时刻变化的，不断反思，才能不断跟上变化。王慧文在一次采访中说：美团的持续高速增长，不是我们在推动着业务发展，而是业务快速发展，我们努力地跟上，不是我们做了什么事情，只是我们跟上了，没掉队。在一个快速发展的行业里，在一个快速变化的时代里， 创业者、管理者如果没有自我反思，是很难生存下来的。在第一次创业修行中，王慧文就悟出一个道理：人，把事做成不易，不断成长、突破自己边界更难。
-2. 不设限的人生，成长机会无限“君子不器”是王慧文的人生原则之一。2019年，在极客公园创新大会上，极客公园创始人、总裁张鹏问王慧文：你觉得美团的基因是什么？王慧文当时就说出了“君子不器”四个字，他面对张鹏侃侃而谈：孔子说，君子不器，君子不是一个器皿，人不要搞自我定义，自我定义就是自我设限，我不倾向于用美团的基因来自我设限。他还用“基因突变”举例，基因变化变错的概率比变对的概率高几百万倍，所以大家都很恐惧基因变化，抵触变化。但王慧文认为变化不可怕，自我设限才最可怕，他还幽默地说：一旦变对了呢？一旦长出翅膀了呢？这种不自我设限，就是“美团无边界，专注而不专一”的根源。君子不器，有两个含义：一是人想要成长就不能有固化思维，事物是变化的，人也要具备动态发展的眼光，反思过去，展望未来；二是人不能像器皿那样自我设限，器皿只有某一方面的用途和才能，而人应该博学多识。孔子的这两点要求，王慧文都做到了，他的生活和工作就是如此。
-《财经天下》周刊记者朱晓培这样形容“百变的王慧文”
-在王慧文的朋友圈里，总能看见他忽然想到一个问题，比如：是不是20世纪在唯心主义和唯物主义领域都没有出现过大师？如果地球上没有美洲，哥伦布的船直接西行到了亚洲，今天的世界格局又会是什么样子？为什么射雕英雄传的五绝里只有反派欧阳锋没有广招门徒？
-正如王慧文在内部信中所说，他个人的兴趣“散乱不稳定”。当年创业时，王慧文和王兴都不会敲代码，但他们都觉得：没事，我们可以学。同样，后来在美团时，有一段时间王慧文要研究零售，他几乎每天都看一本关于零售的书，并且跟很多人谈论自己的心得。
-王慧文敬佩爱因斯坦，爱因斯坦曾说：科学和艺术一样，都让我们的世界更加绚丽多彩。爱因斯坦格外推崇西方古典音乐。这位“相对论”的创始人经常和“量子论”的创始人普朗克一起演奏贝多芬的作品，爱因斯坦拉小提琴，普朗克弹钢琴。相对论和量子论共同构成了21世纪物理学科的两大支柱，而它们的创始人不仅都对科学抱有偏执的热情，也都对艺术也怀有高涨的热爱，这真的很奇妙。
-
-王慧文从中体会到：爱因斯坦经常从艺术和审美的视角去探讨科学命题，人如果永远只站在一个视角来看待人生，人生就会变得特别狭隘，不够丰富，而站在不同视角来看待问题，不设限地长大，才非常重要。不自我定义、不自我设限、不抗拒变化、不沉溺过去的王慧文，与“无边界”的美团极为匹配。
-2012年底，美团实现盈亏平衡后，王慧文认为团购领域大局已定，又开始把目光聚焦在了外卖领域。2015年10月，早已在“千团大战”中站稳脚跟的美团，开始跟大众点评整合，从T型战略逐步转向餐饮、酒旅、综合三大业务架构。几次调整后，到店餐饮事业群、外卖配送事业群和餐饮生态平台被统一归进餐饮平台，总负责人仍然是王慧文。2017年12月，美团再次调整架构，王慧文担任大零售事业群总裁，统筹生鲜零售、外卖、配送、餐饮B2B等业务。同时，王慧文还负责出行事业部，正式和滴滴展开角逐。至此，美团点评已经构建了新到店事业群、大零售事业群、酒店旅游事业群和出行事业部四大业务体系，王慧文是其中两大事业群的统帅。
-如果管理者认为自己就是一个器皿，那么你就会认为自己的状态永远不会改变，也没有改变的必要。如果王慧文这样想，就不会为美团的基业立下赫赫战功。只有当你明白“君子不器”的道理时，才会意识到成长的必要性，也才会清醒地看到自己过去的弱点。不自我设限，多元思考人生，始终相信自己有更多机会，这样的管理者才能持续地自我突破，才能在激烈的竞争中拼杀出属于自己的战场。
-二、“练强兵，结硬寨，打呆仗”，造就能征善战的王慧文王慧文信奉曾国藩的九字箴言：练强兵，结硬寨，打呆仗。
-1. 有担当的管理者，麾下自有万千雄兵“练强兵”很容易理解，当时清朝腐败，太平天国武装起义，清朝的正规军竟无力抵抗，只好调动地方军事力量，多亏有曾国藩统率的湘军，才能击败太平军。此后，湘军成为了清朝军事上强有力的骨干。没有强兵，则无法作战。但强兵如何练成？曾国藩治理湘军，主要凭思想纪律，而不是战术技巧。王慧文“练强兵”，看重三点：人聪明，接地气，学习能力强（不是考试能力强）。其次，王慧文主张：管理者的一个重要责任，就是——担当。王慧文有一句话曾经火遍全网：有担当的管理者，要把下属从“愚昧之巅”推向“绝望之谷”，至于下属能否爬上“开悟之坡”，看个人造化。王慧文解释，这句话的核心词是“担当”。他向来不喜欢说“责任”，因为他认为：责任可以逃避，只有有担当的管理者才不会逃避责任。那么，什么是“愚昧之巅”、“绝望之谷”、“开悟之坡”？这些词语源于 达克效应 ，王慧文说：我思考我个人的成长和周围同事的成长，每个人都希望自己最后成为智者（大师），但是，我们要承认一个事实，大部分人没有走上去。
-愚昧之巅——人的智慧极低，但是自信度极高；绝望之谷——认识到自己的不足，智慧有所增长，自信度大幅降低；开悟之坡——智慧继续增长，自信度开始反弹增长；持续平稳高原——智慧达到顶级，自信心也持续平稳，走上大师之路。
-王慧文说：大部分人没能从愚昧之巅走到绝望之谷，大部分人都在这个部分遇到了困难。王慧文借用“达克效应”理论，不是为了拆穿别人的智慧不足，而是为了强调管理者的担当，他认为：
-大部分人都知道别人处在愚昧之巅，但是很少有人知道自己处在愚昧之巅，这就产生了非常大的信息不对称。为什么人不知道自己在愚昧之巅？就是因为每一个人在自己成长的过程中，没有得到有效反馈，没有人告诉他“你现在在愚昧之巅”。因此，有效反馈变得非常重要和稀缺。但是再进一步思考，为什么很多人没有得到这个反馈？因为别人没有这个责任反馈给你，而且戳破真相是有风险的。
-王慧文觉得他们在离开美团的环境后，很可能更没希望得到他人的有效反馈了，所以他有好几次，在同事或下属离职时，告诉了对方正处于愚昧之巅的真相，但是转眼就被拉黑了。尽管王慧文承认他们是一个好人、正直的人，也是一个想成长的、对美团有过贡献的人，将来也会成为对社会有贡献的人，王慧文希望对方成长得更好，才戳破真相，但是要戳破真相、给他人有效反馈，就必须承担得罪人的风险。
-也正因此，管理者才更需要担当。王慧文说：你给别人反馈的时候，也可能你自己是一个傻×，可能我自己是在愚昧之巅，其实人家是对的，这个可能性也是很大的，通过这个行为反而证明了你可能在愚昧之巅的事实。管理者能不能从善意出发，帮下属敲响警钟？又能不能在被误解时，甘愿承受来自下属的伤害？或者是在发现自己比下属更愚昧的时候，还能不能调整心态，通过努力学习来提升自己的智慧和自信？回答这些问题的最好方式，就是努力向一个有担当的管理者去逼近。担当，是管理者们最稀缺的能力，但却是“练强兵”必不可少的素质。
-2. 优秀管理者，都在暗下笨功夫“结硬寨，打呆仗”，是曾国藩的兵法内核。字面意思是，把军营扎得坚如磐石，打仗时不讲究技巧而是追求笨方法。曾国藩带兵打仗有个规矩，他到任何地方安营扎寨之后，不论当时是刮风还是下雨，首先命令士兵们挖掘战壕，壕深约两米，而且还要筑墙，墙高约八尺高，墙外再挖一道沟。这就确保整个营盘固若金汤。湘军总是要挖沟、筑墙，行军速度非常慢。由于这种打法显得特别笨，所以才叫“结硬寨，打呆仗”。王慧文的工作速度并不慢，但他也爱下笨功夫，一个细节一个细节得打磨，确保每个业务流程都能稳扎稳打。美团前员工这样评价王慧文：老王可能是我见过在互联网行业，大佬级别中所谓“比你聪明还更拼搏”，并且会关注很多业务细节的人。工作起来，王慧文就像变成了拼命三郎，让很多比他年轻的人都心生畏惧。据美团前员工回忆：每周六下午，是大团队的业务管理会，每个分支业务的负责人要详细地讲解业务进度，用数据说话，以结果为导向，绝对不让周报变成“流水账”；在这个过程中，王慧文会非常认真地听每个人的讲解，绝不走过场，绝不讲废话；某个员工在周报中提及“某个数据变化属于正常波动”，这是产品负责人没有特别认真思考或经验欠缺、全局感不强而惯用的一个理由，而此时王慧文则会一针见血地指出是因为什么问题、什么原因导致的数据变化，让人心服口服。王兴在内部信里这样评价王慧文：
-美团精神，老王身体力行、堪称典范。回顾老王过去九年多的工作，既有冲锋在前的勇猛，又有安营扎寨的稳健；既有舍我其谁的担当，又有功成不必在我的潇洒；既有“天下兴亡，匹夫有责”的责任感，又有“我们什么都没有，但是我们有兄弟和勇气”的真性情；既长期有耐心地保持战略定力，又坚持时不我待、只争朝夕地忘情投入。美团人经常加班到凌晨两三点，但转天早上九点又准时坐到办公室里开会，这让很多人对美团这家公司佩服不已。
-2013年6月，美团收购猛买网，猛买网创始人张智勇在加入美团之后，曾发微博说：牛x都是苦x堆出来的，你看美团网牛x，没看到的都是苦x。原来公司没有比它做得好，就是我不够苦x，是因为我管理不好。在这里，每月每周都能学到东西，蛮好的。辛苦没关系，能学到东西就行，最怕加班没结果。
-对王慧文来说，周六全天开会，周日半天高管会，每周留给自己的时间或许只有一个下午而已。但王慧文向外界和美团内部员工展现的，永远是一副精力充沛、充满激情的样子。这就像将军带兵打仗，“跟我上”和“给我上”，一字之差，但全军的战斗力却会有天壤之别。前者能把团队里每个人的心思都拧成一股绳，无往不胜；后者却永远苦于团队像一盘散沙。
-三、“不宜贪天之功，知止不殆”，造就未来不可限量的王慧文王慧文在今年年初的内部信里，把自己在美团拼搏的17年激情燃烧岁月，轻描淡写地说成了“我运气实在太好”。低调、收敛，不是王慧文今天才有的风格，而是他始终具备的性格底色。王慧文经常开玩笑地说，我是农民的孩子，只会拼命工作。玩笑的背后，是他专注做事的态度，以及不居功自傲的格局和胸襟。管理者要常常怀有“清零思维”，过去的错误要变成未来的前车之鉴，不能用来惩罚自己；过去的成就要变成未来的经验和警示，不能用来炫耀自己、骄傲自满。如果管理者觉得自己“满了”，也就意味着，你认为自己的成长之路到头了。清零思维也是一种包容心。《九败一胜：美团创始人王兴创业十年》写道：王慧文曾去过无锡，见到88米高的灵山大佛，从远处看大佛，跟山一样高，走近大佛，人还没有大佛的脚趾头高。王慧文心想，如果这尊大佛有脚臭的话，那么来观光的人就只能闻到大佛的脚臭味，而看不见整个大佛的巍巍如山。只有包容的人，心胸宽广，眼界开阔，才看得到大佛的宝相庄严。该书的作者李志刚说：也只有包容的CEO，才能听到下面的真实心声，兼听则明，才能有各种奇人异士来帮你做事。王慧文这17年来，已经为美团培养了大批人才，也为人才梯度建设付出了贡献，他离职后，自然也不需要人才来帮自己做事了，但是这种包容心会始终伴随他，让他的未来无法限量。王慧文也包容对手，他和王兴都不认为美团是在跟同行们“争”，美团是在“竞”，他说：我们不认为千团大战是我们打赢了别人，而是我们跟上了行业节奏，他们没有跟上，这个认知是跟打仗不一样的；同向为竞，相向为争。
-包容，就是不眷恋。
-王慧文不眷恋名利荣誉，他说“我运气实在太好，不宜继续贪天之功，知止不殆”；王慧文不眷恋自己的能力，他说“感谢我的家人，承受很多困难，无怨无尽地给我支持和包容”，还感谢了时代、王兴和所有同事；王慧文不眷恋他的江湖，他说“美团十年，豪兴不浅。他日江湖相逢，再当杯酒言欢”。
-金庸先生曾写：天上白云，散了又聚，聚了又散，人生离合，亦复如斯。
-今天，我们预测王慧文的人生“下半场”会有怎样的风景，已经是徒劳，因为他早已选择了一条“不确定”的人生旅程。王慧文说过，固定靶比移动靶更难打中。人生就像一个移动靶，我们谁也不知道自己的未来将穿梭至何处，也几乎不可能帮别人预测。我们只能希望，当自己修炼出清零思维、包容心、不眷恋的人生态度时，能够跟上时代变化莫测的脚步，不要掉队。不论人生的下半场将会如何，至少王慧文已经可以潇洒地说出一句——“这十年激烈精彩，不负年华”。
-四、参考美团王慧文：很少人知道自己在愚昧之巅
+    <title>Dubbo官方中文文档|用户文档|开发者指南|源码导读|运维管理</title>
+    <url>/20190325-Dubbo%E5%AE%98%E6%96%B9%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3%7C%E7%94%A8%E6%88%B7%E6%96%87%E6%A1%A3%7C%E5%BC%80%E5%8F%91%E8%80%85%E6%8C%87%E5%8D%97%7C%E6%BA%90%E7%A0%81%E5%AF%BC%E8%AF%BB%7C%E8%BF%90%E7%BB%B4%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[一、为什么要学Dubbo近几年一直在使用dubbo进行支付系统的开发;作为国内比较受欢迎的一个SOA框架，Dubbo使用简单设计优雅;里面用到的思想和技术，基本上涵盖大部分互联网公司用到的技术;记得直属领导说过一句话，看完Dubbo他觉得设计者简直就是天才;而且看完dubbo的源码，对他的影响很大，处处模仿dubbo的思想;
+二、文档地址中文文档：用户文档、开发者指南、源码导读、运维管理http://dubbo.apache.org/zh-cn/docs/user/quick-start.html用户手册(比较完整)：https://dubbo.gitbooks.io/dubbo-user-book/demos/routing-rule.html官方博客：http://dubbo.apache.org/zh-cn/blog/index.html
+三、Dubbo创始人博客最后更新于2014年https://Javatar.iteye.com/
 ]]></content>
       <categories>
-        <category>RandomThoughts</category>
+        <category>Tech</category>
       </categories>
       <tags>
-        <tag>成长</tag>
-        <tag>阅读</tag>
+        <tag>中间件</tag>
       </tags>
   </entry>
   <entry>
@@ -1167,24 +1167,6 @@ ttl - 跨线程数据传输
       </tags>
   </entry>
   <entry>
-    <title>Git Bash tree（windows）让windows支持tree</title>
-    <url>/20170713-Git%20Bash%20tree%EF%BC%88windows%EF%BC%89/</url>
-    <content><![CDATA[在安装了git客户端之后，发现Git Bash挺好用
-之前在linux shell用过tree命令感觉不错
-发现Git Bash也可以实现，于是就记录一下
-下载地址：点击前往
-下载文件： Binaries	 	Zip
-解压文件：bin目录下找到tree.exe
-把这个放到git安装目录下后的路径：C:\Program Files\Git\usr\bin\tree.exe
-测试：虽然有点丑。。。
-
-hisen@HiSEN MINGW64 /c/code/SpringBootCLI/myapp$ tree.|-- mvnw|-- mvnw.cmd|-- pom.xml`-- src    |-- main    |   |-- Java    |   |   `-- com    |   |       `-- example    |   |           `-- myapp    |   |               |-- DemoApplication.Java    |   |               `-- ServletInitializer.Java    |   `-- resources    |       |-- application.properties    |       |-- static    |       `-- templates    `-- test        `-- Java            `-- com                `-- example                    `-- myapp                        `-- DemoApplicationTests.Java14 directories, 7 files
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>全球国家和地区列表，中英文国名、国际代码、电话区号(SQL &amp; 文本)</title>
     <url>/20191120-Global-country-and-region-information-list/</url>
     <content><![CDATA[零、说明包含全球200+国家和地区的信息本列表属于之前有外国人整理过利用有道翻译API翻译了国家名涉及到全球的业务应该会用的上
@@ -1207,34 +1189,22 @@ https://country-code.cl/
       </tags>
   </entry>
   <entry>
-    <title>Guice Demo | solve NoSuchMethodError</title>
-    <url>/20190424-Guice%20Demo%20%7C%20solve%20NoSuchMethodError/</url>
-    <content><![CDATA[一、Guice简介Google公司的Bob lee开发的轻量级IoC容器，其特点是：
+    <title>Git Bash tree（windows）让windows支持tree</title>
+    <url>/20170713-Git%20Bash%20tree%EF%BC%88windows%EF%BC%89/</url>
+    <content><![CDATA[在安装了git客户端之后，发现Git Bash挺好用
+之前在linux shell用过tree命令感觉不错
+发现Git Bash也可以实现，于是就记录一下
+下载地址：点击前往
+下载文件： Binaries	 	Zip
+解压文件：bin目录下找到tree.exe
+把这个放到git安装目录下后的路径：C:\Program Files\Git\usr\bin\tree.exe
+测试：虽然有点丑。。。
 
-速度快，号称是spring的100倍速度
-无配置文件，实用JDK5.0的annotation描述组件依赖，简单，而且有编译器检查和重构支持
-简单，代码量很少
-
-二、简单样例
-详细代码：https://github.com/hisenyuan/IDEAPractice/tree/master/src/main/Java/com/hisen/jars/guice
-依赖
-
-&lt;dependency&gt;    &lt;groupId&gt;com.google.inject&lt;/groupId&gt;    &lt;artifactId&gt;guice&lt;/artifactId&gt;    &lt;version&gt;4.2.2&lt;/version&gt;&lt;/dependency&gt;
-
-测试类
-
-public class HelloApp extends BaseServer &#123;    @Inject    private HelloServiceImpl hello;    @Test    public void testSayHello() &#123;        // 方式一        Injector injector = Guice.createInjector();        HelloService helloService = injector.getInstance(HelloService.class);        helloService.sayHello(&quot;hisen&quot;);        // 方式二 其实是在BaseServer中做了方式1的事情 【类似Spring的方式】        hello.sayHello(&quot;1&quot;);    &#125;&#125;
-
-三、解决问题Java.lang.NoSuchMethodError: com.google.common.base.Preconditions.checkArgument(ZLJava/lang/String;LJava/lang/Object;LJava/lang/Object;)V
-github有人遇到同样的问题：https://github.com/SeleniumHQ/selenium/issues/3880
-把本地的guava版本由19.0改为21.0成功解决问题
+hisen@HiSEN MINGW64 /c/code/SpringBootCLI/myapp$ tree.|-- mvnw|-- mvnw.cmd|-- pom.xml`-- src    |-- main    |   |-- Java    |   |   `-- com    |   |       `-- example    |   |           `-- myapp    |   |               |-- DemoApplication.Java    |   |               `-- ServletInitializer.Java    |   `-- resources    |       |-- application.properties    |       |-- static    |       `-- templates    `-- test        `-- Java            `-- com                `-- example                    `-- myapp                        `-- DemoApplicationTests.Java14 directories, 7 files
 ]]></content>
       <categories>
         <category>Tech</category>
       </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
   </entry>
   <entry>
     <title>Google Java工具类 - Guava - 常见用法</title>
@@ -1269,23 +1239,27 @@ public class CommonUsage &#123;  /**   * 2.集合转换为特定格式的字符�
       </tags>
   </entry>
   <entry>
-    <title>HashMap和Hashtable的区别</title>
-    <url>/20170217-HashMap%E5%92%8CHashtable%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[在Java 2以前，一般使用Hashtable来映射键值和元素。为了使用Java集合框架，Java对Hashtable进行了重新设计，但是，为了向后兼容保留了所有的方法。Hashtable实现了Map接口，除了Hashtable具有同步功能之外，它与HashMap的用法是一样的。·在使用时一般是用ArrayList代替Vector，LinkedList代替Stack，HashMap代替HashTable，即使在多线程中需要同步，也是用同步包装类。
-另外在使用上还有一些小的差异，比如：
+    <title>Guice Demo | solve NoSuchMethodError</title>
+    <url>/20190424-Guice%20Demo%20%7C%20solve%20NoSuchMethodError/</url>
+    <content><![CDATA[一、Guice简介Google公司的Bob lee开发的轻量级IoC容器，其特点是：
 
-HashTable的key和value都不允许为null值，而HashMap的key和value则都是允许null值的。这个其实没有好坏之分，只是Sun为了统一Collection的操作特性而改进的。
-HashTable有一个contains(Object value)方法，功能上与containsValue(Object value)一样，但是在实现上花销更大，现在已不推荐使用。而HashMap只有containsValue(Object value)方法。
-HashTable使用Enumeration，HashMap使用Iterator。Iterator其实与Enmeration功能上很相似，只是多了删除的功能。用Iterator不过是在名字上变得更为贴切一些。模式的另外一个很重要的功用，就是能够形成一种交流的语言（或者说文化）。有时候，你说Enumeration大家都不明白，说Iterator就都明白了。
+速度快，号称是spring的100倍速度
+无配置文件，实用JDK5.0的annotation描述组件依赖，简单，而且有编译器检查和重构支持
+简单，代码量很少
 
-在实现上两者已有一些差异，这里简单说明一下：
-public Hashtable(int initialCapacity, float loadFactor) &#123;        if (initialCapacity &lt; 0)            throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+                                               initialCapacity);        if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))            throw new IllegalArgumentException(&quot;Illegal Load: &quot;+loadFactor);        if (initialCapacity==0)            initialCapacity = 1;        this.loadFactor = loadFactor;        table = new Entry[initialCapacity];        threshold = (int)Math.min(initialCapacity * loadFactor, MAX_ARRAY_SIZE + 1);        initHashSeedAsNeeded(initialCapacity);    &#125;public Hashtable(int initialCapacity) &#123;        this(initialCapacity, 0.75f);    &#125;public Hashtable() &#123;        this(11, 0.75f);    &#125;public HashMap(int initialCapacity, float loadFactor) &#123;        if (initialCapacity &lt; 0)            throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +                                               initialCapacity);        if (initialCapacity &gt; MAXIMUM_CAPACITY)            initialCapacity = MAXIMUM_CAPACITY;        if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))            throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +                                               loadFactor);        this.loadFactor = loadFactor;        threshold = initialCapacity;        init();    &#125;public HashMap(int initialCapacity) &#123;        this(initialCapacity, DEFAULT_LOAD_FACTOR);    &#125;public HashMap() &#123;        this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);    &#125;
-HashTable中构造hash数组时initialCapacity默认大小是11，增加的方式是 old*2+1。HashMap中构造hash数组时initialCapacity默认大小是16，而且一定是2的指数。对于哈希值的使用也有所不同，HashTable直接使用对象的hashCode，代码是这样的：
-int hash = key.hashCode();int index = (hash &amp; 0x7FFFFFFF) % tab.length;
-而HashMap重新计算hash值，而且用与代替求模：
-int hash = hash(k);int i = indexFor(hash, table.length); static int hash(Object x) &#123;　　int h = x.hashCode(); 　　h += ~(h &lt;&lt; 9);　　h ^= (h &gt;&gt;&gt; 14);　　h += (h &lt;&lt; 4);　　h ^= (h &gt;&gt;&gt; 10);　　return h;&#125;static int indexFor(int h, int length) &#123;　　return h &amp; (length-1);&#125;
+二、简单样例
+详细代码：https://github.com/hisenyuan/IDEAPractice/tree/master/src/main/Java/com/hisen/jars/guice
+依赖
 
-仅供参考，内容来源于互联网
+&lt;dependency&gt;    &lt;groupId&gt;com.google.inject&lt;/groupId&gt;    &lt;artifactId&gt;guice&lt;/artifactId&gt;    &lt;version&gt;4.2.2&lt;/version&gt;&lt;/dependency&gt;
+
+测试类
+
+public class HelloApp extends BaseServer &#123;    @Inject    private HelloServiceImpl hello;    @Test    public void testSayHello() &#123;        // 方式一        Injector injector = Guice.createInjector();        HelloService helloService = injector.getInstance(HelloService.class);        helloService.sayHello(&quot;hisen&quot;);        // 方式二 其实是在BaseServer中做了方式1的事情 【类似Spring的方式】        hello.sayHello(&quot;1&quot;);    &#125;&#125;
+
+三、解决问题Java.lang.NoSuchMethodError: com.google.common.base.Preconditions.checkArgument(ZLJava/lang/String;LJava/lang/Object;LJava/lang/Object;)V
+github有人遇到同样的问题：https://github.com/SeleniumHQ/selenium/issues/3880
+把本地的guava版本由19.0改为21.0成功解决问题
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -1322,6 +1296,32 @@ local_search:
       <categories>
         <category>Tech</category>
       </categories>
+  </entry>
+  <entry>
+    <title>HashMap和Hashtable的区别</title>
+    <url>/20170217-HashMap%E5%92%8CHashtable%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[在Java 2以前，一般使用Hashtable来映射键值和元素。为了使用Java集合框架，Java对Hashtable进行了重新设计，但是，为了向后兼容保留了所有的方法。Hashtable实现了Map接口，除了Hashtable具有同步功能之外，它与HashMap的用法是一样的。·在使用时一般是用ArrayList代替Vector，LinkedList代替Stack，HashMap代替HashTable，即使在多线程中需要同步，也是用同步包装类。
+另外在使用上还有一些小的差异，比如：
+
+HashTable的key和value都不允许为null值，而HashMap的key和value则都是允许null值的。这个其实没有好坏之分，只是Sun为了统一Collection的操作特性而改进的。
+HashTable有一个contains(Object value)方法，功能上与containsValue(Object value)一样，但是在实现上花销更大，现在已不推荐使用。而HashMap只有containsValue(Object value)方法。
+HashTable使用Enumeration，HashMap使用Iterator。Iterator其实与Enmeration功能上很相似，只是多了删除的功能。用Iterator不过是在名字上变得更为贴切一些。模式的另外一个很重要的功用，就是能够形成一种交流的语言（或者说文化）。有时候，你说Enumeration大家都不明白，说Iterator就都明白了。
+
+在实现上两者已有一些差异，这里简单说明一下：
+public Hashtable(int initialCapacity, float loadFactor) &#123;        if (initialCapacity &lt; 0)            throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+                                               initialCapacity);        if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))            throw new IllegalArgumentException(&quot;Illegal Load: &quot;+loadFactor);        if (initialCapacity==0)            initialCapacity = 1;        this.loadFactor = loadFactor;        table = new Entry[initialCapacity];        threshold = (int)Math.min(initialCapacity * loadFactor, MAX_ARRAY_SIZE + 1);        initHashSeedAsNeeded(initialCapacity);    &#125;public Hashtable(int initialCapacity) &#123;        this(initialCapacity, 0.75f);    &#125;public Hashtable() &#123;        this(11, 0.75f);    &#125;public HashMap(int initialCapacity, float loadFactor) &#123;        if (initialCapacity &lt; 0)            throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +                                               initialCapacity);        if (initialCapacity &gt; MAXIMUM_CAPACITY)            initialCapacity = MAXIMUM_CAPACITY;        if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))            throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +                                               loadFactor);        this.loadFactor = loadFactor;        threshold = initialCapacity;        init();    &#125;public HashMap(int initialCapacity) &#123;        this(initialCapacity, DEFAULT_LOAD_FACTOR);    &#125;public HashMap() &#123;        this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);    &#125;
+HashTable中构造hash数组时initialCapacity默认大小是11，增加的方式是 old*2+1。HashMap中构造hash数组时initialCapacity默认大小是16，而且一定是2的指数。对于哈希值的使用也有所不同，HashTable直接使用对象的hashCode，代码是这样的：
+int hash = key.hashCode();int index = (hash &amp; 0x7FFFFFFF) % tab.length;
+而HashMap重新计算hash值，而且用与代替求模：
+int hash = hash(k);int i = indexFor(hash, table.length); static int hash(Object x) &#123;　　int h = x.hashCode(); 　　h += ~(h &lt;&lt; 9);　　h ^= (h &gt;&gt;&gt; 14);　　h += (h &lt;&lt; 4);　　h ^= (h &gt;&gt;&gt; 10);　　return h;&#125;static int indexFor(int h, int length) &#123;　　return h &amp; (length-1);&#125;
+
+仅供参考，内容来源于互联网
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
   </entry>
   <entry>
     <title>Hexo Landscape主题JS优化，不使用谷歌CDN</title>
@@ -1395,23 +1395,6 @@ cnpm install hexo-neat --save
       </categories>
   </entry>
   <entry>
-    <title>Hexo新玩法 - Atom + platformio-ide-terminal</title>
-    <url>/20180716-Hexo%E6%96%B0%E7%8E%A9%E6%B3%95%20-%20Atom%20+%20platformio-ide-terminal/</url>
-    <content><![CDATA[最近在慢慢适应mbp
-然后就在研究怎么方便的写博客
-首先就是找了几款markdown编辑器，发现GitHub出品的Atom还不错
-插件很丰富，然而下载了第一个terminal插件但是无效，一度折腾了很久
-后来搜索了一下，发现这个插件很不错：platformio-ide-terminal
-利用快捷键：control + 点(1左边那个)
-就可以在当前界面呼出终端，而且是当前目录
-也就是在_post目录下，写完了之后执行命令就上传了
-还是很方便的。后续还需要慢慢熟悉更多的插件与工具
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Hxeo百度站长工具抓取失败的原因</title>
     <url>/20170216-Hxeot%E7%99%BE%E5%BA%A6%E7%AB%99%E9%95%BF%E5%B7%A5%E5%85%B7%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
     <content><![CDATA[近期在折腾下hexo博客
@@ -1430,6 +1413,23 @@ HTTP/1.1 403 ForbiddenCache-Control: no-cacheContent-Type: text/htmlTransfer-Enc
       <tags>
         <tag>网络</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>IDEA Denpendencies红色波浪线报错,所有的包无法导入 - 一种解决办法</title>
+    <url>/20170228-IDEA-Denpendencies%E7%BA%A2%E8%89%B2%E6%B3%A2%E6%B5%AA%E7%BA%BF%E6%8A%A5%E9%94%99-%E6%89%80%E6%9C%89%E7%9A%84%E5%8C%85%E6%97%A0%E6%B3%95%E5%AF%BC%E5%85%A5-%E4%B8%80%E7%A7%8D%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+    <content><![CDATA[failed to read artifact descriptor for xxx：jar
+一下午那代码里面是各种报错
+凡是引入的大部分都报错
+原因就是maven管理的jar没有添加上依赖
+最后在stackoverflow找到了良药
+上面有图片，错误会详细一点，如果你的也相同，可以试一试
+maven project -&gt; Execute Maven Goal -&gt; mvn -U clean install
+执行以上命令之后等待完成，应该就好了
+参考自stackoverflow：点击查看
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
   </entry>
   <entry>
     <title>IDEA maven项目通过mongo-Java-driver折腾一下MongoDB</title>
@@ -1451,23 +1451,6 @@ package com.hisen.jdbc;import com.mongodb.Block;import com.mongodb.MongoClient;i
         <tag>存储</tag>
         <tag>java</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>IDEA Denpendencies红色波浪线报错,所有的包无法导入 - 一种解决办法</title>
-    <url>/20170228-IDEA-Denpendencies%E7%BA%A2%E8%89%B2%E6%B3%A2%E6%B5%AA%E7%BA%BF%E6%8A%A5%E9%94%99-%E6%89%80%E6%9C%89%E7%9A%84%E5%8C%85%E6%97%A0%E6%B3%95%E5%AF%BC%E5%85%A5-%E4%B8%80%E7%A7%8D%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
-    <content><![CDATA[failed to read artifact descriptor for xxx：jar
-一下午那代码里面是各种报错
-凡是引入的大部分都报错
-原因就是maven管理的jar没有添加上依赖
-最后在stackoverflow找到了良药
-上面有图片，错误会详细一点，如果你的也相同，可以试一试
-maven project -&gt; Execute Maven Goal -&gt; mvn -U clean install
-执行以上命令之后等待完成，应该就好了
-参考自stackoverflow：点击查看
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
   </entry>
   <entry>
     <title>【阅读笔记】《亚洲大趋势：中国和新兴经济体的未来》</title>
@@ -2037,6 +2020,33 @@ maven project -&gt; Execute Maven Goal -&gt; mvn -U clean install
       </categories>
   </entry>
   <entry>
+    <title>IDEA智能补全快捷键更改为Ctrl + 逗号</title>
+    <url>/20170328-IDEA%E6%99%BA%E8%83%BD%E8%A1%A5%E5%85%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%9B%B4%E6%94%B9%E4%B8%BACtrl%20+%20%E9%80%97%E5%8F%B7/</url>
+    <content><![CDATA[一直就听说idea的智能补全很厉害，但是Ctrl + 空格 被万恶的输入法给占用了网上搜也不是很清晰，这里就写个博客记录一下
+快捷键设置：file－&gt;setting-&gt;Keymap-&gt;Main menu-&gt;Code-&gt;Completion-&gt;Basic找到之后右键Add keyboard Shortcut，然后按下：Ctrl + 逗号
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Hexo新玩法 - Atom + platformio-ide-terminal</title>
+    <url>/20180716-Hexo%E6%96%B0%E7%8E%A9%E6%B3%95%20-%20Atom%20+%20platformio-ide-terminal/</url>
+    <content><![CDATA[最近在慢慢适应mbp
+然后就在研究怎么方便的写博客
+首先就是找了几款markdown编辑器，发现GitHub出品的Atom还不错
+插件很丰富，然而下载了第一个terminal插件但是无效，一度折腾了很久
+后来搜索了一下，发现这个插件很不错：platformio-ide-terminal
+利用快捷键：control + 点(1左边那个)
+就可以在当前界面呼出终端，而且是当前目录
+也就是在_post目录下，写完了之后执行命令就上传了
+还是很方便的。后续还需要慢慢熟悉更多的插件与工具
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>IDEA修改全局设置，如maven等</title>
     <url>/20170215-IDEA%E4%BF%AE%E6%94%B9%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%EF%BC%8C%E5%A6%82maven%E7%AD%89/</url>
     <content><![CDATA[这几天在折腾maven项目
@@ -2046,16 +2056,6 @@ maven project -&gt; Execute Maven Goal -&gt; mvn -U clean install
 结果这样设置就可以了，全局设置。
 File---&gt;Other Setting---&gt;Default Setting
 接下来的设置就是一样的了，各种设置都可以，只要你想全局生效
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>IDEA智能补全快捷键更改为Ctrl + 逗号</title>
-    <url>/20170328-IDEA%E6%99%BA%E8%83%BD%E8%A1%A5%E5%85%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%9B%B4%E6%94%B9%E4%B8%BACtrl%20+%20%E9%80%97%E5%8F%B7/</url>
-    <content><![CDATA[一直就听说idea的智能补全很厉害，但是Ctrl + 空格 被万恶的输入法给占用了网上搜也不是很清晰，这里就写个博客记录一下
-快捷键设置：file－&gt;setting-&gt;Keymap-&gt;Main menu-&gt;Code-&gt;Completion-&gt;Basic找到之后右键Add keyboard Shortcut，然后按下：Ctrl + 逗号
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -2112,18 +2112,6 @@ VM options：-Dfile.encoding&#x3D;UTF-8
       </categories>
   </entry>
   <entry>
-    <title>idea列编辑：IntelliJ IDEA：toggle block selection mode</title>
-    <url>/20171024-IntelliJ%20IDEA%EF%BC%9Atoggle%20block%20selection%20mode/</url>
-    <content><![CDATA[在eclipse中有列编辑模式：toggle block selection mode
-在idea中也可以，而且还比较高级，哈哈
-idea -&gt; 右上角 -&gt; Edit -&gt; Column Selection Mode -&gt; 移动光标到你想要弄的行
-完事在重复一次，就可以退出列编辑模式
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>IntelliJ IDEA 调试窗口、帮助窗口、搜索框、底部消息等中文乱码问题解决</title>
     <url>/20170825-IntelliJ%20IDEA%20%E8%B0%83%E8%AF%95%E7%AA%97%E5%8F%A3%E3%80%81%E5%B8%AE%E5%8A%A9%E7%AA%97%E5%8F%A3%E3%80%81%E6%90%9C%E7%B4%A2%E6%A1%86%E3%80%81%E5%BA%95%E9%83%A8%E6%B6%88%E6%81%AF%E7%AD%89%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[IntelliJ IDEA 调试窗口、帮助窗口、搜索框、底部消息等中文乱码
@@ -2132,6 +2120,18 @@ idea -&gt; 右上角 -&gt; Edit -&gt; Column Selection Mode -&gt; 移动光标�
 解决办法：更改为支持中文的字体（比如：微软雅黑 Microsoft YaHei）
 设置路径：Settings -&gt; Appearance &amp; Behavior -&gt; UI Options -&gt; override default fonts by
 选择何时的字体即可，也可以把勾勾去掉，使用默认的。
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>idea列编辑：IntelliJ IDEA：toggle block selection mode</title>
+    <url>/20171024-IntelliJ%20IDEA%EF%BC%9Atoggle%20block%20selection%20mode/</url>
+    <content><![CDATA[在eclipse中有列编辑模式：toggle block selection mode
+在idea中也可以，而且还比较高级，哈哈
+idea -&gt; 右上角 -&gt; Edit -&gt; Column Selection Mode -&gt; 移动光标到你想要弄的行
+完事在重复一次，就可以退出列编辑模式
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -2418,22 +2418,6 @@ package com.hisen.jars.poi;import Java.io.File;import Java.io.FileInputStream;im
       </tags>
   </entry>
   <entry>
-    <title>Java受检异常和非受检异常 - uncheckedException checkedException</title>
-    <url>/20190429-Java%20-%20%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%E5%92%8C%E9%9D%9E%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%20-%20uncheckedException%20checkedException/</url>
-    <content><![CDATA[一、简单介绍除了runtimeException以外的异常，都属于checkedException。
-CheckedException(受检异常)：编译器会检查这类异常，需要强制捕获，否则无法编译通过。UnCheckedException(非受检异常)：编译器不会检查这类异常，可以不用捕获，可以编译通过。
-二、常见异常受检：IOException、SQLException、NumberFormatException、IllegalArgumentException非受检：OutOfMemoryError、StackOverflowError、NullPointerException、IndexOutOfBoundsException
-点击查看所有jdk8 api文档进去可以看到Java.lang.RuntimeException下有很多子类异常
-暂时写这些，日后再完善
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java GC - 理论与实践 - 附优化案例</title>
     <url>/20190429-Java%20GC%20-%20%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%20-%20%E9%99%84%E4%BC%98%E5%8C%96%E6%A1%88%E4%BE%8B/</url>
     <content><![CDATA[一、理论知识常见参数：
@@ -2473,6 +2457,22 @@ JVM调优是最后的稻草，进行JVM调优之前应该先优化架构和代�
       </tags>
   </entry>
   <entry>
+    <title>Java受检异常和非受检异常 - uncheckedException checkedException</title>
+    <url>/20190429-Java%20-%20%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%E5%92%8C%E9%9D%9E%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%20-%20uncheckedException%20checkedException/</url>
+    <content><![CDATA[一、简单介绍除了runtimeException以外的异常，都属于checkedException。
+CheckedException(受检异常)：编译器会检查这类异常，需要强制捕获，否则无法编译通过。UnCheckedException(非受检异常)：编译器不会检查这类异常，可以不用捕获，可以编译通过。
+二、常见异常受检：IOException、SQLException、NumberFormatException、IllegalArgumentException非受检：OutOfMemoryError、StackOverflowError、NullPointerException、IndexOutOfBoundsException
+点击查看所有jdk8 api文档进去可以看到Java.lang.RuntimeException下有很多子类异常
+暂时写这些，日后再完善
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IDEA - Java.Lang.OutOfMemoryError: PermGen Space</title>
     <url>/20170222-Java-Lang-OutOfMemoryError-PermGen-Space/</url>
     <content><![CDATA[Java.Lang.OutOfMemoryError: PermGen Space
@@ -2484,30 +2484,6 @@ Tomcat只分配了非常小的PermGen内存，这里重新设置一下
       </categories>
       <tags>
         <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java 反序列化漏洞</title>
-    <url>/20200510-Java-deserialize-security-hole/</url>
-    <content><![CDATA[微博目前关注了好几个做安全的大佬不要问我为什么关注问就是想观摩下有钱人的微博！
-其中有一个经常发 Java 相关的内容今天看到一个稍微熟悉一点关于 FastJson 漏洞
-
-窃以为Fastjson入门的最佳篇章非Mi1k7ea这个系列莫属，郑重推荐: Mi1k7ea。共有5篇，从第3篇开始，成体系地由旧到新展示了1.2.25之后各版本的补丁绕过，直至思路惊艳的1.2.47绕过方案及1.2.48的修补方案，相当完备。可以看出此君是动手实践派、整理归纳派，要我说，新学东西时就得这套路，无它。
-
-今天看了这两篇文章，不得不说对 Java 是异常的熟悉。想做好安全，想必要对用的东西了如指掌，知道坑在哪里，怎么填坑。
-
-Java反序列化漏洞
-Fastjson系列一 反序列化漏洞基本原理
-
-
-后记：很多时候大部分人都只关注自己工作职责内的那一亩三分地其实很多时候横向观察一下会发现很多靓丽的风景至今没有如此深入的去看过底层甚是愧疚用最多的时间去做最正确的事情！
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-        <tag>安全</tag>
       </tags>
   </entry>
   <entry>
@@ -2572,6 +2548,30 @@ IDEA解决办法Project Structure -&gt; Artifacts
       <categories>
         <category>Tech</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Java 反序列化漏洞</title>
+    <url>/20200510-Java-deserialize-security-hole/</url>
+    <content><![CDATA[微博目前关注了好几个做安全的大佬不要问我为什么关注问就是想观摩下有钱人的微博！
+其中有一个经常发 Java 相关的内容今天看到一个稍微熟悉一点关于 FastJson 漏洞
+
+窃以为Fastjson入门的最佳篇章非Mi1k7ea这个系列莫属，郑重推荐: Mi1k7ea。共有5篇，从第3篇开始，成体系地由旧到新展示了1.2.25之后各版本的补丁绕过，直至思路惊艳的1.2.47绕过方案及1.2.48的修补方案，相当完备。可以看出此君是动手实践派、整理归纳派，要我说，新学东西时就得这套路，无它。
+
+今天看了这两篇文章，不得不说对 Java 是异常的熟悉。想做好安全，想必要对用的东西了如指掌，知道坑在哪里，怎么填坑。
+
+Java反序列化漏洞
+Fastjson系列一 反序列化漏洞基本原理
+
+
+后记：很多时候大部分人都只关注自己工作职责内的那一亩三分地其实很多时候横向观察一下会发现很多靓丽的风景至今没有如此深入的去看过底层甚是愧疚用最多的时间去做最正确的事情！
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+        <tag>安全</tag>
+      </tags>
   </entry>
   <entry>
     <title>Java.lang.NoClassDefFoundError错误解决</title>
@@ -3452,25 +3452,6 @@ $ cat sort.log123456112345556
       </tags>
   </entry>
   <entry>
-    <title>Linux安装tree命令 - apt-get install tree</title>
-    <url>/20170503-Linux%E5%AE%89%E8%A3%85tree%E5%91%BD%E4%BB%A4%20-%20apt-get%20install%20tree/</url>
-    <content><![CDATA[目前debian系列的系统都无法使用apt-get install tree来安装tree命令
-以下是安装步骤
-#下载（官网为：http://mama.indstate.edu/users/ice/tree/）wget http://mama.indstate.edu/users/ice/tree/src/tree-1.7.0.tgz#解压tar -zxvf tree-1.7.0.tgz#进入目录cd tree-1.7.0#安装sudo make install#完毕
-最简单的使用方法，在目录下输入：tree
-使用效果
-hisen@ubuntu:~/dl$ tree.├── hisen.log├── master└── test_db-master    ├── Changelog    ├── employees_partitioned_5.1.sql    ├── employees_partitioned.sql    ├── employees.sql    ├── images    │   ├── employees.gif    │   ├── employees.jpg    │   └── employees.png    ├── load_departments.dump    ├── load_dept_emp.dump    ├── load_dept_manager.dump    ├── load_employees.dump    ├── load_salaries1.dump    ├── load_salaries2.dump    ├── load_salaries3.dump    ├── load_titles.dump    ├── objects.sql    ├── README.md    ├── sakila    │   ├── README.md    │   ├── sakila-mv-data.sql    │   └── sakila-mv-schema.sql    ├── show_elapsed.sql    ├── sql_test.sh    ├── test_employees_md5.sql    └── test_employees_sha.sql3 directories, 26 files
-使用参数
-tree命令行参数：-a 显示所有文件和目录。-A 使用ASNI绘图字符显示树状图而非以ASCII字符组合。-C 在文件和目录清单加上色彩，便于区分各种类型。-d 显示目录名称而非内容。-D 列出文件或目录的更改时间。-f 在每个文件或目录之前，显示完整的相对路径名称。-F 在执行文件，目录，Socket，符号连接，管道名称名称，各自加上&quot;*&quot;,&quot;/&quot;,&quot;=&quot;,&quot;@&quot;,&quot;|&quot;号。-g 列出文件或目录的所属群组名称，没有对应的名称时，则显示群组识别码。-i 不以阶梯状列出文件或目录名称。-I 不显示符合范本样式的文件或目录名称。-l 如遇到性质为符号连接的目录，直接列出该连接所指向的原始目录。-n 不在文件和目录清单加上色彩。-N 直接列出文件和目录名称，包括控制字符。-p 列出权限标示。-P 只显示符合范本样式的文件或目录名称。-q 用&quot;?&quot;号取代控制字符，列出文件和目录名称。-s 列出文件或目录大小。-t 用文件和目录的更改时间排序。-u 列出文件或目录的拥有者名称，没有对应的名称时，则显示用户识别码。-x 将范围局限在现行的文件系统中，若指定目录下的某些子目录，其存放于另一个文件系统上，则将该子目录予以排除在寻找范围外。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux常用的几个命令</title>
     <url>/20170122-Linux%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E4%B8%AA%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[1、查看日志最后几行
@@ -3481,6 +3462,25 @@ tail -100 /access.log
 #看倒数10行tail -10 /filepath/filename#看行数外加过滤含有指定字符的行tail -10 access.log | grep -v &quot;yourstring&quot;
 4、过滤特定行，保存结果到新文件
 cat /root/old.text | grep -v &quot;yourstring&quot;&gt; /root/new.text
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux安装tree命令 - apt-get install tree</title>
+    <url>/20170503-Linux%E5%AE%89%E8%A3%85tree%E5%91%BD%E4%BB%A4%20-%20apt-get%20install%20tree/</url>
+    <content><![CDATA[目前debian系列的系统都无法使用apt-get install tree来安装tree命令
+以下是安装步骤
+#下载（官网为：http://mama.indstate.edu/users/ice/tree/）wget http://mama.indstate.edu/users/ice/tree/src/tree-1.7.0.tgz#解压tar -zxvf tree-1.7.0.tgz#进入目录cd tree-1.7.0#安装sudo make install#完毕
+最简单的使用方法，在目录下输入：tree
+使用效果
+hisen@ubuntu:~/dl$ tree.├── hisen.log├── master└── test_db-master    ├── Changelog    ├── employees_partitioned_5.1.sql    ├── employees_partitioned.sql    ├── employees.sql    ├── images    │   ├── employees.gif    │   ├── employees.jpg    │   └── employees.png    ├── load_departments.dump    ├── load_dept_emp.dump    ├── load_dept_manager.dump    ├── load_employees.dump    ├── load_salaries1.dump    ├── load_salaries2.dump    ├── load_salaries3.dump    ├── load_titles.dump    ├── objects.sql    ├── README.md    ├── sakila    │   ├── README.md    │   ├── sakila-mv-data.sql    │   └── sakila-mv-schema.sql    ├── show_elapsed.sql    ├── sql_test.sh    ├── test_employees_md5.sql    └── test_employees_sha.sql3 directories, 26 files
+使用参数
+tree命令行参数：-a 显示所有文件和目录。-A 使用ASNI绘图字符显示树状图而非以ASCII字符组合。-C 在文件和目录清单加上色彩，便于区分各种类型。-d 显示目录名称而非内容。-D 列出文件或目录的更改时间。-f 在每个文件或目录之前，显示完整的相对路径名称。-F 在执行文件，目录，Socket，符号连接，管道名称名称，各自加上&quot;*&quot;,&quot;/&quot;,&quot;=&quot;,&quot;@&quot;,&quot;|&quot;号。-g 列出文件或目录的所属群组名称，没有对应的名称时，则显示群组识别码。-i 不以阶梯状列出文件或目录名称。-I 不显示符合范本样式的文件或目录名称。-l 如遇到性质为符号连接的目录，直接列出该连接所指向的原始目录。-n 不在文件和目录清单加上色彩。-N 直接列出文件和目录名称，包括控制字符。-p 列出权限标示。-P 只显示符合范本样式的文件或目录名称。-q 用&quot;?&quot;号取代控制字符，列出文件和目录名称。-s 列出文件或目录大小。-t 用文件和目录的更改时间排序。-u 列出文件或目录的拥有者名称，没有对应的名称时，则显示用户识别码。-x 将范围局限在现行的文件系统中，若指定目录下的某些子目录，其存放于另一个文件系统上，则将该子目录予以排除在寻找范围外。
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -3549,53 +3549,6 @@ package com.hisen.collection.list.duplicate;import com.alibaba.rocketmq.shade.co
 彭博商业周刊(刊物)
 中国国家地里(刊物)
 36氪随身听(广播)
-
-]]></content>
-      <categories>
-        <category>Growth</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>回顾 2021，展望 2022</title>
-    <url>/20220102-Looking-back-to-2021-looking-forward-to-2022/</url>
-    <content><![CDATA[零、摘要回顾 2021
-【完成】换了一份不错的工作;
-【完成】坚持阅读，追求质量;
-【待办】运动量不够，锻炼偏少;
-
-展望 2022
-体重控制在 65Kg 以内，学会自由泳;
-持续阅读，技术与非技术书籍交替看，5 本基础书;
-深入理解公司内部技术栈、深入了解 2-3 条业务线;
-重新学习 Dubbo，学习设计理念，以及分布式系统架构;
-
-一、成长技术方面今年感觉成长不是太明显有所改变的是会深入洞察需求逐步完善设计之后开始 coding，而不是着急开始。
-对于技术底层也有一定地涉猎，更多地可能是在钻电商业务。
-
-二、阅读本年度阅读图书 38 本由于上半年部分时间在准备换工作以及 6 月份换了工作之后花在工作的时间比较多所以今年的阅读量下降地厉害，但是还是会坚持每天都翻几页
-收获较多的为以下几本：
-
-《置身事内》
-《幕后产品》
-《商业的本质和互联网》
-《曾国藩的正面与侧面》
-《分析与思考：黄奇帆复旦经济课》
-
-全部书单
-三、生活唯一的变化可能是多了 2 只鳄鱼龟。夜深人静之时，回到家，给乌龟喂食互动下也挺有意思。
-四、习惯下半年由于工作原因，晚睡较多，很少早起。需要找准自己的节奏，调节步伐，逐步早起。
-五、随说
-做个正常人，不做圣人;
-力所能及地帮助身边人;
-多关注家乡的教育和经济，有机会可以出一把力;
-
-六、推荐这些年能坚持下来的也就只有下面两个了~其它的可能不太适合长时间跟踪
-
-科技爱好者周刊
-GitHub 月度流行项目
 
 ]]></content>
       <categories>
@@ -3788,6 +3741,53 @@ tomkeeper （ 安全大佬，爱分享 ）
       </tags>
   </entry>
   <entry>
+    <title>回顾 2021，展望 2022</title>
+    <url>/20220102-Looking-back-to-2021-looking-forward-to-2022/</url>
+    <content><![CDATA[零、摘要回顾 2021
+【完成】换了一份不错的工作;
+【完成】坚持阅读，追求质量;
+【待办】运动量不够，锻炼偏少;
+
+展望 2022
+体重控制在 65Kg 以内，学会自由泳;
+持续阅读，技术与非技术书籍交替看，5 本基础书;
+深入理解公司内部技术栈、深入了解 2-3 条业务线;
+重新学习 Dubbo，学习设计理念，以及分布式系统架构;
+
+一、成长技术方面今年感觉成长不是太明显有所改变的是会深入洞察需求逐步完善设计之后开始 coding，而不是着急开始。
+对于技术底层也有一定地涉猎，更多地可能是在钻电商业务。
+
+二、阅读本年度阅读图书 38 本由于上半年部分时间在准备换工作以及 6 月份换了工作之后花在工作的时间比较多所以今年的阅读量下降地厉害，但是还是会坚持每天都翻几页
+收获较多的为以下几本：
+
+《置身事内》
+《幕后产品》
+《商业的本质和互联网》
+《曾国藩的正面与侧面》
+《分析与思考：黄奇帆复旦经济课》
+
+全部书单
+三、生活唯一的变化可能是多了 2 只鳄鱼龟。夜深人静之时，回到家，给乌龟喂食互动下也挺有意思。
+四、习惯下半年由于工作原因，晚睡较多，很少早起。需要找准自己的节奏，调节步伐，逐步早起。
+五、随说
+做个正常人，不做圣人;
+力所能及地帮助身边人;
+多关注家乡的教育和经济，有机会可以出一把力;
+
+六、推荐这些年能坚持下来的也就只有下面两个了~其它的可能不太适合长时间跟踪
+
+科技爱好者周刊
+GitHub 月度流行项目
+
+]]></content>
+      <categories>
+        <category>Growth</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MarkdownPad2注册码 20170213</title>
     <url>/20170213-MarkdownPad2%E6%B3%A8%E5%86%8C%E7%A0%81-20170213/</url>
     <content><![CDATA[MarkdownPad2注册码
@@ -3804,22 +3804,6 @@ GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE
       </categories>
   </entry>
   <entry>
-    <title>Maven目录下*.lastupdated命令行批量删除</title>
-    <url>/20170220-Maven%E7%9B%AE%E5%BD%95%E4%B8%8B-lastupdated%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/</url>
-    <content><![CDATA[windows系统
-cd %userprofile%\.m2\repositoryfor /r %i in (*.lastUpdated) do del %i
-或者新建一个bat文件，批处理。就不用每次都在cmd敲命令了
-@echo offecho 确认删除maven仓库下*.lastUpdated文件？pause::create by hisenyuan(hisenyuan@gmail.com)::这里写你的仓库路径set REPOSITORY_PATH=C:\hisenwork\soft\mavenecho 正在搜索...for /f &quot;delims=&quot; %%i in (&#x27;dir /b /s &quot;%REPOSITORY_PATH%\*lastUpdated*&quot;&#x27;) do (    del /s /q %%i)echo 完毕pause
-linux系统
-find /app/maven/localRepository -name &quot;*.lastUpdated&quot; -exec grep -q &quot;Could not transfer&quot; &#123;&#125; \; -print -exec rm &#123;&#125; \;]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>工程效能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Maven镜像库设置 - maven mirrors - maven 镜像 阿里</title>
     <url>/20170412-Maven%E9%95%9C%E5%83%8F%E5%BA%93%E8%AE%BE%E7%BD%AE%20-%20maven%20mirrors%20-%20maven%20%E9%95%9C%E5%83%8F%20%E9%98%BF%E9%87%8C/</url>
     <content><![CDATA[配置文件：
@@ -3833,6 +3817,22 @@ yourPath\maven-3.3.9\conf\settings.xml
 注意：千万不要配成***
 否则内网的仓库或者你配的镜像里面没有一下jar包的时候不会去别的地方搜索
 &lt;!--阿里云：速度挺快--&gt;&lt;mirror&gt;	&lt;id&gt;nexus-aliyun&lt;/id&gt;	&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;	&lt;name&gt;Nexus aliyun&lt;/name&gt;	&lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;&lt;/mirror&gt;&lt;!--谷歌：北京速度不错--&gt;&lt;mirror&gt;  &lt;id&gt;google-maven-central&lt;/id&gt;  &lt;name&gt;Google Maven Central&lt;/name&gt;  &lt;url&gt;https://maven-central.storage.googleapis.com&lt;/url&gt;  &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;&lt;/mirror&gt;]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>工程效能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Maven目录下*.lastupdated命令行批量删除</title>
+    <url>/20170220-Maven%E7%9B%AE%E5%BD%95%E4%B8%8B-lastupdated%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/</url>
+    <content><![CDATA[windows系统
+cd %userprofile%\.m2\repositoryfor /r %i in (*.lastUpdated) do del %i
+或者新建一个bat文件，批处理。就不用每次都在cmd敲命令了
+@echo offecho 确认删除maven仓库下*.lastUpdated文件？pause::create by hisenyuan(hisenyuan@gmail.com)::这里写你的仓库路径set REPOSITORY_PATH=C:\hisenwork\soft\mavenecho 正在搜索...for /f &quot;delims=&quot; %%i in (&#x27;dir /b /s &quot;%REPOSITORY_PATH%\*lastUpdated*&quot;&#x27;) do (    del /s /q %%i)echo 完毕pause
+linux系统
+find /app/maven/localRepository -name &quot;*.lastUpdated&quot; -exec grep -q &quot;Could not transfer&quot; &#123;&#125; \; -print -exec rm &#123;&#125; \;]]></content>
       <categories>
         <category>Tech</category>
       </categories>
@@ -3953,6 +3953,20 @@ mysql&gt; describe stu;+-------+---------+------+-----+---------+---------------
       </tags>
   </entry>
   <entry>
+    <title>MySQL使用like查找汉字乱码</title>
+    <url>/20170208-MySQL%E4%BD%BF%E7%94%A8like%E6%9F%A5%E6%89%BE%E6%B1%89%E5%AD%97%E4%B9%B1%E7%A0%81/</url>
+    <content><![CDATA[第一种解决办法：BINARY在关键字之前加上：BINARY，会使关键字强制转换为二进制字符串
+select id form t where chinese like **BINARY** %汉字%
+第二种解决办法：改关键字类型把关键字的类型改成：BINARY
+这两种办法都可以解决乱码问题]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>存储</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MySQL下A库的a表导入到B库的b表</title>
     <url>/20170516-MySQL%E4%B8%8BA%E5%BA%93%E7%9A%84a%E8%A1%A8%E5%AF%BC%E5%85%A5%E5%88%B0B%E5%BA%93%E7%9A%84b%E8%A1%A8/</url>
     <content><![CDATA[
@@ -3982,20 +3996,6 @@ mysql&gt; create table hisen.employee as(    -&gt; select * from employees.emplo
 如果导出部分字段或者有其他限制条件写sql即可
 这应该是最简单的方法~
 ]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>存储</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MySQL使用like查找汉字乱码</title>
-    <url>/20170208-MySQL%E4%BD%BF%E7%94%A8like%E6%9F%A5%E6%89%BE%E6%B1%89%E5%AD%97%E4%B9%B1%E7%A0%81/</url>
-    <content><![CDATA[第一种解决办法：BINARY在关键字之前加上：BINARY，会使关键字强制转换为二进制字符串
-select id form t where chinese like **BINARY** %汉字%
-第二种解决办法：改关键字类型把关键字的类型改成：BINARY
-这两种办法都可以解决乱码问题]]></content>
       <categories>
         <category>Tech</category>
       </categories>
@@ -4259,25 +4259,6 @@ explain select zipcode,firstname,lastname from hisen_test_explain_people;+----+-
       </tags>
   </entry>
   <entry>
-    <title>Mybatis-Generator自动生成dao、model、mapper</title>
-    <url>/20170802-Mybatis-Generator%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90dao%E3%80%81model%E3%80%81mapper/</url>
-    <content><![CDATA[一、配置插件在resources文件夹下新建：generatorConfig.xml
-内容如下：注意修改包名等信息
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE generatorConfiguration  PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;  &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;&lt;!--详细说明请看：http://blog.csdn.net/tiantangpw/article/details/51690534--&gt;&lt;generatorConfiguration&gt;  &lt;context id=&quot;mysqlgenerator&quot; targetRuntime=&quot;MyBatis3&quot;&gt;    &lt;!--数据库配置--&gt;    &lt;jdbcConnection connectionURL=&quot;jdbc:mysql://127.0.0.1:3306/booksystem&quot;      driverClass=&quot;com.mysql.jdbc.Driver&quot;      password=&quot;hisen&quot;      userId=&quot;root&quot;/&gt;          &lt;!--生成Model(实体类，与数据库字段对应的bean)类存放位置--&gt;    &lt;JavaModelGenerator targetPackage=&quot;com.hisen.entity&quot; targetProject=&quot;src/main/Java&quot;&gt;      &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;      &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot;/&gt;    &lt;/JavaModelGenerator&gt;    &lt;!--生成映射(xxxmapper.xml)文件存放位置--&gt;    &lt;sqlMapGenerator targetPackage=&quot;mapper&quot; targetProject=&quot;src/main/resources&quot;&gt;      &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;    &lt;/sqlMapGenerator&gt;    &lt;!--生成Dao类存放位置--&gt;    &lt;JavaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.hisen.dao&quot;      targetProject=&quot;src/main/Java&quot;&gt;      &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;    &lt;/JavaClientGenerator&gt;        &lt;!--要生成的表--&gt;    &lt;table tableName=&quot;appointment&quot;/&gt;    &lt;table tableName=&quot;user&quot;/&gt;  &lt;/context&gt;&lt;/generatorConfiguration&gt;
-二、添加maven插件
-在pom.xml中添加如下内容：plugins节点内
-&lt;build&gt;    &lt;plugins&gt;      &lt;plugin&gt;        &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;        &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;        &lt;version&gt;1.3.2&lt;/version&gt;        &lt;dependencies&gt;          &lt;dependency&gt;            &lt;groupId&gt;mysql&lt;/groupId&gt;            &lt;artifactId&gt;mysql-connector-Java&lt;/artifactId&gt;            &lt;version&gt;5.1.5&lt;/version&gt;          &lt;/dependency&gt;        &lt;/dependencies&gt;        &lt;configuration&gt;          &lt;overwrite&gt;true&lt;/overwrite&gt;        &lt;/configuration&gt;      &lt;/plugin&gt;    &lt;/plugins&gt;  &lt;/build&gt;
-三、使用在idea调出mavenProject界面，选择plugins，找到mybatis-generator，双击即可
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>工程效能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mysql Employees Database练习题&amp;答案</title>
     <url>/20170410-Mysql%20Employees%20%20Database%E7%BB%83%E4%B9%A0%E9%A2%98&amp;%E7%AD%94%E6%A1%88/</url>
     <content><![CDATA[Employees数据库是mysql官方提供的一个测试用数据库
@@ -4297,6 +4278,44 @@ explain select zipcode,firstname,lastname from hisen_test_explain_people;+----+-
       </categories>
       <tags>
         <tag>存储</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mybatis-Generator自动生成dao、model、mapper</title>
+    <url>/20170802-Mybatis-Generator%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90dao%E3%80%81model%E3%80%81mapper/</url>
+    <content><![CDATA[一、配置插件在resources文件夹下新建：generatorConfig.xml
+内容如下：注意修改包名等信息
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE generatorConfiguration  PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;  &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;&lt;!--详细说明请看：http://blog.csdn.net/tiantangpw/article/details/51690534--&gt;&lt;generatorConfiguration&gt;  &lt;context id=&quot;mysqlgenerator&quot; targetRuntime=&quot;MyBatis3&quot;&gt;    &lt;!--数据库配置--&gt;    &lt;jdbcConnection connectionURL=&quot;jdbc:mysql://127.0.0.1:3306/booksystem&quot;      driverClass=&quot;com.mysql.jdbc.Driver&quot;      password=&quot;hisen&quot;      userId=&quot;root&quot;/&gt;          &lt;!--生成Model(实体类，与数据库字段对应的bean)类存放位置--&gt;    &lt;JavaModelGenerator targetPackage=&quot;com.hisen.entity&quot; targetProject=&quot;src/main/Java&quot;&gt;      &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;      &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot;/&gt;    &lt;/JavaModelGenerator&gt;    &lt;!--生成映射(xxxmapper.xml)文件存放位置--&gt;    &lt;sqlMapGenerator targetPackage=&quot;mapper&quot; targetProject=&quot;src/main/resources&quot;&gt;      &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;    &lt;/sqlMapGenerator&gt;    &lt;!--生成Dao类存放位置--&gt;    &lt;JavaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.hisen.dao&quot;      targetProject=&quot;src/main/Java&quot;&gt;      &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;    &lt;/JavaClientGenerator&gt;        &lt;!--要生成的表--&gt;    &lt;table tableName=&quot;appointment&quot;/&gt;    &lt;table tableName=&quot;user&quot;/&gt;  &lt;/context&gt;&lt;/generatorConfiguration&gt;
+二、添加maven插件
+在pom.xml中添加如下内容：plugins节点内
+&lt;build&gt;    &lt;plugins&gt;      &lt;plugin&gt;        &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;        &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;        &lt;version&gt;1.3.2&lt;/version&gt;        &lt;dependencies&gt;          &lt;dependency&gt;            &lt;groupId&gt;mysql&lt;/groupId&gt;            &lt;artifactId&gt;mysql-connector-Java&lt;/artifactId&gt;            &lt;version&gt;5.1.5&lt;/version&gt;          &lt;/dependency&gt;        &lt;/dependencies&gt;        &lt;configuration&gt;          &lt;overwrite&gt;true&lt;/overwrite&gt;        &lt;/configuration&gt;      &lt;/plugin&gt;    &lt;/plugins&gt;  &lt;/build&gt;
+三、使用在idea调出mavenProject界面，选择plugins，找到mybatis-generator，双击即可
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>工程效能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt 新版本安装 passwall</title>
+    <url>/20221030-OpenWrt_22.03_install_passwall/</url>
+    <content><![CDATA[一、背景最近看了不少软路由的东西于是折腾了一波 OpenWrt奈何网件 R8000 配置一般，跑起来体验不好。后续估计是会上 x86 主机了，虽然可能会性能过剩。
+二、问题在官方原版的 OpenWrt 22.03 版本中如果直接在 software 中安装 luci_app_passwall那么安装后会提示没法实现透明代理，还需要安装一些额外的软件才行
+三、解决问题opkg install ipset ipt2socks iptables iptables-mod-conntrack-extra iptables-mod-iprange iptables-mod-socket iptables-mod-tproxy kmod-ipt-nat
+安装完成之后，再按教程操作即可.原因就是新版本的系统中默认不包含上述模块。问题解决参考自 GitHub issue.
+四、参考
+GiitHub - [Bug]: 系统未安装iptables或ipset，无法透明代理！
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>自建服务</tag>
+        <tag>网络</tag>
       </tags>
   </entry>
   <entry>
@@ -4323,25 +4342,6 @@ Java 项目分为两个部分，一个是源码，一个是资源，在使用mav
       </categories>
       <tags>
         <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt 新版本安装 passwall</title>
-    <url>/20221030-OpenWrt_22.03_install_passwall/</url>
-    <content><![CDATA[一、背景最近看了不少软路由的东西于是折腾了一波 OpenWrt奈何网件 R8000 配置一般，跑起来体验不好。后续估计是会上 x86 主机了，虽然可能会性能过剩。
-二、问题在官方原版的 OpenWrt 22.03 版本中如果直接在 software 中安装 luci_app_passwall那么安装后会提示没法实现透明代理，还需要安装一些额外的软件才行
-三、解决问题opkg install ipset ipt2socks iptables iptables-mod-conntrack-extra iptables-mod-iprange iptables-mod-socket iptables-mod-tproxy kmod-ipt-nat
-安装完成之后，再按教程操作即可.原因就是新版本的系统中默认不包含上述模块。问题解决参考自 GitHub issue.
-四、参考
-GiitHub - [Bug]: 系统未安装iptables或ipset，无法透明代理！
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>自建服务</tag>
-        <tag>网络</tag>
       </tags>
   </entry>
   <entry>
@@ -4432,6 +4432,35 @@ Mysql 默认的事务隔离级别为: REPEATABLE READ
       </categories>
       <tags>
         <tag>存储</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle VM VirtualBox命令行打开虚拟机并且后台运行</title>
+    <url>/20170219-Oracle-VM-VirtualBox%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%93%E5%BC%80%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B9%B6%E4%B8%94%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</url>
+    <content><![CDATA[这几天在折腾Ubuntu虚拟机，想着也就让他做一台服务器罢了
+没想到安装之后发现一直没法让VirtualBox隐藏到托盘
+按正常程序走，打开一个虚拟机会出现两个GUI界面：
+
+VirtualBox界面
+虚拟机界面
+
+第一个可以在打开虚拟机之后关闭，第二个不能关闭也不能隐藏到托盘
+痛苦！！！
+这里给出解决方案：通过cmd命令行启动并且后台运行一、进入VirtualBox安装目录，我这里是C:\tool\Oracle\VirtualBox&gt;
+二、列出所有安装的虚拟机C:\tool\Oracle\VirtualBox&gt;VBoxManage list vms&quot;centos&quot; &#123;162f777f-e3c4-4717-8b5b-4a4e43a8b552&#125;&quot;debian&quot; &#123;48ebecba-77ec-483d-ab73-bf9ee777e2f6&#125;&quot;ubuntu&quot; &#123;d8050b3a-b04b-4fe9-8a90-16086dac0ae9&#125;
+前面是NAME，后面是UUID，之后的name用这连个代替都可以三、命令行启动虚拟机
+C:\tool\Oracle\VirtualBox&gt;VBoxManage startvm &quot;ubuntu&quot; --type headlessWaiting for VM &quot;ubuntu&quot; to power on...VM &quot;ubuntu&quot; has been successfully started.
+headless是在后台运行，并且默认开启vrdp服务，可以通过远程桌面工具来访问
+下面是打开ubuntu之后用Xshell链接的
+Connecting to 127.0.0.1:2222...Connection established.To escape to local shell, press &#x27;Ctrl+Alt+]&#x27;.Welcome to Ubuntu 16.04 LTS (GNU/Linux 4.4.0-62-generic x86_64) * Documentation:  https://help.ubuntu.com/362 个可升级软件包。0 个安全更新。Last login: Sat Feb 18 16:25:58 2017 from 10.0.2.2hisen@hisen-VirtualBox:~$ lsdownload  公共的  模板  视频  图片  文档  下载  音乐  桌面
+
+四、所有相关的命令下面所有的NAME都可以用二中的name和UUID代替
+# 列出所有安装的虚拟机VBoxManage list vms# 后台打开，无界面VBoxManage startvm &quot;NAME&quot; --type headless # gui方式启动，跟桌面点击没有区别VBoxManage startvm NAME --type gui# 列出运行中的虚拟机VBoxManage list runningvms# 关闭虚拟机，等价于点击系统关闭按钮，正常关机VBoxManage controlvm NAME acpipowerbutton# 关闭虚拟机，等价于直接关闭电源，非正常关机VBoxManage controlvm NAME poweroff# 暂停虚拟机的运行VBoxManage controlvm NAME pause# 恢复暂停的虚拟机VBoxManage controlvm NAME resume# 保存当前虚拟机的运行状态VBoxManage controlvm NAME savestate ]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
       </tags>
   </entry>
   <entry>
@@ -4571,35 +4600,6 @@ SELECT JOB,       AVG(SAL)FROM EMPWHERE JOB = &#x27;PRESIDENT&#x27; OR JOB = &#x
       </tags>
   </entry>
   <entry>
-    <title>Oracle VM VirtualBox命令行打开虚拟机并且后台运行</title>
-    <url>/20170219-Oracle-VM-VirtualBox%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%93%E5%BC%80%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B9%B6%E4%B8%94%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</url>
-    <content><![CDATA[这几天在折腾Ubuntu虚拟机，想着也就让他做一台服务器罢了
-没想到安装之后发现一直没法让VirtualBox隐藏到托盘
-按正常程序走，打开一个虚拟机会出现两个GUI界面：
-
-VirtualBox界面
-虚拟机界面
-
-第一个可以在打开虚拟机之后关闭，第二个不能关闭也不能隐藏到托盘
-痛苦！！！
-这里给出解决方案：通过cmd命令行启动并且后台运行一、进入VirtualBox安装目录，我这里是C:\tool\Oracle\VirtualBox&gt;
-二、列出所有安装的虚拟机C:\tool\Oracle\VirtualBox&gt;VBoxManage list vms&quot;centos&quot; &#123;162f777f-e3c4-4717-8b5b-4a4e43a8b552&#125;&quot;debian&quot; &#123;48ebecba-77ec-483d-ab73-bf9ee777e2f6&#125;&quot;ubuntu&quot; &#123;d8050b3a-b04b-4fe9-8a90-16086dac0ae9&#125;
-前面是NAME，后面是UUID，之后的name用这连个代替都可以三、命令行启动虚拟机
-C:\tool\Oracle\VirtualBox&gt;VBoxManage startvm &quot;ubuntu&quot; --type headlessWaiting for VM &quot;ubuntu&quot; to power on...VM &quot;ubuntu&quot; has been successfully started.
-headless是在后台运行，并且默认开启vrdp服务，可以通过远程桌面工具来访问
-下面是打开ubuntu之后用Xshell链接的
-Connecting to 127.0.0.1:2222...Connection established.To escape to local shell, press &#x27;Ctrl+Alt+]&#x27;.Welcome to Ubuntu 16.04 LTS (GNU/Linux 4.4.0-62-generic x86_64) * Documentation:  https://help.ubuntu.com/362 个可升级软件包。0 个安全更新。Last login: Sat Feb 18 16:25:58 2017 from 10.0.2.2hisen@hisen-VirtualBox:~$ lsdownload  公共的  模板  视频  图片  文档  下载  音乐  桌面
-
-四、所有相关的命令下面所有的NAME都可以用二中的name和UUID代替
-# 列出所有安装的虚拟机VBoxManage list vms# 后台打开，无界面VBoxManage startvm &quot;NAME&quot; --type headless # gui方式启动，跟桌面点击没有区别VBoxManage startvm NAME --type gui# 列出运行中的虚拟机VBoxManage list runningvms# 关闭虚拟机，等价于点击系统关闭按钮，正常关机VBoxManage controlvm NAME acpipowerbutton# 关闭虚拟机，等价于直接关闭电源，非正常关机VBoxManage controlvm NAME poweroff# 暂停虚拟机的运行VBoxManage controlvm NAME pause# 恢复暂停的虚拟机VBoxManage controlvm NAME resume# 保存当前虚拟机的运行状态VBoxManage controlvm NAME savestate ]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Oracle 取微秒 - 记录点滴</title>
     <url>/20170923-Oracle-%E5%8F%96%E5%BE%AE%E7%A7%92-%E8%AE%B0%E5%BD%95%E7%82%B9%E6%BB%B4/</url>
     <content><![CDATA[昨天在群里看到有人问怎么通过sql在oracle中取微秒
@@ -4734,27 +4734,6 @@ Tencent - Java安全指南
       </categories>
       <tags>
         <tag>安全</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis counter demo -  redis并发计数器</title>
-    <url>/20180111-Redis%20counter%20demo%20-%20%20redis%E5%B9%B6%E5%8F%91%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
-    <content><![CDATA[一、说明利用redis操作的原子性，实现Java 多线程并发的情况下实现计数器。
-我本机测试多个线程操作之后，结果会出现一定的延迟，但是最终数字是ok的
-应该是redis内部做了一个类似于队列的功能。
-需要注意的是，得使用redis连接的线程池，不然会出现异常
-这里有一个：JedisUtil 下面用到了
-二、 代码实现2.1 redis操作类package com.hisen.thread.count_click_by_redis;import com.hisen.utils.JedisUtil;import redis.clients.jedis.JedisPool;/** * @author hisenyuan * @description 操作redis的线程类 */public class ClickRedis &#123;  /**   * 必须使用线程池，而且线程池要大于并发数，否则会出现redis超时   */  private static JedisPool jedis = JedisUtil.getPool();  public static void click() &#123;    jedis.getResource().incrBy(&quot;hisen&quot;, 1);  &#125;  public static int getCount() &#123;    return Integer.parseInt(jedis.getResource().get(&quot;hisen&quot;));  &#125;  public static void declare() &#123;    jedis.getResource().del(&quot;hisen&quot;);    jedis.close();  &#125;&#125;
-2.2 线程类,模拟点击package com.hisen.thread.count_click_by_redis;/** * @author hisenyuan * @description 执行点击的线程类 */public class CountClickByRedisThread extends Thread&#123;  private int id;  public CountClickByRedisThread(int id) &#123;    this.id = id;  &#125;  @Override  public void run() &#123;    super.run();    ClickRedis.click();    int count = ClickRedis.getCount();    System.out.println(&quot;task:&quot; + id + &quot;\t 执行完毕\t线程编号：&quot; + this.getId() + &quot;\t当前值：&quot; + count);  &#125;&#125;
-2.3 主线程 - 启动类
-package com.hisen.thread.count_click_by_redis;import Java.util.concurrent.ArrayBlockingQueue;import Java.util.concurrent.ThreadPoolExecutor;import Java.util.concurrent.TimeUnit;public class Main &#123;  public static void main(String[] args) throws InterruptedException &#123;    /**     * 5 - corePoolSize：核心池的大小     * 10 - maximumPoolSize：线程池最大线程数，它表示在线程池中最多能创建多少个线程     * 200 - keepAliveTime：表示线程没有任务执行时最多保持多久时间会终止。     * unit - unit：参数keepAliveTime的时间单位，有7种取值     * workQueue：一个阻塞队列，用来存储等待执行的任务     */    ThreadPoolExecutor executor = new ThreadPoolExecutor(        50,        100,        200,        TimeUnit.MICROSECONDS,        new ArrayBlockingQueue&lt;Runnable&gt;(50));    // 开启50个线程    for (int i = 0; i &lt; 50; i++) &#123;      executor.execute(new CountClickByRedisThread(i));    &#125;    System.out.println(&quot;已经开启所有的子线程&quot;);    // 启动一次顺序关闭，执行以前提交的任务，但不接受新任务。    executor.shutdown();    // 判断所有线程是否已经执行完毕    while (true) &#123;      if (executor.isTerminated()) &#123;        System.out.println(&quot;所有的子线程都结束了！&quot;);        // 清除redis数据        ClickRedis.declare();        break;      &#125;      Thread.sleep(100);    &#125;  &#125;&#125;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>高并发</tag>
       </tags>
   </entry>
   <entry>
@@ -5038,6 +5017,46 @@ package com.hisen.thread.count_click_by_redis;import Java.util.concurrent.ArrayB
       </tags>
   </entry>
   <entry>
+    <title>Redis counter demo -  redis并发计数器</title>
+    <url>/20180111-Redis%20counter%20demo%20-%20%20redis%E5%B9%B6%E5%8F%91%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
+    <content><![CDATA[一、说明利用redis操作的原子性，实现Java 多线程并发的情况下实现计数器。
+我本机测试多个线程操作之后，结果会出现一定的延迟，但是最终数字是ok的
+应该是redis内部做了一个类似于队列的功能。
+需要注意的是，得使用redis连接的线程池，不然会出现异常
+这里有一个：JedisUtil 下面用到了
+二、 代码实现2.1 redis操作类package com.hisen.thread.count_click_by_redis;import com.hisen.utils.JedisUtil;import redis.clients.jedis.JedisPool;/** * @author hisenyuan * @description 操作redis的线程类 */public class ClickRedis &#123;  /**   * 必须使用线程池，而且线程池要大于并发数，否则会出现redis超时   */  private static JedisPool jedis = JedisUtil.getPool();  public static void click() &#123;    jedis.getResource().incrBy(&quot;hisen&quot;, 1);  &#125;  public static int getCount() &#123;    return Integer.parseInt(jedis.getResource().get(&quot;hisen&quot;));  &#125;  public static void declare() &#123;    jedis.getResource().del(&quot;hisen&quot;);    jedis.close();  &#125;&#125;
+2.2 线程类,模拟点击package com.hisen.thread.count_click_by_redis;/** * @author hisenyuan * @description 执行点击的线程类 */public class CountClickByRedisThread extends Thread&#123;  private int id;  public CountClickByRedisThread(int id) &#123;    this.id = id;  &#125;  @Override  public void run() &#123;    super.run();    ClickRedis.click();    int count = ClickRedis.getCount();    System.out.println(&quot;task:&quot; + id + &quot;\t 执行完毕\t线程编号：&quot; + this.getId() + &quot;\t当前值：&quot; + count);  &#125;&#125;
+2.3 主线程 - 启动类
+package com.hisen.thread.count_click_by_redis;import Java.util.concurrent.ArrayBlockingQueue;import Java.util.concurrent.ThreadPoolExecutor;import Java.util.concurrent.TimeUnit;public class Main &#123;  public static void main(String[] args) throws InterruptedException &#123;    /**     * 5 - corePoolSize：核心池的大小     * 10 - maximumPoolSize：线程池最大线程数，它表示在线程池中最多能创建多少个线程     * 200 - keepAliveTime：表示线程没有任务执行时最多保持多久时间会终止。     * unit - unit：参数keepAliveTime的时间单位，有7种取值     * workQueue：一个阻塞队列，用来存储等待执行的任务     */    ThreadPoolExecutor executor = new ThreadPoolExecutor(        50,        100,        200,        TimeUnit.MICROSECONDS,        new ArrayBlockingQueue&lt;Runnable&gt;(50));    // 开启50个线程    for (int i = 0; i &lt; 50; i++) &#123;      executor.execute(new CountClickByRedisThread(i));    &#125;    System.out.println(&quot;已经开启所有的子线程&quot;);    // 启动一次顺序关闭，执行以前提交的任务，但不接受新任务。    executor.shutdown();    // 判断所有线程是否已经执行完毕    while (true) &#123;      if (executor.isTerminated()) &#123;        System.out.println(&quot;所有的子线程都结束了！&quot;);        // 清除redis数据        ClickRedis.declare();        break;      &#125;      Thread.sleep(100);    &#125;  &#125;&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>高并发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL优化之小细节 - 点滴记录</title>
+    <url>/20170309-SQL%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B0%8F%E7%BB%86%E8%8A%82%20-%20%E7%82%B9%E6%BB%B4%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[不知道现在是不是还很多人首先就把关联的id放在where的第一位
+这里有一个简单的对比，情况相同的时候，两个sql的时间相差八倍
+优：0.077s
+SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE cf.acct_type in(2,3)  AND ew.customer_id = cf.id
+劣：0.630s
+SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE ew.customer_id = cf.id  AND cf.acct_type in(2,3)
+上述原因：where子句从后往前执行，应该把大的过滤条件放在后面记录时间：2017年3月9日 10:44:59
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>计算机科学与技术反思录【转】</title>
     <url>/20240509-Reflection-on-Computer-Science-and-Technology/</url>
     <content><![CDATA[0. 背景本文来自一朋友给转发的 txt 文件。
@@ -5113,88 +5132,6 @@ package com.hisen.thread.count_click_by_redis;import Java.util.concurrent.ArrayB
       </categories>
       <tags>
         <tag>成长</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL优化之小细节 - 点滴记录</title>
-    <url>/20170309-SQL%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B0%8F%E7%BB%86%E8%8A%82%20-%20%E7%82%B9%E6%BB%B4%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[不知道现在是不是还很多人首先就把关联的id放在where的第一位
-这里有一个简单的对比，情况相同的时候，两个sql的时间相差八倍
-优：0.077s
-SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE cf.acct_type in(2,3)  AND ew.customer_id = cf.id
-劣：0.630s
-SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE ew.customer_id = cf.id  AND cf.acct_type in(2,3)
-上述原因：where子句从后往前执行，应该把大的过滤条件放在后面记录时间：2017年3月9日 10:44:59
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL语句的执行顺序 - 关键字的顺序</title>
-    <url>/20171114-SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</url>
-    <content><![CDATA[sql执行顺序
-from 
-join 
-on 
-where 
-group by(开始使用select中的别名，后面的语句中都可以使用)
-avg,sum…. 
-having 
-select 
-distinct 
-order by
-
-参考资料http://blog.csdn.net/u014044812/article/details/51004754
-http://blog.csdn.net/bitcarmanlee/article/details/51004767 (含流程图)
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>存储</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Shell 批量解压文件并重命名 - 解决文件名冲突</title>
-    <url>/20201107-Shell-batch-decompression-and-rename/</url>
-    <content><![CDATA[一、背景由于某种原因，需要手工处理错误日志提取某些信息。下载下来的日志文件是压缩包
-1.1 文件信息system_error.log.2020-11-01.20201105200433.zipsystem_error.log.2020-11-01.20201105195953.zipsystem_error.log.2020-11-01.20201105200830.zip...省略
-1.2 压缩包信息$ unzip -v system_error.log.2020-11-01.20201105200830.zipArchive:  system_error.log.2020-11-01.20201105200830.zip Length   Method    Size  Cmpr    Date    Time   CRC-32   Name--------  ------  ------- ---- ---------- ----- --------  ---- 4495560  Defl:N    78526  98% 11-01-2020 23:43 504551c6  system_error.log.2020-11-01--------          -------  ---                            ------- 4495560            78526  98%                            1 file
-压缩包文件名不一样，但是压缩包中的文件有一样的名字。例如：system_error.log.2020-11-01
-尝试使用如下方式，提示有重复，需要挨个选择如何处理，极度不便。于是想使用 shell 来解决（ 之前没写过 shell ）
-1.2 尝试过程
-提示有文件重复，需要处理。
-$ unzip &#x27;*.zip&#x27;Archive:  system_error.log.2020-10-15.20201105200943.zipreplace system_error.log.2020-10-15? [y]es, [n]o, [A]ll, [N]one, [r]ename:
-尝试使用 -n 参数，不覆盖
-$ unzip -n &#x27;*.zip&#x27;Archive:  system_error.log.2020-10-15.20201105200943.zip...省略100 archives were successfully processed.
--n 表示不覆盖，有重名的直接跳过，结果就是 100 个文件只解压的 10 个。
-1.3 怎么解压并且重命名？mv A B# 把 A 改名为 B
-怎么拿到压缩包内的文件名？
-# 输出压缩包内的信息$ unzip -v system_error.log.2020-11-01.20201105200830.zipArchive:  system_error.log.2020-11-01.20201105200830.zip Length   Method    Size  Cmpr    Date    Time   CRC-32   Name--------  ------  ------- ---- ---------- ----- --------  ---- 4495560  Defl:N    78526  98% 11-01-2020 23:43 504551c6  system_error.log.2020-11-01--------          -------  ---                            ------- 4495560            78526  98%                            1 file # 使用 awk 截取相关信息 # NR 行号，NF 最后一列 # unzip -v 的输出方式可能有变动，需要自己修改位置，以得到正确的结果 $ unzip -v system_error.log.2020-11-01.20201105200830.zip | awk &#x27;&#123;if(NR==4) print $NF&#125;&#x27; system_error.log.2020-11-01
-
-二、脚本信息1.3 的问题解决了就可以开始写脚本
-2.1 脚本文件名 uf.sh
-#!/bin/sh# 压缩包目录srcDir=$1# 解压后文件存放目录dstDir=$2# 文件名序号seq=1for file in $&#123;srcDir&#125;/*do    # 判断是否为文件    if test -f $file    then        # 获取压缩包名称，例如：system_error.log.2020-11-01.20201105200830.zip        filename=$(basename $file)        # 解压文件，移动文件，并且改名(这里使用的是序号，可以截取原文件名拼接时间戳等避免重名)        unzip $filename &amp;&amp; mv `unzip -v $filename | awk &#x27;&#123;if(NR==4)&#123;print $8&#125;&#125;&#x27;` $&#123;dstDir&#125;/$((seq++))    fidone
-2.2 使用方法注意，目前在目标目录下才能正确运行
-chmod 775 uf.shsh uf.sh ./src ./dst
-然后解决问题，解压所有 100 个压缩包，并且得到 100 个文件(文件名为 1~100)。
-三、总结不得不说解决问题是最快的学习方式第一次写脚本相对耗时，也是一个不错的尝试过程。对linux系统相关的命令&#x2F;函数不熟悉，导致到处查资料，有必要系统化的看看书。
-四、参考信息
-shell 命令解压缩zip文件夹并且对解压后的文件重命名(批量)ps：没有提供注释，对新手不太友好
-shell中变量自增
-Shell 截取文件名和后缀
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
       </tags>
   </entry>
   <entry>
@@ -5398,8 +5335,85 @@ http://blog.csdn.net/linxijun120903/article/details/56487073
         <category>Tech</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>架构</tag>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL语句的执行顺序 - 关键字的顺序</title>
+    <url>/20171114-SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</url>
+    <content><![CDATA[sql执行顺序
+from 
+join 
+on 
+where 
+group by(开始使用select中的别名，后面的语句中都可以使用)
+avg,sum…. 
+having 
+select 
+distinct 
+order by
+
+参考资料http://blog.csdn.net/u014044812/article/details/51004754
+http://blog.csdn.net/bitcarmanlee/article/details/51004767 (含流程图)
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>存储</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringMVC redirect &amp; return JSON &amp; set HTTP code</title>
+    <url>/20180713-SpringMVC%20redirect%20&amp;%20return%20JSON%20&amp;%20set%20HTTP%20code/</url>
+    <content><![CDATA[springmvc正常情况下redirect并且设置指定响应码，异常情况下返回json数据
+背景介绍需求就是正常情况下能redirect到指定的页面异常的情况下，能够返回JSON格式的错误信息正常情况和异常情况都需要设置HTTP Code
+代码实现@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST)public String webCharge(HttpServletRequest request, HttpServletResponse response) &#123;    if (1==1) &#123;        response.setStatus(200);        return &quot;redirect:https://github.com/hisenyuan&quot;;    &#125; else &#123;        try &#123;            response.setStatus(405);            response.getWriter().write(JSON.toJSONString(&quot;hisenyuan&quot;));            return null;        &#125; catch (IOException e) &#123;            e.printStackTrace();            return &quot;&quot;;        &#125;    &#125;&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Shell 批量解压文件并重命名 - 解决文件名冲突</title>
+    <url>/20201107-Shell-batch-decompression-and-rename/</url>
+    <content><![CDATA[一、背景由于某种原因，需要手工处理错误日志提取某些信息。下载下来的日志文件是压缩包
+1.1 文件信息system_error.log.2020-11-01.20201105200433.zipsystem_error.log.2020-11-01.20201105195953.zipsystem_error.log.2020-11-01.20201105200830.zip...省略
+1.2 压缩包信息$ unzip -v system_error.log.2020-11-01.20201105200830.zipArchive:  system_error.log.2020-11-01.20201105200830.zip Length   Method    Size  Cmpr    Date    Time   CRC-32   Name--------  ------  ------- ---- ---------- ----- --------  ---- 4495560  Defl:N    78526  98% 11-01-2020 23:43 504551c6  system_error.log.2020-11-01--------          -------  ---                            ------- 4495560            78526  98%                            1 file
+压缩包文件名不一样，但是压缩包中的文件有一样的名字。例如：system_error.log.2020-11-01
+尝试使用如下方式，提示有重复，需要挨个选择如何处理，极度不便。于是想使用 shell 来解决（ 之前没写过 shell ）
+1.2 尝试过程
+提示有文件重复，需要处理。
+$ unzip &#x27;*.zip&#x27;Archive:  system_error.log.2020-10-15.20201105200943.zipreplace system_error.log.2020-10-15? [y]es, [n]o, [A]ll, [N]one, [r]ename:
+尝试使用 -n 参数，不覆盖
+$ unzip -n &#x27;*.zip&#x27;Archive:  system_error.log.2020-10-15.20201105200943.zip...省略100 archives were successfully processed.
+-n 表示不覆盖，有重名的直接跳过，结果就是 100 个文件只解压的 10 个。
+1.3 怎么解压并且重命名？mv A B# 把 A 改名为 B
+怎么拿到压缩包内的文件名？
+# 输出压缩包内的信息$ unzip -v system_error.log.2020-11-01.20201105200830.zipArchive:  system_error.log.2020-11-01.20201105200830.zip Length   Method    Size  Cmpr    Date    Time   CRC-32   Name--------  ------  ------- ---- ---------- ----- --------  ---- 4495560  Defl:N    78526  98% 11-01-2020 23:43 504551c6  system_error.log.2020-11-01--------          -------  ---                            ------- 4495560            78526  98%                            1 file # 使用 awk 截取相关信息 # NR 行号，NF 最后一列 # unzip -v 的输出方式可能有变动，需要自己修改位置，以得到正确的结果 $ unzip -v system_error.log.2020-11-01.20201105200830.zip | awk &#x27;&#123;if(NR==4) print $NF&#125;&#x27; system_error.log.2020-11-01
+
+二、脚本信息1.3 的问题解决了就可以开始写脚本
+2.1 脚本文件名 uf.sh
+#!/bin/sh# 压缩包目录srcDir=$1# 解压后文件存放目录dstDir=$2# 文件名序号seq=1for file in $&#123;srcDir&#125;/*do    # 判断是否为文件    if test -f $file    then        # 获取压缩包名称，例如：system_error.log.2020-11-01.20201105200830.zip        filename=$(basename $file)        # 解压文件，移动文件，并且改名(这里使用的是序号，可以截取原文件名拼接时间戳等避免重名)        unzip $filename &amp;&amp; mv `unzip -v $filename | awk &#x27;&#123;if(NR==4)&#123;print $8&#125;&#125;&#x27;` $&#123;dstDir&#125;/$((seq++))    fidone
+2.2 使用方法注意，目前在目标目录下才能正确运行
+chmod 775 uf.shsh uf.sh ./src ./dst
+然后解决问题，解压所有 100 个压缩包，并且得到 100 个文件(文件名为 1~100)。
+三、总结不得不说解决问题是最快的学习方式第一次写脚本相对耗时，也是一个不错的尝试过程。对linux系统相关的命令&#x2F;函数不熟悉，导致到处查资料，有必要系统化的看看书。
+四、参考信息
+shell 命令解压缩zip文件夹并且对解压后的文件重命名(批量)ps：没有提供注释，对新手不太友好
+shell中变量自增
+Shell 截取文件名和后缀
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
       </tags>
   </entry>
   <entry>
@@ -5433,20 +5447,6 @@ spring run HelloController.groovyResolving dependencies.........................
       <tags>
         <tag>java</tag>
         <tag>工程效能</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringMVC redirect &amp; return JSON &amp; set HTTP code</title>
-    <url>/20180713-SpringMVC%20redirect%20&amp;%20return%20JSON%20&amp;%20set%20HTTP%20code/</url>
-    <content><![CDATA[springmvc正常情况下redirect并且设置指定响应码，异常情况下返回json数据
-背景介绍需求就是正常情况下能redirect到指定的页面异常的情况下，能够返回JSON格式的错误信息正常情况和异常情况都需要设置HTTP Code
-代码实现@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST)public String webCharge(HttpServletRequest request, HttpServletResponse response) &#123;    if (1==1) &#123;        response.setStatus(200);        return &quot;redirect:https://github.com/hisenyuan&quot;;    &#125; else &#123;        try &#123;            response.setStatus(405);            response.getWriter().write(JSON.toJSONString(&quot;hisenyuan&quot;));            return null;        &#125; catch (IOException e) &#123;            e.printStackTrace();            return &quot;&quot;;        &#125;    &#125;&#125;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -5651,46 +5651,102 @@ package com.hisen.interview;/** * 变量不能被重写 * * @author hisenyuan 20
       </tags>
   </entry>
   <entry>
-    <title>资本的免死金牌：拆解顶级富豪的财富永生城堡</title>
-    <url>/20260628-The-golden-shield-of-capital/</url>
-    <content><![CDATA[在电视剧《人民的名义》大结局中，反派祁同伟吞枪自尽，高小琴被判刑15年。然而，他们留给儿子的2亿港币离岸信托基金，却大概率能安然无恙。
-这绝非编剧的凭空想象，而是现实金融世界中真实存在的冰冷逻辑。在大众眼中，法律和税收是不可违抗的铁律；但在顶层精英眼里，通过“家族信托 + 慈善基金会 + A&#x2F;B股”构筑的顶级防御系统，已经成为一套合法对抗国家收割、实现财富代代相传的“系统Bug”。
-这套“财富城堡”的底层逻辑究竟是怎样的？我们用一张架构图和三大板块为您彻底剥开。
-顶层财富城堡的“铁三角”架构图
-┌────────────────────────────────────────────────────────┐│                   创始人 (顶级富豪/权贵)                  │└──────────────────────────┬─────────────────────────────┘                           │ 1. 设立并托付 (出让表面所有权)                           ▼┌────────────────────────────────────────────────────────┐│                    家族离岸信托                          │ ◄───【隐形防护罩】│               (信托保护人掌握上帝视角)                     │      子女为受益人└──────────────────────────┬─────────────────────────────┘      债主、法院无法追索                           │ 2. 派遣董事 / 掌握核心投票权                           ▼┌────────────────────────────────────────────────────────┐│                    慈善基金会                            │ ◄───【免税保险箱】│   (本金 0 遗产税，炒股仅 1.39% 极低税率，子女任高管)          │      将 95% 资产锁死└──────────────────────────┬─────────────────────────────┘      满足 5% 慈善拨备                           │ 3. 持有无投票权的 A 股 (分红)                           ▼┌────────────────────────────────────────────────────────┐│                    上市公司 / 实体帝国                    │ ◄───【权力方向盘】│  (创始人家族通过极少数的 B 股，实现“以小博大”的控制)           │      垄断利润源源不断└────────────────────────────────────────────────────────┘
+    <title>《人民的名义》与技术管理</title>
+    <url>/20260628-The-name-of-the-people-and-technology-management/</url>
+    <content><![CDATA[0. 缘起五一假期没有什么安排，就在家看了一部比较经典的剧《人民的名义》。当时我比较惊讶的就是：
 
-第一板块：铁三角组合拳的“破防”与“御敌”这套组合拳的精妙之处在于，它将资本的四个核心属性——钱、权、名、税，高效率地剥离并压榨到了极致。
-1. 家族信托：所有权剥离的“隐形防护罩”
-核心Bug：一物三权，资产隔离。
-大白话： 如果你名下有10个亿，当你欠债或离婚时，法院能分光你的财产。但如果你把这10个亿放进“不可撤销信托”，在法律上你就是个“无产阶级”，这笔钱属于信托公司。法院不能因为你个人的债务，去查封另一家独立法人的资产。后代作为受益人，只能按月领生活费。“放弃所有权，保留控制权”，瞬间让所有债主和境内法院无从下手。
+高育良居然和高晓凤是结婚的，和原配是离婚状态。
+侯亮平的领导给他派活时，居然还提醒让问问他老婆钟小艾的建议。
+信托相关：后面还探索了一些信托、慈善基金等知识。
 
-2. 慈善基金会：左手倒右手的“免税保险箱”
-核心Bug：用“自身预算”替代“国家税款”。
-大白话： 在西方，继承遗产要交高达40%-50%的遗产税。富豪们不愿被国家收割，便成立一个自己名字命名的“慈善基金会”，把钱“捐”给自己。这样不仅0遗产税，还换来了“大慈善家”的社会名誉。钱虽然在基金会里，但控制权可以通过章程传给子女。子女在基金会里当高管、领高薪、报销豪车豪宅，名义上是在“考察慈善项目”，实际上实现了财富的完美肉食。
+涉及到利益的事情，在上地视角下还是能看懂，如果现实生活呢？从技术一线走过来，剧里面也有不少值得学习的管理和沟通技巧。
+1. 组织协同与管理当你面对一个庞大的遗留系统、复杂的跨部门协作，甚至准备空降到一个新的业务增效团队时，你面对的局面，本质上就是一个微缩版的“汉东省”。《人民的名义》表面上是政治剧，但其内核是一部 教科书级的复杂系统治理指南。对于资深技术管理者，有四个最核心的组织协同与人员管理洞察。
+1.1 沙瑞金的“重构”哲学：先理清依赖，再动手重构工程师最容易犯的错，是“新官上任三把火”，看到历史遗留系统或低效流程，第一反应就是“推翻重写”。沙瑞金初到汉东，面对彻底板结的政治生态，他没有立刻下令抓人，而是花了大量时间去基层调研（林城、大风厂），理清了汉东复杂的“接口依赖”和“历史技术债”。
 
-3. A&#x2F;B股双层股权：以小博大的“权力方向盘”
-核心Bug：同股不同权，用10%的资本撬动100%的江山。
-大白话： 富豪把值钱但没表决权的A股捐给基金会或卖给散户换现金，自己手里死死攥着“1股等于10个投票权”的B股。这样一来，哪怕富豪只持有公司10%的股票，在股东大会上依然拥有绝对话语权，外人永远别想恶意收购，企业的印钞机永远听从家族的指挥。
-
-第二板块：对抗人性与数学的“资本达尔文主义”有了城堡，内部如何防止“后代指数级繁衍导致分光”以及“争产内斗”呢？富豪们制定了冷酷的规则：
-       ┌────────────── 财富城堡内部的“淘汰机制”─────────────────┐       │                                                    │       ▼                                                    ▼【极少数优秀继承人】                                   【绝大多数平庸后代】掌管董事会，握有A/B股表决权                            剥夺投票权，仅享有“信托低保”继续驱动资本帝国膨胀                                   如敢起诉闹事，触发条款净身出户
+管理映射： 当你接手一个核心业务系统，组织诊断先于架构演进。
+不要急于推动重构，先摸清各团队的利益诉求、核心痛点以及业务的真实运转逻辑。
+所有的技术债，本质上都是过去的组织架构和业务妥协留下的历史快照。
 
 
-打破平分家产，信托不养闲人： 城堡的本金永远锁死不分拆。后代想拿大钱，必须通过“绩效考核”（如考上名校、继承家族业务）。对于游手好闲的败家子，信托只提供刚好够吃穿的“信托低保”，在经济上将其边缘化，防止财富被稀释。
-控制权单线世袭，反诉讼刺刀： 基金会和信托的掌舵人永远只有一个人（长子或最强继承人）。其余旁系只有分钱的受益权，没有管事的投票权。章程中往往埋有“反诉讼条款”（In Terrorem Clause）——谁敢起诉家族争夺家产，谁就立刻失去所有受益资格，净身出户。
-超级免税的复利永动机： 在美国，慈善基金会每年只需拿出资产的5%做慈善（行政开支也算在内），剩下的95%可以在华尔街继续利滚利。更可怕的是，基金会的炒股投资收益税率被法律固定在1.39%（普通企业高达21%以上）。只要华尔街操盘手的回报率大于5%，这座财富雪球就会在近乎免税的环境下无限膨胀。
+落地动作： 谋定而后动。用专业的管理思维去评估资源盘点与风险敞口，把技术愿景转化为各部门都能听懂的业务增效指标，做到“师出有名”。
 
-第三板块：主权“内卷”下的终极逃生门你可能会问，如果大国强行修改法律，或者跨国追赃，这套系统会失效吗？这就涉及到了国际政治的底层残忍逻辑。
-1. 小国出卖法律，大国投鼠忌器那些离岸岛国（开曼、维尔京等）没有工业，他们唯一的暴富手段就是“出卖主权立法权”——立法规定“任何外国政府来查账都是违法”、“资产神圣不可侵犯”。大国因为害怕资本“用脚投票”彻底外逃本国，往往也会默许这些离岸口子的存在，形成了一种高度默契的全球利益闭环。
-2. 自动触发的“瞬移条款”（Flight Clause）顶级离岸信托的章程里，都埋有一颗“时空换位”的地雷。一旦信托所在地（如开曼）的法律面临大国政治施压或变动，该信托会在几秒钟内自动触发管辖法转移。资产的所有权和受托人会自动“瞬移”到另一个更流氓、更庇护富豪的法域（如南太平洋的库克群岛）。
-3. 库克群岛模式：对抗人类的“流氓堡垒”像库克群岛这样的法域，其法律甚至规定：“我们不承认任何外国法庭的判决。” 大国警方或债主如果想拿回钱，必须亲自飞到岛国本土重新起诉，且要在1-2年的极短时效内，举证出“刑事诉讼级别”的恶意欺诈证据。面对动辄数百万美元的跨国诉讼成本和近乎为零的胜率，大多数国家只能望洋兴叹。
-终极复盘底层普通人看到的，是电视新闻里每天更新的“打击洗钱、严厉反腐”；而真正掌握游戏规则的既得利益者看到的，是一张由小国的生存欲、大国的资本焦虑、以及权贵的自保本能共同织就的财富免死金牌。
-祁同伟用一颗子弹切断了境内所有的犯罪证据链，高小琴用完美的财务做账把钱包装成山水集团的“合法利润”出境，香港及离岸信托的法律机器则在资金落地的刹那自动合闸，将其变成了神圣不可侵犯的“合法私有财产”。
-在这套人类顶级的法律与金融工程面前，个人生命是短暂的，但资本的城堡，却得以永生。
+
+1.2 驾驭“李达康式”高绩效人才：结果导向与边界控制李达康是典型的“业务攻坚型Tech Lead”，只要能完成KPI（GDP），他甚至可以无视一些规范，性格强势，容易误伤跨部门协作的同事。沙瑞金对李达康的使用方式，是现代企业管理的典范：既要用他的极致执行力去攻克难题，又要用易学习（纪委）去死死盯住他的合规边界。
+
+管理映射： 团队里有技术狂人，他们能力极强，但忽视代码可读性、系统可维护性和研发规范。
+落地动作： 对待这类高绩效员工，充分授权的同时必须锁定边界。
+给他们最难的硬骨头去啃，但要在架构评审和代码合并环节卡住底线：
+强制文档沉淀；
+使用费曼技巧把复杂逻辑讲给其他成员听；
+
+
+确保他们的个人能力转化为团队的系统资产，而不是让他们成为“不可替代的单点风险”。
+
+
+
+1.3 拆解“高育良式”山头：打破技术黑盒与知识垄断高育良和他的“汉大帮”，本质上就是企业内部的“信息孤岛”和“部门墙”。他们通过建立复杂的人际网络和黑盒操作，垄断了汉东的政法系统。
+
+管理映射： 在研发团队中，最可怕的不是技术菜，而是“技术垄断”。有些老员工把控着核心模块，代码写得极其晦涩，拒绝输出清晰的文档，试图通过制造“信息壁垒”来巩固自己的地位。这就是技术团队里的“山头主义”。
+落地动作： 作为管理者，必须毫不留情地打破这种知识垄断。
+推行强制的轮岗机制、交叉Code Review，以及透明的架构分享。
+把“代码可读性”和“系统可维护性”提升到绩效考核的高度，倡导大道至简的工程文化。
+谁把系统搞得越复杂、越离不开他，就越要削弱他的核心控制权。
+
+
+
+1.4 陈岩石的“底层穿透”：拒绝中层信息过滤陈岩石是沙瑞金在汉东的“物理探针”。如果没有陈岩石，沙瑞金听到的将全是省委大院里粉饰太平的汇报。
+
+管理映射： 随着管理半径变大，你的时间会被各种会议和汇报填满。中层管理者或项目经理为了粉饰进度，往往会上报过滤后的“好消息”。
+落地动作： 保持对一线业务的“穿透式体感”。
+不要只看管理看板上的流转率，偶尔要亲自去看看核心链路的监控大盘，去听听一线运营人员或者客服对系统卡顿的真实吐槽。
+你的管理决策必须建立在真实的“物理依据”之上，而不是经过层层包装的PPT汇报。
+
+
+
+
+核心洞察：优秀的工程师关注逻辑的完美，而优秀的管理者关注资源的配置与目标的达成。把写代码时的模块化思维、解耦思维，运用到组织架构的协同设计中，用最平实、准确的职业语言去统一团队目标，这才是技术人向高阶管理进化的必经之路。
+
+2. 沟通协作在沟通与协作上，《人民的名义》展示的段位更高，甚至可以说是全剧的灵魂。日常研发中，我们常觉得“技术是黑白分明的，沟通却是灰色的”。但实际上，高级的沟通协作，本质上是另一场高并发的“协议对齐”与“流量控制”。对于资深的技术人，无论面对的是业务方、上级还是跨团队同僚，剧中的四种沟通名场面，直接对应了四种极具价值的职场协作解法：
+2.1 向上沟通：不要输出“技术黑盒”，要对齐“核心币种”很多技术人向上汇报时，喜欢抛出一堆非技术领导听不懂的专业术语（如高并发下的锁竞争、垃圾回收停顿等）。这在管理沟通中属于“低效协议”。看看剧中的高育良，哪怕面对不熟悉政法业务的沙瑞金，他每一次汇报都极度丝滑。为什么？因为他永远在用沙瑞金听得懂、且最关心的语言——**“大局观、班子团结、干部稳定”**来包装他的诉求。
+
+技术人的通病： 向上要资源重构时说：“这段旧代码太烂了，我要用 Go 重写，提高并发性能。”
+
+高阶的对齐方式（费曼技巧）： 转化成业务和管理听得懂的**“语言货币”**——资金、时间、稳定性。
+
+“目前核心链路的技术债已经到了临界点，当前的系统架构支撑下半年 11.11 促销的风险敞口极高。如果现在投入 2 个人、花 2 周时间把这部分逻辑解耦，不仅能把大促期间的服务器成本降低 30%，还能保证核心交易的可用性达到 4 个 9 以上，彻底消除资损风险。”
+
+
+
+2.2 横向协作：寻找“最大公约数”，破除“汉大帮”与“秘书帮”的对立剧中“汉大帮”（政法系）和“秘书帮”（经济系）天然对立，但在大风厂危机爆发的那个晚上，这两派人竟然坐在协调会上把问题给解决了。因为他们找到了一个共同的目标：不能发生群体性事件。在研发日常中，类似大风厂这样的“边界扯皮”天天在发生（比如：R&amp;D 觉得业务方的需求变化太快，产品觉得研发排期太长）。
+
+协作解法： 当跨部门协作推不动时，不要在技术细节上跟对方死磕。尝试跳出技术视角，站到更高的业务视角去寻找**“利益最大公约数”**。
+具体动作： 主动帮业务方算账。如果业务要上一个很赶的需求，与其生硬地拒绝，不如给出折中方案：“如果按你原定的完美版本做，研发要 3 周，肯定赶不上营销节点。我们能不能第一期先做个最小可行性产品（MVP），只支持核心主流程，3 天内就能上线跑数据，后面的功能我们按周迭代？”
+
+2.3 向下沟通：警惕“李达康式”的压迫，建立“非责备”的安全感李达康为了出政绩，对下属的沟通极其粗暴和强势，甚至不容许解释。结果导致了什么？孙连城直接躺平开始“仰望星空”，下属们为了不犯错，选择不做事。在技术团队里，如果你也是一个过于强势的 Tech Lead（技术主管），总在出线上事故时当众训斥：“这么简单的 Bug 怎么写出来的？”、“你这代码逻辑是怎么过的 Code Review？”。团队很快就会“李达康化”。
+
+带来的系统风险： 下属会因为害怕犯错而隐瞒技术风险。有了线上隐患不敢说，遇到架构难题自己硬扛，最后演变成无法收拾的灾难性大故障。
+高阶的沟通动作： 引入大厂提倡的 “非责备复盘”（Blameless Post-mortem）。在出故障后，沟通的焦点应该从“这是谁写的 Bug”转向“我们的系统设计和 Review 流程存在什么漏洞，才让这个 Bug 溜到了线上”。用流程和制度的防护网，换取团队成员的心理安全感，才能激发底层的实干创造力。
+
+2.4 危机沟通：学习“季昌明式”的合规与升级机制很多人觉得检察长季昌明“胆小怕事、极度教条”，在抓捕丁义珍的关键时刻，他非要拦着陈海，去向省委汇报，结果导致丁义珍跑了。但如果你在大厂待过，你会发现季昌明才是真正懂**“重大事故升级与容灾机制”**的人。抓捕副厅级干部，稍有不慎就是政治地震，这不是一个检察院能私自兜底的。
+
+技术人的通病： 线上突发大故障，或者核心数据库疑似被锁，为了个人英雄主义，自己悄悄在生产环境改代码、重启服务，结果导致故障范围进一步扩大，错过了最佳的止损时机。
+高阶的流程意识： 越是资深的工程师，越要明白**“风险升级机制”**（Escalation Policy）的重要性。
+明确什么级别的故障必须在 5 分钟内拉通整个核心团队；
+什么时候必须立刻向总监、VP 级别报警争取支持；
+什么时候该直接执行主备切换或熔断降级。  按流程规范办事，这不是教条，而是对系统、对团队最专业的保护。
+
+
+
+
+一句话总结：工程师写代码是为了让机器执行，而沟通是为了让组织协同。像机器一样去精准对齐信息流，像架构师一样去设计协作的边界与容灾机制，这就是从写代码（Coding）走向带团队（Leading）的沟通质变。
+
 ]]></content>
       <categories>
-        <category>RandomThoughts</category>
+        <category>Growth</category>
       </categories>
+      <tags>
+        <tag>成长</tag>
+      </tags>
   </entry>
   <entry>
     <title>《远见：如何规划职业生涯3大阶段》读后感</title>
@@ -6117,102 +6173,46 @@ package com.hisen.interview;/** * 变量不能被重写 * * @author hisenyuan 20
       </tags>
   </entry>
   <entry>
-    <title>《人民的名义》与技术管理</title>
-    <url>/20260628-The-name-of-the-people-and-technology-management/</url>
-    <content><![CDATA[0. 缘起五一假期没有什么安排，就在家看了一部比较经典的剧《人民的名义》。当时我比较惊讶的就是：
+    <title>资本的免死金牌：拆解顶级富豪的财富永生城堡</title>
+    <url>/20260628-The-golden-shield-of-capital/</url>
+    <content><![CDATA[在电视剧《人民的名义》大结局中，反派祁同伟吞枪自尽，高小琴被判刑15年。然而，他们留给儿子的2亿港币离岸信托基金，却大概率能安然无恙。
+这绝非编剧的凭空想象，而是现实金融世界中真实存在的冰冷逻辑。在大众眼中，法律和税收是不可违抗的铁律；但在顶层精英眼里，通过“家族信托 + 慈善基金会 + A&#x2F;B股”构筑的顶级防御系统，已经成为一套合法对抗国家收割、实现财富代代相传的“系统Bug”。
+这套“财富城堡”的底层逻辑究竟是怎样的？我们用一张架构图和三大板块为您彻底剥开。
+顶层财富城堡的“铁三角”架构图
+┌────────────────────────────────────────────────────────┐│                   创始人 (顶级富豪/权贵)                  │└──────────────────────────┬─────────────────────────────┘                           │ 1. 设立并托付 (出让表面所有权)                           ▼┌────────────────────────────────────────────────────────┐│                    家族离岸信托                          │ ◄───【隐形防护罩】│               (信托保护人掌握上帝视角)                     │      子女为受益人└──────────────────────────┬─────────────────────────────┘      债主、法院无法追索                           │ 2. 派遣董事 / 掌握核心投票权                           ▼┌────────────────────────────────────────────────────────┐│                    慈善基金会                            │ ◄───【免税保险箱】│   (本金 0 遗产税，炒股仅 1.39% 极低税率，子女任高管)          │      将 95% 资产锁死└──────────────────────────┬─────────────────────────────┘      满足 5% 慈善拨备                           │ 3. 持有无投票权的 A 股 (分红)                           ▼┌────────────────────────────────────────────────────────┐│                    上市公司 / 实体帝国                    │ ◄───【权力方向盘】│  (创始人家族通过极少数的 B 股，实现“以小博大”的控制)           │      垄断利润源源不断└────────────────────────────────────────────────────────┘
 
-高育良居然和高晓凤是结婚的，和原配是离婚状态。
-侯亮平的领导给他派活时，居然还提醒让问问他老婆钟小艾的建议。
-信托相关：后面还探索了一些信托、慈善基金等知识。
+第一板块：铁三角组合拳的“破防”与“御敌”这套组合拳的精妙之处在于，它将资本的四个核心属性——钱、权、名、税，高效率地剥离并压榨到了极致。
+1. 家族信托：所有权剥离的“隐形防护罩”
+核心Bug：一物三权，资产隔离。
+大白话： 如果你名下有10个亿，当你欠债或离婚时，法院能分光你的财产。但如果你把这10个亿放进“不可撤销信托”，在法律上你就是个“无产阶级”，这笔钱属于信托公司。法院不能因为你个人的债务，去查封另一家独立法人的资产。后代作为受益人，只能按月领生活费。“放弃所有权，保留控制权”，瞬间让所有债主和境内法院无从下手。
 
-涉及到利益的事情，在上地视角下还是能看懂，如果现实生活呢？从技术一线走过来，剧里面也有不少值得学习的管理和沟通技巧。
-1. 组织协同与管理当你面对一个庞大的遗留系统、复杂的跨部门协作，甚至准备空降到一个新的业务增效团队时，你面对的局面，本质上就是一个微缩版的“汉东省”。《人民的名义》表面上是政治剧，但其内核是一部 教科书级的复杂系统治理指南。对于资深技术管理者，有四个最核心的组织协同与人员管理洞察。
-1.1 沙瑞金的“重构”哲学：先理清依赖，再动手重构工程师最容易犯的错，是“新官上任三把火”，看到历史遗留系统或低效流程，第一反应就是“推翻重写”。沙瑞金初到汉东，面对彻底板结的政治生态，他没有立刻下令抓人，而是花了大量时间去基层调研（林城、大风厂），理清了汉东复杂的“接口依赖”和“历史技术债”。
+2. 慈善基金会：左手倒右手的“免税保险箱”
+核心Bug：用“自身预算”替代“国家税款”。
+大白话： 在西方，继承遗产要交高达40%-50%的遗产税。富豪们不愿被国家收割，便成立一个自己名字命名的“慈善基金会”，把钱“捐”给自己。这样不仅0遗产税，还换来了“大慈善家”的社会名誉。钱虽然在基金会里，但控制权可以通过章程传给子女。子女在基金会里当高管、领高薪、报销豪车豪宅，名义上是在“考察慈善项目”，实际上实现了财富的完美肉食。
 
-管理映射： 当你接手一个核心业务系统，组织诊断先于架构演进。
-不要急于推动重构，先摸清各团队的利益诉求、核心痛点以及业务的真实运转逻辑。
-所有的技术债，本质上都是过去的组织架构和业务妥协留下的历史快照。
+3. A&#x2F;B股双层股权：以小博大的“权力方向盘”
+核心Bug：同股不同权，用10%的资本撬动100%的江山。
+大白话： 富豪把值钱但没表决权的A股捐给基金会或卖给散户换现金，自己手里死死攥着“1股等于10个投票权”的B股。这样一来，哪怕富豪只持有公司10%的股票，在股东大会上依然拥有绝对话语权，外人永远别想恶意收购，企业的印钞机永远听从家族的指挥。
 
-
-落地动作： 谋定而后动。用专业的管理思维去评估资源盘点与风险敞口，把技术愿景转化为各部门都能听懂的业务增效指标，做到“师出有名”。
-
-
-1.2 驾驭“李达康式”高绩效人才：结果导向与边界控制李达康是典型的“业务攻坚型Tech Lead”，只要能完成KPI（GDP），他甚至可以无视一些规范，性格强势，容易误伤跨部门协作的同事。沙瑞金对李达康的使用方式，是现代企业管理的典范：既要用他的极致执行力去攻克难题，又要用易学习（纪委）去死死盯住他的合规边界。
-
-管理映射： 团队里有技术狂人，他们能力极强，但忽视代码可读性、系统可维护性和研发规范。
-落地动作： 对待这类高绩效员工，充分授权的同时必须锁定边界。
-给他们最难的硬骨头去啃，但要在架构评审和代码合并环节卡住底线：
-强制文档沉淀；
-使用费曼技巧把复杂逻辑讲给其他成员听；
+第二板块：对抗人性与数学的“资本达尔文主义”有了城堡，内部如何防止“后代指数级繁衍导致分光”以及“争产内斗”呢？富豪们制定了冷酷的规则：
+       ┌────────────── 财富城堡内部的“淘汰机制”─────────────────┐       │                                                    │       ▼                                                    ▼【极少数优秀继承人】                                   【绝大多数平庸后代】掌管董事会，握有A/B股表决权                            剥夺投票权，仅享有“信托低保”继续驱动资本帝国膨胀                                   如敢起诉闹事，触发条款净身出户
 
 
-确保他们的个人能力转化为团队的系统资产，而不是让他们成为“不可替代的单点风险”。
+打破平分家产，信托不养闲人： 城堡的本金永远锁死不分拆。后代想拿大钱，必须通过“绩效考核”（如考上名校、继承家族业务）。对于游手好闲的败家子，信托只提供刚好够吃穿的“信托低保”，在经济上将其边缘化，防止财富被稀释。
+控制权单线世袭，反诉讼刺刀： 基金会和信托的掌舵人永远只有一个人（长子或最强继承人）。其余旁系只有分钱的受益权，没有管事的投票权。章程中往往埋有“反诉讼条款”（In Terrorem Clause）——谁敢起诉家族争夺家产，谁就立刻失去所有受益资格，净身出户。
+超级免税的复利永动机： 在美国，慈善基金会每年只需拿出资产的5%做慈善（行政开支也算在内），剩下的95%可以在华尔街继续利滚利。更可怕的是，基金会的炒股投资收益税率被法律固定在1.39%（普通企业高达21%以上）。只要华尔街操盘手的回报率大于5%，这座财富雪球就会在近乎免税的环境下无限膨胀。
 
-
-
-1.3 拆解“高育良式”山头：打破技术黑盒与知识垄断高育良和他的“汉大帮”，本质上就是企业内部的“信息孤岛”和“部门墙”。他们通过建立复杂的人际网络和黑盒操作，垄断了汉东的政法系统。
-
-管理映射： 在研发团队中，最可怕的不是技术菜，而是“技术垄断”。有些老员工把控着核心模块，代码写得极其晦涩，拒绝输出清晰的文档，试图通过制造“信息壁垒”来巩固自己的地位。这就是技术团队里的“山头主义”。
-落地动作： 作为管理者，必须毫不留情地打破这种知识垄断。
-推行强制的轮岗机制、交叉Code Review，以及透明的架构分享。
-把“代码可读性”和“系统可维护性”提升到绩效考核的高度，倡导大道至简的工程文化。
-谁把系统搞得越复杂、越离不开他，就越要削弱他的核心控制权。
-
-
-
-1.4 陈岩石的“底层穿透”：拒绝中层信息过滤陈岩石是沙瑞金在汉东的“物理探针”。如果没有陈岩石，沙瑞金听到的将全是省委大院里粉饰太平的汇报。
-
-管理映射： 随着管理半径变大，你的时间会被各种会议和汇报填满。中层管理者或项目经理为了粉饰进度，往往会上报过滤后的“好消息”。
-落地动作： 保持对一线业务的“穿透式体感”。
-不要只看管理看板上的流转率，偶尔要亲自去看看核心链路的监控大盘，去听听一线运营人员或者客服对系统卡顿的真实吐槽。
-你的管理决策必须建立在真实的“物理依据”之上，而不是经过层层包装的PPT汇报。
-
-
-
-
-核心洞察：优秀的工程师关注逻辑的完美，而优秀的管理者关注资源的配置与目标的达成。把写代码时的模块化思维、解耦思维，运用到组织架构的协同设计中，用最平实、准确的职业语言去统一团队目标，这才是技术人向高阶管理进化的必经之路。
-
-2. 沟通协作在沟通与协作上，《人民的名义》展示的段位更高，甚至可以说是全剧的灵魂。日常研发中，我们常觉得“技术是黑白分明的，沟通却是灰色的”。但实际上，高级的沟通协作，本质上是另一场高并发的“协议对齐”与“流量控制”。对于资深的技术人，无论面对的是业务方、上级还是跨团队同僚，剧中的四种沟通名场面，直接对应了四种极具价值的职场协作解法：
-2.1 向上沟通：不要输出“技术黑盒”，要对齐“核心币种”很多技术人向上汇报时，喜欢抛出一堆非技术领导听不懂的专业术语（如高并发下的锁竞争、垃圾回收停顿等）。这在管理沟通中属于“低效协议”。看看剧中的高育良，哪怕面对不熟悉政法业务的沙瑞金，他每一次汇报都极度丝滑。为什么？因为他永远在用沙瑞金听得懂、且最关心的语言——**“大局观、班子团结、干部稳定”**来包装他的诉求。
-
-技术人的通病： 向上要资源重构时说：“这段旧代码太烂了，我要用 Go 重写，提高并发性能。”
-
-高阶的对齐方式（费曼技巧）： 转化成业务和管理听得懂的**“语言货币”**——资金、时间、稳定性。
-
-“目前核心链路的技术债已经到了临界点，当前的系统架构支撑下半年 11.11 促销的风险敞口极高。如果现在投入 2 个人、花 2 周时间把这部分逻辑解耦，不仅能把大促期间的服务器成本降低 30%，还能保证核心交易的可用性达到 4 个 9 以上，彻底消除资损风险。”
-
-
-
-2.2 横向协作：寻找“最大公约数”，破除“汉大帮”与“秘书帮”的对立剧中“汉大帮”（政法系）和“秘书帮”（经济系）天然对立，但在大风厂危机爆发的那个晚上，这两派人竟然坐在协调会上把问题给解决了。因为他们找到了一个共同的目标：不能发生群体性事件。在研发日常中，类似大风厂这样的“边界扯皮”天天在发生（比如：R&amp;D 觉得业务方的需求变化太快，产品觉得研发排期太长）。
-
-协作解法： 当跨部门协作推不动时，不要在技术细节上跟对方死磕。尝试跳出技术视角，站到更高的业务视角去寻找**“利益最大公约数”**。
-具体动作： 主动帮业务方算账。如果业务要上一个很赶的需求，与其生硬地拒绝，不如给出折中方案：“如果按你原定的完美版本做，研发要 3 周，肯定赶不上营销节点。我们能不能第一期先做个最小可行性产品（MVP），只支持核心主流程，3 天内就能上线跑数据，后面的功能我们按周迭代？”
-
-2.3 向下沟通：警惕“李达康式”的压迫，建立“非责备”的安全感李达康为了出政绩，对下属的沟通极其粗暴和强势，甚至不容许解释。结果导致了什么？孙连城直接躺平开始“仰望星空”，下属们为了不犯错，选择不做事。在技术团队里，如果你也是一个过于强势的 Tech Lead（技术主管），总在出线上事故时当众训斥：“这么简单的 Bug 怎么写出来的？”、“你这代码逻辑是怎么过的 Code Review？”。团队很快就会“李达康化”。
-
-带来的系统风险： 下属会因为害怕犯错而隐瞒技术风险。有了线上隐患不敢说，遇到架构难题自己硬扛，最后演变成无法收拾的灾难性大故障。
-高阶的沟通动作： 引入大厂提倡的 “非责备复盘”（Blameless Post-mortem）。在出故障后，沟通的焦点应该从“这是谁写的 Bug”转向“我们的系统设计和 Review 流程存在什么漏洞，才让这个 Bug 溜到了线上”。用流程和制度的防护网，换取团队成员的心理安全感，才能激发底层的实干创造力。
-
-2.4 危机沟通：学习“季昌明式”的合规与升级机制很多人觉得检察长季昌明“胆小怕事、极度教条”，在抓捕丁义珍的关键时刻，他非要拦着陈海，去向省委汇报，结果导致丁义珍跑了。但如果你在大厂待过，你会发现季昌明才是真正懂**“重大事故升级与容灾机制”**的人。抓捕副厅级干部，稍有不慎就是政治地震，这不是一个检察院能私自兜底的。
-
-技术人的通病： 线上突发大故障，或者核心数据库疑似被锁，为了个人英雄主义，自己悄悄在生产环境改代码、重启服务，结果导致故障范围进一步扩大，错过了最佳的止损时机。
-高阶的流程意识： 越是资深的工程师，越要明白**“风险升级机制”**（Escalation Policy）的重要性。
-明确什么级别的故障必须在 5 分钟内拉通整个核心团队；
-什么时候必须立刻向总监、VP 级别报警争取支持；
-什么时候该直接执行主备切换或熔断降级。  按流程规范办事，这不是教条，而是对系统、对团队最专业的保护。
-
-
-
-
-一句话总结：工程师写代码是为了让机器执行，而沟通是为了让组织协同。像机器一样去精准对齐信息流，像架构师一样去设计协作的边界与容灾机制，这就是从写代码（Coding）走向带团队（Leading）的沟通质变。
-
+第三板块：主权“内卷”下的终极逃生门你可能会问，如果大国强行修改法律，或者跨国追赃，这套系统会失效吗？这就涉及到了国际政治的底层残忍逻辑。
+1. 小国出卖法律，大国投鼠忌器那些离岸岛国（开曼、维尔京等）没有工业，他们唯一的暴富手段就是“出卖主权立法权”——立法规定“任何外国政府来查账都是违法”、“资产神圣不可侵犯”。大国因为害怕资本“用脚投票”彻底外逃本国，往往也会默许这些离岸口子的存在，形成了一种高度默契的全球利益闭环。
+2. 自动触发的“瞬移条款”（Flight Clause）顶级离岸信托的章程里，都埋有一颗“时空换位”的地雷。一旦信托所在地（如开曼）的法律面临大国政治施压或变动，该信托会在几秒钟内自动触发管辖法转移。资产的所有权和受托人会自动“瞬移”到另一个更流氓、更庇护富豪的法域（如南太平洋的库克群岛）。
+3. 库克群岛模式：对抗人类的“流氓堡垒”像库克群岛这样的法域，其法律甚至规定：“我们不承认任何外国法庭的判决。” 大国警方或债主如果想拿回钱，必须亲自飞到岛国本土重新起诉，且要在1-2年的极短时效内，举证出“刑事诉讼级别”的恶意欺诈证据。面对动辄数百万美元的跨国诉讼成本和近乎为零的胜率，大多数国家只能望洋兴叹。
+终极复盘底层普通人看到的，是电视新闻里每天更新的“打击洗钱、严厉反腐”；而真正掌握游戏规则的既得利益者看到的，是一张由小国的生存欲、大国的资本焦虑、以及权贵的自保本能共同织就的财富免死金牌。
+祁同伟用一颗子弹切断了境内所有的犯罪证据链，高小琴用完美的财务做账把钱包装成山水集团的“合法利润”出境，香港及离岸信托的法律机器则在资金落地的刹那自动合闸，将其变成了神圣不可侵犯的“合法私有财产”。
+在这套人类顶级的法律与金融工程面前，个人生命是短暂的，但资本的城堡，却得以永生。
 ]]></content>
       <categories>
-        <category>Growth</category>
+        <category>RandomThoughts</category>
       </categories>
-      <tags>
-        <tag>成长</tag>
-      </tags>
   </entry>
   <entry>
     <title>Thread Pool Monitor - 线程池监控</title>
@@ -6312,38 +6312,6 @@ redis服务路径: &#x2F;etc&#x2F;init.d&#x2F;redis-server
       </tags>
   </entry>
   <entry>
-    <title>Ubuntu 16 LTS 安装zookeeper并开机启动</title>
-    <url>/20170224-Ubuntu-16-LTS-%E5%AE%89%E8%A3%85zookeeper%E5%B9%B6%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/</url>
-    <content><![CDATA[一、安装sudo apt-get install zookeeper
-默认信息
-#安装路径/usr/share/zookeeper#配置文件/etc/zookeeper/conf/zoo.cfg
-二、启动服务端
-hisen@hisen-server:/usr/share/zookeeper/bin$ sudo sh zkServer.sh
-如果报错
-zkServer.sh: 81: /home/xxx/zookeeper-3.4.6/bin/zkEnv.sh: Syntax error: &quot;(&quot; unexpected (expecting &quot;fi&quot;)网上找了一圈原因，大概意思就是脚本里面用到的shell版本与系统当前使用的shell版本不兼容，导致异常。查看当前ubuntu系统的shell，默认是使用dash，但是脚本里面是使用的bash，问题就在这里了。解决步骤：修改当前系统的shell版本：dpkg-reconfigure dashTab 移动到NO 回车即可(选择否)
-三、验证是否成功hisen@hisen-server:/usr/share/zookeeper/bin$ sudozkCli.sh -server localhost:2181WatchedEvent state:SyncConnected type:None path:null[zk: localhost:2181(CONNECTED) 0]
-出现上面的信息说明成功了
-四、设置开机启动1.创建配置文件
-sudo vi /etc/init.d/zookeeper
-添加以下信息，注意自己的相关路径是否相同，不同修改之
-#!/bin/sh#Configurations injected by install_server below....EXEC=/usr/share/zookeeper/bin/zkServer.shZOO_LOG_DIR=&quot;/var/zookeeper&quot;JAVA_HOME=/usr/hisen/soft/jdk8 PATH=$&#123;JAVA_HOME&#125;/bin:$PATH################ SysV Init Information# chkconfig: - 58 74# description: zookeeper is the zookeeper daemon.### BEGIN INIT INFO# Provides: zookeeper# Required-Start: $network $local_fs $remote_fs# Required-Stop: $network $local_fs $remote_fs# Default-Start: 2 3 4 5# Default-Stop: 0 1 6# Should-Start: $syslog $named# Should-Stop: $syslog $named# Short-Description: start and stop zookeeper# Description: zookeeper daemon### END INIT INFOcase $1 in          start)  /usr/share/zookeeper/bin/zkServer.sh start;;          stop)   /usr/share/zookeeper/bin/zkServer.sh stop;;          status) /usr/share/zookeeper/bin/zkServer.sh status;;          restart) /usr/share/zookeeper/bin/zkServer.sh restart;;          *)  echo &quot;require start|stop|status|restart&quot;  ;;esac
-2.授权
-sudo chmod +x zookeeper
-3.安装开机启动管理软件(一般自带)
-sudo apt-get install rcconf
-4.进入管理界面
-sudo rcconf
-↑ ↓ 移动光标，空格键选中zookeeper
-Tab 使光标移动到OK 回车即可
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Ubuntu 16 换阿里云源</title>
     <url>/20170218-Ubuntu-16-%E6%8D%A2%E9%98%BF%E9%87%8C%E4%BA%91%E6%BA%90/</url>
     <content><![CDATA[
@@ -6408,6 +6376,38 @@ sudo apt-get updatesudo apt-get upgradesudo apt-get install iptables-persistent
 安装过程中，弹窗选择YES
 安装完成后：
 sudo iptables -A INPUT -p tcp --dport 27017 -j ACCEPT]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu 16 LTS 安装zookeeper并开机启动</title>
+    <url>/20170224-Ubuntu-16-LTS-%E5%AE%89%E8%A3%85zookeeper%E5%B9%B6%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/</url>
+    <content><![CDATA[一、安装sudo apt-get install zookeeper
+默认信息
+#安装路径/usr/share/zookeeper#配置文件/etc/zookeeper/conf/zoo.cfg
+二、启动服务端
+hisen@hisen-server:/usr/share/zookeeper/bin$ sudo sh zkServer.sh
+如果报错
+zkServer.sh: 81: /home/xxx/zookeeper-3.4.6/bin/zkEnv.sh: Syntax error: &quot;(&quot; unexpected (expecting &quot;fi&quot;)网上找了一圈原因，大概意思就是脚本里面用到的shell版本与系统当前使用的shell版本不兼容，导致异常。查看当前ubuntu系统的shell，默认是使用dash，但是脚本里面是使用的bash，问题就在这里了。解决步骤：修改当前系统的shell版本：dpkg-reconfigure dashTab 移动到NO 回车即可(选择否)
+三、验证是否成功hisen@hisen-server:/usr/share/zookeeper/bin$ sudozkCli.sh -server localhost:2181WatchedEvent state:SyncConnected type:None path:null[zk: localhost:2181(CONNECTED) 0]
+出现上面的信息说明成功了
+四、设置开机启动1.创建配置文件
+sudo vi /etc/init.d/zookeeper
+添加以下信息，注意自己的相关路径是否相同，不同修改之
+#!/bin/sh#Configurations injected by install_server below....EXEC=/usr/share/zookeeper/bin/zkServer.shZOO_LOG_DIR=&quot;/var/zookeeper&quot;JAVA_HOME=/usr/hisen/soft/jdk8 PATH=$&#123;JAVA_HOME&#125;/bin:$PATH################ SysV Init Information# chkconfig: - 58 74# description: zookeeper is the zookeeper daemon.### BEGIN INIT INFO# Provides: zookeeper# Required-Start: $network $local_fs $remote_fs# Required-Stop: $network $local_fs $remote_fs# Default-Start: 2 3 4 5# Default-Stop: 0 1 6# Should-Start: $syslog $named# Should-Stop: $syslog $named# Short-Description: start and stop zookeeper# Description: zookeeper daemon### END INIT INFOcase $1 in          start)  /usr/share/zookeeper/bin/zkServer.sh start;;          stop)   /usr/share/zookeeper/bin/zkServer.sh stop;;          status) /usr/share/zookeeper/bin/zkServer.sh status;;          restart) /usr/share/zookeeper/bin/zkServer.sh restart;;          *)  echo &quot;require start|stop|status|restart&quot;  ;;esac
+2.授权
+sudo chmod +x zookeeper
+3.安装开机启动管理软件(一般自带)
+sudo apt-get install rcconf
+4.进入管理界面
+sudo rcconf
+↑ ↓ 移动光标，空格键选中zookeeper
+Tab 使光标移动到OK 回车即可
+]]></content>
       <categories>
         <category>Tech</category>
       </categories>
@@ -6554,22 +6554,6 @@ sudo chmod 777 /boot/grub/grub.cfgsudo vi  /boot/grub/grub.cfg#在 export linux_
       </tags>
   </entry>
   <entry>
-    <title>Unable to ping server at localhost 1099 - 出现的原因</title>
-    <url>/20170330-Unable%20to%20ping%20server%20at%20localhost%201099%20-%20%E5%87%BA%E7%8E%B0%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
-    <content><![CDATA[之前老是出现
-Application Server was not connected before run configuration stop, reason: Unable to ping server at localhost:1099
-我遇到这个问题一般是这些原因：
-
-这个端口被占用，一般进程管理把所有Java进程杀了可以解决
-由于在IDEA中错误的给tomcat添加了参数,比如下面这个。去掉即可
-
-这是下VM option中加了：-URIEncoding&#x3D;UTF-8
-Error: Could not create the Java Virtual Machine.Error: A fatal exception has occurred. Program will exit.Unrecognized option: -URIEncoding=UTF-8]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>《地下帝国：金融、网络、半导体---美国如何将世界经济武器化》读后感</title>
     <url>/20260801-Underground-Empire-How-America-Weaponized-the-World-Economy/</url>
     <content><![CDATA[1. 读后感全球化时代，你中有我，我中有你。短时间内很难撇清关系，虽然很别扭，但是还得拉着脸合作。新时代的竞争，和冷战差不多，甚至更严重，双方都制造假想敌，不断竞争。提出假想敌的那些人也可能是为了让自己多争取点资源，扩大自己的一亩三分地。
@@ -6654,6 +6638,22 @@ SWIFT 已从一个政治独立的组织，蜕变为美国政府无所不知的�
         <tag>成长</tag>
         <tag>阅读</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Unable to ping server at localhost 1099 - 出现的原因</title>
+    <url>/20170330-Unable%20to%20ping%20server%20at%20localhost%201099%20-%20%E5%87%BA%E7%8E%B0%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
+    <content><![CDATA[之前老是出现
+Application Server was not connected before run configuration stop, reason: Unable to ping server at localhost:1099
+我遇到这个问题一般是这些原因：
+
+这个端口被占用，一般进程管理把所有Java进程杀了可以解决
+由于在IDEA中错误的给tomcat添加了参数,比如下面这个。去掉即可
+
+这是下VM option中加了：-URIEncoding&#x3D;UTF-8
+Error: Could not create the Java Virtual Machine.Error: A fatal exception has occurred. Program will exit.Unrecognized option: -URIEncoding=UTF-8]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
   </entry>
   <entry>
     <title>理解 Linux Load Averages</title>
@@ -6851,17 +6851,6 @@ ip写上麦的主机ip：127.0.0.1
       </tags>
   </entry>
   <entry>
-    <title>windows10 专业版激活密钥</title>
-    <url>/20170210-Windows10-%E4%B8%93%E4%B8%9A%E7%89%88%E6%BF%80%E6%B4%BB%E5%AF%86%E9%92%A5/</url>
-    <content><![CDATA[2017年2月10日 16:03:48亲测可用，这比激活工具方便多了
-
-VK7JG-NPHTM-C97JM-9MPGT-3V66TNPPR9-FWDCX-D2C8J-H872K-2YT43W269N-WFGWX-YVC9B-4J6C9-T83GXNYW94-47Q7H-7X9TT-W7TXD-JTYPMNJ4MX-VQQ7Q-FP3DB-VDGHX-7XM87MH37W-N47XK-V7XM9-C7227-GCQG9
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Windows10开机bat启动VirtualBox虚拟机并且后台运行</title>
     <url>/20170220-Windows10%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8VirtualBox%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B9%B6%E4%B8%94%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</url>
     <content><![CDATA[1.制作启动脚本
@@ -6884,6 +6873,20 @@ Windows &gt; [开始]菜单 &gt; 程序 &gt; 启动
       </tags>
   </entry>
   <entry>
+    <title>关于数据一致性</title>
+    <url>/20220717-about-data-consistency/</url>
+    <content><![CDATA[1. 背景电商场景下的订单系统往往会有很多查询需求单体数据库无法满足大量数据存储、各种复杂查询
+2. 方案待更新
+3. 总结待更新
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>存储</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>windows任务栏由底部改到左边，并自动隐藏</title>
     <url>/20170215-Windows%E4%BB%BB%E5%8A%A1%E6%A0%8F%E7%94%B1%E5%BA%95%E9%83%A8%E6%94%B9%E5%88%B0%E5%B7%A6%E8%BE%B9%EF%BC%8C%E5%B9%B6%E8%87%AA%E5%8A%A8%E9%9A%90%E8%97%8F/</url>
     <content><![CDATA[windows默认是在底部的
@@ -6897,20 +6900,6 @@ Windows 任务栏放在窗口左边和下面哪一种更合理？各有什么利
       <categories>
         <category>Tech</category>
       </categories>
-  </entry>
-  <entry>
-    <title>关于数据一致性</title>
-    <url>/20220717-about-data-consistency/</url>
-    <content><![CDATA[1. 背景电商场景下的订单系统往往会有很多查询需求单体数据库无法满足大量数据存储、各种复杂查询
-2. 方案待更新
-3. 总结待更新
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>存储</tag>
-      </tags>
   </entry>
   <entry>
     <title>关于互联网医疗</title>
@@ -7024,6 +7013,17 @@ try &#123;    // 业务代码&#125; catch (InterruptedException e) &#123;    // 
       <tags>
         <tag>java</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>windows10 专业版激活密钥</title>
+    <url>/20170210-Windows10-%E4%B8%93%E4%B8%9A%E7%89%88%E6%BF%80%E6%B4%BB%E5%AF%86%E9%92%A5/</url>
+    <content><![CDATA[2017年2月10日 16:03:48亲测可用，这比激活工具方便多了
+
+VK7JG-NPHTM-C97JM-9MPGT-3V66TNPPR9-FWDCX-D2C8J-H872K-2YT43W269N-WFGWX-YVC9B-4J6C9-T83GXNYW94-47Q7H-7X9TT-W7TXD-JTYPMNJ4MX-VQQ7Q-FP3DB-VDGHX-7XM87MH37W-N47XK-V7XM9-C7227-GCQG9
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
   </entry>
   <entry>
     <title>关于学习 Rust</title>
@@ -7817,81 +7817,6 @@ Mem0 · 提取、对比、决策三阶段的记忆框架
       </tags>
   </entry>
   <entry>
-    <title>AI 替代的是任务，不是程序员</title>
-    <url>/20261003-ai-replaces-tasks-not-programmers/</url>
-    <content><![CDATA[程序员会不会被 AI 取代，这个问题被反复问了好几年。真到了日常的工作里，被替掉的是一部分任务：样板代码、重复修复、机械实现。审查、验收和判断留了下来，它们的成本并没有下降。
-软件工程攒了几十年的实践，比如完整的回归测试、跟随代码演进的文档、清晰的模块边界和性能基准，一直没有真正普及。它们对人力的消耗太大，有交付压力时总是先被砍掉。AI 把执行成本降下来之后，这些实践第一次变得划算。
-
-
-1. AI 没有取代程序员，重排了他们的工作Anthropic 基础设施团队的体验是，AI 能快速生成 PR，但 RPC、内存、故障回滚这类关键路径仍然要人来看。模型犯小错也很常见：Spec 里写了十条，它可能漏掉一两条。人工审查不是旧习惯，而是安全底线。
-时间的去向也变了。过去要两周才能手写完的任务，现在一小时内就能生成十几个 PR，但工程师还要花几天分批阅读、跑测试、改掉不合适的地方。「一小时抵两周」只对生成环节成立，交付仍然卡在判断和验证上。原型的收益更明显：一个想法以前要申请一个月的验证时间，现在可以先做原型，一两周就能看出方向能不能走。
-真正扩大的还有工作范围。这位工程师说，原来三个人维护的领域，现在他用一半时间就能覆盖，零散知识交给 AI 补齐，自己抓住方向和边界。他开始同时理解产品、设计、策略和技术方案，成为一个更全面的工程师。价值点也跟着上移：知道该做什么、能提出 Roadmap 的人变得更稀缺，只会把手写代码当成全部能力的人，议价空间在变小。
-协作方式也在变。AI 能先替人解释别人的领域和问题，长会因此减少，很多对齐转到异步消息里。沟通的总量没有消失，只是重心从会议记录转向可检索的上下文。
-所以更准确的说法是任务替代。Stack Overflow 2025 年调查显示，84% 的受访者正在用或计划用 AI 工具，51% 的职业开发者每天使用。同时，46% 的人不信任 AI 输出的准确性，只有 33% 信任，高度信任只有 3%。66% 的开发者被「差不多但不对」的答案困扰，45% 觉得调试 AI 生成的代码更费时。这些数据指向同一个结论：AI 已经进入日常，验收权还在人手里。
-市场情绪也在回落。Anthropic 的年化收入从 2026 年 2 月的 140 亿美元涨到 4 月的 300 亿，7 月底到 650 亿，绝对值还在涨，但增速从年初的每月翻倍降到约 17%。Simon Willison 在复盘 2026 年时写道，模型接管了容易的事，剩下的全是难的。年初那种「程序员要被取代了」的推文少了，讨论转向怎么审查 Agent 代码、怎么控制 Token 开销、怎么划授权边界。议题从「会不会被替代」变成了「怎么用好」。
-2. 写代码变便宜，判断没有Tison 在《When Code Is Cheap》里的判断更直接：只有模型能力覆盖了日常工作的基线，生产力才会井喷。他自己已经进入这个状态，但前提说得很清楚，模型得先达到这条基线。到了这一步，核心竞争力是两件事：把愿望说清楚，以及构建出愿望的落地路径。
-他有选择地「不看代码」。有充分回归测试、范围清楚的代码，重构时只看测试快照就够了。需求还模糊的产品，靠端到端体验验证。但核心设计、并发原语、错误格式这类关键决策，他仍然读代码，必要时自己动手改。所以「不看代码」不是放弃审查，而是把审查的负担转移给测试和明确的验收边界。
-他自己的项目也支持这个判断。他重写过一个几千行的工具，用超过 100 次对话和 155 次提交推进。省下来的手写时间没有变成休息，而是用去确认范围、审查入口契约、重命名模块和补集成测试。规模变大以后，协作文档、清晰命名和可读性反而成了更贵的投入。
-他在 2026 年 9 月的《代码上道》里进一步说明了人的位置：AI 不能承担生产事故的责任，Code Owner 必须理解并重构 AI 生成的代码，才能对交付负责。他的做法是把设计固化成 IaC、项目结构、AGENTS.md、标准操作流程和运维日志，再授权 Agent 执行。连开源协作也要换假设：默认 PR 里有 AI 参与，维护者合并代码，就等于接下了责任。
-这些做法和「软件工程实践变得更容易落地」是同一件事。他在 4 月的《Agentic Coding 的边界》里就指出，领域语言、模块边界和活文档能提高上下文的密度，同时提醒 AI 会放大滥用，过度抽象和无意义的测试覆盖率都要警惕。到 9 月，他的说法从「提示词像软工实践」变成了「项目结构和 SOP 本身就是提示词」，立场更冷静，也更可执行。
-3. 初级人才需要新入口，不是更少的入口初级岗位确实在承压。SignalFire 2025 年的报告估计，大厂新毕业生占招聘的比例降到了 7%，比 2019 年低了一半以上。初创公司这个比例低于 6%，比 2019 年低了三分之一以上。原因不能全归给 AI，融资收紧、团队变小和正式培养项目减少是同时发生的。
-困境在于，传统初级工作正在被压缩。写样板代码、做重复修复、维护文档，这些以前是新人建立上下文的入口，现在 Agent 都能快速完成。我在三月的 AI 随笔里记过这个悖论：初级岗位可能变少，但用好 AI 又要求经验。SignalFire 的提醒更直接，公司如果完全跳过初级岗，长期的人才管道会被破坏。
-解法不是等一个天然岗位回来，而是把入口前移到真实问题上。新人得更早接触方向、测试和验收，否则身上只剩「用过 AI」这个没有区分度的标签。
-可行的培养路径有三层：
-
-学基础：算法、操作系统、数据库和系统设计，仍然决定一个人能不能判断 AI 给出的方案，具体语法的重要性在下降。
-用真实项目练验收：拿一个开源或个人项目当练习场，写行为测试和回归测试，读 AI 的 diff，再重构成自己能解释的结构。
-练方向感：用户为什么需要它、哪些方案不该做、怎么算做成了。Roadmap 不是产品经理的专属头衔，而是可以被验证的判断。
-
-这套路径也回应了访谈里的结论。软件工程仍然值得进入，因为编码成本下降会催生更多定制软件。但新人要按「基础 + 验收 + 产品判断」来准备，而不是追语法。
-4. 省下的时间投向验证、原型和组织协作这些投入有一个共同的目标：提高 oneshot 的命中率。我最近在自己的核心库里体会很深。oneshot 出得不好，第一次生成的代码就不能用，只能反复修，而反复修没有明确的终点。没有上线日期逼着交付，也没有测试告诉我架构方向对不对，动力就耗在调试循环里。反过来，Spec 写清楚了、测试边界划好了、架构约束落了盘，oneshot 命中率高，返工少，人就不会卡在中间。
-省下来的编码时间不该全部变成更快的交付，它至少有三个去处。
-第一个去处是验证，把测试、监控、文档和性能基准补齐。Tison 的体会是，AI 不怕枯燥，适合补齐以前懒得写的性能基准和基础测试。Anthropic 的工程师则把大批量生成改成小批量审查，避免上下文丢失和测试资源浪费。我在《稳定性：从传统工程到大模型时代》里的结论也一样：大模型场景不能靠断言判断对错，评测门禁就是新的回归测试。
-第二个去处是原型和定义问题。Anthropic 的工程师用快速原型换来了更多提案机会。我读《部署工程师》时记下的关键不是技术，而是「写第一行代码之前，怎么确保在解决正确的问题」。FDE 的时间分布里有两三成花在对齐方向、拆问题和做架构决策上，一到五天的部署原型要求真实数据、可部署的结果和高管拍板。原型变便宜以后，验证问题是否成立这件事反而更前置了。
-第三个去处是组织协作。我在《Agent 时代的人月神话》读后感里记录过一条分工线：能形式化的工作交给 Agent，目的、判据和处境的判断留给人。Agent 降低了个体的执行成本，但没有消除概念完整性、责任归属和协作摩擦。开会可以用 AI 减少，跨人的文档、命名和协作仍然决定系统能不能长大。软技能因此更像工程能力：把业务问题翻译成技术问题，把技术取舍翻译成业务结果，把现场经验沉淀成团队可复用的文档。
-这些做法已经有了组织级的验证。Anthropic 内部一个团队每季度交付的代码量是过去的 8 倍，其中 80% 由 Claude 生成。测试量涨了 10 倍，半年里 CI 任务量涨了 25 倍，原来的测试调度服务追不上，打了三次补丁之后只能重写。Shopify CEO 把另一面叫「烂泥手榴弹」：工程师用 AI 几秒钟生成一段代码，自己没核对就发给同事，省下的五分钟变成了 reviewer 两小时的排错成本。生成端越快，组织层面的验证和审查架构就越重要。Anthropic 用两周把核心体验提速约 3 倍，走的也是同一条路：先把「哪里慢」变成可测的指标，再让 Agent 去改，最后把指标接进 CI，防止性能掉回去。
-工程团队可以把这些动作制度化：
-
-关键路径必须人工审查：先明确哪些模块涉及资金、隐私、稳定性或不可逆操作，再决定授权范围。
-用回归测试换取有选择的信任：测试充分的服务可以少看实现，核心模型和错误处理仍然要读。
-把工程约束写进可执行文件：IaC、CI、AGENTS.md 和 SOP 让 Agent 有章可循，也让责任可追踪。
-把业务判断写进文档：成功标准、边界、风险和「为什么不这么做」要能被团队复核。
-给验证链路留出余量：Agent 生成的速度远快于人的审查速度，CI、测试和审查带宽要按新产能重新规划。
-
-上面这些做法都不是新发明。AI 改变的是执行成本，让团队能把软件工程的实践从「知道」推进到「每天做」。
-5. 所以，程序员怎么做得更好把 AI 当成放大器。基础越扎实、系统越健康，它放大的是判断和交付能力。基础薄弱、流程混乱，它放大的是返工和技术债。DORA 2025 年的报告也是这个定位：AI 放大组织已有的优点和弱点，收益主要取决于底层系统。
-程序员的具体优势会转移。写代码仍然重要，但它从终点变成了起点，更重要的是定义问题、选择架构、设计验收边界、读懂复杂系统，并对上线的结果负责。范围扩大之后，工程师还要补产品判断和跨职能协作。方向感会带来更多话语权，因为验证一个想法的成本降低之后，组织更愿意采纳可执行的提案。
-我负责把需求变成一条可验证的路径，让 AI 承担机械工作，自己保留技术决策和最终责任。这不是拒绝 AI，也不是把思考外包出去。
-我自己的做法更具体一些。AI Native 不是让每一步都用 AI，而是把工程约束写进文档和流程：需求澄清、接口契约、决策记录都落盘，上下文被污染时及时切换窗口，代码变更同步回文档。Agent 生成之后，Hook 和 CI 做确定性的校验，人只处理真正需要取舍的问题。一些新模型已经不再把软件工程师当作首要用户，代码是写给人和其他 Agent 读的，可读性和可维护性反而更要靠人来守。AI Native 不该只是一个口号，能落地的版本就是这些约束和验证闭环。
-6. 参考
-Stack Overflow 2025 开发者调查 · 一手调查，AI 使用率、信任度、Agent 采用与常见挫败感数据
-SignalFire 科技人才报告 2025 · 二手行业报告，大厂新毕业生招聘占比降至 7%，初创低于 6%
-DORA 2025 报告 · 一手研究摘要，AI 是组织已有能力的放大器
-Tison · When Code Is Cheap · 一手实践，模型能力覆盖基线后生产力才井喷，以及选择性审查的边界
-Tison · 代码上道、Agentic Coding 的边界 · 一手实践，Code Owner 责任、SOP 授权与上下文密度
-AI 工程师访谈 · 机器转写，Anthropic 基础设施工程师的审查、范围扩大与 Roadmap 判断。字幕有专有名词转写错误
-claude.dev · How we made claude.ai 3x faster in two weeks · 官方一手记录，两周把核心体验提速约 3 倍的做法
-CNBC · 二手报道，三个匿名信源，Anthropic 7 月底年化收入 650 亿美元
-Simon Willison · 二手摘录，Anthropic 官方公告中的 2 月 140 亿、4 月 300 亿、5 月 470 亿美元
-Simon Willison · 2026 in LLMs · 一手综述，容易的事被 Agent 接管、剩下的全是难的
-Anthropic 工程团队的 CI 案例 · 二手笔记转述，季度代码量 8 倍、CI 任务量 25 倍，原始出处未核实
-Shopify CEO Tobi Lütke 访谈 · 二手笔记转述，一半 PR 有 AI 参与与「烂泥手榴弹」的说法，原始出处未核实
-稳定性：从传统工程到大模型时代 · 我的博客，评测门禁是新的回归测试
-《部署工程师》(FDE)读后感 · 我的博客，写第一行代码前先确认问题
-《Agent 时代的人月神话》读后感 · 我的博客，人机分工线与协作成本
-【AI 随笔】尝试与洞察 · 我的博客，初级岗位悖论与 Review 负担
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-        <tag>AI 工程</tag>
-        <tag>工程效能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LLM API 中转站数据泄密，剖析它背后的生意与技术</title>
     <url>/20260915-ai-api-relay-station/</url>
     <content><![CDATA[
@@ -8231,6 +8156,81 @@ CVE 编号与影响版本来自公开漏洞库检索，上生产前建议去 NVD
       </tags>
   </entry>
   <entry>
+    <title>AI 替代的是任务，不是程序员</title>
+    <url>/20261003-ai-replaces-tasks-not-programmers/</url>
+    <content><![CDATA[程序员会不会被 AI 取代，这个问题被反复问了好几年。真到了日常的工作里，被替掉的是一部分任务：样板代码、重复修复、机械实现。审查、验收和判断留了下来，它们的成本并没有下降。
+软件工程攒了几十年的实践，比如完整的回归测试、跟随代码演进的文档、清晰的模块边界和性能基准，一直没有真正普及。它们对人力的消耗太大，有交付压力时总是先被砍掉。AI 把执行成本降下来之后，这些实践第一次变得划算。
+
+
+1. AI 没有取代程序员，重排了他们的工作Anthropic 基础设施团队的体验是，AI 能快速生成 PR，但 RPC、内存、故障回滚这类关键路径仍然要人来看。模型犯小错也很常见：Spec 里写了十条，它可能漏掉一两条。人工审查不是旧习惯，而是安全底线。
+时间的去向也变了。过去要两周才能手写完的任务，现在一小时内就能生成十几个 PR，但工程师还要花几天分批阅读、跑测试、改掉不合适的地方。「一小时抵两周」只对生成环节成立，交付仍然卡在判断和验证上。原型的收益更明显：一个想法以前要申请一个月的验证时间，现在可以先做原型，一两周就能看出方向能不能走。
+真正扩大的还有工作范围。这位工程师说，原来三个人维护的领域，现在他用一半时间就能覆盖，零散知识交给 AI 补齐，自己抓住方向和边界。他开始同时理解产品、设计、策略和技术方案，成为一个更全面的工程师。价值点也跟着上移：知道该做什么、能提出 Roadmap 的人变得更稀缺，只会把手写代码当成全部能力的人，议价空间在变小。
+协作方式也在变。AI 能先替人解释别人的领域和问题，长会因此减少，很多对齐转到异步消息里。沟通的总量没有消失，只是重心从会议记录转向可检索的上下文。
+所以更准确的说法是任务替代。Stack Overflow 2025 年调查显示，84% 的受访者正在用或计划用 AI 工具，51% 的职业开发者每天使用。同时，46% 的人不信任 AI 输出的准确性，只有 33% 信任，高度信任只有 3%。66% 的开发者被「差不多但不对」的答案困扰，45% 觉得调试 AI 生成的代码更费时。这些数据指向同一个结论：AI 已经进入日常，验收权还在人手里。
+市场情绪也在回落。Anthropic 的年化收入从 2026 年 2 月的 140 亿美元涨到 4 月的 300 亿，7 月底到 650 亿，绝对值还在涨，但增速从年初的每月翻倍降到约 17%。Simon Willison 在复盘 2026 年时写道，模型接管了容易的事，剩下的全是难的。年初那种「程序员要被取代了」的推文少了，讨论转向怎么审查 Agent 代码、怎么控制 Token 开销、怎么划授权边界。议题从「会不会被替代」变成了「怎么用好」。
+2. 写代码变便宜，判断没有Tison 在《When Code Is Cheap》里的判断更直接：只有模型能力覆盖了日常工作的基线，生产力才会井喷。他自己已经进入这个状态，但前提说得很清楚，模型得先达到这条基线。到了这一步，核心竞争力是两件事：把愿望说清楚，以及构建出愿望的落地路径。
+他有选择地「不看代码」。有充分回归测试、范围清楚的代码，重构时只看测试快照就够了。需求还模糊的产品，靠端到端体验验证。但核心设计、并发原语、错误格式这类关键决策，他仍然读代码，必要时自己动手改。所以「不看代码」不是放弃审查，而是把审查的负担转移给测试和明确的验收边界。
+他自己的项目也支持这个判断。他重写过一个几千行的工具，用超过 100 次对话和 155 次提交推进。省下来的手写时间没有变成休息，而是用去确认范围、审查入口契约、重命名模块和补集成测试。规模变大以后，协作文档、清晰命名和可读性反而成了更贵的投入。
+他在 2026 年 9 月的《代码上道》里进一步说明了人的位置：AI 不能承担生产事故的责任，Code Owner 必须理解并重构 AI 生成的代码，才能对交付负责。他的做法是把设计固化成 IaC、项目结构、AGENTS.md、标准操作流程和运维日志，再授权 Agent 执行。连开源协作也要换假设：默认 PR 里有 AI 参与，维护者合并代码，就等于接下了责任。
+这些做法和「软件工程实践变得更容易落地」是同一件事。他在 4 月的《Agentic Coding 的边界》里就指出，领域语言、模块边界和活文档能提高上下文的密度，同时提醒 AI 会放大滥用，过度抽象和无意义的测试覆盖率都要警惕。到 9 月，他的说法从「提示词像软工实践」变成了「项目结构和 SOP 本身就是提示词」，立场更冷静，也更可执行。
+3. 初级人才需要新入口，不是更少的入口初级岗位确实在承压。SignalFire 2025 年的报告估计，大厂新毕业生占招聘的比例降到了 7%，比 2019 年低了一半以上。初创公司这个比例低于 6%，比 2019 年低了三分之一以上。原因不能全归给 AI，融资收紧、团队变小和正式培养项目减少是同时发生的。
+困境在于，传统初级工作正在被压缩。写样板代码、做重复修复、维护文档，这些以前是新人建立上下文的入口，现在 Agent 都能快速完成。我在三月的 AI 随笔里记过这个悖论：初级岗位可能变少，但用好 AI 又要求经验。SignalFire 的提醒更直接，公司如果完全跳过初级岗，长期的人才管道会被破坏。
+解法不是等一个天然岗位回来，而是把入口前移到真实问题上。新人得更早接触方向、测试和验收，否则身上只剩「用过 AI」这个没有区分度的标签。
+可行的培养路径有三层：
+
+学基础：算法、操作系统、数据库和系统设计，仍然决定一个人能不能判断 AI 给出的方案，具体语法的重要性在下降。
+用真实项目练验收：拿一个开源或个人项目当练习场，写行为测试和回归测试，读 AI 的 diff，再重构成自己能解释的结构。
+练方向感：用户为什么需要它、哪些方案不该做、怎么算做成了。Roadmap 不是产品经理的专属头衔，而是可以被验证的判断。
+
+这套路径也回应了访谈里的结论。软件工程仍然值得进入，因为编码成本下降会催生更多定制软件。但新人要按「基础 + 验收 + 产品判断」来准备，而不是追语法。
+4. 省下的时间投向验证、原型和组织协作这些投入有一个共同的目标：提高 oneshot 的命中率。我最近在自己的核心库里体会很深。oneshot 出得不好，第一次生成的代码就不能用，只能反复修，而反复修没有明确的终点。没有上线日期逼着交付，也没有测试告诉我架构方向对不对，动力就耗在调试循环里。反过来，Spec 写清楚了、测试边界划好了、架构约束落了盘，oneshot 命中率高，返工少，人就不会卡在中间。
+省下来的编码时间不该全部变成更快的交付，它至少有三个去处。
+第一个去处是验证，把测试、监控、文档和性能基准补齐。Tison 的体会是，AI 不怕枯燥，适合补齐以前懒得写的性能基准和基础测试。Anthropic 的工程师则把大批量生成改成小批量审查，避免上下文丢失和测试资源浪费。我在《稳定性：从传统工程到大模型时代》里的结论也一样：大模型场景不能靠断言判断对错，评测门禁就是新的回归测试。
+第二个去处是原型和定义问题。Anthropic 的工程师用快速原型换来了更多提案机会。我读《部署工程师》时记下的关键不是技术，而是「写第一行代码之前，怎么确保在解决正确的问题」。FDE 的时间分布里有两三成花在对齐方向、拆问题和做架构决策上，一到五天的部署原型要求真实数据、可部署的结果和高管拍板。原型变便宜以后，验证问题是否成立这件事反而更前置了。
+第三个去处是组织协作。我在《Agent 时代的人月神话》读后感里记录过一条分工线：能形式化的工作交给 Agent，目的、判据和处境的判断留给人。Agent 降低了个体的执行成本，但没有消除概念完整性、责任归属和协作摩擦。开会可以用 AI 减少，跨人的文档、命名和协作仍然决定系统能不能长大。软技能因此更像工程能力：把业务问题翻译成技术问题，把技术取舍翻译成业务结果，把现场经验沉淀成团队可复用的文档。
+这些做法已经有了组织级的验证。Anthropic 内部一个团队每季度交付的代码量是过去的 8 倍，其中 80% 由 Claude 生成。测试量涨了 10 倍，半年里 CI 任务量涨了 25 倍，原来的测试调度服务追不上，打了三次补丁之后只能重写。Shopify CEO 把另一面叫「烂泥手榴弹」：工程师用 AI 几秒钟生成一段代码，自己没核对就发给同事，省下的五分钟变成了 reviewer 两小时的排错成本。生成端越快，组织层面的验证和审查架构就越重要。Anthropic 用两周把核心体验提速约 3 倍，走的也是同一条路：先把「哪里慢」变成可测的指标，再让 Agent 去改，最后把指标接进 CI，防止性能掉回去。
+工程团队可以把这些动作制度化：
+
+关键路径必须人工审查：先明确哪些模块涉及资金、隐私、稳定性或不可逆操作，再决定授权范围。
+用回归测试换取有选择的信任：测试充分的服务可以少看实现，核心模型和错误处理仍然要读。
+把工程约束写进可执行文件：IaC、CI、AGENTS.md 和 SOP 让 Agent 有章可循，也让责任可追踪。
+把业务判断写进文档：成功标准、边界、风险和「为什么不这么做」要能被团队复核。
+给验证链路留出余量：Agent 生成的速度远快于人的审查速度，CI、测试和审查带宽要按新产能重新规划。
+
+上面这些做法都不是新发明。AI 改变的是执行成本，让团队能把软件工程的实践从「知道」推进到「每天做」。
+5. 所以，程序员怎么做得更好把 AI 当成放大器。基础越扎实、系统越健康，它放大的是判断和交付能力。基础薄弱、流程混乱，它放大的是返工和技术债。DORA 2025 年的报告也是这个定位：AI 放大组织已有的优点和弱点，收益主要取决于底层系统。
+程序员的具体优势会转移。写代码仍然重要，但它从终点变成了起点，更重要的是定义问题、选择架构、设计验收边界、读懂复杂系统，并对上线的结果负责。范围扩大之后，工程师还要补产品判断和跨职能协作。方向感会带来更多话语权，因为验证一个想法的成本降低之后，组织更愿意采纳可执行的提案。
+我负责把需求变成一条可验证的路径，让 AI 承担机械工作，自己保留技术决策和最终责任。这不是拒绝 AI，也不是把思考外包出去。
+我自己的做法更具体一些。AI Native 不是让每一步都用 AI，而是把工程约束写进文档和流程：需求澄清、接口契约、决策记录都落盘，上下文被污染时及时切换窗口，代码变更同步回文档。Agent 生成之后，Hook 和 CI 做确定性的校验，人只处理真正需要取舍的问题。一些新模型已经不再把软件工程师当作首要用户，代码是写给人和其他 Agent 读的，可读性和可维护性反而更要靠人来守。AI Native 不该只是一个口号，能落地的版本就是这些约束和验证闭环。
+6. 参考
+Stack Overflow 2025 开发者调查 · 一手调查，AI 使用率、信任度、Agent 采用与常见挫败感数据
+SignalFire 科技人才报告 2025 · 二手行业报告，大厂新毕业生招聘占比降至 7%，初创低于 6%
+DORA 2025 报告 · 一手研究摘要，AI 是组织已有能力的放大器
+Tison · When Code Is Cheap · 一手实践，模型能力覆盖基线后生产力才井喷，以及选择性审查的边界
+Tison · 代码上道、Agentic Coding 的边界 · 一手实践，Code Owner 责任、SOP 授权与上下文密度
+AI 工程师访谈 · 机器转写，Anthropic 基础设施工程师的审查、范围扩大与 Roadmap 判断。字幕有专有名词转写错误
+claude.dev · How we made claude.ai 3x faster in two weeks · 官方一手记录，两周把核心体验提速约 3 倍的做法
+CNBC · 二手报道，三个匿名信源，Anthropic 7 月底年化收入 650 亿美元
+Simon Willison · 二手摘录，Anthropic 官方公告中的 2 月 140 亿、4 月 300 亿、5 月 470 亿美元
+Simon Willison · 2026 in LLMs · 一手综述，容易的事被 Agent 接管、剩下的全是难的
+Anthropic 工程团队的 CI 案例 · 二手笔记转述，季度代码量 8 倍、CI 任务量 25 倍，原始出处未核实
+Shopify CEO Tobi Lütke 访谈 · 二手笔记转述，一半 PR 有 AI 参与与「烂泥手榴弹」的说法，原始出处未核实
+稳定性：从传统工程到大模型时代 · 我的博客，评测门禁是新的回归测试
+《部署工程师》(FDE)读后感 · 我的博客，写第一行代码前先确认问题
+《Agent 时代的人月神话》读后感 · 我的博客，人机分工线与协作成本
+【AI 随笔】尝试与洞察 · 我的博客，初级岗位悖论与 Review 负担
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+        <tag>AI 工程</tag>
+        <tag>工程效能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>apt-get 常用命令</title>
     <url>/20170815-apt-get%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[apt-get应该debian内核系列的系统都能用：
@@ -8396,8 +8396,8 @@ HashMap &#x2F; jdk &#x2F; 多线程 &#x2F; jvm 并入 java。
         <category>Tech</category>
       </categories>
       <tags>
-        <tag>AI 工程</tag>
         <tag>效率</tag>
+        <tag>AI 工程</tag>
       </tags>
   </entry>
   <entry>
@@ -8630,25 +8630,6 @@ IOT 设备罢工，感应开关灯之类的没法用，稍微有点影响体验
       </tags>
   </entry>
   <entry>
-    <title>count函数效率问题 - 了解count函数</title>
-    <url>/20170303-count%E5%87%BD%E6%95%B0%E6%95%88%E7%8E%87%E9%97%AE%E9%A2%98%20-%20%E4%BA%86%E8%A7%A3count%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[count函数的作用想要真正的理解count函数，我们就必须明白count函数的作用。
-作用一：统计某一列非空(not null)值得数量，即统计某列有值得结果数,使用count(col)。
-作用二：统计结果集的行数，此时不用管某列是否为null值。即使用count(*).
-明白了这点，我们就应该知道MySQL的count(*)并不是想象中的那样，统计每一列的值，而是直接忽视掉所有列，直接统计行数，那么它的效率肯定是很高的。
-但是有一点，当col指定了该字段为NOT NULL时实际上，MySQL会自动将count(col)转为count(*),但是这样也同样耗费了些时间，如果col没有指定为NOT NULL的话，那么效率就更低了，MySQL就必须要判断每一行的值是否为空。
-所以综上所述，如果是要统计行数最好优先使用select count(*)
-当统计某一列等于多少的值得时候可以使用下面两种方法:
-SELECT SUM(IF(id = 23,1,0)) FROM table SELECT COUNT(id = 23 OR NULL) FROM table 
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>城市与抱负：环境在说什么</title>
     <url>/20260930-cities-and-ambition/</url>
     <content><![CDATA[
@@ -8702,6 +8683,76 @@ Cities and Ambition · Paul Graham，2008 年 5 月，城市信息的完整清�
 国务院关于上海市城市总体规划的批复 · 国函〔2017〕147 号，上海五个中心的原文
 盛颖与 SGLang：从江西的免费教程到推理引擎 · 本站，开源动机那一段
 
+]]></content>
+      <categories>
+        <category>Growth</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>count函数效率问题 - 了解count函数</title>
+    <url>/20170303-count%E5%87%BD%E6%95%B0%E6%95%88%E7%8E%87%E9%97%AE%E9%A2%98%20-%20%E4%BA%86%E8%A7%A3count%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[count函数的作用想要真正的理解count函数，我们就必须明白count函数的作用。
+作用一：统计某一列非空(not null)值得数量，即统计某列有值得结果数,使用count(col)。
+作用二：统计结果集的行数，此时不用管某列是否为null值。即使用count(*).
+明白了这点，我们就应该知道MySQL的count(*)并不是想象中的那样，统计每一列的值，而是直接忽视掉所有列，直接统计行数，那么它的效率肯定是很高的。
+但是有一点，当col指定了该字段为NOT NULL时实际上，MySQL会自动将count(col)转为count(*),但是这样也同样耗费了些时间，如果col没有指定为NOT NULL的话，那么效率就更低了，MySQL就必须要判断每一行的值是否为空。
+所以综上所述，如果是要统计行数最好优先使用select count(*)
+当统计某一列等于多少的值得时候可以使用下面两种方法:
+SELECT SUM(IF(id = 23,1,0)) FROM table SELECT COUNT(id = 23 OR NULL) FROM table 
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《大江大河》观后感</title>
+    <url>/20260628-dajiangdahe/</url>
+    <content><![CDATA[激荡时代的协议升级：一个技术管理者的《大江大河》通关复盘坐在现代企业的格子间里，看着分布式架构的服务器红绿闪烁，我的眼泪却数次为了几十年前的金州厂与东海荒滩而流。
+《大江大河》三部曲，表面上写的是时代的洪流，但在一个技术转管理的互联网人眼里，这分明是一部硬核工程师的“组织突围与系统重构记”。主角宋运辉这三十年的成长，精准地映射了我们每一个技术人从“纯粹写代码”走向“全盘做控盘”的升级阵痛。
+1. 技术人的立命之本：永不向KPI妥协的“系统坚持”作为技术人，全剧最让我热血沸腾的，是宋运辉在面对行政压力时“不调参数降低质量”的死磕。
+
+在快速迭代、急功近利的职场环境中，我们经常会遇到为了赶进度、保政绩（KPI），逼着技术团队“切功能、砍测试、带病上线”的荒唐命令。但早期的宋运辉用工程师的底气做出了表率：代码逻辑错了一行，系统迟早要崩；设备参数降了一档，安全隐患就会永久埋下。
+这种对技术底线的死守，是技术管理者不可动摇的“底层代码”。宋运辉后来当了厂长，他的操作系统依然是那个坐在车间里算数据的工程师。我们可以学会妥协的艺术，但永远不能出卖系统安全的灵魂。
+2. 关系的微操：从“非黑即白”到“灰色接口的流量控制”宋运辉命运的转折，始于老水在图书馆给他的那场灵魂授课，以及他出差德国后的“开眼看世界”。那个曾经不懂人情世故、只会和技术死磕的刺头，开始学会了“看小猫脸色”。
+这绝不是技术人的同流合污，而是高阶管理者必须具备的“流量控制与接口兼容”能力。
+早期系统（金州厂）： 非黑即白，不懂政治，全靠老水当防火墙。一旦老水退休，立刻被闵厂长过河拆桥，遭遇系统锁死。
+中期系统（东海厂）： 经历了程家窒息婚姻的道德绑架、经历了东海批发市场的人事拉扯。他终于意识到：人不是机器，人是有情绪、有诉求、有利益盘算的。
+在鸿门宴上他果断与程家撕破脸，宣布“不让家人管工作”，不是冷血，而是首席架构师在面对严重Bug时选择的“强行切断、全面重构”。他学会了用政客听得懂的语言去要预算，用国际合规的手段去跟跨国资本（洛达）对赌。懂人情世故，是为了保护技术的纯粹；学会看脸色，是为了让技术方案能够拿到带宽顺利上线。
+3. 救急不救穷：从杨巡的“甩猴子”看管理的效率法则全剧最让我高呼过瘾的商战名场面，莫过于杨巡在东海批发市场办公室里，轻松把“猴子”甩回给下岗工人的桥段。这简直是教科书级的管理学太极推手。
+下岗潮是时代的系统性穷困，靠个人的资本去“救穷”是个无底洞，只会引发内存泄漏。杨巡通过：
+共情拉平： 卸下对方防备；
+风险转移： 厘清法理边界；
+精准救急： 提供靠劳动活命的生存接口；
+完璧归赵： 把不干活就没饭吃的罪名扣回给工人代表。
+这套逻辑完美对齐了现代企业架构：线上流量暴涨，我们可以加30台服务器顶住（救急）；但如果底层架构烂成一坨，天天靠烧钱买服务器死撑就是犯罪（救穷）。梁思申最终选择伸手与杨巡合作，正是看中了杨巡这个“底层发动机”自造血的恐怖力量。真正的智者，永远只把资源投放在能产生乘数效应的节点上。
+4. 终极归宿：三种操作系统的时代宿命到了第三部，三个主角站在了各自人生的交叉路口，阿耐用冰冷的笔触完成了中国经济的“基因复盘”：
+宋运辉（精英国企&#x2F;完全体CEO）：
+
+在彭阳农药厂的低谷期，他退居幕后做纯管理。
+他不再执着于自己下场做实验，而是抓方向（转产双效磷）、给团队当防火墙、用肉身抗住外界的行政流言。
+他完成了从 CTO 到 CEO 的蜕变，用“不可替代的技术确定性”赢回了东海的控盘权。
+
+杨巡（民营私企&#x2F;生存大师）：
+
+跪过、哭过、做过假账，但他身段极软，能敏锐感知政策的风向。
+在梁思申遭遇美国争产官司、梁父涉嫌金融违规“搭进去”、整个梁家全面塌方的至暗时刻，杨巡用他极端的求生欲和资本原始积累，完成了阶层上岸。
+
+雷东宝（集体经济&#x2F;草莽大锅饭）：
+
+他的操作系统停留在了几十年前。
+对威权的迷信、对“传宗接代”的封建执念（导致荒唐的代孕黑化），让他搞一言堂、瞎指挥。
+他的操作系统无法兼容现代企业制度，最终被小雷家无情抛弃，成为了留在岸上的时代化石。
+
+5. 结语：轻舟已过万重山《大江大河》之所以成为神剧，是因为它告诉所有技术人：任何技术和商业的成功，最终都必须在人性的江湖里落地。
+梁家最终的政治覆灭、梁母在海外嘈杂中凄凉的电话背景音，剥离了梁思申身上所有属于特权阶层的虚妄。当她赤手空拳重新站在宋运辉面前时，两个在智商、眼界、价值观完全对等的高阶玩家，才完成了跨越时代、超越流言的“系统合并”。
+我们不能跟着别人去浑水摸鱼，我们要跟着太阳走。
+看完了小辉的前半生，合上剧本。每一个坐在格子间里改代码、带团队的技术管理者，骨子里其实都住着一个早期的宋运辉——希望世界按照确定的逻辑运行。但最终，我们都要带着他留给我们的智慧，在盘根错节的现实世界里，带着脚镣，跳出最美的舞。
 ]]></content>
       <categories>
         <category>Growth</category>
@@ -8808,57 +8859,6 @@ Cities and Ambition · Paul Graham，2008 年 5 月，城市信息的完整清�
       </categories>
       <tags>
         <tag>水族</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《大江大河》观后感</title>
-    <url>/20260628-dajiangdahe/</url>
-    <content><![CDATA[激荡时代的协议升级：一个技术管理者的《大江大河》通关复盘坐在现代企业的格子间里，看着分布式架构的服务器红绿闪烁，我的眼泪却数次为了几十年前的金州厂与东海荒滩而流。
-《大江大河》三部曲，表面上写的是时代的洪流，但在一个技术转管理的互联网人眼里，这分明是一部硬核工程师的“组织突围与系统重构记”。主角宋运辉这三十年的成长，精准地映射了我们每一个技术人从“纯粹写代码”走向“全盘做控盘”的升级阵痛。
-1. 技术人的立命之本：永不向KPI妥协的“系统坚持”作为技术人，全剧最让我热血沸腾的，是宋运辉在面对行政压力时“不调参数降低质量”的死磕。
-
-在快速迭代、急功近利的职场环境中，我们经常会遇到为了赶进度、保政绩（KPI），逼着技术团队“切功能、砍测试、带病上线”的荒唐命令。但早期的宋运辉用工程师的底气做出了表率：代码逻辑错了一行，系统迟早要崩；设备参数降了一档，安全隐患就会永久埋下。
-这种对技术底线的死守，是技术管理者不可动摇的“底层代码”。宋运辉后来当了厂长，他的操作系统依然是那个坐在车间里算数据的工程师。我们可以学会妥协的艺术，但永远不能出卖系统安全的灵魂。
-2. 关系的微操：从“非黑即白”到“灰色接口的流量控制”宋运辉命运的转折，始于老水在图书馆给他的那场灵魂授课，以及他出差德国后的“开眼看世界”。那个曾经不懂人情世故、只会和技术死磕的刺头，开始学会了“看小猫脸色”。
-这绝不是技术人的同流合污，而是高阶管理者必须具备的“流量控制与接口兼容”能力。
-早期系统（金州厂）： 非黑即白，不懂政治，全靠老水当防火墙。一旦老水退休，立刻被闵厂长过河拆桥，遭遇系统锁死。
-中期系统（东海厂）： 经历了程家窒息婚姻的道德绑架、经历了东海批发市场的人事拉扯。他终于意识到：人不是机器，人是有情绪、有诉求、有利益盘算的。
-在鸿门宴上他果断与程家撕破脸，宣布“不让家人管工作”，不是冷血，而是首席架构师在面对严重Bug时选择的“强行切断、全面重构”。他学会了用政客听得懂的语言去要预算，用国际合规的手段去跟跨国资本（洛达）对赌。懂人情世故，是为了保护技术的纯粹；学会看脸色，是为了让技术方案能够拿到带宽顺利上线。
-3. 救急不救穷：从杨巡的“甩猴子”看管理的效率法则全剧最让我高呼过瘾的商战名场面，莫过于杨巡在东海批发市场办公室里，轻松把“猴子”甩回给下岗工人的桥段。这简直是教科书级的管理学太极推手。
-下岗潮是时代的系统性穷困，靠个人的资本去“救穷”是个无底洞，只会引发内存泄漏。杨巡通过：
-共情拉平： 卸下对方防备；
-风险转移： 厘清法理边界；
-精准救急： 提供靠劳动活命的生存接口；
-完璧归赵： 把不干活就没饭吃的罪名扣回给工人代表。
-这套逻辑完美对齐了现代企业架构：线上流量暴涨，我们可以加30台服务器顶住（救急）；但如果底层架构烂成一坨，天天靠烧钱买服务器死撑就是犯罪（救穷）。梁思申最终选择伸手与杨巡合作，正是看中了杨巡这个“底层发动机”自造血的恐怖力量。真正的智者，永远只把资源投放在能产生乘数效应的节点上。
-4. 终极归宿：三种操作系统的时代宿命到了第三部，三个主角站在了各自人生的交叉路口，阿耐用冰冷的笔触完成了中国经济的“基因复盘”：
-宋运辉（精英国企&#x2F;完全体CEO）：
-
-在彭阳农药厂的低谷期，他退居幕后做纯管理。
-他不再执着于自己下场做实验，而是抓方向（转产双效磷）、给团队当防火墙、用肉身抗住外界的行政流言。
-他完成了从 CTO 到 CEO 的蜕变，用“不可替代的技术确定性”赢回了东海的控盘权。
-
-杨巡（民营私企&#x2F;生存大师）：
-
-跪过、哭过、做过假账，但他身段极软，能敏锐感知政策的风向。
-在梁思申遭遇美国争产官司、梁父涉嫌金融违规“搭进去”、整个梁家全面塌方的至暗时刻，杨巡用他极端的求生欲和资本原始积累，完成了阶层上岸。
-
-雷东宝（集体经济&#x2F;草莽大锅饭）：
-
-他的操作系统停留在了几十年前。
-对威权的迷信、对“传宗接代”的封建执念（导致荒唐的代孕黑化），让他搞一言堂、瞎指挥。
-他的操作系统无法兼容现代企业制度，最终被小雷家无情抛弃，成为了留在岸上的时代化石。
-
-5. 结语：轻舟已过万重山《大江大河》之所以成为神剧，是因为它告诉所有技术人：任何技术和商业的成功，最终都必须在人性的江湖里落地。
-梁家最终的政治覆灭、梁母在海外嘈杂中凄凉的电话背景音，剥离了梁思申身上所有属于特权阶层的虚妄。当她赤手空拳重新站在宋运辉面前时，两个在智商、眼界、价值观完全对等的高阶玩家，才完成了跨越时代、超越流言的“系统合并”。
-我们不能跟着别人去浑水摸鱼，我们要跟着太阳走。
-看完了小辉的前半生，合上剧本。每一个坐在格子间里改代码、带团队的技术管理者，骨子里其实都住着一个早期的宋运辉——希望世界按照确定的逻辑运行。但最终，我们都要带着他留给我们的智慧，在盘根错节的现实世界里，带着脚镣，跳出最美的舞。
-]]></content>
-      <categories>
-        <category>Growth</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
       </tags>
   </entry>
   <entry>
@@ -8983,16 +8983,6 @@ ps:是谁说数学没用的 ？？？？
       </tags>
   </entry>
   <entry>
-    <title>开源画图工具(各种图)：draw.io 支持 Web、macOS、Windows、Linux</title>
-    <url>/20200406-draw.io-open-source-drawing-tools-support-web-mac-windows-linux/</url>
-    <content><![CDATA[draw.io 一个很棒的开源画图工具，可以导出 xml、pdf、html、png 等各种格式其实重点是开源，目前好几个地方看到有在用，之前用网页版，现在用桌面版多些
-网页版：draw.io桌面版：github 下载支持：Windows、macOS、Linux、Google Chrome OS
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>dubbo transport Data length too large-14277263-max payload-8388608 channel-NettyChannel</title>
     <url>/20190307-dubbo%20transport%20Data%20length%20too%20large-14277263-max%20payload-8388608%20channel-NettyChannel/</url>
     <content><![CDATA[一、报错信息com.alibaba.dubbo.remoting.transport.ExceedPayloadLimitException: Data length too large: 14277263, max payload: 8388608, channel: NettyChannel [channel=[id: 0x12a13c8f, /172.0.0.1:49402 =&gt; /172.0.0.2:23888]]
@@ -9011,6 +9001,16 @@ dubbo.protocol.dubbo.payload=11557050
       <tags>
         <tag>中间件</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>开源画图工具(各种图)：draw.io 支持 Web、macOS、Windows、Linux</title>
+    <url>/20200406-draw.io-open-source-drawing-tools-support-web-mac-windows-linux/</url>
+    <content><![CDATA[draw.io 一个很棒的开源画图工具，可以导出 xml、pdf、html、png 等各种格式其实重点是开源，目前好几个地方看到有在用，之前用网页版，现在用桌面版多些
+网页版：draw.io桌面版：github 下载支持：Windows、macOS、Linux、Google Chrome OS
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
   </entry>
   <entry>
     <title>dubbo与zookeeper的关系</title>
@@ -9700,6 +9700,116 @@ debug非常非常重要。
       </tags>
   </entry>
   <entry>
+    <title>魅族云短信导出成 CSV 和 Markdown：7600 条实录</title>
+    <url>/20261008-flyme-sms-export/</url>
+    <content><![CDATA[短信不算笔记，但同样是散在外面的一份记录。既然要把这些东西收敛到本地，便签之外顺手把它也拿下来。脚本在 phone-cloud-data-export 仓库里。
+魅族云的短信备份页面还在，地址 cloud.flyme.cn/browser/sms-list.jsp。我账号里 1595 个会话、7600 条消息，最早一条是 2007 年，最后一条停在 2022 年初。
+网页版没有批量导出，只能一页页翻。这篇和魅族云便签、锤子便签是同一批，都用浏览器里跑脚本的办法把数据拿下来，再在本地转成 CSV 和 Markdown。
+
+
+1. 接口短信页面的接口都是 POST，表单参数，URL 上要带 tkscsrf：
+
+会话列表：/c/browser/sms/getsmsgroups?tkscsrf=...，body 参数 status=phone、type（文件夹）、start、length
+某个会话的消息：/c/browser/sms/getsmsdialogs?tkscsrf=...，body 参数 contact、status=phone、type、start、length
+
+tkscsrf 是页面自己请求里带的令牌，脚本从 performance 里最近一条请求的 URL 上取，取不到再读 Cookie。
+抓取脚本按文件夹逐个抓会话，再逐个抓会话里的消息，每页 50 条，同时开 3 个会话，每个请求之间留 90 毫秒。跑的时候标签页要留在前台，后台标签页的定时器会被浏览器降速，慢很多。
+每 200 个会话自动存一份分段文件，最后再存一份 full 文件。分段文件是累积快照，中断了重跑不会丢已经抓到的部分。
+2. 抓下来的比实际多接口的 type 参数有 0 到 5 六种取值，实测 type=0/2/4/5 返回的是同一批会话，号码集合和消息都一致，type=3 才是另一批。
+抓的时候按 type 和号码两个键记录，所以原始记录数大于实际会话数。输出阶段按号码合并，同一条消息按 uuId 去重，最后是 1595 个会话、7600 条消息。
+方向靠接口的 type 字段判断：1 是收件，2 是发件。用几条收发方向明确的短信核对过一致。原始字段都留在 短信原始.json 里，有出入可以回去对。
+收 6659 条，发 941 条。收发都有的会话 98 个，只有收的 1455 个，只有发的 42 个。只有收的那批基本都是 106 开头的验证码和通知。
+3. 换行短信正文里混着 \r\n。如果只按 \n 切，行尾会剩一个 \r，在部分编辑器里表现为一个乱码方块。转换脚本先把 \r\n 统一成 \n 再处理。
+按联系人的 Markdown 里，每行一条消息，收和发顶格，正文里的换行缩进两格续写：
+收 2014-07-24 04:58:43 晚上一起吃饭吗发 2014-07-24 05:20:15 好，六点到发 2014-07-29 19:32:10 到楼下了，下来开门  顺便把伞带上
+
+每行末尾加两个空格当硬换行，否则标准 Markdown 会把整个会话渲染成一整段。这两个空格在代码块里看不出来。加上之后在 Obsidian、VS Code 预览和 GitHub 上都正常换行。风格一样可以换，--line-break=space（默认）、br、blank、keep。
+这个账号没有彩信，photo_type 全是 0，所以没有图片要另外下载。
+4. 导出结果输出四个东西：
+
+全部短信.csv：7600 行，一行一条，列是发送时间、方向、对方号码、对方名称、文件夹、正文、uuid。带 BOM，Excel 和 WPS 直接打开不乱码
+短信原始.json：去重后的完整数据，字段最全，含 smsStatus、protocol、photo_type
+按联系人/*.md：消息数大于等于 2 的 763 个会话，一个会话一个文件，时间正序
+收发都有/*.md 和 收发都有.csv：只挑收发都有的 98 个会话
+
+时间范围 2007-11-15 04:40:28 至 2022-01-08 01:10:57。消息最多的一个会话有 684 条。
+5. 脚本都用 node 直接跑，没有第三方依赖：
+# CSV + JSON + 导出报告node sms-convert.js sms flyme-sms-*-full.json# 按联系人 md，只出消息数 &gt;= 2 的会话node sms-convert.js sms flyme-sms-*-full.json --by-contact --both --min-msgs=2
+
+仓库地址：phone-cloud-data-export
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>效率</tag>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>魅族云便签导出到本地 Markdown：605 条实录</title>
+    <url>/20261008-flyme-notes-export/</url>
+    <content><![CDATA[笔记散在好几个地方，魅族便签是攒得最多的一处。这轮的打算是把它们收敛到本地一个目录，来龙去脉写在锤子便签那篇里。脚本在 phone-cloud-data-export 仓库里。
+魅族云便签的网页版在 notes.flyme.cn。我账号里 605 条笔记，时间从 2014 年排到 2022 年，多数是当年在地铁上用手机随手记的。
+这套导出也分两步：先在已经登录的页面里跑脚本抓原始 JSON，再在本地转成带 frontmatter 的 Markdown。Cookie 不出本机。
+
+
+1. 接口页面是 React 单页应用，接口都是 POST，同源带 Cookie，请求头带 X-Requested-With: XMLHttpRequest。
+用到三个：
+
+分类（标签）列表：/c/browser/note/gettags
+某个分类下的笔记：/c/browser/note/getnotegroups，参数 start、length、groupUuid，-1 表示「全部」
+按内容搜索：/c/browser/note/getnotebycontent，参数 content、start、limit
+
+返回结构是 &#123;returnCode, returnMessage, returnValue&#125;，returnCode 为 200 才算成功。登录态过期会返回 302 加一个登录跳转地址，脚本据此判断要不要重新登录。
+笔记对象的字段：uuid、title、body、groupStatus（分类 id）、createDate（毫秒时间戳）、updateDate、topdate（置顶）、remind（提醒）、fontSize、status（D 表示回收站）、files（附件的文件名到地址）。
+和锤子那份不同，这里创建时间是有的，frontmatter 里 created 和 updated 都有值。
+2. 抓取脚本按「全部」和每个分类各翻一遍页，每页 200 条，按 uuid 去重打包成一个 JSON。
+跑完会自报完整性：把抓到的条数和云端各分类条数之和对比，另外打印正文为空的条数。这次的账是：正常 557 条、回收站 47 条、加密占位 1 条，去重后正好 605 条。
+关于为什么用浏览器控制台而不是复制 Cookie，理由和锤子那篇一样，这里不重复。
+3. 正文是块数组body 是个 JSON 字符串，里面是按顺序排的块数组。每个块有自己的 state：
+
+0：段落
+1 &#x2F; 2：待办，未完成和已完成
+3 &#x2F; 4 &#x2F; 5：图片、录音、附件
+50 &#x2F; 51 &#x2F; 53：有序列表、无序列表、列表项
+60：标题，级别在 level 里
+
+文字样式单独放在 span 字段里，长这样：[&#123;span: 样式码, start, end, param&#125;]，start 和 end 是字符下标。
+样式码对照：
+
+1 加粗
+6 下划线
+7 斜体
+16 字号
+17 链接，param 是 URL
+18 删除线
+19 高亮
+
+转换脚本按这些码还原 Markdown。列表能带嵌套，标题能到六级。
+云端 583 条笔记本身没有标题，文件名取正文第一行代替，frontmatter 里的 title 保持云端空值，不编一个出来。
+4. 换行428 条笔记带换行，单换行 5579 处，空行另有 5710 处。
+这次用的是行尾两个空格，也就是 Markdown 的硬换行标记。Obsidian 里观感不变，VS Code 预览和 GitHub 上也认。转换后逐条核对过，标记位置和原始换行一一对应。
+正文里如果混了 \r\n，会先统一成 \n，否则残留的 \r 会把行切坏。这个坑在短信那篇里踩过。
+风格可以换，加 --line-break= 重跑，取值和锤子那篇一致：space、br、blank、keep。
+5. 附件39 个图片和附件还在云端，地址在 cloud.flyme.cn/c/browser/download/...，同样要登录态。要一起落到本地就再跑一次下载脚本，下完把 md 里的云端地址换成本地路径。
+6. 核对node verify.js flyme-notes-raw.json notes 逐条比对 md 和原始 JSON 的创建时间、修改时间、时间戳、标题、分类、正文，并检查有没有漏导。
+结果 558&#x2F;558，缺失 0，字段全部一致。
+7. 结果605 条原始笔记写出 558 个 md，回收站那 47 条默认跳过，加 --include-deleted 可以一起导。
+按分类分目录：未分类 496、JAVA 55、study 5、plan 1、生活 1。时间跨度 2014-07-18 至 2022-03-26。文件名是「创建日期 标题.md」。
+frontmatter 字段：title、uuid、category、category_id、created、updated、created_ts、updated_ts、status、pinned、remind、font_size、attachments。
+这 558 个 md 和锤子便签那批放进同一个库，搜索一次能搜全。Markdown 不绑定工具，Obsidian 和 VS Code 都能直接读，uuid 留着以后跟云端对账。
+8. 脚本抓取、下载附件、转换、校验四个脚本，都用 node 直接跑，没有第三方依赖。
+仓库地址：phone-cloud-data-export
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>github api - github api中文说明</title>
     <url>/20170428-github%20api%20-%20github%20api%E4%B8%AD%E6%96%87%E8%AF%B4%E6%98%8E/</url>
     <content><![CDATA[github api的网址
@@ -10084,6 +10194,40 @@ tags: [关键词1,关键词2]
       </categories>
   </entry>
   <entry>
+    <title>hexo百度抓取失败解决办法</title>
+    <url>/20170216-hexo%E7%99%BE%E5%BA%A6%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+    <content><![CDATA[上一篇帖子说明了一下百度抓取不到的原因是因为github把百度爬虫给屏蔽了
+这里给出的解决办法是用hexo自动提交插件
+需要获取一个自动提交的token
+
+注册百度站长工具：http://zhanzhang.baidu.com
+添加你的hexo域名
+找到网页抓取 - 链接提交 - 下拉选择你的hexo站点
+数据提交方式 - 自动提交 - 主动推送(实时)
+推送接口
+接口调用地址： http://data.zz.baidu.com/urls?site=hisen.me&amp;token=XmxXyESxyz1hANxE
+复制上面token&#x3D;后面的内容，那就是你的token
+
+安装自动提交插件：
+
+
+npm install hexo-baidu-url-submit –save
+编辑站点配置文件_config.yml，添加一下内容
+
+baidu_url_submit:  count: 1 ## 提交最新的一个链接  host: www.hui-wang.info ## 在百度站长平台中注册的域名  token: your_token ## 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!  path: baidu_urls.txt ## 文本文档的地址， 新链接会保存在此文本文档里
+加入新的deployer: 原来type前面是没有 - 的
+但是不这样处理执行hexo g 会报错
+deploy:- type: git  repository: yoururl  branch: master- type: baidu_url_submitter
+生成效果如下：
+$ hexo gINFO  Start processingINFO  Generating Baidu urls for last 1 postsINFO  Posts urls generated in baidu_urls.txthttp://hisen.me/20170216-hexo百度抓取失败解决办法/INFO  Files loaded in 1.31 s$ hexo dINFO  Deploy done: gitINFO  Deploying: baidu_url_submitterINFO  Submitting urlshttp://hisen.me/20170216-hexo百度抓取失败解决办法/&#123;&quot;remain&quot;:1,&quot;success&quot;:1&#125;INFO  Deploy done: baidu_url_submitter
+
+感谢插件作者：王辉的博客
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>HHKB 集合贴</title>
     <url>/20260930-hhkb-mac-qa/</url>
     <content><![CDATA[1. 缘起早些年买的 HHHK Type-S 键盘，一个月左右要换一次电池( 充电电池 )，有时候换完电池，就没法连上 Mac 继续使用，为此还被家里领导吐槽过。因为家里的 Mac Studio + 键盘 + 触摸板都是无线的，键盘挂了就没法用电脑。
@@ -10131,40 +10275,6 @@ right_option -&gt; right_arrow
       <tags>
         <tag>电子设备</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>hexo百度抓取失败解决办法</title>
-    <url>/20170216-hexo%E7%99%BE%E5%BA%A6%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
-    <content><![CDATA[上一篇帖子说明了一下百度抓取不到的原因是因为github把百度爬虫给屏蔽了
-这里给出的解决办法是用hexo自动提交插件
-需要获取一个自动提交的token
-
-注册百度站长工具：http://zhanzhang.baidu.com
-添加你的hexo域名
-找到网页抓取 - 链接提交 - 下拉选择你的hexo站点
-数据提交方式 - 自动提交 - 主动推送(实时)
-推送接口
-接口调用地址： http://data.zz.baidu.com/urls?site=hisen.me&amp;token=XmxXyESxyz1hANxE
-复制上面token&#x3D;后面的内容，那就是你的token
-
-安装自动提交插件：
-
-
-npm install hexo-baidu-url-submit –save
-编辑站点配置文件_config.yml，添加一下内容
-
-baidu_url_submit:  count: 1 ## 提交最新的一个链接  host: www.hui-wang.info ## 在百度站长平台中注册的域名  token: your_token ## 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!  path: baidu_urls.txt ## 文本文档的地址， 新链接会保存在此文本文档里
-加入新的deployer: 原来type前面是没有 - 的
-但是不这样处理执行hexo g 会报错
-deploy:- type: git  repository: yoururl  branch: master- type: baidu_url_submitter
-生成效果如下：
-$ hexo gINFO  Start processingINFO  Generating Baidu urls for last 1 postsINFO  Posts urls generated in baidu_urls.txthttp://hisen.me/20170216-hexo百度抓取失败解决办法/INFO  Files loaded in 1.31 s$ hexo dINFO  Deploy done: gitINFO  Deploying: baidu_url_submitterINFO  Submitting urlshttp://hisen.me/20170216-hexo百度抓取失败解决办法/&#123;&quot;remain&quot;:1,&quot;success&quot;:1&#125;INFO  Deploy done: baidu_url_submitter
-
-感谢插件作者：王辉的博客
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
   </entry>
   <entry>
     <title>homelab - 参考博文</title>
@@ -10558,6 +10668,7 @@ QBQ 问题背后的问题：改变思维模式，提升个人责任感
       <tags>
         <tag>成长</tag>
         <tag>效率</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -11199,6 +11310,17 @@ Java &amp; Android Heap Dump Analyzer
       </tags>
   </entry>
   <entry>
+    <title>linux cal date命令详解</title>
+    <url>/20170314-linux%20cal%20date%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[##显示当月的日历hisen@ubuntu:~$ cal     March 2017       Su Mo Tu We Th Fr Sa            1  2  3  4   5  6  7  8  9 10 11  12 13 14 15 16 17 18  19 20 21 22 23 24 25  26 27 28 29 30 31     ##指定显示1997年11月当月的日历hisen@ubuntu:~$ cal 11 1997   November 1997      Su Mo Tu We Th Fr Sa                     1   2  3  4  5  6  7  8   9 10 11 12 13 14 15  16 17 18 19 20 21 22  23 24 25 26 27 28 29  30   ##显示2018年全年12个月的日历hisen@ubuntu:~$ cal -m 12 -y 2018                            2018      January               February               March          Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa      1  2  3  4  5  6               1  2  3               1  2  3   7  8  9 10 11 12 13   4  5  6  7  8  9 10   4  5  6  7  8  9 10  14 15 16 17 18 19 20  11 12 13 14 15 16 17  11 12 13 14 15 16 17  21 22 23 24 25 26 27  18 19 20 21 22 23 24  18 19 20 21 22 23 24  28 29 30 31           25 26 27 28           25 26 27 28 29 30 31                                                                           April                  May                   June          Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa   1  2  3  4  5  6  7         1  2  3  4  5                  1  2   8  9 10 11 12 13 14   6  7  8  9 10 11 12   3  4  5  6  7  8  9  15 16 17 18 19 20 21  13 14 15 16 17 18 19  10 11 12 13 14 15 16  22 23 24 25 26 27 28  20 21 22 23 24 25 26  17 18 19 20 21 22 23  29 30                 27 28 29 30 31        24 25 26 27 28 29 30                                                                            July                 August              September        Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa   1  2  3  4  5  6  7            1  2  3  4                     1   8  9 10 11 12 13 14   5  6  7  8  9 10 11   2  3  4  5  6  7  8  15 16 17 18 19 20 21  12 13 14 15 16 17 18   9 10 11 12 13 14 15  22 23 24 25 26 27 28  19 20 21 22 23 24 25  16 17 18 19 20 21 22  29 30 31              26 27 28 29 30 31     23 24 25 26 27 28 29                                              30                          October               November              December        Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa      1  2  3  4  5  6               1  2  3                     1   7  8  9 10 11 12 13   4  5  6  7  8  9 10   2  3  4  5  6  7  8  14 15 16 17 18 19 20  11 12 13 14 15 16 17   9 10 11 12 13 14 15  21 22 23 24 25 26 27  18 19 20 21 22 23 24  16 17 18 19 20 21 22  28 29 30 31           25 26 27 28 29 30     23 24 25 26 27 28 29                                              30 31                 ##输出当前日期hisen@ubuntu:~$ dateTue Mar 14 11:48:14 CST 2017##格式化输出年月日hisen@ubuntu:~$ date &quot;+%Y-%m-%d&quot;2017-03-14##格式化输出当前时间hisen@ubuntu:~$ date &quot;+%H:%M:%S&quot;11:49:10##格式化输出年月日时间hisen@ubuntu:~$ date &quot;+%Y-%m-%d %H:%M:%S&quot; 2017-03-14 11:49:18]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Jev 的开源替代 Laya：部署与实测</title>
     <url>/20260926-laya-hands-on/</url>
     <content><![CDATA[1. laya 是什么laya 是一个跑在自己机器上的判断模型：给它一段材料（工单、邮件、命令、JSON）和几个预设问题，它返回选项和概率，不生成任何文字。
@@ -11366,17 +11488,6 @@ AbdelStark、nibzard · Jev p50 延迟 236～276 毫秒的两份独立测量，�
       </tags>
   </entry>
   <entry>
-    <title>linux cal date命令详解</title>
-    <url>/20170314-linux%20cal%20date%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[##显示当月的日历hisen@ubuntu:~$ cal     March 2017       Su Mo Tu We Th Fr Sa            1  2  3  4   5  6  7  8  9 10 11  12 13 14 15 16 17 18  19 20 21 22 23 24 25  26 27 28 29 30 31     ##指定显示1997年11月当月的日历hisen@ubuntu:~$ cal 11 1997   November 1997      Su Mo Tu We Th Fr Sa                     1   2  3  4  5  6  7  8   9 10 11 12 13 14 15  16 17 18 19 20 21 22  23 24 25 26 27 28 29  30   ##显示2018年全年12个月的日历hisen@ubuntu:~$ cal -m 12 -y 2018                            2018      January               February               March          Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa      1  2  3  4  5  6               1  2  3               1  2  3   7  8  9 10 11 12 13   4  5  6  7  8  9 10   4  5  6  7  8  9 10  14 15 16 17 18 19 20  11 12 13 14 15 16 17  11 12 13 14 15 16 17  21 22 23 24 25 26 27  18 19 20 21 22 23 24  18 19 20 21 22 23 24  28 29 30 31           25 26 27 28           25 26 27 28 29 30 31                                                                           April                  May                   June          Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa   1  2  3  4  5  6  7         1  2  3  4  5                  1  2   8  9 10 11 12 13 14   6  7  8  9 10 11 12   3  4  5  6  7  8  9  15 16 17 18 19 20 21  13 14 15 16 17 18 19  10 11 12 13 14 15 16  22 23 24 25 26 27 28  20 21 22 23 24 25 26  17 18 19 20 21 22 23  29 30                 27 28 29 30 31        24 25 26 27 28 29 30                                                                            July                 August              September        Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa   1  2  3  4  5  6  7            1  2  3  4                     1   8  9 10 11 12 13 14   5  6  7  8  9 10 11   2  3  4  5  6  7  8  15 16 17 18 19 20 21  12 13 14 15 16 17 18   9 10 11 12 13 14 15  22 23 24 25 26 27 28  19 20 21 22 23 24 25  16 17 18 19 20 21 22  29 30 31              26 27 28 29 30 31     23 24 25 26 27 28 29                                              30                          October               November              December        Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa      1  2  3  4  5  6               1  2  3                     1   7  8  9 10 11 12 13   4  5  6  7  8  9 10   2  3  4  5  6  7  8  14 15 16 17 18 19 20  11 12 13 14 15 16 17   9 10 11 12 13 14 15  21 22 23 24 25 26 27  18 19 20 21 22 23 24  16 17 18 19 20 21 22  28 29 30 31           25 26 27 28 29 30     23 24 25 26 27 28 29                                              30 31                 ##输出当前日期hisen@ubuntu:~$ dateTue Mar 14 11:48:14 CST 2017##格式化输出年月日hisen@ubuntu:~$ date &quot;+%Y-%m-%d&quot;2017-03-14##格式化输出当前时间hisen@ubuntu:~$ date &quot;+%H:%M:%S&quot;11:49:10##格式化输出年月日时间hisen@ubuntu:~$ date &quot;+%Y-%m-%d %H:%M:%S&quot; 2017-03-14 11:49:18]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux 查看日志文件常用命令</title>
     <url>/20170407-linux-log-command/</url>
     <content><![CDATA[linux查看日志文件内容命令tail、cat、tac、head、echo
@@ -11441,6 +11552,20 @@ echo “the echo command test!”&gt;a.sh
       </tags>
   </entry>
   <entry>
+    <title>log4j:WARN No appenders could be found for logger</title>
+    <url>/20170208-log4j-WARN-No-appenders-could-be-found-for-logger/</url>
+    <content><![CDATA[解决办法为：在项目的src下面新建file名为log4j.properties文件
+###设置log4j.rootLogger = debug,stdout,D,E###输出信息到控制抬log4j.appender.stdout = org.apache.log4j.ConsoleAppenderlog4j.appender.stdout.Target = System.outlog4j.appender.stdout.layout = org.apache.log4j.PatternLayoutlog4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n###输出DEBUG 级别以上的日志到=E://logs/error.loglog4j.appender.D = org.apache.log4j.DailyRollingFileAppenderlog4j.appender.D.File = E://logs/log.loglog4j.appender.D.Append = truelog4j.appender.D.Threshold = DEBUG log4j.appender.D.layout = org.apache.log4j.PatternLayoutlog4j.appender.D.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n###输出ERROR 级别以上的日志到=E://logs/error.loglog4j.appender.E = org.apache.log4j.DailyRollingFileAppenderlog4j.appender.E.File =E://logs/error.log log4j.appender.E.Append = truelog4j.appender.E.Threshold = ERROR log4j.appender.E.layout = org.apache.log4j.PatternLayoutlog4j.appender.E.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n
+log4j详细使用方法:点击查看
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《理想之城》观后感</title>
     <url>/20260628-lixiangzhicheng/</url>
     <content><![CDATA[1. 人性的算法：从《理想之城》看复杂组织的重构与宿命看过《理想之城》的人，大都会被赵显坤和夏明的“神仙打架”爽到。这部剧最硬核的地方，就在于它没有把职场斗争降智为“小人打小报告”的低级内耗，而是扒开了职场的表象，展现了顶级高手如何利用“系统漏洞、人性贪婪和利益博弈”来做局。
@@ -11473,20 +11598,6 @@ echo “the echo command test!”&gt;a.sh
       </categories>
       <tags>
         <tag>成长</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>log4j:WARN No appenders could be found for logger</title>
-    <url>/20170208-log4j-WARN-No-appenders-could-be-found-for-logger/</url>
-    <content><![CDATA[解决办法为：在项目的src下面新建file名为log4j.properties文件
-###设置log4j.rootLogger = debug,stdout,D,E###输出信息到控制抬log4j.appender.stdout = org.apache.log4j.ConsoleAppenderlog4j.appender.stdout.Target = System.outlog4j.appender.stdout.layout = org.apache.log4j.PatternLayoutlog4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n###输出DEBUG 级别以上的日志到=E://logs/error.loglog4j.appender.D = org.apache.log4j.DailyRollingFileAppenderlog4j.appender.D.File = E://logs/log.loglog4j.appender.D.Append = truelog4j.appender.D.Threshold = DEBUG log4j.appender.D.layout = org.apache.log4j.PatternLayoutlog4j.appender.D.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n###输出ERROR 级别以上的日志到=E://logs/error.loglog4j.appender.E = org.apache.log4j.DailyRollingFileAppenderlog4j.appender.E.File =E://logs/error.log log4j.appender.E.Append = truelog4j.appender.E.Threshold = ERROR log4j.appender.E.layout = org.apache.log4j.PatternLayoutlog4j.appender.E.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n
-log4j详细使用方法:点击查看
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -12630,25 +12741,6 @@ redis 查看 key 的大小：debug object key看其中的 serializedlength 即�
       </tags>
   </entry>
   <entry>
-    <title>Java 日志配置文件 - self4j 之 logback 和 log4j</title>
-    <url>/20200406-self4j-logback-log4j-log-properties/</url>
-    <content><![CDATA[写这种博客总感觉很低级但是不得不承认自己从来没有认真的了解过打日志这件事这里开个头，先从常见的日志配置文件开始，后续再深入了解
-“I wish i had” vs “I’m glad i did”人生会不会留下遗憾，在 20 年之后的这两句话中就能看出。希望 20 年后的自己，能够很自豪的说：I’m glad i did.
-一、self4j这是一个只定义了标准的日志组件
-二、logback常见配置：logback.xml
-
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;configuration&gt;    &lt;property name=&quot;APP&quot; value=&quot;hisenyuan-log-project&quot;/&gt;    &lt;!--文件输出--&gt;    &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;        &lt;!--存储路径--&gt;        &lt;file&gt;/export/log/$&#123;APP&#125;/$&#123;APP&#125;_detail.log&lt;/file&gt;        &lt;!--按天分割--&gt;        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;            &lt;FileNamePattern&gt;/www/log/$&#123;APP&#125;/$&#123;APP&#125;_detail.%d&#123;yyyy-MM-dd&#125;.log&lt;/FileNamePattern&gt;        &lt;/rollingPolicy&gt;        &lt;encoder class=&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;&gt;            &lt;pattern&gt;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;0&#125; %X&#123;trace-id&#125; - %m%n&lt;/pattern&gt;        &lt;/encoder&gt;    &lt;/appender&gt;    &lt;!--控制台--&gt;    &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;        &lt;encoder class=&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;&gt;            &lt;pattern&gt;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;0&#125; %X&#123;trace-id&#125; - %m%n&lt;/pattern&gt;        &lt;/encoder&gt;    &lt;/appender&gt;    &lt;!--你想排除xxx包下面的日志--&gt;    &lt;logger name=&quot;kafka.utils.Logging&quot; additivity=&quot;false&quot;&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;!--允许WARN以及以上的打印--&gt;    &lt;logger name=&quot;org.apache.http&quot; additivity=&quot;false&quot;&gt;        &lt;level value=&quot;WARN&quot; /&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;!--日志级别--&gt;    &lt;root level=&quot;INFO&quot;&gt;        &lt;!--启用日志文件打印日志--&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;        &lt;!----&gt;        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;    &lt;/root&gt;&lt;/configuration&gt;
-三、log4j常见配置：log4j.xml
-&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;UTF-8&#x27; ?&gt;&lt;!DOCTYPE log4j:configuration SYSTEM        &quot;http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd&quot;&gt;&lt;log4j:configuration&gt;    &lt;appender name=&quot;CONSOLE&quot; class=&quot;org.apache.log4j.ConsoleAppender&quot;&gt;        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;            &lt;param name=&quot;ConversionPattern&quot; value=&quot;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;1&#125; - %m%n&quot;/&gt;        &lt;/layout&gt;        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;            &lt;param name=&quot;LevelMin&quot; value=&quot;INFO&quot;/&gt;            &lt;param name=&quot;LevelMax&quot; value=&quot;ERROR&quot;/&gt;        &lt;/filter&gt;    &lt;/appender&gt;    &lt;appender name=&quot;FILE&quot; class=&quot;org.apache.log4j.DailyRollingFileAppender&quot;&gt;        &lt;param name=&quot;DatePattern&quot; value=&quot;&#x27;.&#x27;yyyy-MM-dd&quot;/&gt;        &lt;param name=&quot;Append&quot; value=&quot;true&quot;/&gt;        &lt;param name=&quot;file&quot; value=&quot;/www/log/hisenyuan-log-project.log&quot;/&gt;        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;            &lt;param name=&quot;ConversionPattern&quot; value=&quot;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;1&#125; - %m%n&quot;/&gt;        &lt;/layout&gt;        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;            &lt;param name=&quot;LevelMin&quot; value=&quot;INFO&quot;/&gt;            &lt;param name=&quot;LevelMax&quot; value=&quot;ERROR&quot;/&gt;        &lt;/filter&gt;    &lt;/appender&gt;    &lt;logger name=&quot;kafka.utils.Logging&quot; additivity=&quot;false&quot;&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;logger name=&quot;org.apache.http&quot; additivity=&quot;false&quot;&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;root&gt;        &lt;priority value=&quot;INFO&quot;/&gt;        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/root&gt;&lt;/log4j:configuration&gt;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>resteasy fastjson版本冲突问题</title>
     <url>/20190804-resteasy%20fastjson%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[零、相关介绍关键错误信息：Java.lang.RuntimeException: RESTeasy Provider Factory is null, do you have the ResteasyBootstrap listener configured?Java.lang.RuntimeException: Illegal to inject a message body into a singleton into public com.alibaba.fastjson.support.jaxrs.FastJsonProvider(Java.lang.String)
@@ -12664,6 +12756,25 @@ tomcat localhost long
 三、解决办法&lt;dependency&gt;    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;    &lt;artifactId&gt;fastjson&lt;/artifactId&gt;    &lt;version&gt;1.1.34.sec01&lt;/version&gt;&lt;!--改为：1.1.34.sec01相安无事--&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;org.jboss.resteasy&lt;/groupId&gt;    &lt;artifactId&gt;resteasy-jaxrs&lt;/artifactId&gt;    &lt;version&gt;2.2.1.GA&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;org.jboss.resteasy&lt;/groupId&gt;    &lt;artifactId&gt;jaxrs-api&lt;/artifactId&gt;    &lt;version&gt;2.2.1.GA&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;org.jboss.resteasy&lt;/groupId&gt;    &lt;artifactId&gt;resteasy-spring&lt;/artifactId&gt;    &lt;version&gt;2.2.1.GA&lt;/version&gt;&lt;/dependency&gt;
 
 四、细节说明暂时不知道引起的原因，后期补充
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 日志配置文件 - self4j 之 logback 和 log4j</title>
+    <url>/20200406-self4j-logback-log4j-log-properties/</url>
+    <content><![CDATA[写这种博客总感觉很低级但是不得不承认自己从来没有认真的了解过打日志这件事这里开个头，先从常见的日志配置文件开始，后续再深入了解
+“I wish i had” vs “I’m glad i did”人生会不会留下遗憾，在 20 年之后的这两句话中就能看出。希望 20 年后的自己，能够很自豪的说：I’m glad i did.
+一、self4j这是一个只定义了标准的日志组件
+二、logback常见配置：logback.xml
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;configuration&gt;    &lt;property name=&quot;APP&quot; value=&quot;hisenyuan-log-project&quot;/&gt;    &lt;!--文件输出--&gt;    &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;        &lt;!--存储路径--&gt;        &lt;file&gt;/export/log/$&#123;APP&#125;/$&#123;APP&#125;_detail.log&lt;/file&gt;        &lt;!--按天分割--&gt;        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;            &lt;FileNamePattern&gt;/www/log/$&#123;APP&#125;/$&#123;APP&#125;_detail.%d&#123;yyyy-MM-dd&#125;.log&lt;/FileNamePattern&gt;        &lt;/rollingPolicy&gt;        &lt;encoder class=&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;&gt;            &lt;pattern&gt;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;0&#125; %X&#123;trace-id&#125; - %m%n&lt;/pattern&gt;        &lt;/encoder&gt;    &lt;/appender&gt;    &lt;!--控制台--&gt;    &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;        &lt;encoder class=&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;&gt;            &lt;pattern&gt;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;0&#125; %X&#123;trace-id&#125; - %m%n&lt;/pattern&gt;        &lt;/encoder&gt;    &lt;/appender&gt;    &lt;!--你想排除xxx包下面的日志--&gt;    &lt;logger name=&quot;kafka.utils.Logging&quot; additivity=&quot;false&quot;&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;!--允许WARN以及以上的打印--&gt;    &lt;logger name=&quot;org.apache.http&quot; additivity=&quot;false&quot;&gt;        &lt;level value=&quot;WARN&quot; /&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;!--日志级别--&gt;    &lt;root level=&quot;INFO&quot;&gt;        &lt;!--启用日志文件打印日志--&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;        &lt;!----&gt;        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;    &lt;/root&gt;&lt;/configuration&gt;
+三、log4j常见配置：log4j.xml
+&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;UTF-8&#x27; ?&gt;&lt;!DOCTYPE log4j:configuration SYSTEM        &quot;http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd&quot;&gt;&lt;log4j:configuration&gt;    &lt;appender name=&quot;CONSOLE&quot; class=&quot;org.apache.log4j.ConsoleAppender&quot;&gt;        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;            &lt;param name=&quot;ConversionPattern&quot; value=&quot;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;1&#125; - %m%n&quot;/&gt;        &lt;/layout&gt;        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;            &lt;param name=&quot;LevelMin&quot; value=&quot;INFO&quot;/&gt;            &lt;param name=&quot;LevelMax&quot; value=&quot;ERROR&quot;/&gt;        &lt;/filter&gt;    &lt;/appender&gt;    &lt;appender name=&quot;FILE&quot; class=&quot;org.apache.log4j.DailyRollingFileAppender&quot;&gt;        &lt;param name=&quot;DatePattern&quot; value=&quot;&#x27;.&#x27;yyyy-MM-dd&quot;/&gt;        &lt;param name=&quot;Append&quot; value=&quot;true&quot;/&gt;        &lt;param name=&quot;file&quot; value=&quot;/www/log/hisenyuan-log-project.log&quot;/&gt;        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;            &lt;param name=&quot;ConversionPattern&quot; value=&quot;%d&#123;yy-MM-dd.HH:mm:ss.SSS&#125; [%-16t] %-5p %-22c&#123;1&#125; - %m%n&quot;/&gt;        &lt;/layout&gt;        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;            &lt;param name=&quot;LevelMin&quot; value=&quot;INFO&quot;/&gt;            &lt;param name=&quot;LevelMax&quot; value=&quot;ERROR&quot;/&gt;        &lt;/filter&gt;    &lt;/appender&gt;    &lt;logger name=&quot;kafka.utils.Logging&quot; additivity=&quot;false&quot;&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;logger name=&quot;org.apache.http&quot; additivity=&quot;false&quot;&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/logger&gt;    &lt;root&gt;        &lt;priority value=&quot;INFO&quot;/&gt;        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;        &lt;appender-ref ref=&quot;FILE&quot;/&gt;    &lt;/root&gt;&lt;/log4j:configuration&gt;
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -12699,6 +12810,78 @@ awk 入门指南
       </categories>
       <tags>
         <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>锤子便签导出到本地 Markdown：370 条实录</title>
+    <url>/20261008-smartisan-notes-export/</url>
+    <content><![CDATA[我的笔记一直散着。读书时记的放锤子便签，通勤路上随手写的放魅族便签，早年还有有道云笔记和 Notion。时间一长，自己都说不清哪条在哪儿，搜也搜不全。知识管理与消费里问过一句，散落各处的笔记、随想能不能有个地方统一管起来；工作的第一个十年里也提过，说想把所有数据整合到一起。
+想把它们收敛到本地一个目录、用自己的方式管起来，就得先把每个来源的数据拿下来。锤子便签是其中一份，另外两份是魅族云便签和魅族云短信。脚本都在 phone-cloud-data-export 仓库里，拿到就能跑。
+锤子便签的云端在欢喜云 yun.smartisan.com。手机端早就停更，账号中心跳去了 snote.ink，那是字节接手后的另一套产品，和原来的便签不是同一份数据。
+我账号里还有 370 条便签挂在旧接口上。产品在收缩，接口没有退场说明，能拿的时候先拿。导出分两步：抓原始 JSON，再转成带 frontmatter 的 Markdown。
+
+
+1. 接口从哪来锤子便签的网页版是欢喜云里的子应用，跑在 iframe 里，地址 https://yun.smartisan.com/apps/note/。前端是 Angular 1.x，接口都挂在 https://yun.smartisan.com/apps/note/index.php 下，用查询参数 r= 指定动作，同源带 Cookie。
+用到三个：
+
+登录态：GET index.php?r=account/login
+分类列表：GET index.php?r=folder/getList
+便签列表：GET index.php?r=v2/getList，参数 page、page_size
+
+返回统一是 &#123;code, data&#125;，code 为 1 表示出错，未登录是 1701。前端默认每页 3000 条，370 条一页就拉完。
+2. 为什么在浏览器控制台里跑最省事的做法是把 Chrome 的 Cookie 库复制出来，用 curl 批量拉。这条路的代价是，Cookie 库里存着所有站点的登录态，范围远超「导出便签」这一件事。
+所以改成在已经登录的页面里跑脚本。脚本只用当前登录态调官方接口，数据从浏览器直接下载到本地，Cookie 不出本机。三篇导出用的都是这个路子，另外两篇是魅族云便签和魅族云短信。
+3. 云端没有创建时间接口返回的字段有这些：
+uid, sync_id, seqid, eseqid, folderId, favorite, markdown, pos, call_timestamp,modify_time, title, detail, formatting_mode, is_locked, folder_type,position_in_folder, rtf_style, tab_id, conflict_id, from_device
+
+只有 modify_time，没有 create_time。370 条的返回里都没有。
+seqid 和 eseqid 是两个 18 至 19 位整数，看着像时间戳。我把 0 至 32 位所有位移和秒、毫秒、微秒、纳秒四种单位都试了一遍，反推出来的纪元离散度最小也有正负两个月，没有干净解。它们是同步序列号，不是时间编码。
+锤子被字节收购后的 snote.ink 也走过，那边是另一套 ragapp 应用，数据不通。
+所以导出的 frontmatter 里 created 一律写 null。没有拿修改时间冒充创建时间，也没有用 seqid、pos 去反推。
+真要创建时间，剩下两条路。一条是还留着当年的锤子手机，便签 App 的本地 SQLite 里有，需要 root 或完整备份。另一条是先留空，以后拿到别的来源再按 sync_id 回填。
+网页版界面上显示的也是修改时间，前端模板里就是 &#123;&#123;note.modify_time|editTime&#125;&#125;。这个产品对外只给修改时间。
+4. 标题和图片都不是常规字段服务端的 title 不是独立字段，是拿正文第一行非空文字生成的（NoteStringService.getTitle，超过 80 个显示宽度截断）。
+370 条里有 3 条和正文首行对不上：2 条是截断，1 条是纯图片便签，正文没有文字，标题退成「图片便签」。导出的 frontmatter 用服务端原值，文件名也用服务端 title，不另外编。
+图片也不是 Markdown，是自定义标记：
+&lt;image w=宽度 h=高度 describe=描述 name=文件名&gt;
+
+文件地址是 https://yun.smartisan.com/apps/note/notesimage/&lt;name&gt;，要登录态才取得到。这个账号里有 6 张图片，还在云端，要落到本地得再跑一次下载脚本。
+5. 换行370 条里 357 条带换行。单换行原样留在 md 里，标准 Markdown 渲染会把它当空格，笔记会糊成一整段。
+默认把夹在文字中间的单换行转成行尾 &lt;br&gt;，空行仍然当段落分隔。转换后核对过，md 里的 &lt;br&gt; 数量和原始数据的单换行数一致，都是 5115。
+想换别的风格，加 --line-break= 重跑：
+
+br（默认）：行尾 &lt;br&gt;，任何渲染器都认
+space：行尾两个空格，raw 更干净，但容易被编辑器去尾空格弄丢
+blank：单换行换成空行，每行独立成段，渲染最稳但文件变长
+keep：原样保留
+
+6. 怎么确认一条没漏node verify.js smartisan-notes-raw.json notes 会逐条比对 md 和原始 JSON：标题、分类、分类 id、修改时间、时间戳、回收站标记、收藏、pos、formatting_mode、附件清单、正文。正文是先把 md 里的 &lt;br&gt; 和图片链接还原回原始写法再比。
+当前结果 370&#x2F;370，缺失 0，字段全部一致。
+7. 结果370 个 md，按分类分目录：未分类 322、回收站 31、日记 13、生活 2、读书 1、学习 1。时间跨度 2017-05-21 至 2025-04-13，按修改时间。
+文件名是「修改日期 标题.md」，顶部 frontmatter 带 sync_id、seqid、category、category_id、folder_type、trash、favorite、created、modified、pos、formatting_mode、attachments 等字段。sync_id 是留给以后回填创建时间的锚点。
+另外有 8 条便签指向云端已经不存在的分类 id，没有编造分类名，原始 id 留在 category_id 里。
+8. 清空云端（可选）网页版删一条要点两下，批量很烦。接口能一次做完，但有两个坑。
+移到回收站和彻底删除是两个不同的接口：
+
+移到回收站：POST index.php?r=note/updateFolder，参数 sync_ids（JSON 字符串）、folder_type=3、folderId（空）
+彻底删除：POST index.php?r=note/deleteAll，参数 sync_ids（逗号拼接）
+
+note/deleteAll 对不在回收站的便签不生效。实测拿它去删 339 条正常便签，一条都没删掉。所以清空必须两步：先移进回收站，再删。
+写请求还要带 tab_id。前端每次加载页面随机生成一个 8 位值，服务端拿它区分浏览器标签页。不带的话 note/deleteAll 直接报错：
+&#123;&quot;code&quot;:1,&quot;data&quot;:[],&quot;errInfo&quot;:&#123;&quot;2109&quot;:&quot;便签web标签错误&quot;&#125;&#125;
+
+tab_id 是纯客户端随机值，自己生成 8 位字母数字就行。
+清空脚本默认只打印命中的清单，不动数据，要真删得把 CONFIRM 填成「确认」。删除会同步到手机上还在用的锤子便签 App，云端删掉不影响本地已经存下来的 md 和 JSON。
+9. 导完之后三条来源各建一个目录，放进同一个笔记库，标题、分类、时间都进了 frontmatter，全文搜索一次能搜全。
+选 Markdown 是因为它不绑定工具。Obsidian、VS Code、ripgrep 都能直接读，换软件也不用重导。frontmatter 里留着的 sync_id 也不白留：以后要跟云端对账，或者补上锤子缺的创建时间，还能对上。
+10. 脚本抓取、转换、校验和清空四个脚本，都用 node 直接跑，没有第三方依赖。
+仓库地址：phone-cloud-data-export
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -14524,27 +14707,6 @@ IDEA上搭建dubbo服务的简单过程只是简单的让例子在IntelliJ IDEA�
       </tags>
   </entry>
   <entry>
-    <title>《穿布鞋的马云》 - 部分文字摘录</title>
-    <url>/20180908-%E3%80%8A%E7%A9%BF%E5%B8%83%E9%9E%8B%E7%9A%84%E9%A9%AC%E4%BA%91%E3%80%8B%20-%20%E9%83%A8%E5%88%86%E6%96%87%E5%AD%97%E6%91%98%E5%BD%95/</url>
-    <content><![CDATA[《穿布鞋的马云》 2018.10.01 ~ 2018.10.02
-国庆假期没有什么安排，看了几部电影之后感觉蛮愧疚，又浪费了大把的时间
-于是乎在书架上找了本决定看起来压力不那么大的书来看
-这本书感觉整体上写的一般，可能定位就是通俗易懂吧
-但是对于了解一些细节，还是很有帮助
-由于目前待在创业公司，看到很多文字的时候还是很有感触的
-如果你想成功，积极乐观地看待任何问题
-以下为摘抄：
-
-马云在校教书，兼职创业:海博翻译社92派:1992年后创业的企业家想清楚干什么，然后就要清楚该干什么;知道该干什么之后，要明白自己不该干什么——&gt;能干多久？想干多久？这件事情该干多久就多久。记住自己第一天的梦想，至关重要。海博翻译社的网页是第一个外国人能在互联网上搜到的第一个中国的网页。1995年是全世界互联网商用的第一年。只有启蒙才会有更大的市场。资本永远不能控制一家公司，资本只能为创业服务，而不能控制公司。一个创业公司的创始人能够取得权威媒体的认可，也是一件惊人的事情。创业者最重要的是创造条件，如果等到时机成熟的话，一定轮不到我们。有了理想之后，我觉得，最重要的是给自己一个承诺，承诺自己要把这个事情做出来。如果你不行动，不给自己的梦想一个实践的机会，你永远没有机会。创立阿里巴巴之前，三家公司马云得到的创业智慧:第一，选对创业项目很重要第二，即便是几个人的小公司，管理制度的建设也很重要第三，资本控制了你的公司时，你是没有希望的。第四，创业团队没有相同的理念和共同的目标会导致分裂。第五，对国有股东有了近距离的认识。1998年，阿里巴巴做bbs，长城是最早的bbs，xxx到此一游。阿里巴巴，在美国看到的名字，是“open sesame”芝麻开门的意思。合作都是团队做出来的，如果别人把你当英雄，你千万不要把自己当英雄，如果自己把自己当英雄必然要走下坡路。有几种人是难以在团队中培养的，一种是懂资本的人才，其他是财务、法律人才。因为这样的人才不仅要懂专业，而且需要经验。一般的公司多半是在上市之前引进这样的人才。在我擅长的世界里，我非常自信，非常自如。我没有想过要大包大揽，我知道自己的角色是什么。对于公众舆论而言，公司只能用一个声音说话，太多声音，只会让这个公司的形象变的模糊。世界上最不缺的就是钱，缺的是能用资本创造价值的企业家和企业家精神。1999.10高盛投资阿里巴巴使得后者可以对媒体讲一个好的故事:全世界最好的投资银行看好阿里巴巴的长期发展。它让外界对这家初创公司刮目相看。永远不要让资本说话，让资本赚钱。1999.10，拿到高盛500万(40%)投资的马云，随后孙正义想4000万占有49%的股份，后来3000万美元得到30%的股份，再后来，马云马云觉得钱太多反悔，最后孙正义投资2000万获得20%股份。在所有的创业公司发展中，扩张规模是最容易犯错误的时候，而这时犯的错还都是不小的错误。人多财务成本高，这并不是主要的，重要的是那些闲人会让全心全意投入加班加点的人感到不平衡，久而久之，公司的文化风气就不行了。2009.10 西湖论剑，马云请金庸拉拢当时互联网行业的佼佼者参与。前来的有:金庸，新浪王志东，搜狐张朝阳，网易丁磊，my8848王俊涛，加拿大驻华大使，英国驻沪总理事及50多家国际跨国公司在华代表在创业初期要寻找这些梦之队:没有成功，渴望成功，平凡，团结，有共同理想的人。2003年每天收入100万元，2004年每天盈利100万元，2005年每天纳税100万元。拥有好的业绩和产品，同事技巧性地为自己选定一个对标物，这会让你的公司和产品赢得大量关注。“裸奔”和淘宝的倒立与武侠一样，都是极易被识别的与众不同的公司文化符号，也极易产生传播效应。好的商人不在于他的梦想多么伟大，但是他的梦想必须是独特的，任何一个成功的企业家，从第一天起都有一个独特的梦想。2005.8.11雅虎中国并入阿里巴巴。资产技术+10亿美元，获得阿里40%股份。一个公司如果并购另外一个公司的话，文化融合是一件很难的事情。聪明是智慧者的天敌，傻瓜用嘴说话，聪明的人用脑子说话，智慧的人用心讲话。所以永远要记住，不要把自己当成最聪明的人，最聪明的人相信总有别人比自己更聪明。作为一个领导人，应该控制自己的情绪，很多时候发脾气是无能的表现，合理的情绪控制对于团队的和谐，稳定军心有很大作用。改变别人，先改变自己;要完善世界，先完善自己;要帮助好别人，先帮助自己;如果你不能帮助好自己，那一切都是瞎扯。人与人之间最本质的区别不是技能、专业、能力、情商，而是人生的使命感和价值观，而企业同理。先付出，再得到。没有使命感，人生会找不到奋斗的意义;没价值诶观，奋斗的方式会扭曲。80后，90后，我觉得是我的产品，我们没有理由、权利和责任区批判我们的产品，我们唯一有的权利和责任是完善我们的产品。真正的幸福感是你知道自己在做什么，知道别人在做什么，你会逐渐从痛苦中找到那些快乐。如果你想成功，积极乐观地看待任何问题
-]]></content>
-      <categories>
-        <category>Reading</category>
-      </categories>
-      <tags>
-        <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《重塑大脑，重塑人生》读后感 + 摘抄</title>
     <url>/20190903-%E3%80%8A%E9%87%8D%E5%A1%91%E5%A4%A7%E8%84%91%EF%BC%8C%E9%87%8D%E5%A1%91%E4%BA%BA%E7%94%9F%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F%20+%20%E6%91%98%E6%8A%84/</url>
     <content><![CDATA[一、内容简介这是一本人类大脑可塑性研究先驱与翘楚的故事书，正是让我们用触觉看到世界的巴赫-利塔这类先驱，使得我们正在成为来自地球的神。
@@ -14623,6 +14785,27 @@ IDEA上搭建dubbo服务的简单过程只是简单的让例子在IntelliJ IDEA�
       </categories>
       <tags>
         <tag>成长</tag>
+        <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《穿布鞋的马云》 - 部分文字摘录</title>
+    <url>/20180908-%E3%80%8A%E7%A9%BF%E5%B8%83%E9%9E%8B%E7%9A%84%E9%A9%AC%E4%BA%91%E3%80%8B%20-%20%E9%83%A8%E5%88%86%E6%96%87%E5%AD%97%E6%91%98%E5%BD%95/</url>
+    <content><![CDATA[《穿布鞋的马云》 2018.10.01 ~ 2018.10.02
+国庆假期没有什么安排，看了几部电影之后感觉蛮愧疚，又浪费了大把的时间
+于是乎在书架上找了本决定看起来压力不那么大的书来看
+这本书感觉整体上写的一般，可能定位就是通俗易懂吧
+但是对于了解一些细节，还是很有帮助
+由于目前待在创业公司，看到很多文字的时候还是很有感触的
+如果你想成功，积极乐观地看待任何问题
+以下为摘抄：
+
+马云在校教书，兼职创业:海博翻译社92派:1992年后创业的企业家想清楚干什么，然后就要清楚该干什么;知道该干什么之后，要明白自己不该干什么——&gt;能干多久？想干多久？这件事情该干多久就多久。记住自己第一天的梦想，至关重要。海博翻译社的网页是第一个外国人能在互联网上搜到的第一个中国的网页。1995年是全世界互联网商用的第一年。只有启蒙才会有更大的市场。资本永远不能控制一家公司，资本只能为创业服务，而不能控制公司。一个创业公司的创始人能够取得权威媒体的认可，也是一件惊人的事情。创业者最重要的是创造条件，如果等到时机成熟的话，一定轮不到我们。有了理想之后，我觉得，最重要的是给自己一个承诺，承诺自己要把这个事情做出来。如果你不行动，不给自己的梦想一个实践的机会，你永远没有机会。创立阿里巴巴之前，三家公司马云得到的创业智慧:第一，选对创业项目很重要第二，即便是几个人的小公司，管理制度的建设也很重要第三，资本控制了你的公司时，你是没有希望的。第四，创业团队没有相同的理念和共同的目标会导致分裂。第五，对国有股东有了近距离的认识。1998年，阿里巴巴做bbs，长城是最早的bbs，xxx到此一游。阿里巴巴，在美国看到的名字，是“open sesame”芝麻开门的意思。合作都是团队做出来的，如果别人把你当英雄，你千万不要把自己当英雄，如果自己把自己当英雄必然要走下坡路。有几种人是难以在团队中培养的，一种是懂资本的人才，其他是财务、法律人才。因为这样的人才不仅要懂专业，而且需要经验。一般的公司多半是在上市之前引进这样的人才。在我擅长的世界里，我非常自信，非常自如。我没有想过要大包大揽，我知道自己的角色是什么。对于公众舆论而言，公司只能用一个声音说话，太多声音，只会让这个公司的形象变的模糊。世界上最不缺的就是钱，缺的是能用资本创造价值的企业家和企业家精神。1999.10高盛投资阿里巴巴使得后者可以对媒体讲一个好的故事:全世界最好的投资银行看好阿里巴巴的长期发展。它让外界对这家初创公司刮目相看。永远不要让资本说话，让资本赚钱。1999.10，拿到高盛500万(40%)投资的马云，随后孙正义想4000万占有49%的股份，后来3000万美元得到30%的股份，再后来，马云马云觉得钱太多反悔，最后孙正义投资2000万获得20%股份。在所有的创业公司发展中，扩张规模是最容易犯错误的时候，而这时犯的错还都是不小的错误。人多财务成本高，这并不是主要的，重要的是那些闲人会让全心全意投入加班加点的人感到不平衡，久而久之，公司的文化风气就不行了。2009.10 西湖论剑，马云请金庸拉拢当时互联网行业的佼佼者参与。前来的有:金庸，新浪王志东，搜狐张朝阳，网易丁磊，my8848王俊涛，加拿大驻华大使，英国驻沪总理事及50多家国际跨国公司在华代表在创业初期要寻找这些梦之队:没有成功，渴望成功，平凡，团结，有共同理想的人。2003年每天收入100万元，2004年每天盈利100万元，2005年每天纳税100万元。拥有好的业绩和产品，同事技巧性地为自己选定一个对标物，这会让你的公司和产品赢得大量关注。“裸奔”和淘宝的倒立与武侠一样，都是极易被识别的与众不同的公司文化符号，也极易产生传播效应。好的商人不在于他的梦想多么伟大，但是他的梦想必须是独特的，任何一个成功的企业家，从第一天起都有一个独特的梦想。2005.8.11雅虎中国并入阿里巴巴。资产技术+10亿美元，获得阿里40%股份。一个公司如果并购另外一个公司的话，文化融合是一件很难的事情。聪明是智慧者的天敌，傻瓜用嘴说话，聪明的人用脑子说话，智慧的人用心讲话。所以永远要记住，不要把自己当成最聪明的人，最聪明的人相信总有别人比自己更聪明。作为一个领导人，应该控制自己的情绪，很多时候发脾气是无能的表现，合理的情绪控制对于团队的和谐，稳定军心有很大作用。改变别人，先改变自己;要完善世界，先完善自己;要帮助好别人，先帮助自己;如果你不能帮助好自己，那一切都是瞎扯。人与人之间最本质的区别不是技能、专业、能力、情商，而是人生的使命感和价值观，而企业同理。先付出，再得到。没有使命感，人生会找不到奋斗的意义;没价值诶观，奋斗的方式会扭曲。80后，90后，我觉得是我的产品，我们没有理由、权利和责任区批判我们的产品，我们唯一有的权利和责任是完善我们的产品。真正的幸福感是你知道自己在做什么，知道别人在做什么，你会逐渐从痛苦中找到那些快乐。如果你想成功，积极乐观地看待任何问题
+]]></content>
+      <categories>
+        <category>Reading</category>
+      </categories>
+      <tags>
         <tag>阅读</tag>
       </tags>
   </entry>
@@ -14990,22 +15173,6 @@ public void testCreate() &#123;        ThreadFactory namedThreadFactory = new Th
       </tags>
   </entry>
   <entry>
-    <title>如何学习NIO - NIO简单的例子</title>
-    <url>/20170227-%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0NIO-NIO%E7%AE%80%E5%8D%95%E7%9A%84%E4%BE%8B%E5%AD%90/</url>
-    <content><![CDATA[这里参照一些例子写了个简单的CS模型
-例子代码：NIO应用之简单的CS模型
-可以用来简单的理解一下Java nio
-
-深入的理解可以看看下面的链接。
-Java NIO 系列教程:点击查看
-如何学习Java的NIO？:点击查看
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>如何成为专业的技术从业者 - 《程序员的职业素养》 - Bob大叔出品</title>
     <url>/20191008-%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E4%B8%93%E4%B8%9A%E7%9A%84%E6%8A%80%E6%9C%AF%E4%BB%8E%E4%B8%9A%E8%80%85%20-%20%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%81%8C%E4%B8%9A%E7%B4%A0%E5%85%BB%E3%80%8B/</url>
     <content><![CDATA[很不错的一本书，作为程序员都值得去看一看，170+页周末一天可以看完， 还包括做笔记
@@ -15022,6 +15189,22 @@ Java NIO 系列教程:点击查看
         <tag>成长</tag>
         <tag>阅读</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>如何学习NIO - NIO简单的例子</title>
+    <url>/20170227-%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0NIO-NIO%E7%AE%80%E5%8D%95%E7%9A%84%E4%BE%8B%E5%AD%90/</url>
+    <content><![CDATA[这里参照一些例子写了个简单的CS模型
+例子代码：NIO应用之简单的CS模型
+可以用来简单的理解一下Java nio
+
+深入的理解可以看看下面的链接。
+Java NIO 系列教程:点击查看
+如何学习Java的NIO？:点击查看
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
   </entry>
   <entry>
     <title>如何检测Linux VPS系统架构是Xen、KVM还是OpenVZ</title>
@@ -15133,6 +15316,20 @@ public class EnumSingleton &#123;  private EnumSingleton() &#123;  &#125;  publi
       </tags>
   </entry>
   <entry>
+    <title>尝试使用NIO读取文件</title>
+    <url>/20170601-%E5%B0%9D%E8%AF%95%E4%BD%BF%E7%94%A8NIO%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[具体代码如下，这里获取出来的文件大小是准确的
+FileInputStream方式获取出来的大小会有差异
+NIO与IO的对比详见：NIOCopy.Java
+/**   * 利用NIO进行读写文件   *   * @param oldFileName 原文件的路径   * @param newFileName 新文件的路径   */  public static void nioCopy(String oldFileName, String newFileName) &#123;    try &#123;      FileChannel fileChannelIn = new FileInputStream(new File(oldFileName)).getChannel();      FileChannel fileChannelOut = new FileOutputStream(new File(newFileName)).getChannel();      //获取文件大小      long size = fileChannelIn.size();      System.out.printf(&quot;文件大小为：%s byte \n&quot;,size);      //缓冲      ByteBuffer byteBuffer = ByteBuffer.allocate(1024);      long start = System.currentTimeMillis();      while (fileChannelIn.read(byteBuffer) != -1) &#123;        //准备写        byteBuffer.flip();        fileChannelOut.write(byteBuffer);        //准备读        byteBuffer.clear();      &#125;      long end = System.currentTimeMillis();      System.out.printf(&quot;NIO方式复制完成，耗时 %s 秒\n&quot;,(end-start)/1000);      //关闭      fileChannelIn.close();      fileChannelOut.close();    &#125; catch (FileNotFoundException e) &#123;      e.printStackTrace();    &#125; catch (IOException e) &#123;      e.printStackTrace();    &#125;  &#125;]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>布隆过滤器 丨 简介 - Java demo</title>
     <url>/20170907-%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%20%E4%B8%A8%20%E7%AE%80%E4%BB%8B%20-%20Java%20demo/</url>
     <content><![CDATA[概述布隆过滤器的作用是加快判定一个元素是否在集合中出现的方法。
@@ -15189,20 +15386,6 @@ a%b得余数c
       </categories>
       <tags>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>尝试使用NIO读取文件</title>
-    <url>/20170601-%E5%B0%9D%E8%AF%95%E4%BD%BF%E7%94%A8NIO%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[具体代码如下，这里获取出来的文件大小是准确的
-FileInputStream方式获取出来的大小会有差异
-NIO与IO的对比详见：NIOCopy.Java
-/**   * 利用NIO进行读写文件   *   * @param oldFileName 原文件的路径   * @param newFileName 新文件的路径   */  public static void nioCopy(String oldFileName, String newFileName) &#123;    try &#123;      FileChannel fileChannelIn = new FileInputStream(new File(oldFileName)).getChannel();      FileChannel fileChannelOut = new FileOutputStream(new File(newFileName)).getChannel();      //获取文件大小      long size = fileChannelIn.size();      System.out.printf(&quot;文件大小为：%s byte \n&quot;,size);      //缓冲      ByteBuffer byteBuffer = ByteBuffer.allocate(1024);      long start = System.currentTimeMillis();      while (fileChannelIn.read(byteBuffer) != -1) &#123;        //准备写        byteBuffer.flip();        fileChannelOut.write(byteBuffer);        //准备读        byteBuffer.clear();      &#125;      long end = System.currentTimeMillis();      System.out.printf(&quot;NIO方式复制完成，耗时 %s 秒\n&quot;,(end-start)/1000);      //关闭      fileChannelIn.close();      fileChannelOut.close();    &#125; catch (FileNotFoundException e) &#123;      e.printStackTrace();    &#125; catch (IOException e) &#123;      e.printStackTrace();    &#125;  &#125;]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -15372,6 +15555,29 @@ i&#x3D;2写入主存有可能在3写入之前，其它线程已经对i进行了�
       </tags>
   </entry>
   <entry>
+    <title>笔记 - 读后感：《第一本Docker书》</title>
+    <url>/20180127-%E7%AC%94%E8%AE%B0%20-%20%E8%AF%BB%E5%90%8E%E6%84%9F%EF%BC%9A%E3%80%8A%E7%AC%AC%E4%B8%80%E6%9C%ACDocker%E4%B9%A6%E3%80%8B/</url>
+    <content><![CDATA[忘记开始是在什么地方看到docker这个东西
+后面觉得挺好玩，也试了很多次，找过很多的教程。
+搭建了一个zookeeper的集群(docker-compose)
+然后当我需要搭建redis集群的时候，发现里面很多的概念还不是很懂
+比如：volume network
+然后加了docker的群，遇到了在以前idea群里面熟的一个人
+花了一天的时间看完他传的一本书，昨天买的几本书晚上也到了。（docker从入门到实践、Java并发编程的艺术、effective Java中文版 2）
+这本书总体来说还行，就是过时了，还在用link，毕竟三年前的东西
+有些例子也报错，主要是ruby相关的不行，提醒需要2.2以上的版本
+下面是随便做的一点笔记
+
+# 所有容器，不加-a只显示正在运行的；-1 列出最后一次运行的docker ps -a# 启动一个已经停止的容器(id，--name 都可以)docker start hisen_container# 进入容器(容器重启之后进入交换行)docker attach hisen_container# 创建一个守护式容器docker -d# 查看日志 可选 -f 类似tail -f Ctrl+c 退出docker logs hisen_container# 查看容器内的进程docker top hisen_container# 在容器内部运行进程docker exec -d hisen_container touch /etc/new_conf_file# 停止守护式容器docker stop hisen_container# 自动重启容器docker run --restart=always ....=on-failure:5 当容器退出代码为非0时，docker会自动重启，最多重试5次# 深入容器,会以json串显示更多容器信息docker inspect hisen_container # 删除容器，要先stop才行docker rm hisen_container# 删除所有容器 -a:所有容器 -q:只返回容器的IDdocker rm &#x27;docker ps -a -q&#x27;# 启动新的名字为other_hisen_container的容器，并且进入bash shelldocker run -i -t --name other_hisen_container ubuntu /bin/bash# docker文件系统层可写容器镜像(比如tomcat)基础镜像(比如ubuntu)引导文件系统(容器组、命名空间、设备映射)内核# docker简单构成顶层的读写层+底部不可变的可读层还有一些配置，就成了一个容器。# 列出所有镜像docker images# 仓库名:tag 如果没有指定，默认latest# 推荐使用Dockerfile构建镜像FROM ubuntu:14.04MAINTAINER hisenyuan &quot;hisenyuan@gmail.com&quot;RUN apt-get update \&amp;&amp; apt-getinstall -y nginx \&amp;&amp; echo &#x27;Hi,I am in your container&#x27; \   /usr/share/nginx/html/index.htmlEXPOSE 80# 构建镜像，在上面的dockerfile目录docker build -t=&quot;hisenyuan/static_web&quot; .# 查看构建过程，以及镜像的每一层docker history 791397495f7a# 运行构建的镜像 -p端口映射 nginx -g &quot;daemon off;&quot; 前台运行nginxdocker run -d -p 80:80 --name static_web hisenyuan/static_web nginx -g &quot;daemon off;&quot;# Dockerfile指令RUN 镜像构建的时候才会执行CMD 启动一个容器的时候要运行的命令，如有多个，只会生效最后一个，前面的多个会被忽略ENTRYPOINT 例子:ENTRYPOINT [&quot;/usr/sbin/nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;],这个命令不容易覆盖，CMD容易被RUN覆盖WORKDIR 设定工作目录，ENTRYPOINT CMD 会在这个目录执行ENV 设置构建时的环境变量，设置之后可以在后续的RUN命令使用USER 设置运行的用户VOLUME 向基于镜像创建的容器添加卷。1.卷可以在容器间共享和重用2.一个容器不是必须和其他容器共享卷3.对卷的修改是立即生效的4.对卷的修改不会对更新镜像产生影响5.卷会一直存在，直到没有任何容器再使用他VOLUME [&quot;/opt/project&quot;] 创建一个名为/opt/project的挂载点ADD 添加上下文目录的文件到构架容器中，如果是压缩包，会自动解压。会使构建缓存无效COPY 类似ADD、只会在上下文复制文件、也不会解压ONBUILD 为镜像添加触发器，当一个镜像被用作其他镜像的基础镜像时，该镜像中的触发器将会被执行。# 删除镜像，会删除这个镜像的每一层docker rmi hisenyuan/static_web# 运行一个registrydocker run -p 5000:5000 registry# 推送镜像到registrydocker tag 791397495f7a yourip:5000/hisenyuan/static_web #打标签docker push yourip:5000/hisenyuan/static_web #推送到本地注册容器docker run -t -i docker yourip:5000/hisenyuan/static_web /bin/bash #从registry运行一个容器==========第五章 在测试中使用docker==========5.1 使用docker测试静态网站5.1.1 sample网站的初始Dockerfilehisen@docker1:~/docker$ mkdir samplehisen@docker1:~/docker$ cd sample/hisen@docker1:~/docker/sample$ touch Dockerfilehisen@docker1:~/docker/sample$ mkdir nginx &amp;&amp; cd nginxhisen@docker1:~/docker/sample/nginx$ vi global.confserver &#123;        listen          0.0.0.0:80;        server_name     _;        root            /var/www/html/website;        index           index.html index.htm;        access_log      /var/log/nginx/default_access.log;        error_log       /var/log/nginx/default_error.log;&#125;hisen@docker1:~/docker/sample/nginx$ vi nginx.confuser www-data;worker_processes 4;pid /run/nginx.pid;daemon off;events &#123;  &#125;http &#123;  sendfile on;  tcp_nopush on;  tcp_nodelay on;  keepalive_timeout 65;  types_hash_max_size 2048;  include /etc/nginx/mime.types;  default_type application/octet-stream;  access_log /var/log/nginx/access.log;  error_log /var/log/nginx/error.log;  gzip on;  gzip_disable &quot;msie6&quot;;  include /etc/nginx/conf.d/*.conf;&#125;hisen@docker1:~/docker/sample/nginx$ vi DockerfileFROM ubuntu:14.04MAINTAINER hisenyuan &quot;hisenyuan@gmail.com&quot;ENV REFRESHED_AT 2018-01-27RUN apt-get update \ &amp;&amp; apt-get -y -q install nginx \ &amp;&amp; mkdir -p /var/www/htmlADD nginx/global.conf /etc/nginx/conf.d/ADD nginx/nginx.conf /etc/nginx/nginx.confEXPOSE 80hisen@docker1:~/docker/sample/nginx/website$ vi index.html&lt;head&gt;	&lt;title&gt;Test website&lt;/title&gt;&lt;/head&gt;&lt;body&gt;	&lt;h1&gt;This is a test website&lt;/h1&gt;&lt;/body&gt;hisen@docker1:~/docker/sample/nginx$ docker build -t hisenyuan/nginx .hisen@docker1:~/docker/sample/nginx$ docker run -d -p 8080:80 --name website \&gt; -v $PWD/website:/var/www/html/website \&gt; hisenyuan/nginx nginx # 因为已经在配置文件指定了daemon off，所以能直接启动# -v 指定了卷的源目录，挂载本地$PWD/website到容器/var/www/html/website目录，conf配置文件指定了工作目录# 修改之后，刷新浏览器，立马就生效hisen@docker1:~/docker/sample/nginx$ vi $PWD/website/index.html&lt;head&gt;&lt;title&gt;Test website - hisenyuan&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;This is a test website&lt;/h1&gt;&lt;h2&gt;2018年1月27日 13:20:13&lt;/h2&gt;&lt;/body&gt;5.2 使用docker构建并测试web应用程序5.2.1 构建sinatra应用程序# 创建Dockerfilehisen@docker1:~/docker/sinatra$ vi DockerfileFROM ubuntu:14.04MAINTINER hisenyuan &quot;hisenyuan@gmail.com&quot;ENV REFRESHED 2018-01-27RUN apt-get upate \ &amp;&amp; apt-get -y install ruby ruby-dev build-essential redis-tools \ &amp;&amp; gem install --no-rdoc --no-ri sinatra json redis \ &amp;&amp; mkdir -p /opt/webappEXPOSE 4567# 代码网站：https://dockerbook.com/code/5/sinatra/webapp/wget --cut-dir=3 -nH -r --no-parent https://dockerbook.com/code/5/sinatra/webapp/5.3 docker用于持续集成==========第六章 使用docker构建服务==========6.1 构建第一个应用==========第七章 Consul、服务发现与注册==========]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>容器</tag>
+        <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>笔记本在BIOS Setup里面设置双显卡模式</title>
     <url>/20170509-%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%9C%A8BIOS%20Setup%E9%87%8C%E9%9D%A2%E8%AE%BE%E7%BD%AE%E5%8F%8C%E6%98%BE%E5%8D%A1%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[我的本子是双显卡的，英特尔的核芯显卡和英伟达的独显
@@ -15414,29 +15620,6 @@ ID ACCOUNT10 A11 B
       <tags>
         <tag>存储</tag>
         <tag>稳定性</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>笔记 - 读后感：《第一本Docker书》</title>
-    <url>/20180127-%E7%AC%94%E8%AE%B0%20-%20%E8%AF%BB%E5%90%8E%E6%84%9F%EF%BC%9A%E3%80%8A%E7%AC%AC%E4%B8%80%E6%9C%ACDocker%E4%B9%A6%E3%80%8B/</url>
-    <content><![CDATA[忘记开始是在什么地方看到docker这个东西
-后面觉得挺好玩，也试了很多次，找过很多的教程。
-搭建了一个zookeeper的集群(docker-compose)
-然后当我需要搭建redis集群的时候，发现里面很多的概念还不是很懂
-比如：volume network
-然后加了docker的群，遇到了在以前idea群里面熟的一个人
-花了一天的时间看完他传的一本书，昨天买的几本书晚上也到了。（docker从入门到实践、Java并发编程的艺术、effective Java中文版 2）
-这本书总体来说还行，就是过时了，还在用link，毕竟三年前的东西
-有些例子也报错，主要是ruby相关的不行，提醒需要2.2以上的版本
-下面是随便做的一点笔记
-
-# 所有容器，不加-a只显示正在运行的；-1 列出最后一次运行的docker ps -a# 启动一个已经停止的容器(id，--name 都可以)docker start hisen_container# 进入容器(容器重启之后进入交换行)docker attach hisen_container# 创建一个守护式容器docker -d# 查看日志 可选 -f 类似tail -f Ctrl+c 退出docker logs hisen_container# 查看容器内的进程docker top hisen_container# 在容器内部运行进程docker exec -d hisen_container touch /etc/new_conf_file# 停止守护式容器docker stop hisen_container# 自动重启容器docker run --restart=always ....=on-failure:5 当容器退出代码为非0时，docker会自动重启，最多重试5次# 深入容器,会以json串显示更多容器信息docker inspect hisen_container # 删除容器，要先stop才行docker rm hisen_container# 删除所有容器 -a:所有容器 -q:只返回容器的IDdocker rm &#x27;docker ps -a -q&#x27;# 启动新的名字为other_hisen_container的容器，并且进入bash shelldocker run -i -t --name other_hisen_container ubuntu /bin/bash# docker文件系统层可写容器镜像(比如tomcat)基础镜像(比如ubuntu)引导文件系统(容器组、命名空间、设备映射)内核# docker简单构成顶层的读写层+底部不可变的可读层还有一些配置，就成了一个容器。# 列出所有镜像docker images# 仓库名:tag 如果没有指定，默认latest# 推荐使用Dockerfile构建镜像FROM ubuntu:14.04MAINTAINER hisenyuan &quot;hisenyuan@gmail.com&quot;RUN apt-get update \&amp;&amp; apt-getinstall -y nginx \&amp;&amp; echo &#x27;Hi,I am in your container&#x27; \   /usr/share/nginx/html/index.htmlEXPOSE 80# 构建镜像，在上面的dockerfile目录docker build -t=&quot;hisenyuan/static_web&quot; .# 查看构建过程，以及镜像的每一层docker history 791397495f7a# 运行构建的镜像 -p端口映射 nginx -g &quot;daemon off;&quot; 前台运行nginxdocker run -d -p 80:80 --name static_web hisenyuan/static_web nginx -g &quot;daemon off;&quot;# Dockerfile指令RUN 镜像构建的时候才会执行CMD 启动一个容器的时候要运行的命令，如有多个，只会生效最后一个，前面的多个会被忽略ENTRYPOINT 例子:ENTRYPOINT [&quot;/usr/sbin/nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;],这个命令不容易覆盖，CMD容易被RUN覆盖WORKDIR 设定工作目录，ENTRYPOINT CMD 会在这个目录执行ENV 设置构建时的环境变量，设置之后可以在后续的RUN命令使用USER 设置运行的用户VOLUME 向基于镜像创建的容器添加卷。1.卷可以在容器间共享和重用2.一个容器不是必须和其他容器共享卷3.对卷的修改是立即生效的4.对卷的修改不会对更新镜像产生影响5.卷会一直存在，直到没有任何容器再使用他VOLUME [&quot;/opt/project&quot;] 创建一个名为/opt/project的挂载点ADD 添加上下文目录的文件到构架容器中，如果是压缩包，会自动解压。会使构建缓存无效COPY 类似ADD、只会在上下文复制文件、也不会解压ONBUILD 为镜像添加触发器，当一个镜像被用作其他镜像的基础镜像时，该镜像中的触发器将会被执行。# 删除镜像，会删除这个镜像的每一层docker rmi hisenyuan/static_web# 运行一个registrydocker run -p 5000:5000 registry# 推送镜像到registrydocker tag 791397495f7a yourip:5000/hisenyuan/static_web #打标签docker push yourip:5000/hisenyuan/static_web #推送到本地注册容器docker run -t -i docker yourip:5000/hisenyuan/static_web /bin/bash #从registry运行一个容器==========第五章 在测试中使用docker==========5.1 使用docker测试静态网站5.1.1 sample网站的初始Dockerfilehisen@docker1:~/docker$ mkdir samplehisen@docker1:~/docker$ cd sample/hisen@docker1:~/docker/sample$ touch Dockerfilehisen@docker1:~/docker/sample$ mkdir nginx &amp;&amp; cd nginxhisen@docker1:~/docker/sample/nginx$ vi global.confserver &#123;        listen          0.0.0.0:80;        server_name     _;        root            /var/www/html/website;        index           index.html index.htm;        access_log      /var/log/nginx/default_access.log;        error_log       /var/log/nginx/default_error.log;&#125;hisen@docker1:~/docker/sample/nginx$ vi nginx.confuser www-data;worker_processes 4;pid /run/nginx.pid;daemon off;events &#123;  &#125;http &#123;  sendfile on;  tcp_nopush on;  tcp_nodelay on;  keepalive_timeout 65;  types_hash_max_size 2048;  include /etc/nginx/mime.types;  default_type application/octet-stream;  access_log /var/log/nginx/access.log;  error_log /var/log/nginx/error.log;  gzip on;  gzip_disable &quot;msie6&quot;;  include /etc/nginx/conf.d/*.conf;&#125;hisen@docker1:~/docker/sample/nginx$ vi DockerfileFROM ubuntu:14.04MAINTAINER hisenyuan &quot;hisenyuan@gmail.com&quot;ENV REFRESHED_AT 2018-01-27RUN apt-get update \ &amp;&amp; apt-get -y -q install nginx \ &amp;&amp; mkdir -p /var/www/htmlADD nginx/global.conf /etc/nginx/conf.d/ADD nginx/nginx.conf /etc/nginx/nginx.confEXPOSE 80hisen@docker1:~/docker/sample/nginx/website$ vi index.html&lt;head&gt;	&lt;title&gt;Test website&lt;/title&gt;&lt;/head&gt;&lt;body&gt;	&lt;h1&gt;This is a test website&lt;/h1&gt;&lt;/body&gt;hisen@docker1:~/docker/sample/nginx$ docker build -t hisenyuan/nginx .hisen@docker1:~/docker/sample/nginx$ docker run -d -p 8080:80 --name website \&gt; -v $PWD/website:/var/www/html/website \&gt; hisenyuan/nginx nginx # 因为已经在配置文件指定了daemon off，所以能直接启动# -v 指定了卷的源目录，挂载本地$PWD/website到容器/var/www/html/website目录，conf配置文件指定了工作目录# 修改之后，刷新浏览器，立马就生效hisen@docker1:~/docker/sample/nginx$ vi $PWD/website/index.html&lt;head&gt;&lt;title&gt;Test website - hisenyuan&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;This is a test website&lt;/h1&gt;&lt;h2&gt;2018年1月27日 13:20:13&lt;/h2&gt;&lt;/body&gt;5.2 使用docker构建并测试web应用程序5.2.1 构建sinatra应用程序# 创建Dockerfilehisen@docker1:~/docker/sinatra$ vi DockerfileFROM ubuntu:14.04MAINTINER hisenyuan &quot;hisenyuan@gmail.com&quot;ENV REFRESHED 2018-01-27RUN apt-get upate \ &amp;&amp; apt-get -y install ruby ruby-dev build-essential redis-tools \ &amp;&amp; gem install --no-rdoc --no-ri sinatra json redis \ &amp;&amp; mkdir -p /opt/webappEXPOSE 4567# 代码网站：https://dockerbook.com/code/5/sinatra/webapp/wget --cut-dir=3 -nH -r --no-parent https://dockerbook.com/code/5/sinatra/webapp/5.3 docker用于持续集成==========第六章 使用docker构建服务==========6.1 构建第一个应用==========第七章 Consul、服务发现与注册==========]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>容器</tag>
-        <tag>阅读</tag>
       </tags>
   </entry>
   <entry>
@@ -15712,22 +15895,6 @@ Java中有常量池的概念，常量池和类文件相关，其数据存放的�
       </tags>
   </entry>
   <entry>
-    <title>阿里巴巴Java开发手册，摘要&amp;下载链接</title>
-    <url>/20170213-%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%EF%BC%8C%E6%91%98%E8%A6%81-%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</url>
-    <content><![CDATA[阿里巴巴Java开发手册
-看了几个小时，感觉还是不错
-都按规范来写，可以避免很多错误
-下载链接
-点击下载
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>工程效能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>读取文件路径相关问题</title>
     <url>/20190716-%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[零、本文由来感觉从业这么久以来，读取文件路径相关问题一直是一个痛用的很少，之前也解决过相关的问题但是得用这种路径
@@ -15742,6 +15909,22 @@ ps：因maven打包配置不同，最终resources资源文件夹下的路径是�
       </categories>
       <tags>
         <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>阿里巴巴Java开发手册，摘要&amp;下载链接</title>
+    <url>/20170213-%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%EF%BC%8C%E6%91%98%E8%A6%81-%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</url>
+    <content><![CDATA[阿里巴巴Java开发手册
+看了几个小时，感觉还是不错
+都按规范来写，可以避免很多错误
+下载链接
+点击下载
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>工程效能</tag>
       </tags>
   </entry>
   <entry>
