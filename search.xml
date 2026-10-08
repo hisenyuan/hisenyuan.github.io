@@ -529,29 +529,6 @@ else if (value instanceof List) &#123;     index = Integer.parseInt(key);     Li
       </tags>
   </entry>
   <entry>
-    <title>解决 Cloudflare Pages URL 不支持大写的问题</title>
-    <url>/20260809-Cloudflare-pages-url-case/</url>
-    <content><![CDATA[去年升级了博客：Hexo 升级 &amp; 优化，近期才发现有些 Tag 404。但是 hexo s 本地运行的正常打开的，我看了下 Cloudflare pages 的发布日志。判断应该是平台机制问题，生成的文件都是 java 而非预期的 Java。
-于是问了下模型：
-
-问题：这是 Cloudflare Pages 的一个已知机制&#x2F;行为。
-解决：通过 hexo 的配置，把 URL 都调整为小写( 可能会影响 SEO )
-
-原因解析Cloudflare Pages 在部署静态资源时，其底层路由系统（以及预設的 Assets 引擎）在处理 URL 和文件路径时，默认是不区分大小写（Case-Insensitive）或者会执行规范化（Normalization）的。
-
-在 Hexo 中，如果你创建了 Tag 为 Java，Hexo 默认生成的目录结构是 &#x2F;tags&#x2F;Java&#x2F;index.html。但 Cloudflare Pages 在处理路由匹配或文件同步时，往往会强制将路径重写为小写（java），或者对大小写敏感的路径做了规范化路由重定向，这就导致访问原始带大写字母的 URL（例如 &#x2F;tags&#x2F;Java&#x2F;）时触发 404 或重定向循环。
-社区中许多使用 Hexo、Hugo 等静态博客引擎并部署在 Cloudflare Pages 上的开发者都遇到过此类分类&#x2F;标签（Tag&#x2F;Category）包含大写字母导致路径失效的问题。
-解决方案处理这个问题的根本原则是：在 Hexo 侧统一将 URL 生成策略调整为全小写（Case-insensitive Slugs）。修改配置文件的 filename_case 开关：
-# 1 表示将生成的 filename / slug 强制转为小写 (Lower case)# 0 表示保持原样 (Default)filename_case: 1
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Could not initialize class io.jsonwebtoken.impl.DefaultJwtBuilder</title>
     <url>/20181015-Could%20not%20initialize%20class%20io.jsonwebtoken.impl.DefaultJwtBuilder/</url>
     <content><![CDATA[使用jsonwebtoken出现如下错误
@@ -585,25 +562,6 @@ jwt必须依赖Jackson所以报错了
       </categories>
   </entry>
   <entry>
-    <title>Curator - 封装分布式锁等 | ZooKeeper目前最好用的客户端</title>
-    <url>/20190425-Curator%20-%20ZooKeeper%E7%9B%AE%E5%89%8D%E6%9C%80%E5%A5%BD%E7%94%A8%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
-    <content><![CDATA[一、什么是CuratorApache Curator is a Java&#x2F;JVM client library for Apache ZooKeeper, a distributed coordination service.It includes a highlevel API framework and utilities to make using Apache ZooKeeper much easier and more reliable.It also includes recipes for common use cases and extensions such as service discovery and a Java 8 asynchronous DSL.
-特别说明：Guava is to Java What Curator is to ZooKeeper
-二、常见用法后期补上自己的一些demo，其实官方文档已经介绍很全了http://curator.apache.org/getting-started.html
-三、其它说明了解这个客户端是在《从Paxos到Zookeeper:分布式一致性原理与实战》这本书里面看到的(书单)Curator号称是世界上最好用的zk客户端，相比zkClinet来说拥有更好的封装让我想起Redisson和Jedis的模样
-昨天一个做移动端的前同事截图问我那些代码什么意思，用的就是Curator封装的分布式锁
-相比于Redis分布式存在超时问题，zookeeper分布式锁利用临时节点可以避免
-目前dubbo master上使用的是Curator 4.0.1
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>中间件</tag>
-        <tag>分布式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Data URI scheme 利用base64字符串通过image标签显示图片</title>
     <url>/20170512-Data%20URI%20scheme%20%E5%88%A9%E7%94%A8base64%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%9A%E8%BF%87image%E6%A0%87%E7%AD%BE%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87/</url>
     <content><![CDATA[目前，Data URI scheme支持的类型有：
@@ -635,6 +593,69 @@ package com.hisen.image;import com.hisen.utils.Base64Util;import com.hisen.utils
       </categories>
       <tags>
         <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决 Cloudflare Pages URL 不支持大写的问题</title>
+    <url>/20260809-Cloudflare-pages-url-case/</url>
+    <content><![CDATA[去年升级了博客：Hexo 升级 &amp; 优化，近期才发现有些 Tag 404。但是 hexo s 本地运行的正常打开的，我看了下 Cloudflare pages 的发布日志。判断应该是平台机制问题，生成的文件都是 java 而非预期的 Java。
+于是问了下模型：
+
+问题：这是 Cloudflare Pages 的一个已知机制&#x2F;行为。
+解决：通过 hexo 的配置，把 URL 都调整为小写( 可能会影响 SEO )
+
+原因解析Cloudflare Pages 在部署静态资源时，其底层路由系统（以及预設的 Assets 引擎）在处理 URL 和文件路径时，默认是不区分大小写（Case-Insensitive）或者会执行规范化（Normalization）的。
+
+在 Hexo 中，如果你创建了 Tag 为 Java，Hexo 默认生成的目录结构是 &#x2F;tags&#x2F;Java&#x2F;index.html。但 Cloudflare Pages 在处理路由匹配或文件同步时，往往会强制将路径重写为小写（java），或者对大小写敏感的路径做了规范化路由重定向，这就导致访问原始带大写字母的 URL（例如 &#x2F;tags&#x2F;Java&#x2F;）时触发 404 或重定向循环。
+社区中许多使用 Hexo、Hugo 等静态博客引擎并部署在 Cloudflare Pages 上的开发者都遇到过此类分类&#x2F;标签（Tag&#x2F;Category）包含大写字母导致路径失效的问题。
+解决方案处理这个问题的根本原则是：在 Hexo 侧统一将 URL 生成策略调整为全小写（Case-insensitive Slugs）。修改配置文件的 filename_case 开关：
+# 1 表示将生成的 filename / slug 强制转为小写 (Lower case)# 0 表示保持原样 (Default)filename_case: 1
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Curator - 封装分布式锁等 | ZooKeeper目前最好用的客户端</title>
+    <url>/20190425-Curator%20-%20ZooKeeper%E7%9B%AE%E5%89%8D%E6%9C%80%E5%A5%BD%E7%94%A8%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
+    <content><![CDATA[一、什么是CuratorApache Curator is a Java&#x2F;JVM client library for Apache ZooKeeper, a distributed coordination service.It includes a highlevel API framework and utilities to make using Apache ZooKeeper much easier and more reliable.It also includes recipes for common use cases and extensions such as service discovery and a Java 8 asynchronous DSL.
+特别说明：Guava is to Java What Curator is to ZooKeeper
+二、常见用法后期补上自己的一些demo，其实官方文档已经介绍很全了http://curator.apache.org/getting-started.html
+三、其它说明了解这个客户端是在《从Paxos到Zookeeper:分布式一致性原理与实战》这本书里面看到的(书单)Curator号称是世界上最好用的zk客户端，相比zkClinet来说拥有更好的封装让我想起Redisson和Jedis的模样
+昨天一个做移动端的前同事截图问我那些代码什么意思，用的就是Curator封装的分布式锁
+相比于Redis分布式存在超时问题，zookeeper分布式锁利用临时节点可以避免
+目前dubbo master上使用的是Curator 4.0.1
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>中间件</tag>
+        <tag>分布式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Debian丨Ubuntu丨shadowsocks-libev一键安装脚本</title>
+    <url>/20170904-Debian%E4%B8%A8Ubuntu%E4%B8%A8shadowsocks-libev%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</url>
+    <content><![CDATA[执行命令：(装完就开机启动)
+wget --no-check-certificate -O shadowsocks-libev-debian.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev-debian.shchmod +x shadowsocks-libev-debian.sh./shadowsocks-libev-debian.sh 2&gt;&amp;1 | tee shadowsocks-libev-debian.log
+默认设置：
+服务器端口：自己设定（如不设定，默认为 8989）密码：自己设定（如不设定，默认为 teddysun.com）加密方式：自己设定（如不设定，默认为 aes-256-gcm）
+管理命令：
+启动：/etc/init.d/shadowsocks start停止：/etc/init.d/shadowsocks stop重启：/etc/init.d/shadowsocks restart查看状态：/etc/init.d/shadowsocks status
+修改配置文件(端口、密码)
+vi /etc/shadowsocks-libe/config.json&#123;    &quot;server&quot;:&quot;0.0.0.0&quot;,    &quot;server_port&quot;:9090,    &quot;local_address&quot;:&quot;127.0.0.1&quot;,    &quot;local_port&quot;:1080,    &quot;password&quot;:&quot;password&quot;,    &quot;timeout&quot;:600,    &quot;method&quot;:&quot;aes-256-gcm&quot;&#125;
+卸载命令
+./shadowsocks-libev-debian.sh uninstall]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>自建服务</tag>
+        <tag>网络</tag>
       </tags>
   </entry>
   <entry>
@@ -759,19 +780,6 @@ root@hisen-pc:/home/hisen# vi Dockerfile FROM    ubuntu:16.04MAINTAINER      Fis
       </tags>
   </entry>
   <entry>
-    <title>DockerFile - 创建Java开发环境镜像</title>
-    <url>/20180111-DockerFile%20-%20%E5%88%9B%E5%BB%BAJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%95%9C%E5%83%8F/</url>
-    <content><![CDATA[使用ubuntu官方发布的docker镜像进行二次修改
-这是一个菜鸟的脚本，执行命令应该是使用 &amp; 连接，一个RUN命令搞定
-FROM    ubuntuMAINTAINER      Fisher &quot;hisenyuan@gmail.com&quot;RUN     /bin/echo &#x27;root:hisen&#x27; |chpasswdRUN     useradd hisenRUN     /bin/echo &#x27;hisen:hisen&#x27; |chpasswdRUN     /bin/echo -e &quot;LANG=\&quot;en_US.UTF-8\&quot;&quot; &gt;/etc/default/local# 显示系统位数RUN		uname -p# 清空源 RUN     echo &quot;&quot; &gt; /etc/apt/sources.list# 更换为阿里云源RUN		echo &quot;deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb-src http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.list# 更新源RUN		apt-get update# 安装软件RUN     apt-get -y install vimRUN     apt-get -y install curlRUN     apt-get -y install wgetRUN     apt-get -y install net-toolsRUN     apt-get -y install iputils-pingRUN     apt-get -y install git# 创建软件文件夹RUN     mkdir -p /usr/hisen/soft/JavaRUN     mkdir -p /usr/hisen/soft/tomcatRUN     mkdir -p /usr/hisen/soft/mavenRUN     mkdir -p /usr/hisen/soft/download# 添加本地软件包到指定文件夹（会自动解压，软件压缩包必须放在docker同级目录）ADD jdk-8u151-linux-x64.tar.gz /usr/hisen/soft/Java/ADD apache-tomcat-8.5.24.tar.gz /usr/hisen/soft/tomcat/ADD apache-maven-3.5.2-bin.tar.gz /usr/hisen/soft/maven/# 配置环境变量# JavaENV JAVA_HOME=/usr/hisen/soft/Java/jdk1.8.0_151ENV JRE_HOME=$JAVA_HOME/jreENV CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JRE_HOME/libENV PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin# tomcatENV CATALINA_HOME=/usr/hisen/soft/tomcat/apache-tomcat-8.5.24ENV CLASSPATH=.:$JAVA_HOME/lib:$CATALINA_HOME/libENV PATH=$PATH:$CATALINA_HOME/bin# mavenENV MAVEN_HOME=/usr/hisen/soft/maven/apache-maven-3.5.2ENV MAVEN_OPTS=&quot;-Xms256m -Xmx512m&quot;ENV PATH=$&#123;MAVEN_HOME&#125;/bin:$PATH# 监听端口EXPOSE  22EXPOSE  80EXPOSE  8080CMD     /usr/sbin/sshd -D]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>容器</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker一键安装脚本Ubuntu-Debian-CentOS-Fedora-racleLinux</title>
     <url>/20170417-Docker%E4%B8%80%E4%BB%B6%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%ACUbuntu-Debian-CentOS-Fedora-racleLinux/</url>
     <content><![CDATA[系统要求Ubuntu 14.04、16.04
@@ -783,6 +791,19 @@ OracleLinux 6、7
 curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
 详情：http://mirrors.aliyun.com/help/docker-engine
 ]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>容器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DockerFile - 创建Java开发环境镜像</title>
+    <url>/20180111-DockerFile%20-%20%E5%88%9B%E5%BB%BAJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%95%9C%E5%83%8F/</url>
+    <content><![CDATA[使用ubuntu官方发布的docker镜像进行二次修改
+这是一个菜鸟的脚本，执行命令应该是使用 &amp; 连接，一个RUN命令搞定
+FROM    ubuntuMAINTAINER      Fisher &quot;hisenyuan@gmail.com&quot;RUN     /bin/echo &#x27;root:hisen&#x27; |chpasswdRUN     useradd hisenRUN     /bin/echo &#x27;hisen:hisen&#x27; |chpasswdRUN     /bin/echo -e &quot;LANG=\&quot;en_US.UTF-8\&quot;&quot; &gt;/etc/default/local# 显示系统位数RUN		uname -p# 清空源 RUN     echo &quot;&quot; &gt; /etc/apt/sources.list# 更换为阿里云源RUN		echo &quot;deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb-src http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.listRUN		echo &quot;deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.list# 更新源RUN		apt-get update# 安装软件RUN     apt-get -y install vimRUN     apt-get -y install curlRUN     apt-get -y install wgetRUN     apt-get -y install net-toolsRUN     apt-get -y install iputils-pingRUN     apt-get -y install git# 创建软件文件夹RUN     mkdir -p /usr/hisen/soft/JavaRUN     mkdir -p /usr/hisen/soft/tomcatRUN     mkdir -p /usr/hisen/soft/mavenRUN     mkdir -p /usr/hisen/soft/download# 添加本地软件包到指定文件夹（会自动解压，软件压缩包必须放在docker同级目录）ADD jdk-8u151-linux-x64.tar.gz /usr/hisen/soft/Java/ADD apache-tomcat-8.5.24.tar.gz /usr/hisen/soft/tomcat/ADD apache-maven-3.5.2-bin.tar.gz /usr/hisen/soft/maven/# 配置环境变量# JavaENV JAVA_HOME=/usr/hisen/soft/Java/jdk1.8.0_151ENV JRE_HOME=$JAVA_HOME/jreENV CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JRE_HOME/libENV PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin# tomcatENV CATALINA_HOME=/usr/hisen/soft/tomcat/apache-tomcat-8.5.24ENV CLASSPATH=.:$JAVA_HOME/lib:$CATALINA_HOME/libENV PATH=$PATH:$CATALINA_HOME/bin# mavenENV MAVEN_HOME=/usr/hisen/soft/maven/apache-maven-3.5.2ENV MAVEN_OPTS=&quot;-Xms256m -Xmx512m&quot;ENV PATH=$&#123;MAVEN_HOME&#125;/bin:$PATH# 监听端口EXPOSE  22EXPOSE  80EXPOSE  8080CMD     /usr/sbin/sshd -D]]></content>
       <categories>
         <category>Tech</category>
       </categories>
@@ -1001,27 +1022,6 @@ SAP 中国区总裁还提醒了一句值得记住的话：AI 落地的最大挑�
       </tags>
   </entry>
   <entry>
-    <title>Debian丨Ubuntu丨shadowsocks-libev一键安装脚本</title>
-    <url>/20170904-Debian%E4%B8%A8Ubuntu%E4%B8%A8shadowsocks-libev%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</url>
-    <content><![CDATA[执行命令：(装完就开机启动)
-wget --no-check-certificate -O shadowsocks-libev-debian.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev-debian.shchmod +x shadowsocks-libev-debian.sh./shadowsocks-libev-debian.sh 2&gt;&amp;1 | tee shadowsocks-libev-debian.log
-默认设置：
-服务器端口：自己设定（如不设定，默认为 8989）密码：自己设定（如不设定，默认为 teddysun.com）加密方式：自己设定（如不设定，默认为 aes-256-gcm）
-管理命令：
-启动：/etc/init.d/shadowsocks start停止：/etc/init.d/shadowsocks stop重启：/etc/init.d/shadowsocks restart查看状态：/etc/init.d/shadowsocks status
-修改配置文件(端口、密码)
-vi /etc/shadowsocks-libe/config.json&#123;    &quot;server&quot;:&quot;0.0.0.0&quot;,    &quot;server_port&quot;:9090,    &quot;local_address&quot;:&quot;127.0.0.1&quot;,    &quot;local_port&quot;:1080,    &quot;password&quot;:&quot;password&quot;,    &quot;timeout&quot;:600,    &quot;method&quot;:&quot;aes-256-gcm&quot;&#125;
-卸载命令
-./shadowsocks-libev-debian.sh uninstall]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>自建服务</tag>
-        <tag>网络</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>王慧文(美团)：很少人知道自己在愚昧之巅</title>
     <url>/20200723-Few-people-know-that-they-are-ignorance/</url>
     <content><![CDATA[零、写在前面早几天在领导 JG 的朋友圈看到这篇文章简单几个字的标题，让我产生了兴趣一来这个标题是挺吸引人，典型的自媒体文章二来JG 之前推过一些书很不错三来一般领导朋友圈都不会推垃圾信息
@@ -1207,38 +1207,6 @@ https://country-code.cl/
       </tags>
   </entry>
   <entry>
-    <title>Google Java工具类 - Guava - 常见用法</title>
-    <url>/20170801-Google%20Java%E5%B7%A5%E5%85%B7%E7%B1%BB%20-%20Guava%20-%20%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/</url>
-    <content><![CDATA[概述
-工具类 就是封装平常用的方法，不需要你重复造轮子，节省开发人员时间，提高工作效率。谷歌作为大公司，当然会从日常的工作中提取中很多高效率的方法出来。所以就诞生了Guava。
-高效设计良好的API，被Google的开发者设计，实现和使用
-遵循高效的Java语法实践
-使代码更刻度，简洁，简单
-节约时间，资源，提高生产力 Guava工程
-包含了若干被Google的 Java项目广泛依赖 的核心库，例如：
-
-集合 [collections]
-缓存 [caching]
-原生类型支持 [primitives support]
-并发库 [concurrency libraries]
-通用注解 [common annotations]
-字符串处理 [string processing]
-I&#x2F;O 等等。
-
-部分用法如下：
-
-public class CommonUsage &#123;  /**   * 2.集合转换为特定格式的字符串   */  @Test  public void collection2Srt() &#123;    //List转    List&lt;String&gt; list = new ArrayList&lt;String&gt;();    list.add(&quot;a&quot;);    list.add(&quot;b&quot;);    list.add(&quot;c&quot;);    list.add(&quot;d&quot;);    list.add(&quot;e&quot;);    list.add(&quot;f&quot;);    String result = Joiner.on(&quot;-&quot;).join(list);    System.out.println(result);//a-b-c-d-e-f    //Map 转    HashMap&lt;String, Integer&gt; map = Maps.newHashMap();    map.put(&quot;a&quot;, 1);    map.put(&quot;b&quot;, 2);    map.put(&quot;c&quot;, 3);    //on 分隔符，withKeyValueSeparator key value之间的分隔符    String s = Joiner.on(&quot;,&quot;).withKeyValueSeparator(&quot;=&quot;).join(map);    System.out.println(s);//a=1,b=2,c=3  &#125;  /**   * 3.将String 转为特定的集合   */  @Test  public void str2Collection() &#123;    String s = &quot;1,2,3,4,5,6,7,8,9&quot;;    List&lt;String&gt; list = Splitter.on(&quot;,&quot;).splitToList(s);    System.out.println(list);    s = &quot;1-2-3-4- 5-  6  &quot;;    //去除空串与空格    List&lt;String&gt; list1 = Splitter.on(&quot;-&quot;).omitEmptyStrings().trimResults().splitToList(s);    System.out.println(list1);    //将String转换为map    String str = &quot;a=1,b=2&quot;;    Map&lt;String, String&gt; map = Splitter.on(&quot;,&quot;).withKeyValueSeparator(&quot;=&quot;).split(str);  &#125;  /**   * 4.多个字符切割，或者特定的正则分隔   */  @Test  public void strSplit() &#123;    String input = &quot;aa.dd,,ff,,.&quot;;    List&lt;String&gt; list = Splitter.onPattern(&quot;[.|,]&quot;).omitEmptyStrings().trimResults()        .splitToList(input);    System.out.println(list);    // 判断匹配结果    boolean result = CharMatcher.inRange(&#x27;a&#x27;, &#x27;z&#x27;).or(CharMatcher.inRange(&#x27;A&#x27;, &#x27;Z&#x27;))        .matches(&#x27;K&#x27;);//true    // 保留数字文本    String s1 = CharMatcher.digit().retainFrom(&quot;abc 123 efg&quot;);//123    // 删除数字文本    String s2 = CharMatcher.digit().removeFrom(&quot;abc 123 efg&quot;);//abc  efg  &#125;  /**   * 9.计算程序开始结束用了多少时间   */  @Test  public void countTime() &#123;    Stopwatch stopwatch = Stopwatch.createStarted();    for (int i = 0; i &lt; 100000; i++) &#123;    &#125;    //TimeUnit可以指定时间精度    long nanos = stopwatch.elapsed(TimeUnit.MILLISECONDS);    System.out.println(nanos);  &#125;  /**   * 10.Files 文件操作   * 方便，   */  @Test  public void filesOperation() &#123;    String fileName = &quot;./src/main/Java/com/hisen/jars/guava/test.txt&quot;;    for (int i = 0; i &lt; 1000; i++) &#123;      //写      filesWrite(fileName, String.valueOf(i) + &quot;\n&quot;);    &#125;    //读    List&lt;String&gt; list = filesRead(fileName);    System.out.println(&quot;读取到的内容：&quot; + list.toString());//    Files.copy(sourceFile, targetFile); //复制文件//    Files.equal(File,File);//比较文件内容是否完全一致//    touch方法创建或者更新文件的时间戳。//    createTempDir()方法创建临时目录//    Files.createParentDirs(File) 创建父级目录//    getChecksum(File)获得文件的checksum//    hash(File)获得文件的hashmap系列方法获得文件的内存映射//    getFileExtension(String)获得文件的扩展名//    getNameWithoutExtension(String file)获得不带扩展名的文件名  &#125;  /**   * Files写文件   *   * @param fileName 文件名（包括路径）   * @param contents 写入的单行内容   */  public void filesWrite(final String fileName, final String contents) &#123;    checkNotNull(fileName, &quot;文件名称不能为空&quot;);    checkNotNull(contents, &quot;写入内容不能为空&quot;);    final File file = new File(fileName);    try &#123;      //Files.write(contents.getBytes(), file);//覆盖      Files.append(contents, file, Charsets.UTF_8);//追加    &#125; catch (IOException e) &#123;      System.out.println(&quot;ERROR trying to write to file &#x27;&quot; + fileName + &quot;&#x27; - &quot;          + e.toString());    &#125;  &#125;  /**   * Files 文件单行读取   *   * @param filePath 文件名(包括路径)   */  public List&lt;String&gt; filesRead(String filePath) &#123;    checkNotNull(filePath, &quot;文件名称不能为空&quot;);    File file = new File(filePath);    List&lt;String&gt; list = null;    try &#123;      list = Files.readLines(file, Charsets.UTF_8);    &#125; catch (IOException e) &#123;      e.printStackTrace();    &#125;    return list;  &#125;&#125;
-
-部分摘自：点击查看
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Guice Demo | solve NoSuchMethodError</title>
     <url>/20190424-Guice%20Demo%20%7C%20solve%20NoSuchMethodError/</url>
     <content><![CDATA[一、Guice简介Google公司的Bob lee开发的轻量级IoC容器，其特点是：
@@ -1295,21 +1263,6 @@ int hash = hash(k);int i = indexFor(hash, table.length); static int hash(Object 
       </tags>
   </entry>
   <entry>
-    <title>Hexo Landscape主题JS优化，不使用谷歌CDN</title>
-    <url>/20170208-Hexo-Landscape%E4%B8%BB%E9%A2%98JS%E4%BC%98%E5%8C%96%EF%BC%8C%E4%B8%8D%E4%BD%BF%E7%94%A8%E8%B0%B7%E6%AD%8CCDN/</url>
-    <content><![CDATA[jQuery库的优化修改这个文件：
-themes/landscape/layout/_partial/after-footer.ejs
-将17行左右的
-&lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js&quot;&gt;&lt;/script&gt;
-改为
-&lt;script src=&quot;http://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js&quot;&gt;&lt;/script&gt;
-重新生成博客之后就把谷歌的cdn替换成百度的cdn了
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Hexo next主题添加本地搜索 - 不使用第三方服务</title>
     <url>/20170407-Hexo%20next%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%20-%20%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1/</url>
     <content><![CDATA[之前安装过第三方的搜索服务，贼蛋疼。都不免费了。
@@ -1337,6 +1290,53 @@ local_search:
       <categories>
         <category>Tech</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Hexo Landscape主题JS优化，不使用谷歌CDN</title>
+    <url>/20170208-Hexo-Landscape%E4%B8%BB%E9%A2%98JS%E4%BC%98%E5%8C%96%EF%BC%8C%E4%B8%8D%E4%BD%BF%E7%94%A8%E8%B0%B7%E6%AD%8CCDN/</url>
+    <content><![CDATA[jQuery库的优化修改这个文件：
+themes/landscape/layout/_partial/after-footer.ejs
+将17行左右的
+&lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js&quot;&gt;&lt;/script&gt;
+改为
+&lt;script src=&quot;http://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js&quot;&gt;&lt;/script&gt;
+重新生成博客之后就把谷歌的cdn替换成百度的cdn了
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Google Java工具类 - Guava - 常见用法</title>
+    <url>/20170801-Google%20Java%E5%B7%A5%E5%85%B7%E7%B1%BB%20-%20Guava%20-%20%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/</url>
+    <content><![CDATA[概述
+工具类 就是封装平常用的方法，不需要你重复造轮子，节省开发人员时间，提高工作效率。谷歌作为大公司，当然会从日常的工作中提取中很多高效率的方法出来。所以就诞生了Guava。
+高效设计良好的API，被Google的开发者设计，实现和使用
+遵循高效的Java语法实践
+使代码更刻度，简洁，简单
+节约时间，资源，提高生产力 Guava工程
+包含了若干被Google的 Java项目广泛依赖 的核心库，例如：
+
+集合 [collections]
+缓存 [caching]
+原生类型支持 [primitives support]
+并发库 [concurrency libraries]
+通用注解 [common annotations]
+字符串处理 [string processing]
+I&#x2F;O 等等。
+
+部分用法如下：
+
+public class CommonUsage &#123;  /**   * 2.集合转换为特定格式的字符串   */  @Test  public void collection2Srt() &#123;    //List转    List&lt;String&gt; list = new ArrayList&lt;String&gt;();    list.add(&quot;a&quot;);    list.add(&quot;b&quot;);    list.add(&quot;c&quot;);    list.add(&quot;d&quot;);    list.add(&quot;e&quot;);    list.add(&quot;f&quot;);    String result = Joiner.on(&quot;-&quot;).join(list);    System.out.println(result);//a-b-c-d-e-f    //Map 转    HashMap&lt;String, Integer&gt; map = Maps.newHashMap();    map.put(&quot;a&quot;, 1);    map.put(&quot;b&quot;, 2);    map.put(&quot;c&quot;, 3);    //on 分隔符，withKeyValueSeparator key value之间的分隔符    String s = Joiner.on(&quot;,&quot;).withKeyValueSeparator(&quot;=&quot;).join(map);    System.out.println(s);//a=1,b=2,c=3  &#125;  /**   * 3.将String 转为特定的集合   */  @Test  public void str2Collection() &#123;    String s = &quot;1,2,3,4,5,6,7,8,9&quot;;    List&lt;String&gt; list = Splitter.on(&quot;,&quot;).splitToList(s);    System.out.println(list);    s = &quot;1-2-3-4- 5-  6  &quot;;    //去除空串与空格    List&lt;String&gt; list1 = Splitter.on(&quot;-&quot;).omitEmptyStrings().trimResults().splitToList(s);    System.out.println(list1);    //将String转换为map    String str = &quot;a=1,b=2&quot;;    Map&lt;String, String&gt; map = Splitter.on(&quot;,&quot;).withKeyValueSeparator(&quot;=&quot;).split(str);  &#125;  /**   * 4.多个字符切割，或者特定的正则分隔   */  @Test  public void strSplit() &#123;    String input = &quot;aa.dd,,ff,,.&quot;;    List&lt;String&gt; list = Splitter.onPattern(&quot;[.|,]&quot;).omitEmptyStrings().trimResults()        .splitToList(input);    System.out.println(list);    // 判断匹配结果    boolean result = CharMatcher.inRange(&#x27;a&#x27;, &#x27;z&#x27;).or(CharMatcher.inRange(&#x27;A&#x27;, &#x27;Z&#x27;))        .matches(&#x27;K&#x27;);//true    // 保留数字文本    String s1 = CharMatcher.digit().retainFrom(&quot;abc 123 efg&quot;);//123    // 删除数字文本    String s2 = CharMatcher.digit().removeFrom(&quot;abc 123 efg&quot;);//abc  efg  &#125;  /**   * 9.计算程序开始结束用了多少时间   */  @Test  public void countTime() &#123;    Stopwatch stopwatch = Stopwatch.createStarted();    for (int i = 0; i &lt; 100000; i++) &#123;    &#125;    //TimeUnit可以指定时间精度    long nanos = stopwatch.elapsed(TimeUnit.MILLISECONDS);    System.out.println(nanos);  &#125;  /**   * 10.Files 文件操作   * 方便，   */  @Test  public void filesOperation() &#123;    String fileName = &quot;./src/main/Java/com/hisen/jars/guava/test.txt&quot;;    for (int i = 0; i &lt; 1000; i++) &#123;      //写      filesWrite(fileName, String.valueOf(i) + &quot;\n&quot;);    &#125;    //读    List&lt;String&gt; list = filesRead(fileName);    System.out.println(&quot;读取到的内容：&quot; + list.toString());//    Files.copy(sourceFile, targetFile); //复制文件//    Files.equal(File,File);//比较文件内容是否完全一致//    touch方法创建或者更新文件的时间戳。//    createTempDir()方法创建临时目录//    Files.createParentDirs(File) 创建父级目录//    getChecksum(File)获得文件的checksum//    hash(File)获得文件的hashmap系列方法获得文件的内存映射//    getFileExtension(String)获得文件的扩展名//    getNameWithoutExtension(String file)获得不带扩展名的文件名  &#125;  /**   * Files写文件   *   * @param fileName 文件名（包括路径）   * @param contents 写入的单行内容   */  public void filesWrite(final String fileName, final String contents) &#123;    checkNotNull(fileName, &quot;文件名称不能为空&quot;);    checkNotNull(contents, &quot;写入内容不能为空&quot;);    final File file = new File(fileName);    try &#123;      //Files.write(contents.getBytes(), file);//覆盖      Files.append(contents, file, Charsets.UTF_8);//追加    &#125; catch (IOException e) &#123;      System.out.println(&quot;ERROR trying to write to file &#x27;&quot; + fileName + &quot;&#x27; - &quot;          + e.toString());    &#125;  &#125;  /**   * Files 文件单行读取   *   * @param filePath 文件名(包括路径)   */  public List&lt;String&gt; filesRead(String filePath) &#123;    checkNotNull(filePath, &quot;文件名称不能为空&quot;);    File file = new File(filePath);    List&lt;String&gt; list = null;    try &#123;      list = Files.readLines(file, Charsets.UTF_8);    &#125; catch (IOException e) &#123;      e.printStackTrace();    &#125;    return list;  &#125;&#125;
+
+部分摘自：点击查看
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
   </entry>
   <entry>
     <title>Hexo 绑定个人域名简单方法</title>
@@ -1468,54 +1468,6 @@ package com.hisen.jdbc;import com.mongodb.Block;import com.mongodb.MongoClient;i
         <tag>存储</tag>
         <tag>java</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>IDEA 貌似注解失效 - 报错：cannot resolve method xxx</title>
-    <url>/20170301-IDEA-%E8%B2%8C%E4%BC%BC%E6%B3%A8%E8%A7%A3%E5%A4%B1%E6%95%88-%E6%8A%A5%E9%94%99%EF%BC%9Acannot-resolve-method-xxx/</url>
-    <content><![CDATA[在Java平台上lombok提供了简单的注解的形式
-来帮助我们消除一些必须有但看起来很臃肿的代码
-比如属性的get&#x2F;set，及对象的toString等方法，特别是相对于 POJO;
-
-出现问题
-各种log方法，set方法中红色波浪线
-提示：cannot resolve method xxx
-虽然出现错误但是编译是可以通过的
-
-问题原因原来的代码用了lombok简单注解比如maven的pom.xml文件有如下配置
-&lt;dependency&gt;	&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;	&lt;artifactId&gt;lombok&lt;/artifactId&gt;	&lt;version&gt;1.16.8&lt;/version&gt;&lt;/dependency&gt;
-
-解决办法安装lombok plugin
-
-装完插件之后就舒服了，也不报错
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>IDEA修改全局设置，如maven等</title>
-    <url>/20170215-IDEA%E4%BF%AE%E6%94%B9%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%EF%BC%8C%E5%A6%82maven%E7%AD%89/</url>
-    <content><![CDATA[这几天在折腾maven项目
-我发现居然每次新open一个项目就得配置下maven
-因为默认的maven配置文件不行，我自定义的文件用的是阿里云的镜像
-那样快一点，于是很郁闷，决定要搞定他！！！
-结果这样设置就可以了，全局设置。
-File---&gt;Other Setting---&gt;Default Setting
-接下来的设置就是一样的了，各种设置都可以，只要你想全局生效
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>IDEA智能补全快捷键更改为Ctrl + 逗号</title>
-    <url>/20170328-IDEA%E6%99%BA%E8%83%BD%E8%A1%A5%E5%85%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%9B%B4%E6%94%B9%E4%B8%BACtrl%20+%20%E9%80%97%E5%8F%B7/</url>
-    <content><![CDATA[一直就听说idea的智能补全很厉害，但是Ctrl + 空格 被万恶的输入法给占用了网上搜也不是很清晰，这里就写个博客记录一下
-快捷键设置：file－&gt;setting-&gt;Keymap-&gt;Main menu-&gt;Code-&gt;Completion-&gt;Basic找到之后右键Add keyboard Shortcut，然后按下：Ctrl + 逗号
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
   </entry>
   <entry>
     <title>【阅读笔记】《亚洲大趋势：中国和新兴经济体的未来》</title>
@@ -2062,6 +2014,54 @@ File---&gt;Other Setting---&gt;Default Setting
       </tags>
   </entry>
   <entry>
+    <title>IDEA修改全局设置，如maven等</title>
+    <url>/20170215-IDEA%E4%BF%AE%E6%94%B9%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%EF%BC%8C%E5%A6%82maven%E7%AD%89/</url>
+    <content><![CDATA[这几天在折腾maven项目
+我发现居然每次新open一个项目就得配置下maven
+因为默认的maven配置文件不行，我自定义的文件用的是阿里云的镜像
+那样快一点，于是很郁闷，决定要搞定他！！！
+结果这样设置就可以了，全局设置。
+File---&gt;Other Setting---&gt;Default Setting
+接下来的设置就是一样的了，各种设置都可以，只要你想全局生效
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>IDEA 貌似注解失效 - 报错：cannot resolve method xxx</title>
+    <url>/20170301-IDEA-%E8%B2%8C%E4%BC%BC%E6%B3%A8%E8%A7%A3%E5%A4%B1%E6%95%88-%E6%8A%A5%E9%94%99%EF%BC%9Acannot-resolve-method-xxx/</url>
+    <content><![CDATA[在Java平台上lombok提供了简单的注解的形式
+来帮助我们消除一些必须有但看起来很臃肿的代码
+比如属性的get&#x2F;set，及对象的toString等方法，特别是相对于 POJO;
+
+出现问题
+各种log方法，set方法中红色波浪线
+提示：cannot resolve method xxx
+虽然出现错误但是编译是可以通过的
+
+问题原因原来的代码用了lombok简单注解比如maven的pom.xml文件有如下配置
+&lt;dependency&gt;	&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;	&lt;artifactId&gt;lombok&lt;/artifactId&gt;	&lt;version&gt;1.16.8&lt;/version&gt;&lt;/dependency&gt;
+
+解决办法安装lombok plugin
+
+装完插件之后就舒服了，也不报错
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>IDEA智能补全快捷键更改为Ctrl + 逗号</title>
+    <url>/20170328-IDEA%E6%99%BA%E8%83%BD%E8%A1%A5%E5%85%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%9B%B4%E6%94%B9%E4%B8%BACtrl%20+%20%E9%80%97%E5%8F%B7/</url>
+    <content><![CDATA[一直就听说idea的智能补全很厉害，但是Ctrl + 空格 被万恶的输入法给占用了网上搜也不是很清晰，这里就写个博客记录一下
+快捷键设置：file－&gt;setting-&gt;Keymap-&gt;Main menu-&gt;Code-&gt;Completion-&gt;Basic找到之后右键Add keyboard Shortcut，然后按下：Ctrl + 逗号
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>IDEA自定义注释模板(Javadoc) - Jindent插件 - 安装&amp;设置</title>
     <url>/20170214-IDEA%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E9%87%8A%E6%A8%A1%E6%9D%BF-Javadoc-Jindent%E6%8F%92%E4%BB%B6-%E5%AE%89%E8%A3%85-%E8%AE%BE%E7%BD%AE/</url>
     <content><![CDATA[在线安装
@@ -2132,6 +2132,111 @@ VM options：-Dfile.encoding&#x3D;UTF-8
 在idea中也可以，而且还比较高级，哈哈
 idea -&gt; 右上角 -&gt; Edit -&gt; Column Selection Mode -&gt; 移动光标到你想要弄的行
 完事在重复一次，就可以退出列编辑模式
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Intellij IDEA中使用MyBatis-generator 自动生成MyBatis代码</title>
+    <url>/20170322-Intellij%20IDEA%E4%B8%AD%E4%BD%BF%E7%94%A8MyBatis-generator%20%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90MyBatis%E4%BB%A3%E7%A0%81/</url>
+    <content><![CDATA[MyBatis Generator是一个非常方便的代码生成工具，
+可以根据数据库中表结构自动生成CRUD代码，可以满足大部分需求。
+MyBatis Generator (MBG) 是一个Mybatis的代码生成器 ，
+可以根据数据库中表结构自动生成简单的CRUD（插入，查询，更新，删除）操作。
+但联合查询和存储过程，需手动手写SQL和对象。
+PS:配置过程中请注意自己的工程目录结构
+一、pom.xml添加插件&lt;plugin&gt;                &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;                &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;                &lt;version&gt;1.3.2&lt;/version&gt;                &lt;dependencies&gt;                    &lt;dependency&gt;                        &lt;groupId&gt;mysql&lt;/groupId&gt;                        &lt;artifactId&gt;mysql-connector-Java&lt;/artifactId&gt;                        &lt;version&gt;5.1.5&lt;/version&gt;                    &lt;/dependency&gt;                &lt;/dependencies&gt;                &lt;configuration&gt;                    &lt;overwrite&gt;true&lt;/overwrite&gt;                &lt;/configuration&gt;            &lt;/plugin&gt;
+二、配置generatorConfig.xml
+resources下建generatorConfig.xml,作为mybatis-generator-maven-plugin插件的执行目标。
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE generatorConfiguration        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;&lt;generatorConfiguration&gt;    &lt;context id=&quot;mysqlgenerator&quot; targetRuntime=&quot;MyBatis3&quot;&gt;        &lt;!--数据库连接信息--&gt;        &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;                        connectionURL=&quot;jdbc:mysql://127.0.0.1:3306/ssm&quot;                        userId=&quot;root&quot;                        password=&quot;hisen&quot; /&gt;        &lt;!--代码相关路径和包--&gt;        &lt;JavaModelGenerator targetPackage=&quot;com.hisen.mybatis.model&quot; targetProject=&quot;src/main/Java&quot; /&gt;        &lt;sqlMapGenerator targetPackage=&quot;com.hisen.mybatis.mapper&quot; targetProject=&quot;src/main/resources&quot; /&gt;        &lt;JavaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.hisen.mybatis.mapper&quot; targetProject=&quot;src/main/Java&quot; /&gt;        &lt;!--表名--&gt;        &lt;table tableName=&quot;appointment&quot;/&gt;        &lt;table tableName=&quot;book&quot;/&gt;    &lt;/context&gt;&lt;/generatorConfiguration&gt;
+三、Intellij配置MyBatis Generator生成代码的运行方式：命令行、使用Ant、使用Maven、Java编码。
+本文采用Maven插件mybatis-generator-maven-plugin来运行MyBatis Generator，用的是命令行的方式。
+配置插件选择目录，输入命令：mybatis-generator:generate -e找到插件。双击执行即可看到生成的文件
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Intellij Idea 快捷键汇总&amp;介绍</title>
+    <url>/20170213-Intellij-Idea-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB-%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[最常用快捷键(1~18)
+
+Ctrl＋E，可以显示最近编辑的文件列表
+Shift＋Click可以关闭文件
+Ctrl＋[或]可以跳到大括号的开头结尾
+Ctrl＋Shift＋Backspace可以跳转到上次编辑的地方
+Ctrl＋F12，可以显示当前文件的结构
+Ctrl＋F7可以查询当前元素在当前文件中的引用，然后按F3可以选择
+Ctrl＋N，可以快速打开类
+Ctrl＋Shift＋N，可以快速打开文件
+Alt＋Q可以看到当前方法的声明
+Ctrl＋W可以选择单词继而语句继而行继而函数
+Alt＋F1可以将正在编辑的元素在各个面板中定位
+Ctrl＋P，可以显示参数信息
+Ctrl＋Shift＋Insert可以选择剪贴板内容并插入
+Alt＋Insert可以生成构造器&#x2F;Getter&#x2F;Setter等
+Ctrl＋Alt＋V 可以引入变量。例如把括号内的SQL赋成一个变量
+Ctrl＋Alt＋T可以把代码包在一块内，例如try&#x2F;catch
+Alt＋Up and Alt＋Down可在方法间快速移动
+在一些地方按Alt＋Enter可以得到一些Intention Action，例如将”&#x3D;&#x3D;”改为”equals()”
+Ctrl＋Shift＋Alt＋N可以快速打开符号
+Ctrl＋Shift＋Space在很多时候都能够给出Smart提示
+Alt＋F3可以快速寻找
+Ctrl＋&#x2F;和Ctrl＋Shift＋&#x2F;可以注释代码
+Ctrl＋Alt＋B可以跳转到抽象方法的实现
+Ctrl＋O可以选择父类的方法进行重写
+Ctrl＋Q可以看JavaDoc
+Ctrl＋Alt＋Space是类名自动完成
+快速打开类&#x2F;文件&#x2F;符号时，可以使用通配符，也可以使用缩写
+Live Templates! Ctrl＋J
+Ctrl＋Shift＋F7可以高亮当前元素在当前文件中的使用
+Ctrl＋Alt＋Up &#x2F;Ctrl＋Alt＋Down可以快速跳转搜索结果
+Ctrl＋Shift＋J可以整合两行
+Alt＋F8是计算变量值
+
+
+Alt+回车 导入包,自动修正
+Ctrl+N   查找类
+Ctrl+Shift+N 查找文件
+Ctrl+Alt+L  格式化代码
+Ctrl+Alt+O 优化导入的类和包
+Alt+Insert 生成代码(如get,set方法,构造函数等)
+Ctrl+E或者Alt+Shift+C  最近更改的代码
+Ctrl+R 替换文本
+Ctrl+F 查找文本
+Ctrl+Shift+Space 自动补全代码
+Ctrl+空格 代码提示
+Ctrl+Alt+Space 类名或接口名提示
+Ctrl+P 方法参数提示
+Ctrl+Shift+Alt+N 查找类中的方法或变量
+Alt+Shift+C 对比最近修改的代码
+Shift+F6  重构-重命名
+Ctrl+Shift+先上键
+Ctrl+X 删除行
+Ctrl+D 复制行
+Ctrl+&#x2F; 或 Ctrl+Shift+&#x2F;  注释（&#x2F;&#x2F; 或者&#x2F;…&#x2F; ）
+Ctrl+J  自动代码
+Ctrl+E 最近打开的文件
+Ctrl+H 显示类结构图
+Ctrl+Q 显示注释文档
+Alt+F1 查找代码所在位置
+Alt+1 快速打开或隐藏工程面板
+Ctrl+Alt+ left&#x2F;right 返回至上次浏览的位置
+Alt+ left&#x2F;right 切换代码视图
+Alt+ Up&#x2F;Down 在方法间快速移动定位
+Ctrl+Shift+Up&#x2F;Down 代码向上&#x2F;下移动。
+F2 或Shift+F2 高亮错误或警告快速定位
+代码标签输入完成后，按Tab，生成代码。
+选中文本，按Ctrl+Shift+F7 ，高亮显示所有该文本，按Esc高亮消失。
+Ctrl+W 选中代码，连续按会有其他效果
+选中文本，按Alt+F3 ，逐个往下查找相同文本，并高亮显示。
+Ctrl+Up&#x2F;Down 光标跳转到第一行或最后一行下
+Ctrl+B 快速打开光标处的类或方法
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -2298,6 +2403,37 @@ JWT官方网站：https://jwt.io/
       </tags>
   </entry>
   <entry>
+    <title>Java - 利用apache POI读取Excel（xls,xlsx,2003,2007)</title>
+    <url>/20180113-Java%20-%20%E5%88%A9%E7%94%A8apache%20POI%E8%AF%BB%E5%8F%96Excel%EF%BC%88xls,xlsx,2003,2007)/</url>
+    <content><![CDATA[一个简单的工具类，更多Java小练习：https://github.com/hisenyuan/IDEAPractice
+一、添加依赖&lt;!-- POI start --&gt;&lt;dependency&gt;  &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;  &lt;artifactId&gt;poi&lt;/artifactId&gt;  &lt;version&gt;3.9&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;  &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;  &lt;artifactId&gt;poi-ooxml&lt;/artifactId&gt;  &lt;version&gt;3.9&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;  &lt;groupId&gt;commons-collections&lt;/groupId&gt;  &lt;artifactId&gt;commons-collections&lt;/artifactId&gt;  &lt;version&gt;3.2.2&lt;/version&gt;&lt;/dependency&gt;&lt;!-- POI end --&gt;
+二、测试类package com.hisen.jars.poi;import Java.io.File;import Java.io.IOException;import Java.util.Arrays;import Java.util.List;/** * @author hisenyuan * @time 2018/1/12 17:43 * @description 测试读取 */public class TestPoiExcelUtil &#123;  public static void main(String[] args) &#123;    File file = new File(&quot;C:\\work\\document\\银行信息.xlsx&quot;);    try &#123;      // 每一个excelData为一行数据（存放在数组）      List&lt;String[]&gt; excelData = POIExcelUtil.readExcel(file);      for (String[] data:excelData) &#123;        System.out.println(Arrays.toString(data));      &#125;    &#125; catch (IOException e) &#123;      e.printStackTrace();    &#125;  &#125;&#125;
+三、工具类代码完整类：POIExcelUtil.Java
+package com.hisen.jars.poi;import Java.io.File;import Java.io.FileInputStream;import Java.io.FileNotFoundException;import Java.io.IOException;import Java.io.InputStream;import Java.util.ArrayList;import Java.util.List;import org.apache.log4j.Logger;import org.apache.poi.hssf.usermodel.HSSFWorkbook;import org.apache.poi.ss.usermodel.Cell;import org.apache.poi.ss.usermodel.Row;import org.apache.poi.ss.usermodel.Sheet;import org.apache.poi.ss.usermodel.Workbook;import org.apache.poi.xssf.usermodel.XSSFWorkbook;/** * @author hisenyuan * @time 2018/1/12 16:35 * @description 利用POI读取excel表格 */public class POIExcelUtil &#123;  private static Logger logger = Logger.getLogger(POIExcelUtil.class);  private final static String XLS = &quot;xls&quot;;  private final static String XLSX = &quot;xlsx&quot;;  public static List&lt;String[]&gt; readExcel(File file) throws IOException &#123;    // 检查文件    checkFile(file);    Workbook workBook = getWorkBook(file);    // 返回对象,每行作为一个数组，放在集合返回    ArrayList&lt;String[]&gt; rowList = new ArrayList&lt;&gt;();    if (null != workBook) &#123;      for (int sheetNum = 0; sheetNum &lt; workBook.getNumberOfSheets(); sheetNum++) &#123;        // 获得当前sheet工作表        Sheet sheet = workBook.getSheetAt(sheetNum);        if (sheet == null) &#123;          continue;        &#125;        // 获得当前sheet的开始行        int firstRowNum = sheet.getFirstRowNum();        // 获得当前sheet的结束行        int lastRowNum = sheet.getLastRowNum();        // 循环所有行(第一行为标题)        for (int rowNum = firstRowNum; rowNum &lt; lastRowNum; rowNum++) &#123;          // 获得当前行          Row row = sheet.getRow(rowNum);          if (row == null) &#123;            continue;          &#125;          // 获得当前行开始的列          short firstCellNum = row.getFirstCellNum();          // 获得当前行的列数          int lastCellNum = row.getPhysicalNumberOfCells();          String[] cells = new String[row.getPhysicalNumberOfCells()];          // 循环当前行          for (int cellNum = firstCellNum; cellNum &lt; lastCellNum; cellNum++) &#123;            Cell cell = row.getCell(cellNum);            cells[cellNum] = getCellValue(cell);          &#125;          rowList.add(cells);        &#125;      &#125;    &#125;    return rowList;  &#125;&#125;]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java受检异常和非受检异常 - uncheckedException checkedException</title>
+    <url>/20190429-Java%20-%20%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%E5%92%8C%E9%9D%9E%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%20-%20uncheckedException%20checkedException/</url>
+    <content><![CDATA[一、简单介绍除了runtimeException以外的异常，都属于checkedException。
+CheckedException(受检异常)：编译器会检查这类异常，需要强制捕获，否则无法编译通过。UnCheckedException(非受检异常)：编译器不会检查这类异常，可以不用捕获，可以编译通过。
+二、常见异常受检：IOException、SQLException、NumberFormatException、IllegalArgumentException非受检：OutOfMemoryError、StackOverflowError、NullPointerException、IndexOutOfBoundsException
+点击查看所有jdk8 api文档进去可以看到Java.lang.RuntimeException下有很多子类异常
+暂时写这些，日后再完善
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IDEA - Java.Lang.OutOfMemoryError: PermGen Space</title>
     <url>/20170222-Java-Lang-OutOfMemoryError-PermGen-Space/</url>
     <content><![CDATA[Java.Lang.OutOfMemoryError: PermGen Space
@@ -2351,37 +2487,6 @@ JVM调优是最后的稻草，进行JVM调优之前应该先优化架构和代�
       </tags>
   </entry>
   <entry>
-    <title>Java受检异常和非受检异常 - uncheckedException checkedException</title>
-    <url>/20190429-Java%20-%20%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%E5%92%8C%E9%9D%9E%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%20-%20uncheckedException%20checkedException/</url>
-    <content><![CDATA[一、简单介绍除了runtimeException以外的异常，都属于checkedException。
-CheckedException(受检异常)：编译器会检查这类异常，需要强制捕获，否则无法编译通过。UnCheckedException(非受检异常)：编译器不会检查这类异常，可以不用捕获，可以编译通过。
-二、常见异常受检：IOException、SQLException、NumberFormatException、IllegalArgumentException非受检：OutOfMemoryError、StackOverflowError、NullPointerException、IndexOutOfBoundsException
-点击查看所有jdk8 api文档进去可以看到Java.lang.RuntimeException下有很多子类异常
-暂时写这些，日后再完善
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java - 利用apache POI读取Excel（xls,xlsx,2003,2007)</title>
-    <url>/20180113-Java%20-%20%E5%88%A9%E7%94%A8apache%20POI%E8%AF%BB%E5%8F%96Excel%EF%BC%88xls,xlsx,2003,2007)/</url>
-    <content><![CDATA[一个简单的工具类，更多Java小练习：https://github.com/hisenyuan/IDEAPractice
-一、添加依赖&lt;!-- POI start --&gt;&lt;dependency&gt;  &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;  &lt;artifactId&gt;poi&lt;/artifactId&gt;  &lt;version&gt;3.9&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;  &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;  &lt;artifactId&gt;poi-ooxml&lt;/artifactId&gt;  &lt;version&gt;3.9&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;  &lt;groupId&gt;commons-collections&lt;/groupId&gt;  &lt;artifactId&gt;commons-collections&lt;/artifactId&gt;  &lt;version&gt;3.2.2&lt;/version&gt;&lt;/dependency&gt;&lt;!-- POI end --&gt;
-二、测试类package com.hisen.jars.poi;import Java.io.File;import Java.io.IOException;import Java.util.Arrays;import Java.util.List;/** * @author hisenyuan * @time 2018/1/12 17:43 * @description 测试读取 */public class TestPoiExcelUtil &#123;  public static void main(String[] args) &#123;    File file = new File(&quot;C:\\work\\document\\银行信息.xlsx&quot;);    try &#123;      // 每一个excelData为一行数据（存放在数组）      List&lt;String[]&gt; excelData = POIExcelUtil.readExcel(file);      for (String[] data:excelData) &#123;        System.out.println(Arrays.toString(data));      &#125;    &#125; catch (IOException e) &#123;      e.printStackTrace();    &#125;  &#125;&#125;
-三、工具类代码完整类：POIExcelUtil.Java
-package com.hisen.jars.poi;import Java.io.File;import Java.io.FileInputStream;import Java.io.FileNotFoundException;import Java.io.IOException;import Java.io.InputStream;import Java.util.ArrayList;import Java.util.List;import org.apache.log4j.Logger;import org.apache.poi.hssf.usermodel.HSSFWorkbook;import org.apache.poi.ss.usermodel.Cell;import org.apache.poi.ss.usermodel.Row;import org.apache.poi.ss.usermodel.Sheet;import org.apache.poi.ss.usermodel.Workbook;import org.apache.poi.xssf.usermodel.XSSFWorkbook;/** * @author hisenyuan * @time 2018/1/12 16:35 * @description 利用POI读取excel表格 */public class POIExcelUtil &#123;  private static Logger logger = Logger.getLogger(POIExcelUtil.class);  private final static String XLS = &quot;xls&quot;;  private final static String XLSX = &quot;xlsx&quot;;  public static List&lt;String[]&gt; readExcel(File file) throws IOException &#123;    // 检查文件    checkFile(file);    Workbook workBook = getWorkBook(file);    // 返回对象,每行作为一个数组，放在集合返回    ArrayList&lt;String[]&gt; rowList = new ArrayList&lt;&gt;();    if (null != workBook) &#123;      for (int sheetNum = 0; sheetNum &lt; workBook.getNumberOfSheets(); sheetNum++) &#123;        // 获得当前sheet工作表        Sheet sheet = workBook.getSheetAt(sheetNum);        if (sheet == null) &#123;          continue;        &#125;        // 获得当前sheet的开始行        int firstRowNum = sheet.getFirstRowNum();        // 获得当前sheet的结束行        int lastRowNum = sheet.getLastRowNum();        // 循环所有行(第一行为标题)        for (int rowNum = firstRowNum; rowNum &lt; lastRowNum; rowNum++) &#123;          // 获得当前行          Row row = sheet.getRow(rowNum);          if (row == null) &#123;            continue;          &#125;          // 获得当前行开始的列          short firstCellNum = row.getFirstCellNum();          // 获得当前行的列数          int lastCellNum = row.getPhysicalNumberOfCells();          String[] cells = new String[row.getPhysicalNumberOfCells()];          // 循环当前行          for (int cellNum = firstCellNum; cellNum &lt; lastCellNum; cellNum++) &#123;            Cell cell = row.getCell(cellNum);            cells[cellNum] = getCellValue(cell);          &#125;          rowList.add(cells);        &#125;      &#125;    &#125;    return rowList;  &#125;&#125;]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java 反序列化漏洞</title>
     <url>/20200510-Java-deserialize-security-hole/</url>
     <content><![CDATA[微博目前关注了好几个做安全的大佬不要问我为什么关注问就是想观摩下有钱人的微博！
@@ -2403,166 +2508,6 @@ Fastjson系列一 反序列化漏洞基本原理
       <tags>
         <tag>成长</tag>
         <tag>安全</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Intellij Idea 快捷键汇总&amp;介绍</title>
-    <url>/20170213-Intellij-Idea-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB-%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[最常用快捷键(1~18)
-
-Ctrl＋E，可以显示最近编辑的文件列表
-Shift＋Click可以关闭文件
-Ctrl＋[或]可以跳到大括号的开头结尾
-Ctrl＋Shift＋Backspace可以跳转到上次编辑的地方
-Ctrl＋F12，可以显示当前文件的结构
-Ctrl＋F7可以查询当前元素在当前文件中的引用，然后按F3可以选择
-Ctrl＋N，可以快速打开类
-Ctrl＋Shift＋N，可以快速打开文件
-Alt＋Q可以看到当前方法的声明
-Ctrl＋W可以选择单词继而语句继而行继而函数
-Alt＋F1可以将正在编辑的元素在各个面板中定位
-Ctrl＋P，可以显示参数信息
-Ctrl＋Shift＋Insert可以选择剪贴板内容并插入
-Alt＋Insert可以生成构造器&#x2F;Getter&#x2F;Setter等
-Ctrl＋Alt＋V 可以引入变量。例如把括号内的SQL赋成一个变量
-Ctrl＋Alt＋T可以把代码包在一块内，例如try&#x2F;catch
-Alt＋Up and Alt＋Down可在方法间快速移动
-在一些地方按Alt＋Enter可以得到一些Intention Action，例如将”&#x3D;&#x3D;”改为”equals()”
-Ctrl＋Shift＋Alt＋N可以快速打开符号
-Ctrl＋Shift＋Space在很多时候都能够给出Smart提示
-Alt＋F3可以快速寻找
-Ctrl＋&#x2F;和Ctrl＋Shift＋&#x2F;可以注释代码
-Ctrl＋Alt＋B可以跳转到抽象方法的实现
-Ctrl＋O可以选择父类的方法进行重写
-Ctrl＋Q可以看JavaDoc
-Ctrl＋Alt＋Space是类名自动完成
-快速打开类&#x2F;文件&#x2F;符号时，可以使用通配符，也可以使用缩写
-Live Templates! Ctrl＋J
-Ctrl＋Shift＋F7可以高亮当前元素在当前文件中的使用
-Ctrl＋Alt＋Up &#x2F;Ctrl＋Alt＋Down可以快速跳转搜索结果
-Ctrl＋Shift＋J可以整合两行
-Alt＋F8是计算变量值
-
-
-Alt+回车 导入包,自动修正
-Ctrl+N   查找类
-Ctrl+Shift+N 查找文件
-Ctrl+Alt+L  格式化代码
-Ctrl+Alt+O 优化导入的类和包
-Alt+Insert 生成代码(如get,set方法,构造函数等)
-Ctrl+E或者Alt+Shift+C  最近更改的代码
-Ctrl+R 替换文本
-Ctrl+F 查找文本
-Ctrl+Shift+Space 自动补全代码
-Ctrl+空格 代码提示
-Ctrl+Alt+Space 类名或接口名提示
-Ctrl+P 方法参数提示
-Ctrl+Shift+Alt+N 查找类中的方法或变量
-Alt+Shift+C 对比最近修改的代码
-Shift+F6  重构-重命名
-Ctrl+Shift+先上键
-Ctrl+X 删除行
-Ctrl+D 复制行
-Ctrl+&#x2F; 或 Ctrl+Shift+&#x2F;  注释（&#x2F;&#x2F; 或者&#x2F;…&#x2F; ）
-Ctrl+J  自动代码
-Ctrl+E 最近打开的文件
-Ctrl+H 显示类结构图
-Ctrl+Q 显示注释文档
-Alt+F1 查找代码所在位置
-Alt+1 快速打开或隐藏工程面板
-Ctrl+Alt+ left&#x2F;right 返回至上次浏览的位置
-Alt+ left&#x2F;right 切换代码视图
-Alt+ Up&#x2F;Down 在方法间快速移动定位
-Ctrl+Shift+Up&#x2F;Down 代码向上&#x2F;下移动。
-F2 或Shift+F2 高亮错误或警告快速定位
-代码标签输入完成后，按Tab，生成代码。
-选中文本，按Ctrl+Shift+F7 ，高亮显示所有该文本，按Esc高亮消失。
-Ctrl+W 选中代码，连续按会有其他效果
-选中文本，按Alt+F3 ，逐个往下查找相同文本，并高亮显示。
-Ctrl+Up&#x2F;Down 光标跳转到第一行或最后一行下
-Ctrl+B 快速打开光标处的类或方法
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Intellij IDEA中使用MyBatis-generator 自动生成MyBatis代码</title>
-    <url>/20170322-Intellij%20IDEA%E4%B8%AD%E4%BD%BF%E7%94%A8MyBatis-generator%20%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90MyBatis%E4%BB%A3%E7%A0%81/</url>
-    <content><![CDATA[MyBatis Generator是一个非常方便的代码生成工具，
-可以根据数据库中表结构自动生成CRUD代码，可以满足大部分需求。
-MyBatis Generator (MBG) 是一个Mybatis的代码生成器 ，
-可以根据数据库中表结构自动生成简单的CRUD（插入，查询，更新，删除）操作。
-但联合查询和存储过程，需手动手写SQL和对象。
-PS:配置过程中请注意自己的工程目录结构
-一、pom.xml添加插件&lt;plugin&gt;                &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;                &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;                &lt;version&gt;1.3.2&lt;/version&gt;                &lt;dependencies&gt;                    &lt;dependency&gt;                        &lt;groupId&gt;mysql&lt;/groupId&gt;                        &lt;artifactId&gt;mysql-connector-Java&lt;/artifactId&gt;                        &lt;version&gt;5.1.5&lt;/version&gt;                    &lt;/dependency&gt;                &lt;/dependencies&gt;                &lt;configuration&gt;                    &lt;overwrite&gt;true&lt;/overwrite&gt;                &lt;/configuration&gt;            &lt;/plugin&gt;
-二、配置generatorConfig.xml
-resources下建generatorConfig.xml,作为mybatis-generator-maven-plugin插件的执行目标。
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE generatorConfiguration        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;&lt;generatorConfiguration&gt;    &lt;context id=&quot;mysqlgenerator&quot; targetRuntime=&quot;MyBatis3&quot;&gt;        &lt;!--数据库连接信息--&gt;        &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;                        connectionURL=&quot;jdbc:mysql://127.0.0.1:3306/ssm&quot;                        userId=&quot;root&quot;                        password=&quot;hisen&quot; /&gt;        &lt;!--代码相关路径和包--&gt;        &lt;JavaModelGenerator targetPackage=&quot;com.hisen.mybatis.model&quot; targetProject=&quot;src/main/Java&quot; /&gt;        &lt;sqlMapGenerator targetPackage=&quot;com.hisen.mybatis.mapper&quot; targetProject=&quot;src/main/resources&quot; /&gt;        &lt;JavaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.hisen.mybatis.mapper&quot; targetProject=&quot;src/main/Java&quot; /&gt;        &lt;!--表名--&gt;        &lt;table tableName=&quot;appointment&quot;/&gt;        &lt;table tableName=&quot;book&quot;/&gt;    &lt;/context&gt;&lt;/generatorConfiguration&gt;
-三、Intellij配置MyBatis Generator生成代码的运行方式：命令行、使用Ant、使用Maven、Java编码。
-本文采用Maven插件mybatis-generator-maven-plugin来运行MyBatis Generator，用的是命令行的方式。
-配置插件选择目录，输入命令：mybatis-generator:generate -e找到插件。双击执行即可看到生成的文件
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java.lang.NoClassDefFoundError错误解决</title>
-    <url>/20190223-Java.lang.NoClassDefFoundError%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[maven项目昨天遇到的一个错误：Java.lang.NoClassDefFoundError
-理论原因：JVM在编译的时候能找到调用方法或静态变量所在的类，但在运行的时候找不到此类而引发的错误。
-真实原因：(仅针对当前问题)项目A依赖公共服务C-1.0.1版本项目B依赖项目A，B中dependencyManagement强制指定C-1.0.0
-此时编译可以通过，运行时如果有用的C的新版本功能就会会出现上述问题
-解决办法：对项目B中C的版本升级，使用1.0.1
-扩展阅读：https://blog.csdn.net/qq_27576335/article/details/77102385https://blog.csdn.net/jamesjxin/article/details/46606307
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java.lang.IllegalArgumentException: addChild:  Child name &#39;/hisen&#39; is not unique</title>
-    <url>/20170227-Java-lang-IllegalArgumentException-addChild-Child-name-hisen-is-not-unique/</url>
-    <content><![CDATA[报错如下：
-27-Feb-2017 12:53:31.268 严重 [RMI TCP Connection(13)-127.0.0.1] org.apache.tomcat.util.modeler.BaseModelMBean.invoke Exception invoking method manageApp Java.lang.IllegalArgumentException: addChild:  Child name &#x27;/hisen&#x27; is not unique	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.Java:738)	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.Java:728)	at org.apache.catalina.core.StandardHost.addChild(StandardHost.Java:734)	at org.apache.catalina.startup.HostConfig.manageApp(HostConfig.Java:1702)	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.Java:57)	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.Java:43)	at Java.lang.reflect.Method.invoke(Method.Java:606)	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.Java:300)	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.Java:819)	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.Java:801)	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.Java:482)	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.Java:431)	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.Java:57)	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.Java:43)	at Java.lang.reflect.Method.invoke(Method.Java:606)	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.Java:300)	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.Java:819)	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.Java:801)	at Javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.Java:1487)	at Javax.management.remote.rmi.RMIConnectionImpl.access$300(RMIConnectionImpl.Java:97)	at Javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.Java:1328)	at Javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.Java:1420)	at Javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.Java:848)	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.Java:57)	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.Java:43)	at Java.lang.reflect.Method.invoke(Method.Java:606)	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.Java:322)	at sun.rmi.transport.Transport$1.run(Transport.Java:177)	at sun.rmi.transport.Transport$1.run(Transport.Java:174)	at Java.security.AccessController.doPrivileged(Native Method)	at sun.rmi.transport.Transport.serviceCall(Transport.Java:173)	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.Java:556)	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.Java:811)	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.Java:670)	at Java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.Java:1145)	at Java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.Java:615)	at Java.lang.Thread.run(Thread.Java:744)
-重要的是：
-org.apache.tomcat.util.modeler.BaseModelMBean.invoke Exception invoking method manageApp Java.lang.IllegalArgumentException: addChild:  Child name &#x27;/hisen&#x27; is not unique
-IDEA解决办法Project Structure -&gt; Artifacts
-查看里面是否有配置相同的Artifacts
-删除即可
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Java.sql.SQLException Connections could not be acquired from the underlying database</title>
-    <url>/20170602-Java.sql.SQLException%20Connections%20could%20not%20be%20acquired%20from%20the%20underlying%20database/</url>
-    <content><![CDATA[Java.sql.SQLException: Connections could not be acquired from the underlying database
-这个错误出现的原因有的说是因为jdbc配置文件写错了
-正确的写法是：
-c3p0.driverClass=com.mysql.jdbc.Driverc3p0.jdbcUrl=jdbc:mysql://localhost:3306/testc3p0.user=rootc3p0.password=root
-而不是
-driver=com.mysql.jdbc.Driverurl=jdbc:mysql://localhost:3306/testuser=rootpassword=root
-
-但是我遇到的不是如此
-后来发现是因为maven出问题了，jar包没有加载进项目
-这是在starkoverflow上看到的回答
-In my case it was problem that c3p0-0.9.2.1.jar file was not copied by maven into src/main/webapp/web-inf/libs
-最后maven重新install之后就解决了
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -2611,6 +2556,61 @@ JVM 新生代大小与老年代大小默认为 1:2，大部分应用按这个设
       <tags>
         <tag>java</tag>
         <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java.lang.IllegalArgumentException: addChild:  Child name &#39;/hisen&#39; is not unique</title>
+    <url>/20170227-Java-lang-IllegalArgumentException-addChild-Child-name-hisen-is-not-unique/</url>
+    <content><![CDATA[报错如下：
+27-Feb-2017 12:53:31.268 严重 [RMI TCP Connection(13)-127.0.0.1] org.apache.tomcat.util.modeler.BaseModelMBean.invoke Exception invoking method manageApp Java.lang.IllegalArgumentException: addChild:  Child name &#x27;/hisen&#x27; is not unique	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.Java:738)	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.Java:728)	at org.apache.catalina.core.StandardHost.addChild(StandardHost.Java:734)	at org.apache.catalina.startup.HostConfig.manageApp(HostConfig.Java:1702)	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.Java:57)	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.Java:43)	at Java.lang.reflect.Method.invoke(Method.Java:606)	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.Java:300)	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.Java:819)	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.Java:801)	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.Java:482)	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.Java:431)	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.Java:57)	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.Java:43)	at Java.lang.reflect.Method.invoke(Method.Java:606)	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.Java:300)	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.Java:819)	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.Java:801)	at Javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.Java:1487)	at Javax.management.remote.rmi.RMIConnectionImpl.access$300(RMIConnectionImpl.Java:97)	at Javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.Java:1328)	at Javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.Java:1420)	at Javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.Java:848)	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.Java:57)	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.Java:43)	at Java.lang.reflect.Method.invoke(Method.Java:606)	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.Java:322)	at sun.rmi.transport.Transport$1.run(Transport.Java:177)	at sun.rmi.transport.Transport$1.run(Transport.Java:174)	at Java.security.AccessController.doPrivileged(Native Method)	at sun.rmi.transport.Transport.serviceCall(Transport.Java:173)	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.Java:556)	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.Java:811)	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.Java:670)	at Java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.Java:1145)	at Java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.Java:615)	at Java.lang.Thread.run(Thread.Java:744)
+重要的是：
+org.apache.tomcat.util.modeler.BaseModelMBean.invoke Exception invoking method manageApp Java.lang.IllegalArgumentException: addChild:  Child name &#x27;/hisen&#x27; is not unique
+IDEA解决办法Project Structure -&gt; Artifacts
+查看里面是否有配置相同的Artifacts
+删除即可
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Java.lang.NoClassDefFoundError错误解决</title>
+    <url>/20190223-Java.lang.NoClassDefFoundError%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[maven项目昨天遇到的一个错误：Java.lang.NoClassDefFoundError
+理论原因：JVM在编译的时候能找到调用方法或静态变量所在的类，但在运行的时候找不到此类而引发的错误。
+真实原因：(仅针对当前问题)项目A依赖公共服务C-1.0.1版本项目B依赖项目A，B中dependencyManagement强制指定C-1.0.0
+此时编译可以通过，运行时如果有用的C的新版本功能就会会出现上述问题
+解决办法：对项目B中C的版本升级，使用1.0.1
+扩展阅读：https://blog.csdn.net/qq_27576335/article/details/77102385https://blog.csdn.net/jamesjxin/article/details/46606307
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java.sql.SQLException Connections could not be acquired from the underlying database</title>
+    <url>/20170602-Java.sql.SQLException%20Connections%20could%20not%20be%20acquired%20from%20the%20underlying%20database/</url>
+    <content><![CDATA[Java.sql.SQLException: Connections could not be acquired from the underlying database
+这个错误出现的原因有的说是因为jdbc配置文件写错了
+正确的写法是：
+c3p0.driverClass=com.mysql.jdbc.Driverc3p0.jdbcUrl=jdbc:mysql://localhost:3306/testc3p0.user=rootc3p0.password=root
+而不是
+driver=com.mysql.jdbc.Driverurl=jdbc:mysql://localhost:3306/testuser=rootpassword=root
+
+但是我遇到的不是如此
+后来发现是因为maven出问题了，jar包没有加载进项目
+这是在starkoverflow上看到的回答
+In my case it was problem that c3p0-0.9.2.1.jar file was not copied by maven into src/main/webapp/web-inf/libs
+最后maven重新install之后就解决了
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -2808,6 +2808,23 @@ package com.hisen.utils;import Java.io.File;import Java.io.FileInputStream;impor
       </tags>
   </entry>
   <entry>
+    <title>Java多姿势读写文件</title>
+    <url>/20180718-Java%E5%A4%9A%E5%A7%BF%E5%8A%BF%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[重温经典，特意看了下为什么读文件非得不让等于 -1
+fileChannelIn.read(byteBuffer) !&#x3D; -1
+EOF &#x3D; End Of File，其默认值就是-1
+这是一个约定好的结束符，不是认为改变的
+代码建议使用大文件进行测试，看效果比较明显
+@Testpublic void testCopy() &#123;    String oldFileName = &quot;/Users/hisenyuan/hisen/blog/source/_posts/Test-Java-Code.md&quot;;    String newFileName = &quot;/Users/hisenyuan/hisen/test/Test-Java-Code.md&quot;;    nioCopy(oldFileName, newFileName);    ioCopy(oldFileName, newFileName.replace(&quot;.md&quot;, &quot;.md.bak&quot;));    ioCopyByLine(oldFileName,newFileName.replace(&quot;.md&quot;,&quot;.bak.&quot; + System.currentTimeMillis()));&#125;/** * 利用NIO进行读写文件 * * @param oldFileName 原文件的路径 * @param newFileName 新文件的路径 */public static void nioCopy(String oldFileName, String newFileName) &#123;    try &#123;        FileChannel fileChannelIn = new FileInputStream(new File(oldFileName)).getChannel();        FileChannel fileChannelOut = new FileOutputStream(new File(newFileName)).getChannel();        //获取文件大小        long size = fileChannelIn.size();        System.out.printf(&quot;文件大小为：%s byte \n&quot;, size);        //缓冲        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);        long start = System.currentTimeMillis();        while (fileChannelIn.read(byteBuffer) != -1) &#123;            //准备写            byteBuffer.flip();            fileChannelOut.write(byteBuffer);            //准备读            byteBuffer.clear();        &#125;        long end = System.currentTimeMillis();        System.out.printf(&quot;NIO方式复制完成，耗时 %s 秒\n&quot;, (end - start) / 1000);        //关闭        fileChannelIn.close();        fileChannelOut.close();    &#125; catch (FileNotFoundException e) &#123;        e.printStackTrace();    &#125; catch (IOException e) &#123;        e.printStackTrace();    &#125;&#125;/** * IO方式复制文件 * * @param oldFileName * @param newFileName */public static void ioCopy(String oldFileName, String newFileName) &#123;    try &#123;        FileInputStream fileInputStream = new FileInputStream(new File(oldFileName));        FileOutputStream fileOutputStream = new FileOutputStream(new File(newFileName));        long length = new File(oldFileName).length();        System.out.printf(&quot;文件大小为：%s byte \n&quot;, length);        byte[] buffer = new byte[1024];        long start = System.currentTimeMillis();        int len = 0;        //EOF = End Of File，其默认值就是-1        while ((len = fileInputStream.read(buffer)) != -1) &#123;            fileOutputStream.write(buffer, 0, len);        &#125;        long end = System.currentTimeMillis();        System.out.printf(&quot;IO方式复制完成，耗时 %s 秒\n&quot;, (end - start) / 1000);    &#125; catch (FileNotFoundException e) &#123;        e.printStackTrace();    &#125; catch (IOException e) &#123;        e.printStackTrace();    &#125;&#125;public static void ioCopyByLine(String oldFileName, String newFileName) &#123;    try &#123;        BufferedReader reader = new BufferedReader(new FileReader(oldFileName));        BufferedWriter writer = new BufferedWriter(new FileWriter(newFileName));        String line;        while ((line = reader.readLine()) != null) &#123;            writer.write(line);            writer.newLine();            writer.flush();        &#125;    &#125; catch (IOException e) &#123;        System.out.println(&quot;error:&quot; + e);    &#125;&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java对象的一生 | 从new到被回收</title>
     <url>/20190408-Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%80%E7%94%9F/</url>
     <content><![CDATA[一、出生过程这里讲述的是第一次出生的过程，即之前class没有被加载。
@@ -2837,23 +2854,6 @@ Java对象的生命周期与垃圾回收以及四种引用
 Java new一个对象的过程中发生了什么
 
 目前写的不是太完善，有机会写的透彻明白一些。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java多姿势读写文件</title>
-    <url>/20180718-Java%E5%A4%9A%E5%A7%BF%E5%8A%BF%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[重温经典，特意看了下为什么读文件非得不让等于 -1
-fileChannelIn.read(byteBuffer) !&#x3D; -1
-EOF &#x3D; End Of File，其默认值就是-1
-这是一个约定好的结束符，不是认为改变的
-代码建议使用大文件进行测试，看效果比较明显
-@Testpublic void testCopy() &#123;    String oldFileName = &quot;/Users/hisenyuan/hisen/blog/source/_posts/Test-Java-Code.md&quot;;    String newFileName = &quot;/Users/hisenyuan/hisen/test/Test-Java-Code.md&quot;;    nioCopy(oldFileName, newFileName);    ioCopy(oldFileName, newFileName.replace(&quot;.md&quot;, &quot;.md.bak&quot;));    ioCopyByLine(oldFileName,newFileName.replace(&quot;.md&quot;,&quot;.bak.&quot; + System.currentTimeMillis()));&#125;/** * 利用NIO进行读写文件 * * @param oldFileName 原文件的路径 * @param newFileName 新文件的路径 */public static void nioCopy(String oldFileName, String newFileName) &#123;    try &#123;        FileChannel fileChannelIn = new FileInputStream(new File(oldFileName)).getChannel();        FileChannel fileChannelOut = new FileOutputStream(new File(newFileName)).getChannel();        //获取文件大小        long size = fileChannelIn.size();        System.out.printf(&quot;文件大小为：%s byte \n&quot;, size);        //缓冲        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);        long start = System.currentTimeMillis();        while (fileChannelIn.read(byteBuffer) != -1) &#123;            //准备写            byteBuffer.flip();            fileChannelOut.write(byteBuffer);            //准备读            byteBuffer.clear();        &#125;        long end = System.currentTimeMillis();        System.out.printf(&quot;NIO方式复制完成，耗时 %s 秒\n&quot;, (end - start) / 1000);        //关闭        fileChannelIn.close();        fileChannelOut.close();    &#125; catch (FileNotFoundException e) &#123;        e.printStackTrace();    &#125; catch (IOException e) &#123;        e.printStackTrace();    &#125;&#125;/** * IO方式复制文件 * * @param oldFileName * @param newFileName */public static void ioCopy(String oldFileName, String newFileName) &#123;    try &#123;        FileInputStream fileInputStream = new FileInputStream(new File(oldFileName));        FileOutputStream fileOutputStream = new FileOutputStream(new File(newFileName));        long length = new File(oldFileName).length();        System.out.printf(&quot;文件大小为：%s byte \n&quot;, length);        byte[] buffer = new byte[1024];        long start = System.currentTimeMillis();        int len = 0;        //EOF = End Of File，其默认值就是-1        while ((len = fileInputStream.read(buffer)) != -1) &#123;            fileOutputStream.write(buffer, 0, len);        &#125;        long end = System.currentTimeMillis();        System.out.printf(&quot;IO方式复制完成，耗时 %s 秒\n&quot;, (end - start) / 1000);    &#125; catch (FileNotFoundException e) &#123;        e.printStackTrace();    &#125; catch (IOException e) &#123;        e.printStackTrace();    &#125;&#125;public static void ioCopyByLine(String oldFileName, String newFileName) &#123;    try &#123;        BufferedReader reader = new BufferedReader(new FileReader(oldFileName));        BufferedWriter writer = new BufferedWriter(new FileWriter(newFileName));        String line;        while ((line = reader.readLine()) != null) &#123;            writer.write(line);            writer.newLine();            writer.flush();        &#125;    &#125; catch (IOException e) &#123;        System.out.println(&quot;error:&quot; + e);    &#125;&#125;
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -3185,35 +3185,6 @@ var hq_str_sh600877=&quot;中国嘉陵,6.340,6.400,6.360,6.470,6.210,6.340,6.350
       </tags>
   </entry>
   <entry>
-    <title>Java静态代码块</title>
-    <url>/20170211-Java%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97/</url>
-    <content><![CDATA[有时候重新回味一下以前的知识也很美妙
-总能发现以前自己没有怎么在意的细节
-
-静态代码块是在类中独立于类成员的static语句块，可以有多个。
-如果要初始化静态变量，可以声明一个静态块。
-格式如下：
-static &#123;	//块执行代码&#125;
-
-静态块存在单独的内存中，仅在该类被加载时执行，示例如下：
-package com.hisen.JavaGaiShu.page91test20;public class JingTaiDaiMaKuai &#123;	private static String a;	private String b;	static &#123;		JingTaiDaiMaKuai.a = &quot;我学习了很多语言&quot;;		System.out.println(a);		JingTaiDaiMaKuai t = new JingTaiDaiMaKuai();		t.fina();		t.b=&quot;Java语言&quot;;		System.out.println(t.b);	&#125;	static &#123;		JingTaiDaiMaKuai.a = &quot;I Love Java&quot;;		System.out.println(a);	&#125;	public static void main(String[] args) &#123;	&#125;	static &#123;		JingTaiDaiMaKuai.a = &quot;我还将继续学习下去&quot;;		System.out.println(a);	&#125;	private void fina() &#123;		System.out.println(&quot;但是我最喜欢的是：&quot;);	&#125;&#125;
-
-
-输出如下：
-
-我学习了很多语言但是我最喜欢的是：Java语言I Love Java我还将继续学习下去
-
-静态代码块在运行main方法时可以直接调用而不用创建实例。
-静态代码块直接是按顺序执行的。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java调用有道翻译接口 - 免费翻译API</title>
     <url>/20180712-Java%E8%B0%83%E7%94%A8%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E6%8E%A5%E5%8F%A3-%E5%85%8D%E8%B4%B9%E7%BF%BB%E8%AF%91API/</url>
     <content><![CDATA[这个接口为免费的
@@ -3252,6 +3223,35 @@ service redis restart
       <tags>
         <tag>运维</tag>
         <tag>缓存</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java静态代码块</title>
+    <url>/20170211-Java%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97/</url>
+    <content><![CDATA[有时候重新回味一下以前的知识也很美妙
+总能发现以前自己没有怎么在意的细节
+
+静态代码块是在类中独立于类成员的static语句块，可以有多个。
+如果要初始化静态变量，可以声明一个静态块。
+格式如下：
+static &#123;	//块执行代码&#125;
+
+静态块存在单独的内存中，仅在该类被加载时执行，示例如下：
+package com.hisen.JavaGaiShu.page91test20;public class JingTaiDaiMaKuai &#123;	private static String a;	private String b;	static &#123;		JingTaiDaiMaKuai.a = &quot;我学习了很多语言&quot;;		System.out.println(a);		JingTaiDaiMaKuai t = new JingTaiDaiMaKuai();		t.fina();		t.b=&quot;Java语言&quot;;		System.out.println(t.b);	&#125;	static &#123;		JingTaiDaiMaKuai.a = &quot;I Love Java&quot;;		System.out.println(a);	&#125;	public static void main(String[] args) &#123;	&#125;	static &#123;		JingTaiDaiMaKuai.a = &quot;我还将继续学习下去&quot;;		System.out.println(a);	&#125;	private void fina() &#123;		System.out.println(&quot;但是我最喜欢的是：&quot;);	&#125;&#125;
+
+
+输出如下：
+
+我学习了很多语言但是我最喜欢的是：Java语言I Love Java我还将继续学习下去
+
+静态代码块在运行main方法时可以直接调用而不用创建实例。
+静态代码块直接是按顺序执行的。
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -3606,6 +3606,95 @@ GitHub 月度流行项目
       </tags>
   </entry>
   <entry>
+    <title>回顾 2023，展望 2024</title>
+    <url>/20231231-Looking-back-to-2023-looking-forward-to-2024/</url>
+    <content><![CDATA[0. 摘要0.1 回顾 2023
+年初领证了~
+折腾了 1 个小型家用服务器
+工作上做了一个和 LLM 相关的项目
+工作上经历过 2 次领导较大的组织变动
+Q4 装修了小房子，目前折腾全屋智障中
+入职 2 年多经历了一次涨薪( 侮辱性普调 &#x3D;-&#x3D; )
+
+0.2 展望 2024
+工作上更上一层楼
+还清外债走向小康
+继续锻炼汇报总结能力
+继续运动，体重控制在 60kg
+学习&#x2F;沉淀方法论指导工作和生活
+
+1. 成长
+第一次主导重要的项目后端开发工作，在项目管理&#x2F;LLM方面有更多的认识，也第一次正式使用 Golang 进行开发。做的好的地方：
+
+及时攻克了多个项目卡点。
+与多个方向的同学沟通协作比较顺畅。
+积极使用大模型来提升工作效率( 主要是 Golang 不太熟悉 )。
+在高压状态下，依然坚持合理的架构边界，保持较高的 CR 打回率。
+
+做的不足的地方：
+
+团队在磨合初期，得多当面沟通，毕竟文字信息传递的情绪不太好揣摩。
+作为项目负责人，高估了自己的时间，由于有很多需要沟通协调的事情，导致分配给自己的开发工作进度不及预期。
+没能及时把项目全局架构( 前&#x2F;后端、上下游 )，影响过程中沟通的效率，项目再忙也需要输出一个高层级的概念框架。
+
+2. 阅读本年度阅读图书 25 本，不及预期。不及预期的主要原因是：
+
+装修准备，各种看功率
+装修之中，和工长斗智斗勇
+LLM 项目，时间紧任务重
+太懒，有很多时间没有利用上
+
+收获较多的为以下几本：
+
+《凤凰项目》小说形式描述一家公司 IT 运维相关的故事
+《小岛经济学》以故事的形式描述各种经济规律以及原理
+《以色列:一个民族的重生》巴以冲突之前看的，主要是想了解一下以色列为什么科技那么发达，但从中未找到答案
+《这才是心理学》心理学也是一门科学，但是很多时候被大众&#x2F;媒体给误解了
+《搞定系统设计》2021 年初版的书，中文版最近才出，设计的思路收益颇丰。推特上关注了作者，alex xu，画图有一手。
+
+全部书单
+3. 生活3.1 龟缸两只鳄龟，剩下一只，长的特别巨大，还时刻想着越狱。每天出门之前会喂一点『寸金饲料』(不推荐，用主要是便宜)或者『冻干南极磷虾』
+3.2 鱼缸趴地矮珍珠多次爆缸，目前清理得仅剩一小撮。入了一颗水杨梅，目前生长比较正常。
+把尼特利 AT5 水草灯小黄鱼 268 出了，21年9月 724 入的。印象很深刻的一点就是，刚刚发布，立马就被下单买走了。唯一能解释的是，好东西出二手也方便一些。PS：之前有看到一句话很不错，每年都用最新款的东西，完事淘汰还能回血不少。
+3.3 全屋智能目前入手的有易来的灯、易来的凌动开关。绿米的智能开关(零火版)。小米中枢网关 + 小米多模网关 + 小米人体传感器2S。homeassistant  搭建中，目前仅做了 homekit 桥接。不推荐领普的人体存在传感器，比较拉胯，识别错误率较高。后续有机会开个帖子单独说说全屋智能(智障)
+3.4 HomeLab送走了 9020sff，迎来了 E5 双路服务器(详情：搭建我的第一台服务器 )。在推上看了不少大佬在折腾 HomeLab，而且图画的一个比一个好。最初是由 NAS 入坑的，后续折腾的话主要是那种上网。现在的就想着有空折腾的软硬件，顺便学点有用没用的知识。
+目前我的设备：
+
+群晖 DS918+ * 1
+E5 服务器 * 1
+2.5G 8口交换机 * 1
+玩客云 * 1
+无线宝 * 1
+
+4. 习惯4.1 作息全年都是晚睡晚起，早晚的时间基本上浪费了。早上是 8 点左右起床中午一般午休 15min，看书 15min晚上是回家之后刷一会 new feeds
+
+不刷新闻+视频
+一般都是看看中文技术圈大佬们的动态
+
+4.2 运动
+【自行车】全年几乎没怎么骑，主要是没有合适的小伙伴，大家都忙
+【羽毛球】倒是执行的还不错，基本上能保证每周一次的频率，也有一定的进步
+【游泳】2022 年的买的次卡用完之后，几乎没怎么游
+
+5. 随说
+参与了一次规模比较大的老乡座谈会，增加了不少看得见摸得着的榜样。
+座谈会上结对子环节，2 个北航的大一新生加了我。希望后续能定期交流。
+践行最小惊讶原则，你好我好大家好。
+及时给予正反馈&#x2F;负反馈(大部分人应该不怎么说负反馈)
+
+6. 推荐能够坚持看下来的，目前就剩下科技爱好者周刊
+
+科技爱好者周刊
+
+]]></content>
+      <categories>
+        <category>Growth</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>回顾 2025，展望 2026</title>
     <url>/20260101-Looking-back-to-2025-looking-forward-to-2026/</url>
     <content><![CDATA[0. 摘要0.1 回顾 2025
@@ -3699,95 +3788,6 @@ tomkeeper （ 安全大佬，爱分享 ）
       </tags>
   </entry>
   <entry>
-    <title>回顾 2023，展望 2024</title>
-    <url>/20231231-Looking-back-to-2023-looking-forward-to-2024/</url>
-    <content><![CDATA[0. 摘要0.1 回顾 2023
-年初领证了~
-折腾了 1 个小型家用服务器
-工作上做了一个和 LLM 相关的项目
-工作上经历过 2 次领导较大的组织变动
-Q4 装修了小房子，目前折腾全屋智障中
-入职 2 年多经历了一次涨薪( 侮辱性普调 &#x3D;-&#x3D; )
-
-0.2 展望 2024
-工作上更上一层楼
-还清外债走向小康
-继续锻炼汇报总结能力
-继续运动，体重控制在 60kg
-学习&#x2F;沉淀方法论指导工作和生活
-
-1. 成长
-第一次主导重要的项目后端开发工作，在项目管理&#x2F;LLM方面有更多的认识，也第一次正式使用 Golang 进行开发。做的好的地方：
-
-及时攻克了多个项目卡点。
-与多个方向的同学沟通协作比较顺畅。
-积极使用大模型来提升工作效率( 主要是 Golang 不太熟悉 )。
-在高压状态下，依然坚持合理的架构边界，保持较高的 CR 打回率。
-
-做的不足的地方：
-
-团队在磨合初期，得多当面沟通，毕竟文字信息传递的情绪不太好揣摩。
-作为项目负责人，高估了自己的时间，由于有很多需要沟通协调的事情，导致分配给自己的开发工作进度不及预期。
-没能及时把项目全局架构( 前&#x2F;后端、上下游 )，影响过程中沟通的效率，项目再忙也需要输出一个高层级的概念框架。
-
-2. 阅读本年度阅读图书 25 本，不及预期。不及预期的主要原因是：
-
-装修准备，各种看功率
-装修之中，和工长斗智斗勇
-LLM 项目，时间紧任务重
-太懒，有很多时间没有利用上
-
-收获较多的为以下几本：
-
-《凤凰项目》小说形式描述一家公司 IT 运维相关的故事
-《小岛经济学》以故事的形式描述各种经济规律以及原理
-《以色列:一个民族的重生》巴以冲突之前看的，主要是想了解一下以色列为什么科技那么发达，但从中未找到答案
-《这才是心理学》心理学也是一门科学，但是很多时候被大众&#x2F;媒体给误解了
-《搞定系统设计》2021 年初版的书，中文版最近才出，设计的思路收益颇丰。推特上关注了作者，alex xu，画图有一手。
-
-全部书单
-3. 生活3.1 龟缸两只鳄龟，剩下一只，长的特别巨大，还时刻想着越狱。每天出门之前会喂一点『寸金饲料』(不推荐，用主要是便宜)或者『冻干南极磷虾』
-3.2 鱼缸趴地矮珍珠多次爆缸，目前清理得仅剩一小撮。入了一颗水杨梅，目前生长比较正常。
-把尼特利 AT5 水草灯小黄鱼 268 出了，21年9月 724 入的。印象很深刻的一点就是，刚刚发布，立马就被下单买走了。唯一能解释的是，好东西出二手也方便一些。PS：之前有看到一句话很不错，每年都用最新款的东西，完事淘汰还能回血不少。
-3.3 全屋智能目前入手的有易来的灯、易来的凌动开关。绿米的智能开关(零火版)。小米中枢网关 + 小米多模网关 + 小米人体传感器2S。homeassistant  搭建中，目前仅做了 homekit 桥接。不推荐领普的人体存在传感器，比较拉胯，识别错误率较高。后续有机会开个帖子单独说说全屋智能(智障)
-3.4 HomeLab送走了 9020sff，迎来了 E5 双路服务器(详情：搭建我的第一台服务器 )。在推上看了不少大佬在折腾 HomeLab，而且图画的一个比一个好。最初是由 NAS 入坑的，后续折腾的话主要是那种上网。现在的就想着有空折腾的软硬件，顺便学点有用没用的知识。
-目前我的设备：
-
-群晖 DS918+ * 1
-E5 服务器 * 1
-2.5G 8口交换机 * 1
-玩客云 * 1
-无线宝 * 1
-
-4. 习惯4.1 作息全年都是晚睡晚起，早晚的时间基本上浪费了。早上是 8 点左右起床中午一般午休 15min，看书 15min晚上是回家之后刷一会 new feeds
-
-不刷新闻+视频
-一般都是看看中文技术圈大佬们的动态
-
-4.2 运动
-【自行车】全年几乎没怎么骑，主要是没有合适的小伙伴，大家都忙
-【羽毛球】倒是执行的还不错，基本上能保证每周一次的频率，也有一定的进步
-【游泳】2022 年的买的次卡用完之后，几乎没怎么游
-
-5. 随说
-参与了一次规模比较大的老乡座谈会，增加了不少看得见摸得着的榜样。
-座谈会上结对子环节，2 个北航的大一新生加了我。希望后续能定期交流。
-践行最小惊讶原则，你好我好大家好。
-及时给予正反馈&#x2F;负反馈(大部分人应该不怎么说负反馈)
-
-6. 推荐能够坚持看下来的，目前就剩下科技爱好者周刊
-
-科技爱好者周刊
-
-]]></content>
-      <categories>
-        <category>Growth</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MarkdownPad2注册码 20170213</title>
     <url>/20170213-MarkdownPad2%E6%B3%A8%E5%86%8C%E7%A0%81-20170213/</url>
     <content><![CDATA[MarkdownPad2注册码
@@ -3802,22 +3802,6 @@ GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE
       <categories>
         <category>Tech</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Maven目录下*.lastupdated命令行批量删除</title>
-    <url>/20170220-Maven%E7%9B%AE%E5%BD%95%E4%B8%8B-lastupdated%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/</url>
-    <content><![CDATA[windows系统
-cd %userprofile%\.m2\repositoryfor /r %i in (*.lastUpdated) do del %i
-或者新建一个bat文件，批处理。就不用每次都在cmd敲命令了
-@echo offecho 确认删除maven仓库下*.lastUpdated文件？pause::create by hisenyuan(hisenyuan@gmail.com)::这里写你的仓库路径set REPOSITORY_PATH=C:\hisenwork\soft\mavenecho 正在搜索...for /f &quot;delims=&quot; %%i in (&#x27;dir /b /s &quot;%REPOSITORY_PATH%\*lastUpdated*&quot;&#x27;) do (    del /s /q %%i)echo 完毕pause
-linux系统
-find /app/maven/localRepository -name &quot;*.lastUpdated&quot; -exec grep -q &quot;Could not transfer&quot; &#123;&#125; \; -print -exec rm &#123;&#125; \;]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>工程效能</tag>
-      </tags>
   </entry>
   <entry>
     <title>Maven镜像库设置 - maven mirrors - maven 镜像 阿里</title>
@@ -3841,29 +3825,6 @@ yourPath\maven-3.3.9\conf\settings.xml
       </tags>
   </entry>
   <entry>
-    <title>MongoDB - 简单操作 - CRUD - JAVA</title>
-    <url>/20170711-MongoDB%20-%20%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9C%20-%20CRUD%20-%20JAVA/</url>
-    <content><![CDATA[之前我记得写过简单的测试类，但是忘了，现在重新写一个
-顺便用博客记录下，mongodb系列应该会有几篇记录
-本篇具体代码：SampleMongoTestNo1.Java
-1、环境介绍
-mongodb安装教程：点击查看
-DataBase：MongoDB V 3.2Driver　：3.4.1maven：    &lt;dependency&gt;      &lt;groupId&gt;org.mongodb&lt;/groupId&gt;      &lt;artifactId&gt;mongo-Java-driver&lt;/artifactId&gt;      &lt;version&gt;3.4.1&lt;/version&gt;    &lt;/dependency&gt;
-２、初始化连接
-private Mongo mg = null;private DB db;private DBCollection dbCollection;@Beforepublic void initDB()&#123;  //建立连接  mg = new MongoClient(&quot;127.0.0.1&quot;,27017);  //获取要操作的数据库实例，没有会创建  db = mg.getDB(&quot;hisen&quot;);  //获取要操作的集合实例，没有会创建  dbCollection = db.getCollection(&quot;emp&quot;);&#125;
-3、关闭连接
-@After  public void destoryDB()&#123;    if (mg == null) &#123;      mg.close();      mg=null;      db=null;      dbCollection=null;    &#125;  &#125;
-4、CRUD操作
-
-/**   * 插入数据   */  @Test  public void testCreate()&#123;    DBObject obj = null;    for (int i = 1; i &lt;= 10; i++) &#123;      obj = new BasicDBObject(&quot;_id&quot;,i).append(&quot;name&quot;,&quot;hisen&quot;+i).append(&quot;age&quot;,i*5);      dbCollection.save(obj);    &#125;  &#125;  /**   * 查询所有   */  @Test  public void testReadAll()&#123;    DBCursor dbCursor = dbCollection.find();    while (dbCursor.hasNext())&#123;      System.out.println(dbCursor.next());    &#125;  &#125;  /**   * 修改记录   */  @Test  public void testUpdate()&#123;    BasicDBObject condition = new BasicDBObject(&quot;_id&quot;,10);    BasicDBObject res = new BasicDBObject(&quot;name&quot;, &quot;hisen10_new&quot;);    //若没有此语句，直接调用下面的语句，返回结果&#123; &quot;_id&quot; : 10 , &quot;name&quot; : &quot;hisen10_new&quot;&#125;    BasicDBObject res2 = new BasicDBObject(&quot;$set&quot;, res);    dbCollection.update(condition,res2);    System.out.println(dbCollection.findOne(new BasicDBObject(&quot;_id&quot;,10)));  &#125;  /**   * 删除记录   */  @Test  public void testDelete()&#123;    dbCollection.remove(new BasicDBObject(&quot;_id&quot;,10));    testReadAll();  &#125;  /**   * 根据主键查询   */  @Test  public void testReadOneWithId()&#123;    DBObject object = dbCollection.findOne(new BasicDBObject(&quot;_id&quot;,1));    System.out.println(object);  &#125;  /**   * 模糊查询 - 使用正则   */  @Test  public void testReadPuzzy()&#123;    Pattern pattern = Pattern.compile(&quot;^hisen1&quot;);    BasicDBObject basicDBObject = new BasicDBObject(&quot;name&quot;,pattern);    DBCursor dbCursor = dbCollection.find(basicDBObject);    while (dbCursor.hasNext())&#123;      System.out.println(dbCursor.next());    &#125;  &#125;  /**   * 清空集合   */  @Test  public void testDrop()&#123;    dbCollection.drop();    testReadAll();  &#125;]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>存储</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MySQL - Data truncation:Incorrect datetime value</title>
     <url>/20190201-MySQL%20-%20Data%20truncation%20Incorrect%20datetime%20value/</url>
     <content><![CDATA[一、问题com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect datetime value: &#x27;2039-01-07 12:58:20.625&#x27; for column
@@ -3877,6 +3838,22 @@ The TIMESTAMP data type is used for values that contain both date and time parts
       </categories>
       <tags>
         <tag>存储</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Maven目录下*.lastupdated命令行批量删除</title>
+    <url>/20170220-Maven%E7%9B%AE%E5%BD%95%E4%B8%8B-lastupdated%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/</url>
+    <content><![CDATA[windows系统
+cd %userprofile%\.m2\repositoryfor /r %i in (*.lastUpdated) do del %i
+或者新建一个bat文件，批处理。就不用每次都在cmd敲命令了
+@echo offecho 确认删除maven仓库下*.lastUpdated文件？pause::create by hisenyuan(hisenyuan@gmail.com)::这里写你的仓库路径set REPOSITORY_PATH=C:\hisenwork\soft\mavenecho 正在搜索...for /f &quot;delims=&quot; %%i in (&#x27;dir /b /s &quot;%REPOSITORY_PATH%\*lastUpdated*&quot;&#x27;) do (    del /s /q %%i)echo 完毕pause
+linux系统
+find /app/maven/localRepository -name &quot;*.lastUpdated&quot; -exec grep -q &quot;Could not transfer&quot; &#123;&#125; \; -print -exec rm &#123;&#125; \;]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>工程效能</tag>
       </tags>
   </entry>
   <entry>
@@ -3915,6 +3892,29 @@ update 表名 set 字段名=字段值 where 条件如 update A set name=&#x27;xi
     <content><![CDATA[命令行常用操作，备忘
 #开启远程登录grant all privileges on *.* to &#x27;user&#x27;@&#x27;%&#x27; identified by &#x27;passwd&#x27; with grant option;#创建数据库create database DB;#创建用户insert into mysql.user(Host,User,Password) values(&quot;localhost&quot;,&quot;user&quot;,password(&quot;passwd&quot;));#删除用户DELETE FROM user WHERE user=&quot;username&quot; and HOST=&quot;localhost&quot;;#修改指定用户密码update mysql.user set password=password(&#x27;new passwd&#x27;) where user=&quot;username&quot; and host=&quot;localhost&quot;;#用户授权grant all privileges on DB.* to &#x27;user&#x27;@&#x27;localhost&#x27; identified by &#x27;passwd&#x27;;grant select,update on DB.* to &#x27;user&#x27;@&#x27;localhost&#x27; identified by &#x27;passwd&#x27;;#刷新权限flush privileges;#数据库导出mysqldump -uUSRENAME -pPASSWD DATABASE &gt; DATABASE.sql#数据库导出(只导出表结构 -d)mysqldump -uUSRENAME -pPASSWD -d DATABASE &gt; DATABASE.sql#数据库导入#1.切换数据库use DATABASE;#2.设置编码set names utf8;#3.执行导入操作source /home/abc/abc.sql;#直接导入mysql -uUSERNAME -p DATABASE &lt; DATABASE.sql
 ]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>存储</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MongoDB - 简单操作 - CRUD - JAVA</title>
+    <url>/20170711-MongoDB%20-%20%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9C%20-%20CRUD%20-%20JAVA/</url>
+    <content><![CDATA[之前我记得写过简单的测试类，但是忘了，现在重新写一个
+顺便用博客记录下，mongodb系列应该会有几篇记录
+本篇具体代码：SampleMongoTestNo1.Java
+1、环境介绍
+mongodb安装教程：点击查看
+DataBase：MongoDB V 3.2Driver　：3.4.1maven：    &lt;dependency&gt;      &lt;groupId&gt;org.mongodb&lt;/groupId&gt;      &lt;artifactId&gt;mongo-Java-driver&lt;/artifactId&gt;      &lt;version&gt;3.4.1&lt;/version&gt;    &lt;/dependency&gt;
+２、初始化连接
+private Mongo mg = null;private DB db;private DBCollection dbCollection;@Beforepublic void initDB()&#123;  //建立连接  mg = new MongoClient(&quot;127.0.0.1&quot;,27017);  //获取要操作的数据库实例，没有会创建  db = mg.getDB(&quot;hisen&quot;);  //获取要操作的集合实例，没有会创建  dbCollection = db.getCollection(&quot;emp&quot;);&#125;
+3、关闭连接
+@After  public void destoryDB()&#123;    if (mg == null) &#123;      mg.close();      mg=null;      db=null;      dbCollection=null;    &#125;  &#125;
+4、CRUD操作
+
+/**   * 插入数据   */  @Test  public void testCreate()&#123;    DBObject obj = null;    for (int i = 1; i &lt;= 10; i++) &#123;      obj = new BasicDBObject(&quot;_id&quot;,i).append(&quot;name&quot;,&quot;hisen&quot;+i).append(&quot;age&quot;,i*5);      dbCollection.save(obj);    &#125;  &#125;  /**   * 查询所有   */  @Test  public void testReadAll()&#123;    DBCursor dbCursor = dbCollection.find();    while (dbCursor.hasNext())&#123;      System.out.println(dbCursor.next());    &#125;  &#125;  /**   * 修改记录   */  @Test  public void testUpdate()&#123;    BasicDBObject condition = new BasicDBObject(&quot;_id&quot;,10);    BasicDBObject res = new BasicDBObject(&quot;name&quot;, &quot;hisen10_new&quot;);    //若没有此语句，直接调用下面的语句，返回结果&#123; &quot;_id&quot; : 10 , &quot;name&quot; : &quot;hisen10_new&quot;&#125;    BasicDBObject res2 = new BasicDBObject(&quot;$set&quot;, res);    dbCollection.update(condition,res2);    System.out.println(dbCollection.findOne(new BasicDBObject(&quot;_id&quot;,10)));  &#125;  /**   * 删除记录   */  @Test  public void testDelete()&#123;    dbCollection.remove(new BasicDBObject(&quot;_id&quot;,10));    testReadAll();  &#125;  /**   * 根据主键查询   */  @Test  public void testReadOneWithId()&#123;    DBObject object = dbCollection.findOne(new BasicDBObject(&quot;_id&quot;,1));    System.out.println(object);  &#125;  /**   * 模糊查询 - 使用正则   */  @Test  public void testReadPuzzy()&#123;    Pattern pattern = Pattern.compile(&quot;^hisen1&quot;);    BasicDBObject basicDBObject = new BasicDBObject(&quot;name&quot;,pattern);    DBCursor dbCursor = dbCollection.find(basicDBObject);    while (dbCursor.hasNext())&#123;      System.out.println(dbCursor.next());    &#125;  &#125;  /**   * 清空集合   */  @Test  public void testDrop()&#123;    dbCollection.drop();    testReadAll();  &#125;]]></content>
       <categories>
         <category>Tech</category>
       </categories>
@@ -4300,6 +4300,25 @@ explain select zipcode,firstname,lastname from hisen_test_explain_people;+----+-
       </tags>
   </entry>
   <entry>
+    <title>OpenWrt 新版本安装 passwall</title>
+    <url>/20221030-OpenWrt_22.03_install_passwall/</url>
+    <content><![CDATA[一、背景最近看了不少软路由的东西于是折腾了一波 OpenWrt奈何网件 R8000 配置一般，跑起来体验不好。后续估计是会上 x86 主机了，虽然可能会性能过剩。
+二、问题在官方原版的 OpenWrt 22.03 版本中如果直接在 software 中安装 luci_app_passwall那么安装后会提示没法实现透明代理，还需要安装一些额外的软件才行
+三、解决问题opkg install ipset ipt2socks iptables iptables-mod-conntrack-extra iptables-mod-iprange iptables-mod-socket iptables-mod-tproxy kmod-ipt-nat
+安装完成之后，再按教程操作即可.原因就是新版本的系统中默认不包含上述模块。问题解决参考自 GitHub issue.
+四、参考
+GiitHub - [Bug]: 系统未安装iptables或ipset，无法透明代理！
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>自建服务</tag>
+        <tag>网络</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>No MyBatis mapper was found in &#39;com.xxx.dao&#39; package</title>
     <url>/20170801-No%20MyBatis%20mapper%20was%20found%20in%20&#39;%5Bcom.xxx.dao%5D&#39;%20package%20/</url>
     <content><![CDATA[出错maven项目，启动tomcat的时候报错：
@@ -4323,25 +4342,6 @@ Java 项目分为两个部分，一个是源码，一个是资源，在使用mav
       </categories>
       <tags>
         <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt 新版本安装 passwall</title>
-    <url>/20221030-OpenWrt_22.03_install_passwall/</url>
-    <content><![CDATA[一、背景最近看了不少软路由的东西于是折腾了一波 OpenWrt奈何网件 R8000 配置一般，跑起来体验不好。后续估计是会上 x86 主机了，虽然可能会性能过剩。
-二、问题在官方原版的 OpenWrt 22.03 版本中如果直接在 software 中安装 luci_app_passwall那么安装后会提示没法实现透明代理，还需要安装一些额外的软件才行
-三、解决问题opkg install ipset ipt2socks iptables iptables-mod-conntrack-extra iptables-mod-iprange iptables-mod-socket iptables-mod-tproxy kmod-ipt-nat
-安装完成之后，再按教程操作即可.原因就是新版本的系统中默认不包含上述模块。问题解决参考自 GitHub issue.
-四、参考
-GiitHub - [Bug]: 系统未安装iptables或ipset，无法透明代理！
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>自建服务</tag>
-        <tag>网络</tag>
       </tags>
   </entry>
   <entry>
@@ -4737,6 +4737,27 @@ Tencent - Java安全指南
       </tags>
   </entry>
   <entry>
+    <title>Redis counter demo -  redis并发计数器</title>
+    <url>/20180111-Redis%20counter%20demo%20-%20%20redis%E5%B9%B6%E5%8F%91%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
+    <content><![CDATA[一、说明利用redis操作的原子性，实现Java 多线程并发的情况下实现计数器。
+我本机测试多个线程操作之后，结果会出现一定的延迟，但是最终数字是ok的
+应该是redis内部做了一个类似于队列的功能。
+需要注意的是，得使用redis连接的线程池，不然会出现异常
+这里有一个：JedisUtil 下面用到了
+二、 代码实现2.1 redis操作类package com.hisen.thread.count_click_by_redis;import com.hisen.utils.JedisUtil;import redis.clients.jedis.JedisPool;/** * @author hisenyuan * @description 操作redis的线程类 */public class ClickRedis &#123;  /**   * 必须使用线程池，而且线程池要大于并发数，否则会出现redis超时   */  private static JedisPool jedis = JedisUtil.getPool();  public static void click() &#123;    jedis.getResource().incrBy(&quot;hisen&quot;, 1);  &#125;  public static int getCount() &#123;    return Integer.parseInt(jedis.getResource().get(&quot;hisen&quot;));  &#125;  public static void declare() &#123;    jedis.getResource().del(&quot;hisen&quot;);    jedis.close();  &#125;&#125;
+2.2 线程类,模拟点击package com.hisen.thread.count_click_by_redis;/** * @author hisenyuan * @description 执行点击的线程类 */public class CountClickByRedisThread extends Thread&#123;  private int id;  public CountClickByRedisThread(int id) &#123;    this.id = id;  &#125;  @Override  public void run() &#123;    super.run();    ClickRedis.click();    int count = ClickRedis.getCount();    System.out.println(&quot;task:&quot; + id + &quot;\t 执行完毕\t线程编号：&quot; + this.getId() + &quot;\t当前值：&quot; + count);  &#125;&#125;
+2.3 主线程 - 启动类
+package com.hisen.thread.count_click_by_redis;import Java.util.concurrent.ArrayBlockingQueue;import Java.util.concurrent.ThreadPoolExecutor;import Java.util.concurrent.TimeUnit;public class Main &#123;  public static void main(String[] args) throws InterruptedException &#123;    /**     * 5 - corePoolSize：核心池的大小     * 10 - maximumPoolSize：线程池最大线程数，它表示在线程池中最多能创建多少个线程     * 200 - keepAliveTime：表示线程没有任务执行时最多保持多久时间会终止。     * unit - unit：参数keepAliveTime的时间单位，有7种取值     * workQueue：一个阻塞队列，用来存储等待执行的任务     */    ThreadPoolExecutor executor = new ThreadPoolExecutor(        50,        100,        200,        TimeUnit.MICROSECONDS,        new ArrayBlockingQueue&lt;Runnable&gt;(50));    // 开启50个线程    for (int i = 0; i &lt; 50; i++) &#123;      executor.execute(new CountClickByRedisThread(i));    &#125;    System.out.println(&quot;已经开启所有的子线程&quot;);    // 启动一次顺序关闭，执行以前提交的任务，但不接受新任务。    executor.shutdown();    // 判断所有线程是否已经执行完毕    while (true) &#123;      if (executor.isTerminated()) &#123;        System.out.println(&quot;所有的子线程都结束了！&quot;);        // 清除redis数据        ClickRedis.declare();        break;      &#125;      Thread.sleep(100);    &#125;  &#125;&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>高并发</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《权衡(修订版)》读后感</title>
     <url>/20260726-Reason-in-the-Balance/</url>
     <content><![CDATA[
@@ -5017,24 +5038,22 @@ Tencent - Java安全指南
       </tags>
   </entry>
   <entry>
-    <title>Redis counter demo -  redis并发计数器</title>
-    <url>/20180111-Redis%20counter%20demo%20-%20%20redis%E5%B9%B6%E5%8F%91%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
-    <content><![CDATA[一、说明利用redis操作的原子性，实现Java 多线程并发的情况下实现计数器。
-我本机测试多个线程操作之后，结果会出现一定的延迟，但是最终数字是ok的
-应该是redis内部做了一个类似于队列的功能。
-需要注意的是，得使用redis连接的线程池，不然会出现异常
-这里有一个：JedisUtil 下面用到了
-二、 代码实现2.1 redis操作类package com.hisen.thread.count_click_by_redis;import com.hisen.utils.JedisUtil;import redis.clients.jedis.JedisPool;/** * @author hisenyuan * @description 操作redis的线程类 */public class ClickRedis &#123;  /**   * 必须使用线程池，而且线程池要大于并发数，否则会出现redis超时   */  private static JedisPool jedis = JedisUtil.getPool();  public static void click() &#123;    jedis.getResource().incrBy(&quot;hisen&quot;, 1);  &#125;  public static int getCount() &#123;    return Integer.parseInt(jedis.getResource().get(&quot;hisen&quot;));  &#125;  public static void declare() &#123;    jedis.getResource().del(&quot;hisen&quot;);    jedis.close();  &#125;&#125;
-2.2 线程类,模拟点击package com.hisen.thread.count_click_by_redis;/** * @author hisenyuan * @description 执行点击的线程类 */public class CountClickByRedisThread extends Thread&#123;  private int id;  public CountClickByRedisThread(int id) &#123;    this.id = id;  &#125;  @Override  public void run() &#123;    super.run();    ClickRedis.click();    int count = ClickRedis.getCount();    System.out.println(&quot;task:&quot; + id + &quot;\t 执行完毕\t线程编号：&quot; + this.getId() + &quot;\t当前值：&quot; + count);  &#125;&#125;
-2.3 主线程 - 启动类
-package com.hisen.thread.count_click_by_redis;import Java.util.concurrent.ArrayBlockingQueue;import Java.util.concurrent.ThreadPoolExecutor;import Java.util.concurrent.TimeUnit;public class Main &#123;  public static void main(String[] args) throws InterruptedException &#123;    /**     * 5 - corePoolSize：核心池的大小     * 10 - maximumPoolSize：线程池最大线程数，它表示在线程池中最多能创建多少个线程     * 200 - keepAliveTime：表示线程没有任务执行时最多保持多久时间会终止。     * unit - unit：参数keepAliveTime的时间单位，有7种取值     * workQueue：一个阻塞队列，用来存储等待执行的任务     */    ThreadPoolExecutor executor = new ThreadPoolExecutor(        50,        100,        200,        TimeUnit.MICROSECONDS,        new ArrayBlockingQueue&lt;Runnable&gt;(50));    // 开启50个线程    for (int i = 0; i &lt; 50; i++) &#123;      executor.execute(new CountClickByRedisThread(i));    &#125;    System.out.println(&quot;已经开启所有的子线程&quot;);    // 启动一次顺序关闭，执行以前提交的任务，但不接受新任务。    executor.shutdown();    // 判断所有线程是否已经执行完毕    while (true) &#123;      if (executor.isTerminated()) &#123;        System.out.println(&quot;所有的子线程都结束了！&quot;);        // 清除redis数据        ClickRedis.declare();        break;      &#125;      Thread.sleep(100);    &#125;  &#125;&#125;
+    <title>SQL优化之小细节 - 点滴记录</title>
+    <url>/20170309-SQL%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B0%8F%E7%BB%86%E8%8A%82%20-%20%E7%82%B9%E6%BB%B4%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[不知道现在是不是还很多人首先就把关联的id放在where的第一位
+这里有一个简单的对比，情况相同的时候，两个sql的时间相差八倍
+优：0.077s
+SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE cf.acct_type in(2,3)  AND ew.customer_id = cf.id
+劣：0.630s
+SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE ew.customer_id = cf.id  AND cf.acct_type in(2,3)
+上述原因：where子句从后往前执行，应该把大的过滤条件放在后面记录时间：2017年3月9日 10:44:59
+
 ]]></content>
       <categories>
         <category>Tech</category>
       </categories>
       <tags>
-        <tag>java</tag>
-        <tag>高并发</tag>
+        <tag>性能</tag>
       </tags>
   </entry>
   <entry>
@@ -5116,50 +5135,6 @@ package com.hisen.thread.count_click_by_redis;import Java.util.concurrent.ArrayB
       </tags>
   </entry>
   <entry>
-    <title>SQL优化之小细节 - 点滴记录</title>
-    <url>/20170309-SQL%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B0%8F%E7%BB%86%E8%8A%82%20-%20%E7%82%B9%E6%BB%B4%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[不知道现在是不是还很多人首先就把关联的id放在where的第一位
-这里有一个简单的对比，情况相同的时候，两个sql的时间相差八倍
-优：0.077s
-SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE cf.acct_type in(2,3)  AND ew.customer_id = cf.id
-劣：0.630s
-SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE ew.customer_id = cf.id  AND cf.acct_type in(2,3)
-上述原因：where子句从后往前执行，应该把大的过滤条件放在后面记录时间：2017年3月9日 10:44:59
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL语句的执行顺序 - 关键字的顺序</title>
-    <url>/20171114-SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</url>
-    <content><![CDATA[sql执行顺序
-from 
-join 
-on 
-where 
-group by(开始使用select中的别名，后面的语句中都可以使用)
-avg,sum…. 
-having 
-select 
-distinct 
-order by
-
-参考资料http://blog.csdn.net/u014044812/article/details/51004754
-http://blog.csdn.net/bitcarmanlee/article/details/51004767 (含流程图)
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>存储</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Shell 批量解压文件并重命名 - 解决文件名冲突</title>
     <url>/20201107-Shell-batch-decompression-and-rename/</url>
     <content><![CDATA[一、背景由于某种原因，需要手工处理错误日志提取某些信息。下载下来的日志文件是压缩包
@@ -5195,6 +5170,31 @@ Shell 截取文件名和后缀
       </categories>
       <tags>
         <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL语句的执行顺序 - 关键字的顺序</title>
+    <url>/20171114-SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</url>
+    <content><![CDATA[sql执行顺序
+from 
+join 
+on 
+where 
+group by(开始使用select中的别名，后面的语句中都可以使用)
+avg,sum…. 
+having 
+select 
+distinct 
+order by
+
+参考资料http://blog.csdn.net/u014044812/article/details/51004754
+http://blog.csdn.net/bitcarmanlee/article/details/51004767 (含流程图)
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>存储</tag>
       </tags>
   </entry>
   <entry>
@@ -5403,20 +5403,6 @@ http://blog.csdn.net/linxijun120903/article/details/56487073
       </tags>
   </entry>
   <entry>
-    <title>SpringMVC redirect &amp; return JSON &amp; set HTTP code</title>
-    <url>/20180713-SpringMVC%20redirect%20&amp;%20return%20JSON%20&amp;%20set%20HTTP%20code/</url>
-    <content><![CDATA[springmvc正常情况下redirect并且设置指定响应码，异常情况下返回json数据
-背景介绍需求就是正常情况下能redirect到指定的页面异常的情况下，能够返回JSON格式的错误信息正常情况和异常情况都需要设置HTTP Code
-代码实现@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST)public String webCharge(HttpServletRequest request, HttpServletResponse response) &#123;    if (1==1) &#123;        response.setStatus(200);        return &quot;redirect:https://github.com/hisenyuan&quot;;    &#125; else &#123;        try &#123;            response.setStatus(405);            response.getWriter().write(JSON.toJSONString(&quot;hisenyuan&quot;));            return null;        &#125; catch (IOException e) &#123;            e.printStackTrace();            return &quot;&quot;;        &#125;    &#125;&#125;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Spring Boot CLI 安装（windows）</title>
     <url>/20170713-Spring%20Boot%20CLI%20%E5%AE%89%E8%A3%85%EF%BC%88windows%EF%BC%89/</url>
     <content><![CDATA[SpringBootCLI是一个命令行工具，可用于快速搭建基于spring的原型。
@@ -5447,6 +5433,20 @@ spring run HelloController.groovyResolving dependencies.........................
       <tags>
         <tag>java</tag>
         <tag>工程效能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringMVC redirect &amp; return JSON &amp; set HTTP code</title>
+    <url>/20180713-SpringMVC%20redirect%20&amp;%20return%20JSON%20&amp;%20set%20HTTP%20code/</url>
+    <content><![CDATA[springmvc正常情况下redirect并且设置指定响应码，异常情况下返回json数据
+背景介绍需求就是正常情况下能redirect到指定的页面异常的情况下，能够返回JSON格式的错误信息正常情况和异常情况都需要设置HTTP Code
+代码实现@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST)public String webCharge(HttpServletRequest request, HttpServletResponse response) &#123;    if (1==1) &#123;        response.setStatus(200);        return &quot;redirect:https://github.com/hisenyuan&quot;;    &#125; else &#123;        try &#123;            response.setStatus(405);            response.getWriter().write(JSON.toJSONString(&quot;hisenyuan&quot;));            return null;        &#125; catch (IOException e) &#123;            e.printStackTrace();            return &quot;&quot;;        &#125;    &#125;&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -5649,6 +5649,48 @@ package com.hisen.interview;/** * 变量不能被重写 * * @author hisenyuan 20
       <tags>
         <tag>java</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>资本的免死金牌：拆解顶级富豪的财富永生城堡</title>
+    <url>/20260628-The-golden-shield-of-capital/</url>
+    <content><![CDATA[在电视剧《人民的名义》大结局中，反派祁同伟吞枪自尽，高小琴被判刑15年。然而，他们留给儿子的2亿港币离岸信托基金，却大概率能安然无恙。
+这绝非编剧的凭空想象，而是现实金融世界中真实存在的冰冷逻辑。在大众眼中，法律和税收是不可违抗的铁律；但在顶层精英眼里，通过“家族信托 + 慈善基金会 + A&#x2F;B股”构筑的顶级防御系统，已经成为一套合法对抗国家收割、实现财富代代相传的“系统Bug”。
+这套“财富城堡”的底层逻辑究竟是怎样的？我们用一张架构图和三大板块为您彻底剥开。
+顶层财富城堡的“铁三角”架构图
+┌────────────────────────────────────────────────────────┐│                   创始人 (顶级富豪/权贵)                  │└──────────────────────────┬─────────────────────────────┘                           │ 1. 设立并托付 (出让表面所有权)                           ▼┌────────────────────────────────────────────────────────┐│                    家族离岸信托                          │ ◄───【隐形防护罩】│               (信托保护人掌握上帝视角)                     │      子女为受益人└──────────────────────────┬─────────────────────────────┘      债主、法院无法追索                           │ 2. 派遣董事 / 掌握核心投票权                           ▼┌────────────────────────────────────────────────────────┐│                    慈善基金会                            │ ◄───【免税保险箱】│   (本金 0 遗产税，炒股仅 1.39% 极低税率，子女任高管)          │      将 95% 资产锁死└──────────────────────────┬─────────────────────────────┘      满足 5% 慈善拨备                           │ 3. 持有无投票权的 A 股 (分红)                           ▼┌────────────────────────────────────────────────────────┐│                    上市公司 / 实体帝国                    │ ◄───【权力方向盘】│  (创始人家族通过极少数的 B 股，实现“以小博大”的控制)           │      垄断利润源源不断└────────────────────────────────────────────────────────┘
+
+第一板块：铁三角组合拳的“破防”与“御敌”这套组合拳的精妙之处在于，它将资本的四个核心属性——钱、权、名、税，高效率地剥离并压榨到了极致。
+1. 家族信托：所有权剥离的“隐形防护罩”
+核心Bug：一物三权，资产隔离。
+大白话： 如果你名下有10个亿，当你欠债或离婚时，法院能分光你的财产。但如果你把这10个亿放进“不可撤销信托”，在法律上你就是个“无产阶级”，这笔钱属于信托公司。法院不能因为你个人的债务，去查封另一家独立法人的资产。后代作为受益人，只能按月领生活费。“放弃所有权，保留控制权”，瞬间让所有债主和境内法院无从下手。
+
+2. 慈善基金会：左手倒右手的“免税保险箱”
+核心Bug：用“自身预算”替代“国家税款”。
+大白话： 在西方，继承遗产要交高达40%-50%的遗产税。富豪们不愿被国家收割，便成立一个自己名字命名的“慈善基金会”，把钱“捐”给自己。这样不仅0遗产税，还换来了“大慈善家”的社会名誉。钱虽然在基金会里，但控制权可以通过章程传给子女。子女在基金会里当高管、领高薪、报销豪车豪宅，名义上是在“考察慈善项目”，实际上实现了财富的完美肉食。
+
+3. A&#x2F;B股双层股权：以小博大的“权力方向盘”
+核心Bug：同股不同权，用10%的资本撬动100%的江山。
+大白话： 富豪把值钱但没表决权的A股捐给基金会或卖给散户换现金，自己手里死死攥着“1股等于10个投票权”的B股。这样一来，哪怕富豪只持有公司10%的股票，在股东大会上依然拥有绝对话语权，外人永远别想恶意收购，企业的印钞机永远听从家族的指挥。
+
+第二板块：对抗人性与数学的“资本达尔文主义”有了城堡，内部如何防止“后代指数级繁衍导致分光”以及“争产内斗”呢？富豪们制定了冷酷的规则：
+       ┌────────────── 财富城堡内部的“淘汰机制”─────────────────┐       │                                                    │       ▼                                                    ▼【极少数优秀继承人】                                   【绝大多数平庸后代】掌管董事会，握有A/B股表决权                            剥夺投票权，仅享有“信托低保”继续驱动资本帝国膨胀                                   如敢起诉闹事，触发条款净身出户
+
+
+打破平分家产，信托不养闲人： 城堡的本金永远锁死不分拆。后代想拿大钱，必须通过“绩效考核”（如考上名校、继承家族业务）。对于游手好闲的败家子，信托只提供刚好够吃穿的“信托低保”，在经济上将其边缘化，防止财富被稀释。
+控制权单线世袭，反诉讼刺刀： 基金会和信托的掌舵人永远只有一个人（长子或最强继承人）。其余旁系只有分钱的受益权，没有管事的投票权。章程中往往埋有“反诉讼条款”（In Terrorem Clause）——谁敢起诉家族争夺家产，谁就立刻失去所有受益资格，净身出户。
+超级免税的复利永动机： 在美国，慈善基金会每年只需拿出资产的5%做慈善（行政开支也算在内），剩下的95%可以在华尔街继续利滚利。更可怕的是，基金会的炒股投资收益税率被法律固定在1.39%（普通企业高达21%以上）。只要华尔街操盘手的回报率大于5%，这座财富雪球就会在近乎免税的环境下无限膨胀。
+
+第三板块：主权“内卷”下的终极逃生门你可能会问，如果大国强行修改法律，或者跨国追赃，这套系统会失效吗？这就涉及到了国际政治的底层残忍逻辑。
+1. 小国出卖法律，大国投鼠忌器那些离岸岛国（开曼、维尔京等）没有工业，他们唯一的暴富手段就是“出卖主权立法权”——立法规定“任何外国政府来查账都是违法”、“资产神圣不可侵犯”。大国因为害怕资本“用脚投票”彻底外逃本国，往往也会默许这些离岸口子的存在，形成了一种高度默契的全球利益闭环。
+2. 自动触发的“瞬移条款”（Flight Clause）顶级离岸信托的章程里，都埋有一颗“时空换位”的地雷。一旦信托所在地（如开曼）的法律面临大国政治施压或变动，该信托会在几秒钟内自动触发管辖法转移。资产的所有权和受托人会自动“瞬移”到另一个更流氓、更庇护富豪的法域（如南太平洋的库克群岛）。
+3. 库克群岛模式：对抗人类的“流氓堡垒”像库克群岛这样的法域，其法律甚至规定：“我们不承认任何外国法庭的判决。” 大国警方或债主如果想拿回钱，必须亲自飞到岛国本土重新起诉，且要在1-2年的极短时效内，举证出“刑事诉讼级别”的恶意欺诈证据。面对动辄数百万美元的跨国诉讼成本和近乎为零的胜率，大多数国家只能望洋兴叹。
+终极复盘底层普通人看到的，是电视新闻里每天更新的“打击洗钱、严厉反腐”；而真正掌握游戏规则的既得利益者看到的，是一张由小国的生存欲、大国的资本焦虑、以及权贵的自保本能共同织就的财富免死金牌。
+祁同伟用一颗子弹切断了境内所有的犯罪证据链，高小琴用完美的财务做账把钱包装成山水集团的“合法利润”出境，香港及离岸信托的法律机器则在资金落地的刹那自动合闸，将其变成了神圣不可侵犯的“合法私有财产”。
+在这套人类顶级的法律与金融工程面前，个人生命是短暂的，但资本的城堡，却得以永生。
+]]></content>
+      <categories>
+        <category>RandomThoughts</category>
+      </categories>
   </entry>
   <entry>
     <title>《远见：如何规划职业生涯3大阶段》读后感</title>
@@ -6075,48 +6117,6 @@ package com.hisen.interview;/** * 变量不能被重写 * * @author hisenyuan 20
       </tags>
   </entry>
   <entry>
-    <title>资本的免死金牌：拆解顶级富豪的财富永生城堡</title>
-    <url>/20260628-The-golden-shield-of-capital/</url>
-    <content><![CDATA[在电视剧《人民的名义》大结局中，反派祁同伟吞枪自尽，高小琴被判刑15年。然而，他们留给儿子的2亿港币离岸信托基金，却大概率能安然无恙。
-这绝非编剧的凭空想象，而是现实金融世界中真实存在的冰冷逻辑。在大众眼中，法律和税收是不可违抗的铁律；但在顶层精英眼里，通过“家族信托 + 慈善基金会 + A&#x2F;B股”构筑的顶级防御系统，已经成为一套合法对抗国家收割、实现财富代代相传的“系统Bug”。
-这套“财富城堡”的底层逻辑究竟是怎样的？我们用一张架构图和三大板块为您彻底剥开。
-顶层财富城堡的“铁三角”架构图
-┌────────────────────────────────────────────────────────┐│                   创始人 (顶级富豪/权贵)                  │└──────────────────────────┬─────────────────────────────┘                           │ 1. 设立并托付 (出让表面所有权)                           ▼┌────────────────────────────────────────────────────────┐│                    家族离岸信托                          │ ◄───【隐形防护罩】│               (信托保护人掌握上帝视角)                     │      子女为受益人└──────────────────────────┬─────────────────────────────┘      债主、法院无法追索                           │ 2. 派遣董事 / 掌握核心投票权                           ▼┌────────────────────────────────────────────────────────┐│                    慈善基金会                            │ ◄───【免税保险箱】│   (本金 0 遗产税，炒股仅 1.39% 极低税率，子女任高管)          │      将 95% 资产锁死└──────────────────────────┬─────────────────────────────┘      满足 5% 慈善拨备                           │ 3. 持有无投票权的 A 股 (分红)                           ▼┌────────────────────────────────────────────────────────┐│                    上市公司 / 实体帝国                    │ ◄───【权力方向盘】│  (创始人家族通过极少数的 B 股，实现“以小博大”的控制)           │      垄断利润源源不断└────────────────────────────────────────────────────────┘
-
-第一板块：铁三角组合拳的“破防”与“御敌”这套组合拳的精妙之处在于，它将资本的四个核心属性——钱、权、名、税，高效率地剥离并压榨到了极致。
-1. 家族信托：所有权剥离的“隐形防护罩”
-核心Bug：一物三权，资产隔离。
-大白话： 如果你名下有10个亿，当你欠债或离婚时，法院能分光你的财产。但如果你把这10个亿放进“不可撤销信托”，在法律上你就是个“无产阶级”，这笔钱属于信托公司。法院不能因为你个人的债务，去查封另一家独立法人的资产。后代作为受益人，只能按月领生活费。“放弃所有权，保留控制权”，瞬间让所有债主和境内法院无从下手。
-
-2. 慈善基金会：左手倒右手的“免税保险箱”
-核心Bug：用“自身预算”替代“国家税款”。
-大白话： 在西方，继承遗产要交高达40%-50%的遗产税。富豪们不愿被国家收割，便成立一个自己名字命名的“慈善基金会”，把钱“捐”给自己。这样不仅0遗产税，还换来了“大慈善家”的社会名誉。钱虽然在基金会里，但控制权可以通过章程传给子女。子女在基金会里当高管、领高薪、报销豪车豪宅，名义上是在“考察慈善项目”，实际上实现了财富的完美肉食。
-
-3. A&#x2F;B股双层股权：以小博大的“权力方向盘”
-核心Bug：同股不同权，用10%的资本撬动100%的江山。
-大白话： 富豪把值钱但没表决权的A股捐给基金会或卖给散户换现金，自己手里死死攥着“1股等于10个投票权”的B股。这样一来，哪怕富豪只持有公司10%的股票，在股东大会上依然拥有绝对话语权，外人永远别想恶意收购，企业的印钞机永远听从家族的指挥。
-
-第二板块：对抗人性与数学的“资本达尔文主义”有了城堡，内部如何防止“后代指数级繁衍导致分光”以及“争产内斗”呢？富豪们制定了冷酷的规则：
-       ┌────────────── 财富城堡内部的“淘汰机制”─────────────────┐       │                                                    │       ▼                                                    ▼【极少数优秀继承人】                                   【绝大多数平庸后代】掌管董事会，握有A/B股表决权                            剥夺投票权，仅享有“信托低保”继续驱动资本帝国膨胀                                   如敢起诉闹事，触发条款净身出户
-
-
-打破平分家产，信托不养闲人： 城堡的本金永远锁死不分拆。后代想拿大钱，必须通过“绩效考核”（如考上名校、继承家族业务）。对于游手好闲的败家子，信托只提供刚好够吃穿的“信托低保”，在经济上将其边缘化，防止财富被稀释。
-控制权单线世袭，反诉讼刺刀： 基金会和信托的掌舵人永远只有一个人（长子或最强继承人）。其余旁系只有分钱的受益权，没有管事的投票权。章程中往往埋有“反诉讼条款”（In Terrorem Clause）——谁敢起诉家族争夺家产，谁就立刻失去所有受益资格，净身出户。
-超级免税的复利永动机： 在美国，慈善基金会每年只需拿出资产的5%做慈善（行政开支也算在内），剩下的95%可以在华尔街继续利滚利。更可怕的是，基金会的炒股投资收益税率被法律固定在1.39%（普通企业高达21%以上）。只要华尔街操盘手的回报率大于5%，这座财富雪球就会在近乎免税的环境下无限膨胀。
-
-第三板块：主权“内卷”下的终极逃生门你可能会问，如果大国强行修改法律，或者跨国追赃，这套系统会失效吗？这就涉及到了国际政治的底层残忍逻辑。
-1. 小国出卖法律，大国投鼠忌器那些离岸岛国（开曼、维尔京等）没有工业，他们唯一的暴富手段就是“出卖主权立法权”——立法规定“任何外国政府来查账都是违法”、“资产神圣不可侵犯”。大国因为害怕资本“用脚投票”彻底外逃本国，往往也会默许这些离岸口子的存在，形成了一种高度默契的全球利益闭环。
-2. 自动触发的“瞬移条款”（Flight Clause）顶级离岸信托的章程里，都埋有一颗“时空换位”的地雷。一旦信托所在地（如开曼）的法律面临大国政治施压或变动，该信托会在几秒钟内自动触发管辖法转移。资产的所有权和受托人会自动“瞬移”到另一个更流氓、更庇护富豪的法域（如南太平洋的库克群岛）。
-3. 库克群岛模式：对抗人类的“流氓堡垒”像库克群岛这样的法域，其法律甚至规定：“我们不承认任何外国法庭的判决。” 大国警方或债主如果想拿回钱，必须亲自飞到岛国本土重新起诉，且要在1-2年的极短时效内，举证出“刑事诉讼级别”的恶意欺诈证据。面对动辄数百万美元的跨国诉讼成本和近乎为零的胜率，大多数国家只能望洋兴叹。
-终极复盘底层普通人看到的，是电视新闻里每天更新的“打击洗钱、严厉反腐”；而真正掌握游戏规则的既得利益者看到的，是一张由小国的生存欲、大国的资本焦虑、以及权贵的自保本能共同织就的财富免死金牌。
-祁同伟用一颗子弹切断了境内所有的犯罪证据链，高小琴用完美的财务做账把钱包装成山水集团的“合法利润”出境，香港及离岸信托的法律机器则在资金落地的刹那自动合闸，将其变成了神圣不可侵犯的“合法私有财产”。
-在这套人类顶级的法律与金融工程面前，个人生命是短暂的，但资本的城堡，却得以永生。
-]]></content>
-      <categories>
-        <category>RandomThoughts</category>
-      </categories>
-  </entry>
-  <entry>
     <title>《人民的名义》与技术管理</title>
     <url>/20260628-The-name-of-the-people-and-technology-management/</url>
     <content><![CDATA[0. 缘起五一假期没有什么安排，就在家看了一部比较经典的剧《人民的名义》。当时我比较惊讶的就是：
@@ -6295,23 +6295,6 @@ sudo init 3
       </tags>
   </entry>
   <entry>
-    <title>Ubuntu 16 LTS 安装redis -  apt-get install redis-server</title>
-    <url>/20170223-Ubuntu-16-LTS-%E5%AE%89%E8%A3%85redis-ape-get-install-redis-server/</url>
-    <content><![CDATA[配置文件的路径： &#x2F;etc&#x2F;redis&#x2F;redis.conf
-redis服务路径: &#x2F;etc&#x2F;init.d&#x2F;redis-server
-默认是开机启动
-
-#安装hisen@hisen-server:/$ sudo apt-get install redis-server#打开服务hisen@hisen-server:/$ service redis start==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===Authentication is required to start &#x27;redis-server.service&#x27;.Authenticating as: hisen,,, (hisen)Password: ==== AUTHENTICATION COMPLETE ===#打开客户端hisen@hisen-server:/$ redis-cli#操作数据库127.0.0.1:6379&gt; set hisen hisen.meOK#获取数据127.0.0.1:6379&gt; get hisen&quot;hisen.me&quot;127.0.0.1:6379&gt; #停止数据库hisen@hisen-server:/$ service redis stop==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===Authentication is required to stop &#x27;redis-server.service&#x27;.Authenticating as: hisen,,, (hisen)Password: ==== AUTHENTICATION COMPLETE ===hisen@hisen-server:/$ 
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Ubuntu 16 LTS 安装zookeeper并开机启动</title>
     <url>/20170224-Ubuntu-16-LTS-%E5%AE%89%E8%A3%85zookeeper%E5%B9%B6%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/</url>
     <content><![CDATA[一、安装sudo apt-get install zookeeper
@@ -6335,6 +6318,23 @@ sudo apt-get install rcconf
 sudo rcconf
 ↑ ↓ 移动光标，空格键选中zookeeper
 Tab 使光标移动到OK 回车即可
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu 16 LTS 安装redis -  apt-get install redis-server</title>
+    <url>/20170223-Ubuntu-16-LTS-%E5%AE%89%E8%A3%85redis-ape-get-install-redis-server/</url>
+    <content><![CDATA[配置文件的路径： &#x2F;etc&#x2F;redis&#x2F;redis.conf
+redis服务路径: &#x2F;etc&#x2F;init.d&#x2F;redis-server
+默认是开机启动
+
+#安装hisen@hisen-server:/$ sudo apt-get install redis-server#打开服务hisen@hisen-server:/$ service redis start==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===Authentication is required to start &#x27;redis-server.service&#x27;.Authenticating as: hisen,,, (hisen)Password: ==== AUTHENTICATION COMPLETE ===#打开客户端hisen@hisen-server:/$ redis-cli#操作数据库127.0.0.1:6379&gt; set hisen hisen.meOK#获取数据127.0.0.1:6379&gt; get hisen&quot;hisen.me&quot;127.0.0.1:6379&gt; #停止数据库hisen@hisen-server:/$ service redis stop==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===Authentication is required to stop &#x27;redis-server.service&#x27;.Authenticating as: hisen,,, (hisen)Password: ==== AUTHENTICATION COMPLETE ===hisen@hisen-server:/$ 
+
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -6570,6 +6570,52 @@ Error: Could not create the Java Virtual Machine.Error: A fatal exception has oc
       </categories>
   </entry>
   <entry>
+    <title>理解 Linux Load Averages</title>
+    <url>/20201026-Understanding-Linux-Load-Averages/</url>
+    <content><![CDATA[零、背景最近做压力测试，不同的系统的机器监控数据差异明显A 系统：CPU 高 load 低B 系统：CPU 低 load 高
+那么是什么导致 A B 系统出现这种情况？CPU 高了系统肯定跑不动了，那么 load 多高代表系统跑不动呢？
+一、解释
+A 系统的原因  CPU 很忙，没有等待其它资源，瓶颈在 CPU。
+B 系统的原因  等待磁盘 I&#x2F;O 完成的进程过多，导致进程队列长度过大，  但是 CPU 运行的进程却很少，这样就导致负载过大，但 CPU 使用率低，瓶颈不在 CPU，可能在 I&#x2F;O。
+
+二、load averages 知识
+Linux 系统下代表的是 system load averages。
+
+Linux load averages track not just runnable tasks, but also tasks in the uninterruptible sleep state.  Linux 平均负载不仅跟踪可运行的任务，还跟踪处于不可中断睡眠状态的任务。
+
+On Linux, load averages are (or try to be) “system load averages”, for the system as a whole, measuring the number of threads that are working and waiting to work (CPU, disk, uninterruptible locks). Put differently, it measures the number of threads that aren’t completely idle. Advantage: includes demand for different resources.  在 Linux 上，负载平均值是(或试图是)“系统负载平均值” ，对于整个系统来说，测量正在工作和等待工作的线程数(CPU、磁盘、不可中断锁)。换句话说，它测量的是没有完全空闲的线程数量。优势: 包括对不同资源的需求。
+
+In 1993, a Linux engineer found a nonintuitive case with load averages, and with a three-line patch changed them forever from “CPU load averages” to what one might call “system load averages.” His change included tasks in the uninterruptible state, so that load averages reflected demand for disk resources and not just CPUs.  1993年，一位 Linux 工程师发现了一个与平均负载不直观的案例，一个三行补丁永远地将它们从“ CPU 负载平均值”改变为人们可能称之为“系统负载平均值”他的更改包括处于不可中断状态的任务，因此平均负载反映了对磁盘资源的需求，而不仅仅是 cpu。
+
+
+三、总结
+linux load averages 数字大，代表系统压力大;
+
+
+
+load 高可能的原因有(CPU、I&#x2F;O、不可中断锁);
+load 1min load 5min load 15min，从左到右递增说明负载在增加，递减说明负载在降低;
+负载多大才算高，没有定论，得看是否影响业务，如果业务正常那多半是没有问题的;
+
+四、load 优化
+优化算法，减少 CPU 计算;
+减少 I&#x2F;O 交互的次数，以及大小;
+分布式系统水平扩展更多的机器;
+
+五、参考
+Linux Load Averages: Solving the Mystery (发表于 2017 年)
+理解Linux系统负荷 （发表于 2011 年）
+Linux中CPU使用率低负载高
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《地下帝国：金融、网络、半导体---美国如何将世界经济武器化》读后感</title>
     <url>/20260801-Underground-Empire-How-America-Weaponized-the-World-Economy/</url>
     <content><![CDATA[1. 读后感全球化时代，你中有我，我中有你。短时间内很难撇清关系，虽然很别扭，但是还得拉着脸合作。新时代的竞争，和冷战差不多，甚至更严重，双方都制造假想敌，不断竞争。提出假想敌的那些人也可能是为了让自己多争取点资源，扩大自己的一亩三分地。
@@ -6656,52 +6702,6 @@ SWIFT 已从一个政治独立的组织，蜕变为美国政府无所不知的�
       </tags>
   </entry>
   <entry>
-    <title>理解 Linux Load Averages</title>
-    <url>/20201026-Understanding-Linux-Load-Averages/</url>
-    <content><![CDATA[零、背景最近做压力测试，不同的系统的机器监控数据差异明显A 系统：CPU 高 load 低B 系统：CPU 低 load 高
-那么是什么导致 A B 系统出现这种情况？CPU 高了系统肯定跑不动了，那么 load 多高代表系统跑不动呢？
-一、解释
-A 系统的原因  CPU 很忙，没有等待其它资源，瓶颈在 CPU。
-B 系统的原因  等待磁盘 I&#x2F;O 完成的进程过多，导致进程队列长度过大，  但是 CPU 运行的进程却很少，这样就导致负载过大，但 CPU 使用率低，瓶颈不在 CPU，可能在 I&#x2F;O。
-
-二、load averages 知识
-Linux 系统下代表的是 system load averages。
-
-Linux load averages track not just runnable tasks, but also tasks in the uninterruptible sleep state.  Linux 平均负载不仅跟踪可运行的任务，还跟踪处于不可中断睡眠状态的任务。
-
-On Linux, load averages are (or try to be) “system load averages”, for the system as a whole, measuring the number of threads that are working and waiting to work (CPU, disk, uninterruptible locks). Put differently, it measures the number of threads that aren’t completely idle. Advantage: includes demand for different resources.  在 Linux 上，负载平均值是(或试图是)“系统负载平均值” ，对于整个系统来说，测量正在工作和等待工作的线程数(CPU、磁盘、不可中断锁)。换句话说，它测量的是没有完全空闲的线程数量。优势: 包括对不同资源的需求。
-
-In 1993, a Linux engineer found a nonintuitive case with load averages, and with a three-line patch changed them forever from “CPU load averages” to what one might call “system load averages.” His change included tasks in the uninterruptible state, so that load averages reflected demand for disk resources and not just CPUs.  1993年，一位 Linux 工程师发现了一个与平均负载不直观的案例，一个三行补丁永远地将它们从“ CPU 负载平均值”改变为人们可能称之为“系统负载平均值”他的更改包括处于不可中断状态的任务，因此平均负载反映了对磁盘资源的需求，而不仅仅是 cpu。
-
-
-三、总结
-linux load averages 数字大，代表系统压力大;
-
-
-
-load 高可能的原因有(CPU、I&#x2F;O、不可中断锁);
-load 1min load 5min load 15min，从左到右递增说明负载在增加，递减说明负载在降低;
-负载多大才算高，没有定论，得看是否影响业务，如果业务正常那多半是没有问题的;
-
-四、load 优化
-优化算法，减少 CPU 计算;
-减少 I&#x2F;O 交互的次数，以及大小;
-分布式系统水平扩展更多的机器;
-
-五、参考
-Linux Load Averages: Solving the Mystery (发表于 2017 年)
-理解Linux系统负荷 （发表于 2011 年）
-Linux中CPU使用率低负载高
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Unix文件超过大小限制移动到某目录</title>
     <url>/20190408-Unix%E6%96%87%E4%BB%B6%E8%B6%85%E8%BF%87%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6%E7%A7%BB%E5%8A%A8%E5%88%B0%E6%9F%90%E7%9B%AE%E5%BD%95/</url>
     <content><![CDATA[某个文件夹下面有n个文件，需要移动大于10M的文件到&#x2F;tmp&#x2F;目录下
@@ -6753,6 +6753,25 @@ github地址：ValidSudoku.Java
       </tags>
   </entry>
   <entry>
+    <title>WeightAlgorithm - 权重算法 - Random、HashCode对比</title>
+    <url>/20190322-WeightAlgorithm%20-%20%E6%9D%83%E9%87%8D%E7%AE%97%E6%B3%95%20-%20Random%E3%80%81HashCode%E5%AF%B9%E6%AF%94/</url>
+    <content><![CDATA[一、权重算法权重算法一般在路由里面用的比较多，分布式环境下对等的服务有多个，加权随机选出一个服务来调用；
+可能还有其他方面的用途，下面的代码简单的实现了这个权重，本质上就用到了数组，随机下标；
+二、代码概览public static void main(String[] args) &#123;    String[] weight = &#123;&quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;&#125;;    final int times = 500000;    final long hashStart = System.currentTimeMillis();    List&lt;String&gt; hashRes = getList4Hash(weight, times);    printRes(&quot;Hash&quot;, hashStart, hashRes);    final long randomStart = System.currentTimeMillis();    List&lt;String&gt; randomRes = getList4Random(weight, times);    printRes(&quot;Random&quot;, randomStart, randomRes);//        Hash          use millis: 931//        A:49.92%//        B:29.99%//        C:20.09%//        Random        use millis: 50//        A:50.08%//        B:29.93%//        C:19.99%&#125;
+
+三、完整代码
+github:show all code
+package com.hisen.algorithms;import com.google.common.collect.Lists;import Java.text.NumberFormat;import Java.util.List;import Java.util.Map;import Java.util.Random;import Java.util.UUID;import Java.util.function.Function;import Java.util.stream.Collectors;/** * @Author hisenyuan * @Description $end$ * @Date 2019/3/21 21:04 */public class WeightAlgorithm &#123;    public static void main(String[] args) &#123;        String[] weight = &#123;&quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;&#125;;        final int times = 500000;        final long hashStart = System.currentTimeMillis();        List&lt;String&gt; hashRes = getList4Hash(weight, times);        printRes(&quot;Hash&quot;, hashStart, hashRes);        final long randomStart = System.currentTimeMillis();        List&lt;String&gt; randomRes = getList4Random(weight, times);        printRes(&quot;Random&quot;, randomStart, randomRes);//        Hash          use millis: 931//        A:49.92%//        B:29.99%//        C:20.09%//        Random        use millis: 50//        A:50.08%//        B:29.93%//        C:19.99%    &#125;    private static void printRes(String method, long start, List&lt;String&gt; resList) &#123;        final Map&lt;String, Long&gt; collect = resList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));        final double a = collect.get(&quot;A&quot;);        final double b = collect.get(&quot;B&quot;);        final double c = collect.get(&quot;C&quot;);        final double sum = a + b + c;        NumberFormat nt = NumberFormat.getPercentInstance();        nt.setMinimumFractionDigits(2);        System.out.println(method + &quot;\t use millis: &quot; + (System.currentTimeMillis() - start));        System.out.println(&quot;A&quot; + &quot;:&quot; + nt.format(a / sum));        System.out.println(&quot;B&quot; + &quot;:&quot; + nt.format(b / sum));        System.out.println(&quot;C&quot; + &quot;:&quot; + nt.format(c / sum));    &#125;    private static List&lt;String&gt; getList4Hash(String[] weight, int times) &#123;        List&lt;String&gt; result = Lists.newArrayList();        for (int i = 0; i &lt; times; i++) &#123;            final String a = UUID.randomUUID().toString() + System.currentTimeMillis();            final int hash = a.hashCode();            final int index = hash &gt; 0 ? hash : -hash;            final String res = weight[index % weight.length];            result.add(res);        &#125;        return result;    &#125;    private static List&lt;String&gt; getList4Random(String[] weight, int times) &#123;        List&lt;String&gt; result = Lists.newArrayList();        Random random = new Random();        for (int i = 0; i &lt; times; i++) &#123;            final int index = random.nextInt(weight.length);            final String res = weight[index];            result.add(res);        &#125;        return result;    &#125;&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>WebSocket - Java &amp; html &amp; JavaScript - 单发 &amp; 群发</title>
     <url>/20180728-WebSocket%20-%20Java%20&amp;%20html%20&amp;%20JavaScript%20-%20%E5%8D%95%E5%8F%91%20&amp;%20%E7%BE%A4%E5%8F%91/</url>
     <content><![CDATA[一、背景说明最近在做app后台相关接口
@@ -6779,25 +6798,6 @@ package com.hisen.ws.server;import com.hisen.ws.util.Constants;import Javax.webs
       </categories>
       <tags>
         <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>WeightAlgorithm - 权重算法 - Random、HashCode对比</title>
-    <url>/20190322-WeightAlgorithm%20-%20%E6%9D%83%E9%87%8D%E7%AE%97%E6%B3%95%20-%20Random%E3%80%81HashCode%E5%AF%B9%E6%AF%94/</url>
-    <content><![CDATA[一、权重算法权重算法一般在路由里面用的比较多，分布式环境下对等的服务有多个，加权随机选出一个服务来调用；
-可能还有其他方面的用途，下面的代码简单的实现了这个权重，本质上就用到了数组，随机下标；
-二、代码概览public static void main(String[] args) &#123;    String[] weight = &#123;&quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;&#125;;    final int times = 500000;    final long hashStart = System.currentTimeMillis();    List&lt;String&gt; hashRes = getList4Hash(weight, times);    printRes(&quot;Hash&quot;, hashStart, hashRes);    final long randomStart = System.currentTimeMillis();    List&lt;String&gt; randomRes = getList4Random(weight, times);    printRes(&quot;Random&quot;, randomStart, randomRes);//        Hash          use millis: 931//        A:49.92%//        B:29.99%//        C:20.09%//        Random        use millis: 50//        A:50.08%//        B:29.93%//        C:19.99%&#125;
-
-三、完整代码
-github:show all code
-package com.hisen.algorithms;import com.google.common.collect.Lists;import Java.text.NumberFormat;import Java.util.List;import Java.util.Map;import Java.util.Random;import Java.util.UUID;import Java.util.function.Function;import Java.util.stream.Collectors;/** * @Author hisenyuan * @Description $end$ * @Date 2019/3/21 21:04 */public class WeightAlgorithm &#123;    public static void main(String[] args) &#123;        String[] weight = &#123;&quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;&#125;;        final int times = 500000;        final long hashStart = System.currentTimeMillis();        List&lt;String&gt; hashRes = getList4Hash(weight, times);        printRes(&quot;Hash&quot;, hashStart, hashRes);        final long randomStart = System.currentTimeMillis();        List&lt;String&gt; randomRes = getList4Random(weight, times);        printRes(&quot;Random&quot;, randomStart, randomRes);//        Hash          use millis: 931//        A:49.92%//        B:29.99%//        C:20.09%//        Random        use millis: 50//        A:50.08%//        B:29.93%//        C:19.99%    &#125;    private static void printRes(String method, long start, List&lt;String&gt; resList) &#123;        final Map&lt;String, Long&gt; collect = resList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));        final double a = collect.get(&quot;A&quot;);        final double b = collect.get(&quot;B&quot;);        final double c = collect.get(&quot;C&quot;);        final double sum = a + b + c;        NumberFormat nt = NumberFormat.getPercentInstance();        nt.setMinimumFractionDigits(2);        System.out.println(method + &quot;\t use millis: &quot; + (System.currentTimeMillis() - start));        System.out.println(&quot;A&quot; + &quot;:&quot; + nt.format(a / sum));        System.out.println(&quot;B&quot; + &quot;:&quot; + nt.format(b / sum));        System.out.println(&quot;C&quot; + &quot;:&quot; + nt.format(c / sum));    &#125;    private static List&lt;String&gt; getList4Hash(String[] weight, int times) &#123;        List&lt;String&gt; result = Lists.newArrayList();        for (int i = 0; i &lt; times; i++) &#123;            final String a = UUID.randomUUID().toString() + System.currentTimeMillis();            final int hash = a.hashCode();            final int index = hash &gt; 0 ? hash : -hash;            final String res = weight[index % weight.length];            result.add(res);        &#125;        return result;    &#125;    private static List&lt;String&gt; getList4Random(String[] weight, int times) &#123;        List&lt;String&gt; result = Lists.newArrayList();        Random random = new Random();        for (int i = 0; i &lt; times; i++) &#123;            final int index = random.nextInt(weight.length);            final String res = weight[index];            result.add(res);        &#125;        return result;    &#125;&#125;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -7043,6 +7043,35 @@ gitbook
       </categories>
   </entry>
   <entry>
+    <title>关于 Java static</title>
+    <url>/20211112-about-static/</url>
+    <content><![CDATA[零、背景同事分享《Effective Java》其中第十章，并发部分例子有争议变量是否需要(代码如下) static？几个大佬说需要加，我众目睽睽下反驳不需要，略尴尬
+&#x2F;&#x2F; 是否需要加 static？才能保证单例正确private volatile Singleton singleton;
+一、程序关键代码1.1 原程序(错误)public class Singleton &#123;   private volatile Singleton singleton;   public Singleton() &#123;   &#125;   private Singleton getInstance() &#123;      if (singleton == null) &#123;         synchronized (Singleton.class) &#123;            if (singleton == null) &#123;               singleton = new Singleton();            &#125;         &#125;      &#125;      return singleton;   &#125;&#125;
+1.2 正确程序
+public class Singleton &#123;   private static volatile Singleton singleton;   public Singleton() &#123;   &#125;   private Singleton getInstance() &#123;      if (singleton == null) &#123;         synchronized (Singleton.class) &#123;            if (singleton == null) &#123;               singleton = new Singleton();            &#125;         &#125;      &#125;      return singleton;   &#125;&#125;
+
+二、验证2.1 验证程序public class Singleton &#123;   private static final AtomicInteger COUNT = new AtomicInteger(0);   // 通过volatile关键字来确保安全   private volatile Singleton singleton;   public Singleton() &#123;   &#125;   private Singleton getInstance() &#123;      if (singleton == null) &#123;         synchronized (Singleton.class) &#123;            if (singleton == null) &#123;               System.out.println(&quot;new:&quot; + COUNT.addAndGet(1));               singleton = new Singleton();            &#125;         &#125;      &#125;      return singleton;   &#125;   @Test   public void test() &#123;      int taskCount = 700;      // 锁住所有线程，等待并发执行      final CountDownLatch begin = new CountDownLatch(1);      final ExecutorService exec = Executors.newFixedThreadPool(taskCount);      for (int index = 0; index &lt; taskCount; index++) &#123;         submitTask(begin, exec);      &#125;      System.out.println(&quot;开始执行&quot;);      // begin 减1 ，开始并发执行      begin.countDown();      //关闭执行      exec.shutdown();   &#125;   private void submitTask(CountDownLatch begin, ExecutorService exec) &#123;      Runnable run = () -&gt; &#123;         try &#123;            // 等待，所有一起执行            begin.await();            //开始模拟等待。。。            Singleton singleton = new Singleton();            Singleton instance = singleton.getInstance();            System.out.println(Objects.isNull(instance));         &#125; catch (InterruptedException e) &#123;            e.printStackTrace();         &#125;      &#125;;      exec.submit(run);   &#125;&#125;
+2.2 验证结果带 static 的结果符合预期对象只创建一次，并且返回结果均不为 null
+2.2.1 不带 static开始执行new:1new:2new:3falsetrue省略几十行….
+2.2.2 带 static开始执行new:1false
+三、原因分析static变量也称作静态变量，静态变量和非静态变量的区别是：静态变量被所有的对象所共享，在内存中只有一个副本，它当且仅当在类初次加载时会被初始化。而非静态变量是对象所拥有的，在创建对象的时候被初始化，存在多个副本，各个对象拥有的副本互不影响。
+关键：static 变量在内存中只有一个副本，由所有对象共享。
+四、参考
+Java并发（七）：双重检验锁定DCL
+Java中的static关键字解析
+线程池模拟高并发
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>高并发</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>陆奇 | 年轻人的榜样</title>
     <url>/20211109-about-luqi/</url>
     <content><![CDATA[零、背景不知在哪听说过陆奇的传说对于一位地位如此之高的华人甚是敬仰，奈何相关资料甚少，很难深入了解不像李开复、吴军那样，出过一些书，了解可以多些
@@ -7223,35 +7252,6 @@ Ownership把公司的事业，当成是自己的事业，own everything。从我
       </categories>
       <tags>
         <tag>成长</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于 Java static</title>
-    <url>/20211112-about-static/</url>
-    <content><![CDATA[零、背景同事分享《Effective Java》其中第十章，并发部分例子有争议变量是否需要(代码如下) static？几个大佬说需要加，我众目睽睽下反驳不需要，略尴尬
-&#x2F;&#x2F; 是否需要加 static？才能保证单例正确private volatile Singleton singleton;
-一、程序关键代码1.1 原程序(错误)public class Singleton &#123;   private volatile Singleton singleton;   public Singleton() &#123;   &#125;   private Singleton getInstance() &#123;      if (singleton == null) &#123;         synchronized (Singleton.class) &#123;            if (singleton == null) &#123;               singleton = new Singleton();            &#125;         &#125;      &#125;      return singleton;   &#125;&#125;
-1.2 正确程序
-public class Singleton &#123;   private static volatile Singleton singleton;   public Singleton() &#123;   &#125;   private Singleton getInstance() &#123;      if (singleton == null) &#123;         synchronized (Singleton.class) &#123;            if (singleton == null) &#123;               singleton = new Singleton();            &#125;         &#125;      &#125;      return singleton;   &#125;&#125;
-
-二、验证2.1 验证程序public class Singleton &#123;   private static final AtomicInteger COUNT = new AtomicInteger(0);   // 通过volatile关键字来确保安全   private volatile Singleton singleton;   public Singleton() &#123;   &#125;   private Singleton getInstance() &#123;      if (singleton == null) &#123;         synchronized (Singleton.class) &#123;            if (singleton == null) &#123;               System.out.println(&quot;new:&quot; + COUNT.addAndGet(1));               singleton = new Singleton();            &#125;         &#125;      &#125;      return singleton;   &#125;   @Test   public void test() &#123;      int taskCount = 700;      // 锁住所有线程，等待并发执行      final CountDownLatch begin = new CountDownLatch(1);      final ExecutorService exec = Executors.newFixedThreadPool(taskCount);      for (int index = 0; index &lt; taskCount; index++) &#123;         submitTask(begin, exec);      &#125;      System.out.println(&quot;开始执行&quot;);      // begin 减1 ，开始并发执行      begin.countDown();      //关闭执行      exec.shutdown();   &#125;   private void submitTask(CountDownLatch begin, ExecutorService exec) &#123;      Runnable run = () -&gt; &#123;         try &#123;            // 等待，所有一起执行            begin.await();            //开始模拟等待。。。            Singleton singleton = new Singleton();            Singleton instance = singleton.getInstance();            System.out.println(Objects.isNull(instance));         &#125; catch (InterruptedException e) &#123;            e.printStackTrace();         &#125;      &#125;;      exec.submit(run);   &#125;&#125;
-2.2 验证结果带 static 的结果符合预期对象只创建一次，并且返回结果均不为 null
-2.2.1 不带 static开始执行new:1new:2new:3falsetrue省略几十行….
-2.2.2 带 static开始执行new:1false
-三、原因分析static变量也称作静态变量，静态变量和非静态变量的区别是：静态变量被所有的对象所共享，在内存中只有一个副本，它当且仅当在类初次加载时会被初始化。而非静态变量是对象所拥有的，在创建对象的时候被初始化，存在多个副本，各个对象拥有的副本互不影响。
-关键：static 变量在内存中只有一个副本，由所有对象共享。
-四、参考
-Java并发（七）：双重检验锁定DCL
-Java中的static关键字解析
-线程池模拟高并发
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>高并发</tag>
       </tags>
   </entry>
   <entry>
@@ -9700,56 +9700,9 @@ debug非常非常重要。
       </tags>
   </entry>
   <entry>
-    <title>魅族云短信导出成 CSV 和 Markdown：7600 条实录</title>
-    <url>/20261008-flyme-sms-export/</url>
-    <content><![CDATA[短信不算笔记，但同样是散在外面的一份记录。既然要把这些东西收敛到本地，便签之外顺手把它也拿下来。脚本在 GitHub 上：phone-cloud-data-export。
-魅族云的短信备份页面还在，地址 cloud.flyme.cn/browser/sms-list.jsp。我账号里 1595 个会话、7600 条消息，最早一条是 2007 年，最后一条停在 2022 年初。
-网页版没有批量导出，只能一页页翻。这篇和魅族云便签、锤子便签是同一批，都用浏览器里跑脚本的办法把数据拿下来，再在本地转成 CSV 和 Markdown。
-
-
-1. 接口短信页面的接口都是 POST，表单参数，URL 上要带 tkscsrf：
-
-会话列表：/c/browser/sms/getsmsgroups?tkscsrf=...，body 参数 status=phone、type（文件夹）、start、length
-某个会话的消息：/c/browser/sms/getsmsdialogs?tkscsrf=...，body 参数 contact、status=phone、type、start、length
-
-tkscsrf 是页面自己请求里带的令牌，脚本从 performance 里最近一条请求的 URL 上取，取不到再读 Cookie。
-抓取脚本按文件夹逐个抓会话，再逐个抓会话里的消息，每页 50 条，同时开 3 个会话，每个请求之间留 90 毫秒。跑的时候标签页要留在前台，后台标签页的定时器会被浏览器降速，慢很多。
-每 200 个会话自动存一份分段文件，最后再存一份 full 文件。分段文件是累积快照，中断了重跑不会丢已经抓到的部分。
-2. 抓下来的比实际多接口的 type 参数有 0 到 5 六种取值，实测 type=0/2/4/5 返回的是同一批会话，号码集合和消息都一致，type=3 才是另一批。
-抓的时候按 type 和号码两个键记录，所以原始记录数大于实际会话数。输出阶段按号码合并，同一条消息按 uuId 去重，最后是 1595 个会话、7600 条消息。
-方向靠接口的 type 字段判断：1 是收件，2 是发件。用几条收发方向明确的短信核对过一致。原始字段都留在 短信原始.json 里，有出入可以回去对。
-收 6659 条，发 941 条。收发都有的会话 98 个，只有收的 1455 个，只有发的 42 个。只有收的那批基本都是 106 开头的验证码和通知。
-3. 换行短信正文里混着 \r\n。如果只按 \n 切，行尾会剩一个 \r，在部分编辑器里表现为一个乱码方块。转换脚本先把 \r\n 统一成 \n 再处理。
-按联系人的 Markdown 里，每行一条消息，收和发顶格，正文里的换行缩进两格续写：
-收 2014-07-24 04:58:43 晚上一起吃饭吗发 2014-07-24 05:20:15 好，六点到发 2014-07-29 19:32:10 到楼下了，下来开门  顺便把伞带上
-
-每行末尾加两个空格当硬换行，否则标准 Markdown 会把整个会话渲染成一整段。这两个空格在代码块里看不出来。加上之后在 Obsidian、VS Code 预览和 GitHub 上都正常换行。风格一样可以换，--line-break=space（默认）、br、blank、keep。
-这个账号没有彩信，photo_type 全是 0，所以没有图片要另外下载。
-4. 导出结果输出四个东西：
-
-全部短信.csv：7600 行，一行一条，列是发送时间、方向、对方号码、对方名称、文件夹、正文、uuid。带 BOM，Excel 和 WPS 直接打开不乱码
-短信原始.json：去重后的完整数据，字段最全，含 smsStatus、protocol、photo_type
-按联系人/*.md：消息数大于等于 2 的 763 个会话，一个会话一个文件，时间正序
-收发都有/*.md 和 收发都有.csv：只挑收发都有的 98 个会话
-
-时间范围 2007-11-15 04:40:28 至 2022-01-08 01:10:57。消息最多的一个会话有 684 条。
-5. 脚本都用 node 直接跑，没有第三方依赖：
-# CSV + JSON + 导出报告node sms-convert.js sms flyme-sms-*-full.json# 按联系人 md，只出消息数 &gt;= 2 的会话node sms-convert.js sms flyme-sms-*-full.json --by-contact --both --min-msgs=2
-
-GitHub 仓库：phone-cloud-data-export
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>效率</tag>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>魅族云便签导出到本地 Markdown：605 条实录</title>
     <url>/20261008-flyme-notes-export/</url>
-    <content><![CDATA[笔记散在好几个地方，魅族便签是攒得最多的一处。这轮的打算是把它们收敛到本地一个目录，来龙去脉写在锤子便签那篇里。脚本在 GitHub 上：phone-cloud-data-export。
+    <content><![CDATA[笔记散在好几个地方，魅族便签是攒得最多的一处。这轮的打算是把它们收敛到本地一个目录，来龙去脉写在锤子便签那篇里。脚本在 GitHub 上：phone-cloud-data-export&#x2F;flyme-notes。
 魅族云便签的网页版在 notes.flyme.cn。我账号里 605 条笔记，时间从 2014 年排到 2022 年，多数是当年在地铁上用手机随手记的。
 这套导出也分两步：先在已经登录的页面里跑脚本抓原始 JSON，再在本地转成带 frontmatter 的 Markdown。Cookie 不出本机。
 
@@ -9800,7 +9753,7 @@ GitHub 仓库：phone-cloud-data-export
 frontmatter 字段：title、uuid、category、category_id、created、updated、created_ts、updated_ts、status、pinned、remind、font_size、attachments。
 这 558 个 md 和锤子便签那批放进同一个库，搜索一次能搜全。Markdown 不绑定工具，Obsidian 和 VS Code 都能直接读，uuid 留着以后跟云端对账。
 8. 脚本抓取、下载附件、转换、校验四个脚本，都用 node 直接跑，没有第三方依赖。
-GitHub 仓库：phone-cloud-data-export
+GitHub 仓库：phone-cloud-data-export&#x2F;flyme-notes
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -9810,19 +9763,50 @@ GitHub 仓库：phone-cloud-data-export
       </tags>
   </entry>
   <entry>
-    <title>git版本差异报告 - git difftool分支对比 - gitLab compare</title>
-    <url>/20190309-git%E7%89%88%E6%9C%AC%E5%B7%AE%E5%BC%82%E6%8A%A5%E5%91%8A%20-%20git%20difftool%E5%88%86%E6%94%AF%E5%AF%B9%E6%AF%94%20-%20gitLab%20compare/</url>
-    <content><![CDATA[一、初衷有时候上线会出现合错代码，比如功能，或者maven的pom文件；
-人都不是十全十美的人，只要是人就会犯错关键是要想办法去避免，只有工具才不犯错
-所以尽量想办法利用工具来防止我们犯错，git来说有很多办法；简单的命令，或者gitlab的compare报告；每次上线之前，开发自己看一遍当前版本与线上版本的区别，确认每一个点都是正确的改动；
-二、gitlab compare功能(推荐)2.1 入口：工程首页 -&gt; Repository -&gt; Compare2.2 选择：上一个版本，当前版本，点击Compare2.2 结果：一次能看到两个版本的所有commit、改动点
-三、git命令# 显示版本之间改动的文件名git difftool master 1.2.4 --stat# 在命令行挨个显示版本某个文件具体差异git difftool master 1.2.4
+    <title>魅族云短信导出成 CSV 和 Markdown：7600 条实录</title>
+    <url>/20261008-flyme-sms-export/</url>
+    <content><![CDATA[短信不算笔记，但同样是散在外面的一份记录。既然要把这些东西收敛到本地，便签之外顺手把它也拿下来。脚本在 GitHub 上：phone-cloud-data-export&#x2F;flyme-sms。
+魅族云的短信备份页面还在，地址 cloud.flyme.cn/browser/sms-list.jsp。我账号里 1595 个会话、7600 条消息，最早一条是 2007 年，最后一条停在 2022 年初。
+网页版没有批量导出，只能一页页翻。这篇和魅族云便签、锤子便签是同一批，都用浏览器里跑脚本的办法把数据拿下来，再在本地转成 CSV 和 Markdown。
+
+
+1. 接口短信页面的接口都是 POST，表单参数，URL 上要带 tkscsrf：
+
+会话列表：/c/browser/sms/getsmsgroups?tkscsrf=...，body 参数 status=phone、type（文件夹）、start、length
+某个会话的消息：/c/browser/sms/getsmsdialogs?tkscsrf=...，body 参数 contact、status=phone、type、start、length
+
+tkscsrf 是页面自己请求里带的令牌，脚本从 performance 里最近一条请求的 URL 上取，取不到再读 Cookie。
+抓取脚本按文件夹逐个抓会话，再逐个抓会话里的消息，每页 50 条，同时开 3 个会话，每个请求之间留 90 毫秒。跑的时候标签页要留在前台，后台标签页的定时器会被浏览器降速，慢很多。
+每 200 个会话自动存一份分段文件，最后再存一份 full 文件。分段文件是累积快照，中断了重跑不会丢已经抓到的部分。
+2. 抓下来的比实际多接口的 type 参数有 0 到 5 六种取值，实测 type=0/2/4/5 返回的是同一批会话，号码集合和消息都一致，type=3 才是另一批。
+抓的时候按 type 和号码两个键记录，所以原始记录数大于实际会话数。输出阶段按号码合并，同一条消息按 uuId 去重，最后是 1595 个会话、7600 条消息。
+方向靠接口的 type 字段判断：1 是收件，2 是发件。用几条收发方向明确的短信核对过一致。原始字段都留在 短信原始.json 里，有出入可以回去对。
+收 6659 条，发 941 条。收发都有的会话 98 个，只有收的 1455 个，只有发的 42 个。只有收的那批基本都是 106 开头的验证码和通知。
+3. 换行短信正文里混着 \r\n。如果只按 \n 切，行尾会剩一个 \r，在部分编辑器里表现为一个乱码方块。转换脚本先把 \r\n 统一成 \n 再处理。
+按联系人的 Markdown 里，每行一条消息，收和发顶格，正文里的换行缩进两格续写：
+收 2014-07-24 04:58:43 晚上一起吃饭吗发 2014-07-24 05:20:15 好，六点到发 2014-07-29 19:32:10 到楼下了，下来开门  顺便把伞带上
+
+每行末尾加两个空格当硬换行，否则标准 Markdown 会把整个会话渲染成一整段。这两个空格在代码块里看不出来。加上之后在 Obsidian、VS Code 预览和 GitHub 上都正常换行。风格一样可以换，--line-break=space（默认）、br、blank、keep。
+这个账号没有彩信，photo_type 全是 0，所以没有图片要另外下载。
+4. 导出结果输出四个东西：
+
+全部短信.csv：7600 行，一行一条，列是发送时间、方向、对方号码、对方名称、文件夹、正文、uuid。带 BOM，Excel 和 WPS 直接打开不乱码
+短信原始.json：去重后的完整数据，字段最全，含 smsStatus、protocol、photo_type
+按联系人/*.md：消息数大于等于 2 的 763 个会话，一个会话一个文件，时间正序
+收发都有/*.md 和 收发都有.csv：只挑收发都有的 98 个会话
+
+时间范围 2007-11-15 04:40:28 至 2022-01-08 01:10:57。消息最多的一个会话有 684 条。
+5. 脚本都用 node 直接跑，没有第三方依赖：
+# CSV + JSON + 导出报告node sms-convert.js sms flyme-sms-*-full.json# 按联系人 md，只出消息数 &gt;= 2 的会话node sms-convert.js sms flyme-sms-*-full.json --by-contact --both --min-msgs=2
+
+GitHub 仓库：phone-cloud-data-export&#x2F;flyme-sms
 ]]></content>
       <categories>
         <category>Tech</category>
       </categories>
       <tags>
-        <tag>工程效能</tag>
+        <tag>效率</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -9949,6 +9933,22 @@ current_user_url: &quot;https://api.github.com/user&quot;,current_user_authoriza
       <categories>
         <category>Tech</category>
       </categories>
+  </entry>
+  <entry>
+    <title>git版本差异报告 - git difftool分支对比 - gitLab compare</title>
+    <url>/20190309-git%E7%89%88%E6%9C%AC%E5%B7%AE%E5%BC%82%E6%8A%A5%E5%91%8A%20-%20git%20difftool%E5%88%86%E6%94%AF%E5%AF%B9%E6%AF%94%20-%20gitLab%20compare/</url>
+    <content><![CDATA[一、初衷有时候上线会出现合错代码，比如功能，或者maven的pom文件；
+人都不是十全十美的人，只要是人就会犯错关键是要想办法去避免，只有工具才不犯错
+所以尽量想办法利用工具来防止我们犯错，git来说有很多办法；简单的命令，或者gitlab的compare报告；每次上线之前，开发自己看一遍当前版本与线上版本的区别，确认每一个点都是正确的改动；
+二、gitlab compare功能(推荐)2.1 入口：工程首页 -&gt; Repository -&gt; Compare2.2 选择：上一个版本，当前版本，点击Compare2.2 结果：一次能看到两个版本的所有commit、改动点
+三、git命令# 显示版本之间改动的文件名git difftool master 1.2.4 --stat# 在命令行挨个显示版本某个文件具体差异git difftool master 1.2.4
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>工程效能</tag>
+      </tags>
   </entry>
   <entry>
     <title>通过 OpenWrt 利用 Cloudflare tunnel 回家 - 连上家庭内网</title>
@@ -11618,28 +11618,6 @@ log4j配置文件
       </tags>
   </entry>
   <entry>
-    <title>Mac iTerm2 无法 ping 网关</title>
-    <url>/20251018-mac_iterm2_can_not_ping_gateway/</url>
-    <content><![CDATA[0. 概览如果 Mac 可以正常上网，但是无法访问本地网络。解决：“系统设置”→“隐私与安全性”→“本地网络”，打开对应软件的权限。
-1. 表象无法 ping 网关，但是可以上网。
-ping 192.168.1.1PING 192.168.1.1 (192.168.1.1): 56 data bytesping: sendto: No route to hostping: sendto: No route to hostRequest timeout for icmp_seq 0...--- 192.168.1.1 ping statistics ---17 packets transmitted, 0 packets received, 100.0% packet loss
-
-2. 排查2.1 使用自带终端可以正常 ping。
-2.2 抓包
-sudo tcpdump -i en0 icmplistening on en0, link-type EN10MB (Ethernet), snapshot length 524288 bytes16:50:17.646968 IP 180.165.12.183 &gt; 192.168.1.55: ICMP 180.165.12.183 udp port 49914 unreachable, length 5616:50:18.135497 IP 117.148.114.147 &gt; 192.168.1.55: ICMP 117.148.114.147 udp port 42944 unreachable, length 5616:50:18.361302 IP 210.74.154.110 &gt; 192.168.1.55: ICMP 210.74.154.110 udp port 40764 unreachable, length 5616:50:18.361989 IP 210.74.154.110 &gt; 192.168.1.55: ICMP 210.74.154.110 udp port 61340 unreachable, length 5616:50:18.434133 IP 117.155.164.106 &gt; 192.168.1.55: ICMP 117.155.164.106 udp port 10218 unreachable, length 5616:50:18.475222 IP 119.191.82.252 &gt; 192.168.1.55: ICMP 119.191.82.252 udp port hydap unreachable, length 5616:50:19.077798 IP 140.75.168.17 &gt; 192.168.1.55: ICMP 140.75.168.17 udp port 15464 unreachable, length 56
-发现 180 这些 IP，很像 switchhost 上 GitHub 的IP。
-2.3 问模型SwitchHost 会导致 iTerm2 出现无法 ping 网关的问题吗？Mac 自带的终端是可以 ping 的。答：
-本地网络权限问题：macOS 系统更新（如 Sequoia 15.0.1）后，可能会弹出权限请求窗口，询问是否允许应用访问本地网络。若用户误选“否”，iTerm2 将被禁止访问本地网络，导致无法 ping 通网关。解决方法：在 macOS 的“系统设置”→“隐私与安全性”→“本地网络”中，确保 iTerm2 的开关处于开启状态。
-发现来问题，开启本地网络之后就可以正常使用。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>网络</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>mac docker compose timezone 问题解决</title>
     <url>/20181221-mac%20docker%20compose%20timezone%20%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[一、背景介绍想用docker搭建一个lnmp环境
@@ -11670,6 +11648,28 @@ apply &amp; restart
       </categories>
       <tags>
         <tag>容器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mac iTerm2 无法 ping 网关</title>
+    <url>/20251018-mac_iterm2_can_not_ping_gateway/</url>
+    <content><![CDATA[0. 概览如果 Mac 可以正常上网，但是无法访问本地网络。解决：“系统设置”→“隐私与安全性”→“本地网络”，打开对应软件的权限。
+1. 表象无法 ping 网关，但是可以上网。
+ping 192.168.1.1PING 192.168.1.1 (192.168.1.1): 56 data bytesping: sendto: No route to hostping: sendto: No route to hostRequest timeout for icmp_seq 0...--- 192.168.1.1 ping statistics ---17 packets transmitted, 0 packets received, 100.0% packet loss
+
+2. 排查2.1 使用自带终端可以正常 ping。
+2.2 抓包
+sudo tcpdump -i en0 icmplistening on en0, link-type EN10MB (Ethernet), snapshot length 524288 bytes16:50:17.646968 IP 180.165.12.183 &gt; 192.168.1.55: ICMP 180.165.12.183 udp port 49914 unreachable, length 5616:50:18.135497 IP 117.148.114.147 &gt; 192.168.1.55: ICMP 117.148.114.147 udp port 42944 unreachable, length 5616:50:18.361302 IP 210.74.154.110 &gt; 192.168.1.55: ICMP 210.74.154.110 udp port 40764 unreachable, length 5616:50:18.361989 IP 210.74.154.110 &gt; 192.168.1.55: ICMP 210.74.154.110 udp port 61340 unreachable, length 5616:50:18.434133 IP 117.155.164.106 &gt; 192.168.1.55: ICMP 117.155.164.106 udp port 10218 unreachable, length 5616:50:18.475222 IP 119.191.82.252 &gt; 192.168.1.55: ICMP 119.191.82.252 udp port hydap unreachable, length 5616:50:19.077798 IP 140.75.168.17 &gt; 192.168.1.55: ICMP 140.75.168.17 udp port 15464 unreachable, length 56
+发现 180 这些 IP，很像 switchhost 上 GitHub 的IP。
+2.3 问模型SwitchHost 会导致 iTerm2 出现无法 ping 网关的问题吗？Mac 自带的终端是可以 ping 的。答：
+本地网络权限问题：macOS 系统更新（如 Sequoia 15.0.1）后，可能会弹出权限请求窗口，询问是否允许应用访问本地网络。若用户误选“否”，iTerm2 将被禁止访问本地网络，导致无法 ping 通网关。解决方法：在 macOS 的“系统设置”→“隐私与安全性”→“本地网络”中，确保 iTerm2 的开关处于开启状态。
+发现来问题，开启本地网络之后就可以正常使用。
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>网络</tag>
       </tags>
   </entry>
   <entry>
@@ -11771,22 +11771,6 @@ cargo:deploy
       <tags>
         <tag>java</tag>
         <tag>工程效能</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mongodb - failed with errno13 Permission denied</title>
-    <url>/20170712-mongodb%20-%20failed%20with%20errno%2013%20Permission%20denied/</url>
-    <content><![CDATA[在命令行输入：mongo报错
-hisen@ubuntu:~$ mongoMongoDB shell version: 3.2.13connecting to: test2017-07-11T23:11:23.827+0800 I STORAGE  [main] In File::open(), ::open for &#x27;/home/hisen/.mongorc.js&#x27; failed with errno:13 Permission deniedThe &quot;.mongorc.js&quot; file located in your home folder could not be executed
-看倒数第二行，应该是权限的问题，于是
-hisen@ubuntu:~$ sudo chown -R hisen /home/hisen/.mongorc.jshisen@ubuntu:~$ mongoMongoDB shell version: 3.2.13connecting to: testServer has startup warnings: 2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] 2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is &#x27;always&#x27;.2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] **        We suggest setting it to &#x27;never&#x27;2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] 2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/defrag is &#x27;always&#x27;.2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] **        We suggest setting it to &#x27;never&#x27;2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] 
-完美解决，用户权限的问题。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
       </tags>
   </entry>
   <entry>
@@ -12001,6 +11985,22 @@ Scaling AI Agent Infrastructure with the MCP Stateless updates – Google Develo
       <tags>
         <tag>Agent</tag>
         <tag>架构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mongodb - failed with errno13 Permission denied</title>
+    <url>/20170712-mongodb%20-%20failed%20with%20errno%2013%20Permission%20denied/</url>
+    <content><![CDATA[在命令行输入：mongo报错
+hisen@ubuntu:~$ mongoMongoDB shell version: 3.2.13connecting to: test2017-07-11T23:11:23.827+0800 I STORAGE  [main] In File::open(), ::open for &#x27;/home/hisen/.mongorc.js&#x27; failed with errno:13 Permission deniedThe &quot;.mongorc.js&quot; file located in your home folder could not be executed
+看倒数第二行，应该是权限的问题，于是
+hisen@ubuntu:~$ sudo chown -R hisen /home/hisen/.mongorc.jshisen@ubuntu:~$ mongoMongoDB shell version: 3.2.13connecting to: testServer has startup warnings: 2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] 2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is &#x27;always&#x27;.2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] **        We suggest setting it to &#x27;never&#x27;2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] 2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/defrag is &#x27;always&#x27;.2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] **        We suggest setting it to &#x27;never&#x27;2017-07-11T23:11:15.845+0800 I CONTROL  [initandlisten] 
+完美解决，用户权限的问题。
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
       </tags>
   </entry>
   <entry>
@@ -12813,10 +12813,33 @@ awk 入门指南
       </tags>
   </entry>
   <entry>
+    <title>软件工程师面试指引</title>
+    <url>/20200805-software-engineer-interview-guide/</url>
+    <content><![CDATA[零、关于面试面试决定因子：70% 能力、20% 缘分、10% 行情。软件工程师是条不归路，每天进步一点点，早日走上人生巅峰。
+一、面经&#x2F;知识点仓库的内容更多是抛砖引玉，提供通用与重要的技术，真正掌握还得贴合自身需要，花时间持续深入地学习。
+基础指引：https://github.com/Snailclimb/JavaGuide进阶之路：https://github.com/doocs/advanced-Java编程书籍：https://github.com/jobbole/awesome-programming-books算法小抄：https://labuladong.gitbook.io/algo/大厂试题：https://github.com/0voice/interview_internal_reference简历打磨：https://github.com/geekcompany/ResumeSample/blob/master/Java.md
+后续持续更新，多交流，共同成长。
+二、相关内容计算机科学的自我修炼技术人的自我修炼(书单)
+三、更新记录2020-12-18
+
+新增『算法小抄』，很佩服作者的计划、执行能力。关于作者部分很认同。
+
+2021-02-18
+新增『计算机科学的自我修炼』相关链接
+
+]]></content>
+      <categories>
+        <category>Growth</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>锤子便签导出到本地 Markdown：370 条实录</title>
     <url>/20261008-smartisan-notes-export/</url>
     <content><![CDATA[我的笔记一直散着。读书时记的放锤子便签，通勤路上随手写的放魅族便签，早年还有有道云笔记和 Notion。时间一长，自己都说不清哪条在哪儿，搜也搜不全。知识管理与消费里问过一句，散落各处的笔记、随想能不能有个地方统一管起来；工作的第一个十年里也提过，说想把所有数据整合到一起。
-想把它们收敛到本地一个目录、用自己的方式管起来，就得先把每个来源的数据拿下来。锤子便签是其中一份，另外两份是魅族云便签和魅族云短信。脚本都开在 GitHub 上：phone-cloud-data-export，拿到就能跑。
+想把它们收敛到本地一个目录、用自己的方式管起来，就得先把每个来源的数据拿下来。锤子便签是其中一份，另外两份是魅族云便签和魅族云短信。脚本都开在 GitHub 上：phone-cloud-data-export&#x2F;smartisan-notes，拿到就能跑。
 锤子便签的云端在欢喜云 yun.smartisan.com。手机端早就停更，账号中心跳去了 snote.ink，那是字节接手后的另一套产品，和原来的便签不是同一份数据。
 我账号里还有 370 条便签挂在旧接口上。产品在收缩，接口没有退场说明，能拿的时候先拿。导出分两步：抓原始 JSON，再转成带 frontmatter 的 Markdown。
 
@@ -12875,36 +12898,13 @@ tab_id 是纯客户端随机值，自己生成 8 位字母数字就行。
 9. 导完之后三条来源各建一个目录，放进同一个笔记库，标题、分类、时间都进了 frontmatter，全文搜索一次能搜全。
 选 Markdown 是因为它不绑定工具。Obsidian、VS Code、ripgrep 都能直接读，换软件也不用重导。frontmatter 里留着的 sync_id 也不白留：以后要跟云端对账，或者补上锤子缺的创建时间，还能对上。
 10. 脚本抓取、转换、校验和清空四个脚本，都用 node 直接跑，没有第三方依赖。
-GitHub 仓库：phone-cloud-data-export
+GitHub 仓库：phone-cloud-data-export&#x2F;smartisan-notes
 ]]></content>
       <categories>
         <category>Tech</category>
       </categories>
       <tags>
         <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>软件工程师面试指引</title>
-    <url>/20200805-software-engineer-interview-guide/</url>
-    <content><![CDATA[零、关于面试面试决定因子：70% 能力、20% 缘分、10% 行情。软件工程师是条不归路，每天进步一点点，早日走上人生巅峰。
-一、面经&#x2F;知识点仓库的内容更多是抛砖引玉，提供通用与重要的技术，真正掌握还得贴合自身需要，花时间持续深入地学习。
-基础指引：https://github.com/Snailclimb/JavaGuide进阶之路：https://github.com/doocs/advanced-Java编程书籍：https://github.com/jobbole/awesome-programming-books算法小抄：https://labuladong.gitbook.io/algo/大厂试题：https://github.com/0voice/interview_internal_reference简历打磨：https://github.com/geekcompany/ResumeSample/blob/master/Java.md
-后续持续更新，多交流，共同成长。
-二、相关内容计算机科学的自我修炼技术人的自我修炼(书单)
-三、更新记录2020-12-18
-
-新增『算法小抄』，很佩服作者的计划、执行能力。关于作者部分很认同。
-
-2021-02-18
-新增『计算机科学的自我修炼』相关链接
-
-]]></content>
-      <categories>
-        <category>Growth</category>
-      </categories>
-      <tags>
-        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
@@ -13372,35 +13372,6 @@ AI 只是加快了写代码的部分，或者做设计的部分。这里有一�
       </tags>
   </entry>
   <entry>
-    <title>我追踪的信息源</title>
-    <url>/20260125-the-information-source-i-follow/</url>
-    <content><![CDATA[我不太喜欢推荐类的信息源，避免信息茧房。浏览器收藏夹会有一个 trace 目录，里面有很多觉得不错的博客、网站等，空了的时候随机翻一番，进行被动输入。
-值得推荐的：
-
-tombkeeper ( 微博 )
-
-腾讯的安全大拿，热爱分享。信息检索能力、思考能力、输出能力超强。
-
-
-
-
-科技爱好者周刊
-Github月度流行项目
-晚点
-宝玉的分享
-近期高频更新&#x2F;翻译 AI 相关内容。早期在微博活跃，现在有一个网站，更新比较及时。
-
-
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>效率</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>工作的第一个十年</title>
     <url>/20250719-the-first-decade-of-work/</url>
     <content><![CDATA[简短概述十年前，本科毕业，成为北漂一族。
@@ -13501,6 +13472,35 @@ tombkeeper : 网络安全大拿、刚开始他的微博基本上看不懂、现�
       </categories>
       <tags>
         <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我追踪的信息源</title>
+    <url>/20260125-the-information-source-i-follow/</url>
+    <content><![CDATA[我不太喜欢推荐类的信息源，避免信息茧房。浏览器收藏夹会有一个 trace 目录，里面有很多觉得不错的博客、网站等，空了的时候随机翻一番，进行被动输入。
+值得推荐的：
+
+tombkeeper ( 微博 )
+
+腾讯的安全大拿，热爱分享。信息检索能力、思考能力、输出能力超强。
+
+
+
+
+科技爱好者周刊
+Github月度流行项目
+晚点
+宝玉的分享
+近期高频更新&#x2F;翻译 AI 相关内容。早期在微博活跃，现在有一个网站，更新比较及时。
+
+
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>效率</tag>
       </tags>
   </entry>
   <entry>
@@ -14215,6 +14215,45 @@ A 套餐所有会有均可购买B 套餐 VIP3 不能购买C 套餐仅 VIP1 可�
       </tags>
   </entry>
   <entry>
+    <title>《五十度灰》系列观后感</title>
+    <url>/20260628-wushiduhuixilie/</url>
+    <content><![CDATA[在通俗大众的眼中，《五十度灰》（Fifty Shades of Grey）三部曲是一套充斥着豪车、直升机、百亿霸总与限制级画面的都市罗曼史。然而，若撇开这些博人眼球的商业包装，将其放在现代心理学、两性博弈与人格模型的显微镜下，这其实是一个极其硬核的“双人心理沙盘演练”。
+整个三部曲的底层故事逻辑，讲述的并不是一个单纯的“总裁爱上灰姑娘”的童话，而是一个关于“两个不同人格模型在权力、私欲与控制的博弈中，最终完成反向重塑与精神救赎”的现代寓言。
+1. 第一部《五十度灰》：权力的初次交锋与底线的试探1.1 莫名的开局与失控的序幕故事的开篇看似荒诞且充满巧合：文学系女大学生安娜（Anastasia Steele）顶替生病的闺蜜，去采访年轻英俊的百亿创投巨头克里斯蒂安·格雷（Christian Grey）。安娜自幼沉浸在英国文学的世界里，精神世界丰富且对周围平庸的追求者不屑一顾。这种超然的纯洁与固执，瞬间激发了格雷恐怖的占有欲。
+
+然而，当格雷将安娜带入他的“红房子”，并拿出一份事无巨细、规定了饮食起居及绝对服从规矩的 BDSM 合同（Dom&#x2F;Sub 契约）时，两性的博弈正式从“浪漫追求”演变为“权力争夺”。
+1.2 私欲的工具化与 Sub 的终极权力在这一阶段，格雷将内心的“控制欲”伪装在精英外表和商业合同之下。由于童年遭受生母抛弃和虐待的创伤，格雷极度缺乏安全感，他需要通过事事在握的“确定性”来维持心理防线。他把安娜当作一个满足自身心理缺陷的“完美客体（工具）”，试图用冷酷的规矩拒绝发生真正平等、有温度的情感连接。
+但第一部的结尾给出了极高级的反转：当格雷在红房子里用皮带跨越情感边界地抽打了安娜 6 下、单方面宣泄控制欲时，安娜看清了这场游戏背后并非爱意，而是冷酷与扭曲。她动用了身为 Sub 的终极权力——拒绝、呼唤其真名（拒绝物化）并果断离场。这一走，直接打破了格雷“掌控一切”的幻觉，将这位不可一世的支配者推向了精神崩溃的边缘。
+#2. 第二部《五十度飞》：规则的彻底重组与反客为主
+2.1 攻守易势的心理依附无法承受失去安娜之痛的格雷，被迫放下所有高高在上的姿态，卑微求和。此时，安娜展现出了极强的人格底线，她重组了游戏规则，提出了复合的绝对前提：“不签合同、没有规矩、不要红房子，要一场正常的、平等的恋爱。”
+格雷的全盘妥协，标志着两人的权力关系彻底发生了“反客为主”的倒置。格雷原本高度依赖“制定规则”来获得安全感，但为了留住安娜，他必须被迫学着去“适应不确定性”。
+2.2 创伤重现与情绪的“反向驯服”第二部中，格雷扭曲童年的始作俑者埃琳娜（罗宾逊太太）、以及因嫉妒企图枪杀安娜的前任 Sub 先后出现，甚至格雷本人也经历了直升机坠机的生死考验。
+在这一系列危机的倒逼下，格雷在梦魇中向安娜下跪。这一幕揭示了控制狂背后的真相：他不是太强大，而是太弱小。安娜用她那健全的人格、稳定的情绪和无条件的爱，扮演了超越情人的“心理疗愈者”角色。她剥离了格雷身上那些防御性的私欲，反向重塑了格雷的心理系统，让他明白：不需要靠支配别人，也能获得安全的爱。
+3. 第三部《五十度自由》：人格的最终独立与高质量共生3.1 职场、生育与控制欲的临界点两人步入婚姻后，矛盾并未绝迹，而是推向了更深层的现实维度。安娜在职场上凭借专业能力快速晋升为出版社主编，她死守自己的专业阵地，甚至在改回夫姓的问题上与格雷爆发激烈冲突。她用绝对的人格独立，拒绝被“格雷太太”这个符号吞噬。
+冲突在安娜意外怀孕时达到顶峰。格雷因为童年阴影以及对安娜“独占私欲”作祟，对胎儿产生了强烈的抗拒与自私的愤怒。他愤而离家，在酒吧喝得烂醉并遇到了企图挑拨的埃琳娜。虽然格雷保持了身体的忠诚并拒绝了埃琳娜，但宿醉归家后，极度无能为力的他再次退行回老一套的控制手段——在红房子里粗暴地捆绑并占有了安娜，试图重新确立掌控感。
+3.2 致命的觉醒与红房子的终局面对格雷近乎自残式的粗暴惩罚，安娜流着泪说出了全片最具分量的一句话：
+
+“Christian, this is not love. You are punishing me for something I have no control over.”（这不是爱，你是在为你无法控制的事情惩罚我。）
+
+这句话如同一把尖刀，彻底刺破了格雷最后的心理防御，让他直面自己即将变成当年虐待他的恶魔这一事实。最终，在经历前上司杰克的疯狂绑架与复仇危机时，安娜展现出惊人的孤勇，持枪反击保护了家庭。
+在大结局的几年后，红房子依然存在，但它已经不再是格雷宣泄痛苦与惩罚的“精神牢笼”，而是退去了冰冷的权力剥削，变成了双方在完全平等、快乐的前提下调剂生活的情趣空间。草坪上，他们与两岁的儿子和即将出生的女儿共享阳光，格雷最终被驯化成了一个满眼都是家庭的温柔父亲。
+4. Dom&#x2F;Sub 文化底层的现代解构《五十度灰》的文本之所以能立住，是因为它无意中暗合了现代心理学与社会学对 Dom&#x2F;Sub 文化的底层逻辑解构：
+
+“逃避自我”与压力卸载： 现实中社会地位越高、掌控欲越强的人（如格雷），前额叶皮层长期超载，往往越容易在私密关系中渴望让渡控制权，以此获得极致的心理减压。
+创伤重现与自我疗愈： 弗洛伊德式的“创伤重现”表明，小时候经历过绝对无助的人，长大后会通过扮演 Dom 或安全的 Sub，在可控的环境里战胜当年的恐惧。
+高浓度的化学鸡尾酒： BDSM 互动带来的痛觉与紧张，会刺激大脑分泌海量的内啡肽（带来极乐感）与催产素（建立深刻的精神纽带），其本质是一场披着不平等外衣的、最高级别的平等信任契约。
+
+真正读懂这部作品的人会明白：格雷在财富与社会地位上是绝对的支配者（Dom），但在精神与情感上，他是一个随时可能碎掉的依附者（Sub）；安娜表面上一无所有，但她凭借健全的人格与死守的底线，成为了这场权力博弈中真正的统治者。
+安娜用了三部曲的篇幅，把一份冷酷的商业奴役合同，变成了一首有温度的家庭共生诗。敢于掀翻桌子的人，才配拥有规则的制定权——这才是隐藏在豪车与欲望之下，最硬核的两性博弈逻辑。
+]]></content>
+      <categories>
+        <category>Growth</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【阅读笔记】《国家为什么失败》</title>
     <url>/20251123-why_nations_fail/</url>
     <content><![CDATA[1. 基本信息中文书名：《国家为什么会失败》原版书名：Why Nations Fail: The Origins of Power, Prosperity, and Poverty阅读时间：2025.09.05 ～ 2025.09.19阅读理由：应该是在 X 上看到有人推荐，书名比较吸引人就加入了『阅读清单』。讲的比较多的是贫穷相关，和之前《贫穷的本质》、《枪炮、钢铁与病菌》、《历史的教训》、《大众经济学》有较大的相关性，是个不错的主题阅读材料。
@@ -14425,45 +14464,6 @@ A 套餐所有会有均可购买B 套餐 VIP3 不能购买C 套餐仅 VIP1 可�
       <tags>
         <tag>成长</tag>
         <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《五十度灰》系列观后感</title>
-    <url>/20260628-wushiduhuixilie/</url>
-    <content><![CDATA[在通俗大众的眼中，《五十度灰》（Fifty Shades of Grey）三部曲是一套充斥着豪车、直升机、百亿霸总与限制级画面的都市罗曼史。然而，若撇开这些博人眼球的商业包装，将其放在现代心理学、两性博弈与人格模型的显微镜下，这其实是一个极其硬核的“双人心理沙盘演练”。
-整个三部曲的底层故事逻辑，讲述的并不是一个单纯的“总裁爱上灰姑娘”的童话，而是一个关于“两个不同人格模型在权力、私欲与控制的博弈中，最终完成反向重塑与精神救赎”的现代寓言。
-1. 第一部《五十度灰》：权力的初次交锋与底线的试探1.1 莫名的开局与失控的序幕故事的开篇看似荒诞且充满巧合：文学系女大学生安娜（Anastasia Steele）顶替生病的闺蜜，去采访年轻英俊的百亿创投巨头克里斯蒂安·格雷（Christian Grey）。安娜自幼沉浸在英国文学的世界里，精神世界丰富且对周围平庸的追求者不屑一顾。这种超然的纯洁与固执，瞬间激发了格雷恐怖的占有欲。
-
-然而，当格雷将安娜带入他的“红房子”，并拿出一份事无巨细、规定了饮食起居及绝对服从规矩的 BDSM 合同（Dom&#x2F;Sub 契约）时，两性的博弈正式从“浪漫追求”演变为“权力争夺”。
-1.2 私欲的工具化与 Sub 的终极权力在这一阶段，格雷将内心的“控制欲”伪装在精英外表和商业合同之下。由于童年遭受生母抛弃和虐待的创伤，格雷极度缺乏安全感，他需要通过事事在握的“确定性”来维持心理防线。他把安娜当作一个满足自身心理缺陷的“完美客体（工具）”，试图用冷酷的规矩拒绝发生真正平等、有温度的情感连接。
-但第一部的结尾给出了极高级的反转：当格雷在红房子里用皮带跨越情感边界地抽打了安娜 6 下、单方面宣泄控制欲时，安娜看清了这场游戏背后并非爱意，而是冷酷与扭曲。她动用了身为 Sub 的终极权力——拒绝、呼唤其真名（拒绝物化）并果断离场。这一走，直接打破了格雷“掌控一切”的幻觉，将这位不可一世的支配者推向了精神崩溃的边缘。
-#2. 第二部《五十度飞》：规则的彻底重组与反客为主
-2.1 攻守易势的心理依附无法承受失去安娜之痛的格雷，被迫放下所有高高在上的姿态，卑微求和。此时，安娜展现出了极强的人格底线，她重组了游戏规则，提出了复合的绝对前提：“不签合同、没有规矩、不要红房子，要一场正常的、平等的恋爱。”
-格雷的全盘妥协，标志着两人的权力关系彻底发生了“反客为主”的倒置。格雷原本高度依赖“制定规则”来获得安全感，但为了留住安娜，他必须被迫学着去“适应不确定性”。
-2.2 创伤重现与情绪的“反向驯服”第二部中，格雷扭曲童年的始作俑者埃琳娜（罗宾逊太太）、以及因嫉妒企图枪杀安娜的前任 Sub 先后出现，甚至格雷本人也经历了直升机坠机的生死考验。
-在这一系列危机的倒逼下，格雷在梦魇中向安娜下跪。这一幕揭示了控制狂背后的真相：他不是太强大，而是太弱小。安娜用她那健全的人格、稳定的情绪和无条件的爱，扮演了超越情人的“心理疗愈者”角色。她剥离了格雷身上那些防御性的私欲，反向重塑了格雷的心理系统，让他明白：不需要靠支配别人，也能获得安全的爱。
-3. 第三部《五十度自由》：人格的最终独立与高质量共生3.1 职场、生育与控制欲的临界点两人步入婚姻后，矛盾并未绝迹，而是推向了更深层的现实维度。安娜在职场上凭借专业能力快速晋升为出版社主编，她死守自己的专业阵地，甚至在改回夫姓的问题上与格雷爆发激烈冲突。她用绝对的人格独立，拒绝被“格雷太太”这个符号吞噬。
-冲突在安娜意外怀孕时达到顶峰。格雷因为童年阴影以及对安娜“独占私欲”作祟，对胎儿产生了强烈的抗拒与自私的愤怒。他愤而离家，在酒吧喝得烂醉并遇到了企图挑拨的埃琳娜。虽然格雷保持了身体的忠诚并拒绝了埃琳娜，但宿醉归家后，极度无能为力的他再次退行回老一套的控制手段——在红房子里粗暴地捆绑并占有了安娜，试图重新确立掌控感。
-3.2 致命的觉醒与红房子的终局面对格雷近乎自残式的粗暴惩罚，安娜流着泪说出了全片最具分量的一句话：
-
-“Christian, this is not love. You are punishing me for something I have no control over.”（这不是爱，你是在为你无法控制的事情惩罚我。）
-
-这句话如同一把尖刀，彻底刺破了格雷最后的心理防御，让他直面自己即将变成当年虐待他的恶魔这一事实。最终，在经历前上司杰克的疯狂绑架与复仇危机时，安娜展现出惊人的孤勇，持枪反击保护了家庭。
-在大结局的几年后，红房子依然存在，但它已经不再是格雷宣泄痛苦与惩罚的“精神牢笼”，而是退去了冰冷的权力剥削，变成了双方在完全平等、快乐的前提下调剂生活的情趣空间。草坪上，他们与两岁的儿子和即将出生的女儿共享阳光，格雷最终被驯化成了一个满眼都是家庭的温柔父亲。
-4. Dom&#x2F;Sub 文化底层的现代解构《五十度灰》的文本之所以能立住，是因为它无意中暗合了现代心理学与社会学对 Dom&#x2F;Sub 文化的底层逻辑解构：
-
-“逃避自我”与压力卸载： 现实中社会地位越高、掌控欲越强的人（如格雷），前额叶皮层长期超载，往往越容易在私密关系中渴望让渡控制权，以此获得极致的心理减压。
-创伤重现与自我疗愈： 弗洛伊德式的“创伤重现”表明，小时候经历过绝对无助的人，长大后会通过扮演 Dom 或安全的 Sub，在可控的环境里战胜当年的恐惧。
-高浓度的化学鸡尾酒： BDSM 互动带来的痛觉与紧张，会刺激大脑分泌海量的内啡肽（带来极乐感）与催产素（建立深刻的精神纽带），其本质是一场披着不平等外衣的、最高级别的平等信任契约。
-
-真正读懂这部作品的人会明白：格雷在财富与社会地位上是绝对的支配者（Dom），但在精神与情感上，他是一个随时可能碎掉的依附者（Sub）；安娜表面上一无所有，但她凭借健全的人格与死守的底线，成为了这场权力博弈中真正的统治者。
-安娜用了三部曲的篇幅，把一份冷酷的商业奴役合同，变成了一首有温度的家庭共生诗。敢于掀翻桌子的人，才配拥有规则的制定权——这才是隐藏在豪车与欲望之下，最硬核的两性博弈逻辑。
-]]></content>
-      <categories>
-        <category>Growth</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
       </tags>
   </entry>
   <entry>
@@ -14707,27 +14707,6 @@ IDEA上搭建dubbo服务的简单过程只是简单的让例子在IntelliJ IDEA�
       </tags>
   </entry>
   <entry>
-    <title>《穿布鞋的马云》 - 部分文字摘录</title>
-    <url>/20180908-%E3%80%8A%E7%A9%BF%E5%B8%83%E9%9E%8B%E7%9A%84%E9%A9%AC%E4%BA%91%E3%80%8B%20-%20%E9%83%A8%E5%88%86%E6%96%87%E5%AD%97%E6%91%98%E5%BD%95/</url>
-    <content><![CDATA[《穿布鞋的马云》 2018.10.01 ~ 2018.10.02
-国庆假期没有什么安排，看了几部电影之后感觉蛮愧疚，又浪费了大把的时间
-于是乎在书架上找了本决定看起来压力不那么大的书来看
-这本书感觉整体上写的一般，可能定位就是通俗易懂吧
-但是对于了解一些细节，还是很有帮助
-由于目前待在创业公司，看到很多文字的时候还是很有感触的
-如果你想成功，积极乐观地看待任何问题
-以下为摘抄：
-
-马云在校教书，兼职创业:海博翻译社92派:1992年后创业的企业家想清楚干什么，然后就要清楚该干什么;知道该干什么之后，要明白自己不该干什么——&gt;能干多久？想干多久？这件事情该干多久就多久。记住自己第一天的梦想，至关重要。海博翻译社的网页是第一个外国人能在互联网上搜到的第一个中国的网页。1995年是全世界互联网商用的第一年。只有启蒙才会有更大的市场。资本永远不能控制一家公司，资本只能为创业服务，而不能控制公司。一个创业公司的创始人能够取得权威媒体的认可，也是一件惊人的事情。创业者最重要的是创造条件，如果等到时机成熟的话，一定轮不到我们。有了理想之后，我觉得，最重要的是给自己一个承诺，承诺自己要把这个事情做出来。如果你不行动，不给自己的梦想一个实践的机会，你永远没有机会。创立阿里巴巴之前，三家公司马云得到的创业智慧:第一，选对创业项目很重要第二，即便是几个人的小公司，管理制度的建设也很重要第三，资本控制了你的公司时，你是没有希望的。第四，创业团队没有相同的理念和共同的目标会导致分裂。第五，对国有股东有了近距离的认识。1998年，阿里巴巴做bbs，长城是最早的bbs，xxx到此一游。阿里巴巴，在美国看到的名字，是“open sesame”芝麻开门的意思。合作都是团队做出来的，如果别人把你当英雄，你千万不要把自己当英雄，如果自己把自己当英雄必然要走下坡路。有几种人是难以在团队中培养的，一种是懂资本的人才，其他是财务、法律人才。因为这样的人才不仅要懂专业，而且需要经验。一般的公司多半是在上市之前引进这样的人才。在我擅长的世界里，我非常自信，非常自如。我没有想过要大包大揽，我知道自己的角色是什么。对于公众舆论而言，公司只能用一个声音说话，太多声音，只会让这个公司的形象变的模糊。世界上最不缺的就是钱，缺的是能用资本创造价值的企业家和企业家精神。1999.10高盛投资阿里巴巴使得后者可以对媒体讲一个好的故事:全世界最好的投资银行看好阿里巴巴的长期发展。它让外界对这家初创公司刮目相看。永远不要让资本说话，让资本赚钱。1999.10，拿到高盛500万(40%)投资的马云，随后孙正义想4000万占有49%的股份，后来3000万美元得到30%的股份，再后来，马云马云觉得钱太多反悔，最后孙正义投资2000万获得20%股份。在所有的创业公司发展中，扩张规模是最容易犯错误的时候，而这时犯的错还都是不小的错误。人多财务成本高，这并不是主要的，重要的是那些闲人会让全心全意投入加班加点的人感到不平衡，久而久之，公司的文化风气就不行了。2009.10 西湖论剑，马云请金庸拉拢当时互联网行业的佼佼者参与。前来的有:金庸，新浪王志东，搜狐张朝阳，网易丁磊，my8848王俊涛，加拿大驻华大使，英国驻沪总理事及50多家国际跨国公司在华代表在创业初期要寻找这些梦之队:没有成功，渴望成功，平凡，团结，有共同理想的人。2003年每天收入100万元，2004年每天盈利100万元，2005年每天纳税100万元。拥有好的业绩和产品，同事技巧性地为自己选定一个对标物，这会让你的公司和产品赢得大量关注。“裸奔”和淘宝的倒立与武侠一样，都是极易被识别的与众不同的公司文化符号，也极易产生传播效应。好的商人不在于他的梦想多么伟大，但是他的梦想必须是独特的，任何一个成功的企业家，从第一天起都有一个独特的梦想。2005.8.11雅虎中国并入阿里巴巴。资产技术+10亿美元，获得阿里40%股份。一个公司如果并购另外一个公司的话，文化融合是一件很难的事情。聪明是智慧者的天敌，傻瓜用嘴说话，聪明的人用脑子说话，智慧的人用心讲话。所以永远要记住，不要把自己当成最聪明的人，最聪明的人相信总有别人比自己更聪明。作为一个领导人，应该控制自己的情绪，很多时候发脾气是无能的表现，合理的情绪控制对于团队的和谐，稳定军心有很大作用。改变别人，先改变自己;要完善世界，先完善自己;要帮助好别人，先帮助自己;如果你不能帮助好自己，那一切都是瞎扯。人与人之间最本质的区别不是技能、专业、能力、情商，而是人生的使命感和价值观，而企业同理。先付出，再得到。没有使命感，人生会找不到奋斗的意义;没价值诶观，奋斗的方式会扭曲。80后，90后，我觉得是我的产品，我们没有理由、权利和责任区批判我们的产品，我们唯一有的权利和责任是完善我们的产品。真正的幸福感是你知道自己在做什么，知道别人在做什么，你会逐渐从痛苦中找到那些快乐。如果你想成功，积极乐观地看待任何问题
-]]></content>
-      <categories>
-        <category>Reading</category>
-      </categories>
-      <tags>
-        <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《重塑大脑，重塑人生》读后感 + 摘抄</title>
     <url>/20190903-%E3%80%8A%E9%87%8D%E5%A1%91%E5%A4%A7%E8%84%91%EF%BC%8C%E9%87%8D%E5%A1%91%E4%BA%BA%E7%94%9F%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F%20+%20%E6%91%98%E6%8A%84/</url>
     <content><![CDATA[一、内容简介这是一本人类大脑可塑性研究先驱与翘楚的故事书，正是让我们用触觉看到世界的巴赫-利塔这类先驱，使得我们正在成为来自地球的神。
@@ -14806,6 +14785,27 @@ IDEA上搭建dubbo服务的简单过程只是简单的让例子在IntelliJ IDEA�
       </categories>
       <tags>
         <tag>成长</tag>
+        <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《穿布鞋的马云》 - 部分文字摘录</title>
+    <url>/20180908-%E3%80%8A%E7%A9%BF%E5%B8%83%E9%9E%8B%E7%9A%84%E9%A9%AC%E4%BA%91%E3%80%8B%20-%20%E9%83%A8%E5%88%86%E6%96%87%E5%AD%97%E6%91%98%E5%BD%95/</url>
+    <content><![CDATA[《穿布鞋的马云》 2018.10.01 ~ 2018.10.02
+国庆假期没有什么安排，看了几部电影之后感觉蛮愧疚，又浪费了大把的时间
+于是乎在书架上找了本决定看起来压力不那么大的书来看
+这本书感觉整体上写的一般，可能定位就是通俗易懂吧
+但是对于了解一些细节，还是很有帮助
+由于目前待在创业公司，看到很多文字的时候还是很有感触的
+如果你想成功，积极乐观地看待任何问题
+以下为摘抄：
+
+马云在校教书，兼职创业:海博翻译社92派:1992年后创业的企业家想清楚干什么，然后就要清楚该干什么;知道该干什么之后，要明白自己不该干什么——&gt;能干多久？想干多久？这件事情该干多久就多久。记住自己第一天的梦想，至关重要。海博翻译社的网页是第一个外国人能在互联网上搜到的第一个中国的网页。1995年是全世界互联网商用的第一年。只有启蒙才会有更大的市场。资本永远不能控制一家公司，资本只能为创业服务，而不能控制公司。一个创业公司的创始人能够取得权威媒体的认可，也是一件惊人的事情。创业者最重要的是创造条件，如果等到时机成熟的话，一定轮不到我们。有了理想之后，我觉得，最重要的是给自己一个承诺，承诺自己要把这个事情做出来。如果你不行动，不给自己的梦想一个实践的机会，你永远没有机会。创立阿里巴巴之前，三家公司马云得到的创业智慧:第一，选对创业项目很重要第二，即便是几个人的小公司，管理制度的建设也很重要第三，资本控制了你的公司时，你是没有希望的。第四，创业团队没有相同的理念和共同的目标会导致分裂。第五，对国有股东有了近距离的认识。1998年，阿里巴巴做bbs，长城是最早的bbs，xxx到此一游。阿里巴巴，在美国看到的名字，是“open sesame”芝麻开门的意思。合作都是团队做出来的，如果别人把你当英雄，你千万不要把自己当英雄，如果自己把自己当英雄必然要走下坡路。有几种人是难以在团队中培养的，一种是懂资本的人才，其他是财务、法律人才。因为这样的人才不仅要懂专业，而且需要经验。一般的公司多半是在上市之前引进这样的人才。在我擅长的世界里，我非常自信，非常自如。我没有想过要大包大揽，我知道自己的角色是什么。对于公众舆论而言，公司只能用一个声音说话，太多声音，只会让这个公司的形象变的模糊。世界上最不缺的就是钱，缺的是能用资本创造价值的企业家和企业家精神。1999.10高盛投资阿里巴巴使得后者可以对媒体讲一个好的故事:全世界最好的投资银行看好阿里巴巴的长期发展。它让外界对这家初创公司刮目相看。永远不要让资本说话，让资本赚钱。1999.10，拿到高盛500万(40%)投资的马云，随后孙正义想4000万占有49%的股份，后来3000万美元得到30%的股份，再后来，马云马云觉得钱太多反悔，最后孙正义投资2000万获得20%股份。在所有的创业公司发展中，扩张规模是最容易犯错误的时候，而这时犯的错还都是不小的错误。人多财务成本高，这并不是主要的，重要的是那些闲人会让全心全意投入加班加点的人感到不平衡，久而久之，公司的文化风气就不行了。2009.10 西湖论剑，马云请金庸拉拢当时互联网行业的佼佼者参与。前来的有:金庸，新浪王志东，搜狐张朝阳，网易丁磊，my8848王俊涛，加拿大驻华大使，英国驻沪总理事及50多家国际跨国公司在华代表在创业初期要寻找这些梦之队:没有成功，渴望成功，平凡，团结，有共同理想的人。2003年每天收入100万元，2004年每天盈利100万元，2005年每天纳税100万元。拥有好的业绩和产品，同事技巧性地为自己选定一个对标物，这会让你的公司和产品赢得大量关注。“裸奔”和淘宝的倒立与武侠一样，都是极易被识别的与众不同的公司文化符号，也极易产生传播效应。好的商人不在于他的梦想多么伟大，但是他的梦想必须是独特的，任何一个成功的企业家，从第一天起都有一个独特的梦想。2005.8.11雅虎中国并入阿里巴巴。资产技术+10亿美元，获得阿里40%股份。一个公司如果并购另外一个公司的话，文化融合是一件很难的事情。聪明是智慧者的天敌，傻瓜用嘴说话，聪明的人用脑子说话，智慧的人用心讲话。所以永远要记住，不要把自己当成最聪明的人，最聪明的人相信总有别人比自己更聪明。作为一个领导人，应该控制自己的情绪，很多时候发脾气是无能的表现，合理的情绪控制对于团队的和谐，稳定军心有很大作用。改变别人，先改变自己;要完善世界，先完善自己;要帮助好别人，先帮助自己;如果你不能帮助好自己，那一切都是瞎扯。人与人之间最本质的区别不是技能、专业、能力、情商，而是人生的使命感和价值观，而企业同理。先付出，再得到。没有使命感，人生会找不到奋斗的意义;没价值诶观，奋斗的方式会扭曲。80后，90后，我觉得是我的产品，我们没有理由、权利和责任区批判我们的产品，我们唯一有的权利和责任是完善我们的产品。真正的幸福感是你知道自己在做什么，知道别人在做什么，你会逐渐从痛苦中找到那些快乐。如果你想成功，积极乐观地看待任何问题
+]]></content>
+      <categories>
+        <category>Reading</category>
+      </categories>
+      <tags>
         <tag>阅读</tag>
       </tags>
   </entry>
@@ -15664,6 +15664,17 @@ ID ACCOUNT10 A11 B
       </tags>
   </entry>
   <entry>
+    <title>解决：eclipse下*.properties显示Unicode乱码</title>
+    <url>/20170208-%E8%A7%A3%E5%86%B3%EF%BC%9Aeclipse%E4%B8%8B-properties%E6%98%BE%E7%A4%BAUnicode%E4%B9%B1%E7%A0%81/</url>
+    <content><![CDATA[eclipse的*.properties文件，默认的编码方式是iso-8859-1
+Window -&gt; preferences -&gt; general -&gt; Contents Types -&gt; Text(展开) -&gt; Java Aroperties File(点击) -&gt; *.properties(locked)(点击) -&gt; 把iso-8859-1改为 UTF-8 -&gt; Update -&gt; OK
+然后就可以正常显示中文了
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>聊聊MySQL的隔离级别 | MySQL隔离级别原理</title>
     <url>/20190413-%E8%81%8A%E8%81%8AMySQL%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</url>
     <content><![CDATA[这是之前的一个帖子：oracle - mysql - 数据库事务隔离级别介绍写的不全面， 按现在的理解，重新写一个；
@@ -15694,31 +15705,6 @@ MySQL的四种事务隔离级别(ps:此处有测试截图，比较直观)
       <tags>
         <tag>存储</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>解决：eclipse下*.properties显示Unicode乱码</title>
-    <url>/20170208-%E8%A7%A3%E5%86%B3%EF%BC%9Aeclipse%E4%B8%8B-properties%E6%98%BE%E7%A4%BAUnicode%E4%B9%B1%E7%A0%81/</url>
-    <content><![CDATA[eclipse的*.properties文件，默认的编码方式是iso-8859-1
-Window -&gt; preferences -&gt; general -&gt; Contents Types -&gt; Text(展开) -&gt; Java Aroperties File(点击) -&gt; *.properties(locked)(点击) -&gt; 把iso-8859-1改为 UTF-8 -&gt; Update -&gt; OK
-然后就可以正常显示中文了
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>解决：html rendering error - MarkdownPad 2</title>
-    <url>/20170119-%E8%A7%A3%E5%86%B3%EF%BC%9Ahtml-rendering-error-MarkdownPad-2/</url>
-    <content><![CDATA[MarkdownPad 2在windows 10上会遇到这个错误
-官方发布了这个问题的解决办法
-详见：点击前往 页面中搜索：This view has crashed
-解决办法windows 10系统 需要下载 一个  awesomium_v1.6.6_sdk_win
-这是一个 HTML UI ENGINE
-下载地址：http://markdownpad.com/download/awesomium_v1.6.6_sdk_win.exe
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
   </entry>
   <entry>
     <title>计算长度最大的子串长度(按空格分割) - 多种方式</title>
@@ -15772,23 +15758,6 @@ github也有：https://github.com/hisenyuan/IDEAPractice/blob/master/src/main/Ja
       <tags>
         <tag>java</tag>
         <tag>高并发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>该Java语句创建了多少个对象？</title>
-    <url>/20170120-%E8%AF%A5Java%E8%AF%AD%E5%8F%A5%E5%88%9B%E5%BB%BA%E4%BA%86%E5%A4%9A%E5%B0%91%E4%B8%AA%E5%AF%B9%E8%B1%A1%EF%BC%9F/</url>
-    <content><![CDATA[String str = new String(&quot;Java&quot;);
-答案：最少一个，最多两个
-
-Java中有常量池的概念，常量池和类文件相关，其数据存放的区域是在方法区中（方法区是jvm中内存模型的概念）
-因为当你使用关键字new的时候是一定会生成一个String类的实例，当你使用直接量的方式定义了一个字符串时，假如这个字符串在常量池中，则不会去实例化String，反之则会生成一个String类的实例，并置入常量池
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -15892,6 +15861,37 @@ jQuery 元素选择器jQuery 使用 CSS 选择器来选取 HTML 元素。$(&quot
       </categories>
       <tags>
         <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决：html rendering error - MarkdownPad 2</title>
+    <url>/20170119-%E8%A7%A3%E5%86%B3%EF%BC%9Ahtml-rendering-error-MarkdownPad-2/</url>
+    <content><![CDATA[MarkdownPad 2在windows 10上会遇到这个错误
+官方发布了这个问题的解决办法
+详见：点击前往 页面中搜索：This view has crashed
+解决办法windows 10系统 需要下载 一个  awesomium_v1.6.6_sdk_win
+这是一个 HTML UI ENGINE
+下载地址：http://markdownpad.com/download/awesomium_v1.6.6_sdk_win.exe
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>该Java语句创建了多少个对象？</title>
+    <url>/20170120-%E8%AF%A5Java%E8%AF%AD%E5%8F%A5%E5%88%9B%E5%BB%BA%E4%BA%86%E5%A4%9A%E5%B0%91%E4%B8%AA%E5%AF%B9%E8%B1%A1%EF%BC%9F/</url>
+    <content><![CDATA[String str = new String(&quot;Java&quot;);
+答案：最少一个，最多两个
+
+Java中有常量池的概念，常量池和类文件相关，其数据存放的区域是在方法区中（方法区是jvm中内存模型的概念）
+因为当你使用关键字new的时候是一定会生成一个String类的实例，当你使用直接量的方式定义了一个字符串时，假如这个字符串在常量池中，则不会去实例化String，反之则会生成一个String类的实例，并置入常量池
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
