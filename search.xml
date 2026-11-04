@@ -18507,7 +18507,7 @@ var data=[&#123;name:&quot;a&quot;,age:12&#125;,&#123;name:&quot;b&quot;,age:11&
     <title>Discuz 被爬虫打垮 - 分析报告</title>
     <url>/20261104-discuz-was-overwhelmed-by-crawlers/</url>
     <content><![CDATA[1. 解决方案Cloudflare Managed Challenge，也就是机器人验证。把除了 &#x2F;msi-*.html 格式的 get 请求都给纳入机器人验证。
-16:45 以后平均 1.03 req&#x2F;s，5xx 只有 147 条。对比 16:03-16:29 的 198.86 req&#x2F;s，边缘挑战把到达源站的流量压低了约 99.5%。
+16:45 以后平均 1.03 req&#x2F;s，5xx 只有 147 条。对比 16:03-16:29 的 198.86 req&#x2F;s，验证码把到达源站的流量压低了约 99.5%。
 使用 cf 之前用过 nginx 硬限流，效果不好，会被错杀。
 
 IP 几乎没有什么规律，只能从访问路径上进行限制。也没法低成本做是否登录的判断。先低成本的用 Cloudflare 吧，以前看到别人说被爬虫打挂还感觉很夸张。
