@@ -18503,4 +18503,230 @@ var data=[&#123;name:&quot;a&quot;,age:12&#125;,&#123;name:&quot;b&quot;,age:11&
         <tag>面试</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Discuz 被爬虫打垮 - 分析报告</title>
+    <url>/20261104-discuz-was-overwhelmed-by-crawlers/</url>
+    <content><![CDATA[1. 解决方案Cloudflare Managed Challenge，也就是机器人验证。把除了 &#x2F;msi-*.html 格式的 get 请求都给纳入机器人验证。
+16:45 以后平均 1.03 req&#x2F;s，5xx 只有 147 条。对比 16:03-16:29 的 198.86 req&#x2F;s，边缘挑战把到达源站的流量压低了约 99.5%。
+使用 cf 之前用过 nginx 硬限流，效果不好，会被错杀。
+
+IP 几乎没有什么规律，只能从访问路径上进行限制。也没法低成本做是否登录的判断。先低成本的用 Cloudflare 吧，以前看到别人说被爬虫打挂还感觉很夸张。
+现在我只想说这些写爬虫的人，是不是没脑子？能不能爬正常的路径，而不是乱尝试。本文是 Discuz 大版本迁移中的准备、切换与流量故障 的延续
+2. 请求概览14:17:08 开始，到 23:59:59 结束
+
+
+
+指标
+数值
+
+
+
+请求数
+421,341
+
+
+独立 IP
+223,809
+
+
+平均请求速率
+12.05 req&#x2F;s
+
+
+返回字节数
+773,237,000 字节，约 773 MB
+
+
+平均响应大小
+1,835 字节
+
+
+P50 请求耗时
+0 秒
+
+
+P95 请求耗时
+9.121 秒
+
+
+P99 请求耗时
+14.561 秒
+
+
+最大请求耗时
+65.33 秒
+
+
+3. 请求路径
+
+
+请求 URI
+功能
+数量
+
+
+
+&#x2F;forum.php?mod&#x3D;post&amp;action&#x3D;reply
+打开回复主题页面；实际发帖要再提交 POST
+62,770
+
+
+&#x2F;forum.php?mod&#x3D;misc&amp;action&#x3D;postreview&amp;do&#x3D;support
+给帖子点赞、支持或“顶”
+57,523
+
+
+&#x2F;forum.php?mod&#x3D;misc&amp;action&#x3D;postreview&amp;do&#x3D;against
+给帖子点踩、反对或“踩”
+57,557
+
+
+&#x2F;search.php?mod&#x3D;forum&amp;source&#x3D;hotsearch
+论坛热搜搜索
+37,779
+
+
+&#x2F;forum.php?mod&#x3D;viewthread
+查看帖子内容
+36,952
+
+
+&#x2F;home.php?mod&#x3D;spacecp&amp;ac&#x3D;pm&amp;op&#x3D;showmsg
+查看私信会话
+32,972
+
+
+&#x2F;forum.php?mod&#x3D;redirect
+按楼层、帖子或上下主题跳转
+29,270
+
+
+&#x2F;msi-*.html 标准帖子页
+Discuz 伪静态帖子详情页
+21,466
+
+
+&#x2F;plugin.php?op&#x3D;ajax&amp;subop&#x3D;rob&amp;id&#x3D;yulegame_hdx
+娱乐插件“打劫”的 AJAX 入口
+8,790
+
+
+&#x2F;connect.php?mod&#x3D;login&amp;op&#x3D;init
+QQ 互联或第三方登录初始化
+8,493
+
+
+这些请求大多不是单次浏览，而是：
+
+反复渲染回复页、帖子页、跳转页和登录初始化页
+反复请求顶、踩、私信、关注、打招呼、加好友等互动入口
+用无意义查询串绕缓存，例如 &#x2F;forum.php?147192&#x3D;&amp;mobile&#x3D;no、&#x2F;?746
+同一批请求指向 Discuz 中需要初始化会话、查数据库、生成模板的路径。
+
+4. IP 分析4.1 IP 分散度
+
+
+每个 IP 的请求数
+IP 数量
+占独立 IP
+
+
+
+1 次
+117,426
+52.5%
+
+
+2 次
+58,503
+26.1%
+
+
+3 次
+27,025
+12.1%
+
+
+4 次
+11,835
+5.3%
+
+
+≥ 5 次
+9,020
+4.0%
+
+
+4.2 IP 国家分布
+
+
+国家
+请求数
+占比
+
+
+
+巴西
+44,413
+10.5%
+
+
+西班牙
+34,008
+8.1%
+
+
+美国
+24,178
+5.7%
+
+
+加拿大
+23,085
+5.5%
+
+
+法国
+20,836
+4.9%
+
+
+哥伦比亚
+19,543
+4.6%
+
+
+英国
+18,681
+4.4%
+
+
+意大利
+16,305
+3.9%
+
+
+中国
+15,820
+3.8%
+
+
+德国
+14,134
+3.4%
+
+
+4.3 全部 IP 信息192.178.16.166 是谷歌的爬虫
+全部 IP 信息：https://gist.github.com/hisenyuan/386433a2b18fad8849b5281e986c0d35
+4.4 User-Agent以 Mozilla&#x2F;5.0 开头：419,299 条，99.5%Windows Chrome 150-159：249,991 条，59.3%明确匹配常见爬虫 UA：2,016 条，0.5%
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+        <tag>自建服务</tag>
+        <tag>稳定性</tag>
+      </tags>
+  </entry>
 </search>
