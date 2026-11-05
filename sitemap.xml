@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hisen.me/about/</loc>
+    
+    <lastmod>2026-11-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hisen.me/20210511-JMH-use-cases-date-format-performance/</loc>
     
     <lastmod>2026-11-04</lastmod>
@@ -20,15 +29,6 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/about/</loc>
-    
-    <lastmod>2026-11-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hisen.me/tags/</loc>
     
     <lastmod>2026-11-04</lastmod>
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/booklist/</loc>
+    <loc>https://hisen.me/categories/</loc>
     
     <lastmod>2026-11-04</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/categories/</loc>
+    <loc>https://hisen.me/booklist/</loc>
     
     <lastmod>2026-11-04</lastmod>
     
@@ -3290,14 +3290,14 @@
   </url>
   
   <url>
-    <loc>https://hisen.me/categories/randomthoughts/</loc>
+    <loc>https://hisen.me/categories/reading/</loc>
     <lastmod>2026-11-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hisen.me/categories/reading/</loc>
+    <loc>https://hisen.me/categories/randomthoughts/</loc>
     <lastmod>2026-11-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

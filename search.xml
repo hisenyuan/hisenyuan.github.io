@@ -447,32 +447,6 @@ CRAC
       </tags>
   </entry>
   <entry>
-    <title>BeanCreationException: Error creating bean with name &#39;xxxService&#39;</title>
-    <url>/20170223-BeanCreationException-Error-creating-bean-with-name-xxxService/</url>
-    <content><![CDATA[出现的问题：
-[platform] ERROR 2017-02-22 17:46:05,756 [RMI TCP Connection(4)-127.0.0.1] org.springframework.web.context.ContextLoader.() | Context initialization failed org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#x27;pmTranLimitLiteServiceImpl&#x27;: Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.msds.zkutil.ZkLockFactory] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: &#123;@Javax.annotation.Resource(mappedName=, shareable=true, description=, name=, type=class Java.lang.Object, authenticationType=CONTAINER, lookup=)&#125;	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.Java:306) ~[spring-context-3.2.4.RELEASE.jar:3.2.4.RELEASE]	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.Java:1116) ~[spring-beans-3.2.4.RELEASE.jar:3.2.4.RELEASE]
-最重要的是这句
-org.springframework.beans.factory.BeanCreationException:Error creating bean with name&#x27;pmTranLimitLiteServiceImpl&#x27;
-出现的原因：缺少相关的jar包或者依赖
-建议不要自己配置idea的module和artificts
-直接在pom.xml文件添加
-&lt;artifactId&gt;hisen-project&lt;/artifactId&gt;&lt;!--加在这句话后面--&gt;  &lt;packaging&gt;war&lt;/packaging&gt;&lt;!--加上这句话就会自动给你打war包--&gt;
-
-其他原因
-开始不知道什么问题，后来搜索这个服务。
-发现这跟dubbo有关，于是百度搜索进了官网
-没想到常见问题里面就有说这个事情
-13. 出现org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#x27;xxxService&#x27;: Initialization of bean failed; nested exception is Java.lang.IllegalArgumentException: Method must not be null怎么办？通常是classpath下存在spring多个版本的jar包，排除掉不需要的spring包即可。
-更多dubbo问题：点击查看
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>BeanUtils 对象拷贝 - 仅拷贝指定属性 - 接口性能优化</title>
     <url>/20200926-BeanUtils-copyLimitedProperties-for-better-performance-of-response/</url>
     <content><![CDATA[零、背景很多时候我们调用接口并不是需要接口返回的所有信息;就像查询数据库很少使用 select * from table; 一样;
@@ -504,6 +478,32 @@ else if (value instanceof List) &#123;     index = Integer.parseInt(key);     Li
       <tags>
         <tag>Java</tag>
         <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BeanCreationException: Error creating bean with name &#39;xxxService&#39;</title>
+    <url>/20170223-BeanCreationException-Error-creating-bean-with-name-xxxService/</url>
+    <content><![CDATA[出现的问题：
+[platform] ERROR 2017-02-22 17:46:05,756 [RMI TCP Connection(4)-127.0.0.1] org.springframework.web.context.ContextLoader.() | Context initialization failed org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#x27;pmTranLimitLiteServiceImpl&#x27;: Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.msds.zkutil.ZkLockFactory] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: &#123;@Javax.annotation.Resource(mappedName=, shareable=true, description=, name=, type=class Java.lang.Object, authenticationType=CONTAINER, lookup=)&#125;	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.Java:306) ~[spring-context-3.2.4.RELEASE.jar:3.2.4.RELEASE]	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.Java:1116) ~[spring-beans-3.2.4.RELEASE.jar:3.2.4.RELEASE]
+最重要的是这句
+org.springframework.beans.factory.BeanCreationException:Error creating bean with name&#x27;pmTranLimitLiteServiceImpl&#x27;
+出现的原因：缺少相关的jar包或者依赖
+建议不要自己配置idea的module和artificts
+直接在pom.xml文件添加
+&lt;artifactId&gt;hisen-project&lt;/artifactId&gt;&lt;!--加在这句话后面--&gt;  &lt;packaging&gt;war&lt;/packaging&gt;&lt;!--加上这句话就会自动给你打war包--&gt;
+
+其他原因
+开始不知道什么问题，后来搜索这个服务。
+发现这跟dubbo有关，于是百度搜索进了官网
+没想到常见问题里面就有说这个事情
+13. 出现org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#x27;xxxService&#x27;: Initialization of bean failed; nested exception is Java.lang.IllegalArgumentException: Method must not be null怎么办？通常是classpath下存在spring多个版本的jar包，排除掉不需要的spring包即可。
+更多dubbo问题：点击查看
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -574,6 +574,20 @@ jwt必须依赖Jackson所以报错了
       </tags>
   </entry>
   <entry>
+    <title>DBeaver-连接全部数据库工具-DBeaver快捷键</title>
+    <url>/20170402-DBeaver-%E8%BF%9E%E6%8E%A5%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B7%A5%E5%85%B7-DBeaver%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    <content><![CDATA[Windows、Linux、Mac OS X多个平台都可以用
+据我观察这个数据库可视化工具很不错，基于Java
+以各种驱动来连接数据库，也就是说Java支持的数据库都可以用他连接
+挺好用的，免费！！！
+安装之后新建连接，选择你要链接的数据库，配置一下就好了。
+下载地址官网下载地址
+快捷键#Shift + Home选中当前光标到行首#Shift + End选中当前光标到行尾#Shift + ↑/↓/←/→ 移动光标并且选中#Alt + X 执行选中的sql#Ctrl + Enter 执行当前光标所在行的sql#Ctrl + Alt + F 格式化SQL（file -&gt; properties -&gt; +SQL Editor -&gt; SQL formatting）]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Curator - 封装分布式锁等 | ZooKeeper目前最好用的客户端</title>
     <url>/20190425-Curator%20-%20ZooKeeper%E7%9B%AE%E5%89%8D%E6%9C%80%E5%A5%BD%E7%94%A8%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
     <content><![CDATA[一、什么是CuratorApache Curator is a Java&#x2F;JVM client library for Apache ZooKeeper, a distributed coordination service.It includes a highlevel API framework and utilities to make using Apache ZooKeeper much easier and more reliable.It also includes recipes for common use cases and extensions such as service discovery and a Java 8 asynchronous DSL.
@@ -591,20 +605,6 @@ jwt必须依赖Jackson所以报错了
         <tag>中间件</tag>
         <tag>分布式</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>DBeaver-连接全部数据库工具-DBeaver快捷键</title>
-    <url>/20170402-DBeaver-%E8%BF%9E%E6%8E%A5%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B7%A5%E5%85%B7-DBeaver%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
-    <content><![CDATA[Windows、Linux、Mac OS X多个平台都可以用
-据我观察这个数据库可视化工具很不错，基于Java
-以各种驱动来连接数据库，也就是说Java支持的数据库都可以用他连接
-挺好用的，免费！！！
-安装之后新建连接，选择你要链接的数据库，配置一下就好了。
-下载地址官网下载地址
-快捷键#Shift + Home选中当前光标到行首#Shift + End选中当前光标到行尾#Shift + ↑/↓/←/→ 移动光标并且选中#Alt + X 执行选中的sql#Ctrl + Enter 执行当前光标所在行的sql#Ctrl + Alt + F 格式化SQL（file -&gt; properties -&gt; +SQL Editor -&gt; SQL formatting）]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
   </entry>
   <entry>
     <title>Data URI scheme 利用base64字符串通过image标签显示图片</title>
@@ -829,60 +829,6 @@ curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/in
       </tags>
   </entry>
   <entry>
-    <title>王慧文(美团)：很少人知道自己在愚昧之巅</title>
-    <url>/20200723-Few-people-know-that-they-are-ignorance/</url>
-    <content><![CDATA[零、写在前面早几天在领导 JG 的朋友圈看到这篇文章简单几个字的标题，让我产生了兴趣一来这个标题是挺吸引人，典型的自媒体文章二来JG 之前推过一些书很不错三来一般领导朋友圈都不会推垃圾信息
-全文看来其实感觉还是挺切合我的认知：
-
-人很难认清自己，很难找到方向，成长路上有他人指点会很棒
-除了遇到的人合读过的书，十年之后你还是你
-多与他人交流，多帮助他人，利人利己
-运动、学习、反馈、重塑大脑
-
-离开学校大部分时间都是围绕着工作有些人可能觉得当前的工作不满意然后想着学点什么高大上的东西为以后的工作做准备极端情况下这种选择是对的，大部分情况会让自己进退两难正确的选择应该是：过好当下，瞭望远方，持续学习，总结反思，慢慢进步架构师同事 SGLS 说过：做好当下的事情才是最重要的，不管现在是做什么项目，设计和实现是我们自己可以控制的。
-以下为原文
-审视是一个特别好的词。当一个人开始审视世界、审视经历、审视自己的时候，更容易做出有担当的选择。作为美团“二号首长”，王慧文选择在2020年底正式“退休”，这不可分说地成为了焦点——王慧文，是怎么成为“王慧文”的？
-一、“不自我设限”，造就无边界的王慧文什么是促使人成长的本质原因？王慧文一直在渴求突破，也一直在探究这个问题。
-1. 人要接受变化，有动荡才有进化王慧文修行的开端，就是校内网。2006年3月，王慧文、王兴和另外四名同伴绞尽脑汁、黑白颠倒，终于让校内网收获了一百多万用户。王兴开始四处找投资，但在多数投资人眼里看来，他们仍是群“生瓜蛋子”、“杂牌军”，校内网不过是几个大学生做的小打小闹的玩意儿。但在这时，千橡集团董事长陈一舟出现了，他愿意拿出一千多万人民币，收购校内网。《九败一胜：美团创始人王兴创业十年》中这样描述
-
-陈一舟说，如果你们不卖，我们可以拿这钱砸到市场上推广。当然，校内网的这群狂妄的小子被这句话激怒了，拒绝跟陈一舟谈。回绝了陈一舟后，王兴的融资依旧不顺利，陈一舟却与王兴他们保持接触，认准了校内网这条大鱼，准备放长线，持久诱惑。2006年9月，陈一舟再次抬高了收购校内网的价码，校内网召开了五人的股东会。王慧文觉得校内网的机会难得，做成的希望很大，而且是自己一手做起来的产品，感情已经很深，所以坚决反对卖掉。王兴态度中立，但倾向于不卖。赖斌强则考虑的方面更多，他支持卖掉，以免大家背着一身巨债创业。除了他们三个大股东，还有另两名小股东，杨俊和付栋平。他们加入较晚，股份也较少，觉得卖不卖都行，比起被收购，他们更担心王慧文和赖斌强由于意见不合而导致团队破裂。这次争论后不久，陈一舟就就又开出了更高的收购价格。几人意识到，如果继续争论不休，团队的裂痕势必更深。万般无奈之下，校内网不得不同意陈一舟的条件。那一晚，大家都不说话，一起去吃夜宵的时候，王兴、王慧文、赖斌强全喝醉了，所有人大哭了一场。
-不论校内网是成功的，还是失败的，在王慧文和王兴的心里，它永远都是遗憾的。回首往事，王慧文已经不再执着，反而觉得这段遗憾对自己的人生是件好事。他说：如果校内网做成了，我会变成让别人非常讨厌的人，刚愎、自负，因为挫折，所以我才懂得反省自己，能更理智客观冷静地看待自己。还有人问王慧文，如果当初不卖的话，校内网能不能做得成？王慧文答：这取决于我们遇到什么样的投资商，如果投资商能够在很多地方帮助我们，是可能做成的；如果投完钱就不怎么管，让我们自己随便搞，那就不行，因为我们还不够成熟。管理者的自我反思，会反馈在他的战略、领导力、管理、业务实操等能力上。人必须反思，是因为事物是时刻变化的，不断反思，才能不断跟上变化。王慧文在一次采访中说：美团的持续高速增长，不是我们在推动着业务发展，而是业务快速发展，我们努力地跟上，不是我们做了什么事情，只是我们跟上了，没掉队。在一个快速发展的行业里，在一个快速变化的时代里， 创业者、管理者如果没有自我反思，是很难生存下来的。在第一次创业修行中，王慧文就悟出一个道理：人，把事做成不易，不断成长、突破自己边界更难。
-2. 不设限的人生，成长机会无限“君子不器”是王慧文的人生原则之一。2019年，在极客公园创新大会上，极客公园创始人、总裁张鹏问王慧文：你觉得美团的基因是什么？王慧文当时就说出了“君子不器”四个字，他面对张鹏侃侃而谈：孔子说，君子不器，君子不是一个器皿，人不要搞自我定义，自我定义就是自我设限，我不倾向于用美团的基因来自我设限。他还用“基因突变”举例，基因变化变错的概率比变对的概率高几百万倍，所以大家都很恐惧基因变化，抵触变化。但王慧文认为变化不可怕，自我设限才最可怕，他还幽默地说：一旦变对了呢？一旦长出翅膀了呢？这种不自我设限，就是“美团无边界，专注而不专一”的根源。君子不器，有两个含义：一是人想要成长就不能有固化思维，事物是变化的，人也要具备动态发展的眼光，反思过去，展望未来；二是人不能像器皿那样自我设限，器皿只有某一方面的用途和才能，而人应该博学多识。孔子的这两点要求，王慧文都做到了，他的生活和工作就是如此。
-《财经天下》周刊记者朱晓培这样形容“百变的王慧文”
-在王慧文的朋友圈里，总能看见他忽然想到一个问题，比如：是不是20世纪在唯心主义和唯物主义领域都没有出现过大师？如果地球上没有美洲，哥伦布的船直接西行到了亚洲，今天的世界格局又会是什么样子？为什么射雕英雄传的五绝里只有反派欧阳锋没有广招门徒？
-正如王慧文在内部信中所说，他个人的兴趣“散乱不稳定”。当年创业时，王慧文和王兴都不会敲代码，但他们都觉得：没事，我们可以学。同样，后来在美团时，有一段时间王慧文要研究零售，他几乎每天都看一本关于零售的书，并且跟很多人谈论自己的心得。
-王慧文敬佩爱因斯坦，爱因斯坦曾说：科学和艺术一样，都让我们的世界更加绚丽多彩。爱因斯坦格外推崇西方古典音乐。这位“相对论”的创始人经常和“量子论”的创始人普朗克一起演奏贝多芬的作品，爱因斯坦拉小提琴，普朗克弹钢琴。相对论和量子论共同构成了21世纪物理学科的两大支柱，而它们的创始人不仅都对科学抱有偏执的热情，也都对艺术也怀有高涨的热爱，这真的很奇妙。
-
-王慧文从中体会到：爱因斯坦经常从艺术和审美的视角去探讨科学命题，人如果永远只站在一个视角来看待人生，人生就会变得特别狭隘，不够丰富，而站在不同视角来看待问题，不设限地长大，才非常重要。不自我定义、不自我设限、不抗拒变化、不沉溺过去的王慧文，与“无边界”的美团极为匹配。
-2012年底，美团实现盈亏平衡后，王慧文认为团购领域大局已定，又开始把目光聚焦在了外卖领域。2015年10月，早已在“千团大战”中站稳脚跟的美团，开始跟大众点评整合，从T型战略逐步转向餐饮、酒旅、综合三大业务架构。几次调整后，到店餐饮事业群、外卖配送事业群和餐饮生态平台被统一归进餐饮平台，总负责人仍然是王慧文。2017年12月，美团再次调整架构，王慧文担任大零售事业群总裁，统筹生鲜零售、外卖、配送、餐饮B2B等业务。同时，王慧文还负责出行事业部，正式和滴滴展开角逐。至此，美团点评已经构建了新到店事业群、大零售事业群、酒店旅游事业群和出行事业部四大业务体系，王慧文是其中两大事业群的统帅。
-如果管理者认为自己就是一个器皿，那么你就会认为自己的状态永远不会改变，也没有改变的必要。如果王慧文这样想，就不会为美团的基业立下赫赫战功。只有当你明白“君子不器”的道理时，才会意识到成长的必要性，也才会清醒地看到自己过去的弱点。不自我设限，多元思考人生，始终相信自己有更多机会，这样的管理者才能持续地自我突破，才能在激烈的竞争中拼杀出属于自己的战场。
-二、“练强兵，结硬寨，打呆仗”，造就能征善战的王慧文王慧文信奉曾国藩的九字箴言：练强兵，结硬寨，打呆仗。
-1. 有担当的管理者，麾下自有万千雄兵“练强兵”很容易理解，当时清朝腐败，太平天国武装起义，清朝的正规军竟无力抵抗，只好调动地方军事力量，多亏有曾国藩统率的湘军，才能击败太平军。此后，湘军成为了清朝军事上强有力的骨干。没有强兵，则无法作战。但强兵如何练成？曾国藩治理湘军，主要凭思想纪律，而不是战术技巧。王慧文“练强兵”，看重三点：人聪明，接地气，学习能力强（不是考试能力强）。其次，王慧文主张：管理者的一个重要责任，就是——担当。王慧文有一句话曾经火遍全网：有担当的管理者，要把下属从“愚昧之巅”推向“绝望之谷”，至于下属能否爬上“开悟之坡”，看个人造化。王慧文解释，这句话的核心词是“担当”。他向来不喜欢说“责任”，因为他认为：责任可以逃避，只有有担当的管理者才不会逃避责任。那么，什么是“愚昧之巅”、“绝望之谷”、“开悟之坡”？这些词语源于 达克效应 ，王慧文说：我思考我个人的成长和周围同事的成长，每个人都希望自己最后成为智者（大师），但是，我们要承认一个事实，大部分人没有走上去。
-愚昧之巅——人的智慧极低，但是自信度极高；绝望之谷——认识到自己的不足，智慧有所增长，自信度大幅降低；开悟之坡——智慧继续增长，自信度开始反弹增长；持续平稳高原——智慧达到顶级，自信心也持续平稳，走上大师之路。
-王慧文说：大部分人没能从愚昧之巅走到绝望之谷，大部分人都在这个部分遇到了困难。王慧文借用“达克效应”理论，不是为了拆穿别人的智慧不足，而是为了强调管理者的担当，他认为：
-大部分人都知道别人处在愚昧之巅，但是很少有人知道自己处在愚昧之巅，这就产生了非常大的信息不对称。为什么人不知道自己在愚昧之巅？就是因为每一个人在自己成长的过程中，没有得到有效反馈，没有人告诉他“你现在在愚昧之巅”。因此，有效反馈变得非常重要和稀缺。但是再进一步思考，为什么很多人没有得到这个反馈？因为别人没有这个责任反馈给你，而且戳破真相是有风险的。
-王慧文觉得他们在离开美团的环境后，很可能更没希望得到他人的有效反馈了，所以他有好几次，在同事或下属离职时，告诉了对方正处于愚昧之巅的真相，但是转眼就被拉黑了。尽管王慧文承认他们是一个好人、正直的人，也是一个想成长的、对美团有过贡献的人，将来也会成为对社会有贡献的人，王慧文希望对方成长得更好，才戳破真相，但是要戳破真相、给他人有效反馈，就必须承担得罪人的风险。
-也正因此，管理者才更需要担当。王慧文说：你给别人反馈的时候，也可能你自己是一个傻×，可能我自己是在愚昧之巅，其实人家是对的，这个可能性也是很大的，通过这个行为反而证明了你可能在愚昧之巅的事实。管理者能不能从善意出发，帮下属敲响警钟？又能不能在被误解时，甘愿承受来自下属的伤害？或者是在发现自己比下属更愚昧的时候，还能不能调整心态，通过努力学习来提升自己的智慧和自信？回答这些问题的最好方式，就是努力向一个有担当的管理者去逼近。担当，是管理者们最稀缺的能力，但却是“练强兵”必不可少的素质。
-2. 优秀管理者，都在暗下笨功夫“结硬寨，打呆仗”，是曾国藩的兵法内核。字面意思是，把军营扎得坚如磐石，打仗时不讲究技巧而是追求笨方法。曾国藩带兵打仗有个规矩，他到任何地方安营扎寨之后，不论当时是刮风还是下雨，首先命令士兵们挖掘战壕，壕深约两米，而且还要筑墙，墙高约八尺高，墙外再挖一道沟。这就确保整个营盘固若金汤。湘军总是要挖沟、筑墙，行军速度非常慢。由于这种打法显得特别笨，所以才叫“结硬寨，打呆仗”。王慧文的工作速度并不慢，但他也爱下笨功夫，一个细节一个细节得打磨，确保每个业务流程都能稳扎稳打。美团前员工这样评价王慧文：老王可能是我见过在互联网行业，大佬级别中所谓“比你聪明还更拼搏”，并且会关注很多业务细节的人。工作起来，王慧文就像变成了拼命三郎，让很多比他年轻的人都心生畏惧。据美团前员工回忆：每周六下午，是大团队的业务管理会，每个分支业务的负责人要详细地讲解业务进度，用数据说话，以结果为导向，绝对不让周报变成“流水账”；在这个过程中，王慧文会非常认真地听每个人的讲解，绝不走过场，绝不讲废话；某个员工在周报中提及“某个数据变化属于正常波动”，这是产品负责人没有特别认真思考或经验欠缺、全局感不强而惯用的一个理由，而此时王慧文则会一针见血地指出是因为什么问题、什么原因导致的数据变化，让人心服口服。王兴在内部信里这样评价王慧文：
-美团精神，老王身体力行、堪称典范。回顾老王过去九年多的工作，既有冲锋在前的勇猛，又有安营扎寨的稳健；既有舍我其谁的担当，又有功成不必在我的潇洒；既有“天下兴亡，匹夫有责”的责任感，又有“我们什么都没有，但是我们有兄弟和勇气”的真性情；既长期有耐心地保持战略定力，又坚持时不我待、只争朝夕地忘情投入。美团人经常加班到凌晨两三点，但转天早上九点又准时坐到办公室里开会，这让很多人对美团这家公司佩服不已。
-2013年6月，美团收购猛买网，猛买网创始人张智勇在加入美团之后，曾发微博说：牛x都是苦x堆出来的，你看美团网牛x，没看到的都是苦x。原来公司没有比它做得好，就是我不够苦x，是因为我管理不好。在这里，每月每周都能学到东西，蛮好的。辛苦没关系，能学到东西就行，最怕加班没结果。
-对王慧文来说，周六全天开会，周日半天高管会，每周留给自己的时间或许只有一个下午而已。但王慧文向外界和美团内部员工展现的，永远是一副精力充沛、充满激情的样子。这就像将军带兵打仗，“跟我上”和“给我上”，一字之差，但全军的战斗力却会有天壤之别。前者能把团队里每个人的心思都拧成一股绳，无往不胜；后者却永远苦于团队像一盘散沙。
-三、“不宜贪天之功，知止不殆”，造就未来不可限量的王慧文王慧文在今年年初的内部信里，把自己在美团拼搏的17年激情燃烧岁月，轻描淡写地说成了“我运气实在太好”。低调、收敛，不是王慧文今天才有的风格，而是他始终具备的性格底色。王慧文经常开玩笑地说，我是农民的孩子，只会拼命工作。玩笑的背后，是他专注做事的态度，以及不居功自傲的格局和胸襟。管理者要常常怀有“清零思维”，过去的错误要变成未来的前车之鉴，不能用来惩罚自己；过去的成就要变成未来的经验和警示，不能用来炫耀自己、骄傲自满。如果管理者觉得自己“满了”，也就意味着，你认为自己的成长之路到头了。清零思维也是一种包容心。《九败一胜：美团创始人王兴创业十年》写道：王慧文曾去过无锡，见到88米高的灵山大佛，从远处看大佛，跟山一样高，走近大佛，人还没有大佛的脚趾头高。王慧文心想，如果这尊大佛有脚臭的话，那么来观光的人就只能闻到大佛的脚臭味，而看不见整个大佛的巍巍如山。只有包容的人，心胸宽广，眼界开阔，才看得到大佛的宝相庄严。该书的作者李志刚说：也只有包容的CEO，才能听到下面的真实心声，兼听则明，才能有各种奇人异士来帮你做事。王慧文这17年来，已经为美团培养了大批人才，也为人才梯度建设付出了贡献，他离职后，自然也不需要人才来帮自己做事了，但是这种包容心会始终伴随他，让他的未来无法限量。王慧文也包容对手，他和王兴都不认为美团是在跟同行们“争”，美团是在“竞”，他说：我们不认为千团大战是我们打赢了别人，而是我们跟上了行业节奏，他们没有跟上，这个认知是跟打仗不一样的；同向为竞，相向为争。
-包容，就是不眷恋。
-王慧文不眷恋名利荣誉，他说“我运气实在太好，不宜继续贪天之功，知止不殆”；王慧文不眷恋自己的能力，他说“感谢我的家人，承受很多困难，无怨无尽地给我支持和包容”，还感谢了时代、王兴和所有同事；王慧文不眷恋他的江湖，他说“美团十年，豪兴不浅。他日江湖相逢，再当杯酒言欢”。
-金庸先生曾写：天上白云，散了又聚，聚了又散，人生离合，亦复如斯。
-今天，我们预测王慧文的人生“下半场”会有怎样的风景，已经是徒劳，因为他早已选择了一条“不确定”的人生旅程。王慧文说过，固定靶比移动靶更难打中。人生就像一个移动靶，我们谁也不知道自己的未来将穿梭至何处，也几乎不可能帮别人预测。我们只能希望，当自己修炼出清零思维、包容心、不眷恋的人生态度时，能够跟上时代变化莫测的脚步，不要掉队。不论人生的下半场将会如何，至少王慧文已经可以潇洒地说出一句——“这十年激烈精彩，不负年华”。
-四、参考美团王慧文：很少人知道自己在愚昧之巅
-]]></content>
-      <categories>
-        <category>RandomThoughts</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-        <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《部署工程师》(FDE)读后感</title>
     <url>/20260829-FDE-2026/</url>
     <content><![CDATA[1. 全文概览FDE(Forward Deployed Engineer)：前置部署工程师
@@ -1079,6 +1025,60 @@ SAP 中国区总裁还提醒了一句值得记住的话：AI 落地的最大挑�
       </tags>
   </entry>
   <entry>
+    <title>王慧文(美团)：很少人知道自己在愚昧之巅</title>
+    <url>/20200723-Few-people-know-that-they-are-ignorance/</url>
+    <content><![CDATA[零、写在前面早几天在领导 JG 的朋友圈看到这篇文章简单几个字的标题，让我产生了兴趣一来这个标题是挺吸引人，典型的自媒体文章二来JG 之前推过一些书很不错三来一般领导朋友圈都不会推垃圾信息
+全文看来其实感觉还是挺切合我的认知：
+
+人很难认清自己，很难找到方向，成长路上有他人指点会很棒
+除了遇到的人合读过的书，十年之后你还是你
+多与他人交流，多帮助他人，利人利己
+运动、学习、反馈、重塑大脑
+
+离开学校大部分时间都是围绕着工作有些人可能觉得当前的工作不满意然后想着学点什么高大上的东西为以后的工作做准备极端情况下这种选择是对的，大部分情况会让自己进退两难正确的选择应该是：过好当下，瞭望远方，持续学习，总结反思，慢慢进步架构师同事 SGLS 说过：做好当下的事情才是最重要的，不管现在是做什么项目，设计和实现是我们自己可以控制的。
+以下为原文
+审视是一个特别好的词。当一个人开始审视世界、审视经历、审视自己的时候，更容易做出有担当的选择。作为美团“二号首长”，王慧文选择在2020年底正式“退休”，这不可分说地成为了焦点——王慧文，是怎么成为“王慧文”的？
+一、“不自我设限”，造就无边界的王慧文什么是促使人成长的本质原因？王慧文一直在渴求突破，也一直在探究这个问题。
+1. 人要接受变化，有动荡才有进化王慧文修行的开端，就是校内网。2006年3月，王慧文、王兴和另外四名同伴绞尽脑汁、黑白颠倒，终于让校内网收获了一百多万用户。王兴开始四处找投资，但在多数投资人眼里看来，他们仍是群“生瓜蛋子”、“杂牌军”，校内网不过是几个大学生做的小打小闹的玩意儿。但在这时，千橡集团董事长陈一舟出现了，他愿意拿出一千多万人民币，收购校内网。《九败一胜：美团创始人王兴创业十年》中这样描述
+
+陈一舟说，如果你们不卖，我们可以拿这钱砸到市场上推广。当然，校内网的这群狂妄的小子被这句话激怒了，拒绝跟陈一舟谈。回绝了陈一舟后，王兴的融资依旧不顺利，陈一舟却与王兴他们保持接触，认准了校内网这条大鱼，准备放长线，持久诱惑。2006年9月，陈一舟再次抬高了收购校内网的价码，校内网召开了五人的股东会。王慧文觉得校内网的机会难得，做成的希望很大，而且是自己一手做起来的产品，感情已经很深，所以坚决反对卖掉。王兴态度中立，但倾向于不卖。赖斌强则考虑的方面更多，他支持卖掉，以免大家背着一身巨债创业。除了他们三个大股东，还有另两名小股东，杨俊和付栋平。他们加入较晚，股份也较少，觉得卖不卖都行，比起被收购，他们更担心王慧文和赖斌强由于意见不合而导致团队破裂。这次争论后不久，陈一舟就就又开出了更高的收购价格。几人意识到，如果继续争论不休，团队的裂痕势必更深。万般无奈之下，校内网不得不同意陈一舟的条件。那一晚，大家都不说话，一起去吃夜宵的时候，王兴、王慧文、赖斌强全喝醉了，所有人大哭了一场。
+不论校内网是成功的，还是失败的，在王慧文和王兴的心里，它永远都是遗憾的。回首往事，王慧文已经不再执着，反而觉得这段遗憾对自己的人生是件好事。他说：如果校内网做成了，我会变成让别人非常讨厌的人，刚愎、自负，因为挫折，所以我才懂得反省自己，能更理智客观冷静地看待自己。还有人问王慧文，如果当初不卖的话，校内网能不能做得成？王慧文答：这取决于我们遇到什么样的投资商，如果投资商能够在很多地方帮助我们，是可能做成的；如果投完钱就不怎么管，让我们自己随便搞，那就不行，因为我们还不够成熟。管理者的自我反思，会反馈在他的战略、领导力、管理、业务实操等能力上。人必须反思，是因为事物是时刻变化的，不断反思，才能不断跟上变化。王慧文在一次采访中说：美团的持续高速增长，不是我们在推动着业务发展，而是业务快速发展，我们努力地跟上，不是我们做了什么事情，只是我们跟上了，没掉队。在一个快速发展的行业里，在一个快速变化的时代里， 创业者、管理者如果没有自我反思，是很难生存下来的。在第一次创业修行中，王慧文就悟出一个道理：人，把事做成不易，不断成长、突破自己边界更难。
+2. 不设限的人生，成长机会无限“君子不器”是王慧文的人生原则之一。2019年，在极客公园创新大会上，极客公园创始人、总裁张鹏问王慧文：你觉得美团的基因是什么？王慧文当时就说出了“君子不器”四个字，他面对张鹏侃侃而谈：孔子说，君子不器，君子不是一个器皿，人不要搞自我定义，自我定义就是自我设限，我不倾向于用美团的基因来自我设限。他还用“基因突变”举例，基因变化变错的概率比变对的概率高几百万倍，所以大家都很恐惧基因变化，抵触变化。但王慧文认为变化不可怕，自我设限才最可怕，他还幽默地说：一旦变对了呢？一旦长出翅膀了呢？这种不自我设限，就是“美团无边界，专注而不专一”的根源。君子不器，有两个含义：一是人想要成长就不能有固化思维，事物是变化的，人也要具备动态发展的眼光，反思过去，展望未来；二是人不能像器皿那样自我设限，器皿只有某一方面的用途和才能，而人应该博学多识。孔子的这两点要求，王慧文都做到了，他的生活和工作就是如此。
+《财经天下》周刊记者朱晓培这样形容“百变的王慧文”
+在王慧文的朋友圈里，总能看见他忽然想到一个问题，比如：是不是20世纪在唯心主义和唯物主义领域都没有出现过大师？如果地球上没有美洲，哥伦布的船直接西行到了亚洲，今天的世界格局又会是什么样子？为什么射雕英雄传的五绝里只有反派欧阳锋没有广招门徒？
+正如王慧文在内部信中所说，他个人的兴趣“散乱不稳定”。当年创业时，王慧文和王兴都不会敲代码，但他们都觉得：没事，我们可以学。同样，后来在美团时，有一段时间王慧文要研究零售，他几乎每天都看一本关于零售的书，并且跟很多人谈论自己的心得。
+王慧文敬佩爱因斯坦，爱因斯坦曾说：科学和艺术一样，都让我们的世界更加绚丽多彩。爱因斯坦格外推崇西方古典音乐。这位“相对论”的创始人经常和“量子论”的创始人普朗克一起演奏贝多芬的作品，爱因斯坦拉小提琴，普朗克弹钢琴。相对论和量子论共同构成了21世纪物理学科的两大支柱，而它们的创始人不仅都对科学抱有偏执的热情，也都对艺术也怀有高涨的热爱，这真的很奇妙。
+
+王慧文从中体会到：爱因斯坦经常从艺术和审美的视角去探讨科学命题，人如果永远只站在一个视角来看待人生，人生就会变得特别狭隘，不够丰富，而站在不同视角来看待问题，不设限地长大，才非常重要。不自我定义、不自我设限、不抗拒变化、不沉溺过去的王慧文，与“无边界”的美团极为匹配。
+2012年底，美团实现盈亏平衡后，王慧文认为团购领域大局已定，又开始把目光聚焦在了外卖领域。2015年10月，早已在“千团大战”中站稳脚跟的美团，开始跟大众点评整合，从T型战略逐步转向餐饮、酒旅、综合三大业务架构。几次调整后，到店餐饮事业群、外卖配送事业群和餐饮生态平台被统一归进餐饮平台，总负责人仍然是王慧文。2017年12月，美团再次调整架构，王慧文担任大零售事业群总裁，统筹生鲜零售、外卖、配送、餐饮B2B等业务。同时，王慧文还负责出行事业部，正式和滴滴展开角逐。至此，美团点评已经构建了新到店事业群、大零售事业群、酒店旅游事业群和出行事业部四大业务体系，王慧文是其中两大事业群的统帅。
+如果管理者认为自己就是一个器皿，那么你就会认为自己的状态永远不会改变，也没有改变的必要。如果王慧文这样想，就不会为美团的基业立下赫赫战功。只有当你明白“君子不器”的道理时，才会意识到成长的必要性，也才会清醒地看到自己过去的弱点。不自我设限，多元思考人生，始终相信自己有更多机会，这样的管理者才能持续地自我突破，才能在激烈的竞争中拼杀出属于自己的战场。
+二、“练强兵，结硬寨，打呆仗”，造就能征善战的王慧文王慧文信奉曾国藩的九字箴言：练强兵，结硬寨，打呆仗。
+1. 有担当的管理者，麾下自有万千雄兵“练强兵”很容易理解，当时清朝腐败，太平天国武装起义，清朝的正规军竟无力抵抗，只好调动地方军事力量，多亏有曾国藩统率的湘军，才能击败太平军。此后，湘军成为了清朝军事上强有力的骨干。没有强兵，则无法作战。但强兵如何练成？曾国藩治理湘军，主要凭思想纪律，而不是战术技巧。王慧文“练强兵”，看重三点：人聪明，接地气，学习能力强（不是考试能力强）。其次，王慧文主张：管理者的一个重要责任，就是——担当。王慧文有一句话曾经火遍全网：有担当的管理者，要把下属从“愚昧之巅”推向“绝望之谷”，至于下属能否爬上“开悟之坡”，看个人造化。王慧文解释，这句话的核心词是“担当”。他向来不喜欢说“责任”，因为他认为：责任可以逃避，只有有担当的管理者才不会逃避责任。那么，什么是“愚昧之巅”、“绝望之谷”、“开悟之坡”？这些词语源于 达克效应 ，王慧文说：我思考我个人的成长和周围同事的成长，每个人都希望自己最后成为智者（大师），但是，我们要承认一个事实，大部分人没有走上去。
+愚昧之巅——人的智慧极低，但是自信度极高；绝望之谷——认识到自己的不足，智慧有所增长，自信度大幅降低；开悟之坡——智慧继续增长，自信度开始反弹增长；持续平稳高原——智慧达到顶级，自信心也持续平稳，走上大师之路。
+王慧文说：大部分人没能从愚昧之巅走到绝望之谷，大部分人都在这个部分遇到了困难。王慧文借用“达克效应”理论，不是为了拆穿别人的智慧不足，而是为了强调管理者的担当，他认为：
+大部分人都知道别人处在愚昧之巅，但是很少有人知道自己处在愚昧之巅，这就产生了非常大的信息不对称。为什么人不知道自己在愚昧之巅？就是因为每一个人在自己成长的过程中，没有得到有效反馈，没有人告诉他“你现在在愚昧之巅”。因此，有效反馈变得非常重要和稀缺。但是再进一步思考，为什么很多人没有得到这个反馈？因为别人没有这个责任反馈给你，而且戳破真相是有风险的。
+王慧文觉得他们在离开美团的环境后，很可能更没希望得到他人的有效反馈了，所以他有好几次，在同事或下属离职时，告诉了对方正处于愚昧之巅的真相，但是转眼就被拉黑了。尽管王慧文承认他们是一个好人、正直的人，也是一个想成长的、对美团有过贡献的人，将来也会成为对社会有贡献的人，王慧文希望对方成长得更好，才戳破真相，但是要戳破真相、给他人有效反馈，就必须承担得罪人的风险。
+也正因此，管理者才更需要担当。王慧文说：你给别人反馈的时候，也可能你自己是一个傻×，可能我自己是在愚昧之巅，其实人家是对的，这个可能性也是很大的，通过这个行为反而证明了你可能在愚昧之巅的事实。管理者能不能从善意出发，帮下属敲响警钟？又能不能在被误解时，甘愿承受来自下属的伤害？或者是在发现自己比下属更愚昧的时候，还能不能调整心态，通过努力学习来提升自己的智慧和自信？回答这些问题的最好方式，就是努力向一个有担当的管理者去逼近。担当，是管理者们最稀缺的能力，但却是“练强兵”必不可少的素质。
+2. 优秀管理者，都在暗下笨功夫“结硬寨，打呆仗”，是曾国藩的兵法内核。字面意思是，把军营扎得坚如磐石，打仗时不讲究技巧而是追求笨方法。曾国藩带兵打仗有个规矩，他到任何地方安营扎寨之后，不论当时是刮风还是下雨，首先命令士兵们挖掘战壕，壕深约两米，而且还要筑墙，墙高约八尺高，墙外再挖一道沟。这就确保整个营盘固若金汤。湘军总是要挖沟、筑墙，行军速度非常慢。由于这种打法显得特别笨，所以才叫“结硬寨，打呆仗”。王慧文的工作速度并不慢，但他也爱下笨功夫，一个细节一个细节得打磨，确保每个业务流程都能稳扎稳打。美团前员工这样评价王慧文：老王可能是我见过在互联网行业，大佬级别中所谓“比你聪明还更拼搏”，并且会关注很多业务细节的人。工作起来，王慧文就像变成了拼命三郎，让很多比他年轻的人都心生畏惧。据美团前员工回忆：每周六下午，是大团队的业务管理会，每个分支业务的负责人要详细地讲解业务进度，用数据说话，以结果为导向，绝对不让周报变成“流水账”；在这个过程中，王慧文会非常认真地听每个人的讲解，绝不走过场，绝不讲废话；某个员工在周报中提及“某个数据变化属于正常波动”，这是产品负责人没有特别认真思考或经验欠缺、全局感不强而惯用的一个理由，而此时王慧文则会一针见血地指出是因为什么问题、什么原因导致的数据变化，让人心服口服。王兴在内部信里这样评价王慧文：
+美团精神，老王身体力行、堪称典范。回顾老王过去九年多的工作，既有冲锋在前的勇猛，又有安营扎寨的稳健；既有舍我其谁的担当，又有功成不必在我的潇洒；既有“天下兴亡，匹夫有责”的责任感，又有“我们什么都没有，但是我们有兄弟和勇气”的真性情；既长期有耐心地保持战略定力，又坚持时不我待、只争朝夕地忘情投入。美团人经常加班到凌晨两三点，但转天早上九点又准时坐到办公室里开会，这让很多人对美团这家公司佩服不已。
+2013年6月，美团收购猛买网，猛买网创始人张智勇在加入美团之后，曾发微博说：牛x都是苦x堆出来的，你看美团网牛x，没看到的都是苦x。原来公司没有比它做得好，就是我不够苦x，是因为我管理不好。在这里，每月每周都能学到东西，蛮好的。辛苦没关系，能学到东西就行，最怕加班没结果。
+对王慧文来说，周六全天开会，周日半天高管会，每周留给自己的时间或许只有一个下午而已。但王慧文向外界和美团内部员工展现的，永远是一副精力充沛、充满激情的样子。这就像将军带兵打仗，“跟我上”和“给我上”，一字之差，但全军的战斗力却会有天壤之别。前者能把团队里每个人的心思都拧成一股绳，无往不胜；后者却永远苦于团队像一盘散沙。
+三、“不宜贪天之功，知止不殆”，造就未来不可限量的王慧文王慧文在今年年初的内部信里，把自己在美团拼搏的17年激情燃烧岁月，轻描淡写地说成了“我运气实在太好”。低调、收敛，不是王慧文今天才有的风格，而是他始终具备的性格底色。王慧文经常开玩笑地说，我是农民的孩子，只会拼命工作。玩笑的背后，是他专注做事的态度，以及不居功自傲的格局和胸襟。管理者要常常怀有“清零思维”，过去的错误要变成未来的前车之鉴，不能用来惩罚自己；过去的成就要变成未来的经验和警示，不能用来炫耀自己、骄傲自满。如果管理者觉得自己“满了”，也就意味着，你认为自己的成长之路到头了。清零思维也是一种包容心。《九败一胜：美团创始人王兴创业十年》写道：王慧文曾去过无锡，见到88米高的灵山大佛，从远处看大佛，跟山一样高，走近大佛，人还没有大佛的脚趾头高。王慧文心想，如果这尊大佛有脚臭的话，那么来观光的人就只能闻到大佛的脚臭味，而看不见整个大佛的巍巍如山。只有包容的人，心胸宽广，眼界开阔，才看得到大佛的宝相庄严。该书的作者李志刚说：也只有包容的CEO，才能听到下面的真实心声，兼听则明，才能有各种奇人异士来帮你做事。王慧文这17年来，已经为美团培养了大批人才，也为人才梯度建设付出了贡献，他离职后，自然也不需要人才来帮自己做事了，但是这种包容心会始终伴随他，让他的未来无法限量。王慧文也包容对手，他和王兴都不认为美团是在跟同行们“争”，美团是在“竞”，他说：我们不认为千团大战是我们打赢了别人，而是我们跟上了行业节奏，他们没有跟上，这个认知是跟打仗不一样的；同向为竞，相向为争。
+包容，就是不眷恋。
+王慧文不眷恋名利荣誉，他说“我运气实在太好，不宜继续贪天之功，知止不殆”；王慧文不眷恋自己的能力，他说“感谢我的家人，承受很多困难，无怨无尽地给我支持和包容”，还感谢了时代、王兴和所有同事；王慧文不眷恋他的江湖，他说“美团十年，豪兴不浅。他日江湖相逢，再当杯酒言欢”。
+金庸先生曾写：天上白云，散了又聚，聚了又散，人生离合，亦复如斯。
+今天，我们预测王慧文的人生“下半场”会有怎样的风景，已经是徒劳，因为他早已选择了一条“不确定”的人生旅程。王慧文说过，固定靶比移动靶更难打中。人生就像一个移动靶，我们谁也不知道自己的未来将穿梭至何处，也几乎不可能帮别人预测。我们只能希望，当自己修炼出清零思维、包容心、不眷恋的人生态度时，能够跟上时代变化莫测的脚步，不要掉队。不论人生的下半场将会如何，至少王慧文已经可以潇洒地说出一句——“这十年激烈精彩，不负年华”。
+四、参考美团王慧文：很少人知道自己在愚昧之巅
+]]></content>
+      <categories>
+        <category>RandomThoughts</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+        <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java 文件读取，部分中文乱码 - 分析与解决</title>
     <url>/20210731-File-reading-part-of-Chinese-garbled-code/</url>
     <content><![CDATA[一、背景最近做项目有一个地址库文件需要放在后端由于文件在 jar 包中的问题，一些读取文件的姿势失效(方便的 Guava Files)最后通过 getResourceAsStream 解决
@@ -1154,22 +1154,6 @@ ttl - 跨线程数据传输
       </tags>
   </entry>
   <entry>
-    <title>Get参数串KV与Map互转 - 利用Java8 Stream</title>
-    <url>/20180713-Get%E5%8F%82%E6%95%B0%E4%B8%B2KV%E4%B8%8EMap%E4%BA%92%E8%BD%AC%20-%20%E5%88%A9%E7%94%A8Java8%20Stream/</url>
-    <content><![CDATA[一、背景在各种系统需要加签的时一般都会把参与签名的数据以get请求参数拼接起来并且要求有序，这个方法会比较方便
-二、实现2.1  拼接为有序的get请求类字符串public String getSortedStr(Map&lt;String, String&gt; unSortedStr) &#123;    String sortedStr= unSortedStr            .entrySet()            .stream()            .filter(entry -&gt; !StringUtil.isEmpty(entry.getValue()))            .sorted(Map.Entry.comparingByKey())            .map(entry -&gt; entry.getKey() + &quot;=&quot; + entry.getValue())            .collect(Collectors.joining(&quot;&amp;&quot;));    return sortedStr;&#125;
-2.2 把get类参数字符串转为mapprivate Map&lt;String,String&gt; getMapData(String getStr)&#123;    String[] strs = getStr.split(&quot;&amp;&quot;);    HashMap&lt;String, String&gt; dataMap = new HashMap&lt;&gt;(16);    for (int i = 0; i &lt; strs.length; i++) &#123;        String[] str = strs[i].split(&quot;=&quot;);        dataMap.put(str[0], str[1]);    &#125;    return dataMap;&#125;
-
-对于get类字符串没有发现比较好的方法转换为map
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Git Bash tree（windows）让windows支持tree</title>
     <url>/20170713-Git%20Bash%20tree%EF%BC%88windows%EF%BC%89/</url>
     <content><![CDATA[在安装了git客户端之后，发现Git Bash挺好用
@@ -1186,6 +1170,22 @@ hisen@HiSEN MINGW64 /c/code/SpringBootCLI/myapp$ tree.|-- mvnw|-- mvnw.cmd|-- po
       <categories>
         <category>Tech</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Get参数串KV与Map互转 - 利用Java8 Stream</title>
+    <url>/20180713-Get%E5%8F%82%E6%95%B0%E4%B8%B2KV%E4%B8%8EMap%E4%BA%92%E8%BD%AC%20-%20%E5%88%A9%E7%94%A8Java8%20Stream/</url>
+    <content><![CDATA[一、背景在各种系统需要加签的时一般都会把参与签名的数据以get请求参数拼接起来并且要求有序，这个方法会比较方便
+二、实现2.1  拼接为有序的get请求类字符串public String getSortedStr(Map&lt;String, String&gt; unSortedStr) &#123;    String sortedStr= unSortedStr            .entrySet()            .stream()            .filter(entry -&gt; !StringUtil.isEmpty(entry.getValue()))            .sorted(Map.Entry.comparingByKey())            .map(entry -&gt; entry.getKey() + &quot;=&quot; + entry.getValue())            .collect(Collectors.joining(&quot;&amp;&quot;));    return sortedStr;&#125;
+2.2 把get类参数字符串转为mapprivate Map&lt;String,String&gt; getMapData(String getStr)&#123;    String[] strs = getStr.split(&quot;&amp;&quot;);    HashMap&lt;String, String&gt; dataMap = new HashMap&lt;&gt;(16);    for (int i = 0; i &lt; strs.length; i++) &#123;        String[] str = strs[i].split(&quot;=&quot;);        dataMap.put(str[0], str[1]);    &#125;    return dataMap;&#125;
+
+对于get类字符串没有发现比较好的方法转换为map
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
   </entry>
   <entry>
     <title>全球国家和地区列表，中英文国名、国际代码、电话区号(SQL &amp; 文本)</title>
@@ -1373,6 +1373,23 @@ hisen-yuan.github.io
       </tags>
   </entry>
   <entry>
+    <title>Hexo新玩法 - Atom + platformio-ide-terminal</title>
+    <url>/20180716-Hexo%E6%96%B0%E7%8E%A9%E6%B3%95%20-%20Atom%20+%20platformio-ide-terminal/</url>
+    <content><![CDATA[最近在慢慢适应mbp
+然后就在研究怎么方便的写博客
+首先就是找了几款markdown编辑器，发现GitHub出品的Atom还不错
+插件很丰富，然而下载了第一个terminal插件但是无效，一度折腾了很久
+后来搜索了一下，发现这个插件很不错：platformio-ide-terminal
+利用快捷键：control + 点(1左边那个)
+就可以在当前界面呼出终端，而且是当前目录
+也就是在_post目录下，写完了之后执行命令就上传了
+还是很方便的。后续还需要慢慢熟悉更多的插件与工具
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Hexo提速优化 - 压缩html、css、js by hexo-neat插件</title>
     <url>/20170211-Hexo%E6%8F%90%E9%80%9F%E4%BC%98%E5%8C%96-%E5%8E%8B%E7%BC%A9html%E3%80%81css%E3%80%81js-by-hexo-neat%E6%8F%92%E4%BB%B6/</url>
     <content><![CDATA[hexo博客生成的HTML代码留有大量的空白
@@ -1392,23 +1409,6 @@ cnpm install hexo-neat --save
 只是在生成博客的过程中可能要浪费一丁点时间
 访问速度有所提升！
 参考：点击查看
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Hexo新玩法 - Atom + platformio-ide-terminal</title>
-    <url>/20180716-Hexo%E6%96%B0%E7%8E%A9%E6%B3%95%20-%20Atom%20+%20platformio-ide-terminal/</url>
-    <content><![CDATA[最近在慢慢适应mbp
-然后就在研究怎么方便的写博客
-首先就是找了几款markdown编辑器，发现GitHub出品的Atom还不错
-插件很丰富，然而下载了第一个terminal插件但是无效，一度折腾了很久
-后来搜索了一下，发现这个插件很不错：platformio-ide-terminal
-利用快捷键：control + 点(1左边那个)
-就可以在当前界面呼出终端，而且是当前目录
-也就是在_post目录下，写完了之后执行命令就上传了
-还是很方便的。后续还需要慢慢熟悉更多的插件与工具
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -1490,21 +1490,6 @@ package com.hisen.jdbc;import com.mongodb.Block;import com.mongodb.MongoClient;i
 解决办法安装lombok plugin
 
 装完插件之后就舒服了，也不报错
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>IDEA修改全局设置，如maven等</title>
-    <url>/20170215-IDEA%E4%BF%AE%E6%94%B9%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%EF%BC%8C%E5%A6%82maven%E7%AD%89/</url>
-    <content><![CDATA[这几天在折腾maven项目
-我发现居然每次新open一个项目就得配置下maven
-因为默认的maven配置文件不行，我自定义的文件用的是阿里云的镜像
-那样快一点，于是很郁闷，决定要搞定他！！！
-结果这样设置就可以了，全局设置。
-File---&gt;Other Setting---&gt;Default Setting
-接下来的设置就是一样的了，各种设置都可以，只要你想全局生效
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -2055,6 +2040,21 @@ File---&gt;Other Setting---&gt;Default Setting
       </tags>
   </entry>
   <entry>
+    <title>IDEA修改全局设置，如maven等</title>
+    <url>/20170215-IDEA%E4%BF%AE%E6%94%B9%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%EF%BC%8C%E5%A6%82maven%E7%AD%89/</url>
+    <content><![CDATA[这几天在折腾maven项目
+我发现居然每次新open一个项目就得配置下maven
+因为默认的maven配置文件不行，我自定义的文件用的是阿里云的镜像
+那样快一点，于是很郁闷，决定要搞定他！！！
+结果这样设置就可以了，全局设置。
+File---&gt;Other Setting---&gt;Default Setting
+接下来的设置就是一样的了，各种设置都可以，只要你想全局生效
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>IDEA智能补全快捷键更改为Ctrl + 逗号</title>
     <url>/20170328-IDEA%E6%99%BA%E8%83%BD%E8%A1%A5%E5%85%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%9B%B4%E6%94%B9%E4%B8%BACtrl%20+%20%E9%80%97%E5%8F%B7/</url>
     <content><![CDATA[一直就听说idea的智能补全很厉害，但是Ctrl + 空格 被万恶的输入法给占用了网上搜也不是很清晰，这里就写个博客记录一下
@@ -2115,20 +2115,6 @@ VM options：-Dfile.encoding&#x3D;UTF-8
       </categories>
   </entry>
   <entry>
-    <title>IntelliJ IDEA 调试窗口、帮助窗口、搜索框、底部消息等中文乱码问题解决</title>
-    <url>/20170825-IntelliJ%20IDEA%20%E8%B0%83%E8%AF%95%E7%AA%97%E5%8F%A3%E3%80%81%E5%B8%AE%E5%8A%A9%E7%AA%97%E5%8F%A3%E3%80%81%E6%90%9C%E7%B4%A2%E6%A1%86%E3%80%81%E5%BA%95%E9%83%A8%E6%B6%88%E6%81%AF%E7%AD%89%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[IntelliJ IDEA 调试窗口、帮助窗口、搜索框、底部消息等中文乱码
-在使用的过程中发现，搜索框历史、提交svn后的消息提示乱码
-最后发现是由于更改了idea界面的字体，字体对中文支持不佳导致
-解决办法：更改为支持中文的字体（比如：微软雅黑 Microsoft YaHei）
-设置路径：Settings -&gt; Appearance &amp; Behavior -&gt; UI Options -&gt; override default fonts by
-选择何时的字体即可，也可以把勾勾去掉，使用默认的。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>idea列编辑：IntelliJ IDEA：toggle block selection mode</title>
     <url>/20171024-IntelliJ%20IDEA%EF%BC%9Atoggle%20block%20selection%20mode/</url>
     <content><![CDATA[在eclipse中有列编辑模式：toggle block selection mode
@@ -2141,28 +2127,18 @@ idea -&gt; 右上角 -&gt; Edit -&gt; Column Selection Mode -&gt; 移动光标�
       </categories>
   </entry>
   <entry>
-    <title>Intellij IDEA中使用MyBatis-generator 自动生成MyBatis代码</title>
-    <url>/20170322-Intellij%20IDEA%E4%B8%AD%E4%BD%BF%E7%94%A8MyBatis-generator%20%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90MyBatis%E4%BB%A3%E7%A0%81/</url>
-    <content><![CDATA[MyBatis Generator是一个非常方便的代码生成工具，
-可以根据数据库中表结构自动生成CRUD代码，可以满足大部分需求。
-MyBatis Generator (MBG) 是一个Mybatis的代码生成器 ，
-可以根据数据库中表结构自动生成简单的CRUD（插入，查询，更新，删除）操作。
-但联合查询和存储过程，需手动手写SQL和对象。
-PS:配置过程中请注意自己的工程目录结构
-一、pom.xml添加插件&lt;plugin&gt;                &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;                &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;                &lt;version&gt;1.3.2&lt;/version&gt;                &lt;dependencies&gt;                    &lt;dependency&gt;                        &lt;groupId&gt;mysql&lt;/groupId&gt;                        &lt;artifactId&gt;mysql-connector-Java&lt;/artifactId&gt;                        &lt;version&gt;5.1.5&lt;/version&gt;                    &lt;/dependency&gt;                &lt;/dependencies&gt;                &lt;configuration&gt;                    &lt;overwrite&gt;true&lt;/overwrite&gt;                &lt;/configuration&gt;            &lt;/plugin&gt;
-二、配置generatorConfig.xml
-resources下建generatorConfig.xml,作为mybatis-generator-maven-plugin插件的执行目标。
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE generatorConfiguration        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;&lt;generatorConfiguration&gt;    &lt;context id=&quot;mysqlgenerator&quot; targetRuntime=&quot;MyBatis3&quot;&gt;        &lt;!--数据库连接信息--&gt;        &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;                        connectionURL=&quot;jdbc:mysql://127.0.0.1:3306/ssm&quot;                        userId=&quot;root&quot;                        password=&quot;hisen&quot; /&gt;        &lt;!--代码相关路径和包--&gt;        &lt;JavaModelGenerator targetPackage=&quot;com.hisen.mybatis.model&quot; targetProject=&quot;src/main/Java&quot; /&gt;        &lt;sqlMapGenerator targetPackage=&quot;com.hisen.mybatis.mapper&quot; targetProject=&quot;src/main/resources&quot; /&gt;        &lt;JavaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.hisen.mybatis.mapper&quot; targetProject=&quot;src/main/Java&quot; /&gt;        &lt;!--表名--&gt;        &lt;table tableName=&quot;appointment&quot;/&gt;        &lt;table tableName=&quot;book&quot;/&gt;    &lt;/context&gt;&lt;/generatorConfiguration&gt;
-三、Intellij配置MyBatis Generator生成代码的运行方式：命令行、使用Ant、使用Maven、Java编码。
-本文采用Maven插件mybatis-generator-maven-plugin来运行MyBatis Generator，用的是命令行的方式。
-配置插件选择目录，输入命令：mybatis-generator:generate -e找到插件。双击执行即可看到生成的文件
+    <title>IntelliJ IDEA 调试窗口、帮助窗口、搜索框、底部消息等中文乱码问题解决</title>
+    <url>/20170825-IntelliJ%20IDEA%20%E8%B0%83%E8%AF%95%E7%AA%97%E5%8F%A3%E3%80%81%E5%B8%AE%E5%8A%A9%E7%AA%97%E5%8F%A3%E3%80%81%E6%90%9C%E7%B4%A2%E6%A1%86%E3%80%81%E5%BA%95%E9%83%A8%E6%B6%88%E6%81%AF%E7%AD%89%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[IntelliJ IDEA 调试窗口、帮助窗口、搜索框、底部消息等中文乱码
+在使用的过程中发现，搜索框历史、提交svn后的消息提示乱码
+最后发现是由于更改了idea界面的字体，字体对中文支持不佳导致
+解决办法：更改为支持中文的字体（比如：微软雅黑 Microsoft YaHei）
+设置路径：Settings -&gt; Appearance &amp; Behavior -&gt; UI Options -&gt; override default fonts by
+选择何时的字体即可，也可以把勾勾去掉，使用默认的。
 ]]></content>
       <categories>
         <category>Tech</category>
       </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
   </entry>
   <entry>
     <title>Intellij Idea 快捷键汇总&amp;介绍</title>
@@ -2403,6 +2379,30 @@ JWT官方网站：https://jwt.io/
       <tags>
         <tag>Java</tag>
         <tag>安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Intellij IDEA中使用MyBatis-generator 自动生成MyBatis代码</title>
+    <url>/20170322-Intellij%20IDEA%E4%B8%AD%E4%BD%BF%E7%94%A8MyBatis-generator%20%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90MyBatis%E4%BB%A3%E7%A0%81/</url>
+    <content><![CDATA[MyBatis Generator是一个非常方便的代码生成工具，
+可以根据数据库中表结构自动生成CRUD代码，可以满足大部分需求。
+MyBatis Generator (MBG) 是一个Mybatis的代码生成器 ，
+可以根据数据库中表结构自动生成简单的CRUD（插入，查询，更新，删除）操作。
+但联合查询和存储过程，需手动手写SQL和对象。
+PS:配置过程中请注意自己的工程目录结构
+一、pom.xml添加插件&lt;plugin&gt;                &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;                &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;                &lt;version&gt;1.3.2&lt;/version&gt;                &lt;dependencies&gt;                    &lt;dependency&gt;                        &lt;groupId&gt;mysql&lt;/groupId&gt;                        &lt;artifactId&gt;mysql-connector-Java&lt;/artifactId&gt;                        &lt;version&gt;5.1.5&lt;/version&gt;                    &lt;/dependency&gt;                &lt;/dependencies&gt;                &lt;configuration&gt;                    &lt;overwrite&gt;true&lt;/overwrite&gt;                &lt;/configuration&gt;            &lt;/plugin&gt;
+二、配置generatorConfig.xml
+resources下建generatorConfig.xml,作为mybatis-generator-maven-plugin插件的执行目标。
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE generatorConfiguration        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;&lt;generatorConfiguration&gt;    &lt;context id=&quot;mysqlgenerator&quot; targetRuntime=&quot;MyBatis3&quot;&gt;        &lt;!--数据库连接信息--&gt;        &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;                        connectionURL=&quot;jdbc:mysql://127.0.0.1:3306/ssm&quot;                        userId=&quot;root&quot;                        password=&quot;hisen&quot; /&gt;        &lt;!--代码相关路径和包--&gt;        &lt;JavaModelGenerator targetPackage=&quot;com.hisen.mybatis.model&quot; targetProject=&quot;src/main/Java&quot; /&gt;        &lt;sqlMapGenerator targetPackage=&quot;com.hisen.mybatis.mapper&quot; targetProject=&quot;src/main/resources&quot; /&gt;        &lt;JavaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.hisen.mybatis.mapper&quot; targetProject=&quot;src/main/Java&quot; /&gt;        &lt;!--表名--&gt;        &lt;table tableName=&quot;appointment&quot;/&gt;        &lt;table tableName=&quot;book&quot;/&gt;    &lt;/context&gt;&lt;/generatorConfiguration&gt;
+三、Intellij配置MyBatis Generator生成代码的运行方式：命令行、使用Ant、使用Maven、Java编码。
+本文采用Maven插件mybatis-generator-maven-plugin来运行MyBatis Generator，用的是命令行的方式。
+配置插件选择目录，输入命令：mybatis-generator:generate -e找到插件。双击执行即可看到生成的文件
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -3926,6 +3926,18 @@ update 表名 set 字段名=字段值 where 条件如 update A set name=&#x27;xi
       </tags>
   </entry>
   <entry>
+    <title>MySQL一些简单的语句</title>
+    <url>/20170120-MySQL%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E7%9A%84%E8%AF%AD%E5%8F%A5/</url>
+    <content><![CDATA[emlog_ad字段idstatuspositiontitleweightcontent
+--找出重复SELECT a.*FROM emlog_ad aWHERE a.id IN    (SELECT b.id id     FROM emlog_ad b     GROUP BY b.title     HAVING count(b.id)&gt;1);--删除重复留下id最小的SELECT a.*FROM emlog_ad aWHERE a.id IN    (SELECT b.id     FROM emlog_ad b     GROUP BY b.title     HAVING count(b.id)&gt;1)  AND a.id NOT IN    (SELECT min(c.id)     FROM emlog_ad c     GROUP BY c.title     HAVING count(c.id)&gt;1);--一句sql把所有AA改为BB，CC改为DDUPDATE emlog_ad aSET a.`status`=(CASE	WHEN a.`status` = &#x27;1&#x27; THEN &#x27;11&#x27;	WHEN a.`status`=&#x27;2&#x27; THEN &#x27;22&#x27;	END);]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>存储</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MySQL一个group by查询出最大值和非group by所在字段的值</title>
     <url>/20170418-MySQL%E4%B8%80%E4%B8%AAgroup%20by%E6%9F%A5%E8%AF%A2%E5%87%BA%E6%9C%80%E5%A4%A7%E5%80%BC%E5%92%8C%E9%9D%9Egroup%20by%E6%89%80%E5%9C%A8%E5%AD%97%E6%AE%B5%E7%9A%84%E5%80%BC/</url>
     <content><![CDATA[表结构，数据内容如下。
@@ -3936,18 +3948,6 @@ mysql&gt; select name, max(age),grade from  stu group by grade;ERROR 1055 (42000
 折腾了一会自己不知道怎么解决，后来倒是解决了。
 具体过程如下：
 mysql&gt; describe stu;+-------+---------+------+-----+---------+----------------+| Field | Type    | Null | Key | Default | Extra          |+-------+---------+------+-----+---------+----------------+| id    | int(11) | NO   | PRI | NULL    | auto_increment || name  | char(1) | YES  |     | NULL    |                || age   | int(11) | YES  |     | NULL    |                || grade | int(11) | YES  |     | NULL    |                |+-------+---------+------+-----+---------+----------------+4 rows in set (0.00 sec)mysql&gt; select * from stu;+----+------+------+-------+| id | name | age  | grade |+----+------+------+-------+|  1 | a    |   11 |     1 ||  2 | b    |   12 |     1 ||  3 | c    |   13 |     1 ||  4 | d    |   11 |     2 ||  5 | e    |   12 |     2 ||  6 | f    |   13 |     2 |+----+------+------+-------+6 rows in set (0.00 sec)mysql&gt; select max(name), max(age),grade from  stu group by grade;+-----------+----------+-------+| max(name) | max(age) | grade |+-----------+----------+-------+| c         |       13 |     1 || f         |       13 |     2 |+-----------+----------+-------+2 rows in set (0.01 sec)]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>存储</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MySQL一些简单的语句</title>
-    <url>/20170120-MySQL%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E7%9A%84%E8%AF%AD%E5%8F%A5/</url>
-    <content><![CDATA[emlog_ad字段idstatuspositiontitleweightcontent
---找出重复SELECT a.*FROM emlog_ad aWHERE a.id IN    (SELECT b.id id     FROM emlog_ad b     GROUP BY b.title     HAVING count(b.id)&gt;1);--删除重复留下id最小的SELECT a.*FROM emlog_ad aWHERE a.id IN    (SELECT b.id     FROM emlog_ad b     GROUP BY b.title     HAVING count(b.id)&gt;1)  AND a.id NOT IN    (SELECT min(c.id)     FROM emlog_ad c     GROUP BY c.title     HAVING count(c.id)&gt;1);--一句sql把所有AA改为BB，CC改为DDUPDATE emlog_ad aSET a.`status`=(CASE	WHEN a.`status` = &#x27;1&#x27; THEN &#x27;11&#x27;	WHEN a.`status`=&#x27;2&#x27; THEN &#x27;22&#x27;	END);]]></content>
       <categories>
         <category>Tech</category>
       </categories>
@@ -5119,25 +5119,6 @@ package com.hisen.thread.count_click_by_redis;import Java.util.concurrent.ArrayB
       </tags>
   </entry>
   <entry>
-    <title>SQL优化之小细节 - 点滴记录</title>
-    <url>/20170309-SQL%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B0%8F%E7%BB%86%E8%8A%82%20-%20%E7%82%B9%E6%BB%B4%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[不知道现在是不是还很多人首先就把关联的id放在where的第一位
-这里有一个简单的对比，情况相同的时候，两个sql的时间相差八倍
-优：0.077s
-SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE cf.acct_type in(2,3)  AND ew.customer_id = cf.id
-劣：0.630s
-SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE ew.customer_id = cf.id  AND cf.acct_type in(2,3)
-上述原因：where子句从后往前执行，应该把大的过滤条件放在后面记录时间：2017年3月9日 10:44:59
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SQL语句的执行顺序 - 关键字的顺序</title>
     <url>/20171114-SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</url>
     <content><![CDATA[sql执行顺序
@@ -5160,6 +5141,25 @@ http://blog.csdn.net/bitcarmanlee/article/details/51004767 (含流程图)
       </categories>
       <tags>
         <tag>存储</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL优化之小细节 - 点滴记录</title>
+    <url>/20170309-SQL%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B0%8F%E7%BB%86%E8%8A%82%20-%20%E7%82%B9%E6%BB%B4%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[不知道现在是不是还很多人首先就把关联的id放在where的第一位
+这里有一个简单的对比，情况相同的时候，两个sql的时间相差八倍
+优：0.077s
+SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE cf.acct_type in(2,3)  AND ew.customer_id = cf.id
+劣：0.630s
+SELECT ew.all_amt ,       ew.customer_id,       cf.id,       cf.cert_id,       cf.acct_typeFROM ew_quota_info ew,     cf_customer cfWHERE ew.customer_id = cf.id  AND cf.acct_type in(2,3)
+上述原因：where子句从后往前执行，应该把大的过滤条件放在后面记录时间：2017年3月9日 10:44:59
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
       </tags>
   </entry>
   <entry>
@@ -6120,6 +6120,47 @@ package com.hisen.interview;/** * 变量不能被重写 * * @author hisenyuan 20
       </tags>
   </entry>
   <entry>
+    <title>Thread Pool Monitor - 线程池监控</title>
+    <url>/20190905-Thread-Pool-Monitor/</url>
+    <content><![CDATA[一、背景业务当中多处用到线程池进行异步处理;为了得知线程池设置是否合理，故需要增加线程池监控;常见的实现方式：
+
+org.springframework.scheduling.concurrent.ScheduledExecutorTask
+org.springframework.scheduling.annotation.Scheduled
+
+本文使用1的方式实现，主要是方便进行配置，可以托管多个任务;
+二、效果预览taskName:pool1-monitor. taskCount:820, completedTaskCount:820, largestPoolSize:30, poolSize:30, activeCount:0, corePoolSize:30, maximumPoolSize:50, queueSize:0taskName:pool2-monitor. taskCount:1703, completedTaskCount:1703, largestPoolSize:30, poolSize:30, activeCount:0, corePoolSize:30, maximumPoolSize:50, queueSize:0taskName:pool3-monitor. taskCount:820, completedTaskCount:448, largestPoolSize:30, poolSize:30, activeCount:30, corePoolSize:30, maximumPoolSize:50, queueSize:342
+
+三、监控逻辑代码如下:
+
+package com.hisen.thread.monitor.threadpool;import org.slf4j.Logger;import org.slf4j.LoggerFactory;import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;import Java.util.List;import Java.util.concurrent.ThreadPoolExecutor;/** * @author hisenyuan * @date 2019-09-05 19:45 */public class ThreadPoolMonitor implements Runnable &#123;    private static final Logger LOGGER = LoggerFactory.getLogger(ThreadPoolMonitor.class);    // xml中注入    private List&lt;ThreadPoolTaskExecutor&gt; pools;    @Override    public void run() &#123;        monitorHandle(pools);    &#125;    private void monitorHandle(List&lt;ThreadPoolTaskExecutor&gt; pools) &#123;        pools.forEach(this::handleExecutor);    &#125;    private void handleExecutor(ThreadPoolTaskExecutor p) &#123;        ThreadPoolExecutor threadPoolExecutor = p.getThreadPoolExecutor();        // 线程池需要执行的任务数        long taskCount = threadPoolExecutor.getTaskCount();        // 线程池在运行过程中已完成的任务数        long completedTaskCount = threadPoolExecutor.getCompletedTaskCount();        // 曾经创建过的最大线程数        long largestPoolSize = threadPoolExecutor.getLargestPoolSize();        // 线程池里的线程数量        long poolSize = threadPoolExecutor.getPoolSize();        // 线程池里活跃的线程数量        long activeCount = threadPoolExecutor.getActiveCount();        // 配置的核心线程数        int corePoolSize = threadPoolExecutor.getCorePoolSize();        // 配置的最大线程数        int maximumPoolSize = threadPoolExecutor.getMaximumPoolSize();        // 当前线程池队列的个数        int queueSize = threadPoolExecutor.getQueue().size();        // 线程池前缀名称        String threadNamePrefix = p.getThreadNamePrefix();        LOGGER.info(&quot;taskName:&#123;&#125;monitor. taskCount:&#123;&#125;, completedTaskCount:&#123;&#125;, largestPoolSize:&#123;&#125;, poolSize:&#123;&#125;, activeCount:&#123;&#125;, corePoolSize:&#123;&#125;, maximumPoolSize:&#123;&#125;, queueSize:&#123;&#125;&quot;                , threadNamePrefix                , taskCount                , completedTaskCount                , largestPoolSize                , poolSize                , activeCount                , corePoolSize                , maximumPoolSize                , queueSize);    &#125;    public List&lt;ThreadPoolTaskExecutor&gt; getPools() &#123;        return pools;    &#125;    public void setPools(List&lt;ThreadPoolTaskExecutor&gt; pools) &#123;        this.pools = pools;    &#125;&#125;
+
+四、spring xml配置&lt;!-- ### 线程池监控 开始 ### --&gt;&lt;bean id=&quot;threadPoolMonitorRunnable&quot; class=&quot;com.hisen.thread.monitor.threadpool.ThreadPoolMonitor&quot;&gt;    &lt;property name=&quot;pools&quot;&gt;        &lt;list&gt;            &lt;ref bean=&quot;pool1&quot; /&gt;            &lt;ref bean=&quot;pool2&quot; /&gt;            &lt;ref bean=&quot;pool3&quot; /&gt;        &lt;/list&gt;    &lt;/property&gt;&lt;/bean&gt;&lt;!-- 定时执行的线程池 --&gt;&lt;bean id=&quot;threadPoolMonitorTask&quot; class=&quot;org.springframework.scheduling.concurrent.ScheduledExecutorTask&quot;&gt;    &lt;property name=&quot;runnable&quot; ref=&quot;threadPoolMonitorRunnable&quot;/&gt;    &lt;!-- 延迟时间，单位ms --&gt;    &lt;property name=&quot;delay&quot; value=&quot;150000&quot;/&gt;    &lt;!-- 间隔时间，单位ms --&gt;    &lt;property name=&quot;period&quot; value=&quot;5000&quot;/&gt;&lt;/bean&gt;&lt;!-- 任务调度 --&gt;&lt;bean id=&quot;scheduledExecutorFactoryBean&quot; class=&quot;org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean&quot;&gt;    &lt;!-- 执行任务的线程池个数 --&gt;    &lt;property name=&quot;poolSize&quot; value=&quot;1&quot; /&gt;    &lt;!-- 任务列表 --&gt;    &lt;property name=&quot;scheduledExecutorTasks&quot;&gt;        &lt;list&gt;            &lt;ref bean=&quot;threadPoolMonitorTask&quot;/&gt;        &lt;/list&gt;    &lt;/property&gt;&lt;/bean&gt;&lt;!-- ### 线程池监控 结束 ### --&gt;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>可观测</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu 16 安装IDEA 并且设置快捷启动</title>
+    <url>/20170304-Ubuntu%2016%20%E5%AE%89%E8%A3%85IDEA%20%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E5%BF%AB%E6%8D%B7%E5%90%AF%E5%8A%A8/</url>
+    <content><![CDATA[安装简单，下载官网的文件(with Java的比较方便)
+解压之后在bin目录下执行
+sudo sh idea.sh
+就会进入安装程序，接下来会跳出图形界面，跟windows差不多的步骤
+没有激活码可以看之前的文章
+关键的一个是我发现网上说的建立桌面快捷方式不行
+就这样弄个方便的
+cd ~ln -s /idea home/bin/idea.sh idea#接下来执行 idea &amp; 就可以打开，如果提示权限不够#就执行 sudo idea &amp;sudo idea &amp;#后面的 &amp; 代表后台运行的意思，不影响控制台
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>《人民的名义》与技术管理</title>
     <url>/20260628-The-name-of-the-people-and-technology-management/</url>
     <content><![CDATA[0. 缘起五一假期没有什么安排，就在家看了一部比较经典的剧《人民的名义》。当时我比较惊讶的就是：
@@ -6216,47 +6257,6 @@ package com.hisen.interview;/** * 变量不能被重写 * * @author hisenyuan 20
       <tags>
         <tag>成长</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Thread Pool Monitor - 线程池监控</title>
-    <url>/20190905-Thread-Pool-Monitor/</url>
-    <content><![CDATA[一、背景业务当中多处用到线程池进行异步处理;为了得知线程池设置是否合理，故需要增加线程池监控;常见的实现方式：
-
-org.springframework.scheduling.concurrent.ScheduledExecutorTask
-org.springframework.scheduling.annotation.Scheduled
-
-本文使用1的方式实现，主要是方便进行配置，可以托管多个任务;
-二、效果预览taskName:pool1-monitor. taskCount:820, completedTaskCount:820, largestPoolSize:30, poolSize:30, activeCount:0, corePoolSize:30, maximumPoolSize:50, queueSize:0taskName:pool2-monitor. taskCount:1703, completedTaskCount:1703, largestPoolSize:30, poolSize:30, activeCount:0, corePoolSize:30, maximumPoolSize:50, queueSize:0taskName:pool3-monitor. taskCount:820, completedTaskCount:448, largestPoolSize:30, poolSize:30, activeCount:30, corePoolSize:30, maximumPoolSize:50, queueSize:342
-
-三、监控逻辑代码如下:
-
-package com.hisen.thread.monitor.threadpool;import org.slf4j.Logger;import org.slf4j.LoggerFactory;import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;import Java.util.List;import Java.util.concurrent.ThreadPoolExecutor;/** * @author hisenyuan * @date 2019-09-05 19:45 */public class ThreadPoolMonitor implements Runnable &#123;    private static final Logger LOGGER = LoggerFactory.getLogger(ThreadPoolMonitor.class);    // xml中注入    private List&lt;ThreadPoolTaskExecutor&gt; pools;    @Override    public void run() &#123;        monitorHandle(pools);    &#125;    private void monitorHandle(List&lt;ThreadPoolTaskExecutor&gt; pools) &#123;        pools.forEach(this::handleExecutor);    &#125;    private void handleExecutor(ThreadPoolTaskExecutor p) &#123;        ThreadPoolExecutor threadPoolExecutor = p.getThreadPoolExecutor();        // 线程池需要执行的任务数        long taskCount = threadPoolExecutor.getTaskCount();        // 线程池在运行过程中已完成的任务数        long completedTaskCount = threadPoolExecutor.getCompletedTaskCount();        // 曾经创建过的最大线程数        long largestPoolSize = threadPoolExecutor.getLargestPoolSize();        // 线程池里的线程数量        long poolSize = threadPoolExecutor.getPoolSize();        // 线程池里活跃的线程数量        long activeCount = threadPoolExecutor.getActiveCount();        // 配置的核心线程数        int corePoolSize = threadPoolExecutor.getCorePoolSize();        // 配置的最大线程数        int maximumPoolSize = threadPoolExecutor.getMaximumPoolSize();        // 当前线程池队列的个数        int queueSize = threadPoolExecutor.getQueue().size();        // 线程池前缀名称        String threadNamePrefix = p.getThreadNamePrefix();        LOGGER.info(&quot;taskName:&#123;&#125;monitor. taskCount:&#123;&#125;, completedTaskCount:&#123;&#125;, largestPoolSize:&#123;&#125;, poolSize:&#123;&#125;, activeCount:&#123;&#125;, corePoolSize:&#123;&#125;, maximumPoolSize:&#123;&#125;, queueSize:&#123;&#125;&quot;                , threadNamePrefix                , taskCount                , completedTaskCount                , largestPoolSize                , poolSize                , activeCount                , corePoolSize                , maximumPoolSize                , queueSize);    &#125;    public List&lt;ThreadPoolTaskExecutor&gt; getPools() &#123;        return pools;    &#125;    public void setPools(List&lt;ThreadPoolTaskExecutor&gt; pools) &#123;        this.pools = pools;    &#125;&#125;
-
-四、spring xml配置&lt;!-- ### 线程池监控 开始 ### --&gt;&lt;bean id=&quot;threadPoolMonitorRunnable&quot; class=&quot;com.hisen.thread.monitor.threadpool.ThreadPoolMonitor&quot;&gt;    &lt;property name=&quot;pools&quot;&gt;        &lt;list&gt;            &lt;ref bean=&quot;pool1&quot; /&gt;            &lt;ref bean=&quot;pool2&quot; /&gt;            &lt;ref bean=&quot;pool3&quot; /&gt;        &lt;/list&gt;    &lt;/property&gt;&lt;/bean&gt;&lt;!-- 定时执行的线程池 --&gt;&lt;bean id=&quot;threadPoolMonitorTask&quot; class=&quot;org.springframework.scheduling.concurrent.ScheduledExecutorTask&quot;&gt;    &lt;property name=&quot;runnable&quot; ref=&quot;threadPoolMonitorRunnable&quot;/&gt;    &lt;!-- 延迟时间，单位ms --&gt;    &lt;property name=&quot;delay&quot; value=&quot;150000&quot;/&gt;    &lt;!-- 间隔时间，单位ms --&gt;    &lt;property name=&quot;period&quot; value=&quot;5000&quot;/&gt;&lt;/bean&gt;&lt;!-- 任务调度 --&gt;&lt;bean id=&quot;scheduledExecutorFactoryBean&quot; class=&quot;org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean&quot;&gt;    &lt;!-- 执行任务的线程池个数 --&gt;    &lt;property name=&quot;poolSize&quot; value=&quot;1&quot; /&gt;    &lt;!-- 任务列表 --&gt;    &lt;property name=&quot;scheduledExecutorTasks&quot;&gt;        &lt;list&gt;            &lt;ref bean=&quot;threadPoolMonitorTask&quot;/&gt;        &lt;/list&gt;    &lt;/property&gt;&lt;/bean&gt;&lt;!-- ### 线程池监控 结束 ### --&gt;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>可观测</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ubuntu 16 安装IDEA 并且设置快捷启动</title>
-    <url>/20170304-Ubuntu%2016%20%E5%AE%89%E8%A3%85IDEA%20%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E5%BF%AB%E6%8D%B7%E5%90%AF%E5%8A%A8/</url>
-    <content><![CDATA[安装简单，下载官网的文件(with Java的比较方便)
-解压之后在bin目录下执行
-sudo sh idea.sh
-就会进入安装程序，接下来会跳出图形界面，跟windows差不多的步骤
-没有激活码可以看之前的文章
-关键的一个是我发现网上说的建立桌面快捷方式不行
-就这样弄个方便的
-cd ~ln -s /idea home/bin/idea.sh idea#接下来执行 idea &amp; 就可以打开，如果提示权限不够#就执行 sudo idea &amp;sudo idea &amp;#后面的 &amp; 代表后台运行的意思，不影响控制台
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
   </entry>
   <entry>
     <title>ubuntu root su 密码</title>
@@ -6493,32 +6493,6 @@ mysql -u root -p
       </tags>
   </entry>
   <entry>
-    <title>Ubuntu安装RocketMQ - Quick Start</title>
-    <url>/20170702-Ubuntu%E5%AE%89%E8%A3%85RocketMQ%20-%20Quick%20Start/</url>
-    <content><![CDATA[安装需求：
-64位的系统 Linux&#x2F;Unix&#x2F;Mac
-64bit JDK 1.8+;
-Maven 3.2.x;
-Git （一般自带）
-
-如果还未安装jdk、maven建议查看教程:点击查看
-Clone &amp; Buildgit clone -b develop https://github.com/apache/incubator-rocketmq.gitcd incubator-rocketmqmvn -Prelease-all -DskipTests clean install -U[INFO] ------------------------------------------------------------------------[INFO] Reactor Summary:[INFO] [INFO] Apache RocketMQ 4.2.0-incubating-SNAPSHOT .......... SUCCESS [01:07 min][INFO] rocketmq-remoting 4.2.0-incubating-SNAPSHOT ........ SUCCESS [ 15.749 s][INFO] rocketmq-common 4.2.0-incubating-SNAPSHOT .......... SUCCESS [ 10.243 s][INFO] rocketmq-client 4.2.0-incubating-SNAPSHOT .......... SUCCESS [ 11.638 s][INFO] rocketmq-store 4.2.0-incubating-SNAPSHOT ........... SUCCESS [ 13.108 s][INFO] rocketmq-srvutil 4.2.0-incubating-SNAPSHOT ......... SUCCESS [  2.051 s][INFO] rocketmq-filter 4.2.0-incubating-SNAPSHOT .......... SUCCESS [  3.917 s][INFO] rocketmq-broker 4.2.0-incubating-SNAPSHOT .......... SUCCESS [  8.726 s][INFO] rocketmq-tools 4.2.0-incubating-SNAPSHOT ........... SUCCESS [  6.002 s][INFO] rocketmq-namesrv 4.2.0-incubating-SNAPSHOT ......... SUCCESS [  2.726 s][INFO] rocketmq-logappender 4.2.0-incubating-SNAPSHOT ..... SUCCESS [  3.514 s][INFO] rocketmq-openmessaging 4.2.0-incubating-SNAPSHOT ... SUCCESS [  2.668 s][INFO] rocketmq-example 4.2.0-incubating-SNAPSHOT ......... SUCCESS [  2.390 s][INFO] rocketmq-filtersrv 4.2.0-incubating-SNAPSHOT ....... SUCCESS [  2.145 s][INFO] rocketmq-test 4.2.0-incubating-SNAPSHOT ............ SUCCESS [  5.428 s][INFO] rocketmq-distribution 4.2.0-incubating-SNAPSHOT .... SUCCESS [ 27.002 s][INFO] ------------------------------------------------------------------------[INFO] BUILD SUCCESS[INFO] ------------------------------------------------------------------------[INFO] Total time: 03:07 min[INFO] Finished at: 2017-07-02T01:35:40+08:00[INFO] Final Memory: 60M/247M[INFO] ------------------------------------------------------------------------cd distribution/target/apache-rocketmq
-Start Name Server
-nohup sh bin/mqnamesrv &amp;tail -f ~/logs/rocketmqlogs/namesrv.logThe Name Server boot success...
-Start Broker
-nohup sh bin/mqbroker -n localhost:9876 &amp;tail -f ~/logs/rocketmqlogs/broker.log The broker[%s, 172.30.30.233:10911] boot success...
-Send &amp; Receive Messages
-Before sending/receiving messages, we need to tell clients the location of name servers. RocketMQ provides multiple ways to achieve this. For simplicity, we use environment variable NAMESRV_ADDRexport NAMESRV_ADDR=localhost:9876sh bin/tools.sh org.apache.rocketmq.example.quickstart.ProducerSendResult [sendStatus=SEND_OK, msgId= ...sh bin/tools.sh org.apache.rocketmq.example.quickstart.Consumer ConsumeMessageThread_%d Receive New Messages: [MessageExt...
-Shutdown Servers
-sh bin/mqshutdown brokerThe mqbroker(36695) is running...Send shutdown request to mqbroker(36695) OKsh bin/mqshutdown namesrvThe mqnamesrv(36664) is running...Send shutdown request to mqnamesrv(36664) OK]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>中间件</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Ubuntu安装nginx</title>
     <url>/20170321-Ubuntu%E5%AE%89%E8%A3%85nginx/</url>
     <content><![CDATA[Nginx (“engine x”) 是一个高性能的 HTTP 和 反向代理 服务器，也是一个 IMAP&#x2F;POP3&#x2F;SMTP 代理服务器。
@@ -6530,6 +6504,24 @@ Nginx 是由 Igor Sysoev 为俄罗斯访问量第二的 Rambler.ru 站点开发�
 Nginx常用命令
 #启动sudo /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf#进入目录cd /usr/local/nginx/#关闭sudo ./sbin/nginx -s quit#Nginx重新加载配置sudo ./sbin/nginx -s reload#指定配置文件sudo ./sbin/nginx -c /usr/local/nginx/conf/nginx.conf#查看版本sudo ./sbin/nginx -v#显示帮助sudo ./sbin/nginx -h
 安装之后就直接监听80端口，浏览器打开127.0.0.1即可访问出现如下页面：
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ubuntu重装系统 - 在ubuntu系统下重新安装</title>
+    <url>/20170305-Ubuntu%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%20-%20%E5%9C%A8ubuntu%E7%B3%BB%E7%BB%9F%E4%B8%8B%E9%87%8D%E6%96%B0%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[有时候在linux环境下需要重新安装一下系统
+这里我就说一下今天我安装的方法。
+下载好ubuntu的镜像，随便放在一个非系统盘的根目录下
+改名为：ubuntu.iso
+sudo chmod 777 /boot/grub/grub.cfgsudo vi  /boot/grub/grub.cfg#在 export linux_gfx_mode 下面添加如下内容menuentry &quot;install  ubuntu powered by hisen&quot; &#123;  search --set -f /ubuntu.iso  loopback loop /ubuntu.iso  set root=(loop)  linux /casper/vmlinuz.efi boot=casper iso-scan/filename=/ubuntu.iso  initrd /casper/initrd.lz  boot&#125;
+保存退出，重启就会进入系统。
+桌面上点击那个安装的图标即可完成重装
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -6553,24 +6545,6 @@ Error: Could not create the Java Virtual Machine.Error: A fatal exception has oc
       <categories>
         <category>Tech</category>
       </categories>
-  </entry>
-  <entry>
-    <title>ubuntu重装系统 - 在ubuntu系统下重新安装</title>
-    <url>/20170305-Ubuntu%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%20-%20%E5%9C%A8ubuntu%E7%B3%BB%E7%BB%9F%E4%B8%8B%E9%87%8D%E6%96%B0%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[有时候在linux环境下需要重新安装一下系统
-这里我就说一下今天我安装的方法。
-下载好ubuntu的镜像，随便放在一个非系统盘的根目录下
-改名为：ubuntu.iso
-sudo chmod 777 /boot/grub/grub.cfgsudo vi  /boot/grub/grub.cfg#在 export linux_gfx_mode 下面添加如下内容menuentry &quot;install  ubuntu powered by hisen&quot; &#123;  search --set -f /ubuntu.iso  loopback loop /ubuntu.iso  set root=(loop)  linux /casper/vmlinuz.efi boot=casper iso-scan/filename=/ubuntu.iso  initrd /casper/initrd.lz  boot&#125;
-保存退出，重启就会进入系统。
-桌面上点击那个安装的图标即可完成重装
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-      </tags>
   </entry>
   <entry>
     <title>《地下帝国：金融、网络、半导体---美国如何将世界经济武器化》读后感</title>
@@ -6785,34 +6759,30 @@ package com.hisen.ws.server;import com.hisen.ws.util.Constants;import Javax.webs
       </tags>
   </entry>
   <entry>
-    <title>WeightAlgorithm - 权重算法 - Random、HashCode对比</title>
-    <url>/20190322-WeightAlgorithm%20-%20%E6%9D%83%E9%87%8D%E7%AE%97%E6%B3%95%20-%20Random%E3%80%81HashCode%E5%AF%B9%E6%AF%94/</url>
-    <content><![CDATA[一、权重算法权重算法一般在路由里面用的比较多，分布式环境下对等的服务有多个，加权随机选出一个服务来调用；
-可能还有其他方面的用途，下面的代码简单的实现了这个权重，本质上就用到了数组，随机下标；
-二、代码概览public static void main(String[] args) &#123;    String[] weight = &#123;&quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;&#125;;    final int times = 500000;    final long hashStart = System.currentTimeMillis();    List&lt;String&gt; hashRes = getList4Hash(weight, times);    printRes(&quot;Hash&quot;, hashStart, hashRes);    final long randomStart = System.currentTimeMillis();    List&lt;String&gt; randomRes = getList4Random(weight, times);    printRes(&quot;Random&quot;, randomStart, randomRes);//        Hash          use millis: 931//        A:49.92%//        B:29.99%//        C:20.09%//        Random        use millis: 50//        A:50.08%//        B:29.93%//        C:19.99%&#125;
+    <title>Ubuntu安装RocketMQ - Quick Start</title>
+    <url>/20170702-Ubuntu%E5%AE%89%E8%A3%85RocketMQ%20-%20Quick%20Start/</url>
+    <content><![CDATA[安装需求：
+64位的系统 Linux&#x2F;Unix&#x2F;Mac
+64bit JDK 1.8+;
+Maven 3.2.x;
+Git （一般自带）
 
-三、完整代码
-github:show all code
-package com.hisen.algorithms;import com.google.common.collect.Lists;import Java.text.NumberFormat;import Java.util.List;import Java.util.Map;import Java.util.Random;import Java.util.UUID;import Java.util.function.Function;import Java.util.stream.Collectors;/** * @Author hisenyuan * @Description $end$ * @Date 2019/3/21 21:04 */public class WeightAlgorithm &#123;    public static void main(String[] args) &#123;        String[] weight = &#123;&quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;&#125;;        final int times = 500000;        final long hashStart = System.currentTimeMillis();        List&lt;String&gt; hashRes = getList4Hash(weight, times);        printRes(&quot;Hash&quot;, hashStart, hashRes);        final long randomStart = System.currentTimeMillis();        List&lt;String&gt; randomRes = getList4Random(weight, times);        printRes(&quot;Random&quot;, randomStart, randomRes);//        Hash          use millis: 931//        A:49.92%//        B:29.99%//        C:20.09%//        Random        use millis: 50//        A:50.08%//        B:29.93%//        C:19.99%    &#125;    private static void printRes(String method, long start, List&lt;String&gt; resList) &#123;        final Map&lt;String, Long&gt; collect = resList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));        final double a = collect.get(&quot;A&quot;);        final double b = collect.get(&quot;B&quot;);        final double c = collect.get(&quot;C&quot;);        final double sum = a + b + c;        NumberFormat nt = NumberFormat.getPercentInstance();        nt.setMinimumFractionDigits(2);        System.out.println(method + &quot;\t use millis: &quot; + (System.currentTimeMillis() - start));        System.out.println(&quot;A&quot; + &quot;:&quot; + nt.format(a / sum));        System.out.println(&quot;B&quot; + &quot;:&quot; + nt.format(b / sum));        System.out.println(&quot;C&quot; + &quot;:&quot; + nt.format(c / sum));    &#125;    private static List&lt;String&gt; getList4Hash(String[] weight, int times) &#123;        List&lt;String&gt; result = Lists.newArrayList();        for (int i = 0; i &lt; times; i++) &#123;            final String a = UUID.randomUUID().toString() + System.currentTimeMillis();            final int hash = a.hashCode();            final int index = hash &gt; 0 ? hash : -hash;            final String res = weight[index % weight.length];            result.add(res);        &#125;        return result;    &#125;    private static List&lt;String&gt; getList4Random(String[] weight, int times) &#123;        List&lt;String&gt; result = Lists.newArrayList();        Random random = new Random();        for (int i = 0; i &lt; times; i++) &#123;            final int index = random.nextInt(weight.length);            final String res = weight[index];            result.add(res);        &#125;        return result;    &#125;&#125;
-]]></content>
+如果还未安装jdk、maven建议查看教程:点击查看
+Clone &amp; Buildgit clone -b develop https://github.com/apache/incubator-rocketmq.gitcd incubator-rocketmqmvn -Prelease-all -DskipTests clean install -U[INFO] ------------------------------------------------------------------------[INFO] Reactor Summary:[INFO] [INFO] Apache RocketMQ 4.2.0-incubating-SNAPSHOT .......... SUCCESS [01:07 min][INFO] rocketmq-remoting 4.2.0-incubating-SNAPSHOT ........ SUCCESS [ 15.749 s][INFO] rocketmq-common 4.2.0-incubating-SNAPSHOT .......... SUCCESS [ 10.243 s][INFO] rocketmq-client 4.2.0-incubating-SNAPSHOT .......... SUCCESS [ 11.638 s][INFO] rocketmq-store 4.2.0-incubating-SNAPSHOT ........... SUCCESS [ 13.108 s][INFO] rocketmq-srvutil 4.2.0-incubating-SNAPSHOT ......... SUCCESS [  2.051 s][INFO] rocketmq-filter 4.2.0-incubating-SNAPSHOT .......... SUCCESS [  3.917 s][INFO] rocketmq-broker 4.2.0-incubating-SNAPSHOT .......... SUCCESS [  8.726 s][INFO] rocketmq-tools 4.2.0-incubating-SNAPSHOT ........... SUCCESS [  6.002 s][INFO] rocketmq-namesrv 4.2.0-incubating-SNAPSHOT ......... SUCCESS [  2.726 s][INFO] rocketmq-logappender 4.2.0-incubating-SNAPSHOT ..... SUCCESS [  3.514 s][INFO] rocketmq-openmessaging 4.2.0-incubating-SNAPSHOT ... SUCCESS [  2.668 s][INFO] rocketmq-example 4.2.0-incubating-SNAPSHOT ......... SUCCESS [  2.390 s][INFO] rocketmq-filtersrv 4.2.0-incubating-SNAPSHOT ....... SUCCESS [  2.145 s][INFO] rocketmq-test 4.2.0-incubating-SNAPSHOT ............ SUCCESS [  5.428 s][INFO] rocketmq-distribution 4.2.0-incubating-SNAPSHOT .... SUCCESS [ 27.002 s][INFO] ------------------------------------------------------------------------[INFO] BUILD SUCCESS[INFO] ------------------------------------------------------------------------[INFO] Total time: 03:07 min[INFO] Finished at: 2017-07-02T01:35:40+08:00[INFO] Final Memory: 60M/247M[INFO] ------------------------------------------------------------------------cd distribution/target/apache-rocketmq
+Start Name Server
+nohup sh bin/mqnamesrv &amp;tail -f ~/logs/rocketmqlogs/namesrv.logThe Name Server boot success...
+Start Broker
+nohup sh bin/mqbroker -n localhost:9876 &amp;tail -f ~/logs/rocketmqlogs/broker.log The broker[%s, 172.30.30.233:10911] boot success...
+Send &amp; Receive Messages
+Before sending/receiving messages, we need to tell clients the location of name servers. RocketMQ provides multiple ways to achieve this. For simplicity, we use environment variable NAMESRV_ADDRexport NAMESRV_ADDR=localhost:9876sh bin/tools.sh org.apache.rocketmq.example.quickstart.ProducerSendResult [sendStatus=SEND_OK, msgId= ...sh bin/tools.sh org.apache.rocketmq.example.quickstart.Consumer ConsumeMessageThread_%d Receive New Messages: [MessageExt...
+Shutdown Servers
+sh bin/mqshutdown brokerThe mqbroker(36695) is running...Send shutdown request to mqbroker(36695) OKsh bin/mqshutdown namesrvThe mqnamesrv(36664) is running...Send shutdown request to mqnamesrv(36664) OK]]></content>
       <categories>
         <category>Tech</category>
       </categories>
       <tags>
-        <tag>Java</tag>
-        <tag>算法</tag>
+        <tag>中间件</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>windows10 专业版激活密钥</title>
-    <url>/20170210-Windows10-%E4%B8%93%E4%B8%9A%E7%89%88%E6%BF%80%E6%B4%BB%E5%AF%86%E9%92%A5/</url>
-    <content><![CDATA[2017年2月10日 16:03:48亲测可用，这比激活工具方便多了
-
-VK7JG-NPHTM-C97JM-9MPGT-3V66TNPPR9-FWDCX-D2C8J-H872K-2YT43W269N-WFGWX-YVC9B-4J6C9-T83GXNYW94-47Q7H-7X9TT-W7TXD-JTYPMNJ4MX-VQQ7Q-FP3DB-VDGHX-7XM87MH37W-N47XK-V7XM9-C7227-GCQG9
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
   </entry>
   <entry>
     <title>Windows ssh连接 VirtualBox Ubuntu 16虚拟机</title>
@@ -6865,6 +6835,17 @@ ip写上麦的主机ip：127.0.0.1
       </tags>
   </entry>
   <entry>
+    <title>windows10 专业版激活密钥</title>
+    <url>/20170210-Windows10-%E4%B8%93%E4%B8%9A%E7%89%88%E6%BF%80%E6%B4%BB%E5%AF%86%E9%92%A5/</url>
+    <content><![CDATA[2017年2月10日 16:03:48亲测可用，这比激活工具方便多了
+
+VK7JG-NPHTM-C97JM-9MPGT-3V66TNPPR9-FWDCX-D2C8J-H872K-2YT43W269N-WFGWX-YVC9B-4J6C9-T83GXNYW94-47Q7H-7X9TT-W7TXD-JTYPMNJ4MX-VQQ7Q-FP3DB-VDGHX-7XM87MH37W-N47XK-V7XM9-C7227-GCQG9
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Windows10开机bat启动VirtualBox虚拟机并且后台运行</title>
     <url>/20170220-Windows10%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8VirtualBox%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B9%B6%E4%B8%94%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</url>
     <content><![CDATA[1.制作启动脚本
@@ -6887,6 +6868,25 @@ Windows &gt; [开始]菜单 &gt; 程序 &gt; 启动
       </tags>
   </entry>
   <entry>
+    <title>WeightAlgorithm - 权重算法 - Random、HashCode对比</title>
+    <url>/20190322-WeightAlgorithm%20-%20%E6%9D%83%E9%87%8D%E7%AE%97%E6%B3%95%20-%20Random%E3%80%81HashCode%E5%AF%B9%E6%AF%94/</url>
+    <content><![CDATA[一、权重算法权重算法一般在路由里面用的比较多，分布式环境下对等的服务有多个，加权随机选出一个服务来调用；
+可能还有其他方面的用途，下面的代码简单的实现了这个权重，本质上就用到了数组，随机下标；
+二、代码概览public static void main(String[] args) &#123;    String[] weight = &#123;&quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;&#125;;    final int times = 500000;    final long hashStart = System.currentTimeMillis();    List&lt;String&gt; hashRes = getList4Hash(weight, times);    printRes(&quot;Hash&quot;, hashStart, hashRes);    final long randomStart = System.currentTimeMillis();    List&lt;String&gt; randomRes = getList4Random(weight, times);    printRes(&quot;Random&quot;, randomStart, randomRes);//        Hash          use millis: 931//        A:49.92%//        B:29.99%//        C:20.09%//        Random        use millis: 50//        A:50.08%//        B:29.93%//        C:19.99%&#125;
+
+三、完整代码
+github:show all code
+package com.hisen.algorithms;import com.google.common.collect.Lists;import Java.text.NumberFormat;import Java.util.List;import Java.util.Map;import Java.util.Random;import Java.util.UUID;import Java.util.function.Function;import Java.util.stream.Collectors;/** * @Author hisenyuan * @Description $end$ * @Date 2019/3/21 21:04 */public class WeightAlgorithm &#123;    public static void main(String[] args) &#123;        String[] weight = &#123;&quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;&#125;;        final int times = 500000;        final long hashStart = System.currentTimeMillis();        List&lt;String&gt; hashRes = getList4Hash(weight, times);        printRes(&quot;Hash&quot;, hashStart, hashRes);        final long randomStart = System.currentTimeMillis();        List&lt;String&gt; randomRes = getList4Random(weight, times);        printRes(&quot;Random&quot;, randomStart, randomRes);//        Hash          use millis: 931//        A:49.92%//        B:29.99%//        C:20.09%//        Random        use millis: 50//        A:50.08%//        B:29.93%//        C:19.99%    &#125;    private static void printRes(String method, long start, List&lt;String&gt; resList) &#123;        final Map&lt;String, Long&gt; collect = resList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));        final double a = collect.get(&quot;A&quot;);        final double b = collect.get(&quot;B&quot;);        final double c = collect.get(&quot;C&quot;);        final double sum = a + b + c;        NumberFormat nt = NumberFormat.getPercentInstance();        nt.setMinimumFractionDigits(2);        System.out.println(method + &quot;\t use millis: &quot; + (System.currentTimeMillis() - start));        System.out.println(&quot;A&quot; + &quot;:&quot; + nt.format(a / sum));        System.out.println(&quot;B&quot; + &quot;:&quot; + nt.format(b / sum));        System.out.println(&quot;C&quot; + &quot;:&quot; + nt.format(c / sum));    &#125;    private static List&lt;String&gt; getList4Hash(String[] weight, int times) &#123;        List&lt;String&gt; result = Lists.newArrayList();        for (int i = 0; i &lt; times; i++) &#123;            final String a = UUID.randomUUID().toString() + System.currentTimeMillis();            final int hash = a.hashCode();            final int index = hash &gt; 0 ? hash : -hash;            final String res = weight[index % weight.length];            result.add(res);        &#125;        return result;    &#125;    private static List&lt;String&gt; getList4Random(String[] weight, int times) &#123;        List&lt;String&gt; result = Lists.newArrayList();        Random random = new Random();        for (int i = 0; i &lt; times; i++) &#123;            final int index = random.nextInt(weight.length);            final String res = weight[index];            result.add(res);        &#125;        return result;    &#125;&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>windows任务栏由底部改到左边，并自动隐藏</title>
     <url>/20170215-Windows%E4%BB%BB%E5%8A%A1%E6%A0%8F%E7%94%B1%E5%BA%95%E9%83%A8%E6%94%B9%E5%88%B0%E5%B7%A6%E8%BE%B9%EF%BC%8C%E5%B9%B6%E8%87%AA%E5%8A%A8%E9%9A%90%E8%97%8F/</url>
     <content><![CDATA[windows默认是在底部的
@@ -6900,6 +6900,20 @@ Windows 任务栏放在窗口左边和下面哪一种更合理？各有什么利
       <categories>
         <category>Tech</category>
       </categories>
+  </entry>
+  <entry>
+    <title>关于数据一致性</title>
+    <url>/20220717-about-data-consistency/</url>
+    <content><![CDATA[1. 背景电商场景下的订单系统往往会有很多查询需求单体数据库无法满足大量数据存储、各种复杂查询
+2. 方案待更新
+3. 总结待更新
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>存储</tag>
+      </tags>
   </entry>
   <entry>
     <title>关于互联网医疗</title>
@@ -7032,17 +7046,48 @@ gitbook
       </categories>
   </entry>
   <entry>
-    <title>关于数据一致性</title>
-    <url>/20220717-about-data-consistency/</url>
-    <content><![CDATA[1. 背景电商场景下的订单系统往往会有很多查询需求单体数据库无法满足大量数据存储、各种复杂查询
-2. 方案待更新
-3. 总结待更新
+    <title>为什么要写博客？</title>
+    <url>/20240303-about-write-blog/</url>
+    <content><![CDATA[之前我也有想过一些写博客的好处：
+
+知识共享：把解决问题的过程记录下来，方便自己后续翻阅，也帮助他人解决问题。
+教学相长：把学到的知识系统整理出来进行分享，发现盲区立马查缺补漏。
+展示自我：可以在简历上放一个博客链接，让聘用单位有机会更多地了解你。
+锻炼表达：提高写作水平，让复杂的文字简单化，整理思路。
+
+在看《软技能2》这本书的时候，发现里面提到很多博客相关的内容。不管是在『营销』还是在『学习』相关的模块上，都频繁提到。
+《软技能2》中比较系统的说法
+
+
+通过博客进行自我营销
+博客可以让他人更了解你，因此会积累名声&#x2F;带来机会
+让你成为更好的软件开发人员和传道者，能带给你许多意想不到的机会。
+很多技术大牛都有技术博客，想想为什么？
+许多著名的软件开发人员直接靠成功的博客赢得口碑。
+博客有一个好处是你无法轻易抹杀的——提高你的沟通技巧。
+组织自己的思想，并将其转化为文字，是一项颇具难度却也极具价值的技能。
+定期更新博客，有助于持续刷新自己的技能，保证自己处于所在行业领域的前沿。
+学习如何写博客实际上都能帮你写出更好的代码，因为你能更轻松地传达自己的意图。
+博客还能帮你更好地传达自己的想法，令想法更有说服力。
+打造成功博客的最大秘诀有且仅有一个——持之以恒。
+强烈建议一周更新一次博客。
+高质量内容的内容才能让你的博客获得成功，想想别人看你博客能获得什么？
+初始阶段，可以通过评论他人博客给自己引流。
+可以撰写博客文章，作为对别人的某篇博客文章的回应(引流效果好)。
+
+《软技能2》建议采取行动开始写博客：
+
+看看你喜欢的博客，试着列出更新频率和文章的平均长度
+开始写博客，制订一个时间表，强迫自己将来坚持写博客。
+承诺至少更新一年博客，大多数人坚持一年作用就会看到相应的效果。
+创建一个待办列表，有新的想法就往里面添加，在需要写的时候就可以挑一个写。
+
 ]]></content>
       <categories>
-        <category>Tech</category>
+        <category>Growth</category>
       </categories>
       <tags>
-        <tag>存储</tag>
+        <tag>成长</tag>
       </tags>
   </entry>
   <entry>
@@ -7682,51 +7727,6 @@ Brooks 说软件工程的困难是可命名的、结构性的、可以被面对�
         <tag>AI 工程</tag>
         <tag>Agent</tag>
         <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>为什么要写博客？</title>
-    <url>/20240303-about-write-blog/</url>
-    <content><![CDATA[之前我也有想过一些写博客的好处：
-
-知识共享：把解决问题的过程记录下来，方便自己后续翻阅，也帮助他人解决问题。
-教学相长：把学到的知识系统整理出来进行分享，发现盲区立马查缺补漏。
-展示自我：可以在简历上放一个博客链接，让聘用单位有机会更多地了解你。
-锻炼表达：提高写作水平，让复杂的文字简单化，整理思路。
-
-在看《软技能2》这本书的时候，发现里面提到很多博客相关的内容。不管是在『营销』还是在『学习』相关的模块上，都频繁提到。
-《软技能2》中比较系统的说法
-
-
-通过博客进行自我营销
-博客可以让他人更了解你，因此会积累名声&#x2F;带来机会
-让你成为更好的软件开发人员和传道者，能带给你许多意想不到的机会。
-很多技术大牛都有技术博客，想想为什么？
-许多著名的软件开发人员直接靠成功的博客赢得口碑。
-博客有一个好处是你无法轻易抹杀的——提高你的沟通技巧。
-组织自己的思想，并将其转化为文字，是一项颇具难度却也极具价值的技能。
-定期更新博客，有助于持续刷新自己的技能，保证自己处于所在行业领域的前沿。
-学习如何写博客实际上都能帮你写出更好的代码，因为你能更轻松地传达自己的意图。
-博客还能帮你更好地传达自己的想法，令想法更有说服力。
-打造成功博客的最大秘诀有且仅有一个——持之以恒。
-强烈建议一周更新一次博客。
-高质量内容的内容才能让你的博客获得成功，想想别人看你博客能获得什么？
-初始阶段，可以通过评论他人博客给自己引流。
-可以撰写博客文章，作为对别人的某篇博客文章的回应(引流效果好)。
-
-《软技能2》建议采取行动开始写博客：
-
-看看你喜欢的博客，试着列出更新频率和文章的平均长度
-开始写博客，制订一个时间表，强迫自己将来坚持写博客。
-承诺至少更新一年博客，大多数人坚持一年作用就会看到相应的效果。
-创建一个待办列表，有新的想法就往里面添加，在需要写的时候就可以挑一个写。
-
-]]></content>
-      <categories>
-        <category>Growth</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
       </tags>
   </entry>
   <entry>
@@ -9345,6 +9345,38 @@ CPU参数对比
       </tags>
   </entry>
   <entry>
+    <title>centos更换yum源为阿里云 - 三步搞定</title>
+    <url>/20170217-centos%E6%9B%B4%E6%8D%A2yum%E6%BA%90%E4%B8%BA%E9%98%BF%E9%87%8C%E4%BA%91-%E4%B8%89%E9%83%A8%E6%90%9E%E5%AE%9A/</url>
+    <content><![CDATA[阿里云是最近新出的一个镜像源。得益于阿里云的高速发展，这么大的需求，肯定会推出自己的镜像源。阿里云Linux安装镜像源地址：http://mirrors.aliyun.com/
+CentOS系统更换软件安装源
+第一步：备份你的原镜像文件，以免出错后可以恢复。
+1、备份mv &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo.backup
+2、下载新的CentOS-Base.repo 到&#x2F;etc&#x2F;yum.repos.d&#x2F;
+（如果无wget命令，底部有具体说明）
+CentOS 5
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-5.repo
+CentOS 6
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
+CentOS 7
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+3、之后运行yum makecache生成缓存
+
+ps：如果你跟我一样苦逼：
+-bash: wget: command not found
+然后：
+yum -y install wget #失败
+那么你可以直接选择上面对应系统的文件下载链接
+下载好文件之后改名为CentOS-Base.repo
+直接放到&#x2F;etc&#x2F;yum.repos.d&#x2F;目录下即可
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>clash 杂记</title>
     <url>/20260530-change-clash-domain/</url>
     <content><![CDATA[曾几何时，觉得配置 v2ray 等这些太费劲，都是请朋友帮忙。
@@ -9429,38 +9461,6 @@ IOT 设备罢工，感应开关灯之类的没法用，稍微有点影响体验
       </tags>
   </entry>
   <entry>
-    <title>centos更换yum源为阿里云 - 三步搞定</title>
-    <url>/20170217-centos%E6%9B%B4%E6%8D%A2yum%E6%BA%90%E4%B8%BA%E9%98%BF%E9%87%8C%E4%BA%91-%E4%B8%89%E9%83%A8%E6%90%9E%E5%AE%9A/</url>
-    <content><![CDATA[阿里云是最近新出的一个镜像源。得益于阿里云的高速发展，这么大的需求，肯定会推出自己的镜像源。阿里云Linux安装镜像源地址：http://mirrors.aliyun.com/
-CentOS系统更换软件安装源
-第一步：备份你的原镜像文件，以免出错后可以恢复。
-1、备份mv &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo.backup
-2、下载新的CentOS-Base.repo 到&#x2F;etc&#x2F;yum.repos.d&#x2F;
-（如果无wget命令，底部有具体说明）
-CentOS 5
-wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-5.repo
-CentOS 6
-wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
-CentOS 7
-wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-3、之后运行yum makecache生成缓存
-
-ps：如果你跟我一样苦逼：
--bash: wget: command not found
-然后：
-yum -y install wget #失败
-那么你可以直接选择上面对应系统的文件下载链接
-下载好文件之后改名为CentOS-Base.repo
-直接放到&#x2F;etc&#x2F;yum.repos.d&#x2F;目录下即可
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>城市与抱负：环境在说什么</title>
     <url>/20260930-cities-and-ambition/</url>
     <content><![CDATA[
@@ -9520,6 +9520,25 @@ Cities and Ambition · Paul Graham，2008 年 5 月，城市信息的完整清�
       </categories>
       <tags>
         <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>count函数效率问题 - 了解count函数</title>
+    <url>/20170303-count%E5%87%BD%E6%95%B0%E6%95%88%E7%8E%87%E9%97%AE%E9%A2%98%20-%20%E4%BA%86%E8%A7%A3count%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[count函数的作用想要真正的理解count函数，我们就必须明白count函数的作用。
+作用一：统计某一列非空(not null)值得数量，即统计某列有值得结果数,使用count(col)。
+作用二：统计结果集的行数，此时不用管某列是否为null值。即使用count(*).
+明白了这点，我们就应该知道MySQL的count(*)并不是想象中的那样，统计每一列的值，而是直接忽视掉所有列，直接统计行数，那么它的效率肯定是很高的。
+但是有一点，当col指定了该字段为NOT NULL时实际上，MySQL会自动将count(col)转为count(*),但是这样也同样耗费了些时间，如果col没有指定为NOT NULL的话，那么效率就更低了，MySQL就必须要判断每一行的值是否为空。
+所以综上所述，如果是要统计行数最好优先使用select count(*)
+当统计某一列等于多少的值得时候可以使用下面两种方法:
+SELECT SUM(IF(id = 23,1,0)) FROM table SELECT COUNT(id = 23 OR NULL) FROM table 
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
       </tags>
   </entry>
   <entry>
@@ -9671,25 +9690,6 @@ Cities and Ambition · Paul Graham，2008 年 5 月，城市信息的完整清�
       </categories>
       <tags>
         <tag>成长</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>count函数效率问题 - 了解count函数</title>
-    <url>/20170303-count%E5%87%BD%E6%95%B0%E6%95%88%E7%8E%87%E9%97%AE%E9%A2%98%20-%20%E4%BA%86%E8%A7%A3count%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[count函数的作用想要真正的理解count函数，我们就必须明白count函数的作用。
-作用一：统计某一列非空(not null)值得数量，即统计某列有值得结果数,使用count(col)。
-作用二：统计结果集的行数，此时不用管某列是否为null值。即使用count(*).
-明白了这点，我们就应该知道MySQL的count(*)并不是想象中的那样，统计每一列的值，而是直接忽视掉所有列，直接统计行数，那么它的效率肯定是很高的。
-但是有一点，当col指定了该字段为NOT NULL时实际上，MySQL会自动将count(col)转为count(*),但是这样也同样耗费了些时间，如果col没有指定为NOT NULL的话，那么效率就更低了，MySQL就必须要判断每一行的值是否为空。
-所以综上所述，如果是要统计行数最好优先使用select count(*)
-当统计某一列等于多少的值得时候可以使用下面两种方法:
-SELECT SUM(IF(id = 23,1,0)) FROM table SELECT COUNT(id = 23 OR NULL) FROM table 
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
       </tags>
   </entry>
   <entry>
@@ -10844,6 +10844,60 @@ Eino Releases · 各版本 API 变更与迁移说明
       </tags>
   </entry>
   <entry>
+    <title>找到好的学习方法</title>
+    <url>/20200226-find-a-good-way-to-learn/</url>
+    <content><![CDATA[1. 时间与学习1.1 时间是公平的时间是公平的，对每个人都一样，不同之处在于每个人单位时间的产出值会有差异。一直在寻找适合于自己的学习方法以提高时间的利用效率，以便不影响诗和远方&#x3D;&#x3D;奈何目前也没有太多满意的答案，或许生命的意义就是在于探索未知而又刺激的世界。
+1.2 相关书籍与思想分享一些文字，提到了一些好的学习方法，抛砖引玉，共勉：
+
+《贫穷的本质》贫穷的本质是认知。其实很多时候真的是认知，方法论决定了一个人可以走多远；
+《刻意练习》原地踏步的练习是没意义的，大众眼里一万小时定律基本上是错误的，需要的是有进步练习；
+《如何阅读一本书》风靡美国的阅读入门书籍，通过主题阅读，交流不同的人不同的的看法，对比吸收;
+《程序员的职业素养》有提到卡塔练习，提高我们的肌肉反应，让写代码像聊天打字一遍的顺畅;
+《学习之道》十个不错的方法：
+运用回想
+知识组块
+简化类比
+方法交替
+间隔重复
+注意休息
+心理对照
+自我测试
+保持专注
+困难先行
+
+
+
+2. 高效学习的秘籍早些天看到一篇不错的帖子对我感触最深的就是，不要看不起薄的教材。标题：如果高效学习有什么秘诀的话，那就都在这里了：）
+
+
+不要完美主义！
+不要过度“学习路径依赖”，学习要冲着自己的目标去。
+不要迷信权威的“好”教材。
+不要看不起“薄薄”的“傻”教材，这些你看不起的学习材料，可能是你入门某个领域的关键。
+不要迷信单一教材。
+实践！
+debug非常非常重要。
+量变到质变。
+最后，一定要相信时间的力量。
+
+3. 参考
+《贫穷的本质》
+《刻意练习》
+《学习之道》
+《如果阅读一本书》
+如果高效学习有什么秘诀的话，那就都在这里了：）
+我的书单
+
+]]></content>
+      <categories>
+        <category>RandomThoughts</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+        <tag>效率</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【笔记】拥抱 LLM 黑盒</title>
     <url>/20260307-embracing-the-black-box-of-LLM/</url>
     <content><![CDATA[1. 笔记
@@ -11086,60 +11140,6 @@ Citrini Research 曾写过一篇关于”2028 年全球智力危机”的深度�
         <tag>AI 工程</tag>
         <tag>Agent</tag>
         <tag>LLM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>找到好的学习方法</title>
-    <url>/20200226-find-a-good-way-to-learn/</url>
-    <content><![CDATA[1. 时间与学习1.1 时间是公平的时间是公平的，对每个人都一样，不同之处在于每个人单位时间的产出值会有差异。一直在寻找适合于自己的学习方法以提高时间的利用效率，以便不影响诗和远方&#x3D;&#x3D;奈何目前也没有太多满意的答案，或许生命的意义就是在于探索未知而又刺激的世界。
-1.2 相关书籍与思想分享一些文字，提到了一些好的学习方法，抛砖引玉，共勉：
-
-《贫穷的本质》贫穷的本质是认知。其实很多时候真的是认知，方法论决定了一个人可以走多远；
-《刻意练习》原地踏步的练习是没意义的，大众眼里一万小时定律基本上是错误的，需要的是有进步练习；
-《如何阅读一本书》风靡美国的阅读入门书籍，通过主题阅读，交流不同的人不同的的看法，对比吸收;
-《程序员的职业素养》有提到卡塔练习，提高我们的肌肉反应，让写代码像聊天打字一遍的顺畅;
-《学习之道》十个不错的方法：
-运用回想
-知识组块
-简化类比
-方法交替
-间隔重复
-注意休息
-心理对照
-自我测试
-保持专注
-困难先行
-
-
-
-2. 高效学习的秘籍早些天看到一篇不错的帖子对我感触最深的就是，不要看不起薄的教材。标题：如果高效学习有什么秘诀的话，那就都在这里了：）
-
-
-不要完美主义！
-不要过度“学习路径依赖”，学习要冲着自己的目标去。
-不要迷信权威的“好”教材。
-不要看不起“薄薄”的“傻”教材，这些你看不起的学习材料，可能是你入门某个领域的关键。
-不要迷信单一教材。
-实践！
-debug非常非常重要。
-量变到质变。
-最后，一定要相信时间的力量。
-
-3. 参考
-《贫穷的本质》
-《刻意练习》
-《学习之道》
-《如果阅读一本书》
-如果高效学习有什么秘诀的话，那就都在这里了：）
-我的书单
-
-]]></content>
-      <categories>
-        <category>RandomThoughts</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-        <tag>效率</tag>
       </tags>
   </entry>
   <entry>
@@ -12232,21 +12232,6 @@ GitHub 上各种学习类型的仓库之推荐书籍
       </tags>
   </entry>
   <entry>
-    <title>英语文档：how-to-manage-a-redis-database.pdf</title>
-    <url>/20201010-how-to-manage-a-redis-database/</url>
-    <content><![CDATA[当初这个文档应该是在『科技爱好者周刊』上还是哪里发现的看这个文档本来的目的是每天坚持阅读英文文档技术文档一般都比较简洁易懂，英语是一个长期的过程，还得继续坚持阅读~
-看的过程中发现，结合一定的场景，和示例和官方文档相比，没有那么枯燥，也更好理解甚至有一些之前未曾关注的用法让我感到惊艳
-所以推荐一下
-下载地址：how-to-manage-a-redis-database.pdf
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>效率</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>怎么移除TVOC(甲醛等)</title>
     <url>/20240303-how-to-remove-TOVC/</url>
     <content><![CDATA[1. 什么是 TVOCTVOC 是“Total Volatile Organic Compounds”的英文缩写，意思是总挥发性有机化合物。包含：苯类、烷类、芳烃类、烯类、卤烃类、酯类、醛类、酮类和其他。
@@ -12419,6 +12404,76 @@ HDMI2.1
       </tags>
   </entry>
   <entry>
+    <title>英语文档：how-to-manage-a-redis-database.pdf</title>
+    <url>/20201010-how-to-manage-a-redis-database/</url>
+    <content><![CDATA[当初这个文档应该是在『科技爱好者周刊』上还是哪里发现的看这个文档本来的目的是每天坚持阅读英文文档技术文档一般都比较简洁易懂，英语是一个长期的过程，还得继续坚持阅读~
+看的过程中发现，结合一定的场景，和示例和官方文档相比，没有那么枯燥，也更好理解甚至有一些之前未曾关注的用法让我感到惊艳
+所以推荐一下
+下载地址：how-to-manage-a-redis-database.pdf
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>效率</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>怎么使用森海克斯 8800PRO 对讲机</title>
+    <url>/20250825-how_to_use_senhaix_8800pro/</url>
+    <content><![CDATA[
+长按 menu 切换频率模式&#x2F;信道模式
+
+
+频率模式：自由输入( eg:438.500 北京直频 )
+信道模式：类似于书签，是之前保存好的频率
+
+
+森海克斯8800PRO蓝牙写频
+
+
+写频软件
+iOS：app store “SHX8800” (我没成功写频，暂时用安卓解决)
+
+  
+
+安卓：官网下载
+
+
+操作步骤
+对讲机打开蓝牙”数据模式”
+手机连接对讲机
+读频
+基于读频修改记录
+如果不先读频，大概率写入 88% 写入的时候程序会崩溃
+
+
+修改完成后写入
+
+
+
+写频里面的一些细节后续有空再补充，写频的目的也就是为了方便录入很多频率。毕竟对讲机操作还是没有 app 操作方便。
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>业余无线电</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>html - 原生Javascript动态显示当前时间和日期</title>
+    <url>/20170412-html%20-%20%E5%8E%9F%E7%94%9FJavascript%E5%8A%A8%E6%80%81%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F/</url>
+    <content><![CDATA[显示当前时间：
+2017年04月12日 18:26:37 星期三
+示例如下：
+
+&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;title&gt;显示当前时间 - 原生Javascript&lt;/title&gt;&lt;script type=&quot;text/Javascript&quot; language=&quot;Javascript&quot;&gt;    function show_cur_times()&#123;    //获取当前日期    var date_time = new Date();    //定义星期    var week;    //switch判断    switch (date_time.getDay())&#123;    case 1: week=&quot;星期一&quot;; break;    case 2: week=&quot;星期二&quot;; break;    case 3: week=&quot;星期三&quot;; break;    case 4: week=&quot;星期四&quot;; break;    case 5: week=&quot;星期五&quot;; break;    case 6: week=&quot;星期六&quot;; break;    default:week=&quot;星期天&quot;; break;    &#125;    //年    var year = date_time.getFullYear();     	//判断小于10，前面补0    if(year&lt;10)&#123;     	year=&quot;0&quot;+year;    &#125;    //月    var month = date_time.getMonth()+1;     	//判断小于10，前面补0    if(month&lt;10)&#123;    month=&quot;0&quot;+month;    &#125;    //日    var day = date_time.getDate();     	//判断小于10，前面补0    if(day&lt;10)&#123;     	day=&quot;0&quot;+day;    &#125;    //时    var hours =date_time.getHours();     	//判断小于10，前面补0    if(hours&lt;10)&#123;     	hours=&quot;0&quot;+hours;    &#125;    //分    var minutes =date_time.getMinutes();     	//判断小于10，前面补0    if(minutes&lt;10)&#123;     	minutes=&quot;0&quot;+minutes;    &#125;    //秒    var seconds=date_time.getSeconds();     	//判断小于10，前面补0    if(seconds&lt;10)&#123;     	seconds=&quot;0&quot;+seconds;    &#125;    //拼接年月日时分秒    var date_str = year+&quot;年&quot;+month+&quot;月&quot;+day+&quot;日 &quot;+hours+&quot;:&quot;+minutes+&quot;:&quot;+seconds+&quot; &quot;+week;    //显示在id为showtimes的容器里    document.getElementById(&quot;showtimes&quot;).innerHTML= date_str;    &#125;    //设置1秒调用一次show_cur_times函数    setInterval(&quot;show_cur_times()&quot;,100);    &lt;/script&gt;&lt;/head&gt;&lt;body&gt;显示当前时间：&lt;p id=&quot;showtimes&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>知识管理与消费：怎么用好书签和笔记？</title>
     <url>/20251108-how_to_use_bookmarks_and_notes_effectively/</url>
     <content><![CDATA[1. 知识管理：书签、笔记书签工具：Chrome、Notion笔记工具：Apple 备忘录、Notion、微博、Microsoft TODO、滴答清单、有道云笔记
@@ -12481,85 +12536,6 @@ QBQ 问题背后的问题：改变思维模式，提升个人责任感
       </tags>
   </entry>
   <entry>
-    <title>怎么使用森海克斯 8800PRO 对讲机</title>
-    <url>/20250825-how_to_use_senhaix_8800pro/</url>
-    <content><![CDATA[
-长按 menu 切换频率模式&#x2F;信道模式
-
-
-频率模式：自由输入( eg:438.500 北京直频 )
-信道模式：类似于书签，是之前保存好的频率
-
-
-森海克斯8800PRO蓝牙写频
-
-
-写频软件
-iOS：app store “SHX8800” (我没成功写频，暂时用安卓解决)
-
-  
-
-安卓：官网下载
-
-
-操作步骤
-对讲机打开蓝牙”数据模式”
-手机连接对讲机
-读频
-基于读频修改记录
-如果不先读频，大概率写入 88% 写入的时候程序会崩溃
-
-
-修改完成后写入
-
-
-
-写频里面的一些细节后续有空再补充，写频的目的也就是为了方便录入很多频率。毕竟对讲机操作还是没有 app 操作方便。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>业余无线电</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>html - 原生Javascript动态显示当前时间和日期</title>
-    <url>/20170412-html%20-%20%E5%8E%9F%E7%94%9FJavascript%E5%8A%A8%E6%80%81%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F/</url>
-    <content><![CDATA[显示当前时间：
-2017年04月12日 18:26:37 星期三
-示例如下：
-
-&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;title&gt;显示当前时间 - 原生Javascript&lt;/title&gt;&lt;script type=&quot;text/Javascript&quot; language=&quot;Javascript&quot;&gt;    function show_cur_times()&#123;    //获取当前日期    var date_time = new Date();    //定义星期    var week;    //switch判断    switch (date_time.getDay())&#123;    case 1: week=&quot;星期一&quot;; break;    case 2: week=&quot;星期二&quot;; break;    case 3: week=&quot;星期三&quot;; break;    case 4: week=&quot;星期四&quot;; break;    case 5: week=&quot;星期五&quot;; break;    case 6: week=&quot;星期六&quot;; break;    default:week=&quot;星期天&quot;; break;    &#125;    //年    var year = date_time.getFullYear();     	//判断小于10，前面补0    if(year&lt;10)&#123;     	year=&quot;0&quot;+year;    &#125;    //月    var month = date_time.getMonth()+1;     	//判断小于10，前面补0    if(month&lt;10)&#123;    month=&quot;0&quot;+month;    &#125;    //日    var day = date_time.getDate();     	//判断小于10，前面补0    if(day&lt;10)&#123;     	day=&quot;0&quot;+day;    &#125;    //时    var hours =date_time.getHours();     	//判断小于10，前面补0    if(hours&lt;10)&#123;     	hours=&quot;0&quot;+hours;    &#125;    //分    var minutes =date_time.getMinutes();     	//判断小于10，前面补0    if(minutes&lt;10)&#123;     	minutes=&quot;0&quot;+minutes;    &#125;    //秒    var seconds=date_time.getSeconds();     	//判断小于10，前面补0    if(seconds&lt;10)&#123;     	seconds=&quot;0&quot;+seconds;    &#125;    //拼接年月日时分秒    var date_str = year+&quot;年&quot;+month+&quot;月&quot;+day+&quot;日 &quot;+hours+&quot;:&quot;+minutes+&quot;:&quot;+seconds+&quot; &quot;+week;    //显示在id为showtimes的容器里    document.getElementById(&quot;showtimes&quot;).innerHTML= date_str;    &#125;    //设置1秒调用一次show_cur_times函数    setInterval(&quot;show_cur_times()&quot;,100);    &lt;/script&gt;&lt;/head&gt;&lt;body&gt;显示当前时间：&lt;p id=&quot;showtimes&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>IDEA failed to create jvm:error code -1</title>
-    <url>/20170303-idea%20failed%20to%20create%20jvm%20error%20code%20-1/</url>
-    <content><![CDATA[今天先更改了 idea64.exe.vmoptions 这个配置文件
-一直么有重启，后来就安装了个插件重启一下，结果就泪崩了
-一直出现这个错误总以为是环境变量配置的问题，或者是文件损坏了什么
-重启，重装jdk，重新配置什么都试过，不管用。
-后来替换了配置文件就好了！！！
-解决方案配置文件路径：
-\IDEA HOME\bin\idea64.exe.vmoptions或者\IDEA HOME\bin\idea.exe.vmoptions
-默认配置文件内容如下：
-32bit
--server-Xms128m-Xmx512m-XX:ReservedCodeCacheSize=240m-XX:+UseConcMarkSweepGC-XX:SoftRefLRUPolicyMSPerMB=50-ea-Dsun.io.useCanonCaches=false-DJava.net.preferIPv4Stack=true-XX:+HeapDumpOnOutOfMemoryError-XX:-OmitStackTraceInFastThrow
-64bit
--Xms128m-Xmx750m-XX:ReservedCodeCacheSize=240m-XX:+UseConcMarkSweepGC-XX:SoftRefLRUPolicyMSPerMB=50-ea-Dsun.io.useCanonCaches=false-DJava.net.preferIPv4Stack=true-XX:+HeapDumpOnOutOfMemoryError-XX:-OmitStackTraceInFastThrow
-
-by the way:
-IDEA 写博客真是舒服啊~
-完全不用切换来切换去的！
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
     <title>iTerm2自动连接远程服务器</title>
     <url>/20180720-iTerm2%E8%87%AA%E5%8A%A8%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
     <content><![CDATA[mac自带的终端总感觉不大好用，于是乎就被安利了iTerm2
@@ -12592,6 +12568,30 @@ sudo cp auto_ssh.sh /usr/local/bin/cd /usr/local/bin/sudo chmod +x auto_ssh.sh
       </categories>
   </entry>
   <entry>
+    <title>IDEA failed to create jvm:error code -1</title>
+    <url>/20170303-idea%20failed%20to%20create%20jvm%20error%20code%20-1/</url>
+    <content><![CDATA[今天先更改了 idea64.exe.vmoptions 这个配置文件
+一直么有重启，后来就安装了个插件重启一下，结果就泪崩了
+一直出现这个错误总以为是环境变量配置的问题，或者是文件损坏了什么
+重启，重装jdk，重新配置什么都试过，不管用。
+后来替换了配置文件就好了！！！
+解决方案配置文件路径：
+\IDEA HOME\bin\idea64.exe.vmoptions或者\IDEA HOME\bin\idea.exe.vmoptions
+默认配置文件内容如下：
+32bit
+-server-Xms128m-Xmx512m-XX:ReservedCodeCacheSize=240m-XX:+UseConcMarkSweepGC-XX:SoftRefLRUPolicyMSPerMB=50-ea-Dsun.io.useCanonCaches=false-DJava.net.preferIPv4Stack=true-XX:+HeapDumpOnOutOfMemoryError-XX:-OmitStackTraceInFastThrow
+64bit
+-Xms128m-Xmx750m-XX:ReservedCodeCacheSize=240m-XX:+UseConcMarkSweepGC-XX:SoftRefLRUPolicyMSPerMB=50-ea-Dsun.io.useCanonCaches=false-DJava.net.preferIPv4Stack=true-XX:+HeapDumpOnOutOfMemoryError-XX:-OmitStackTraceInFastThrow
+
+by the way:
+IDEA 写博客真是舒服啊~
+完全不用切换来切换去的！
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>idea jrebel 7.0 破解 - 获取JRebel激活码</title>
     <url>/20170303-idea%20jrebel%207.0%20%E7%A0%B4%E8%A7%A3%20-%20%E8%8E%B7%E5%8F%96JRebel%E6%BF%80%E6%B4%BB%E7%A0%81/</url>
     <content><![CDATA[其实这玩意完全不要破解，直接官网注册就会给一个注册码
@@ -12599,23 +12599,6 @@ sudo cp auto_ssh.sh /usr/local/bin/cd /usr/local/bin/sudo chmod +x auto_ssh.sh
 注册完了之后在IDEA里面去设置，会提醒激活。
 tomcat部署了项目之后，点击JR启动是可以热部署的！！！
 改了Java代码都不要重新启动项目，哈哈！！！
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>idea启动tomcat服务失败 SEVERE [RMI TCP Connection(3)-127.0.0.1]</title>
-    <url>/20170215-idea%E5%90%AF%E5%8A%A8tomcat%E6%9C%8D%E5%8A%A1%E5%A4%B1%E8%B4%A5-SEVERE-RMI-TCP-Connection-3-127-0-0-1/</url>
-    <content><![CDATA[工程是从eclipse生成的，用idea开发。
-重复了一遍以往正常的不能再正常了的导入配置，结果遇到了如下问题：
-SEVERE [RMI TCP Connection(3)-127.0.0.1] 
-15-Feb-2017 11:05:25.993 严重 [RMI TCP Connection(3)-127.0.0.1] org.apache.catalina.core.StandardContext.listenerStart Skipped installing application listeners due to previous error(s)
-
-删除导入项目中的web.xml文件因为idea要用的东西自己会自动生成
-然后就搞定了这个纠结我一天的问题
-我是百度搜索这个错误：RMI TCP Connection(3)-127.0.0.1
-得到的答案，感谢10100：查看原文
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -12706,173 +12689,21 @@ SEVERE [RMI TCP Connection(3)-127.0.0.1]
       </tags>
   </entry>
   <entry>
-    <title>Jev 是什么，和千问小模型相比差在哪</title>
-    <url>/20260919-jev-decision-model/</url>
-    <content><![CDATA[1. 缘起2026 年 9 月 15 日，TypeSafe AI 发布模型 Jev。它不生成文字，给定一段材料与若干预设问题，直接返回选项和概率。创始人 Diogo Almeida 为 InstructGPT 论文作者之一。发布三天内，GitHub 上出现十余个围绕它的项目。
-它要解决的问题：Agent 跑一次任务，中间要做几十上百次小判断，比如下一步点哪个按钮、这封邮件归哪个队列、这条命令危不危险。这些判断的答案通常只是一个选项或一个数，但交给大模型做，模型得先把答案写成一句话，程序再解析回来。成本花在两处用不上的地方：把答案写成文字，以及每问一个问题都把同一份材料重读一遍。
+    <title>idea启动tomcat服务失败 SEVERE [RMI TCP Connection(3)-127.0.0.1]</title>
+    <url>/20170215-idea%E5%90%AF%E5%8A%A8tomcat%E6%9C%8D%E5%8A%A1%E5%A4%B1%E8%B4%A5-SEVERE-RMI-TCP-Connection-3-127-0-0-1/</url>
+    <content><![CDATA[工程是从eclipse生成的，用idea开发。
+重复了一遍以往正常的不能再正常了的导入配置，结果遇到了如下问题：
+SEVERE [RMI TCP Connection(3)-127.0.0.1] 
+15-Feb-2017 11:05:25.993 严重 [RMI TCP Connection(3)-127.0.0.1] org.apache.catalina.core.StandardContext.listenerStart Skipped installing application listeners due to previous error(s)
 
-
-2. 它是什么2.1 和传统大模型的区别大模型处理文字分两步。
-第一步是读：把输入的文字逐层算一遍，转成模型内部的表示。这一步叫编码（prefill）。
-第二步是写：在读过之后得到的内部表示上，一个字一个字地生成答案。这一步叫解码（decode）。
-传统大模型两步都做。Jev 只做第一步，读完直接在内部表示上读出答案的概率。TypeSafe 官方把这条路线称作 System One，和生成类模型边写边想的 System Two 相对。
-传统 LLM：读完还要写  材料 + 问题       │       ▼   读（编码）       │       ▼   写（解码）          &#123; → &quot; → q → u → e → u → e → &quot; → …   （循环）            每写一个字，都要接回上文才能算下一个       │       ▼  &#123;&quot;queue&quot;: &quot;payments&quot;&#125;       │       ▼   程序解析这段文本───────────────────────────────────Jev：读完直接给答案  材料 + 问题       │       ▼   读（编码）       │       ▼   读出概率           payments 0.91 / account 0.06 / other 0.03
-
-「读」和「写」的耗时性质不同。
-读是并行的。整段材料一起算，整个模型只需从显存读进来一次，这一次读入就用在了全部字符上。字符越多，这笔开销摊得越薄。
-写是串行的。每写一个字都要把整个模型重新读一遍，而这一遍里只算出一个字，算力基本用不上。写 N 个字，模型就读 N 遍。
-一份讲解给了具体比例：在一张 A100 显卡上，读可以一次处理 500 个字符、耗时约 50 毫秒，摊到每个字符 0.1 毫秒；写每产出一个字符要 10 毫秒，差两个数量级。实际服务会把多个请求攒成一批一起算来摊薄这笔开销，但单个请求上的差距就是这么悬殊。
-所以生成类模型的延迟随输出长度增长，Jev 没有这一段。旁证：200 个选项的问题和 2 个选项的问题，返回延迟几乎一样。
-2.2 输入和输出一次请求分两段，state 放材料，questions 放问题。questions 里每一项就是一个问题，各带类型、问法和预设答案：
-&#123;  &quot;state&quot;: &quot;我的提现连续失败三次，银行说一切正常&quot;,  &quot;questions&quot;: &#123;    &quot;queue&quot;: &#123;      &quot;type&quot;: &quot;choice&quot;,      &quot;instructions&quot;: &quot;分给哪个团队？&quot;,      &quot;criteria&quot;: &#123; &quot;payments&quot;: &quot;提现失败&quot;, &quot;account&quot;: &quot;登录&quot;, &quot;other&quot;: &quot;其他&quot; &#125;    &#125;,    &quot;escalate&quot;: &#123; &quot;type&quot;: &quot;noul&quot;, &quot;instructions&quot;: &quot;需要人工介入吗？&quot; &#125;  &#125;&#125;
-
-问题分三类：Choice 从候选里选一个，上限 255 个；Score 按有序等级打分，2 至 10 级；Noul 做是&#x2F;否判断。
-响应按问题 id 逐项返回，没有文本：
-&#123;  &quot;model&quot;: &quot;jev-latest&quot;,  &quot;answers&quot;: &#123;    &quot;queue&quot;: &#123;      &quot;type&quot;: &quot;choice&quot;,      &quot;choice&quot;: &quot;payments&quot;,      &quot;confidence&quot;: 0.87,      &quot;probabilities&quot;: &#123; &quot;payments&quot;: 0.91, &quot;account&quot;: 0.06, &quot;other&quot;: 0.03 &#125;    &#125;,    &quot;escalate&quot;: &#123; &quot;type&quot;: &quot;noul&quot;, &quot;noul&quot;: 0.42 &#125;  &#125;,  &quot;usage&quot;: &#123; &quot;input_tokens&quot;: 96, &quot;output_tokens&quot;: 34 &#125;&#125;
-
-answers 下每一题返回一个对象：Choice 给选中的选项和各选项概率，Score 给加权后的分数和等级说明，Noul 只给一个 0 到 1 的数，是答案为「是」的概率。
-0.91 这个数可以直接接阈值。Archer Hume 的报告里给了推法：设误升级一次代价为 1，漏掉一个紧急工单代价为 9，那么 p(紧急) &gt; 0.1 时就该升级。代价比一变，阈值跟着变。
-这条策略成立的前提是概率可信：模型说 0.9 的那批样本里，得真有约九成判断正确。TypeSafe 称 Jev 的概率经 RLCD（面向校准决策的强化学习）训练，让概率在训练时就对齐真实结果。这个声称未经独立验证：官方没公开训练细节，公开的测量只有 Jev 自己的基准记录。
-还有两处容易看错。confidence 由 probabilities 的分布形状算出，集中就高、摊开就低，与「模型有多确定」不是一回事，Noul 类型没有这个字段。usage 里的 output_tokens 只是计费字段，不代表真生成了 token。
-结构和字段名照官方文档，示例数值是示意。
-2.3 一次读，多个问题同一份材料上往往要问好几件事。已部署的 pi-jev 每收到一条编码 Agent 要执行的命令，就同时问四件事：
-
-这条命令有破坏性吗
-会把本地数据或密钥发出去吗
-超出用户要求范围了吗
-用户如果不想要，损害有多大
-
-它给前三个问题各设了阈值，概率分别超过 0.90、0.70、0.85 就拦下这条命令。
-若分开调用，这段材料要被完整读四遍：
-传统 LLM：材料读 4 遍  问第 1 件     读材料 ──► 写答案  问第 2 件     读材料 ──► 写答案  问第 3 件     读材料 ──► 写答案  问第 4 件     读材料 ──► 写答案───────────────────────────────────Jev：材料读 1 遍  读材料（1 次）      │      ├─► 问题 1      ├─► 问题 2      ├─► 问题 3      └─► 问题 4          问题之间互不可见，只共享同一份材料
-
-问题之间互不可见，这一点有实测：把验证码写在另一个问题里，再问某个问题该验证码是什么，返回概率 0.00；把同一句移进 state，概率升到 0.90 以上。
-2.4 边界
-答案必须提前封闭，选项由调用方给出
-写不出任何文字
-没有推理过程，需要解释的场合用不了
-
-3. 和千问小模型相比差在哪最常被问到的问题：拿千问小模型来做同样的判断，效果是不是一样。把两者的差别按维度摆开：
-
-
-
-对比维度
-Jev
-千问小模型自建
-结论
-
-
-
-输出形态与解析
-直接读概率，无生成
-生成文本后解析，可用语法约束保证格式
-自建能复现
-
-
-多个问题的成本
-state 只读一次
-需自己复用材料读过的部分
-自建能复现
-
-
-响应速度
-官方 70～500 毫秒
-实测 1.023 秒
-自建慢一档
-
-
-判断准确率
-0.883，官方公布
-0.845，实测 4B &#x2F; 3090
-差 3.8 个点
-
-
-概率校准
-称经 RLCD 校准，未独立验证
-未复现，数值未校准
-Jev 独有
-
-
-部署方式
-托管服务，邀请制
-模型开源，单卡可跑
-各有取舍
-
-
-六项里，输出和成本两项能完全复现，速度和准确率能复现但各差一档，只有校准是 Jev 独有，而这一项恰好也没被独立验证过。所以「用千问也能做」这句话，除了校准之外基本成立。
-表里的数来自两个第三方项目：速度和准确率是 SemIf 测的（一张 3090、一个 4B 模型），校准是 SemIf 和 mini-Jev 的结论。自建那边是第三方在自己机器上跑，Jev 那边出自官方公布，两边不是同一条件。
-校准这行的差距，mini-Jev 给了对照：让模型生成概率数值，准确率只有 0.346；改成直接读选项打分，升到 0.896。
-官方还公布过 193.6 倍、444.6 倍的加速数字。这两个数字是自家设计的四类工作流上与特定模型比较的最大差距，换个任务不成立；官方基准里 Jev 得 67.8%，对照的前沿模型在 68%～74%，准确率处于中间。
-Jev 发布三天后，GitHub 上出现了照这套接口做的开源模型 Laya：权重 Apache-2.0 开放，HTTP 服务兼容 Jev 的 /v1/systemone 协议，模型是自己训练的另一套，但同样声称经 RLCD 校准。校准这一项因此有了能自己动手的对照。部署与实测另见《Jev 的开源替代 Laya：部署与实测》。
-4. 和现有 Agent 架构的结合点凡是「看一眼材料、做一个答案受限的判断」的步骤，都可能换成 Jev。按 Agent 循环里的位置排：
-
-
-
-在 Agent 里的位置
-判断什么
-现状
-
-
-
-入口 · 意图路由
-这条输入该走哪条链路
-jev-router 已落地
-
-
-循环内 · 下一步动作
-点哪个按钮、调哪个工具
-jev-browser 已落地
-
-
-循环内 · 是否继续
-这步完成了吗、要不要重试
-官方列出，无实例
-
-
-执行前 · 护栏
-这条命令危不危险
-pi-jev 已落地
-
-
-执行后 · 校验
-上一步输出对不对
-官方列出，无实例
-
-
-上下文 · 批次预筛
-哪些材料值得进上下文
-jev_map 已落地
-
-
-离线 · 批量标注
-大批材料跑同一组问题
-SemIf 实测用法
-
-
-意图路由对应表里第一行。官方有 Intent Routing 模式，实例是 jev-router，给 Claude Code 和 Codex 逐回合挑模型：简单的活给快档，难的给强档。
-执行前护栏对应表里第四行。这类判断原本靠规则或小模型，规则覆盖不了措辞变化，小模型在长文本上读不准。可用的是 pi-jev 的命令闸门，LangChain 的 AutoModeMiddleware 也能在执行前拦下工具调用。官方把这类用途归在 Universal Verification 下，范围更宽：验证其他 AI 的输入、抽取结果、推理链和工具调用。
-有个前提：Jev 发布才三天，表里的项目都是这三天里写的，没有一个有生产环境的运行时长。位置是按架构逻辑推的，不是从运行数据里总结的。
-5. 参考
-TypeSafe 官方文档 · API 契约、三种原语的定义，以及 confidence 是从概率分布算出的统计量
-TypeSafe AI primer · RLCD 与 RLHF、RLVR 的并列关系，官方一手
-TypeSafe Patterns · Intent Routing、Speculative Fan-Out 等模式的官方定义
-jev-router · 给 Claude Code 与 Codex 做逐回合模型路由
-LangChain TypeSafe 集成 · TypeSafeClassifier 与执行前拦截的 AutoModeMiddleware
-Archer Hume 逆向工程 · 200 选项与 2 选项延迟相同、问题隔离实验、由代价推阈值的例子；作者自述为黑盒推测，非官方披露
-SemIf · 单张 3090 复现同一接口，模型阶梯与共享 state 实测；项目自述为独立研究，与 TypeSafe 无关
-mini-Jev · 直接读选项打分与生成 JSON 的对照实验，预注册
-pi-jev · 编码 Agent 命令闸门的四个问题与实际阈值
-Prefill — Computational Deep Dive · 读与写两段为什么耗时差这么多，A100 上 500 字符读约 50 毫秒、单字符写约 10 毫秒的出处
-
+删除导入项目中的web.xml文件因为idea要用的东西自己会自动生成
+然后就搞定了这个纠结我一天的问题
+我是百度搜索这个错误：RMI TCP Connection(3)-127.0.0.1
+得到的答案，感谢10100：查看原文
 ]]></content>
       <categories>
         <category>Tech</category>
       </categories>
-      <tags>
-        <tag>AI 工程</tag>
-        <tag>Agent</tag>
-        <tag>LLM</tag>
-      </tags>
   </entry>
   <entry>
     <title>从零开始在孤岛统治一千人</title>
@@ -13057,6 +12888,175 @@ graph LR
       <tags>
         <tag>成长</tag>
         <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jev 是什么，和千问小模型相比差在哪</title>
+    <url>/20260919-jev-decision-model/</url>
+    <content><![CDATA[1. 缘起2026 年 9 月 15 日，TypeSafe AI 发布模型 Jev。它不生成文字，给定一段材料与若干预设问题，直接返回选项和概率。创始人 Diogo Almeida 为 InstructGPT 论文作者之一。发布三天内，GitHub 上出现十余个围绕它的项目。
+它要解决的问题：Agent 跑一次任务，中间要做几十上百次小判断，比如下一步点哪个按钮、这封邮件归哪个队列、这条命令危不危险。这些判断的答案通常只是一个选项或一个数，但交给大模型做，模型得先把答案写成一句话，程序再解析回来。成本花在两处用不上的地方：把答案写成文字，以及每问一个问题都把同一份材料重读一遍。
+
+
+2. 它是什么2.1 和传统大模型的区别大模型处理文字分两步。
+第一步是读：把输入的文字逐层算一遍，转成模型内部的表示。这一步叫编码（prefill）。
+第二步是写：在读过之后得到的内部表示上，一个字一个字地生成答案。这一步叫解码（decode）。
+传统大模型两步都做。Jev 只做第一步，读完直接在内部表示上读出答案的概率。TypeSafe 官方把这条路线称作 System One，和生成类模型边写边想的 System Two 相对。
+传统 LLM：读完还要写  材料 + 问题       │       ▼   读（编码）       │       ▼   写（解码）          &#123; → &quot; → q → u → e → u → e → &quot; → …   （循环）            每写一个字，都要接回上文才能算下一个       │       ▼  &#123;&quot;queue&quot;: &quot;payments&quot;&#125;       │       ▼   程序解析这段文本───────────────────────────────────Jev：读完直接给答案  材料 + 问题       │       ▼   读（编码）       │       ▼   读出概率           payments 0.91 / account 0.06 / other 0.03
+
+「读」和「写」的耗时性质不同。
+读是并行的。整段材料一起算，整个模型只需从显存读进来一次，这一次读入就用在了全部字符上。字符越多，这笔开销摊得越薄。
+写是串行的。每写一个字都要把整个模型重新读一遍，而这一遍里只算出一个字，算力基本用不上。写 N 个字，模型就读 N 遍。
+一份讲解给了具体比例：在一张 A100 显卡上，读可以一次处理 500 个字符、耗时约 50 毫秒，摊到每个字符 0.1 毫秒；写每产出一个字符要 10 毫秒，差两个数量级。实际服务会把多个请求攒成一批一起算来摊薄这笔开销，但单个请求上的差距就是这么悬殊。
+所以生成类模型的延迟随输出长度增长，Jev 没有这一段。旁证：200 个选项的问题和 2 个选项的问题，返回延迟几乎一样。
+2.2 输入和输出一次请求分两段，state 放材料，questions 放问题。questions 里每一项就是一个问题，各带类型、问法和预设答案：
+&#123;  &quot;state&quot;: &quot;我的提现连续失败三次，银行说一切正常&quot;,  &quot;questions&quot;: &#123;    &quot;queue&quot;: &#123;      &quot;type&quot;: &quot;choice&quot;,      &quot;instructions&quot;: &quot;分给哪个团队？&quot;,      &quot;criteria&quot;: &#123; &quot;payments&quot;: &quot;提现失败&quot;, &quot;account&quot;: &quot;登录&quot;, &quot;other&quot;: &quot;其他&quot; &#125;    &#125;,    &quot;escalate&quot;: &#123; &quot;type&quot;: &quot;noul&quot;, &quot;instructions&quot;: &quot;需要人工介入吗？&quot; &#125;  &#125;&#125;
+
+问题分三类：Choice 从候选里选一个，上限 255 个；Score 按有序等级打分，2 至 10 级；Noul 做是&#x2F;否判断。
+响应按问题 id 逐项返回，没有文本：
+&#123;  &quot;model&quot;: &quot;jev-latest&quot;,  &quot;answers&quot;: &#123;    &quot;queue&quot;: &#123;      &quot;type&quot;: &quot;choice&quot;,      &quot;choice&quot;: &quot;payments&quot;,      &quot;confidence&quot;: 0.87,      &quot;probabilities&quot;: &#123; &quot;payments&quot;: 0.91, &quot;account&quot;: 0.06, &quot;other&quot;: 0.03 &#125;    &#125;,    &quot;escalate&quot;: &#123; &quot;type&quot;: &quot;noul&quot;, &quot;noul&quot;: 0.42 &#125;  &#125;,  &quot;usage&quot;: &#123; &quot;input_tokens&quot;: 96, &quot;output_tokens&quot;: 34 &#125;&#125;
+
+answers 下每一题返回一个对象：Choice 给选中的选项和各选项概率，Score 给加权后的分数和等级说明，Noul 只给一个 0 到 1 的数，是答案为「是」的概率。
+0.91 这个数可以直接接阈值。Archer Hume 的报告里给了推法：设误升级一次代价为 1，漏掉一个紧急工单代价为 9，那么 p(紧急) &gt; 0.1 时就该升级。代价比一变，阈值跟着变。
+这条策略成立的前提是概率可信：模型说 0.9 的那批样本里，得真有约九成判断正确。TypeSafe 称 Jev 的概率经 RLCD（面向校准决策的强化学习）训练，让概率在训练时就对齐真实结果。这个声称未经独立验证：官方没公开训练细节，公开的测量只有 Jev 自己的基准记录。
+还有两处容易看错。confidence 由 probabilities 的分布形状算出，集中就高、摊开就低，与「模型有多确定」不是一回事，Noul 类型没有这个字段。usage 里的 output_tokens 只是计费字段，不代表真生成了 token。
+结构和字段名照官方文档，示例数值是示意。
+2.3 一次读，多个问题同一份材料上往往要问好几件事。已部署的 pi-jev 每收到一条编码 Agent 要执行的命令，就同时问四件事：
+
+这条命令有破坏性吗
+会把本地数据或密钥发出去吗
+超出用户要求范围了吗
+用户如果不想要，损害有多大
+
+它给前三个问题各设了阈值，概率分别超过 0.90、0.70、0.85 就拦下这条命令。
+若分开调用，这段材料要被完整读四遍：
+传统 LLM：材料读 4 遍  问第 1 件     读材料 ──► 写答案  问第 2 件     读材料 ──► 写答案  问第 3 件     读材料 ──► 写答案  问第 4 件     读材料 ──► 写答案───────────────────────────────────Jev：材料读 1 遍  读材料（1 次）      │      ├─► 问题 1      ├─► 问题 2      ├─► 问题 3      └─► 问题 4          问题之间互不可见，只共享同一份材料
+
+问题之间互不可见，这一点有实测：把验证码写在另一个问题里，再问某个问题该验证码是什么，返回概率 0.00；把同一句移进 state，概率升到 0.90 以上。
+2.4 边界
+答案必须提前封闭，选项由调用方给出
+写不出任何文字
+没有推理过程，需要解释的场合用不了
+
+3. 和千问小模型相比差在哪最常被问到的问题：拿千问小模型来做同样的判断，效果是不是一样。把两者的差别按维度摆开：
+
+
+
+对比维度
+Jev
+千问小模型自建
+结论
+
+
+
+输出形态与解析
+直接读概率，无生成
+生成文本后解析，可用语法约束保证格式
+自建能复现
+
+
+多个问题的成本
+state 只读一次
+需自己复用材料读过的部分
+自建能复现
+
+
+响应速度
+官方 70～500 毫秒
+实测 1.023 秒
+自建慢一档
+
+
+判断准确率
+0.883，官方公布
+0.845，实测 4B &#x2F; 3090
+差 3.8 个点
+
+
+概率校准
+称经 RLCD 校准，未独立验证
+未复现，数值未校准
+Jev 独有
+
+
+部署方式
+托管服务，邀请制
+模型开源，单卡可跑
+各有取舍
+
+
+六项里，输出和成本两项能完全复现，速度和准确率能复现但各差一档，只有校准是 Jev 独有，而这一项恰好也没被独立验证过。所以「用千问也能做」这句话，除了校准之外基本成立。
+表里的数来自两个第三方项目：速度和准确率是 SemIf 测的（一张 3090、一个 4B 模型），校准是 SemIf 和 mini-Jev 的结论。自建那边是第三方在自己机器上跑，Jev 那边出自官方公布，两边不是同一条件。
+校准这行的差距，mini-Jev 给了对照：让模型生成概率数值，准确率只有 0.346；改成直接读选项打分，升到 0.896。
+官方还公布过 193.6 倍、444.6 倍的加速数字。这两个数字是自家设计的四类工作流上与特定模型比较的最大差距，换个任务不成立；官方基准里 Jev 得 67.8%，对照的前沿模型在 68%～74%，准确率处于中间。
+Jev 发布三天后，GitHub 上出现了照这套接口做的开源模型 Laya：权重 Apache-2.0 开放，HTTP 服务兼容 Jev 的 /v1/systemone 协议，模型是自己训练的另一套，但同样声称经 RLCD 校准。校准这一项因此有了能自己动手的对照。部署与实测另见《Jev 的开源替代 Laya：部署与实测》。
+4. 和现有 Agent 架构的结合点凡是「看一眼材料、做一个答案受限的判断」的步骤，都可能换成 Jev。按 Agent 循环里的位置排：
+
+
+
+在 Agent 里的位置
+判断什么
+现状
+
+
+
+入口 · 意图路由
+这条输入该走哪条链路
+jev-router 已落地
+
+
+循环内 · 下一步动作
+点哪个按钮、调哪个工具
+jev-browser 已落地
+
+
+循环内 · 是否继续
+这步完成了吗、要不要重试
+官方列出，无实例
+
+
+执行前 · 护栏
+这条命令危不危险
+pi-jev 已落地
+
+
+执行后 · 校验
+上一步输出对不对
+官方列出，无实例
+
+
+上下文 · 批次预筛
+哪些材料值得进上下文
+jev_map 已落地
+
+
+离线 · 批量标注
+大批材料跑同一组问题
+SemIf 实测用法
+
+
+意图路由对应表里第一行。官方有 Intent Routing 模式，实例是 jev-router，给 Claude Code 和 Codex 逐回合挑模型：简单的活给快档，难的给强档。
+执行前护栏对应表里第四行。这类判断原本靠规则或小模型，规则覆盖不了措辞变化，小模型在长文本上读不准。可用的是 pi-jev 的命令闸门，LangChain 的 AutoModeMiddleware 也能在执行前拦下工具调用。官方把这类用途归在 Universal Verification 下，范围更宽：验证其他 AI 的输入、抽取结果、推理链和工具调用。
+有个前提：Jev 发布才三天，表里的项目都是这三天里写的，没有一个有生产环境的运行时长。位置是按架构逻辑推的，不是从运行数据里总结的。
+5. 参考
+TypeSafe 官方文档 · API 契约、三种原语的定义，以及 confidence 是从概率分布算出的统计量
+TypeSafe AI primer · RLCD 与 RLHF、RLVR 的并列关系，官方一手
+TypeSafe Patterns · Intent Routing、Speculative Fan-Out 等模式的官方定义
+jev-router · 给 Claude Code 与 Codex 做逐回合模型路由
+LangChain TypeSafe 集成 · TypeSafeClassifier 与执行前拦截的 AutoModeMiddleware
+Archer Hume 逆向工程 · 200 选项与 2 选项延迟相同、问题隔离实验、由代价推阈值的例子；作者自述为黑盒推测，非官方披露
+SemIf · 单张 3090 复现同一接口，模型阶梯与共享 state 实测；项目自述为独立研究，与 TypeSafe 无关
+mini-Jev · 直接读选项打分与生成 JSON 的对照实验，预注册
+pi-jev · 编码 Agent 命令闸门的四个问题与实际阈值
+Prefill — Computational Deep Dive · 读与写两段为什么耗时差这么多，A100 上 500 字符读约 50 毫秒、单字符写约 10 毫秒的出处
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>AI 工程</tag>
+        <tag>Agent</tag>
+        <tag>LLM</tag>
       </tags>
   </entry>
   <entry>
@@ -13297,6 +13297,70 @@ AbdelStark、nibzard · Jev p50 延迟 236～276 毫秒的两份独立测量，�
       </tags>
   </entry>
   <entry>
+    <title>Linux 查看日志文件常用命令</title>
+    <url>/20170407-linux-log-command/</url>
+    <content><![CDATA[linux查看日志文件内容命令tail、cat、tac、head、echo
+tail -f test.log
+你会看到屏幕不断有内容被打印出来. 这时候中断第一个进程Ctrl-C,
+cat -n hisen.log | grep ‘907’
+在文件当中查找指定的内容，这里是查询：907
+
+linux 如何显示一个文件的某几行(中间几行)
+从第3000行开始，显示1000行。即显示3000~3999行
+cat filename | tail -n +3000 | head -n 1000
+显示1000行到3000行
+cat filename| head -n 3000 | tail -n +1000
+*注意两种方法的顺序分解：
+
+tail -n 1000：显示最后1000行
+tail -n +1000：从1000行开始显示，显示1000行以后的
+head -n 1000：显示前面1000行
+
+用sed命令sed -n ‘5,10p’ filename 这样你就可以只查看文件的第5行到第10行。
+例：cat mylog.log | tail -n 1000 #输出mylog.log 文件最后一千行
+
+cat主要有三大功能：
+1.一次显示整个文件。$ cat filename
+2.从键盘创建一个文件。$ cat &gt; filename
+只能创建新文件,不能编辑已有文件.
+3.将几个文件合并为一个文件： $cat file1 file2 &gt; file
+参数：
+-n 或 –number 由 1 开始对所有输出的行数编号
+-b 或 –number-nonblank 和 -n 相似，只不过对于空白行不编号
+-s 或 –squeeze-blank 当遇到有连续两行以上的空白行，就代换为一行的空白行
+-v 或 –show-nonprinting
+例：
+把 textfile1 的档案内容加上行号后输入 textfile2 这个档案里
+cat -n textfile1 &gt; textfile2
+把 textfile1 和 textfile2 的档案内容加上行号（空白行不加）之后将内容附加到 textfile3 里。
+cat -b textfile1 textfile2 &gt;&gt; textfile3
+把test.txt文件扔进垃圾箱，赋空值test.txt
+cat /dev/null &gt; /etc/test.txt
+
+注意：&gt;意思是创建，&gt;&gt;是追加。千万不要弄混了。
+
+tac (反向列示)
+tac 是将 cat 反写过来，所以他的功能就跟 cat 相反， cat 是由第一行到最后一行连续显示在萤幕上，
+而 tac 则是由最后一行到第一行反向在萤幕上显示出来！
+
+在Linux中echo命令用来在标准输出上显示一段字符，比如：echo “the echo command test!”
+这个就会输出“the echo command test!”这一行文字！
+echo “the echo command test!”&gt;a.sh
+这个就会在a.sh文件中输出“the echo command test!”这一行文字！
+该命令的一般格式为： echo [ -n ] 字符串其中选项n表示输出文字后不换行；字符串能加引号，也能不加引号。
+用echo命令输出加引号的字符串时，将字符串原样输出；
+用echo命令输出不加引号的字符串时，将字符串中的各个单词作为字符串输出，各字符串之间用一个空格分割。
+一些实例
+#在整个文件搜索含有907的内容hisen@ubuntu:~/dl$ cat -n hisen.log | grep &#x27;907&#x27;    25	[2017-04-07 03:49:04,907] Artifact ssm_study:war exploded: Art    26	[2017-04-07 03:49:04,907] Artifact ssm_study:war exploded: Dep#从第3行开始,显示10行 即：3~12 并且显示行号hisen@ubuntu:~/dl$ cat -n hisen.log | tail -n +3 | head -n 10     3	07-Apr-2017 15:48:50.072 信息 [main] org.apache.coyote.Abstrac     4	07-Apr-2017 15:48:50.137 信息 [main] Using a shared selector f     5	07-Apr-2017 15:48:50.172 测试 [main] Initializing ProtocolHand     6	07-Apr-2017 15:48:50.186 信息 [main] Using a shared selector f     7	07-Apr-2017 15:48:50.187 你猜 [main] load Initialization proce     8	07-Apr-2017 15:48:50.261 信息 [main] StandardService.startInte     9	07-Apr-2017 15:48:50.261 信息 [main] Servlet Engine: Apache To    10	07-Apr-2017 15:48:50.293 信息 [main] Starting ProtocolHandler    11	07-Apr-2017 15:48:50.318 哪里 [main] ProtocolHandler [ajp-nio-    12	07-Apr-2017 15:48:50.328 信息 [main] start Server startup in 1#显示10行前三行hisen@ubuntu:~/dl$ cat -n hisen.log | head -n +10 | tail -n 3     8	07-Apr-2017 15:48:50.261 信息 [main] StandardService.startInte     9	07-Apr-2017 15:48:50.261 信息 [main] Servlet Engine: Apache To    10	07-Apr-2017 15:48:50.293 信息 [main] Starting ProtocolHandler#显示3-10行hisen@ubuntu:~/dl$ cat -n hisen.log | head -n 10 | tail -n +3     3	07-Apr-2017 15:48:50.072 信息 [main] org.apache.coyote.Abstrac     4	07-Apr-2017 15:48:50.137 信息 [main] Using a shared selector f     5	07-Apr-2017 15:48:50.172 测试 [main] Initializing ProtocolHand     6	07-Apr-2017 15:48:50.186 信息 [main] Using a shared selector f     7	07-Apr-2017 15:48:50.187 你猜 [main] load Initialization proce     8	07-Apr-2017 15:48:50.261 信息 [main] StandardService.startInte     9	07-Apr-2017 15:48:50.261 信息 [main] Servlet Engine: Apache To    10	07-Apr-2017 15:48:50.293 信息 [main] Starting ProtocolHandler#显示倒数第二行hisen@ubuntu:~/dl$ cat -n hisen.log | tail -n 2    25	[2017-04-07 03:49:04,907] Artifact ssm_study:war exploded: Art    26	[2017-04-07 03:49:04,907] Artifact ssm_study:war exploded: Dep#从24行开始，显示到最后hisen@ubuntu:~/dl$ cat -n hisen.log | tail -n +24    24	07-Apr-2017 15:49:04.585 信息 during time.    25	[2017-04-07 03:49:04,907] Artifact ssm_study:war exploded: Art    26	[2017-04-07 03:49:04,907] Artifact ssm_study:war exploded: Dep
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>李录怎么看 AI：技术、生意和估值</title>
     <url>/20261018-li-lu-ai-investing/</url>
     <content><![CDATA[李录是喜马拉雅资本创始人，长期管理芒格家族部分资产。他首先是个投资者，不是技术专家。这个身份决定了他的问题顺序：这项技术能做什么，谁靠它赚钱，价格是否合理，风险是否超出承受范围。
@@ -13456,67 +13520,17 @@ Reuters · Anthropic 估值、成本和招股书细节，主流媒体，二手�
       </tags>
   </entry>
   <entry>
-    <title>Linux 查看日志文件常用命令</title>
-    <url>/20170407-linux-log-command/</url>
-    <content><![CDATA[linux查看日志文件内容命令tail、cat、tac、head、echo
-tail -f test.log
-你会看到屏幕不断有内容被打印出来. 这时候中断第一个进程Ctrl-C,
-cat -n hisen.log | grep ‘907’
-在文件当中查找指定的内容，这里是查询：907
-
-linux 如何显示一个文件的某几行(中间几行)
-从第3000行开始，显示1000行。即显示3000~3999行
-cat filename | tail -n +3000 | head -n 1000
-显示1000行到3000行
-cat filename| head -n 3000 | tail -n +1000
-*注意两种方法的顺序分解：
-
-tail -n 1000：显示最后1000行
-tail -n +1000：从1000行开始显示，显示1000行以后的
-head -n 1000：显示前面1000行
-
-用sed命令sed -n ‘5,10p’ filename 这样你就可以只查看文件的第5行到第10行。
-例：cat mylog.log | tail -n 1000 #输出mylog.log 文件最后一千行
-
-cat主要有三大功能：
-1.一次显示整个文件。$ cat filename
-2.从键盘创建一个文件。$ cat &gt; filename
-只能创建新文件,不能编辑已有文件.
-3.将几个文件合并为一个文件： $cat file1 file2 &gt; file
-参数：
--n 或 –number 由 1 开始对所有输出的行数编号
--b 或 –number-nonblank 和 -n 相似，只不过对于空白行不编号
--s 或 –squeeze-blank 当遇到有连续两行以上的空白行，就代换为一行的空白行
--v 或 –show-nonprinting
-例：
-把 textfile1 的档案内容加上行号后输入 textfile2 这个档案里
-cat -n textfile1 &gt; textfile2
-把 textfile1 和 textfile2 的档案内容加上行号（空白行不加）之后将内容附加到 textfile3 里。
-cat -b textfile1 textfile2 &gt;&gt; textfile3
-把test.txt文件扔进垃圾箱，赋空值test.txt
-cat /dev/null &gt; /etc/test.txt
-
-注意：&gt;意思是创建，&gt;&gt;是追加。千万不要弄混了。
-
-tac (反向列示)
-tac 是将 cat 反写过来，所以他的功能就跟 cat 相反， cat 是由第一行到最后一行连续显示在萤幕上，
-而 tac 则是由最后一行到第一行反向在萤幕上显示出来！
-
-在Linux中echo命令用来在标准输出上显示一段字符，比如：echo “the echo command test!”
-这个就会输出“the echo command test!”这一行文字！
-echo “the echo command test!”&gt;a.sh
-这个就会在a.sh文件中输出“the echo command test!”这一行文字！
-该命令的一般格式为： echo [ -n ] 字符串其中选项n表示输出文字后不换行；字符串能加引号，也能不加引号。
-用echo命令输出加引号的字符串时，将字符串原样输出；
-用echo命令输出不加引号的字符串时，将字符串中的各个单词作为字符串输出，各字符串之间用一个空格分割。
-一些实例
-#在整个文件搜索含有907的内容hisen@ubuntu:~/dl$ cat -n hisen.log | grep &#x27;907&#x27;    25	[2017-04-07 03:49:04,907] Artifact ssm_study:war exploded: Art    26	[2017-04-07 03:49:04,907] Artifact ssm_study:war exploded: Dep#从第3行开始,显示10行 即：3~12 并且显示行号hisen@ubuntu:~/dl$ cat -n hisen.log | tail -n +3 | head -n 10     3	07-Apr-2017 15:48:50.072 信息 [main] org.apache.coyote.Abstrac     4	07-Apr-2017 15:48:50.137 信息 [main] Using a shared selector f     5	07-Apr-2017 15:48:50.172 测试 [main] Initializing ProtocolHand     6	07-Apr-2017 15:48:50.186 信息 [main] Using a shared selector f     7	07-Apr-2017 15:48:50.187 你猜 [main] load Initialization proce     8	07-Apr-2017 15:48:50.261 信息 [main] StandardService.startInte     9	07-Apr-2017 15:48:50.261 信息 [main] Servlet Engine: Apache To    10	07-Apr-2017 15:48:50.293 信息 [main] Starting ProtocolHandler    11	07-Apr-2017 15:48:50.318 哪里 [main] ProtocolHandler [ajp-nio-    12	07-Apr-2017 15:48:50.328 信息 [main] start Server startup in 1#显示10行前三行hisen@ubuntu:~/dl$ cat -n hisen.log | head -n +10 | tail -n 3     8	07-Apr-2017 15:48:50.261 信息 [main] StandardService.startInte     9	07-Apr-2017 15:48:50.261 信息 [main] Servlet Engine: Apache To    10	07-Apr-2017 15:48:50.293 信息 [main] Starting ProtocolHandler#显示3-10行hisen@ubuntu:~/dl$ cat -n hisen.log | head -n 10 | tail -n +3     3	07-Apr-2017 15:48:50.072 信息 [main] org.apache.coyote.Abstrac     4	07-Apr-2017 15:48:50.137 信息 [main] Using a shared selector f     5	07-Apr-2017 15:48:50.172 测试 [main] Initializing ProtocolHand     6	07-Apr-2017 15:48:50.186 信息 [main] Using a shared selector f     7	07-Apr-2017 15:48:50.187 你猜 [main] load Initialization proce     8	07-Apr-2017 15:48:50.261 信息 [main] StandardService.startInte     9	07-Apr-2017 15:48:50.261 信息 [main] Servlet Engine: Apache To    10	07-Apr-2017 15:48:50.293 信息 [main] Starting ProtocolHandler#显示倒数第二行hisen@ubuntu:~/dl$ cat -n hisen.log | tail -n 2    25	[2017-04-07 03:49:04,907] Artifact ssm_study:war exploded: Art    26	[2017-04-07 03:49:04,907] Artifact ssm_study:war exploded: Dep#从24行开始，显示到最后hisen@ubuntu:~/dl$ cat -n hisen.log | tail -n +24    24	07-Apr-2017 15:49:04.585 信息 during time.    25	[2017-04-07 03:49:04,907] Artifact ssm_study:war exploded: Art    26	[2017-04-07 03:49:04,907] Artifact ssm_study:war exploded: Dep
+    <title>log4j:WARN No appenders could be found for logger</title>
+    <url>/20170208-log4j-WARN-No-appenders-could-be-found-for-logger/</url>
+    <content><![CDATA[解决办法为：在项目的src下面新建file名为log4j.properties文件
+###设置log4j.rootLogger = debug,stdout,D,E###输出信息到控制抬log4j.appender.stdout = org.apache.log4j.ConsoleAppenderlog4j.appender.stdout.Target = System.outlog4j.appender.stdout.layout = org.apache.log4j.PatternLayoutlog4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n###输出DEBUG 级别以上的日志到=E://logs/error.loglog4j.appender.D = org.apache.log4j.DailyRollingFileAppenderlog4j.appender.D.File = E://logs/log.loglog4j.appender.D.Append = truelog4j.appender.D.Threshold = DEBUG log4j.appender.D.layout = org.apache.log4j.PatternLayoutlog4j.appender.D.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n###输出ERROR 级别以上的日志到=E://logs/error.loglog4j.appender.E = org.apache.log4j.DailyRollingFileAppenderlog4j.appender.E.File =E://logs/error.log log4j.appender.E.Append = truelog4j.appender.E.Threshold = ERROR log4j.appender.E.layout = org.apache.log4j.PatternLayoutlog4j.appender.E.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n
+log4j详细使用方法:点击查看
 ]]></content>
       <categories>
         <category>Tech</category>
       </categories>
       <tags>
-        <tag>运维</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -13555,20 +13569,6 @@ echo “the echo command test!”&gt;a.sh
       </tags>
   </entry>
   <entry>
-    <title>log4j:WARN No appenders could be found for logger</title>
-    <url>/20170208-log4j-WARN-No-appenders-could-be-found-for-logger/</url>
-    <content><![CDATA[解决办法为：在项目的src下面新建file名为log4j.properties文件
-###设置log4j.rootLogger = debug,stdout,D,E###输出信息到控制抬log4j.appender.stdout = org.apache.log4j.ConsoleAppenderlog4j.appender.stdout.Target = System.outlog4j.appender.stdout.layout = org.apache.log4j.PatternLayoutlog4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n###输出DEBUG 级别以上的日志到=E://logs/error.loglog4j.appender.D = org.apache.log4j.DailyRollingFileAppenderlog4j.appender.D.File = E://logs/log.loglog4j.appender.D.Append = truelog4j.appender.D.Threshold = DEBUG log4j.appender.D.layout = org.apache.log4j.PatternLayoutlog4j.appender.D.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n###输出ERROR 级别以上的日志到=E://logs/error.loglog4j.appender.E = org.apache.log4j.DailyRollingFileAppenderlog4j.appender.E.File =E://logs/error.log log4j.appender.E.Append = truelog4j.appender.E.Threshold = ERROR log4j.appender.E.layout = org.apache.log4j.PatternLayoutlog4j.appender.E.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n
-log4j详细使用方法:点击查看
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>log4j日志信息插入mysql数据库</title>
     <url>/20170321-log4j%E6%97%A5%E5%BF%97%E4%BF%A1%E6%81%AF%E6%8F%92%E5%85%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
     <content><![CDATA[以前不知道这玩意还能直接插入MySQL数据库
@@ -13583,39 +13583,6 @@ log4j配置文件
       </categories>
       <tags>
         <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mac docker compose timezone 问题解决</title>
-    <url>/20181221-mac%20docker%20compose%20timezone%20%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[一、背景介绍想用docker搭建一个lnmp环境
-使用这个脚本：
-https://github.com/buxiaomo/docker-compose/tree/master/lnmp
-
-执行命令之后报错
-docker-compose -f lnmp.yml up -dWARNING: Some services (mysql, nginx, php, redis) use the &#x27;deploy&#x27; key, which will be ignored. Compose does not support &#x27;deploy&#x27; configuration - use `docker stack deploy` to deploy to a swarm.WARNING: Some services (mysql, nginx, php) use the &#x27;configs&#x27; key, which will be ignored. Compose does not support &#x27;configs&#x27; configuration - use `docker stack deploy` to deploy to a swarm.lnmp_mysql_1 is up-to-dateStarting lnmp_redis_1 ...lnmp_nginx_1 is up-to-dateStarting lnmp_redis_1 ... errorERROR: for lnmp_redis_1  Cannot start service redis: b&#x27;Mounts denied: \r\nThe path /usr/share/zoneinfo/Asia/Shanghai\r\nis not shared from OS X and is not known to Docker.\r\nYou can configure shared paths from Docker -&gt; Preferences... -&gt; File Sharing.\r\nSee https://docs.docker.com/docker-for-mac/osxfs/#namespaces for more info.\r\n.&#x27;                    memory: 100MERROR: for redis  Cannot start service redis: b&#x27;Mounts denied: \r\nThe path /usr/share/zoneinfo/Asia/Shanghai\r\nis not shared from OS X and is not known to Docker.\r\nYou can configure shared paths from Docker -&gt; Preferences... -&gt; File Sharing.\r\nSee https://docs.docker.com/docker-for-mac/osxfs/#namespaces for more info.\r\n.&#x27;ERROR: Encountered errors while bringing up the project.
-
-二、报错原因
-mac机器的时间路径与linux不一样
-lnmp.yml redis用到了这个时间
-
-三、解决办法
-查看当前机器时间文件真实位置(&#x2F;etc&#x2F;localtime 这个路径是不让共享给docker的)
-
-ls -la /etc/localtimelrwxr-xr-x  1 root  wheel  39 10 19 11:13 /etc/localtime -&gt; /var/db/timezone/zoneinfo/Asia/Shanghai
-
-设置位置 ：Docker -&gt; Preferences… -&gt; File Sharing
-新增共享目录：&#x2F;var&#x2F;db&#x2F;timezone
-apply &amp; restart
-修改lnmp.yml配置文件 全局替换：&#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;Asia&#x2F;Shanghai 为：&#x2F;var&#x2F;db&#x2F;timezone&#x2F;zoneinfo&#x2F;Asia&#x2F;Shanghai
-
-四、成功信息docker-compose -f lnmp.yml up -dWARNING: Some services (mysql, nginx, php, redis) use the &#x27;deploy&#x27; key, which will be ignored. Compose does not support &#x27;deploy&#x27; configuration - use `docker stack deploy` to deploy to a swarm.WARNING: Some services (mysql, nginx, php) use the &#x27;configs&#x27; key, which will be ignored. Compose does not support &#x27;configs&#x27; configuration - use `docker stack deploy` to deploy to a swarm.Removing lnmp_redis_1Starting lnmp_nginx_1                ... doneStarting lnmp_mysql_1                ... doneRecreating f5b9db566588_lnmp_redis_1 ... doneStarting lnmp_php_1                  ... done
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>容器</tag>
       </tags>
   </entry>
   <entry>
@@ -13674,6 +13641,39 @@ package mainimport (	&quot;bufio&quot;	&quot;fmt&quot;	&quot;os&quot;)// dup2 �
       </categories>
       <tags>
         <tag>go</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mac docker compose timezone 问题解决</title>
+    <url>/20181221-mac%20docker%20compose%20timezone%20%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[一、背景介绍想用docker搭建一个lnmp环境
+使用这个脚本：
+https://github.com/buxiaomo/docker-compose/tree/master/lnmp
+
+执行命令之后报错
+docker-compose -f lnmp.yml up -dWARNING: Some services (mysql, nginx, php, redis) use the &#x27;deploy&#x27; key, which will be ignored. Compose does not support &#x27;deploy&#x27; configuration - use `docker stack deploy` to deploy to a swarm.WARNING: Some services (mysql, nginx, php) use the &#x27;configs&#x27; key, which will be ignored. Compose does not support &#x27;configs&#x27; configuration - use `docker stack deploy` to deploy to a swarm.lnmp_mysql_1 is up-to-dateStarting lnmp_redis_1 ...lnmp_nginx_1 is up-to-dateStarting lnmp_redis_1 ... errorERROR: for lnmp_redis_1  Cannot start service redis: b&#x27;Mounts denied: \r\nThe path /usr/share/zoneinfo/Asia/Shanghai\r\nis not shared from OS X and is not known to Docker.\r\nYou can configure shared paths from Docker -&gt; Preferences... -&gt; File Sharing.\r\nSee https://docs.docker.com/docker-for-mac/osxfs/#namespaces for more info.\r\n.&#x27;                    memory: 100MERROR: for redis  Cannot start service redis: b&#x27;Mounts denied: \r\nThe path /usr/share/zoneinfo/Asia/Shanghai\r\nis not shared from OS X and is not known to Docker.\r\nYou can configure shared paths from Docker -&gt; Preferences... -&gt; File Sharing.\r\nSee https://docs.docker.com/docker-for-mac/osxfs/#namespaces for more info.\r\n.&#x27;ERROR: Encountered errors while bringing up the project.
+
+二、报错原因
+mac机器的时间路径与linux不一样
+lnmp.yml redis用到了这个时间
+
+三、解决办法
+查看当前机器时间文件真实位置(&#x2F;etc&#x2F;localtime 这个路径是不让共享给docker的)
+
+ls -la /etc/localtimelrwxr-xr-x  1 root  wheel  39 10 19 11:13 /etc/localtime -&gt; /var/db/timezone/zoneinfo/Asia/Shanghai
+
+设置位置 ：Docker -&gt; Preferences… -&gt; File Sharing
+新增共享目录：&#x2F;var&#x2F;db&#x2F;timezone
+apply &amp; restart
+修改lnmp.yml配置文件 全局替换：&#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;Asia&#x2F;Shanghai 为：&#x2F;var&#x2F;db&#x2F;timezone&#x2F;zoneinfo&#x2F;Asia&#x2F;Shanghai
+
+四、成功信息docker-compose -f lnmp.yml up -dWARNING: Some services (mysql, nginx, php, redis) use the &#x27;deploy&#x27; key, which will be ignored. Compose does not support &#x27;deploy&#x27; configuration - use `docker stack deploy` to deploy to a swarm.WARNING: Some services (mysql, nginx, php) use the &#x27;configs&#x27; key, which will be ignored. Compose does not support &#x27;configs&#x27; configuration - use `docker stack deploy` to deploy to a swarm.Removing lnmp_redis_1Starting lnmp_nginx_1                ... doneStarting lnmp_mysql_1                ... doneRecreating f5b9db566588_lnmp_redis_1 ... doneStarting lnmp_php_1                  ... done
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>容器</tag>
       </tags>
   </entry>
   <entry>
@@ -14120,6 +14120,24 @@ Java.net.URL
       </tags>
   </entry>
   <entry>
+    <title>new ImageIcon()无法加载同目录图片</title>
+    <url>/20170208-new-ImageIcon-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E5%90%8C%E7%9B%AE%E5%BD%95%E5%9B%BE%E7%89%87/</url>
+    <content><![CDATA[错误：
+new ImageIcon(&quot;1.jpg&quot;)
+正确：
+new ImageIcon(&quot;src/com/hisen/thread/progressbar/1.jpg&quot;)
+图片路径：
+test\src\com\hisen\thread\progressbar\1.jpg
+所谓的相对路径，是相对于这个工程而言的，而不是当前文件夹而言。
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mybatis：No constructor found in xxx matching</title>
     <url>/20170317-mybatis%EF%BC%9ANo%20constructor%20found%20in%20xxx%20matching%20%5BJava.lang.Integer,%20Java.lang.String,%20Java.lang.Integer%5D/</url>
     <content><![CDATA[如下错误提示：
@@ -14154,24 +14172,6 @@ select *  from hisenwhere id &gt; $&#123;lastId&#125;  order by idlimit $&#123;p
       </categories>
       <tags>
         <tag>性能</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>new ImageIcon()无法加载同目录图片</title>
-    <url>/20170208-new-ImageIcon-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E5%90%8C%E7%9B%AE%E5%BD%95%E5%9B%BE%E7%89%87/</url>
-    <content><![CDATA[错误：
-new ImageIcon(&quot;1.jpg&quot;)
-正确：
-new ImageIcon(&quot;src/com/hisen/thread/progressbar/1.jpg&quot;)
-图片路径：
-test\src\com\hisen\thread\progressbar\1.jpg
-所谓的相对路径，是相对于这个工程而言的，而不是当前文件夹而言。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -14379,6 +14379,23 @@ prompt 注入与记忆毒化
       </tags>
   </entry>
   <entry>
+    <title>powerdesigner Oracle mysql comment 缺少右括号</title>
+    <url>/20170622-powerdesigner%20Oracle%20mysql%20comment%20%E7%BC%BA%E5%B0%91%E5%8F%B3%E6%8B%AC%E5%8F%B7/</url>
+    <content><![CDATA[powerdesigner Oracle mysql comment 缺少右括号
+今天人家给我个powerdesigner设计好的表
+要我去间数据库，直接复制出来去oracle执行，结果报错。
+在comment附近，如果把comment去掉则可以正确执行
+最后找到罪魁祸首：powerdesigner没有设置对数据库
+解决办法，在powerdesigner页面
+database--&gt;change curren DBMS 
+上面是设置你需要的数据库
+下面是为更改前的数据库
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>PingCAP TiDB Cloud 泄露事件分析：被盗云身份如何放大控制面风险</title>
     <url>/20261021-pingcap-cloud-trust-boundary/</url>
     <content><![CDATA[2026 年 10 月 19 日，PingCAP 发布安全事件公告。公告确认，2026 年 9 月 9 日至 10 月 7 日，外部人员使用被盗服务账号访问内部系统，复制数据并获取源代码。
@@ -14568,23 +14585,6 @@ NIST AI Risk Management Framework · AI 风险治理框架
         <tag>运维</tag>
         <tag>安全</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>powerdesigner Oracle mysql comment 缺少右括号</title>
-    <url>/20170622-powerdesigner%20Oracle%20mysql%20comment%20%E7%BC%BA%E5%B0%91%E5%8F%B3%E6%8B%AC%E5%8F%B7/</url>
-    <content><![CDATA[powerdesigner Oracle mysql comment 缺少右括号
-今天人家给我个powerdesigner设计好的表
-要我去间数据库，直接复制出来去oracle执行，结果报错。
-在comment附近，如果把comment去掉则可以正确执行
-最后找到罪魁祸首：powerdesigner没有设置对数据库
-解决办法，在powerdesigner页面
-database--&gt;change curren DBMS 
-上面是设置你需要的数据库
-下面是为更改前的数据库
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
   </entry>
   <entry>
     <title>rabbitMQ的安装和Demo</title>
@@ -15904,23 +15904,6 @@ mysql&gt; select * from test;+------+------+--------+| id   | age  | weigth |+--
       </tags>
   </entry>
   <entry>
-    <title>su  Authentication failure</title>
-    <url>/20170401-su%20%20Authentication%20failure/</url>
-    <content><![CDATA[想要获取root权限，提示如下
-hisen@ubuntu:/var/lib$ suPassword: su: Authentication failure
-解决办法
-hisen@ubuntu:$ sudo passwd rootEnter new UNIX password: Retype new UNIX password: passwd: password updated successfullyhisen@ubuntu:$ suPassword: root@ubuntu:# cd mysql
-重新设置一下密码即可，我这边装的时候设置的用户是：hisen
-刚刚重新设置的密码就是你装系统的时候设置的用户密码。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>给群晖 DS918+ 添加 2.5G 无线网卡</title>
     <url>/20221119-synology-DS918-add-2500M-RTL8156B-usb-network-cart/</url>
     <content><![CDATA[0. 前言给群晖 918+ 添加 RTL-8156B 2.5G 网卡，困扰了我两天。因为按照之后没法在系统控制面板里面找到对应的网卡。就连 GitHub 上驱动的作者都说不支持 RTL-8156B(详见：GitHub-issue) 的外置网卡。但是我想那么多人都买了这种网卡，并且成功了，于是周末到处搜，最终找到了办法。
@@ -15968,6 +15951,23 @@ root@DS:~# ifconfigeth2      Link encap:Ethernet  HWaddr 00:xx:xx:xx:xx:03      
       <tags>
         <tag>自建服务</tag>
         <tag>网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>su  Authentication failure</title>
+    <url>/20170401-su%20%20Authentication%20failure/</url>
+    <content><![CDATA[想要获取root权限，提示如下
+hisen@ubuntu:/var/lib$ suPassword: su: Authentication failure
+解决办法
+hisen@ubuntu:$ sudo passwd rootEnter new UNIX password: Retype new UNIX password: passwd: password updated successfullyhisen@ubuntu:$ suPassword: root@ubuntu:# cd mysql
+重新设置一下密码即可，我这边装的时候设置的用户是：hisen
+刚刚重新设置的密码就是你装系统的时候设置的用户密码。
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
       </tags>
   </entry>
   <entry>
@@ -16058,6 +16058,39 @@ MIT 6.824
       </categories>
       <tags>
         <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【AI 随笔】尝试与洞察</title>
+    <url>/20260308-the-AI-logbook-Trials-and-Insights/</url>
+    <content><![CDATA[个人经历与想法2023 使用 AI 做药品说明书，Bot 式交互，数字人形象、真人 TTS；2024 使用 AI 进行图文制作：文生图、相关性检索、OCR 文字识别；2025 风控策略、AI 机审、代码提示、页面 prompt 生成脚本代码；2026 Coding Agent 流行，写单侧、梳理历史项目、完成中小功能；
+虽然现阶段 AI Coding 等工具不够完美，但是我们必须相信他能做好，持续使用，持续学习。不会用 AI 是麻烦的，只会用 AI 是危险的。不要有惰性，觉得 AI 什么都可以解决就不学习，全依赖 AI。
+鲁肃谈 AI 时代的工程师早些天看蚂蚁集团三代 CTO 齐聚一堂的视频，其中鲁肃的观点让我印象深刻。工程师的核心
+
+记忆：主动学习各种技术，精通并了解；
+创新：面对业务，基于已有的技术，权衡最好的方案；
+匠心：根据自己的品味，极力追求极致，不断反思、实践、提升；
+
+
+当前 AI 能够替代的更多的记忆都部分，让我们有更多的时间去做创新，去落地并打磨好的创意。
+就业市场的随想后续的初级岗位可能需求量会很小，但是使用 AI 又要求有一定的经验，岂不是悖论。只要有足够的利润，总会有人愿意投入人力物力去培养新人，不然饮壑止血？
+最近看到有关 35 的言论，还挺友好，主要还是要心态年轻，有足够的好奇心。
+从软件工程角度看软件工程诞生于 1968 年，其根本初衷是为了解决所谓的“软件危机”（Software Crisis）：
+
+不可控的成本与进度：软件开发经常陷入“完成了 90%，但剩下的 10% 需要无限期”的怪圈;
+不可观测的复杂性：软件是无形的，随着逻辑堆叠，没有人能理清全局，导致牵一发而动全身;
+沟通损耗：当团队人数翻倍时，沟通链路呈指数级增长，生产力反而可能下降（布鲁克定律）;
+软件质量与可靠性：如何保证银行、航空或医疗系统的代码在极端情况下不出错;
+
+软件工程思想，在 AI Native 更重要。超级个体再牛，也没法独自去做一个工业级的产品。还是需要协作，这就要求：清晰的文档、良好的可读性、顺畅的沟通等。eg：封闭会议室面对面沟通完就开始干活，大概率会南辕北辙… 每个人按自己的理解干活~
+AI 只是加快了写代码的部分，或者做设计的部分。这里有一个问题，就是所有这种加速之后，Review 的负担会很重；由于速度快，同时进行多个事情，导致上下文切换的巨大开销；
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+        <tag>AI 工程</tag>
       </tags>
   </entry>
   <entry>
@@ -16161,39 +16194,6 @@ tombkeeper : 网络安全大拿、刚开始他的微博基本上看不懂、现�
       </categories>
       <tags>
         <tag>成长</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【AI 随笔】尝试与洞察</title>
-    <url>/20260308-the-AI-logbook-Trials-and-Insights/</url>
-    <content><![CDATA[个人经历与想法2023 使用 AI 做药品说明书，Bot 式交互，数字人形象、真人 TTS；2024 使用 AI 进行图文制作：文生图、相关性检索、OCR 文字识别；2025 风控策略、AI 机审、代码提示、页面 prompt 生成脚本代码；2026 Coding Agent 流行，写单侧、梳理历史项目、完成中小功能；
-虽然现阶段 AI Coding 等工具不够完美，但是我们必须相信他能做好，持续使用，持续学习。不会用 AI 是麻烦的，只会用 AI 是危险的。不要有惰性，觉得 AI 什么都可以解决就不学习，全依赖 AI。
-鲁肃谈 AI 时代的工程师早些天看蚂蚁集团三代 CTO 齐聚一堂的视频，其中鲁肃的观点让我印象深刻。工程师的核心
-
-记忆：主动学习各种技术，精通并了解；
-创新：面对业务，基于已有的技术，权衡最好的方案；
-匠心：根据自己的品味，极力追求极致，不断反思、实践、提升；
-
-
-当前 AI 能够替代的更多的记忆都部分，让我们有更多的时间去做创新，去落地并打磨好的创意。
-就业市场的随想后续的初级岗位可能需求量会很小，但是使用 AI 又要求有一定的经验，岂不是悖论。只要有足够的利润，总会有人愿意投入人力物力去培养新人，不然饮壑止血？
-最近看到有关 35 的言论，还挺友好，主要还是要心态年轻，有足够的好奇心。
-从软件工程角度看软件工程诞生于 1968 年，其根本初衷是为了解决所谓的“软件危机”（Software Crisis）：
-
-不可控的成本与进度：软件开发经常陷入“完成了 90%，但剩下的 10% 需要无限期”的怪圈;
-不可观测的复杂性：软件是无形的，随着逻辑堆叠，没有人能理清全局，导致牵一发而动全身;
-沟通损耗：当团队人数翻倍时，沟通链路呈指数级增长，生产力反而可能下降（布鲁克定律）;
-软件质量与可靠性：如何保证银行、航空或医疗系统的代码在极端情况下不出错;
-
-软件工程思想，在 AI Native 更重要。超级个体再牛，也没法独自去做一个工业级的产品。还是需要协作，这就要求：清晰的文档、良好的可读性、顺畅的沟通等。eg：封闭会议室面对面沟通完就开始干活，大概率会南辕北辙… 每个人按自己的理解干活~
-AI 只是加快了写代码的部分，或者做设计的部分。这里有一个问题，就是所有这种加速之后，Review 的负担会很重；由于速度快，同时进行多个事情，导致上下文切换的巨大开销；
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>成长</tag>
-        <tag>AI 工程</tag>
       </tags>
   </entry>
   <entry>
@@ -16504,6 +16504,23 @@ ttdx minis debug：本地调试
       </tags>
   </entry>
   <entry>
+    <title>try redis - redis官方教程练习</title>
+    <url>/20170519-try%20redis%20-%20redis%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%E7%BB%83%E4%B9%A0/</url>
+    <content><![CDATA[这里主要是介绍了几种redis支持的数据结构，以及操作方法
+官网地址：http://try.redis.io/
+我的redis是安装在linux虚拟机，通过Xshell操作，显示可能跟cmd不大一样
+但是操作都是一样的
+具体操作如下：
+
+#连接redis客户端hisen@ubuntu:~$ redis-cli#存放数据127.0.0.1:6379&gt; set &#x27;connections&#x27; &#x27;10&#x27;OK127.0.0.1:6379&gt; get connections&quot;10&quot;#自增1方法：incr127.0.0.1:6379&gt; incr connections(integer) 11127.0.0.1:6379&gt; incr connections(integer) 12#删除127.0.0.1:6379&gt; del conncetions(integer) 0#不存在才存放数据 setnx：SET-if-not-exists127.0.0.1:6379&gt; SETNX hisen hello(integer) 1127.0.0.1:6379&gt; get hisen&quot;hello&quot;127.0.0.1:6379&gt; SETNX hisen hello(integer) 0#添加数据127.0.0.1:6379&gt; set resource:lock &quot;redis demo&quot;OK#设置超时时间，单位秒127.0.0.1:6379&gt; expire resource:lock 120(integer) 1#查看剩余时间127.0.0.1:6379&gt; ttl resource:lock(integer) 85127.0.0.1:6379&gt; ttl resource:lock(integer) 81127.0.0.1:6379&gt; ttl resource:lock(integer) 57#List集合#放在list最后（right 右边）127.0.0.1:6379&gt; rpush friends &quot;Alice&quot;(integer) 1127.0.0.1:6379&gt; rpush friends &quot;Bob&quot;(integer) 2#放在最前（left 左边）127.0.0.1:6379&gt; lpush friends &quot;Sam&quot;(integer) 3#获取所有数据127.0.0.1:6379&gt; lrange friends 0 -11) &quot;Sam&quot;2) &quot;Alice&quot;3) &quot;Bob&quot;#获取下标0-1的数据127.0.0.1:6379&gt; lrange friends 0 11) &quot;Sam&quot;2) &quot;Alice&quot;#获取下标1-2的数据127.0.0.1:6379&gt; lrange friends 1 21) &quot;Alice&quot;2) &quot;Bob&quot;#获取长度127.0.0.1:6379&gt; llen friends(integer) 3#删除第一个数据（左边）127.0.0.1:6379&gt; lpop friends&quot;Sam&quot;#删除最后一个数据（右边）127.0.0.1:6379&gt; rpop friends&quot;Bob&quot;127.0.0.1:6379&gt; llen friends(integer) 1#输出所有127.0.0.1:6379&gt; lrange friends 0 -11) &quot;Alice&quot;#Set集合#添加127.0.0.1:6379&gt; sadd superpowers &quot;flight&quot;(integer) 1127.0.0.1:6379&gt; sadd superpowers &quot;x-ray vision&quot;(integer) 1127.0.0.1:6379&gt; sadd superpowers &quot;reflexes&quot;(integer) 1#删除127.0.0.1:6379&gt; srem superpowers &quot;reflexes&quot;(integer) 1#判断数据是否存在set中127.0.0.1:6379&gt; sismember superpowers &quot;flight&quot;(integer) 1#输出所有127.0.0.1:6379&gt; smembers superpowers1) &quot;flight&quot;2) &quot;x-ray vision&quot;127.0.0.1:6379&gt; sadd birdpowers &quot;pecking&quot;(integer) 1127.0.0.1:6379&gt; sadd birdpowers &quot;flight&quot;(integer) 1#合并两个SET，会过滤重复127.0.0.1:6379&gt; sunion superpowers birdpowers1) &quot;pecking&quot;2) &quot;flight&quot;3) &quot;x-ray vision&quot;#有序集合，按照数字排序127.0.0.1:6379&gt; zadd hackers 1940 &quot;Alan Kay&quot;(integer) 1127.0.0.1:6379&gt; zadd hackers 1906 &quot;Grace Hopper&quot;(integer) 1127.0.0.1:6379&gt; zadd hackers 1953 &quot;Richard Stallman&quot;(integer) 1127.0.0.1:6379&gt; zadd hackers 1965 &quot;Yukihiro Mastsumoto&quot;(integer) 1127.0.0.1:6379&gt; zadd hackers 1916 &quot;Claude Shannon&quot;(integer) 1127.0.0.1:6379&gt; zadd hackers 1969 &quot;Linus Torvalds&quot;(integer) 1127.0.0.1:6379&gt; ZADD hackers 1957 &quot;Sophie Wilson&quot;(integer) 1127.0.0.1:6379&gt; ZADD hackers 1912 &quot;Alan Turing&quot;(integer) 1#输出127.0.0.1:6379&gt; zrange hackers 2 41) &quot;Claude Shannon&quot;2) &quot;Alan Kay&quot;3) &quot;Richard Stallman&quot;127.0.0.1:6379&gt; zrange hackers 0 -11) &quot;Grace Hopper&quot;2) &quot;Alan Turing&quot;3) &quot;Claude Shannon&quot;4) &quot;Alan Kay&quot;5) &quot;Richard Stallman&quot;6) &quot;Sophie Wilson&quot;7) &quot;Yukihiro Mastsumoto&quot;8) &quot;Linus Torvalds&quot;127.0.0.1:6379&gt; #哈希集合127.0.0.1:6379&gt; hset user:1000 name &quot;hisen&quot;(integer) 1127.0.0.1:6379&gt; hset user:1000 email &quot;hisen@hisen.com&quot;(integer) 1127.0.0.1:6379&gt; hset user:1000 pwassword &quot;pswd&quot;(integer) 1127.0.0.1:6379&gt; hgetall user:10001) &quot;name&quot;2) &quot;hisen&quot;3) &quot;email&quot;4) &quot;hisen@hisen.com&quot;5) &quot;pwassword&quot;6) &quot;pswd&quot;#自增27.0.0.1:6379&gt; hset user:1000 visits 10(integer) 1127.0.0.1:6379&gt; hset user:1000 visits 1(integer) 0127.0.0.1:6379&gt; hincrby user:1000 visits 1(integer) 2127.0.0.1:6379&gt; hincrby user:1000 visits 1(integer) 3127.0.0.1:6379&gt; hincrby user:1000 visits 10(integer) 13127.0.0.1:6379&gt; hdel user:1000 visits(integer) 1127.0.0.1:6379&gt; hincrby user:1000 visits 1(integer) 1]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>缓存</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis Cluster slot 分布不均匀问题排查</title>
     <url>/20210518-troubleshooting-unbalanced-of-redis-cluster-slots/</url>
     <content><![CDATA[零、背景在压测过程中发现有部分 redis cluster 节点内存占用比其它节点高(来自监控)
@@ -16534,23 +16551,6 @@ awk getline 函数
       </categories>
       <tags>
         <tag>中间件</tag>
-        <tag>缓存</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>try redis - redis官方教程练习</title>
-    <url>/20170519-try%20redis%20-%20redis%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%E7%BB%83%E4%B9%A0/</url>
-    <content><![CDATA[这里主要是介绍了几种redis支持的数据结构，以及操作方法
-官网地址：http://try.redis.io/
-我的redis是安装在linux虚拟机，通过Xshell操作，显示可能跟cmd不大一样
-但是操作都是一样的
-具体操作如下：
-
-#连接redis客户端hisen@ubuntu:~$ redis-cli#存放数据127.0.0.1:6379&gt; set &#x27;connections&#x27; &#x27;10&#x27;OK127.0.0.1:6379&gt; get connections&quot;10&quot;#自增1方法：incr127.0.0.1:6379&gt; incr connections(integer) 11127.0.0.1:6379&gt; incr connections(integer) 12#删除127.0.0.1:6379&gt; del conncetions(integer) 0#不存在才存放数据 setnx：SET-if-not-exists127.0.0.1:6379&gt; SETNX hisen hello(integer) 1127.0.0.1:6379&gt; get hisen&quot;hello&quot;127.0.0.1:6379&gt; SETNX hisen hello(integer) 0#添加数据127.0.0.1:6379&gt; set resource:lock &quot;redis demo&quot;OK#设置超时时间，单位秒127.0.0.1:6379&gt; expire resource:lock 120(integer) 1#查看剩余时间127.0.0.1:6379&gt; ttl resource:lock(integer) 85127.0.0.1:6379&gt; ttl resource:lock(integer) 81127.0.0.1:6379&gt; ttl resource:lock(integer) 57#List集合#放在list最后（right 右边）127.0.0.1:6379&gt; rpush friends &quot;Alice&quot;(integer) 1127.0.0.1:6379&gt; rpush friends &quot;Bob&quot;(integer) 2#放在最前（left 左边）127.0.0.1:6379&gt; lpush friends &quot;Sam&quot;(integer) 3#获取所有数据127.0.0.1:6379&gt; lrange friends 0 -11) &quot;Sam&quot;2) &quot;Alice&quot;3) &quot;Bob&quot;#获取下标0-1的数据127.0.0.1:6379&gt; lrange friends 0 11) &quot;Sam&quot;2) &quot;Alice&quot;#获取下标1-2的数据127.0.0.1:6379&gt; lrange friends 1 21) &quot;Alice&quot;2) &quot;Bob&quot;#获取长度127.0.0.1:6379&gt; llen friends(integer) 3#删除第一个数据（左边）127.0.0.1:6379&gt; lpop friends&quot;Sam&quot;#删除最后一个数据（右边）127.0.0.1:6379&gt; rpop friends&quot;Bob&quot;127.0.0.1:6379&gt; llen friends(integer) 1#输出所有127.0.0.1:6379&gt; lrange friends 0 -11) &quot;Alice&quot;#Set集合#添加127.0.0.1:6379&gt; sadd superpowers &quot;flight&quot;(integer) 1127.0.0.1:6379&gt; sadd superpowers &quot;x-ray vision&quot;(integer) 1127.0.0.1:6379&gt; sadd superpowers &quot;reflexes&quot;(integer) 1#删除127.0.0.1:6379&gt; srem superpowers &quot;reflexes&quot;(integer) 1#判断数据是否存在set中127.0.0.1:6379&gt; sismember superpowers &quot;flight&quot;(integer) 1#输出所有127.0.0.1:6379&gt; smembers superpowers1) &quot;flight&quot;2) &quot;x-ray vision&quot;127.0.0.1:6379&gt; sadd birdpowers &quot;pecking&quot;(integer) 1127.0.0.1:6379&gt; sadd birdpowers &quot;flight&quot;(integer) 1#合并两个SET，会过滤重复127.0.0.1:6379&gt; sunion superpowers birdpowers1) &quot;pecking&quot;2) &quot;flight&quot;3) &quot;x-ray vision&quot;#有序集合，按照数字排序127.0.0.1:6379&gt; zadd hackers 1940 &quot;Alan Kay&quot;(integer) 1127.0.0.1:6379&gt; zadd hackers 1906 &quot;Grace Hopper&quot;(integer) 1127.0.0.1:6379&gt; zadd hackers 1953 &quot;Richard Stallman&quot;(integer) 1127.0.0.1:6379&gt; zadd hackers 1965 &quot;Yukihiro Mastsumoto&quot;(integer) 1127.0.0.1:6379&gt; zadd hackers 1916 &quot;Claude Shannon&quot;(integer) 1127.0.0.1:6379&gt; zadd hackers 1969 &quot;Linus Torvalds&quot;(integer) 1127.0.0.1:6379&gt; ZADD hackers 1957 &quot;Sophie Wilson&quot;(integer) 1127.0.0.1:6379&gt; ZADD hackers 1912 &quot;Alan Turing&quot;(integer) 1#输出127.0.0.1:6379&gt; zrange hackers 2 41) &quot;Claude Shannon&quot;2) &quot;Alan Kay&quot;3) &quot;Richard Stallman&quot;127.0.0.1:6379&gt; zrange hackers 0 -11) &quot;Grace Hopper&quot;2) &quot;Alan Turing&quot;3) &quot;Claude Shannon&quot;4) &quot;Alan Kay&quot;5) &quot;Richard Stallman&quot;6) &quot;Sophie Wilson&quot;7) &quot;Yukihiro Mastsumoto&quot;8) &quot;Linus Torvalds&quot;127.0.0.1:6379&gt; #哈希集合127.0.0.1:6379&gt; hset user:1000 name &quot;hisen&quot;(integer) 1127.0.0.1:6379&gt; hset user:1000 email &quot;hisen@hisen.com&quot;(integer) 1127.0.0.1:6379&gt; hset user:1000 pwassword &quot;pswd&quot;(integer) 1127.0.0.1:6379&gt; hgetall user:10001) &quot;name&quot;2) &quot;hisen&quot;3) &quot;email&quot;4) &quot;hisen@hisen.com&quot;5) &quot;pwassword&quot;6) &quot;pswd&quot;#自增27.0.0.1:6379&gt; hset user:1000 visits 10(integer) 1127.0.0.1:6379&gt; hset user:1000 visits 1(integer) 0127.0.0.1:6379&gt; hincrby user:1000 visits 1(integer) 2127.0.0.1:6379&gt; hincrby user:1000 visits 1(integer) 3127.0.0.1:6379&gt; hincrby user:1000 visits 10(integer) 13127.0.0.1:6379&gt; hdel user:1000 visits(integer) 1127.0.0.1:6379&gt; hincrby user:1000 visits 1(integer) 1]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
         <tag>缓存</tag>
       </tags>
   </entry>
@@ -17233,46 +17233,6 @@ A 套餐所有会有均可购买B 套餐 VIP3 不能购买C 套餐仅 VIP1 可�
       </tags>
   </entry>
   <entry>
-    <title>zookeeper &amp; dubbo搭建 - 在IDEA上运行阿里巴巴Dubbo-demo</title>
-    <url>/20170419-zookeeper%20&amp;%20dubbo%E6%90%AD%E5%BB%BA%20-%20%E5%9C%A8IDEA%E4%B8%8A%E8%BF%90%E8%A1%8C%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Dubbo-demo/</url>
-    <content><![CDATA[
-
-IDEA上搭建dubbo服务的简单过程只是简单的让例子在IntelliJ IDEA跑起来
-目前是最新的版本：2.5.4-SNAPSHOT
-本文档更新时间：2017年04月19日01:08:02
-一 、安装zookeeper参考链接：ubuntu apt-get安装zookeeper
-二、Idea clone本项目导出项目之后，配置一下tomcat，添加dubbo-admin：war到tomcat中
-项目github地址：https://github.com/hisen-yuan/dubbo
-三、启动tomcat，即可访问dubbo管理后台默认账号：root
-默认密码：root
-四、启动服务提供者&amp;消费者demo
-修改dubbo-demo-consumer配置文件中的注册中心地址
-
-/dubbo/dubbo-demo/dubbo-demo-consumer/src/test/resources/dubbo.properties
-
-#dubbo.registry.address=multicast://224.5.6.7:1234#使用本地的zookeeper做注册中心dubbo.registry.address=zookeeper://127.0.0.1:2181
-
-
-修改ubbo-demo-provider配置文件中的注册中心地址
-
-/dubbo/dubbo-demo/dubbo-demo-provider/src/test/resources/dubbo.properties
-
-#dubbo.registry.address=multicast://224.5.6.7:1234#使用本地的zookeeper做注册中心dubbo.registry.address=zookeeper://127.0.0.1:2181
-
-
-分别启动dubbo-demo下ubbo-demo-provider、dubbo-demo-consumer下的测试方法
-
-即可在后台看到有服务在运行
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>中间件</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>盛颖与 SGLang：从江西的免费教程到推理引擎</title>
     <url>/20260927-ying-sheng-sglang-ai-infra/</url>
     <content><![CDATA[2026 年 8 月 4 日，硅谷101 播了一期对谈，嘉宾是盛颖。节目页给的头衔有三个：开源推理引擎 SGLang 的发起人、xAI 前推理团队负责人、RadixArk 联合创始人兼 CEO。这期还有一份近四万字的文字稿，发在硅谷101 的头条号上，本文引用的原话都出自那里。
@@ -17405,6 +17365,46 @@ LMSYS 官方 About · 非营利身份、officer 与顾问名单、2023 年的多
         <tag>成长</tag>
         <tag>AI 工程</tag>
         <tag>LLM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>zookeeper &amp; dubbo搭建 - 在IDEA上运行阿里巴巴Dubbo-demo</title>
+    <url>/20170419-zookeeper%20&amp;%20dubbo%E6%90%AD%E5%BB%BA%20-%20%E5%9C%A8IDEA%E4%B8%8A%E8%BF%90%E8%A1%8C%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Dubbo-demo/</url>
+    <content><![CDATA[
+
+IDEA上搭建dubbo服务的简单过程只是简单的让例子在IntelliJ IDEA跑起来
+目前是最新的版本：2.5.4-SNAPSHOT
+本文档更新时间：2017年04月19日01:08:02
+一 、安装zookeeper参考链接：ubuntu apt-get安装zookeeper
+二、Idea clone本项目导出项目之后，配置一下tomcat，添加dubbo-admin：war到tomcat中
+项目github地址：https://github.com/hisen-yuan/dubbo
+三、启动tomcat，即可访问dubbo管理后台默认账号：root
+默认密码：root
+四、启动服务提供者&amp;消费者demo
+修改dubbo-demo-consumer配置文件中的注册中心地址
+
+/dubbo/dubbo-demo/dubbo-demo-consumer/src/test/resources/dubbo.properties
+
+#dubbo.registry.address=multicast://224.5.6.7:1234#使用本地的zookeeper做注册中心dubbo.registry.address=zookeeper://127.0.0.1:2181
+
+
+修改ubbo-demo-provider配置文件中的注册中心地址
+
+/dubbo/dubbo-demo/dubbo-demo-provider/src/test/resources/dubbo.properties
+
+#dubbo.registry.address=multicast://224.5.6.7:1234#使用本地的zookeeper做注册中心dubbo.registry.address=zookeeper://127.0.0.1:2181
+
+
+分别启动dubbo-demo下ubbo-demo-provider、dubbo-demo-consumer下的测试方法
+
+即可在后台看到有服务在运行
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>中间件</tag>
       </tags>
   </entry>
   <entry>
@@ -17871,6 +17871,16 @@ O(nlogn)~O(n)
       </tags>
   </entry>
   <entry>
+    <title>多线程基础 &amp; 进阶 丨 系统架构 - CSDN博主：说好不能打脸</title>
+    <url>/20170818-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80%20&amp;%20%E8%BF%9B%E9%98%B6%20-%20CSDN%E5%8D%9A%E4%B8%BB%EF%BC%9A%E8%AF%B4%E5%A5%BD%E4%B8%8D%E8%83%BD%E6%89%93%E8%84%B8/</url>
+    <content><![CDATA[发现一个不错的技术博客，分享一下
+有时间多学习多线程基础 &amp; 进阶系统架构
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title>多线程：优雅的使用ExecutorService进行压力测试</title>
     <url>/20180714-%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%9A%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8ExecutorService%E8%BF%9B%E8%A1%8C%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[很多时候写功能或者接口需要进行压力测试，今天发现jwt在生成token的时候，如果输入都是一样的仅有一个签发时间不一样，生成的token是有可能是一样的
@@ -17901,14 +17911,19 @@ Java NIO 系列教程:点击查看
       </categories>
   </entry>
   <entry>
-    <title>多线程基础 &amp; 进阶 丨 系统架构 - CSDN博主：说好不能打脸</title>
-    <url>/20170818-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80%20&amp;%20%E8%BF%9B%E9%98%B6%20-%20CSDN%E5%8D%9A%E4%B8%BB%EF%BC%9A%E8%AF%B4%E5%A5%BD%E4%B8%8D%E8%83%BD%E6%89%93%E8%84%B8/</url>
-    <content><![CDATA[发现一个不错的技术博客，分享一下
-有时间多学习多线程基础 &amp; 进阶系统架构
-]]></content>
+    <title>如何检测Linux VPS系统架构是Xen、KVM还是OpenVZ</title>
+    <url>/20170208-%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8BLinux-VPS%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E6%98%AFXen%E3%80%81KVM%E8%BF%98%E6%98%AFOpenVZ/</url>
+    <content><![CDATA[结果[root]# virt-whatxenxen-hvm
+
+Centoswget http://people.redhat.com/~rjones/virt-what/files/virt-what-1.12.tar.gztar zxvf virt-what-1.12.tar.gzcd virt-what-1.12/./configuremake &amp;&amp; make installvirt-what
+
+Ubuntu&#x2F;debianapt-get install virt-whatvirt-what]]></content>
       <categories>
         <category>Tech</category>
       </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
   </entry>
   <entry>
     <title>如何成为专业的技术从业者 - 《程序员的职业素养》 - Bob大叔出品</title>
@@ -17926,21 +17941,6 @@ Java NIO 系列教程:点击查看
       <tags>
         <tag>成长</tag>
         <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何检测Linux VPS系统架构是Xen、KVM还是OpenVZ</title>
-    <url>/20170208-%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8BLinux-VPS%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E6%98%AFXen%E3%80%81KVM%E8%BF%98%E6%98%AFOpenVZ/</url>
-    <content><![CDATA[结果[root]# virt-whatxenxen-hvm
-
-Centoswget http://people.redhat.com/~rjones/virt-what/files/virt-what-1.12.tar.gztar zxvf virt-what-1.12.tar.gzcd virt-what-1.12/./configuremake &amp;&amp; make installvirt-what
-
-Ubuntu&#x2F;debianapt-get install virt-whatvirt-what]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
       </tags>
   </entry>
   <entry>
@@ -18260,23 +18260,6 @@ i&#x3D;2写入主存有可能在3写入之前，其它线程已经对i进行了�
       </tags>
   </entry>
   <entry>
-    <title>浏览器出现：Reimage Repair - zh.reimageplus.com</title>
-    <url>/20170705-%E6%B5%8F%E8%A7%88%E5%99%A8%E5%87%BA%E7%8E%B0%EF%BC%9AReimage%20Repair%20-%20zh.reimageplus.com/</url>
-    <content><![CDATA[近期使用chrome出现打开一些网站老是弹出莫名其妙的网址
-最终指向的都是Reimage Repair，网址zh.reimageplus.com网上一查，貌似因为插件被污染的原因
-我关闭chrome所有的插件，一个一个排查，最后找到了一个插件出问题
-本来还想去举报，发现这个插件被下架了
-问题排查
-右上角菜单按钮 ---更多工具 --- 扩展程序 --- 关闭所有插件然后一个个打开，测试某些网页是否还会继续跳出那恶心的东西然后就找到问题了。
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>安全</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>笔记 - 读后感：《第一本Docker书》</title>
     <url>/20180127-%E7%AC%94%E8%AE%B0%20-%20%E8%AF%BB%E5%90%8E%E6%84%9F%EF%BC%9A%E3%80%8A%E7%AC%AC%E4%B8%80%E6%9C%ACDocker%E4%B9%A6%E3%80%8B/</url>
     <content><![CDATA[忘记开始是在什么地方看到docker这个东西
@@ -18297,6 +18280,23 @@ i&#x3D;2写入主存有可能在3写入之前，其它线程已经对i进行了�
       <tags>
         <tag>容器</tag>
         <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浏览器出现：Reimage Repair - zh.reimageplus.com</title>
+    <url>/20170705-%E6%B5%8F%E8%A7%88%E5%99%A8%E5%87%BA%E7%8E%B0%EF%BC%9AReimage%20Repair%20-%20zh.reimageplus.com/</url>
+    <content><![CDATA[近期使用chrome出现打开一些网站老是弹出莫名其妙的网址
+最终指向的都是Reimage Repair，网址zh.reimageplus.com网上一查，貌似因为插件被污染的原因
+我关闭chrome所有的插件，一个一个排查，最后找到了一个插件出问题
+本来还想去举报，发现这个插件被下架了
+问题排查
+右上角菜单按钮 ---更多工具 --- 扩展程序 --- 关闭所有插件然后一个个打开，测试某些网页是否还会继续跳出那恶心的东西然后就找到问题了。
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>安全</tag>
       </tags>
   </entry>
   <entry>
@@ -18345,38 +18345,6 @@ ID ACCOUNT10 A11 B
       </tags>
   </entry>
   <entry>
-    <title>聊聊MySQL的隔离级别 | MySQL隔离级别原理</title>
-    <url>/20190413-%E8%81%8A%E8%81%8AMySQL%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</url>
-    <content><![CDATA[这是之前的一个帖子：oracle - mysql - 数据库事务隔离级别介绍写的不全面， 按现在的理解，重新写一个；
-一、名词解释脏读：在一个查询事务过程中，读到了其它事务没有提交的数据；不可重复读：一个事务查询过程中，多次查询得到了不一致的结果，原因是：有别的更新事务提交了；幻读：一个事务查询过程中，多次查询得到了不一致的结果，原因是：有别的删除事务&#x2F;插入事务提交了；
-二、数据库隔离级别| name | 名称 | 脏读 | 不可重复读 | 幻读 | 加锁读 ||:—–|:—–|:—–|:—–|:—–|:—–| :—–|| Read uncommitted |  读未提交 | Yes | Yes | Yes | No || Read committed | 读已提交 | No | Yes | Yes  | No || Repeatable read | 可重复读 | No | No | Yes  | No || Serializable | 序列化 | No | No | No | Yes |
-默认的隔离级别为：RR，原因：5.1之后版本，如果Binlogog开启语句级别，必须为RR，RC可能会导致Binlog数据错误(详情);
-三、控制方式读未提交：每次都是读数据最新的版本(包括事务未提交的数据)；读已提交：MVCC控制；可重复读：MVCC控制；序列化：在读取的每一行上加锁，只能按顺序进行读写；
-四、InnoDB MVCC(多版本并发控制)原理
-InnoDB引擎下的MVCC，是通过在每一行上增加两个隐藏列实现的；每发生一个新的事务，系统版本都会递增；当UPDATE数据的时候，都是先copy出来一行操作，不影响原表数据，提交之后才影响；
-一个保存创建时间(非时间值，而是系统版本号)；一个保存删除时间(非时间值，而是系统版本号)；
-4.1 SELECT当前查询事务系统ID：5结果条件：
-
-CREATE VERSION &lt;&#x3D; 5(RR级别为 &lt;&#x3D; 5,RC级别应该是直接取最大值)；
-DELETE VERSION &#x3D;&#x3D; null or DELETE VERSION &gt; 5 (RR级别应该只有为空，RC级别可能有 &gt; 5的情况)；
-
-1可以保证读取到的行，在事务开始之前就已经存在，要么是事务自身插入或者修改的；2可以保证读取到的行，在事务开始之前未被删除；
-4.2 INSERT为新插入的每一行保存当前系统版本号作为CREATE VERSION；
-4.3 DELETE为删除的每一行保存当前系统版本号作为DELETE VERSION；
-4.4 UPDATE插入一行新的记录，保存当前系统版本号作为CREATE VERSION；同事保存当前系统版本号到原来的行上作为DELETE VERSION；
-五、参考：
-《高性能MySQL》
-MySQL的四种事务隔离级别(ps:此处有测试截图，比较直观)
-
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>存储</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网关、快捷支付，代收代付，账户托管，二维码扫码支付</title>
     <url>/20170213-%E7%BD%91%E5%85%B3%E3%80%81%E5%BF%AB%E6%8D%B7%E6%94%AF%E4%BB%98%EF%BC%8C%E4%BB%A3%E6%94%B6%E4%BB%A3%E4%BB%98%EF%BC%8C%E8%B4%A6%E6%88%B7%E6%89%98%E7%AE%A1%EF%BC%8C%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%89%AB%E7%A0%81%E6%94%AF%E4%BB%98/</url>
     <content><![CDATA[一、网关支付这是在线支付的最普遍形式。大致支付过程：第三方支付公司作为代理（网关），接入一堆银行。用户在网关页面（可以在商户端，也可以第三方支付平台端）选择银行，页面跳转到第三方支付平台，然后重定向到对应的银行，用户在银行电子银行官网，采用网银（个人网银或企业网银）完成支付。
@@ -18418,6 +18386,38 @@ MySQL的四种事务隔离级别(ps:此处有测试截图，比较直观)
       </tags>
   </entry>
   <entry>
+    <title>聊聊MySQL的隔离级别 | MySQL隔离级别原理</title>
+    <url>/20190413-%E8%81%8A%E8%81%8AMySQL%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</url>
+    <content><![CDATA[这是之前的一个帖子：oracle - mysql - 数据库事务隔离级别介绍写的不全面， 按现在的理解，重新写一个；
+一、名词解释脏读：在一个查询事务过程中，读到了其它事务没有提交的数据；不可重复读：一个事务查询过程中，多次查询得到了不一致的结果，原因是：有别的更新事务提交了；幻读：一个事务查询过程中，多次查询得到了不一致的结果，原因是：有别的删除事务&#x2F;插入事务提交了；
+二、数据库隔离级别| name | 名称 | 脏读 | 不可重复读 | 幻读 | 加锁读 ||:—–|:—–|:—–|:—–|:—–|:—–| :—–|| Read uncommitted |  读未提交 | Yes | Yes | Yes | No || Read committed | 读已提交 | No | Yes | Yes  | No || Repeatable read | 可重复读 | No | No | Yes  | No || Serializable | 序列化 | No | No | No | Yes |
+默认的隔离级别为：RR，原因：5.1之后版本，如果Binlogog开启语句级别，必须为RR，RC可能会导致Binlog数据错误(详情);
+三、控制方式读未提交：每次都是读数据最新的版本(包括事务未提交的数据)；读已提交：MVCC控制；可重复读：MVCC控制；序列化：在读取的每一行上加锁，只能按顺序进行读写；
+四、InnoDB MVCC(多版本并发控制)原理
+InnoDB引擎下的MVCC，是通过在每一行上增加两个隐藏列实现的；每发生一个新的事务，系统版本都会递增；当UPDATE数据的时候，都是先copy出来一行操作，不影响原表数据，提交之后才影响；
+一个保存创建时间(非时间值，而是系统版本号)；一个保存删除时间(非时间值，而是系统版本号)；
+4.1 SELECT当前查询事务系统ID：5结果条件：
+
+CREATE VERSION &lt;&#x3D; 5(RR级别为 &lt;&#x3D; 5,RC级别应该是直接取最大值)；
+DELETE VERSION &#x3D;&#x3D; null or DELETE VERSION &gt; 5 (RR级别应该只有为空，RC级别可能有 &gt; 5的情况)；
+
+1可以保证读取到的行，在事务开始之前就已经存在，要么是事务自身插入或者修改的；2可以保证读取到的行，在事务开始之前未被删除；
+4.2 INSERT为新插入的每一行保存当前系统版本号作为CREATE VERSION；
+4.3 DELETE为删除的每一行保存当前系统版本号作为DELETE VERSION；
+4.4 UPDATE插入一行新的记录，保存当前系统版本号作为CREATE VERSION；同事保存当前系统版本号到原来的行上作为DELETE VERSION；
+五、参考：
+《高性能MySQL》
+MySQL的四种事务隔离级别(ps:此处有测试截图，比较直观)
+
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>存储</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>解决：eclipse下*.properties显示Unicode乱码</title>
     <url>/20170208-%E8%A7%A3%E5%86%B3%EF%BC%9Aeclipse%E4%B8%8B-properties%E6%98%BE%E7%A4%BAUnicode%E4%B9%B1%E7%A0%81/</url>
     <content><![CDATA[eclipse的*.properties文件，默认的编码方式是iso-8859-1
@@ -18441,6 +18441,30 @@ Window -&gt; preferences -&gt; general -&gt; Contents Types -&gt; Text(展开) -
       <categories>
         <category>Tech</category>
       </categories>
+  </entry>
+  <entry>
+    <title>计算长度最大的子串长度(按空格分割) - 多种方式</title>
+    <url>/20190326-%E8%AE%A1%E7%AE%97%E9%95%BF%E5%BA%A6%E6%9C%80%E5%A4%A7%E7%9A%84%E5%AD%90%E4%B8%B2%E9%95%BF%E5%BA%A6(%E6%8C%89%E7%A9%BA%E6%A0%BC%E5%88%86%E5%89%B2)/</url>
+    <content><![CDATA[一、背景今天中午一个朋友问我一个问题没来得及回，现在折腾一下;问题：有一个包含以N个空格分割的字符串，求最大子串的长度，要求时间空间复杂度最优;
+二、方案：
+朋友给人方案：直接split分割遍历数组，找出最大值;
+面试官的方案：使用StringTokenizer，找出最大值;
+我想到的方案：indexOf计算index差值，找出最大值;
+
+三、结果：封装的代码比较复杂，目前来看不在么好分析时间复杂度和空间复杂度；于是就直观得对比了一下时间；
+//        output//        use(nano): 15486049, by 方案3//        use(nano): 66060102, by 方案2//        use(nano): 80844275, by 方案1
+有时间再深入了解下StringTokenizer的源码
+四、代码对比String oriStr = &quot;aa aa aaaa aaa a a a aa aa a&quot;;int times = 100000;// 自定义实现final long start1 = System.nanoTime();for (int i = 0; i &lt; times; i++) &#123;    String splitStr = &quot; &quot;;    findMaxLength(oriStr, splitStr);&#125;final long end1 = System.nanoTime();// 利用 StringTokenizerfinal long start2 = System.nanoTime();for (int i = 0; i &lt; times; i++) &#123;    findMaxLength4StringTokenizer(oriStr);&#125;final long end2 = System.nanoTime();// 利用 Splitfinal long start3 = System.nanoTime();for (int i = 0; i &lt; times; i++) &#123;    String splitStr = &quot; &quot;;    findMaxLength4Split(oriStr, splitStr);&#125;final long end3 = System.nanoTime();System.out.println(&quot;use(nano): &quot; + (end1 - start1) + &quot;, by findMaxLength&quot;);System.out.println(&quot;use(nano): &quot; + (end2 - start2) + &quot;, by findMaxLength4StringTokenizer&quot;);System.out.println(&quot;use(nano): &quot; + (end3 - start3) + &quot;, by findMaxLength4Split&quot;);//        output//        use(nano): 15486049, by findMaxLength//        use(nano): 66060102, by findMaxLength4StringTokenizer//        use(nano): 80844275, by findMaxLength4Split
+五、完整代码
+github也有：https://github.com/hisenyuan/IDEAPractice/blob/master/src/main/Java/com/hisen/interview/TestStringTokenizer.Java
+/** * @Author hisenyuan * @Description 计算长度最大的子串长度(按空格分割), 自定义实现比较优 * @Date 2019/3/26 20:53 */public class TestStringTokenizer &#123;    public static void main(String[] args) &#123;        String oriStr = &quot;aa aa aaaa aaa a a a aa aa a&quot;;        int times = 100000;        // 自定义实现        final long start1 = System.nanoTime();        for (int i = 0; i &lt; times; i++) &#123;            String splitStr = &quot; &quot;;            findMaxLength(oriStr, splitStr);        &#125;        final long end1 = System.nanoTime();        // 利用 StringTokenizer        final long start2 = System.nanoTime();        for (int i = 0; i &lt; times; i++) &#123;            findMaxLength4StringTokenizer(oriStr);        &#125;        final long end2 = System.nanoTime();        // 利用 Split        final long start3 = System.nanoTime();        for (int i = 0; i &lt; times; i++) &#123;            String splitStr = &quot; &quot;;            findMaxLength4Split(oriStr, splitStr);        &#125;        final long end3 = System.nanoTime();        System.out.println(&quot;use(nano): &quot; + (end1 - start1) + &quot;, by findMaxLength&quot;);        System.out.println(&quot;use(nano): &quot; + (end2 - start2) + &quot;, by findMaxLength4StringTokenizer&quot;);        System.out.println(&quot;use(nano): &quot; + (end3 - start3) + &quot;, by findMaxLength4Split&quot;);//        output//        use(nano): 15486049, by findMaxLength//        use(nano): 66060102, by findMaxLength4StringTokenizer//        use(nano): 80844275, by findMaxLength4Split    &#125;    private static void findMaxLength4StringTokenizer(String oriStr) &#123;        int maxLength = 0;        final StringTokenizer stringTokenizer = new StringTokenizer(oriStr);        while (stringTokenizer.hasMoreElements()) &#123;            final int length = stringTokenizer.nextToken().length();            maxLength = length &gt; maxLength ? length : maxLength;        &#125;//        System.out.println(&quot;max: &quot; + maxLength);    &#125;    private static void findMaxLength(String oriStr, String splitStr) &#123;        int index = 0;        final int maxIndex = oriStr.lastIndexOf(splitStr);        int maxLength = oriStr.length() - maxIndex;        while (index &lt; maxIndex) &#123;            final int currentIndex = oriStr.indexOf(splitStr, index);            int currLength = currentIndex - index;            maxLength = currLength &gt; maxLength ? currLength : maxLength;            index = currentIndex + splitStr.length();        &#125;//        System.out.println(&quot;max: &quot; + maxLength);    &#125;    private static void findMaxLength4Split(String oriStr, String splitStr) &#123;        int maxLength = 0;        final String[] strings = oriStr.split(splitStr);        for (String str : strings) &#123;            final int length = str.length();            maxLength = length &gt; maxLength ? length : maxLength;        &#125;//        System.out.println(&quot;max: &quot; + maxLength);    &#125;&#125;
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
   </entry>
   <entry>
     <title>认识Java I/O | BIO NIO AIO | 同步与异步 | 阻塞与非阻塞 | I/O多路复用</title>
@@ -18470,30 +18494,6 @@ Window -&gt; preferences -&gt; general -&gt; Contents Types -&gt; Text(展开) -
       <tags>
         <tag>Java</tag>
         <tag>高并发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>计算长度最大的子串长度(按空格分割) - 多种方式</title>
-    <url>/20190326-%E8%AE%A1%E7%AE%97%E9%95%BF%E5%BA%A6%E6%9C%80%E5%A4%A7%E7%9A%84%E5%AD%90%E4%B8%B2%E9%95%BF%E5%BA%A6(%E6%8C%89%E7%A9%BA%E6%A0%BC%E5%88%86%E5%89%B2)/</url>
-    <content><![CDATA[一、背景今天中午一个朋友问我一个问题没来得及回，现在折腾一下;问题：有一个包含以N个空格分割的字符串，求最大子串的长度，要求时间空间复杂度最优;
-二、方案：
-朋友给人方案：直接split分割遍历数组，找出最大值;
-面试官的方案：使用StringTokenizer，找出最大值;
-我想到的方案：indexOf计算index差值，找出最大值;
-
-三、结果：封装的代码比较复杂，目前来看不在么好分析时间复杂度和空间复杂度；于是就直观得对比了一下时间；
-//        output//        use(nano): 15486049, by 方案3//        use(nano): 66060102, by 方案2//        use(nano): 80844275, by 方案1
-有时间再深入了解下StringTokenizer的源码
-四、代码对比String oriStr = &quot;aa aa aaaa aaa a a a aa aa a&quot;;int times = 100000;// 自定义实现final long start1 = System.nanoTime();for (int i = 0; i &lt; times; i++) &#123;    String splitStr = &quot; &quot;;    findMaxLength(oriStr, splitStr);&#125;final long end1 = System.nanoTime();// 利用 StringTokenizerfinal long start2 = System.nanoTime();for (int i = 0; i &lt; times; i++) &#123;    findMaxLength4StringTokenizer(oriStr);&#125;final long end2 = System.nanoTime();// 利用 Splitfinal long start3 = System.nanoTime();for (int i = 0; i &lt; times; i++) &#123;    String splitStr = &quot; &quot;;    findMaxLength4Split(oriStr, splitStr);&#125;final long end3 = System.nanoTime();System.out.println(&quot;use(nano): &quot; + (end1 - start1) + &quot;, by findMaxLength&quot;);System.out.println(&quot;use(nano): &quot; + (end2 - start2) + &quot;, by findMaxLength4StringTokenizer&quot;);System.out.println(&quot;use(nano): &quot; + (end3 - start3) + &quot;, by findMaxLength4Split&quot;);//        output//        use(nano): 15486049, by findMaxLength//        use(nano): 66060102, by findMaxLength4StringTokenizer//        use(nano): 80844275, by findMaxLength4Split
-五、完整代码
-github也有：https://github.com/hisenyuan/IDEAPractice/blob/master/src/main/Java/com/hisen/interview/TestStringTokenizer.Java
-/** * @Author hisenyuan * @Description 计算长度最大的子串长度(按空格分割), 自定义实现比较优 * @Date 2019/3/26 20:53 */public class TestStringTokenizer &#123;    public static void main(String[] args) &#123;        String oriStr = &quot;aa aa aaaa aaa a a a aa aa a&quot;;        int times = 100000;        // 自定义实现        final long start1 = System.nanoTime();        for (int i = 0; i &lt; times; i++) &#123;            String splitStr = &quot; &quot;;            findMaxLength(oriStr, splitStr);        &#125;        final long end1 = System.nanoTime();        // 利用 StringTokenizer        final long start2 = System.nanoTime();        for (int i = 0; i &lt; times; i++) &#123;            findMaxLength4StringTokenizer(oriStr);        &#125;        final long end2 = System.nanoTime();        // 利用 Split        final long start3 = System.nanoTime();        for (int i = 0; i &lt; times; i++) &#123;            String splitStr = &quot; &quot;;            findMaxLength4Split(oriStr, splitStr);        &#125;        final long end3 = System.nanoTime();        System.out.println(&quot;use(nano): &quot; + (end1 - start1) + &quot;, by findMaxLength&quot;);        System.out.println(&quot;use(nano): &quot; + (end2 - start2) + &quot;, by findMaxLength4StringTokenizer&quot;);        System.out.println(&quot;use(nano): &quot; + (end3 - start3) + &quot;, by findMaxLength4Split&quot;);//        output//        use(nano): 15486049, by findMaxLength//        use(nano): 66060102, by findMaxLength4StringTokenizer//        use(nano): 80844275, by findMaxLength4Split    &#125;    private static void findMaxLength4StringTokenizer(String oriStr) &#123;        int maxLength = 0;        final StringTokenizer stringTokenizer = new StringTokenizer(oriStr);        while (stringTokenizer.hasMoreElements()) &#123;            final int length = stringTokenizer.nextToken().length();            maxLength = length &gt; maxLength ? length : maxLength;        &#125;//        System.out.println(&quot;max: &quot; + maxLength);    &#125;    private static void findMaxLength(String oriStr, String splitStr) &#123;        int index = 0;        final int maxIndex = oriStr.lastIndexOf(splitStr);        int maxLength = oriStr.length() - maxIndex;        while (index &lt; maxIndex) &#123;            final int currentIndex = oriStr.indexOf(splitStr, index);            int currLength = currentIndex - index;            maxLength = currLength &gt; maxLength ? currLength : maxLength;            index = currentIndex + splitStr.length();        &#125;//        System.out.println(&quot;max: &quot; + maxLength);    &#125;    private static void findMaxLength4Split(String oriStr, String splitStr) &#123;        int maxLength = 0;        final String[] strings = oriStr.split(splitStr);        for (String str : strings) &#123;            final int length = str.length();            maxLength = length &gt; maxLength ? length : maxLength;        &#125;//        System.out.println(&quot;max: &quot; + maxLength);    &#125;&#125;
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
